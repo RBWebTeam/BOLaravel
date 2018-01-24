@@ -2,7 +2,7 @@
 					@section('content')
 					        
 
-					          <!-- Body Content Start ---->
+					          <!-- Body Content Start -->
 					            <div id="content" style="overflow:scroll;">
 								 <div class="container-fluid white-bg">
 								 <div class="col-md-12"><h3 class="mrg-btm">FBA List</h3></div>
@@ -62,43 +62,44 @@
 					                   <th>Created Date</th>
 					                   <th>Mobile No</th>
 					                   <th>Email ID</th>
-									   <th></th>
+									   <th>Payment Link</th>
 									   <th>Password</th>
 					                   <th>City</th>
 									   <th>Pincode</th>
 					                   <th>FSM Details</th>
 					                   <th>POSP No</th>
-									   
 									   <th>Loan ID</th>
 					                   <th>Posp Name</th>
 					                   <th>Partner Info</th>
 					                   <th>Documents</th>
-									   
 									   <th>Bank Account</th>
 									   <th>SMS</th>
+									   <th>sales code</th>
+
 					                 </tr>
 					                </thead>
 					                <tbody>
+					              @foreach($query as $val)
 					                 <tr>
-					                  <td>LAKHINANDAN SHARMA</td>
-					                  <td>16 Jan 2017</td>
-					                  <td>9954429253</td>
-					                  <td>lakhinandanlicisssssssssssss@gmail.com</td>
-									  <td><a href="#" data-toggle="modal" data-target="#paymentLink">payment Link</a></td>
-									  <td><a href="#" data-toggle="modal" data-target="#showPassword">*****</a></td>
-					                  <td>DIBRUGARH</td>
-									  <td>Pincode</td>
-					                  <td><a href="#" data-toggle="modal" data-target="#fsmDetails">FSM</a></td>
-					                  <td>dgdg</td>
-									  
-									  <td><a href="#" data-toggle="modal" data-target="#updatePosp">UPDATE</a></td>
-					                  <td>Durgapratap Rajbhar</td>
-					                  <td><a href="#" data-toggle="modal" data-target="#partnerInfo">Partner Info</a></td>
-					                  <td><a href="#">Pending</a></td>
-									  <td>No</td>
-									  <td><a href="#" data-toggle="modal" data-target="#sendSms"><span class="glyphicon glyphicon-envelope center-obj"></span></a></td>
-					                  </tr>
-					               
+					                  <td><?php echo $val->FullName; ?></td>
+					                  <td><?php echo $val->createdate; ?></td>
+					                  <td><?php echo $val->MobiNumb1; ?></td>
+					                  <td><?php echo $val->EMaiID; ?></td>
+					                  <td><a href="#" class="popover-Payment" data-toggle="popover" title="Payment link" data-content="<?php echo $val->Link; ?>">Payment link</a></td>
+					                  <td><a href="#" class="popover-Password" data-toggle="popover" title="Show Password" data-content="<?php echo $val->Password; ?>">*****</a></td>
+					                  <td><?php echo $val->city; ?></td>
+					                  <td><?php echo $val->Pincode; ?></td>
+					                  <td>Fsm Details</td>
+					                  <td><a href="#" onclick="POSP_UPDATE" id="">update </a></td>
+					                  <td><a href="">update</a></td>
+					                  <td><?php echo $val->pospname; ?></td>
+					                  <td><?php echo $val->PartnerID; ?></td>
+					                  <td>pending</td>
+					                  <td><?php echo $val->bankaccount; ?></td>
+					                  <td><a href="#" onclick="SMS_FN(#{<?php echo $val->fbaid; ?>},#{<?php echo $val->MobiNumb1; ?>})">sms </a></td>
+					                  <td><a href="">update</a></td>
+                                    </tr>
+					               @endforeach
 					               
 					             </tbody>
 					            </table>
@@ -117,21 +118,69 @@
 								
 					            </div>
 					            </div>
-								<!-- Body Content Start ---->
-								
 
-
-
-					@endsection		
-
+<!-- send sms -->
+<div class="sms_sent_id modal fade" role="dialog">   
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+        <h4 class="modal-title">SEND SMS</h4>
+      </div>
+      <div class="modal-body">
+        <form id="message_sms_id">
+          <div class="form-group">
+            <label class="control-label" for="recipient-name">Mobile Nubmer:</label>
+            <input class="form-control Mobile_ID" id="recipient-name" type="text" name="mobile_no" readonly=""/>
+            <input id="fba_id" type="hidden" name="fbaid"/>
+          </div>
+          <div class="form-group">
+            <label class="control-label" for="message-text">SMS :</label>
+            <textarea class="form-controll sms_id" id="message-text" name="sms"></textarea>
+          </div>
+        </form>
+        <div class="modal-footer">
+          <button class="btn btn-default" type="button" data-dismiss="modal">Close</button>
+          <button class="btn btn-primary message_sms_id" type="button">Save changes</button><b class="alert-success primary" id="strong_id"></b>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- update posp -->
+<div class="updatePosp modal fade" role="dialog">   
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+        <h4 class="modal-title">UPDATE POSP</h4>
+      </div>
+      <div class="modal-body">
+        <form id="posp_from_id">
+          <div class="form-group">
+            <input id="fba_id_posp" type="hidden" name="fbaid"/>
+            <input id="flage_id" type="hidden" name="flage_id"/>
+          </div>
+          <div class="form-group">
+            <label class="control-label" for="message-text">POSP :</label>
+            <input class="recipient-name form-control" id="posp_name_id" type="text" name="posp_name" onkeypress="return Numeric(event)"/>
+          </div>
+        </form>
+        <div class="modal-footer"> 
+          <button class="btn btn-default" type="button" data-dismiss="modal">Close</button>
+          <button class="btn btn-primary posp_from_id" type="button">Save changes</button><b class="alert-success primary" id="strong_lead"></b>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+@endsection	
 <script type="text/javascript">
-	
-
 	$(document).ready(function() {
           $('#example').DataTable( {
           "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]]
-          } );
-          } );
+          });
+          });
           $('.popover-Payment').popover({
             trigger: 'focus'
           });
