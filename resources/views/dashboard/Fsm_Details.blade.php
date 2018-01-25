@@ -7,7 +7,7 @@
 			 <div class="col-md-12"><h3 class="mrg-btm">FSM Details</h3></div>
 			 
 			 <!-- Filter End -->
-			 <div class="col-md-12">
+			 <!-- <div class="col-md-12">
 			 <div class="panel panel-primary">
 			 <div class="panel-heading">
 						<h3 class="panel-title">Filter</h3>
@@ -22,7 +22,7 @@
 						<input type="text" class="form-control" id="dev-table-filter" data-action="filter" data-filters="#dev-table" placeholder="Search..." />
 					</div>
 			 </div>
-			 </div>
+			 </div> -->
 			 <!-- Filter End -->
 			 
 			 <div class="col-md-12">
@@ -69,11 +69,4 @@
             </table>
 			</div>
 			</div>
-			@endsection	
-<script type="text/javascript">
-	$(document).ready(function(){
-    $('.Password').popover();
-     trigger: 'focus'   
-});
-</script>
-
+			@endsection
