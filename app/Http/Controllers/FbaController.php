@@ -16,9 +16,9 @@ class FbaController extends Controller
         public function fba_list(){
 
 
-                 // $query=DB::select("call usp_load_fbalist_new(0)");
+                 $query=DB::select("call usp_load_fbalist_new(0)");
                             
-        	      $query=array(1,2,3,4);
+        	      // $query=array(1,2,3,4);
 
                  return view('dashboard.fba-list',['query'=>$query]);
 

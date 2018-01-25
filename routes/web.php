@@ -26,3 +26,6 @@ Route::get('register-user','LoginController@register_user');
 
 Route::get('dashboard','DashboardController@dashboard');
 Route::get('fba-list','FbaController@fba_list');
+
+// laravel
+Route::get('fba-blocklist','fbablocklistController@fbablocklist');

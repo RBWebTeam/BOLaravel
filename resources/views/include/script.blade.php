@@ -46,3 +46,25 @@ $(document).ready(function(){
                  });
              });
  </script>
+
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $(".block").click(function(){
+// alert("test");
+      $(this).closest("td").find(".unblock").toggle();
+
+      //.style("display":"");
+      $(this).toggle();
+    //    $(".unblock").toggle();
+    //$(".block").toggle();
+    });
+  $(".unblock").click(function(){
+      $(this).closest("td").find(".block").toggle();
+      $(this).toggle();
+      //  $(".block").toggle();
+    //$(".unblock").toggle();
+    });
+});
+</script>
+

@@ -68,12 +68,10 @@
 									   <th>Pincode</th>
 					                   <th>FSM Details</th>
 					                   <th>POSP No</th>
-									   
 									   <th>Loan ID</th>
 					                   <th>Posp Name</th>
 					                   <th>Partner Info</th>
 					                   <th>Documents</th>
-									   
 									   <th>Bank Account</th>
 									   <th>SMS</th>
 					                 </tr>
@@ -84,26 +82,25 @@
 					                  <td>16 Jan 2017</td>
 					                  <td>9954429253</td>
 					                  <td>lakhinandanlicisssssssssssss@gmail.com</td>
-									  <td><a href="#" data-toggle="modal" data-target="#paymentLink">payment Link</a></td>
-									  <td><a href="#" data-toggle="modal" data-target="#showPassword">*****</a></td>
-					                  <td>DIBRUGARH</td>
-									  <td>Pincode</td>
-					                  <td><a href="#" data-toggle="modal" data-target="#fsmDetails">FSM</a></td>
-					                  <td>dgdg</td>
+			 <td><a href="#" data-toggle="modal" data-target="#paymentLink">payment Link</a></td>
+			 <td><a href="#" data-toggle="modal" data-target="#showPassword">*****</a></td>
+			 <td>DIBRUGARH</td>
+			 <td>Pincode</td>
+		    <td><a href="#" data-toggle="modal" data-target="#fsmDetails">FSM</a></td>
+		     <td>dgdg</td>
 									  
-									  <td><a href="#" data-toggle="modal" data-target="#updatePosp">UPDATE</a></td>
-					                  <td>Durgapratap Rajbhar</td>
-					                  <td><a href="#" data-toggle="modal" data-target="#partnerInfo">Partner Info</a></td>
-					                  <td><a href="#">Pending</a></td>
-									  <td>No</td>
-									  <td><a href="#" data-toggle="modal" data-target="#sendSms"><span class="glyphicon glyphicon-envelope center-obj"></span></a></td>
-					                  </tr>
+			 <td><a href="#" data-toggle="modal" data-target="#updatePosp">UPDATE</a></td>
+			 <td>Durgapratap Rajbhar</td>
+			 <td><a href="#" data-toggle="modal" data-target="#partnerInfo">Partner Info</a></td>
+			 <td><a href="#">Pending</a></td>
+			 <td>No</td>
+			 <td><a href="#" data-toggle="modal" data-target="#sendSms"><span class="glyphicon glyphicon-envelope center-obj"></span></a></td>
+					  </tr>
 					               
-					               
-					             </tbody>
-					            </table>
-								</div>
-								</div>
+					  </tbody>
+					    </table>
+						</div>
+						</div>
 								
 								<h5 class="pull-left"><b>Records :</b> <span>1 to 10 </span>Of <span class="badge">186</span><h5>
 								<ul class="pagination pull-right">
@@ -196,19 +193,19 @@
                                .done(function(msg){ 
                                               if(msg.status==0){
                                                                     
-                                                                   $('#strong_lead').html('<strong>Success!</strong>  update..');
-                                                                    if($('#flage_id').val()==1){
-                                                                    fba_id_posp=$('#fba_id_posp').val();
-                                                                    $('#'+fba_id_posp).empty();
-                                                                    $('#'+fba_id_posp).append($('#posp_name_id').val());
-                                                                    }if($('#flage_id').val()==2){
-                                                                         //LoanID
+                      $('#strong_lead').html('<strong>Success!</strong>  update..');
+                      if($('#flage_id').val()==1){
+                      fba_id_posp=$('#fba_id_posp').val();
+                      $('#'+fba_id_posp).empty();
+                      $('#'+fba_id_posp).append($('#posp_name_id').val());
+                       }if($('#flage_id').val()==2){
+                              //LoanID
 
-                                                                    fba_id_posp=$('#fba_id_posp').val();
-                                                                      alert(fba_id_posp);
-                                                                     $('#LoanID'+fba_id_posp).empty();
-                                                                     $('#LoanID'+fba_id_posp).append($('#posp_name_id').val());
-                                                                    }
+                             fba_id_posp=$('#fba_id_posp').val();
+                             alert(fba_id_posp);
+                             $('#LoanID'+fba_id_posp).empty();
+                             $('#LoanID'+fba_id_posp).append($('#posp_name_id').val());
+                            }
                                                    
 
                                                         setTimeout(function () {
