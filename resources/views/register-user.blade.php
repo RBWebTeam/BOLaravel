@@ -4,28 +4,29 @@
 
              <div class="container-fluid white-bg">
 				<div class="col-md-12"><h3 class="mrg-btm">REGISTER USER</h3></div>
-				<form method="post" action="submit-query.html">
+				<form method="post" action="{{url('register-user')}}">
+				{{csrf_field()}} 
                 <div class="col-md-4 col-xs-12">
 				<div class="form-group">
-				<input type="text" class="form-control" placeholder="Username" />
+				<input type="text" class="form-control" name="username" id="username" placeholder="Username" />
 				</div>
 				</div>
 				
 				<div class="col-md-4 col-xs-12">
 				<div class="form-group">
-				<input type="email" class="form-control" placeholder="Email Id"/>
+				<input type="email" class="form-control" name="Emailid" id="Emailid" placeholder="Email Id"/>
 				</div>
 				</div>
 				
 				<div class="col-md-4 col-xs-12">
 				<div class="form-group">
-				<input type="password" class="form-control" placeholder="Password"/>
+				<input type="password" class="form-control" name="password" id="password" placeholder="Password"/>
 				</div>
 				</div>
 				
 				<div class="col-md-4 col-xs-12">
 				<div class="form-group">
-				<input type="password" class="form-control"placeholder="Confirm Password" />
+				<input type="password" class="form-control" name="password2" id="password2" placeholder="Confirm Password" />
 				</div>
 				</div>
 				
@@ -33,7 +34,7 @@
 				
 				<div class="col-md-4 col-xs-12">
 				<div class="form-group">
-				<select class="selectpicker select-opt form-control" required>
+				<select class="selectpicker select-opt form-control" name="employetype" id="employetype" required>
 				 <option value="1">Authorities</option>
 								<option value="1">SUB CATEGORIES</option>
 								<option value="2">HEALTH INSURANCE</option>
@@ -131,21 +132,21 @@
                                             </td>
 		                                   </tr>
 		                                   <tr align="left tr-css">
-			                                  <td>
-                                                <input type="hidden" value="20" class="used">
-                                                <input type="checkbox" class="used">
-                                                <span>SUBMIT QUERY</</span>
-                                            </td>
-		                                   </tr>
-		                                   <tr align="left tr-css">
-			                                  <td>
-                                                <input type="hidden" value="20" class="used">
-                                                <input type="checkbox" class="used">
-                                                <span>USER QUERIES</</span>
-                                            </td>
-		                                   </tr>
-                                          <tr align="left tr-css">
-			                                  <td>
+			                               <td>
+                  <input type="hidden" value="20" class="used">
+                  <input type="checkbox" class="used">
+                 <!--  <span>SUBMIT QUERY</</span> -->
+                  </td>
+		          </tr>
+		          <tr align="left tr-css">
+			      <td>
+                  <input type="hidden" value="20" class="used">
+                  <input type="checkbox" class="used">
+                  <span>USER QUERIES</</span>
+                    </td>
+		            </tr>
+                    <tr align="left tr-css">
+			        <td>
                                                 <input type="hidden" value="20" class="used">
                                                 <input type="checkbox" class="used">
                                                 <span>USER FEEDBACK</</span>

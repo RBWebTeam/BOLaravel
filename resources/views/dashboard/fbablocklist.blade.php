@@ -8,7 +8,55 @@
 			 <div class="col-md-12">
 			 <div class="overflow-scroll">
 			 <div class="table-responsive" >
-				<table class="table table-bordered table-striped tbl" >
+           <!-- \\filter start -->
+
+     <div class="col-md-12">
+                 <div class="panel panel-primary">
+                 <div class="panel-heading">
+                      <h3 class="panel-title">Filter</h3>
+                      <div class="pull-right">
+                        <span class="clickable filter" data-toggle="tooltip" data-container="body">
+                        <span class="glyphicon glyphicon-plus glyphicon1"></span> &nbsp;&nbsp;
+                          <span class="glyphicon glyphicon-filter glyphicon1 fltr-tog"></span>
+                        </span>
+                      </div>
+                    </div>
+                    <div class="panel-body filter-bdy" style="display:none">
+                      <input type="text" class="form-control" id="dev-table-filter" data-action="filter" data-filters="#dev-table" placeholder="Search..." />
+                    </div>
+                 </div>
+                 </div>
+
+          <!--  \\filter end
+ -->
+
+       <!-- //start date -->
+        <div class="col-md-4">
+                <div class="form-group">
+                   
+                          <p>From Date</p>
+                   <div id="datepicker" class="input-group date" data-date-format="mm-dd-yyyy">
+                         <input class="form-control" type="text" placeholder="From Date" />
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                        </div>
+                      </div>
+                     </div>
+                 <div class="col-md-4">
+                 <div class="form-group">
+                 <p>To Date</p>
+                   <div id="datepicker1" class="input-group date" data-date-format="mm-dd-yyyy">
+                         <input class="form-control" type="text" placeholder="From Date" />
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                        </div>
+                      </div>
+                     </div>
+                 <div class="col-md-4">
+                 <div class="form-group"> <button class="common-btn mrg-top">SHOW</button></div>
+                 </div>
+
+
+       <!-- //end date -->
+				<table id="example" class="table table-bordered table-striped tbl" >
                  <thead>
                   <tr>
                    <th>Full Name</th>
@@ -51,6 +99,7 @@
             </div>
             </div>
 @endsection
+
 
 
 

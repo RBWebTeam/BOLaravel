@@ -22,10 +22,17 @@ Route::get('/', function () {
 Route::post('admin-login','LoginController@login');
 Route::get('register-user','LoginController@register_user');
 
+Route::post('register-user','LoginController@registerinsert');
+Route::post('register-user','LoginController@stateandauthorities');
+
 
 
 Route::get('dashboard','DashboardController@dashboard');
 Route::get('fba-list','FbaController@fba_list');
 
-// laravel
+
+
 Route::get('fba-blocklist','fbablocklistController@fbablocklist');
+
+Route::get('Fsm-Details','FsmDetailsController@FsmDetails');
+
