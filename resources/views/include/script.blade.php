@@ -25,14 +25,14 @@ $(document).ready(function(){
   $("#datepicker").datepicker({ 
         autoclose: true, 
         todayHighlight: true
-  }).datepicker('update', new Date());
+  }).datepicker("getDate");
 });
  
   $(function () {
   $("#datepicker1").datepicker({ 
         autoclose: true, 
         todayHighlight: true
-  }).datepicker('update', new Date());
+  }).datepicker("getDate");
 });
  
              $(document).ready(function () {

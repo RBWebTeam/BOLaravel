@@ -1,8 +1,6 @@
-					@extends('include.master')
-					@section('content')
-    
-
-					          <!-- Body Content Start -->
+	@extends('include.master')
+  @section('content')
+   <!-- Body Content Start -->
 					            <div id="content" style="overflow:scroll;">
 								 <div class="container-fluid white-bg">
 								 <div class="col-md-12"><h3 class="mrg-btm">FBA List</h3></div>
@@ -72,9 +70,7 @@
 									   <th>Bank Account</th>
 									   <th>SMS</th>
 									   <th>sales code</th>
-
-					                 </tr>
-					                </thead>
+                      </tr>
 					                <tbody>
 					              @foreach($query as $val)
 					                 <tr>
@@ -82,6 +78,7 @@
 					                  <td><?php echo $val->createdate; ?></td>
 					                  <td><?php echo $val->MobiNumb1; ?></td>
 					                  <td><?php echo $val->EMaiID; ?></td>
+
 					                  <td><a href="#" class="popover-Payment" data-toggle="popover" title="Payment link" data-content="<?php echo $val->Link; ?>">Payment link</a></td>
 					                  <td><a href="#" class="popover-Password" data-toggle="popover" title="Show Password" data-content="<a><?php echo $val->Password; ?></a>">*****</a></td>
 					                  <td><?php echo $val->city; ?></td>
@@ -91,11 +88,12 @@
 					                  <td><a href="">update</a></td>
 					                  <td><?php echo $val->pospname; ?></td>
 					                  <td><?php echo $val->PartnerID; ?></td>
-					                  <td>pending</td>
 					                  <td><?php echo $val->bankaccount; ?></td>
 					                  <td><a href="#" onclick="SMS_FN(#{<?php echo $val->fbaid; ?>},#{<?php echo $val->MobiNumb1; ?>})">sms </a></td>
 					                  <td><a href="">update</a></td>
+
                                     </tr>
+
 					               @endforeach
 					               
 					             </tbody>
@@ -112,9 +110,10 @@
 					              <li><a href="#">5</a></li>
 					            </ul> -->
 								</div>
-								
+			   
+                      			</div>
 					            </div>
-					            </div>
+
 
 <!-- send sms -->
 <div class="sms_sent_id modal fade" role="dialog">   
@@ -171,7 +170,9 @@
     </div>
   </div>
 </div>
+
 @endsection
+
 
 
 

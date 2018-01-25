@@ -57,10 +57,30 @@ class LoginController extends InitialController
                 return view('register-user');
        }
 
+             // start insert
+        public function registerinsert (Request $req){
+           DB::statement("call usp_insert_emp_login_new(?,?,?,?)",array($req->username,$req->Emailid,$req->password,$req->employetype));
+          // return redirect ('register-user');
 
-      public function register_form(Request $req){
+          }
 
-            $val =Validator::make($req->all(), [
+            // Start state
+          // public function stateandauthorities (Request$req){
+          //   DB::statement("call usp_usermenustatemapping(?,?,?)",array($req->username,$req->StatesV,$req->Body_gvStateList_lblVals_4));
+          //   return redirect ('register-user');
+          // }
+
+
+              // End state
+
+
+    //  DB::table('emp_login')->insert(
+    // ['username' =>$req->username, 'password'=>$req->password,'emptype'=>$req->employetype,'emailid'=>$req->Emailid,]);
+     //  return redirect('register-user'); 
+     //end insert
+
+          public function register_form(Request $req){
+          $val =Validator::make($req->all(), [
                 'name' => 'required|min:5',
                 'contact' => 'required|regex:/^[0-9]{10}+$/',
                 'email' => 'required|email|unique:user_registration',
