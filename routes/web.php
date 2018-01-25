@@ -26,3 +26,6 @@ Route::get('register-user','LoginController@register_user');
 
 Route::get('dashboard','DashboardController@dashboard');
 Route::get('fba-list','FbaController@fba_list');
+ 
+Route::get('lead-details','LeadDetailsController@lead_details1');
+Route::get('otp-details','otpDetailsController@otp_details1');

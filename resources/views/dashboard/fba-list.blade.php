@@ -62,43 +62,44 @@
 					                   <th>Created Date</th>
 					                   <th>Mobile No</th>
 					                   <th>Email ID</th>
-									   <th></th>
+									   <th>Payment Link</th>
 									   <th>Password</th>
 					                   <th>City</th>
 									   <th>Pincode</th>
 					                   <th>FSM Details</th>
 					                   <th>POSP No</th>
-									   
 									   <th>Loan ID</th>
 					                   <th>Posp Name</th>
 					                   <th>Partner Info</th>
 					                   <th>Documents</th>
-									   
 									   <th>Bank Account</th>
 									   <th>SMS</th>
+									   <th>sales code</th>
+
 					                 </tr>
 					                </thead>
 					                <tbody>
+					              @foreach($query as $val)
 					                 <tr>
-					                  <td>LAKHINANDAN SHARMA</td>
-					                  <td>16 Jan 2017</td>
-					                  <td>9954429253</td>
-					                  <td>lakhinandanlicisssssssssssss@gmail.com</td>
-									  <td><a href="#" data-toggle="modal" data-target="#paymentLink">payment Link</a></td>
-									  <td><a href="#" data-toggle="modal" data-target="#showPassword">*****</a></td>
-					                  <td>DIBRUGARH</td>
-									  <td>Pincode</td>
-					                  <td><a href="#" data-toggle="modal" data-target="#fsmDetails">FSM</a></td>
-					                  <td>dgdg</td>
-									  
-									  <td><a href="#" data-toggle="modal" data-target="#updatePosp">UPDATE</a></td>
-					                  <td>Durgapratap Rajbhar</td>
-					                  <td><a href="#" data-toggle="modal" data-target="#partnerInfo">Partner Info</a></td>
-					                  <td><a href="#">Pending</a></td>
-									  <td>No</td>
-									  <td><a href="#" data-toggle="modal" data-target="#sendSms"><span class="glyphicon glyphicon-envelope center-obj"></span></a></td>
-					                  </tr>
-					               
+					                  <td><?php echo $val->FullName; ?></td>
+					                  <td><?php echo $val->createdate; ?></td>
+					                  <td><?php echo $val->MobiNumb1; ?></td>
+					                  <td><?php echo $val->EMaiID; ?></td>
+					                  <td><a href="">Payment Link </a></td>
+					                  <td><?php echo $val->Password; ?></td>
+					                  <td><?php echo $val->city; ?></td>
+					                  <td><?php echo $val->Pincode; ?></td>
+					                  <td>Fsm Details</td>
+					                  <td><a href="">update</a></td>
+					                  <td><a href="">update</a></td>
+					                  <td><?php echo $val->pospname; ?></td>
+					                  <td><?php echo $val->PartnerID; ?></td>
+					                  <td>pending</td>
+					                  <td><?php echo $val->bankaccount; ?></td>
+					                  <td><a href="">sms</a></td>
+					                  <td><a href="">update</a></td>
+                                    </tr>
+					               @endforeach
 					               
 					             </tbody>
 					            </table>
@@ -117,21 +118,14 @@
 								
 					            </div>
 					            </div>
-								<!-- Body Content Start ---->
-								
-
-
-
-					@endsection		
+@endsection		
 
 <script type="text/javascript">
-	
-
 	$(document).ready(function() {
           $('#example').DataTable( {
           "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]]
-          } );
-          } );
+          });
+          });
           $('.popover-Payment').popover({
             trigger: 'focus'
           });
