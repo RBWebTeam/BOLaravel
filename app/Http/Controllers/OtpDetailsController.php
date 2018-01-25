@@ -10,16 +10,18 @@ use Redirect;
 use Session;
 use URL;
 use Mail;
-class otpDetailsController extends Controller
+class OtpDetailsController extends InitialController
 {
        
         public function otp_details1(){
-      // $query=DB::select("call usp_load_leads()");
-         // print_r("test"); exit();
 
-             return view ('dashboard.otp-details');      
-                
-        	 
-               
+
+                $query=DB::select("call CreateOTPTransaction('C','null','null','null','null','null','null')");
+                print_r($query); exit();
+
+                 return view('dashboard.otp-details',['query'=>$query]);
+
         }
-    }
+
+}
+

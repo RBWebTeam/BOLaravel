@@ -113,6 +113,6 @@
 $(function() {
 	bs_input_file();
 });
-		 </script>
+		 </script>s
     </body>
 </html>
