@@ -21,5 +21,10 @@ class FbaController extends InitialController
          // print_r($query); exit();
        return view('dashboard.fba-list',['query'=>$query]);
 
+               
+
+
         }
+
 }
+

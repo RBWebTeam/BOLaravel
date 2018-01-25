@@ -76,6 +76,7 @@
                      <th>SMS</th>
                      <th>sales code</th>
 
+<<<<<<< HEAD
                            </tr>
                           </thead>
                           <tbody>
@@ -98,6 +99,30 @@
                             <td><?php echo $val->bankaccount; ?></td>
                             <td><a href="#" onclick="SMS_FN(#{<?php echo $val->fbaid; ?>},#{<?php echo $val->MobiNumb1; ?>})">sms </a></td>
                             <td><a href="">update</a></td>
+=======
+					                 </tr>
+					                </thead>
+					                <tbody>
+					              @foreach($query as $val)
+					                 <tr>
+					                  <td><?php echo $val->FullName; ?></td>
+					                  <td><?php echo $val->createdate; ?></td>
+					                  <td><?php echo $val->MobiNumb1; ?></td>
+					                  <td><?php echo $val->EMaiID; ?></td>
+
+					                  <td><a href="#" class="popover-Payment" data-toggle="popover" title="Payment link" data-content="<?php echo $val->Link; ?>">Payment link</a></td>
+					                  <td><a href="#" class="popover-Password" data-toggle="popover" title="Show Password" data-content="<?php echo $val->Password; ?>">*****</a></td>
+					                  <td><?php echo $val->city; ?></td>
+					                  <td><?php echo $val->Pincode; ?></td>
+					                  <td>Fsm Details</td>
+					                  <td><a href="#" onclick="POSP_UPDATE" id="">update </a></td>
+					                  <td><a href="">update</a></td>
+					                  <td><?php echo $val->pospname; ?></td>
+					                  <td><?php echo $val->PartnerID; ?></td>
+					                  <td><?php echo $val->bankaccount; ?></td>
+					                  <td><a href="#" onclick="SMS_FN(#{<?php echo $val->fbaid; ?>},#{<?php echo $val->MobiNumb1; ?>})">sms </a></td>
+					                  <td><a href="">update</a></td>
+>>>>>>> f1ca795314c59247cc99d818bde19592fa595a37
                                     </tr>
                          @endforeach
                          
@@ -118,6 +143,7 @@
                 
                       </div>
                       </div>
+
 
 
 <!-- send sms -->

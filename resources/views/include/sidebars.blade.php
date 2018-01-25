@@ -4,7 +4,12 @@
      <li class="nav-item"><a href="#"><span class="sp-nav"><img src="images/icon/home.png"></span>&nbsp;&nbsp; Home Page</a></li>
     <li class="nav-item"><a href="{{url('Fsm-Details')}}"><span class="sp-nav"><img src="images/icon/fsm-detail.png"></span>&nbsp;&nbsp; FSM Details</a></li>
     <li class="nav-item"><a href="{{url('fba-list')}}"><span class="sp-nav"><img src="images/icon/lead-details.png"></span> &nbsp;&nbsp;FBA LIST</a></li>
+
     <li class="nav-item"><a href="{{url('fba-blocklist')}}"><span class="sp-nav"><img src="images/icon/lead-details.png"></span> &nbsp;&nbsp;FBA BLOCK LIST</a></li>
+
+    <li class="nav-item"><a href="{{url('lead-details')}}"><span class="sp-nav"><img src="images/icon/offline-quote.png"></span> &nbsp;&nbsp;Lead Details</a></li>
+     <li class="nav-item"><a href="{{url('otp-details')}}"><span class="sp-nav"><img src="images/icon/offline-quote.png"></span> &nbsp;&nbsp;OTP Details</a></li>
+
     <li class="nav-item"><a href="#"><span class="sp-nav"><img src="images/icon/offline-quote.png"></span> &nbsp;&nbsp;Offline Quote Requests</a></li>
     <li class="nav-item"><a href="#"><span class="sp-nav"><img src="images/icon/new-user.png"></span> &nbsp;&nbsp;Login Request Log</a></li>
     <li class="nav-item"><a href="#"><span class="sp-nav"><img src="images/icon/email.png"></span> &nbsp;&nbsp;Send SMS</a></li>

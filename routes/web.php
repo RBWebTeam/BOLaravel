@@ -23,7 +23,7 @@ Route::post('admin-login','LoginController@login');
 Route::get('register-user','LoginController@register_user');
 
 Route::post('register-user','LoginController@registerinsert');
-Route::post('register-user','LoginController@stateandauthorities');
+// Route::post('register-user','LoginController@stateandauthorities');
 
 
 
@@ -32,7 +32,14 @@ Route::get('fba-list','FbaController@fba_list');
 
 
 
+
 Route::get('fba-blocklist','fbablocklistController@fbablocklist');
+
+
+Route::get('lead-details','LeadDetailsController@lead_details1');
+Route::get('register-form','RegisterFormController@register_form');
+Route::get('otp-details','OtpDetailsController@otp_details1');
 
 Route::get('Fsm-Details','FsmDetailsController@FsmDetails');
 
+ Route::get('send-notification','SendNotificationController@sendnotification');
