@@ -16,11 +16,10 @@ class OtpDetailsController extends InitialController
         public function otp_details1(){
 
 
-                $query=DB::select("call CreateOTPTransaction('C','null','null','null','null','null','null')");
+          $query=DB::select("call CreateOTPTransaction('c')");
                 print_r($query); exit();
 
-                 return view('dashboard.otp-details',['query'=>$query]);
-
+return view('dashboard.otp-details',['query'=>$query]);
         }
 
 }

@@ -1,9 +1,11 @@
-   @extends('include.master')
+ @extends('include.master')
 					@section('content')
+
+<body>
 		   <!-- Body Content Start ---->
             <div id="content" style="overflow:scroll;">
 			 <div class="container-fluid white-bg">
-			 <div class="col-md-12"><h3 class="mrg-btm">Send Notification</h3></div>
+			 <div class="col-md-12" ><h3 class="mrg-btm" >Send Notification</h3></div>
 			<form method="post" action="">
 			    <div class="col-md-6 col-xs-12">
 				<div class="form-group">
@@ -71,8 +73,6 @@
 			
 			
         </div>
-
-        @endsection	
      <!-- Wrapper Div End ---->
 
          <script type="text/javascript">
@@ -113,6 +113,6 @@
 $(function() {
 	bs_input_file();
 });
-		 </script>s
+		 </script>
     </body>
 </html>

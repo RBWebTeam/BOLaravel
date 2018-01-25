@@ -15,12 +15,12 @@ class SendNotificationController extends InitialController
        
         public function sendnotification(){
 
- $query=DB::select("call usp_load_fbalist_new(0)");
+      //$query=DB::select("call usp_load_fbalist_new(0)");
                // print_r($query); exit();
 
                  //return view('dashboard.send-notification');
 
-                 return view('dashboard.send-notification',['query'=>$query]);
+                 return view('dashboard.send-notification');
 
         }
 

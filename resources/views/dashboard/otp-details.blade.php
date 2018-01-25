@@ -1,5 +1,4 @@
-
-@extends('include.master')
+                 @extends('include.master')
 					@section('content')
 					        
 					        <body>
@@ -40,7 +39,7 @@
                  </tr>
                 </thead>
                 <tbody>
-                 <tr>
+                 <!-- <tr>
                   <td>9920217391</td>
                   <td>422584</td>
                   <td>1/19/2018 6:15:41 PM</td>
@@ -70,8 +69,17 @@
                   <td>422584</td>
                   <td>1/19/2018 6:15:41 PM</td>
                   </tr>
-				  
+				   -->
                
+               @foreach($query as $val)
+					                 <tr>
+					                  <td><?php echo $val->FullName; ?></td>
+					                  <td><?php echo $val->createdate; ?></td>
+					                  <td><?php echo $val->MobiNumb1; ?></td>
+					                  <td><?php echo $val->MobiNumb2; ?></td>
+					                  <td><?php echo $val->Address1; ?></td>
+					                  </tr>
+					               @endforeach
                
              </tbody>
             </table>
