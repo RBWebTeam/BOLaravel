@@ -41,6 +41,9 @@ Route::get('register-form','RegisterFormController@register_form');
 Route::get('otp-details','OtpDetailsController@otp_details1');
 
 Route::get('Fsm-Details','FsmDetailsController@FsmDetails');
-Route::get('Fsm-Register','FsmRegisterController@bindsate');
+Route::get('Fsm-Register','FsmRegisterController@getsate');
+Route::get('Fsm-Register/{id}',array('as'=>'FSMRegister.ajax','uses'=>'FsmRegisterController@getcity'));
+/*Route::get('Fsm-Register','FsmRegisterController@getmanager');*/
+Route::get('Fsm-Register/{flag}/{value}',array('as'=>'FSMRegister.ajax','uses'=>'FsmRegisterController@getpincode'));
 
  Route::get('send-notification','SendNotificationController@sendnotification');

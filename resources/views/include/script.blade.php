@@ -167,5 +167,118 @@ $(document).ready(function(){
                       });
                   });
 
+ $(document).ready(function() {
 
- </script>
+        $('select[name="State"]').on('change', function() {
+            var state_id = $(this).val();
+            if(state_id) {
+                $.ajax({
+                    url: 'Fsm-Register/'+state_id,
+                    type: "GET",
+                    dataType: "json",
+                    success:function(data) {
+
+                        
+                        $('select[name="city"]').empty();
+                        $('select[name="city"]').append('<option value="0">select city</option>');
+                        $.each(data, function(key, value) {
+
+                            $('select[name="city"]').append('<option value="'+ key +'">'+ value +'</option>');
+                        });
+
+
+                    }
+                });
+            }else{
+                $('select[name="city"]').empty();
+            }
+        });
+
+
+
+
+
+  $("#basic-addon2").click(function(e) {
+          e.preventDefault();
+            var flag = 0;
+            var value = "";
+
+            if($(txtmappincode).val()!="")  {
+              flag = 3;
+              value = $('#txtmappincode').val();
+            }
+            else if($('#txtmapcity').val() != 0){
+              flag = 2;
+              value = $('#txtmapcity').val();
+            }
+            else if($('#txtmapstate').val() != 0)
+            {
+              flag = 1;
+              value = $('#txtmapstate').val(); 
+            }
+            else
+            {
+              alert('select atleast one option');
+            }
+
+            alert(flag +','+value);  
+
+            $.ajax({
+                    url: 'Fsm-Register/'+flag+'/'+value,
+                    type: "GET",
+                    dataType: "json",
+                    success:function(data) {
+
+                      //alert($('#tblpincode').rows.count);
+                      $('#tblpincode tr:not(:first)').remove();
+
+                      var rows = "";
+                      for(var i =0; i < data.length;i++)
+                      {
+                        rows = rows +"<tr align='left'><td>";
+                        rows = rows +"<input id='pincode' type='checkbox' class='used chk' value = data[i].pincode>";
+                        rows = rows +"<span>"+data[i].pincode+"</span></td></tr>";
+                      }
+
+                      $('#tblpincode > tbody:last-child').append(rows);
+
+
+                        /*$.each(data, function(key, value) {
+
+                            $('select[name="city"]').append('<option value="'+ key +'">'+ value +'</option>');
+
+                            $('#pincode').val(data['pincode']);
+                        });
+*/
+
+                    }
+                });
+          });
+
+
+ $('#chkselectall').click(function () {    
+     $('.chk').prop('checked', this.checked);    
+ });
+
+
+/*$("#chkselectall").click(function(){
+alert('Test');
+  if($(this).is(':checked'))
+  { 
+
+
+    $(this).closest('table > tbody > tr').each(function(tr){
+      alert($(this).find('span').text());
+    })
+
+  }
+
+});*/
+
+
+    });
+
+
+
+</script>
+
