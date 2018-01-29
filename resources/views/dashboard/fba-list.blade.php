@@ -50,7 +50,7 @@
 							  <div class="col-md-12">
 								 <div class="overflow-scroll">
 								 <div class="table-responsive" >
-									<table id="example" class="table table-bordered table-striped tbl">
+					<table class="datatable-responsive table table-striped table-bordered dt-responsive nowrap" id="example">
 					                 <thead>
 					                  <tr>
 					                   <th>Full Name</th>
@@ -70,7 +70,7 @@
 									   <th>Bank Account</th>
 									   <th>SMS</th>
 									   <th>sales code</th>
-                      </tr>
+                                     </tr>
 					                <tbody>
 					              @foreach($query as $val)
 					                 <tr>
@@ -80,7 +80,7 @@
 					                  <td><?php echo $val->EMaiID; ?></td>
 
 					                  <td><a href="#" class="popover-Payment" data-toggle="popover" title="Payment link" data-content="<?php echo $val->Link; ?>">Payment link</a></td>
-					                  <td><a href="#" class="popover-Password" data-toggle="popover" title="Show Password" data-content="<a><?php echo $val->Password; ?></a>">*****</a></td>
+					                  <td><a href="#" class="popover-Password" data-toggle="popover" title="Show Password" data-content="<?php echo $val->Password; ?>">*****</a></td>
 					                  <td><?php echo $val->city; ?></td>
 					                  <td><?php echo $val->Pincode; ?></td>
 					                  <td>Fsm Details</td>

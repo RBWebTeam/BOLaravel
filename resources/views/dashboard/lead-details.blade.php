@@ -1,22 +1,13 @@
-		@extends('include.master')
-					@section('content')
+@extends('include.master')
+	@section('content')
 					        
 
-
-	
-<body>
-
-
-    <!-- Sidebar End -->
-           
-		   
-		   
-		   <!-- Body Content Start ---->
+ <!-- Body Content Start -->
             <div id="content" style="overflow:scroll"; >
 			 <div class="container-fluid white-bg">
 			 <div class="col-md-12"><h3 class="mrg-btm">LEAD DETAILS</h3></div>
 			 <!-- Filter End -->
-			 <div class="col-md-12">
+			 <!-- <div class="col-md-12">
 			 <div class="panel panel-primary">
 			 <div class="panel-heading">
 						<h3 class="modal-title">Filter</h3>
@@ -31,7 +22,7 @@
 						<input type="text" class="form-control" id="dev-table-filter" data-action="filter" data-filters="#dev-table" placeholder="Search..." />
 					</div>
 			 </div>
-			 </div>
+			 </div> -->
 
 
 
@@ -39,7 +30,7 @@
 			 <div class="col-md-12">
 			 <div class="overflow-scroll">
 			 <div class="table-responsive" >
-				<table class="table table-bordered table-striped tbl" id="dev-table" >
+			<table class="datatable-responsive table table-striped table-bordered dt-responsive nowrap" id="example">
                  <thead>
                   <tr>
                    <th>Full Name</th>
@@ -98,7 +89,7 @@
 			</div>
 			</div>
 			<!-- Pagination Start -->
-			<div>
+			<!-- <div>
 			<h5 class="pull-left"><b>Records :</b> <span>1 to 10 </span>Of <span class="badge">186</span><h5>
 			<ul class="pagination pull-right">
               <li><a href="#">1</a></li>
@@ -107,7 +98,7 @@
               <li><a href="#">4</a></li>
               <li><a href="#">5</a></li>
             </ul>
-			</div>
+			</div> -->
 			<!-- Pagination End -->
 			</div>
 			<div class="col-md-12"><button class="common-btn center-obj">EXPORT TO EXCEL</button></div>
@@ -121,53 +112,10 @@
 			
         </div>
         @endsection	
-     <!-- Wrapper Div End ---->
+     
 
-         <script type="text/javascript">
-             $(document).ready(function () {
-                 $('#sidebarCollapse').on('click', function () {
-                     $('#sidebar').toggleClass('active');
-                 });
-             });
-         </script>
-		 
-		 <script>
-		    function bs_input_file() {
-	$(".input-file").before(
-		function() {
-			if ( ! $(this).prev().hasClass('input-ghost') ) {
-				var element = $("<input type='file' class='input-ghost' style='visibility:hidden; height:0'>");
-				element.attr("name",$(this).attr("name"));
-				element.change(function(){
-					element.next(element).find('input').val((element.val()).split('\\').pop());
-				});
-				$(this).find("button.btn-choose").click(function(){
-					element.click();
-				});
-				$(this).find("button.btn-reset").click(function(){
-					element.val(null);
-					$(this).parents(".input-file").find('input').val('');
-				});
-				$(this).find('input').css("cursor","pointer");
-				$(this).find('input').mousedown(function() {
-					$(this).parents('.input-file').prev().click();
-					return false;
-				});
-				return element;
-			}
-		}
-	);
-}
-$(function() {
-	bs_input_file();
-});
-</script>
 
 
 
 		 
-		 
- 
- 
-    </body>
-</html>
+	
