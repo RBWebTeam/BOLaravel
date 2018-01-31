@@ -7,7 +7,8 @@
 			 <div class="container-fluid white-bg">
 			 <div class="col-md-12"><h3 class="mrg-btm">Register Form</h3></div>
 			 <div class="col-md-12">
-			 <form>
+			 <form id="fsmregister" method="post">
+			 	 {{ csrf_field() }}
 			  <ul class="nav nav-tabs nav-justified">
                 <li class="active"><a data-toggle="tab" href="#home">FSM Basic Info -  &nbsp;<span class="badge">Step 1</span></a></li>
                 <li><a data-toggle="tab" href="#menu1">Pincode Mapping - &nbsp;<span class="badge">Step 2</a></span></li>
@@ -18,7 +19,7 @@
               <h4 class="text-center">FSM Basic Info</h4>
 			  <div class="col-md-4 col-xs-12">
 				<div class="form-group">
-				 <select id="txttitle" class="selectpicker select-opt form-control" required="Yes">
+				 <select id="txttitle" name="txttitle" class="selectpicker select-opt form-control" required="Yes">
 			     <option selected="selected" value="0">Title</option>
 		         <option value="1">Mr</option>
 		         <option value="2">Mrs</option>
@@ -28,63 +29,63 @@
 				</div>
               <div class="col-md-4 col-xs-12">
 				<div class="form-group">
-				<input id="txtFname" type="text" class="form-control" placeholder="First Name" required="Yes">
+				<input id="txtFname" name="txtFname" type="text" class="form-control" placeholder="First Name" required="Yes">
 				</div>
 				</div>
 				<div class="col-md-4 col-xs-12">
 				<div class="form-group">
-				<input id="txtLname" type="text" class="form-control" placeholder="Last Name" required="Yes">
+				<input id="txtLname" name="txtLname" type="text" class="form-control" placeholder="Last Name" required="Yes">
 				</div>
 				</div>
 				<div class="col-md-4 col-xs-12">
 				<div class="form-group">
-				<input id="txtCname" type="text" class="form-control" placeholder="Company Name">
+				<input id="txtCname" name="txtCname" type="text" class="form-control" placeholder="Company Name">
 				</div>
 				</div>
 				<div class="col-md-4 col-xs-12">
 				<div class="form-group">
-				<input id="txtemail" type="email" class="form-control" placeholder="email Id" required="Yes">
+				<input id="txtemail" name="txtemail" type="email" class="form-control" placeholder="email Id" required="Yes">
 				</div>
 				</div>
 				<div class="col-md-4 col-xs-12">
 				<div class="form-group">
-				<input id="txtMobile" type="number" class="form-control" placeholder="Mobile No." required="Yes">
+				<input id="txtMobile" name="txtMobile" type="number" class="form-control" placeholder="Mobile No." required="Yes">
 				</div>
 				</div>
 				
 			    <div class="col-md-4">
 			    <div class="form-group">
 			    <div id="datepicker" class="input-group date" data-date-format="mm-dd-yyyy">
-                 <input class="form-control" type="text" placeholder="From Date">
+                 <input id="txtdate" name="txtdate" class="form-control" type="text" placeholder="From Date">
                 <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                </div>
                </div>
               </div>
 			  <div class="col-md-4 col-xs-12">
 				<div class="form-group">
-				<input id="txtpan" type="text" class="form-control" placeholder="Pan Card">
+				<input id="txtpan" name="txtpan" type="text" class="form-control" placeholder="Pan Card">
 				</div>
 				</div>
 				<div class="col-md-4 col-xs-12">
 				<div class="form-group">
-				<input id="txtAadhar" type="number" class="form-control" placeholder="Aadhar No.">
+				<input id="txtAadhar" name="txtAadhar" type="number" class="form-control" placeholder="Aadhar No.">
 				</div>
 				</div>
 				<div class="col-md-4 col-xs-12">
 				<div class="form-group">
-				<input id="txtPincode"  type="number" class="form-control" placeholder="Pincode" required="Yes">
+				<input id="txtPincode" name="txtPincode" type="number" class="form-control" placeholder="Pincode" required="Yes">
 				</div>
 				</div>
 				<div class="col-md-4 col-xs-12">
 				<div class="form-group">
-				<input id="txtCity" type="text" class="form-control" placeholder="City">
+				<input id="txtCity" name="txtCity" type="text" class="form-control" placeholder="City">
 				</div>
 				</div>
 				<div class="col-md-4 col-xs-12">
 				<div class="form-group">
-				<select id="txtstate" class="selectpicker select-opt form-control" required="">
-					<option selected="selected" value="0">State</option>
-					 @foreach($query as $val)
+				<select id="txtstate" name="txtstate" class="selectpicker select-opt form-control" required="">
+			     <option selected="selected" value="0">State</option>
+				 @foreach($state as $val)
 			     <option value="{{$val->state_id}}">{{$val->state_name}}</option>
 		          @endforeach
 				</select>
@@ -92,7 +93,7 @@
 				</div>
 				<div class="col-md-4 col-xs-12">
 				<div class="form-group">
-				<select id="txtmanager" class="selectpicker select-opt form-control" required="">
+				<select id="txtmanager" name="txtmanager" class="selectpicker select-opt form-control" required="">
 					<option>--SELECT MANAGER--</option>
 			   @foreach($manager as $val)
 		         <option value="{{$val->mgid}}">{{$val->fullname}}</option>
@@ -103,12 +104,12 @@
 				
 				<div class="col-md-4 col-xs-12">
 				<div class="form-group">
-				<div class="form-control">is Lead Recipient &nbsp; &nbsp; <input type="radio" id="txtyes" name="rdo"/>&nbsp;Yes   <input type="radio" id="txtno" name="rdo"/>&nbsp;No</div>
+				<div class="form-control">is Lead Recipient &nbsp; &nbsp; <input type="radio" id="txtyes" name="rdoyes"/>&nbsp;Yes   <input value="OFF" type="radio" id="txtno" name="rdono"/>&nbsp;No</div>
 				</div>
 				</div>
 				<div class="col-md-4 col-xs-12">
 				<div class="form-group">
-				<select id="txtfsmtype" class="selectpicker select-opt form-control" required="">
+				<select id="txtfsmtype" name="txtfsmtype" class="selectpicker select-opt form-control" required="">
 			     <option>--SELECT FSM TYPE--</option>
 	             <option>Employee</option>
 	             <option>Paid Employee</option>
@@ -121,9 +122,9 @@
               <h4 class="text-center">Pincode Mapping</h4>
               <div class="col-md-4 col-xs-12">
 				<div class="form-group">
-				<select name="State" id="txtmapstate" class="selectpicker select-opt form-control" required="">
+				<select name="State"  id="txtmapstate" class="selectpicker select-opt form-control" required="">
 			     <option>Select State</option>
-		          @foreach($query as $val)
+		          @foreach($state as $val)
 			     <option value="{{$val->state_id}}">{{$val->state_name}}</option>
 		          @endforeach
 				</select>
@@ -139,7 +140,7 @@
 				</div>
                 <div class="col-md-8 col-xs-12">
 				<div class="input-group">
-                <input type="number" id="txtmappincode" class="form-control" placeholder="Pincodes">
+                <input type="number" name="txtmappincode" id="txtmappincode" class="form-control" placeholder="Pincodes">
                 <span class="input-group-addon btn btn-info" id="basic-addon2">Select Pincodes</span>
                 </div>
 				 </div>
@@ -203,12 +204,12 @@
 			  
 			  <div class="col-md-4 col-xs-12">
 				<div class="form-group">
-				<input id="txtbankacno" type="text" class="form-control" placeholder="Bank Ac No.">
+				<input id="txtbankacno" name="txtbankacno" type="text" class="form-control" placeholder="Bank Ac No.">
 				</div>
 				</div>
                <div class="col-md-4 col-xs-12">
 				<div class="form-group">
-				<select id="txtactype" class="selectpicker select-opt form-control" required="">
+				<select id="txtactype" name="txtactype" class="selectpicker select-opt form-control" required="">
 			     <option selected="selected" value="0">Account Type</option>
 		         <option value="1">Saving Account</option>
 		         <option value="2">Current Account</option>
@@ -218,27 +219,27 @@
 				</div>
               <div class="col-md-4 col-xs-12">
 				<div class="form-group">
-				<input id="txtifsc" type="text" class="form-control" placeholder="IFSC Code">
+				<input id="txtifsc" name="txtifsc" type="text" class="form-control" placeholder="IFSC Code">
 				</div>
 				</div>
 				<div class="col-md-4 col-xs-12">
 				<div class="form-group">
-				<input id="txtmicr" type="text" class="form-control" placeholder="MICR Code">
+				<input id="txtmicr" name="txtmicr" type="text" class="form-control" placeholder="MICR Code">
 				</div>
 				</div>
 				<div class="col-md-4 col-xs-12">
 				<div class="form-group">
-				<input id="txtbankno" type="text" class="form-control" placeholder="Bank Name">
+				<input id="txtbankno" name="txtbankno" type="text" class="form-control" placeholder="Bank Name">
 				</div>
 				</div>
 				<div class="col-md-4 col-xs-12">
 				<div class="form-group">
-				<input id="txtbankbrach" type="text" class="form-control" placeholder="Bank Branch">
+				<input id="txtbankbrach" name="txtbankbrach" type="text" class="form-control" placeholder="Bank Branch">
 				</div>
 				</div>
 				<div class="col-md-4 col-xs-12">
 				<div class="form-group">
-				<input id="txtbankcity" type="text" class="form-control" placeholder="Bank City">
+				<input id="txtbankcity" name="txtbankcity" type="text" class="form-control" placeholder="Bank City">
 				</div>
 				</div>
               </div>

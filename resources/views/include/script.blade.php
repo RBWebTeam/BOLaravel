@@ -167,9 +167,11 @@ $(document).ready(function(){
                       });
                   });
 
- $(document).ready(function() {
+//script for fsm register..
 
-        $('select[name="State"]').on('change', function() {
+ $(document).ready(function() {
+  insertfsm();
+    $('#txtmapstate').on('change', function() {
             var state_id = $(this).val();
             if(state_id) {
                 $.ajax({
@@ -179,11 +181,11 @@ $(document).ready(function(){
                     success:function(data) {
 
                         
-                        $('select[name="city"]').empty();
-                        $('select[name="city"]').append('<option value="0">select city</option>');
+                        $('#txtmapcity').empty();
+                        $('#txtmapcity').append('<option value="0">select city</option>');
                         $.each(data, function(key, value) {
 
-                            $('select[name="city"]').append('<option value="'+ key +'">'+ value +'</option>');
+                            $('#txtmapcity').append('<option value="'+ key +'">'+ value +'</option>');
                         });
 
 
@@ -194,11 +196,7 @@ $(document).ready(function(){
             }
         });
 
-
-
-
-
-  $("#basic-addon2").click(function(e) {
+$("#basic-addon2").click(function(e) {
           e.preventDefault();
             var flag = 0;
             var value = "";
@@ -221,7 +219,7 @@ $(document).ready(function(){
               alert('select atleast one option');
             }
 
-            alert(flag +','+value);  
+            /*alert(flag +','+value);  */
 
             $.ajax({
                     url: 'Fsm-Register/'+flag+'/'+value,
@@ -236,21 +234,11 @@ $(document).ready(function(){
                       for(var i =0; i < data.length;i++)
                       {
                         rows = rows +"<tr align='left'><td>";
-                        rows = rows +"<input id='pincode' type='checkbox' class='used chk' value = data[i].pincode>";
+                        rows = rows +"<input id='pincode' type='checkbox' class='used chk' value =''>";
                         rows = rows +"<span>"+data[i].pincode+"</span></td></tr>";
                       }
 
                       $('#tblpincode > tbody:last-child').append(rows);
-
-
-                        /*$.each(data, function(key, value) {
-
-                            $('select[name="city"]').append('<option value="'+ key +'">'+ value +'</option>');
-
-                            $('#pincode').val(data['pincode']);
-                        });
-*/
-
                     }
                 });
           });
@@ -259,26 +247,29 @@ $(document).ready(function(){
  $('#chkselectall').click(function () {    
      $('.chk').prop('checked', this.checked);    
  });
+});
 
+// insert Fsm details
+function insertfsm() {
+  console.log($('#fsmregister').serialize());
+   $.ajax({ 
+   url: "{{URL::to('Fsm-Register')}}",
+   method:"POST",
+   data: $('#fsmregister').serialize(),
 
-/*$("#chkselectall").click(function(){
-alert('Test');
-  if($(this).is(':checked'))
-  { 
+   success: function(msg)  
+   {
+    console.log(msg);
+    alert("Record saved successfully..");
+   }
 
+ });
+}
 
-    $(this).closest('table > tbody > tr').each(function(tr){
-      alert($(this).find('span').text());
-    })
-
-  }
-
-});*/
-
-
-    });
-
-
-
+$(document).ready(function(){
+                    $("#btnsubmit").click(function () {
+                       insertfsm();
+                    });
+                });
 </script>
 

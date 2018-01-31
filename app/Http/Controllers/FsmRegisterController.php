@@ -18,11 +18,12 @@ class FsmRegisterController extends Controller
 
 public function getsate()
 {
-   $query = DB::select("call usp_load_state_list()");
+   $state = DB::select("call usp_load_state_list()");
    $manager = DB::select("call usp_load_managers()");
+   
 			/*	print_r($query);
 	        exit();*/
-        return view('dashboard.FSMregister',['query'=>$query,'manager'=>$manager]);
+        return view('dashboard.FSMregister',['state'=>$state,'manager'=>$manager]);
 }
 public function getcity($id)
 {
@@ -38,6 +39,39 @@ public function getcity($id)
  $pincode = DB::select("call usp_load_pincodes($flag,$value)");
   return json_encode($pincode);
 }
+
+public function insertfsm(Request $req){
+
+    DB::statement('call sp_insert_FBAReg(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',array(
+      $req->txttitle,
+      $req->txtFname,
+      $req->txtLname,
+      $req->txtCname,
+      $req->txtemail,
+      $req->txtMobile,
+      $req->txtdate,
+      $req->rdoyes,
+      $req->rdono,
+      $req->txtpan,
+      $req->txtAadhar,
+      $req->txtPincode,
+      $req->txtCity,
+      $req->txtstate,
+      $req->txtmanager,
+      $req->txtfsmtype,
+      $req->State,
+      $req->city,
+      $req->txtbankacno,
+      $req->txtactype,
+      $req->txtifsc,
+      $req->txtmicr,
+      $req->txtbankno,
+      $req->txtbankbrach,
+      $req->txtbankcity
+
+    ));
+     return view ("dashboard.FSMregister");
+  }
 
 }
 
