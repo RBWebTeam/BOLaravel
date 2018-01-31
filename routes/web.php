@@ -23,8 +23,10 @@ Route::post('admin-login','LoginController@login');
 Route::get('register-user','LoginController@register_user');
 
 Route::post('register-user','LoginController@registerinsert');
-// Route::post('register-user','LoginController@stateandauthorities');
+Route::get('register-user','LoginController@getsate');
+ Route::post('register-user-save','LoginController@register_user_save');
 
+// 
 
 
 Route::get('dashboard','DashboardController@dashboard');

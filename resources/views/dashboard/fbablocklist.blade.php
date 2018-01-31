@@ -10,7 +10,7 @@
 			 <div class="table-responsive" >
            <!-- \\filter start -->
 
-     <div class="col-md-12">
+     <!-- <div class="col-md-12">
                  <div class="panel panel-primary">
                  <div class="panel-heading">
                       <h3 class="panel-title">Filter</h3>
@@ -26,12 +26,12 @@
                     </div>
                  </div>
                  </div>
-
+ -->
           <!--  \\filter end
  -->
 
        <!-- //start date -->
-        <div class="col-md-4">
+       <!--  <div class="col-md-4">
                 <div class="form-group">
                    
                           <p>From Date</p>
@@ -53,7 +53,7 @@
                  <div class="col-md-4">
                  <div class="form-group"> <button class="common-btn mrg-top">SHOW</button></div>
                  </div>
-
+ -->
 
        <!-- //end date -->
 				<table id="example" class="table table-bordered table-striped tbl" >
@@ -86,7 +86,11 @@
        <td><?php echo $val->EMaiID; ?></td>
        <td><?php echo $val->city; ?></td>
        <td><?php echo $val->Pincode; ?></td>
-      <td><button class="btn btn-default block">Block </button><button class="btn btn-danger unblock" style="display:none;">Unblock</button></td>
+      <td><button class="btn btn-default block">Block </button><button class="btn btn-danger unblock
+      " style="display:none;">Unblock</button>
+      <input type="hidden" name="txtfbaid" value="<?php echo $val->fbaid; ?>">
+      </td>
+
                 
        </tr>
        @endforeach
