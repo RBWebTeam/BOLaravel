@@ -20,4 +20,13 @@ class fbablocklistController extends Controller
                 // $query=array(1,2,3,4);
 		return view ('dashboard.fbablocklist',['query'=>$query]);
 	}
-}
+
+	public function fbablockunblock($flag,$value){
+          
+          /*print_r($req->id);*/
+		   
+	      DB::statement("call Usp_updatefba_block_Unblock('$flag','$value')");
+
+		 return view ('dashboard.fbablocklist');
+		}
+	}

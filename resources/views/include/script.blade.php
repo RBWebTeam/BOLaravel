@@ -1,10 +1,12 @@
 <script type="text/javascript">
+
 function Numeric(event) {     // for numeric value function
       if ((event.keyCode < 48 || event.keyCode > 57) && event.keyCode != 8) {
           event.keyCode = 0;
           return false;
       }
     }
+
 $(document).ready(function(){
     $(".fltr-tog").click(function(){
         $(".filter-bdy").toggle();
@@ -249,6 +251,7 @@ $("#basic-addon2").click(function(e) {
  });
 });
 
+<<<<<<< HEAD
 // insert Fsm details
 function insertfsm() {
   console.log($('#fsmregister').serialize());
@@ -262,6 +265,82 @@ function insertfsm() {
     console.log(msg);
     alert("Record saved successfully..");
    }
+=======
+});
+
+ // fba  block unblock
+ 
+ $('.block').click(function(){
+  var flag=1;
+  var value= $(this).closest('td').find('input[name="txtfbaid"]').val();
+// alert('Block click');
+  $(this).toggle();
+  $(this).closest('td').find('.unblock').toggle();
+
+
+$.ajax({
+            type: "GET",
+            url:'fba-blocklist/'+flag+'/'+value, 
+                     
+           success: function( msg ) {
+                 console.log(msg);
+            }
+        });
+
+
+});
+
+$('.unblock').click(function(){
+  // alert('unblock click');
+  $(this).toggle();
+  $(this).closest('td').find('.block').toggle();
+
+  var flag=0;
+  var value=$(this).closest('td').find('input[name="txtfbaid"]').val();
+ 
+  $.ajax({
+            type: "GET",
+            url:'fba-blocklist/'+flag+'/'+value, 
+                     
+           success: function( msg ) {
+                 console.log(msg);
+            }
+        });
+});
+// end block
+
+ 
+ 
+/*function block_fn(){
+
+var flag="";
+var value="";
+
+
+alert(id);
+ value = $('#txtfbaid').val();
+ if {
+  $("#blockbtn").click(function () {
+        flag=0;
+    });
+}
+else if {
+  $("#Unblockbtn").click(function () {
+        flag=1;
+    });
+}
+
+$.ajax({
+            type: "GET",
+            url:'fba-blocklist/'+flag+'/'+value,, 
+                     
+           success: function( msg ) {
+                 console.log(msg);
+            }
+        });
+*/
+  
+>>>>>>> f863f53e3eee27bffe8c23c91b516d3076bf58d2
 
  });
 }
@@ -272,4 +351,10 @@ $(document).ready(function(){
                     });
                 });
 </script>
+
+
+
+   
+
+
 

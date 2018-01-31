@@ -23,17 +23,18 @@ Route::post('admin-login','LoginController@login');
 Route::get('register-user','LoginController@register_user');
 
 Route::post('register-user','LoginController@registerinsert');
-// Route::post('register-user','LoginController@stateandauthorities');
+Route::get('register-user','LoginController@getsate');
+ Route::post('register-user-save','LoginController@register_user_save');
 
+// 
 
 
 Route::get('dashboard','DashboardController@dashboard');
 Route::get('fba-list','FbaController@fba_list');
 
 
-
-
 Route::get('fba-blocklist','fbablocklistController@fbablocklist');
+Route::get('fba-blocklist/{flag}/{value}',array('as'=>'fbablocklist.ajax','uses'=>'fbablocklistController@fbablockunblock'));
 
 
 Route::get('lead-details','LeadDetailsController@lead_details1');
