@@ -18,7 +18,7 @@
               <h4 class="text-center">FSM Basic Info</h4>
 			  <div class="col-md-4 col-xs-12">
 				<div class="form-group">
-				 <select id="txttitle" class="selectpicker select-opt form-control" required="">
+				 <select id="txttitle" class="selectpicker select-opt form-control" required="Yes">
 			     <option selected="selected" value="0">Title</option>
 		         <option value="1">Mr</option>
 		         <option value="2">Mrs</option>
@@ -28,12 +28,12 @@
 				</div>
               <div class="col-md-4 col-xs-12">
 				<div class="form-group">
-				<input id="txtFname" type="text" class="form-control" placeholder="First Name">
+				<input id="txtFname" type="text" class="form-control" placeholder="First Name" required="Yes">
 				</div>
 				</div>
 				<div class="col-md-4 col-xs-12">
 				<div class="form-group">
-				<input id="txtLname" type="text" class="form-control" placeholder="Last Name">
+				<input id="txtLname" type="text" class="form-control" placeholder="Last Name" required="Yes">
 				</div>
 				</div>
 				<div class="col-md-4 col-xs-12">
@@ -43,12 +43,12 @@
 				</div>
 				<div class="col-md-4 col-xs-12">
 				<div class="form-group">
-				<input id="txtemail" type="email" class="form-control" placeholder="email Id">
+				<input id="txtemail" type="email" class="form-control" placeholder="email Id" required="Yes">
 				</div>
 				</div>
 				<div class="col-md-4 col-xs-12">
 				<div class="form-group">
-				<input id="txtMobile" type="number" class="form-control" placeholder="Mobile No.">
+				<input id="txtMobile" type="number" class="form-control" placeholder="Mobile No." required="Yes">
 				</div>
 				</div>
 				
@@ -72,7 +72,7 @@
 				</div>
 				<div class="col-md-4 col-xs-12">
 				<div class="form-group">
-				<input id="txtPincode"  type="number" class="form-control" placeholder="Pincode">
+				<input id="txtPincode"  type="number" class="form-control" placeholder="Pincode" required="Yes">
 				</div>
 				</div>
 				<div class="col-md-4 col-xs-12">
@@ -93,34 +93,10 @@
 				<div class="col-md-4 col-xs-12">
 				<div class="form-group">
 				<select id="txtmanager" class="selectpicker select-opt form-control" required="">
-		         <option>--SELECT MANAGER--</option>
-	             <option>Abhas  Chatterjee</option>
-	             <option>Amit  Rawal</option>
-	             <option>Anjali  Thakkar</option>
-	             <option>Ashish  Saini</option>
-	             <option>Deepak  Arora</option>
-	             <option>GA Sathyanarayana</option>
-	             <option>Gaurav  Goel</option>
-	             <option>Gaurav  Singhvi</option>
-	             <option>Hari  Thakur</option>
-	             <option>Harish  Kotecha</option>
-	             <option>Kalyan  Pillai</option>
-	             <option>Krishana  Singh</option>
-	             <option>Kunal  Sharma</option>
-	             <option>Madhav  Rajput</option>
-	             <option>Meera  Budhan</option>
-	             <option>Mohit  Chandel</option>
-	             <option>Naresh  Kumar</option>
-               	 <option>Pradeesh  KS</option>
-	             <option>Prakash Shetty</option>
-	             <option>Pramod  Balakshe</option>
-	             <option>Pratibha  Vaidya</option>
-	             <option>Rakesh  Dhurve</option>
-	             <option>Rakesh  Dhurve</option>
-	             <option>Rakesh  Dhurve</option>
-	             <option>Raviraj  Saroj</option>
-	             <option>Rinkesh Buradkar</option>
-	             <option>Vikas  Sharma</option>
+					<option>--SELECT MANAGER--</option>
+			   @foreach($manager as $val)
+		         <option value="{{$val->mgid}}">{{$val->fullname}}</option>
+	             @endforeach
 				</select>
 				</div>
 				</div>
@@ -145,7 +121,7 @@
               <h4 class="text-center">Pincode Mapping</h4>
               <div class="col-md-4 col-xs-12">
 				<div class="form-group">
-				<select id="txtmapstate" class="selectpicker select-opt form-control" required="">
+				<select name="State" id="txtmapstate" class="selectpicker select-opt form-control" required="">
 			     <option>Select State</option>
 		          @foreach($query as $val)
 			     <option value="{{$val->state_id}}">{{$val->state_name}}</option>
@@ -155,9 +131,9 @@
 				</div>
 				<div class="col-md-4 col-xs-12">
 				<div class="form-group">
-				<select id="txtmapcity" class="selectpicker select-opt form-control" required="">
+				<select name="city" id="txtmapcity" class="selectpicker select-opt form-control" required="">
 			     <option>Select City</option>
-		         <option>Mumbai</option>
+		         <!-- <option>Mumbai</option> -->
 				</select>
 				</div>
 				</div>
@@ -170,31 +146,25 @@
 				 <br>
 				 <div class="col-md-12"><div class="well well-sm mrg-top text-center map-pin">Map Pincodes</div></div>
 				 
-				 <div class="col-sm-5 col-xs-12 form-padding" id="StatesV" style="overflow-y:scroll;height:270px;">
+				 <div class="col-md-12 form-padding" id="StatesV" style="overflow-y:scroll;height:270px;">
 							
                                               <div>
-	                                          <table class="table table-responsive table-hover" cellspacing="0">
+	                                          <table id="tblpincode" class="table table-responsive table-hover" cellspacing="0">
 		                                       <tbody>
 											   <tr class="headerstyle" align="center">
 			                                    <th scope="col">
-                                                <input  type="checkbox" class="used">
+                                                <input  type="checkbox" class="used" id="chkselectall">
                                                 <span>Select All</span>
                                                 </th>
 		                                       </tr>
 											
-		                                    <tr align="left">
-			                               <td>
-                                                <input type="hidden" value="4" class="used">
-                                                <input  type="checkbox" class="used">
-                                                <span>456456</span>
-                                            </td>
-		                                   </tr>
+		                                  
 										    </tbody>
 									 </table>
                                      </div>
 									</div>
 									
-						<div class="col-md-2">
+						<!-- <div class="col-md-2">
 						 <input type="submit" value=">" class="btn btn-primary btn-large map-btn block">
 						 <input type="submit" value=">>" class="btn btn-primary btn-large map-btn block">
 						 <input type="submit" value="<" class="btn btn-primary btn-large map-btn block">
@@ -223,7 +193,7 @@
 										    </tbody>
 									 </table>
                                      </div>
-									</div>
+									</div> -->
               </div>
 			  
 			  

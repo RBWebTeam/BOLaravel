@@ -1,7 +1,12 @@
           @extends('include.master')
+         @include('include.script')
+        
           @section('content')
     
 <link type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+
+
+
 <div id="content" style="overflow:scroll;">
 			 <div class="container-fluid white-bg">
 			 <div class="col-md-12"><h3 class="mrg-btm">FBA Block List</h3></div>
@@ -79,17 +84,17 @@
 
      @foreach($query as $val)   
 
-       <!-- <td><?php echo $val->fbaid;?></td> -->
+       
        <td><?php echo $val->FullName; ?></td> 
        <td><?php echo $val->createdate; ?></td>
        <td><?php echo $val->MobiNumb1; ?></td> 
        <td><?php echo $val->EMaiID; ?></td>
        <td><?php echo $val->city; ?></td>
        <td><?php echo $val->Pincode; ?></td>
-      <td><button class="btn btn-default block">Block </button><button class="btn btn-danger unblock
-      " style="display:none;">Unblock</button>
-      <input type="hidden" name="txtfbaid" value="<?php echo $val->fbaid; ?>">
-      </td>
+      <td><button id="btnblock" class="btn btn-default block">Block </button>
+      <button id="btnunblock" class="btn btn-danger unblock" style="display:none;">Unblock</button>
+      <input type="hidden" name="txtfbaid" value="<?php echo $val->fbaid; ?>"></td>
+    
 
                 
        </tr>
@@ -103,6 +108,9 @@
             </div>
             </div>
 @endsection
+
+
+
 
 
 

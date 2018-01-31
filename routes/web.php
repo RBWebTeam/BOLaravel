@@ -33,9 +33,8 @@ Route::get('dashboard','DashboardController@dashboard');
 Route::get('fba-list','FbaController@fba_list');
 
 
-
-
 Route::get('fba-blocklist','fbablocklistController@fbablocklist');
+Route::get('fba-blocklist/{flag}/{value}',array('as'=>'fbablocklist.ajax','uses'=>'fbablocklistController@fbablockunblock'));
 
 
 Route::get('lead-details','LeadDetailsController@lead_details1');
@@ -43,6 +42,9 @@ Route::get('register-form','RegisterFormController@register_form');
 Route::get('otp-details','OtpDetailsController@otp_details1');
 
 Route::get('Fsm-Details','FsmDetailsController@FsmDetails');
-Route::get('Fsm-Register','FsmRegisterController@bindsate');
+Route::get('Fsm-Register','FsmRegisterController@getsate');
+Route::get('Fsm-Register/{id}',array('as'=>'FSMRegister.ajax','uses'=>'FsmRegisterController@getcity'));
+/*Route::get('Fsm-Register','FsmRegisterController@getmanager');*/
+Route::get('Fsm-Register/{flag}/{value}',array('as'=>'FSMRegister.ajax','uses'=>'FsmRegisterController@getpincode'));
 
  Route::get('send-notification','SendNotificationController@sendnotification');

@@ -1,10 +1,12 @@
 <script type="text/javascript">
+
 function Numeric(event) {     // for numeric value function
       if ((event.keyCode < 48 || event.keyCode > 57) && event.keyCode != 8) {
           event.keyCode = 0;
           return false;
       }
     }
+
 $(document).ready(function(){
     $(".fltr-tog").click(function(){
         $(".filter-bdy").toggle();
@@ -167,21 +169,180 @@ $(document).ready(function(){
                       });
                   });
 
+ $(document).ready(function() {
+
+        $('select[name="State"]').on('change', function() {
+            var state_id = $(this).val();
+            if(state_id) {
+                $.ajax({
+                    url: 'Fsm-Register/'+state_id,
+                    type: "GET",
+                    dataType: "json",
+                    success:function(data) {
+
+                        
+                        $('select[name="city"]').empty();
+                        $('select[name="city"]').append('<option value="0">select city</option>');
+                        $.each(data, function(key, value) {
+
+                            $('select[name="city"]').append('<option value="'+ key +'">'+ value +'</option>');
+                        });
 
 
-
- </script>
-
-
- <!-- <script type="text/javascript">
-   
-   $(function () {
-        $('#searchInput').onkeyup(function () {
-            if ($(this).val() == '') {
-                $('.Block').prop('disabled', true);
-            } else {
-                $('.unblock').prop('disabled', false);
+                    }
+                });
+            }else{
+                $('select[name="city"]').empty();
             }
         });
+
+
+
+
+
+  $("#basic-addon2").click(function(e) {
+          e.preventDefault();
+            var flag = 0;
+            var value = "";
+
+            if($(txtmappincode).val()!="")  {
+              flag = 3;
+              value = $('#txtmappincode').val();
+            }
+            else if($('#txtmapcity').val() != 0){
+              flag = 2;
+              value = $('#txtmapcity').val();
+            }
+            else if($('#txtmapstate').val() != 0)
+            {
+              flag = 1;
+              value = $('#txtmapstate').val(); 
+            }
+            else
+            {
+              alert('select atleast one option');
+            }
+
+            alert(flag +','+value);  
+
+            $.ajax({
+                    url: 'Fsm-Register/'+flag+'/'+value,
+                    type: "GET",
+                    dataType: "json",
+                    success:function(data) {
+
+                      //alert($('#tblpincode').rows.count);
+                      $('#tblpincode tr:not(:first)').remove();
+
+                      var rows = "";
+                      for(var i =0; i < data.length;i++)
+                      {
+                        rows = rows +"<tr align='left'><td>";
+                        rows = rows +"<input id='pincode' type='checkbox' class='used chk' value = data[i].pincode>";
+                        rows = rows +"<span>"+data[i].pincode+"</span></td></tr>";
+                      }
+
+                      $('#tblpincode > tbody:last-child').append(rows);
+
+
+                        /*$.each(data, function(key, value) {
+
+                            $('select[name="city"]').append('<option value="'+ key +'">'+ value +'</option>');
+
+                            $('#pincode').val(data['pincode']);
+                        });
+*/
+
+                    }
+                });
+          });
+
+
+ $('#chkselectall').click(function () {    
+     $('.chk').prop('checked', this.checked);    
+ });
+
+});
+
+ // fba  block unblock
+ 
+ $('.block').click(function(){
+  var flag=1;
+  var value= $(this).closest('td').find('input[name="txtfbaid"]').val();
+// alert('Block click');
+  $(this).toggle();
+  $(this).closest('td').find('.unblock').toggle();
+
+
+$.ajax({
+            type: "GET",
+            url:'fba-blocklist/'+flag+'/'+value, 
+                     
+           success: function( msg ) {
+                 console.log(msg);
+            }
+        });
+
+
+});
+
+$('.unblock').click(function(){
+  // alert('unblock click');
+  $(this).toggle();
+  $(this).closest('td').find('.block').toggle();
+
+  var flag=0;
+  var value=$(this).closest('td').find('input[name="txtfbaid"]').val();
+ 
+  $.ajax({
+            type: "GET",
+            url:'fba-blocklist/'+flag+'/'+value, 
+                     
+           success: function( msg ) {
+                 console.log(msg);
+            }
+        });
+});
+// end block
+
+ 
+ 
+/*function block_fn(){
+
+var flag="";
+var value="";
+
+
+alert(id);
+ value = $('#txtfbaid').val();
+ if {
+  $("#blockbtn").click(function () {
+        flag=0;
     });
-</script> -->
+}
+else if {
+  $("#Unblockbtn").click(function () {
+        flag=1;
+    });
+}
+
+$.ajax({
+            type: "GET",
+            url:'fba-blocklist/'+flag+'/'+value,, 
+                     
+           success: function( msg ) {
+                 console.log(msg);
+            }
+        });
+*/
+  
+
+
+</script>
+
+
+
+   
+
+
+
