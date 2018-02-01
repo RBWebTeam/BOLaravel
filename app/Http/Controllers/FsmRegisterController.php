@@ -20,8 +20,8 @@ public function getsate()
 {
    $state = DB::select("call usp_load_state_list()");
    $manager = DB::select("call usp_load_managers()");
-   
-   return view('dashboard.FSMregister',['state'=>$state,'manager'=>$manager]);
+
+    return view('dashboard.FSMregister',['state'=>$state,'manager'=>$manager]);
 }
 public function getcity($id)
 {
@@ -29,7 +29,7 @@ public function getcity($id)
                     ->where("stateid",$id)
                     ->pluck("cityname","city_id");
         return json_encode($cities);
-        
+      
 }
  
  public function getpincode($flag,$value){
@@ -40,7 +40,7 @@ public function getcity($id)
 
 public function insertfsm(Request $req){
 
-    DB::statement('call sp_insert_FBAReg(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',array(
+    DB::statement('call sp_insert_FBAReg(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',array(
       $req->txttitle,
       $req->txtFname,
       $req->txtLname,
@@ -48,29 +48,26 @@ public function insertfsm(Request $req){
       $req->txtemail,
       $req->txtMobile,
       $req->txtdate,
-      $req->rdoyes,
-      $req->rdono,
       $req->txtpan,
       $req->txtAadhar,
       $req->txtPincode,
       $req->txtCity,
       $req->txtstate,
       $req->txtmanager,
+      $req->rdo,
       $req->txtfsmtype,
-      $req->State,
-      $req->city,
       $req->txtbankacno,
       $req->txtactype,
       $req->txtifsc,
       $req->txtmicr,
-      $req->txtbankno,
+      $req->txtbankname,
       $req->txtbankbrach,
       $req->txtbankcity
     ));
       $state = DB::select("call usp_load_state_list()");
       $manager = DB::select("call usp_load_managers()");
    
-     
+      
         return view('dashboard.FSMregister',['state'=>$state,'manager'=>$manager]);
   }
 

@@ -7,7 +7,7 @@
 			 <div class="container-fluid white-bg">
 			 <div class="col-md-12"><h3 class="mrg-btm">Register Form</h3></div>
 			 <div class="col-md-12">
-			 <form id="fsmregister" method="post">
+			 <form id="fsmregister" name="fsmregister" method="post">
 			 	 {{ csrf_field() }}
 			  <ul class="nav nav-tabs nav-justified">
                 <li class="active"><a data-toggle="tab" href="#home">FSM Basic Info -  &nbsp;<span class="badge">Step 1</span></a></li>
@@ -104,7 +104,7 @@
 				
 				<div class="col-md-4 col-xs-12">
 				<div class="form-group">
-				<div class="form-control">is Lead Recipient &nbsp; &nbsp; <input type="radio" id="txtyes" name="rdoyes"/>&nbsp;Yes   <input value="OFF" type="radio" id="txtno" name="rdono"/>&nbsp;No</div>
+				<div class="form-control">is Lead Recipient &nbsp; &nbsp; <input type="radio" id="txtyes" name="rdo"/>&nbsp;Yes   <input value="OFF" type="radio" id="txtno" name="rdo"/>&nbsp;No</div>
 				</div>
 				</div>
 				<div class="col-md-4 col-xs-12">
@@ -229,7 +229,7 @@
 				</div>
 				<div class="col-md-4 col-xs-12">
 				<div class="form-group">
-				<input id="txtbankno" name="txtbankno" type="text" class="form-control" placeholder="Bank Name">
+				<input id="txtbankname" name="txtbankname" type="text" class="form-control" placeholder="Bank Name">
 				</div>
 				</div>
 				<div class="col-md-4 col-xs-12">
@@ -249,16 +249,13 @@
 				<br>
 				<div class="center-obj center-multi-obj">
 				<button class="common-btn">Back</button>
-				 <button id="btnsubmit" onclick="Validate();" class="common-btn">Submit</button>
+				 <button id="btnsubmit" onclick="Validate()" class="common-btn">Submit</button>
 				 </div>
 				</div>
 			    </form>
             </div>
-			
-			
 			</div>
-			
-            </div>
+			</div>
             </div>
 
 @endsection
