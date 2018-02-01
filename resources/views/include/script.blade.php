@@ -172,7 +172,7 @@ $(document).ready(function(){
 //script for fsm register..
 
  $(document).ready(function() {
-  insertfsm();
+
     $('#txtmapstate').on('change', function() {
             var state_id = $(this).val();
             if(state_id) {
@@ -251,7 +251,7 @@ $("#basic-addon2").click(function(e) {
  });
 });
 
-<<<<<<< HEAD
+
 // insert Fsm details
 function insertfsm() {
   console.log($('#fsmregister').serialize());
@@ -265,8 +265,10 @@ function insertfsm() {
     console.log(msg);
     alert("Record saved successfully..");
    }
-=======
+
 });
+
+}
 
  // fba  block unblock
  
@@ -307,49 +309,60 @@ $('.unblock').click(function(){
             }
         });
 });
-// end block
 
- 
- 
-/*function block_fn(){
+// validation for fsm 
+function Validate()
+{
+    var txtFname =document.fsmregister.txtFname;
+    var txtLname = document.fsmregister.txtLname;
+    var txtemail = document.fsmregister.txtemail;
+    var txtMobile = document.fsmregister.txtMobile;
+    var txtPincode = document.fsmregister.txtPincode;
+   
+    alert("test1");
 
-var flag="";
-var value="";
+    if (txtFname.value =="")
+    {
+        window.alert("Please First Name.");
+        txtFname.focus();
+        
+    }
+     else if (txtLname.value == "")
+    {
+        window.alert("Please provide a No of qustion.");
+        txtLname.focus();
+        
+    }
+    else if (txtemail.value == "")
+    {   
+        window.alert("Please provide Duration.");
+        txtemail.focus();
+       
+    }
+    else if (txtMobile.value == "")
+    {
+        window.alert("Please provide Start Date.");
+       txtMobile.focus();
+       
+    }
+    else if (txtPincode.value == "")
+    {
+        window.alert("Please provide End Date.");
+       txtPincode.focus();
+        
+    }
+    else{
+         insertfsm();
+    }
+ }
 
 
-alert(id);
- value = $('#txtfbaid').val();
- if {
-  $("#blockbtn").click(function () {
-        flag=0;
-    });
-}
-else if {
-  $("#Unblockbtn").click(function () {
-        flag=1;
-    });
-}
-
-$.ajax({
-            type: "GET",
-            url:'fba-blocklist/'+flag+'/'+value,, 
-                     
-           success: function( msg ) {
-                 console.log(msg);
-            }
-        });
-*/
-  
->>>>>>> f863f53e3eee27bffe8c23c91b516d3076bf58d2
-
- });
-}
-
-$(document).ready(function(){
+/*$(document).ready(function(){
                     $("#btnsubmit").click(function () {
-                       insertfsm();
+                      alert("test");
+                      Validate();
                     });
-                });
+                });*/
 </script>
 
 
