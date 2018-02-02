@@ -91,10 +91,11 @@
 					                  <td><a href="">update</a></td>
 					                  <td><?php echo $val->pospname; ?></td>
 					                  <td><?php echo $val->PartnerID; ?></td>
+					                  <td>Pending</td>
 					                  <td><?php echo $val->bankaccount; ?></td>
-					                  <td><a href="#" onclick="SMS_FN(#{<?php echo $val->fbaid; ?>},#{<?php echo $val->MobiNumb1; ?>})">sms </a></td>
+					                   <td><a href="#" onclick="SMS_FN(#{<?php echo $val->fbaid; ?>},#{<?php echo $val->MobiNumb1; ?>})">sms </a></td>
 					                  <td><a href="">update</a></td>
-					                  <td><a href="">update</a></td>
+					                  
 					              </tr>
 					              @endforeach
 					              </tbody>

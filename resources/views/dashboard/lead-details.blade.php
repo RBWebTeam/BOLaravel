@@ -6,26 +6,7 @@
             <div id="content" style="overflow:scroll"; >
 			 <div class="container-fluid white-bg">
 			 <div class="col-md-12"><h3 class="mrg-btm">LEAD DETAILS</h3></div>
-			 <!-- Filter End -->
-			 <!-- <div class="col-md-12">
-			 <div class="panel panel-primary">
-			 <div class="panel-heading">
-						<h3 class="modal-title">Filter</h3>
-						<div class="pull-right">
-							<span class="clickable filter" data-toggle="tooltip" data-container="body">
-							<span class="glyphicon glyphicon-plus mrg-tp-forteen"></span> &nbsp;&nbsp;
-								<span class="glyphicon glyphicon-filter glyphicon1"></span>
-							</span>
-						</div>
-					</div>
-					<div class="panel-body filter-bdy" style="display:none">
-						<input type="text" class="form-control" id="dev-table-filter" data-action="filter" data-filters="#dev-table" placeholder="Search..." />
-					</div>
-			 </div>
-			 </div> -->
-
-
-
+			 
 			 <!-- Filter End -->
 			 <div class="col-md-12">
 			 <div class="overflow-scroll">
@@ -47,13 +28,10 @@
                    <th>Introducer Name</th>
                    <th>Lead Type</th>
                    <th>Lead Status</th>
-
-				   
-                 </tr>
+                   </tr>
                 </thead>
                 <tbody>
-					
-					          @foreach($query as $val)
+				 @foreach($query as $val)
 					                 <tr>
 					                  <td><?php echo $val->FullName; ?></td>
 					                  <td><?php echo $val->createdate; ?></td>
@@ -72,27 +50,15 @@
                                     </tr>
 					               @endforeach
 					               
-					             </tbody>
+			          </tbody>
             </table>
 			</div>
 			</div>
-			<!-- Pagination Start -->
-			<!-- <div>
-			<h5 class="pull-left"><b>Records :</b> <span>1 to 10 </span>Of <span class="badge">186</span><h5>
-			<ul class="pagination pull-right">
-              <li><a href="#">1</a></li>
-              <li><a href="#">2</a></li>
-              <li><a href="#">3</a></li>
-              <li><a href="#">4</a></li>
-              <li><a href="#">5</a></li>
-            </ul>
-			</div> -->
-			<!-- Pagination End -->
 			</div>
 			<div class="col-md-12"><button class="common-btn center-obj">EXPORT TO EXCEL</button></div>
 			</div>
             </div>
-           </div>
+          
         @endsection	
      
 

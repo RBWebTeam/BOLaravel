@@ -171,8 +171,8 @@ $(document).ready(function(){
 
 //script for fsm register..
 
- $(document).ready(function() {
-  insertfsm();
+ $(document).ready(function(){
+
     $('#txtmapstate').on('change', function() {
             var state_id = $(this).val();
             if(state_id) {
@@ -181,24 +181,20 @@ $(document).ready(function(){
                     type: "GET",
                     dataType: "json",
                     success:function(data) {
-
-                        
                         $('#txtmapcity').empty();
                         $('#txtmapcity').append('<option value="0">select city</option>');
                         $.each(data, function(key, value) {
 
                             $('#txtmapcity').append('<option value="'+ key +'">'+ value +'</option>');
                         });
-
-
-                    }
+                     }
                 });
             }else{
                 $('select[name="city"]').empty();
             }
         });
 
-$("#basic-addon2").click(function(e) {
+$("#basic-addon2").click(function(e){
           e.preventDefault();
             var flag = 0;
             var value = "";
@@ -221,8 +217,6 @@ $("#basic-addon2").click(function(e) {
               alert('select atleast one option');
             }
 
-            /*alert(flag +','+value);  */
-
             $.ajax({
                     url: 'Fsm-Register/'+flag+'/'+value,
                     type: "GET",
@@ -244,13 +238,62 @@ $("#basic-addon2").click(function(e) {
                     }
                 });
           });
-
-
- $('#chkselectall').click(function () {    
+$('#chkselectall').click(function () {    
      $('.chk').prop('checked', this.checked);    
  });
 });
 
+<<<<<<< HEAD
+=======
+ // validation for fsm
+/* function Validate()
+{
+    var txtFname =document.fsmregister.txtFname;
+    var txtLname = document.fsmregister.txtLname;
+    var txtemail = document.fsmregister.txtemail;
+    var txtMobile = document.fsmregister.txtMobile;
+    var txtPincode = document.fsmregister.txtPincode;
+    
+    
+
+    if (txtFname.value =="")
+    {
+        window.alert("Please provide Fisrt name.");
+        txtFname.focus();
+        
+    }
+     else if (txtLname.value == "")
+    {
+        window.alert("Please provide a No of qustion.");
+        txtLname.focus();
+        
+    }
+    else if (txtemail.value == "")
+    {   
+        window.alert("Please provide Duration.");
+        txtemail.focus();
+       
+    }
+    else if (txtMobile.value == "")
+    {
+        window.alert("Please provide Start Date.");
+       txtMobile.focus();
+       
+    }
+    else if (txtPincode.value == "")
+    {
+        window.alert("Please provide Start Date.");
+       txtPincode.focus();
+       
+    }
+    else{
+        insertfsm();
+    }
+ }
+*/
+
+
+>>>>>>> 616ed02bb9bd3950cafbeb0f515516f07cca9a2c
 // insert Fsm details
 function insertfsm() {
   console.log($('#fsmregister').serialize());
@@ -267,6 +310,14 @@ function insertfsm() {
 
 });
  }
+
+}
+
+/*$(document).ready(function(){
+                    $("#btnsubmit").click(function () {
+                      insertfsm();
+                    });
+                });*/
 
  // fba  block unblock
  
@@ -307,6 +358,7 @@ $('.unblock').click(function(){
             }
         });
 });
+<<<<<<< HEAD
 // end block
 
  
@@ -323,6 +375,8 @@ $(document).ready(function(){
 
 
 
+=======
+>>>>>>> 616ed02bb9bd3950cafbeb0f515516f07cca9a2c
 </script>
 
 

@@ -20,10 +20,8 @@ public function getsate()
 {
    $state = DB::select("call usp_load_state_list()");
    $manager = DB::select("call usp_load_managers()");
-   
-			/*	print_r($query);
-	        exit();*/
-        return view('dashboard.FSMregister',['state'=>$state,'manager'=>$manager]);
+
+    return view('dashboard.FSMregister',['state'=>$state,'manager'=>$manager]);
 }
 public function getcity($id)
 {
@@ -31,7 +29,7 @@ public function getcity($id)
                     ->where("stateid",$id)
                     ->pluck("cityname","city_id");
         return json_encode($cities);
-        /*print_r($cities); exit();*/
+      
 }
  
  public function getpincode($flag,$value){
@@ -42,7 +40,7 @@ public function getcity($id)
 
 public function insertfsm(Request $req){
 
-    DB::statement('call sp_insert_FBAReg(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',array(
+    DB::statement('call sp_insert_FBAReg(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',array(
       $req->txttitle,
       $req->txtFname,
       $req->txtLname,
@@ -50,28 +48,29 @@ public function insertfsm(Request $req){
       $req->txtemail,
       $req->txtMobile,
       $req->txtdate,
-      $req->rdoyes,
-      $req->rdono,
       $req->txtpan,
       $req->txtAadhar,
       $req->txtPincode,
       $req->txtCity,
       $req->txtstate,
       $req->txtmanager,
+      $req->rdo,
       $req->txtfsmtype,
-      $req->State,
-      $req->city,
       $req->txtbankacno,
       $req->txtactype,
       $req->txtifsc,
       $req->txtmicr,
-      $req->txtbankno,
+      $req->txtbankname,
       $req->txtbankbrach,
       $req->txtbankcity
-
     ));
-     return view ("dashboard.FSMregister");
+      $state = DB::select("call usp_load_state_list()");
+      $manager = DB::select("call usp_load_managers()");
+   
+      
+        return view('dashboard.FSMregister',['state'=>$state,'manager'=>$manager]);
   }
 
 }
 
+/*1,shubham,khandekar,rupeeboss,shubhamkhandekar2@gmail.com,7218150396,02-15-2018,on,,abcd1234,490380602929,400708,mumbai,1,1000016,Employee,18,163,123456789,2,12345,12345,kotak,mumbai,mumbai*/
