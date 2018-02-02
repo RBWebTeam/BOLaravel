@@ -20,11 +20,11 @@
 
 <div class="col-md-5 col-xs-5 no-mob-pad">
 <div class="pull-right log-txt">
-<p><span class="hidden-xs">Welcome </span><b>Mr. Yogaraj Patel</b></p>
+<p><span class="hidden-xs">Welcome </span><b>Mr. Goving Dharne</b></p>
 <p><span class="hidden-xs">Last login - Date / Time :</span> <b>22-09-2017 / 12.45 pm</b></p>
 </div>
 </div>
 
-<div class="col-md-1 col-xs-2 no-mob-pad"><a href="#" class="pull-right log-btn"><span class="logout-btn"><img src="images/icon/exit.png"></span></a></div>
+<div class="col-md-1 col-xs-2 no-mob-pad"><a href="log-out" class="pull-right log-btn"><span class="logout-btn"><img src="images/icon/exit.png"></span></a></div>
 <span class="search-btn hidden-md hidden-lg pull-right"><img src="images/icon/search.png"></span>
 </div>

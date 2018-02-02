@@ -2,32 +2,30 @@
     @section('content')
 
  <!-- Body Content Start -->
-            <div id="content" style="overflow:scroll;">
+           
 			 <div class="container-fluid white-bg">
-			 <div class="col-md-12"><h3 class="mrg-btm">FSM Details</h3></div>
+			
 			 
 			 <!-- Filter End -->
-			 <!-- <div class="col-md-12">
+			 <div class="col-md-11">
 			 <div class="panel panel-primary">
 			 <div class="panel-heading">
-						<h3 class="panel-title">Filter</h3>
+						<h3 class="panel-title">FSM Details</h3>
 						<div class="pull-right">
-							<span class="clickable filter" data-toggle="tooltip" data-container="body"><a href="">
-							<span class="glyphicon glyphicon-plus mrg-tp-forteen"></span></a> &nbsp;&nbsp;
-								<span class="glyphicon glyphicon-filter glyphicon1"></span>
-							</span>
+							<span class="clickable filter" data-toggle="tooltip" data-container="body"><a href="Fsm-Register">
+							<span class="glyphicon glyphicon-plus mrg-tp-forteen"></span></a></span>
 						</div>
 					</div>
 					<div class="panel-body filter-bdy" style="display:none">
 						<input type="text" class="form-control" id="dev-table-filter" data-action="filter" data-filters="#dev-table" placeholder="Search..." />
 					</div>
 			 </div>
-			 </div> -->
+			 </div>
 			 <!-- Filter End -->
 			 
 			 <div class="col-md-12">
 			 <div class="overflow-scroll">
-			 <div class="table-responsive container" >
+			 <div class="table-responsive container">
 			<table class="datatable-responsive table table-striped table-bordered dt-responsive nowrap" id="example">
                  <thead>
                   <tr>
@@ -40,17 +38,16 @@
                    <th>Leads</th>
                    <th>Registered Leads</th>
                    <th>Aadhar No.</th>
-				   
 				   <th>Pin Code</th>
                    <th>City</th>
-                   <th>	State</th>
+                   <th>State</th>
                  </tr>
                 </thead>
                 
                 <tbody>
                 @foreach($query as $val)
                 <tr>
-                  <td><?php echo $val->Name; ?></td>
+                  <td><a href=""><?php echo $val->Name; ?></a></td>
                   <td><?php echo $val->DOB; ?></td>
                   <td><?php echo $val->Email; ?></td>
                   <td><a href="#" class="popover-Password" data-toggle="popover" title="Show Password" data-content="<?php echo $val->Password; ?>">*****</a></td>
@@ -69,5 +66,7 @@
             </table>
 			</div>
 			</div>
-		</div>
+			</div>
+			</div>
+		
 			@endsection

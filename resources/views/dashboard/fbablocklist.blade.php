@@ -1,11 +1,5 @@
-         @extends('include.master')
-        @include('include.script')
-        @section('content')
-    
-<link type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
-
-
-
+@extends('include.master')
+@section('content')   
 <div id="content" style="overflow:scroll;">
 			 <div class="container-fluid white-bg">
 			 <div class="col-md-12"><h3 class="mrg-btm">FBA Block List</h3></div>
