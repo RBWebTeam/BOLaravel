@@ -12,11 +12,11 @@
 
     <li class="nav-item"><a href="#"><span class="sp-nav"><img src="images/icon/offline-quote.png"></span> &nbsp;&nbsp;Offline Quote Requests</a></li>
     <li class="nav-item"><a href="#"><span class="sp-nav"><img src="images/icon/new-user.png"></span> &nbsp;&nbsp;Login Request Log</a></li>
-    <li class="nav-item"><a href="#"><span class="sp-nav"><img src="images/icon/email.png"></span> &nbsp;&nbsp;Send SMS</a></li>
+    <li class="nav-item"><a href="{{url('send-sms')}}"><span class="sp-nav"><img src="images/icon/email.png"></span> &nbsp;&nbsp;Send SMS</a></li>
     <li class="nav-item"><a href="#"><span class="sp-nav"><img src="images/icon/submit-query.png"></span> &nbsp;&nbsp;Submit Query</a></li>
     <li class="nav-item"><a href="#"><span class="sp-nav"><img src="images/icon/user-queries.png"></span> &nbsp;&nbsp;User Queries</a></li>
     <li class="nav-item"><a href="#"><span class="sp-nav"><img src="images/icon/user-feedback.png"></span> &nbsp;&nbsp;User Feedback</a></li>
-    <li class="nav-item"><a href="#"><span class="sp-nav"><img src="images/icon/notification.png"></span> &nbsp;&nbsp;Send Notification</a></li>
+    <li class="nav-item"><a href="{{url('send-notification')}}"><span class="sp-nav"><img src="images/icon/notification.png"></span> &nbsp;&nbsp;Send Notification</a></li>
     <li class="nav-item"><a href="#"><span class="sp-nav"><img src="images/icon/login.png"></span> &nbsp;&nbsp;Demo User Details</a></li>
     <li class="nav-item"><a href="#"><span class="sp-nav"><img src="images/icon/login-icon.png"></span> &nbsp;&nbsp;Create Demo Login</a></li>
     <li class="nav-item"><a href="#"><span class="sp-nav"><img src="images/icon/user-queries.png"></span> &nbsp;&nbsp;FBA List</a></li>

@@ -26,7 +26,7 @@ Route::post('register-user','LoginController@registerinsert');
 Route::get('register-user','LoginController@getsate');
  Route::post('register-user-save','LoginController@register_user_save');
 
-// 
+
 
 
 Route::get('dashboard','DashboardController@dashboard');
@@ -40,7 +40,7 @@ Route::get('fba-blocklist/{flag}/{value}',array('as'=>'fbablocklist.ajax','uses'
 Route::get('lead-details','LeadDetailsController@lead_details1');
 Route::get('register-form','RegisterFormController@register_form');
 
-Route::get('otp-details','OtpDetailsController@otp_details1');
+
 
 
 //FSM Details
@@ -51,3 +51,15 @@ Route::get('Fsm-Register/{flag}/{value}',array('as'=>'FSMRegister.ajax','uses'=>
 Route::post('Fsm-Register','FsmRegisterController@insertfsm');
 
  Route::get('send-notification','SendNotificationController@sendnotification');
+
+
+
+
+ //send sms
+
+ Route::get('send-sms','SendSMSController@ViewSendSMSDetails');
+
+ //Otp Detail
+ Route::get('otp-details','OtpDetailsController@otp_details');
+
+ Route::get('log-out','LoginController@logout');

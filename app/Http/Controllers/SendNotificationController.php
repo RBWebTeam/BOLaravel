@@ -13,16 +13,12 @@ use Mail;
 class SendNotificationController extends InitialController
 {
        
-        public function sendnotification(){
+      Public function Sendnotification(){
 
-      //$query=DB::select("call usp_load_fbalist_new(0)");
-               // print_r($query); exit();
 
-                 //return view('dashboard.send-notification');
+      	return view('dashboard.send-notification');
 
-                 return view('dashboard.send-notification');
-
-        }
+      }
 
 }
 

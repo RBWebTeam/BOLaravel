@@ -11,26 +11,31 @@
 				{{csrf_field()}} 
                 <div class="col-md-4 col-xs-12">
 				<div class="form-group">
-				<input type="text" class="form-control" name="username" id="username" required="" placeholder="Username" />
+				<input type="text" class="form-control" name="username" id="username" placeholder="Name"  />
+				@if ($errors->has('username'))<label class="control-label" for="inputError"> {{ $errors->first('username') }}</label>  @endif
 				</div>
 				</div>
 				
 				<div class="col-md-4 col-xs-12">
 				<div class="form-group">
-				<input type="email" class="form-control" name="Emailid" id="Emailid" required=""  placeholder="Email Id"/>
+				<input type="email" class="form-control" name="Emailid" id="Emailid"  placeholder="Email Id"/>
+				@if ($errors->has('Emailid'))<label class="control-label" for="inputError"> {{ $errors->first('Emailid') }}</label>  @endif
 				</div>
 				</div>
 				
 				<div class="col-md-4 col-xs-12">
 				<div class="form-group">
-				<input type="password" class="form-control" name="password" id="password" required="" placeholder="Password"/>
+				<input type="password" class="form-control" name="password" id="password" placeholder="Password" />
+				@if ($errors->has('password'))<label class="control-label" for="inputError"> {{ $errors->first('password') }}</label>  @endif
 				</div>
 				</div>
 				
 				<div class="col-md-4 col-xs-12">
 				<div class="form-group">
-				<input type="password" class="form-control" name="password2" id="password2" required="" placeholder="Confirm Password" />
+				<input type="password" class="form-control" name="confirm_password" id="password2"   placeholder="Confirm Password" />
 				</div>
+
+				@if ($errors->has('confirm_password'))<label class="control-label" for="inputError"> {{ $errors->first('confirm_password') }}</label>  @endif
 				</div>
 				
 			    <div class="col-md-4 col-xs-12">

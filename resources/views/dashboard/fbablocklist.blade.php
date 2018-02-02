@@ -1,7 +1,6 @@
-          @extends('include.master')
-         @include('include.script')
-        
-          @section('content')
+         @extends('include.master')
+        @include('include.script')
+        @section('content')
     
 <link type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
 

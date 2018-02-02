@@ -13,13 +13,11 @@ use Mail;
 class OtpDetailsController extends InitialController
 {
        
-        public function otp_details1(){
+        public function otp_details(){
 
-/*
-          $query=DB::select("call CreateOTPTransaction('c')");
-                print_r($query); exit();*/
+        $query=DB::select("call usp_loadotp_details()");
 
-return view('dashboard.otp-details'/*,['query'=>$query]*/);
+        return view('dashboard.otp-details',['query'=>$query]);
         }
 
 }

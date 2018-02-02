@@ -251,7 +251,6 @@ $("#basic-addon2").click(function(e) {
  });
 });
 
-<<<<<<< HEAD
 // insert Fsm details
 function insertfsm() {
   console.log($('#fsmregister').serialize());
@@ -265,8 +264,9 @@ function insertfsm() {
     console.log(msg);
     alert("Record saved successfully..");
    }
-=======
+
 });
+ }
 
  // fba  block unblock
  
@@ -310,46 +310,19 @@ $('.unblock').click(function(){
 // end block
 
  
- 
-/*function block_fn(){
-
-var flag="";
-var value="";
 
 
-alert(id);
- value = $('#txtfbaid').val();
- if {
-  $("#blockbtn").click(function () {
-        flag=0;
-    });
-}
-else if {
-  $("#Unblockbtn").click(function () {
-        flag=1;
-    });
-}
-
-$.ajax({
-            type: "GET",
-            url:'fba-blocklist/'+flag+'/'+value,, 
-                     
-           success: function( msg ) {
-                 console.log(msg);
-            }
-        });
-*/
-  
->>>>>>> f863f53e3eee27bffe8c23c91b516d3076bf58d2
-
- });
-}
 
 $(document).ready(function(){
                     $("#btnsubmit").click(function () {
                        insertfsm();
                     });
                 });
+
+
+
+
+
 </script>
 
 

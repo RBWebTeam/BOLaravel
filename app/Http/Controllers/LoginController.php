@@ -16,20 +16,19 @@ class LoginController extends InitialController
 {
       public function login(Request $request){
          
-           
-            $validator = Validator::make($request->all(), [
+     $validator = Validator::make($request->all(), [
     'email' => 'required',
     'password' => 'required',
     ]);
 
-  if ($validator->fails()) {
+   if ($validator->fails()) {
     return redirect('/')
     ->withErrors($validator)
     ->withInput();
-  }else{
+   }else{
           
           $value=DB::table('emp_login')->where('emailid','=',$request->email)
-          ->where('password','=',md5($request->password))
+          ->where('password','=', $request->password)
           ->first();
           	if($value!=''){ 
 		          	  $request->session()->put('emailid',$value->emailid);
@@ -39,7 +38,7 @@ class LoginController extends InitialController
                   $request->session()->put('last_login',$value->last_login);
 		              
 		             
-                          return redirect()->intended('dashboard');
+                 return redirect()->intended('dashboard');
                 }else{
                	      Session::flash('msg', "Invalid email or password. Please Try again! ");
                        return Redirect::back();
@@ -73,35 +72,35 @@ class LoginController extends InitialController
                 return view('register-user',['query' => $query,'AUTHORITIES'=>$AUTHORITIES]);
                 }
 
-                // start state insert
-                // public function stateinsert(Request$req){
+           public function register_user_save(Request $req){
 
-                //  DB::statement("call usp_insloginstatemapping(?,?)",array($req->username,$req->txtstate));
+           $validator =Validator::make($req->all(), [
+             'username' => 'required|min:5',
+             'Emailid' => 'required|email|unique:emp_login',
+             'password' =>'required|min:6',
+             'confirm_password' => 'required|min:6|same:password',
+                            ]);
+             if ($validator->fails()) {
+             return redirect('register-user')
+             ->withErrors($validator)
+             ->withInput();
+            }else{
+          
+         $qu=DB::select("call usp_insert_emp_login_new(?,?,?,?)",array($req->username,$req->Emailid,$req->password,$req->employetype));
 
-                //      return redirect ('register-user');
-                // }
-
-                // end state insert
-
-            
-      public function register_user_save(Request $req){
-
-
-        $qu=DB::select("call usp_insert_emp_login_new(?,?,?,?)",array($req->username,$req->Emailid,$req->password,$req->employetype));
-
-         if($qu[0]->Result=='already'){
-              Session::flash('message', 'Emailid already exists...!'); 
-         }else{
+         // if($qu[0]->Result=='already'){
+         //      Session::flash('message', 'Emailid already exists...!'); 
+         // }else{
        
            $atho=implode(',',$req->author);
            $txtstate=implode(',',$req->txtstate);
            $proc= DB::select("call usp_usermenustatemapping(?,?,?)",array($qu[0]->Result,$atho,$txtstate)); 
 
            Session::flash('message', 'Register successfully...!'); 
-         }
+        // }
          
            return redirect ('register-user');
-
+}
             }
 
 
