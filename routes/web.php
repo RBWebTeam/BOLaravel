@@ -40,7 +40,7 @@ Route::get('Fsm-Register/{id}',array('as'=>'FSMRegister.ajax','uses'=>'FsmRegist
 Route::get('Fsm-Register/{flag}/{value}',array('as'=>'FSMRegister.ajax','uses'=>'FsmRegisterController@getpincode'));
 Route::post('Fsm-Register','FsmRegisterController@insertfsm');
 
-<<<<<<< HEAD
+
  Route::get('send-notification','SendNotificationController@sendnotification');
 
 
@@ -50,11 +50,10 @@ Route::post('Fsm-Register','FsmRegisterController@insertfsm');
 
  Route::get('send-sms','SendSMSController@ViewSendSMSDetails');
  Route::get('send-sms','SendSMSController@sms_load');
-=======
+
 Route::get('send-notification','SendNotificationController@sendnotification');
 //send sms
 Route::get('send-sms','SendSMSController@ViewSendSMSDetails');
->>>>>>> 2195ae8c82bb9b1b69f0990cdb9572eb22f62f0f
 
  //Otp Detail
  Route::get('otp-details','OtpDetailsController@otp_details');

@@ -1,5 +1,6 @@
 @extends('include.master')
-    @section('content')
+@section('content')
+
 <div id="content" style="overflow:scroll;">
 
 			 <div class="container-fluid white-bg">
