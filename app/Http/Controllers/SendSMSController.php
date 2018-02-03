@@ -22,7 +22,7 @@ class SendSMSController extends Controller
 
         $query=DB::select("call usp_loadfsm_list($flag,$value)");
 
-        return view('dashboard/send-sms',['query'=>$query]);
+        return view('dashboard.send-sms',['query'=>$query]);
     }
 }
 

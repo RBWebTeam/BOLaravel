@@ -48,12 +48,12 @@ Route::post('Fsm-Register','FsmRegisterController@insertfsm');
 
  //send sms
 
- Route::get('send-sms','SendSMSController@ViewSendSMSDetails');
- Route::get('send-sms','SendSMSController@sms_load');
+ /*Route::get('send-sms','SendSMSController@ViewSendSMSDetails');
+ Route::get('send-sms','SendSMSController@sms_load');*/
 
 Route::get('send-notification','SendNotificationController@sendnotification');
 //send sms
-Route::get('send-sms','SendSMSController@ViewSendSMSDetails');
+/*Route::get('send-sms','SendSMSController@ViewSendSMSDetails');*/
 
  //Otp Detail
  Route::get('otp-details','OtpDetailsController@otp_details');

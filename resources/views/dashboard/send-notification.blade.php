@@ -8,7 +8,7 @@
 			    <div class="col-md-6 col-xs-12">
 				<div class="form-group">
 				<select class="selectpicker select-opt form-control" required>
-			     <option selected="selected" value="0">-SELECT-</option>
+			     <option name="txttype" selected="selected" value="0">-SELECT-</option>
 		         <option value="1">STATE</option>
 		         <option value="2">CITY</option>
 		         <option value="3">PINCODE</option>
@@ -20,18 +20,18 @@
 				</div>
 				<div class="col-md-6 col-xs-12">
 				<div class="form-group">
-				<input type="text" class="form-control" placeholder="Search Criteria"/>
+				<input name="txtcriteria" type="text" class="form-control" placeholder="Search Criteria"/>
 				</div>
 				</div>
 				<div class="col-md-6 col-xs-12">
 				<div class="form-group">
-				<input type="text" class="form-control" placeholder="Notification Title" />
+				<input name="txtnottitle" type="text" class="form-control" placeholder="Notification Title" />
 				</div>
 				</div>
 				<div class="col-md-6 col-xs-12">
 	             <div class="form-group">
 		         <div class="input-group input-file" name="Fichier1">
-    		    <input type="file" class="form-control" placeholder='Choose a file...' required/>			
+    		    <input name="txtfile" type="file" class="form-control" placeholder='Choose a file...' required/>			
                 <span class="input-group-btn">
         		<button class="btn btn-info btn-choose" type="button">Browse</button>
     		    </span>
@@ -40,15 +40,15 @@
 				</div>
 				<div class="col-md-12 col-xs-12">
 				<div class="text-area padding">
-				<textarea required>Message...</textarea>
+				<textarea name="txtmsg" required>Message...</textarea>
 				</div>
 				</div>
 				<div class="col-md-12 col-xs-12">
 				<br>
 				<div class="center-obj center-multi-obj">
-				<button class="common-btn">Back</button>
-				 <button class="common-btn">Submit</button>
-				 <button class="common-btn">Modify</button>
+				<button id="btnback" class="common-btn">Back</button>
+				 <button id="btnsubmit" class="common-btn">Submit</button>
+				 <button id="btnmodify" class="common-btn">Modify</button>
 				 </div>
 				</div>
 			 </form>
