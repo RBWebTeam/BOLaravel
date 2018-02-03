@@ -224,7 +224,7 @@ $("#basic-addon2").click(function(e){
                     dataType: "json",
                     success:function(data) {
 
-                      //alert($('#tblpincode').rows.count);
+                      
                       $('#tblpincode tr:not(:first)').remove();
 
                       var rows = "";
@@ -243,57 +243,6 @@ $('#chkselectall').click(function () {
      $('.chk').prop('checked', this.checked);    
  });
 });
-
-
- // validation for fsm
-/* function Validate()
-{
-    var txtFname =document.fsmregister.txtFname;
-    var txtLname = document.fsmregister.txtLname;
-    var txtemail = document.fsmregister.txtemail;
-    var txtMobile = document.fsmregister.txtMobile;
-    var txtPincode = document.fsmregister.txtPincode;
-    
-    
-
-    if (txtFname.value =="")
-    {
-        window.alert("Please provide Fisrt name.");
-        txtFname.focus();
-        
-    }
-     else if (txtLname.value == "")
-    {
-        window.alert("Please provide a No of qustion.");
-        txtLname.focus();
-        
-    }
-    else if (txtemail.value == "")
-    {   
-        window.alert("Please provide Duration.");
-        txtemail.focus();
-       
-    }
-    else if (txtMobile.value == "")
-    {
-        window.alert("Please provide Start Date.");
-       txtMobile.focus();
-       
-    }
-    else if (txtPincode.value == "")
-    {
-        window.alert("Please provide Start Date.");
-       txtPincode.focus();
-       
-    }
-    else{
-        insertfsm();
-    }
- }
-*/
-
-
-
 // insert Fsm details
 function insertfsm() {
   console.log($('#fsmregister').serialize());
@@ -311,19 +260,11 @@ function insertfsm() {
 });
  }
 
-
-/*$(document).ready(function(){
-                    $("#btnsubmit").click(function () {
-                      insertfsm();
-                    });
-                });*/
-
- // fba  block unblock
- 
+// fba  block unblock
  $('.block').click(function(){
   var flag=1;
   var value= $(this).closest('td').find('input[name="txtfbaid"]').val();
-// alert('Block click');
+
   $(this).toggle();
   $(this).closest('td').find('.unblock').toggle();
 
@@ -340,7 +281,6 @@ function insertfsm() {
 });
 
 $('.unblock').click(function(){
-  // alert('unblock click');
   $(this).toggle();
   $(this).closest('td').find('.block').toggle();
 
@@ -357,6 +297,7 @@ $('.unblock').click(function(){
         });
 });
 
+
 // end block
 
                         // SEND-SMS
@@ -371,6 +312,10 @@ $('.unblock').click(function(){
               // }
 
 
+
+
+
+// end block
 
 </script>
 

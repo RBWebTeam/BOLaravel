@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use Response;
- 
 use Validator;
 use Redirect;
 use Session;
@@ -101,7 +100,13 @@ class LoginController extends InitialController
          
            return redirect ('register-user');
 }
-            }
+
+}
+
+public function logout() 
+{
+   return redirect('/');
+}
 
 
 

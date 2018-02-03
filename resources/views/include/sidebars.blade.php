@@ -3,9 +3,9 @@
     <ul class="list-unstyled components" style="overflow: hidden; width: auto; height: 95%;">
      <li class="nav-item"><a href="#"><span class="sp-nav"><img src="images/icon/home.png"></span>&nbsp;&nbsp; Home Page</a></li>
     <li class="nav-item"><a href="{{url('Fsm-Details')}}"><span class="sp-nav"><img src="images/icon/fsm-detail.png"></span>&nbsp;&nbsp; FSM Details</a></li>
-    <li class="nav-item"><a href="{{url('fba-list')}}"><span class="sp-nav"><img src="images/icon/lead-details.png"></span> &nbsp;&nbsp;FBA LIST</a></li>
+    <li class="nav-item"><a href="{{url('fba-list')}}"><span class="sp-nav"><img src="images/icon/lead-details.png"></span> &nbsp;&nbsp;FBA List</a></li>
 
-    <li class="nav-item"><a href="{{url('fba-blocklist')}}"><span class="sp-nav"><img src="images/icon/lead-details.png"></span> &nbsp;&nbsp;FBA BLOCK LIST</a></li>
+    <li class="nav-item"><a href="{{url('fba-blocklist')}}"><span class="sp-nav"><img src="images/icon/lead-details.png"></span> &nbsp;&nbsp;FBA Block List</a></li>
 
     <li class="nav-item"><a href="{{url('lead-details')}}"><span class="sp-nav"><img src="images/icon/offline-quote.png"></span> &nbsp;&nbsp;Lead Details</a></li>
      <li class="nav-item"><a href="{{url('otp-details')}}"><span class="sp-nav"><img src="images/icon/offline-quote.png"></span> &nbsp;&nbsp;OTP Details</a></li>
@@ -19,7 +19,6 @@
     <li class="nav-item"><a href="{{url('send-notification')}}"><span class="sp-nav"><img src="images/icon/notification.png"></span> &nbsp;&nbsp;Send Notification</a></li>
     <li class="nav-item"><a href="#"><span class="sp-nav"><img src="images/icon/login.png"></span> &nbsp;&nbsp;Demo User Details</a></li>
     <li class="nav-item"><a href="#"><span class="sp-nav"><img src="images/icon/login-icon.png"></span> &nbsp;&nbsp;Create Demo Login</a></li>
-    <li class="nav-item"><a href="#"><span class="sp-nav"><img src="images/icon/user-queries.png"></span> &nbsp;&nbsp;FBA List</a></li>
     <li class="nav-item"><a href="#"><span class="sp-nav"><img src="images/icon/customer-validation.png"></span> &nbsp;&nbsp;Customer ID Validation</a></li>
     <li class="nav-item"><a href="#"><span class="sp-nav"><img src="images/icon/unsigned-lead.png"></span> &nbsp;&nbsp;Un-Assigned Leads</a></li>
     <li class="nav-item"><a href="#"><span class="sp-nav"><img src="images/icon/drill-down-report.png"></span> &nbsp;&nbsp;Drill Down Report</a></li>

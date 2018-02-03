@@ -5,7 +5,20 @@
  <!-- Body Content Start -->
             <div id="content" style="overflow:scroll"; >
 			 <div class="container-fluid white-bg">
-			 <div class="col-md-12"><h3 class="mrg-btm">LEAD DETAILS</h3></div>
+			 <div class="col-md-10">
+			 <div class="panel panel-primary">
+			 <div class="panel-heading">
+						<h3 class="panel-title">LEAD DETAILS</h3>
+						<div class="pull-right">
+							<span class="clickable filter" data-toggle="tooltip" data-container="body"><a href="genrate-lead">
+							<span class="glyphicon glyphicon-plus mrg-tp-forteen"></span></a></span>
+						</div>
+					</div>
+					<div class="panel-body filter-bdy" style="display:none">
+						<input type="text" class="form-control" id="dev-table-filter" data-action="filter" data-filters="#dev-table" placeholder="Search..." />
+					</div>
+			 </div>
+			 </div>
 			 
 			 <!-- Filter End -->
 			 <div class="col-md-12">
@@ -33,7 +46,7 @@
                 <tbody>
 				 @foreach($query as $val)
 					                 <tr>
-					                  <td><?php echo $val->FullName; ?></td>
+					                  <td><a href=""><?php echo $val->FullName; ?></a></td>
 					                  <td><?php echo $val->createdate; ?></td>
 					                  <td><?php echo $val->MobiNumb1; ?></td>
 					                  <td><?php echo $val->MobiNumb2; ?></td>

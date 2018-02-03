@@ -1,7 +1,9 @@
  @extends('include.master')
     @section('content')
 
-
+@if(Session::has('message'))
+<p class="alert alert-info">{{ Session::get('message') }}</p>
+@endif
  <!-- Body Content Start -->
             <div id="content" style="overflow:scroll;">
 			 <div class="container-fluid white-bg">
@@ -29,12 +31,14 @@
 				</div>
               <div class="col-md-4 col-xs-12">
 				<div class="form-group">
-				<input id="txtFname" name="txtFname" type="text" class="form-control" placeholder="First Name">
+				<input id="txtFname" name="FirstName" type="text" class="form-control" placeholder="First Name">
+				@if ($errors->has('FirstName'))<label class="control-label" for="inputError"> {{ $errors->first('FirstName') }}</label>  @endif
 				</div>
 				</div>
 				<div class="col-md-4 col-xs-12">
 				<div class="form-group">
-				<input id="txtLname" name="txtLname" type="text" class="form-control" placeholder="Last Name">
+				<input id="txtLname" name="LastName" type="text" class="form-control" placeholder="LastName">
+				@if ($errors->has('LastName'))<label class="control-label" for="inputError"> {{ $errors->first('LastName') }}</label>  @endif
 				</div>
 				</div>
 				<div class="col-md-4 col-xs-12">
@@ -44,12 +48,14 @@
 				</div>
 				<div class="col-md-4 col-xs-12">
 				<div class="form-group">
-				<input id="txtemail" name="txtemail" type="email" class="form-control" placeholder="email Id">
+				<input id="txtemail" name="EmailId" type="email" class="form-control" placeholder="Email Id">
+				@if ($errors->has('EmailId'))<label class="control-label" for="inputError"> {{ $errors->first('EmailId') }}</label>  @endif
 				</div>
 				</div>
 				<div class="col-md-4 col-xs-12">
 				<div class="form-group">
-				<input id="txtMobile" name="txtMobile" type="number" class="form-control" placeholder="Mobile No.">
+				<input id="txtMobile" name="MobileNo" type="number" class="form-control" placeholder="Mobile No.">
+				@if ($errors->has('MobileNo'))<label class="control-label" for="inputError"> {{ $errors->first('MobileNo') }}</label>  @endif
 				</div>
 				</div>
 				
@@ -73,7 +79,7 @@
 				</div>
 				<div class="col-md-4 col-xs-12">
 				<div class="form-group">
-				<input id="txtPincode" name="txtPincode" type="number" class="form-control" placeholder="Pincode">
+				<input id="txtPincode" name="Pincode" type="number" class="form-control" placeholder="Pincode">@if ($errors->has('Pincode'))<label class="control-label" for="inputError"> {{ $errors->first('Pincode') }}</label>  @endif
 				</div>
 				</div>
 				<div class="col-md-4 col-xs-12">
@@ -248,7 +254,7 @@
 			<div class="col-md-12 col-xs-12">
 				<br>
 				<div class="center-obj center-multi-obj">
-				<button class="common-btn">Back</button>
+				<a href="Fsm-Details" class="common-btn">Back</a>
 				 <button id="btnsubmit" onclick="Validate()" class="common-btn">Submit</button>
 				 </div>
 				</div>
