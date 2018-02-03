@@ -16,7 +16,7 @@
     <li class="nav-item"><a href="#"><span class="sp-nav"><img src="images/icon/submit-query.png"></span> &nbsp;&nbsp;Submit Query</a></li>
     <li class="nav-item"><a href="#"><span class="sp-nav"><img src="images/icon/user-queries.png"></span> &nbsp;&nbsp;User Queries</a></li>
     <li class="nav-item"><a href="#"><span class="sp-nav"><img src="images/icon/user-feedback.png"></span> &nbsp;&nbsp;User Feedback</a></li>
-    <li class="nav-item"><a href="{{url('send-notification')}}"><span class="sp-nav"><img src="images/icon/notification.png"></span> &nbsp;&nbsp;Send Notification</a></li>
+    <li class="nav-item"><a href=""><span class="sp-nav"><img src="images/icon/notification.png"></span> &nbsp;&nbsp;Send Notification</a></li>
     <li class="nav-item"><a href="#"><span class="sp-nav"><img src="images/icon/login.png"></span> &nbsp;&nbsp;Demo User Details</a></li>
     <li class="nav-item"><a href="#"><span class="sp-nav"><img src="images/icon/login-icon.png"></span> &nbsp;&nbsp;Create Demo Login</a></li>
     <li class="nav-item"><a href="#"><span class="sp-nav"><img src="images/icon/customer-validation.png"></span> &nbsp;&nbsp;Customer ID Validation</a></li>

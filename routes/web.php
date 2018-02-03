@@ -19,6 +19,11 @@ Route::get('/', function () {
 
 
 Route::post('admin-login','LoginController@login');
+
+ Route::group(['middleware' => ['CheckMidd']], function (){
+
+ 
+
 Route::get('register-user','LoginController@register_user');
 Route::post('register-user','LoginController@registerinsert');
 Route::get('register-user','LoginController@getsate');
@@ -61,3 +66,4 @@ Route::get('send-notification','SendNotificationController@sendnotification');
 
 //genrate lead
  Route::get('genrate-lead','genrateleadController@getlead');
+ });

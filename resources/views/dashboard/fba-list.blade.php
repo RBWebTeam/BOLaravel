@@ -89,13 +89,13 @@
 					                  <td><?php echo $val->city; ?></td>
 					                  <td><?php echo $val->Pincode; ?></td>
 					                  <td>Fsm Details</td>
-					                  <td><a href="#" onclick="POSP_UPDATE" id="">update </a></td>
-					                  <td><a href="">update</a></td>
+					                  <td><a href="#" data-toggle="modal" data-target="#updatePosp" onclick="POSP_UPDATE" id="">update </a></td>
+					                  <td><a href="" data-target="#sendSms">update</a></td>
 					                  <td><?php echo $val->pospname; ?></td>
-					                  <td><?php echo $val->PartnerID; ?></td>
+					                  <td><a href="">partner info</a></td>
 					                  <td>Pending</td>
 					                  <td><?php echo $val->bankaccount; ?></td>
-					                   <td><a href="#" onclick="SMS_FN(#{<?php echo $val->fbaid; ?>},#{<?php echo $val->MobiNumb1; ?>})">sms </a></td>
+					                   <td><a href="#" data-toggle="modal" data-target="#sms_sent_id" onclick="SMS_FN(#{<?php echo $val->fbaid; ?>},#{<?php echo $val->MobiNumb1; ?>})">sms </a></td>
 					                  <td><a href="">update</a></td>
 					                  
 					              </tr>

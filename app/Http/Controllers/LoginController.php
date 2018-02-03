@@ -103,8 +103,9 @@ class LoginController extends InitialController
 
 }
 
-public function logout() 
+public function logout(Request $req) 
 {
+  $req->session()->flush();
    return redirect('/');
 }
 
