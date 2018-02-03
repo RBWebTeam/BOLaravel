@@ -9,11 +9,11 @@
 		   
 				<div class="col-md-12 col-xs-12">
 				<div class="form-group col-md-4">
-				<select class="selectpicker select-opt form-control" required="">
+				<select id="smslist" class="selectpicker select-opt form-control" required="" onchange="function">
 			     <option>-- Select Recipient --</option>
-		         <option>FBA</option>
-				 <option>FSM</option>
-				 <option>FBA POSP</option>
+		         <option value="1">FBA</option>
+				 <option value="2">FSM</option>
+				 <option value="3">FBA POSP</option>
 				</select>
 				</div>
 				</div>
@@ -27,7 +27,6 @@
 			                                    <th scope="col">
                                                 <input type="checkbox" class="used" style="width: auto; float: left; display: inline-block; margin-right: 16px;">
                                                 <span>RECIPIENTS</span>
-												
 												<div class="search-container">
                                                 <form action="/action_page.php">
                                                 <input type="text" placeholder="Search.." name="search">
@@ -36,17 +35,25 @@
 												 </div>
                                                </th>
 		                                       </tr>
-		                                    <tr align="left">		
+		                                 <!--    <tr align="left">		
 			                               <td>
                                                 <input type="hidden" value="4" class="used">
                                                 <input  type="checkbox" class="used">
                                                 <span>PRASANNAA DEVADIGGA : 9820030969</span>
                                             </td>
-		                                   </tr>
-										    </tbody>
-									 </table>
-                                     </div>
-									</div>
+		                                   </tr> -->
+
+		                                    @foreach($query as $val)  
+		                                     <tr>
+                                             <td><?php echo $val->FBAID; ?></td> 
+                                             <td><?php echo $val->SMId; ?></td>
+                                             </tr>
+                                             @endforeach
+
+                                      </tbody>
+									  </table>
+                                      </div>
+									  </div>
 			
 				<div class="col-sm-6 col-xs-12 form-padding">
 	                           <textarea style="padding:10px; height:200px;">Type SMS</textarea>

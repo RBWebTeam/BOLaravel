@@ -27,13 +27,9 @@ class fbablocklistController extends Controller
 		   
 	      DB::statement("call Usp_updatefba_block_Unblock('$flag','$value')");
 
-		 return view ('dashboard.fbablocklist');
+		 return Redirect ('fba-blocklist');
 
 
-		 $query=DB::select("call usp_load_fbalist_new(0)");
-		// print_r($query); exit();
-
-                // $query=array(1,2,3,4);
-		return view ('dashboard.fbablocklist',['query'=>$query]);
+		
 		}
 	}

@@ -58,6 +58,7 @@ Route::post('Fsm-Register','FsmRegisterController@insertfsm');
  //send sms
 
  Route::get('send-sms','SendSMSController@ViewSendSMSDetails');
+ Route::get('send-sms','SendSMSController@sms_load');
 
  //Otp Detail
  Route::get('otp-details','OtpDetailsController@otp_details');

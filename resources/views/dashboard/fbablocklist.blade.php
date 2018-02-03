@@ -1,8 +1,8 @@
          @extends('include.master')
-        @include('include.script')
+        <!-- @include('include.script') -->
         @section('content')
     
-<link type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+<!-- <link type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet"> -->
 
 
 
@@ -93,10 +93,7 @@
       <td><button id="btnblock" class="btn btn-default block">Block </button>
       <button id="btnunblock" class="btn btn-danger unblock" style="display:none;">Unblock</button>
       <input type="hidden" name="txtfbaid" value="<?php echo $val->fbaid; ?>"></td>
-    
-
-                
-       </tr>
+      </tr>
        @endforeach
        </tbody>
       </table>

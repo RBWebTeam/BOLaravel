@@ -12,10 +12,11 @@ $(document).ready(function(){
         $(".filter-bdy").toggle();
     });
 });
- 
-function myFunction(x) {
-   x.classList.toggle("change");
-}
+     // Menubar cross close
+// function myFunction(x) {
+//    x.classList.toggle("change");
+// }
+    //Menubar cross close end
  
 $(document).ready(function(){
     $(".search-btn").click(function(){
@@ -243,8 +244,7 @@ $('#chkselectall').click(function () {
  });
 });
 
-<<<<<<< HEAD
-=======
+
  // validation for fsm
 /* function Validate()
 {
@@ -293,7 +293,7 @@ $('#chkselectall').click(function () {
 */
 
 
->>>>>>> 616ed02bb9bd3950cafbeb0f515516f07cca9a2c
+
 // insert Fsm details
 function insertfsm() {
   console.log($('#fsmregister').serialize());
@@ -311,7 +311,6 @@ function insertfsm() {
 });
  }
 
-}
 
 /*$(document).ready(function(){
                     $("#btnsubmit").click(function () {
@@ -328,8 +327,7 @@ function insertfsm() {
   $(this).toggle();
   $(this).closest('td').find('.unblock').toggle();
 
-
-$.ajax({
+   $.ajax({
             type: "GET",
             url:'fba-blocklist/'+flag+'/'+value, 
                      
@@ -358,25 +356,22 @@ $('.unblock').click(function(){
             }
         });
 });
-<<<<<<< HEAD
+
 // end block
 
- 
+                        // SEND-SMS
+              // $(document).ready(function(){
+              // $('.smslist').on('change', function(){
+              //  var FBAID = $(this).val();
 
 
 
-$(document).ready(function(){
-                    $("#btnsubmit").click(function () {
-                       insertfsm();
-                    });
-                });
+              // }
+
+              // }
 
 
 
-
-
-=======
->>>>>>> 616ed02bb9bd3950cafbeb0f515516f07cca9a2c
 </script>
 
 

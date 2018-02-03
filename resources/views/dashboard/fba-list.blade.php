@@ -1,6 +1,7 @@
 @extends('include.master')
     @section('content')
 <div id="content" style="overflow:scroll;">
+
 			 <div class="container-fluid white-bg">
 			 <div class="col-md-12"><h3 class="mrg-btm">FBA List</h3></div>
 			 
