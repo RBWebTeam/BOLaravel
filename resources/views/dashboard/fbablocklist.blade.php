@@ -65,6 +65,7 @@
 				           <th>City</th>
 				           <th>Pincode</th>
                    <th>BLOCK</th>
+                   
                   </tr>
                  </thead>
                  <tbody>
@@ -86,9 +87,9 @@
        <td><?php echo $val->city; ?></td>
        <td><?php echo $val->Pincode; ?></td>
       <td><button id="btnblock" class="btn btn-default block">Block </button>
-      <button id="btnunblock" class="btn btn-danger unblock" style="display:none;">Unblock</button>
+      <button id="btnunblock" class="btn btn-danger unblock" style="display:none;">Unblock</button> 
       <input type="hidden" name="txtfbaid" value="<?php echo $val->fbaid; ?>"></td>
-      </tr>
+     </tr>
        @endforeach
        </tbody>
       </table>

@@ -15,8 +15,10 @@ class fbablocklistController extends Controller
 	public function  fbablocklist(){
 
 		$query=DB::select("call usp_load_fbalist_new(0)");
-		// print_r($query); exit();
-
+		 
+		
+		/* print_r($users); exit();
+*/
                 // $query=array(1,2,3,4);
 		return view ('dashboard.fbablocklist',['query'=>$query]);
 	}
