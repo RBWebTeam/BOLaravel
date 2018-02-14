@@ -33,6 +33,7 @@ Route::get('dashboard','DashboardController@dashboard');
 
 //Fba details
 Route::get('fba-list','FbaController@fba_list');
+Route::get('fba-list/{fbaid}/{value}/{flag}',array('as'=>'fba-list.ajax','uses'=>'FbaController@updateposp'));
 Route::get('fba-blocklist','fbablocklistController@fbablocklist');
 Route::get('fba-blocklist/{flag}/{value}',array('as'=>'fbablocklist.ajax','uses'=>'fbablocklistController@fbablockunblock'));
 Route::get('lead-details','LeadDetailsController@lead_details1');
@@ -53,6 +54,9 @@ Route::post('Fsm-Register','FsmRegisterController@insertfsm');
 
  //send sms
 
+
+
+
  // Route::get('send-sms','SendSMSController@ViewSendSMSDetails');
  
 
@@ -61,6 +65,16 @@ Route::get('send-notification','SendNotificationController@sendnotification');
 Route::get('send-sms','SendSMSController@ViewSendSMSDetails');
 // Route::get('send-sms','SendSMSController@sms_load');
 
+
+ /*Route::get('send-sms','SendSMSController@ViewSendSMSDetails');
+ Route::get('send-sms','SendSMSController@sms_load');*/
+
+Route::get('send-notification','SendNotificationController@sendnotification');
+//send sms
+/*Route::get('send-sms','SendSMSController@ViewSendSMSDetails');*/
+
+
+
  //Otp Detail
  Route::get('otp-details','OtpDetailsController@otp_details');
  Route::get('log-out','LoginController@logout');
@@ -68,9 +82,18 @@ Route::get('send-sms','SendSMSController@ViewSendSMSDetails');
 //genrate lead
  Route::get('genrate-lead','genrateleadController@getlead');
 
+
+
+
 // Bankoffer
 
  Route::get('bankoffer','bankofferController@bank_offer');
+
+
+
+Route::get('payment-history','PaymentHistoryController@payment_history');
+ 
+
 
 
 
