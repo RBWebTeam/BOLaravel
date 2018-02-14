@@ -49,6 +49,9 @@ $(document).ready(function(){
           "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]]
           });
           });
+  // start test
+
+  // end test
           $('.popover-Payment').popover({
             trigger: 'focus'
           });
@@ -279,13 +282,15 @@ function insertfsm() {
 
 
 });
+ 
+
 
 $('.unblock').click(function(){
   $(this).toggle();
   $(this).closest('td').find('.block').toggle();
 
   var flag=0;
-  var value=$(this).closest('td').find('input[name="txtfbaid"]').val();
+  var value=$(this).closest('td').find('input[name="txtfbaid"]').val('return');
  
   $.ajax({
             type: "GET",
@@ -296,26 +301,24 @@ $('.unblock').click(function(){
             }
         });
 });
+ 
 
 
-// end block
+// function sendsmsrecipients(){
+//   var smslist = document.getElementById("smslist");
+//   console.log(smslist);
+//   // alert("test");
+//      $.ajax({ 
+//    url: "{{URL::to('send-sms')}}",
+//    method:"GET",
+//    data:{smslist:smslist},
+//    success: function(msg)  
+//    {
+// console.log(msg);
+//    }
 
-                        // SEND-SMS
-              // $(document).ready(function(){
-              // $('.smslist').on('change', function(){
-              //  var FBAID = $(this).val();
-
-
-
-              // }
-
-              // }
-
-
-
-
-
-// end block
+//  });
+// }   
 
 </script>
 

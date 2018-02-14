@@ -9,7 +9,7 @@
 		   
 				<div class="col-md-12 col-xs-12">
 				<div class="form-group col-md-4">
-				<select id="smslist" class="selectpicker select-opt form-control" required="" onchange="function">
+				<select id="smslist" class="selectpicker select-opt form-control" required="" onchange="sendsmsrecipients()">
 			     <option>-- Select Recipient --</option>
 		         <option value="1">FBA</option>
 				 <option value="2">FSM</option>
@@ -20,51 +20,51 @@
 
 				<div class="col-sm-6 col-xs-12 form-padding" id="StatesV" style="overflow-y:scroll;height:270px;">
 							
-                                              <div>
-	                                          <table class="table table-responsive table-hover" cellspacing="0">
-		                                       <tbody>
-											<tr class="headerstyle" align="center">
-			                                    <th scope="col">
-                                                <input type="checkbox" class="used" style="width: auto; float: left; display: inline-block; margin-right: 16px;">
-                                                <span>RECIPIENTS</span>
-												<div class="search-container">
-                                                <form action="/action_page.php">
-                                                <input type="text" placeholder="Search.." name="search">
-                                                <button type="submit"><i class="fa fa-search"></i></button>
-                                                 </form>
-												 </div>
-                                               </th>
-		                                       </tr>
-		                                 <!--    <tr align="left">		
+                        <div>
+	                    <table class="table table-responsive table-hover" cellspacing="0">
+		                <tbody>
+						<tr class="headerstyle" align="center">
+			            <th scope="col">
+                        <input type="checkbox" class="used" style="width: auto; float: left; display: inline-block; margin-right: 16px;">
+                        <span>RECIPIENTS</span>
+						<div class="search-container">
+                        <form action="/action_page.php">
+                        <input type="text" placeholder="Search.." name="search">
+                        <button type="submit"><i class="fa fa-search"></i></button>
+                        </form>
+						</div>
+                        </th>
+		                </tr>
+		                                 <!--   <tr align="left">		
 			                               <td>
                                                 <input type="hidden" value="4" class="used">
                                                 <input  type="checkbox" class="used">
                                                 <span>PRASANNAA DEVADIGGA : 9820030969</span>
                                             </td>
 		                                   </tr> -->
+		                                   <tr>  
+		                                   @foreach($query as $val)  
 
-		                                    @foreach($query as $val)  
-		                                     <tr>
-                                             <td><?php echo $val->FBAID; ?></td> 
-                                             <td><?php echo $val->SMId; ?></td>
-                                             </tr>
+                                            <td><?php echo $val->fullname; ?></td> 
+                                            <td><?php echo $val->mobileno; ?></td>
+                                            <td><?php echo $val->smid; ?></td> 
+                                            <td><?php echo $val->mobileno; ?></td>  
+                                            </tr>
                                              @endforeach
-
-                                      </tbody>
-									  </table>
-                                      </div>
-									  </div>
+               
+                                         </tbody>
+									    </table>
+                                        </div>
+									    </div>
 			
-				<div class="col-sm-6 col-xs-12 form-padding">
+				               <div class="col-sm-6 col-xs-12 form-padding">
 	                           <textarea style="padding:10px; height:200px;">Type SMS</textarea>
 				               <div class="center-obj pull-left">
-				                <button class="common-btn">SEND</button>
-                                     </div>
-									</div>
+				               <button class="common-btn">SEND</button>
+                               </div>
+							   </div>
 					
-		
-			
-            </div>
+		    </div>
             </div>
 			<!-- Body Content Start -->
 			 @endsection

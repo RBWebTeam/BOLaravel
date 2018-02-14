@@ -21,8 +21,7 @@
        <td><?php echo $val->ValidData; ?></td> 
        <td><?php echo $val->OTP; ?></td>
        <td><?php echo $val->CreaDate; ?></td>
-       
-       </tr>
+      </tr>
        @endforeach
                  
       </tbody>
