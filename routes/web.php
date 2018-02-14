@@ -67,4 +67,9 @@ Route::get('send-notification','SendNotificationController@sendnotification');
 
 //genrate lead
  Route::get('genrate-lead','genrateleadController@getlead');
+
+Route::get('payment-history','PaymentHistoryController@payment_history');
+ 
+
+
  });
