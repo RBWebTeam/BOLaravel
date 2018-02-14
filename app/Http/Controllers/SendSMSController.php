@@ -13,16 +13,17 @@ use Mail;
 
 class SendSMSController extends Controller
 {
-    public function ViewSendSMSDetails()
-    {
-    	return view('dashboard/send-sms');
-    }
+    public function ViewSendSMSDetails(Request $req){
+    	// $data=$req->smslist;
+    	// print_r($data);exit();
+    	
+     // print_r('smslist');exit();
 
-        public function sms_load(){
-
-        $query=DB::select("call usp_loadfsm_list($flag,$value)");
-
-        return view('dashboard/send-sms',['query'=>$query]);
+        $query=DB::select("call usp_loadfsm_list(?)",[2]);
+        
+       //  print "<pre>";
+       // print_r($query);exit();
+         return view('dashboard/send-sms',['query'=>$query]);
     }
 }
 

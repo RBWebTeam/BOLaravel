@@ -7,7 +7,7 @@
 			<form method="post" action="">
 			    <div class="col-md-6 col-xs-12">
 				<div class="form-group">
-				<select class="selectpicker select-opt form-control" required>
+				<select id="selectdata" class="selectpicker select-opt form-control" required>
 			     <option selected="selected" value="0">-SELECT-</option>
 		         <option value="1">STATE</option>
 		         <option value="2">CITY</option>
@@ -18,6 +18,10 @@
 				</select>
 				</div>
 				</div>
+			<!-- 	test start -->
+			
+			 
+			<!-- 	test end -->
 				<div class="col-md-6 col-xs-12">
 				<div class="form-group">
 				<input type="text" class="form-control" placeholder="Search Criteria"/>
@@ -29,8 +33,8 @@
 				</div>
 				</div>
 				<div class="col-md-6 col-xs-12">
-	             <div class="form-group">
-		         <div class="input-group input-file" name="Fichier1">
+	            <div class="form-group">
+		        <div class="input-group input-file" name="Fichier1">
     		    <input type="file" class="form-control" placeholder='Choose a file...' required/>			
                 <span class="input-group-btn">
         		<button class="btn btn-info btn-choose" type="button">Browse</button>

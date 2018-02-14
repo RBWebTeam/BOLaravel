@@ -69,35 +69,28 @@
                  </thead>
                  <tbody>
                  <tr>
-                  <!-- <td>OMARAM CHOUDHARY</td>
-                  <td>17 Jan 2018</td>
-                  <td>9784120418</td>
-                  <td>onarwal418@gmail.com</td>
-				  <td>JODHPUR</td>
-				  <td>342001</td> -->
+            
+       @foreach($query as $val) 
 
-     @foreach($query as $val)   
-
-       
        <td><?php echo $val->FullName; ?></td> 
        <td><?php echo $val->createdate; ?></td>
        <td><?php echo $val->MobiNumb1; ?></td> 
        <td><?php echo $val->EMaiID; ?></td>
        <td><?php echo $val->city; ?></td>
        <td><?php echo $val->Pincode; ?></td>
-      <td><button id="btnblock" class="btn btn-default block">Block </button>
+       <td>
+      <button id="btnblock" class="btn btn-default block">Block </button>
       <button id="btnunblock" class="btn btn-danger unblock" style="display:none;">Unblock</button>
-      <input type="hidden" name="txtfbaid" value="<?php echo $val->fbaid; ?>"></td>
+      <input type="hidden" name="txtfbaid" id="blocksame" value="<?php echo $val->fbaid; ?>"></td>
       </tr>
        @endforeach
-       </tbody>
+      </tbody>
       </table>
 			</div>
 			</div>
 			</div>
-			
-            </div>
-            </div>
+		  </div>
+      </div>
 @endsection
 
 
