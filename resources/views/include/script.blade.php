@@ -45,6 +45,7 @@ $(document).ready(function(){
              });
 
   $(document).ready(function() {
+
           $('#example').DataTable({
           "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]]
           });
@@ -79,9 +80,9 @@ $(document).ready(function(){
              }
 
              function LoanID_UPDATE(id){
-                       $('#flage_id').val(2);
-                       $('#fba_id_posp').val(id);
-                       $('.updatePosp').modal('show');
+                       $('#flage_idloan').val(2);
+                       $('#fba_id_loan').val(id);
+                       $('.updateLoan').modal('show');
 
              }
           
@@ -105,7 +106,7 @@ $(document).ready(function(){
                           }
             });
 // POSP UPADTE MODEL
-             $('.posp_from_id').click(function(event){  event.preventDefault();
+            /* $('.posp_from_id').click(function(event){  event.preventDefault();
                        var sms=$('#posp_name_id').val();
                                  
                           if(sms){
@@ -146,7 +147,7 @@ $(document).ready(function(){
                           }else{
                               alert("abc..");
                           }
-            })
+            })*/
  // Extend dataTables search
  $(document).ready(function(){
                   $.fn.dataTable.ext.search.push(
@@ -303,6 +304,22 @@ $('.unblock').click(function(){
 });
  
 
+$('.posp_from_id').click(function(){
+  var flag=$(this).closest('div').find('input[name="flage_id"]').val();
+  var fbaid=$(this).closest('div').find('input[name="fbaid"]').val();
+  var value=$("#posp_name_id").val();
+ $.ajax({
+            type: "GET",
+            url:'fba-list/'+fbaid+'/'+value+'/'+flag, 
+            success: function( msg ) {
+            console.log(msg);
+           }
+        });
+ alert("posp updated successfully..!");
+ $('.updatePosp').modal('hide');
+ location.reload();
+});
+
 
 // function sendsmsrecipients(){
 //   var smslist = document.getElementById("smslist");
@@ -320,6 +337,41 @@ $('.unblock').click(function(){
 //  });
 // }   
 
+$('.loan_from_id').click(function(){
+  var flag=$(this).closest('div').find('input[name="flage_idloan"]').val();
+  var fbaid=$(this).closest('div').find('input[name="fba_id_loan"]').val();
+  var value=$("#loan_id").val();
+  
+ $.ajax({
+            type: "GET",
+            url:'fba-list/'+fbaid+'/'+value+'/'+flag, 
+            success: function( msg ) {
+            console.log(msg);
+           }
+        });
+ alert("loan id updated successfully..!");
+ $('.updateLoan').modal('hide');
+ location.reload();
+});
+
+
+/*function chkpospid(){
+  if($("#txtPosp").val()!="")
+  {
+     $('.check').css("display", "none");
+  }
+  else if($("#txtloan").val()!=""){
+    $('.checkloan').css("display", "none");
+  }
+  else{
+   $('.check').css("display", " ");
+   $('.checkloan').css("display", " ");
+  }
+}
+ $(document).ready(function(){
+   chkisblock();
+ });
+*/
 </script>
 
 

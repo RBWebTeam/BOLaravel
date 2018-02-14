@@ -90,14 +90,16 @@
 					                  <td><?php echo $val->city; ?></td>
 					                  <td><?php echo $val->Pincode; ?></td>
 					                  <td>Fsm Details</td>
-					                  <td><a href="#" onclick="POSP_UPDATE" id="">update </a></td>
-					                  <td><a href="">update</a></td>
+					                  <td><?php echo $val->POSPNo; ?><a href="#" style="" class="check" data-toggle="modal" data-target="#updatePosp" onclick="POSP_UPDATE(<?php echo $val->fbaid; ?>)">update</a>
+					                   <input id="txtPosp" value="<?php echo $val->POSPNo; ?>" type="hidden" name=""/></td>
+					                  <td><?php echo $val->LoanID; ?><a href="#" style="" class="checkloan" data-toggle="modal" data-target="#updateLoan" onclick="LoanID_UPDATE(<?php echo $val->fbaid; ?>)">update</a>
+					                   <input id="txtloan" value="<?php echo $val->LoanID; ?>" type="hidden" name=""/></td>
 					                  <td><?php echo $val->pospname; ?></td>
-					                  <td><?php echo $val->PartnerID; ?></td>
+					                  <td><a href="" data-toggle="modal" data-target="#partnerInfo">partner info</a></td>
 					                  <td>Pending</td>
 					                  <td><?php echo $val->bankaccount; ?></td>
-					                   <td><a href="#" onclick="SMS_FN(#{<?php echo $val->fbaid; ?>},#{<?php echo $val->MobiNumb1; ?>})">sms </a></td>
-					                  <td><a href="">update</a></td>
+					                   <td><a href="#" data-toggle="modal" data-target="#sms_sent_id" onclick="SMS_FN(<?php echo $val->fbaid;?>,<?php echo $val->MobiNumb1;?>)">sms</a></td>
+					                  <td><a href="#">update</a></td>
 					                  
 					              </tr>
 					              @endforeach
@@ -111,7 +113,7 @@
             </div>
 
 <!-- send sms -->
-<div class="sms_sent_id modal fade" role="dialog">   
+<div class="sms_sent_id id modal fade" role="dialog">   
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -132,7 +134,7 @@
         </form>
         <div class="modal-footer">
           <button class="btn btn-default" type="button" data-dismiss="modal">Close</button>
-          <button class="btn btn-primary message_sms_id" type="button">Save changes</button><b class="alert-success primary" id="strong_id"></b>
+          <button class="btn btn-primary message_sms_id" type="button">Send</button><b class="alert-success primary" id="strong_id"></b>
         </div>
       </div>
     </div>
@@ -149,21 +151,92 @@
       <div class="modal-body">
         <form id="posp_from_id">
           <div class="form-group">
-            <input id="fba_id_posp" type="hidden" name="fbaid"/>
-            <input id="flage_id" type="hidden" name="flage_id"/>
+            
           </div>
           <div class="form-group">
             <label class="control-label" for="message-text">POSP :</label>
-            <input class="recipient-name form-control" id="posp_name_id" type="text" name="posp_name" onkeypress="return Numeric(event)"/>
+            <input type="number" class="recipient-name form-control" id="posp_name_id" name="posp_name" required="yes" />
           </div>
         </form>
         <div class="modal-footer"> 
           <button class="btn btn-default" type="button" data-dismiss="modal">Close</button>
-          <button class="btn btn-primary posp_from_id" type="button">Save changes</button><b class="alert-success primary" id="strong_lead"></b>
+          <button id="btnpospupdate" class="btn btn-primary posp_from_id" type="button">Save changes</button><b class="alert-success primary" id="strong_lead"></b>
+          <input id="fba_id_posp" type="hidden" name="fbaid"/>
+          <input id="flage_id" type="hidden" name="flage_id"/>
         </div>
       </div>
     </div>
   </div>
+
+
+
+</div>
+<!-- update Loan -->
+<div class="updateLoan modal fade" role="dialog">   
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+        <h4 class="modal-title">UPDATE LOAN</h4>
+      </div>
+      <div class="modal-body">
+        <form id="posp_from_id">
+          <div class="form-group">
+            
+          </div>
+          <div class="form-group">
+            <label class="control-label" for="message-text">Loan Id:</label>
+            <input type="number" class="recipient-name form-control" id="loan_id" type="text" name="posp_name"/>
+          </div>
+        </form>
+        <div class="modal-footer"> 
+          <button class="btn btn-default" type="button" data-dismiss="modal">Close</button>
+          <button id="btnloanupdate" class="btn btn-primary loan_from_id" type="button">Save changes</button>
+          <input id="fba_id_loan" type="hidden" name="fba_id_loan"/>
+          <input id="flage_idloan" type="hidden" name="flage_idloan"/>
+          <b class="alert-success primary" id="strong_lead"></b>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Partner Info Start -->
+<div id="partnerInfo" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Partner Info</h4>
+      </div>
+      <div class="modal-body">
+	  <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+		    <tr>
+			 <td>Partner ID</td>
+			 <td>Name</td>
+			 <td>Mobile No</td>
+			 <td>Email</td>
+			 <td>City</td>
+			 <td>Pincode</td>
+			</tr>
+			<tr>
+			 <td></td>
+			 <td>Pavamaana Softech</td>
+			 <td>9845724268</td>
+			 <td>bgykumar@gmail.com</td>
+			 <td>Bangalore</td>
+			 <td>560021</td>
+			</tr>
+		</table>
+		</div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Partner Info End -->
 
 @endsection
 

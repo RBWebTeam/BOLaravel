@@ -10,7 +10,7 @@
 			 <div class="panel-heading">
 						<h3 class="panel-title">LEAD DETAILS</h3>
 						<div class="pull-right">
-							<span class="clickable filter" data-toggle="tooltip" data-container="body"><a href="genrate-lead">
+							<span class="clickable filter" data-toggle="tooltip" data-container="body"><a href="">
 							<span class="glyphicon glyphicon-plus mrg-tp-forteen"></span></a></span>
 						</div>
 					</div>

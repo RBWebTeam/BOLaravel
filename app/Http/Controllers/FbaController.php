@@ -13,18 +13,18 @@ use Mail;
 class FbaController extends InitialController
 {
        
-        public function fba_list(){
-
-
+        public function fba_list()
+        {
 
          $query=DB::select("call usp_load_fbalist_new(0)");
          // print_r($query); exit();
-       return view('dashboard.fba-list',['query'=>$query]);
-
-               
-
-
+          return view('dashboard.fba-list',['query'=>$query]);
         }
 
+        public function updateposp($fbaid,$value,$flag) {
+          DB::select("call usp_update_posploanid('$fbaid','$value','$flag')");
+          return redirect('fba-list');
+        }
 }
+
 
