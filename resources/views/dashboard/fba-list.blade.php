@@ -1,7 +1,7 @@
 @extends('include.master')
 @section('content')
 
-<div id="content" style="overflow:scroll;">
+
 
 			 <div class="container-fluid white-bg">
 			 <div class="col-md-12"><h3 class="mrg-btm">FBA List</h3></div>
@@ -31,8 +31,8 @@
 			  <div class="form-group">
 			   
                 <p>From Date</p>
-			   <div id="datepicker" class="input-group date" data-date-format="mm-dd-yyyy">
-               <input class="form-control" type="text" placeholder="From Date" />
+			   <div id="datepicker" class="input-group date" data-date-format="dd-mm-yyyy">
+               <input class="form-control" type="text" placeholder="From Date" / value="01-01-2017">
               <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
               </div>
             </div>
@@ -40,8 +40,8 @@
 		   <div class="col-md-4">
 			 <div class="form-group">
 			 <p>To Date</p>
-			   <div id="datepicker1" class="input-group date" data-date-format="mm-dd-yyyy">
-               <input class="form-control" type="text" placeholder="From Date" />
+			   <div id="datepicker1" class="input-group date" data-date-format="dd-mm-yyyy">
+           <input class="form-control" type="text" placeholder="From Date" / value="<?php echo date('d-m-y');?>">
               <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
               </div>
             </div>
@@ -50,11 +50,12 @@
 		   <div class="form-group"> <button class="common-btn mrg-top">SHOW</button></div>
 		   </div>
 		   <!-- Date End -->
-		   
-			 <div class="col-md-10">
+		
+			 <div class="col-md-12">
 			 <div class="overflow-scroll">
 			 <div class="table-responsive" >
-				<table class="datatable-responsive table table-striped table-bordered dt-responsive nowrap" id="example">
+
+			<table class="datatable-responsive table table-striped table-bordered dt-responsive nowrap" id="example">
                                     <thead>
 					                  <tr>
 					                   <th>Full Name</th>
@@ -107,11 +108,8 @@
             </table>
 			</div>
 			</div>
-			
-			
 			</div>
-			
-            </div>
+			</div>
             </div>
 
 <!-- send sms -->
@@ -169,6 +167,10 @@
       </div>
     </div>
   </div>
+
+
+
+
 </div>
 <!-- update Loan -->
 <div class="updateLoan modal fade" role="dialog">   
@@ -236,6 +238,8 @@
   </div>
 </div>
 <!-- Partner Info End -->
+
+
 @endsection
 
 

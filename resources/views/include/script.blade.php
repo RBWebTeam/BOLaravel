@@ -50,6 +50,9 @@ $(document).ready(function(){
           "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]]
           });
           });
+  // start test
+
+  // end test
           $('.popover-Payment').popover({
             trigger: 'focus'
           });
@@ -280,13 +283,15 @@ function insertfsm() {
 
 
 });
+ 
+
 
 $('.unblock').click(function(){
   $(this).toggle();
   $(this).closest('td').find('.block').toggle();
 
   var flag=0;
-  var value=$(this).closest('td').find('input[name="txtfbaid"]').val();
+  var value=$(this).closest('td').find('input[name="txtfbaid"]').val('return');
  
   $.ajax({
             type: "GET",
@@ -297,6 +302,8 @@ $('.unblock').click(function(){
             }
         });
 });
+ 
+
 
 $('.posp_from_id').click(function(){
   var flag=$(this).closest('div').find('input[name="flage_id"]').val();
@@ -314,6 +321,25 @@ $('.posp_from_id').click(function(){
  location.reload();
 });
 
+
+
+// function sendsmsrecipients(){
+//   var smslist = document.getElementById("smslist");
+//   console.log(smslist);
+//   // alert("test");
+//      $.ajax({ 
+//    url: "{{URL::to('send-sms')}}",
+//    method:"GET",
+//    data:{smslist:smslist},
+//    success: function(msg)  
+//    {
+// console.log(msg);
+//    }
+
+//  });
+// }   
+
+
 $('.loan_from_id').click(function(){
   var flag=$(this).closest('div').find('input[name="flage_idloan"]').val();
   var fbaid=$(this).closest('div').find('input[name="fba_id_loan"]').val();
@@ -330,6 +356,8 @@ $('.loan_from_id').click(function(){
  $('.updateLoan').modal('hide');
  location.reload();
 });
+
+
 
 /*function chkpospid(){
   if($("#txtPosp").val()!="")

@@ -8,3 +8,7 @@
   <script type="text/javascript" src="{{url('js/query_script.js')}}"></script>
 
  
+      <link rel="stylesheet" type="text/css" href="//cdn.rawgit.com/davidstutz/bootstrap-multiselect/master/dist/css/bootstrap-multiselect.css">
+      <script type="text/javascript" src="//cdn.rawgit.com/davidstutz/bootstrap-multiselect/master/dist/js/bootstrap-multiselect.js"></script>
+    
+  

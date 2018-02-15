@@ -1,7 +1,7 @@
 <div class="scrolling">
     <nav id="sidebar">
     <ul class="list-unstyled components" style="overflow: hidden; width: auto; height: 95%;">
-     <li class="nav-item"><a href="#"><span class="sp-nav"><img src="images/icon/home.png"></span>&nbsp;&nbsp; Home Page</a></li>
+     <li class="nav-item"><a href="{{url('dashboard')}}"><span class="sp-nav"><img src="images/icon/home.png"></span>&nbsp;&nbsp; Home Page</a></li>
     <li class="nav-item"><a href="{{url('Fsm-Details')}}"><span class="sp-nav"><img src="images/icon/fsm-detail.png"></span>&nbsp;&nbsp; FSM Details</a></li>
     <li class="nav-item"><a href="{{url('fba-list')}}"><span class="sp-nav"><img src="images/icon/lead-details.png"></span> &nbsp;&nbsp;FBA List</a></li>
 
@@ -12,7 +12,17 @@
 
     <li class="nav-item"><a href="#"><span class="sp-nav"><img src="images/icon/offline-quote.png"></span> &nbsp;&nbsp;Offline Quote Requests</a></li>
     <li class="nav-item"><a href="#"><span class="sp-nav"><img src="images/icon/new-user.png"></span> &nbsp;&nbsp;Login Request Log</a></li>
+
+    <!-- <li class="nav-item"><a href="{url{'bankoffer'}}"><span class="sp-nav"><img src="images/icon/lead-details.png"></span> &nbsp;&nbsp;Bank offer</a></li> -->
+    <li class="nav-item"><a href="#"><span class="sp-nav"><img src="images/icon/email.png"></span> &nbsp;&nbsp;Send SMS</a></li>
+
+
+    <!-- <li class="nav-item"><a href="{url{'bankoffer'}}"><span class="sp-nav"><img src="images/icon/lead-details.png"></span> &nbsp;&nbsp;Bank offer</a></li> -->
+    <li class="nav-item"><a href="#"><span class="sp-nav"><img src="images/icon/email.png"></span> &nbsp;&nbsp;Send SMS</a></li>
+
     <li class="nav-item"><a href=""><span class="sp-nav"><img src="images/icon/email.png"></span> &nbsp;&nbsp;Send SMS</a></li>
+
+
     <li class="nav-item"><a href="#"><span class="sp-nav"><img src="images/icon/submit-query.png"></span> &nbsp;&nbsp;Submit Query</a></li>
     <li class="nav-item"><a href="{{url('queries')}}"><span class="sp-nav"><img src="images/icon/user-queries.png"></span> &nbsp;&nbsp;User Queries</a></li>
     <li class="nav-item"><a href="#"><span class="sp-nav"><img src="images/icon/user-feedback.png"></span> &nbsp;&nbsp;User Feedback</a></li>
