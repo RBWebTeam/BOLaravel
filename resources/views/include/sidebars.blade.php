@@ -14,7 +14,7 @@
     <li class="nav-item"><a href="#"><span class="sp-nav"><img src="images/icon/new-user.png"></span> &nbsp;&nbsp;Login Request Log</a></li>
 
     <!-- <li class="nav-item"><a href="{url{'bankoffer'}}"><span class="sp-nav"><img src="images/icon/lead-details.png"></span> &nbsp;&nbsp;Bank offer</a></li> -->
-    <li class="nav-item"><a href="#"><span class="sp-nav"><img src="images/icon/email.png"></span> &nbsp;&nbsp;Send SMS</a></li>
+    <li class="nav-item"><a href="{{url('lead-up-load')}}"><span class="sp-nav"><img src="images/icon/email.png"></span> &nbsp;&nbsp;Lead-up-Load</a></li>
 
 
     <!-- <li class="nav-item"><a href="{url{'bankoffer'}}"><span class="sp-nav"><img src="images/icon/lead-details.png"></span> &nbsp;&nbsp;Bank offer</a></li> -->
@@ -38,7 +38,13 @@
     <li class="nav-item"><a href="#"><span class="sp-nav"><img src="images/icon/setting-icon.png"></span> &nbsp;&nbsp;Reset Password</a></li>
     <li class="nav-item"><a href="#"><span class="sp-nav"><img src="images/icon/setting-icon.png"></span> &nbsp;&nbsp;Settings</a></li>
     <li class="nav-item"><a href="book-appointment"><span class="sp-nav"><img src="images/icon/book-appointment_ic.png"></span> &nbsp;&nbsp;Book Appointment</a></li>
+
+
+
+<?php echo $MyNavBar->asUl() ;?>
+
     </ul>
     
      </nav>
      </div>
+

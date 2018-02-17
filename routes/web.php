@@ -99,6 +99,9 @@ Route::get('queries','QueriesController@queries');
 Route::get('book-appointment','BookAppointmentController@book_appointment');
  
 
+/*Menu List*/ 
+Route::get('menu-list','MenuController@menu_list');
+Route::post('menu-add','MenuController@menu_add');
 
   /************
 //  LEAD  RM
@@ -107,9 +110,10 @@ Route::group(['namespace' => 'leadController',  ], function() {
 Route::get('lead-up-load','LeaduploadController@lead_up_load');
 Route::post('import-excel','LeaduploadController@importExcel');        
 Route::post('lead-update','LeaduploadController@lead_update');          
-Route::post('lead-interested','LeaduploadController@interested');   
- 
+Route::post('lead-interested','LeaduploadController@interested'); 
 });
+
+
  });
 
-
+ 

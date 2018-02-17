@@ -54,8 +54,14 @@ class LeaduploadController extends Controller{
     'email' =>  'required|email|unique:raw_lead_master',
     'panno' =>  'required',
     'pincode' =>  'required',
-    
-      ]);$arra=array(
+
+      ]);
+
+
+
+
+      if ($val->passes()){ 
+        $arra=array(
          'name'=>$value['name'],
          'mobile'=>$value['mobile'],
          'email'=>$value['email'],
@@ -70,9 +76,7 @@ class LeaduploadController extends Controller{
             'user_id'=>Session::get('emp_id'),
             'ip_address'=>\Request::ip(),
             'created_on'=>date('Y-m-d H:i:s'),); 
-
-
-      if ($val->passes()){ DB::table('raw_lead_master')->insert($arra);} 
+      	DB::table('raw_lead_master')->insert($arra);} 
   }
 
         
