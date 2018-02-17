@@ -37,7 +37,7 @@
     <li class="nav-item"><a href="{{url('register-user')}}"><span class="sp-nav"><img src="images/icon/new-user.png"></span> &nbsp;&nbsp;Register User</a></li>
     <li class="nav-item"><a href="#"><span class="sp-nav"><img src="images/icon/setting-icon.png"></span> &nbsp;&nbsp;Reset Password</a></li>
     <li class="nav-item"><a href="#"><span class="sp-nav"><img src="images/icon/setting-icon.png"></span> &nbsp;&nbsp;Settings</a></li>
-    <li class="nav-item"><a href="book-appointment"><span class="sp-nav"><img src="images/book-appointment.png"></span> &nbsp;&nbsp;Book Appointment</a></li>
+    <li class="nav-item"><a href="book-appointment"><span class="sp-nav"><img src="images/icon/book-appointment_ic.png"></span> &nbsp;&nbsp;Book Appointment</a></li>
     </ul>
     
      </nav>
