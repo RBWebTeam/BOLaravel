@@ -100,18 +100,16 @@ Route::get('book-appointment','BookAppointmentController@book_appointment');
  
 
 
- 
- });
-
-
- /************
-//  LEAD  ROUTE
+  /************
+//  LEAD  RM
 ******************/
 Route::group(['namespace' => 'leadController',  ], function() {
-        
 Route::get('lead-up-load','LeaduploadController@lead_up_load');
 Route::post('import-excel','LeaduploadController@importExcel');        
 Route::post('lead-update','LeaduploadController@lead_update');          
 Route::post('lead-interested','LeaduploadController@interested');   
  
 });
+ });
+
+

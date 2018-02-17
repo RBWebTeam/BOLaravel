@@ -1,6 +1,6 @@
 <script type="text/javascript">
-	 function get_fn_id(id){
-
+	 function get_fn_id(id,mobile){
+        $('#lead_id_mobile').val(mobile);
 	 	$('#lead_id').val(id);
        $('#lead_up_load-Modal').modal('show');
  }
@@ -14,8 +14,11 @@ $('#interested_id-Modal').modal('show');
 
  	       if($('#lead_type_id').val()!=0 && $('#remark').val()!=0 && $('#lead_status_id').val()!=0 ){ 
             $.post("{{url('lead-update')}}",$('#lead_up_from').serialize())
-             .done(function(msg){ 
-                 if(msg==0){
+             .done(function(data){ 
+                 if(data.error==0){
+                     if(data.status=='sms'){
+                     	 alert("SMS Sent...");
+                     }
                  	window.location.href = "{{url('lead-up-load')}}";
                  }else{
                   
