@@ -47,4 +47,8 @@ if(last_segment.split("=")[1]==1){
    
 }
 
+
 });
+
+
+
