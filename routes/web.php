@@ -94,6 +94,9 @@ Route::get('send-notification','SendNotificationController@sendnotification');
 Route::get('payment-history','PaymentHistoryController@payment_history');
  
 Route::get('queries','QueriesController@queries');
+
+/*Book Appointment*/
+Route::get('book-appointment','BookAppointmentController@book_appointment');
  
 
 
