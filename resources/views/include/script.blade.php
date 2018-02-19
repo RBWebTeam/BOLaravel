@@ -331,7 +331,7 @@ $('.loan_from_id').click(function(){
  location.reload();
 });
 
-/*function chkpospid(){
+function chkpospid(){
   if($("#txtPosp").val()!="")
   {
      $('.check').css("display", "none");
@@ -340,14 +340,14 @@ $('.loan_from_id').click(function(){
     $('.checkloan').css("display", "none");
   }
   else{
-   $('.check').css("display", " ");
-   $('.checkloan').css("display", " ");
+   $('.check').css("display", "");
+   $('.checkloan').css("display", "");
   }
 }
  $(document).ready(function(){
-   chkisblock();
+   chkpospid();
  });
-*/
+
 </script>
 
 

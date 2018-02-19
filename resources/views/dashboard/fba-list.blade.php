@@ -90,9 +90,9 @@
 					                  <td><?php echo $val->Pincode; ?></td>
 					                  <td>Fsm Details</td>
 					                  <td><?php echo $val->POSPNo; ?><a href="#" style="" class="check" data-toggle="modal" data-target="#updatePosp" onclick="POSP_UPDATE(<?php echo $val->fbaid; ?>)">update</a>
-					                   <input id="txtPosp" value="<?php echo $val->POSPNo; ?>" type="hidden" name=""/></td>
+					                   <input id="txtPosp" class="txtPosp" value="<?php echo $val->POSPNo; ?>" type="hidden" name=""/></td>
 					                  <td><?php echo $val->LoanID; ?><a href="#" style="" class="checkloan" data-toggle="modal" data-target="#updateLoan" onclick="LoanID_UPDATE(<?php echo $val->fbaid; ?>)">update</a>
-					                   <input id="txtloan" value="<?php echo $val->LoanID; ?>" type="hidden" name=""/></td>
+					                   <input id="txtloan" class="txtloan" value="<?php echo $val->LoanID; ?>" type="hidden" name=""/></td>
 					                  <td><?php echo $val->pospname; ?></td>
 					                  <td><a href="" data-toggle="modal" data-target="#partnerInfo">partner info</a></td>
 					                  <td>Pending</td>
