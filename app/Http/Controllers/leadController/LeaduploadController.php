@@ -84,16 +84,19 @@ class LeaduploadController extends Controller{
         public function lead_update(Request $req){
         	           $status=null;
         	           $error=1;
+                     $followup= $req['lead_followup']?$req['lead_followup']:null; 
+
         	           $arr=array();
         	             try{
         	             	 if($req->lead_status_id==14){
-        	             	 	$mes=$this->interested($req->mobile);
+        	             	 	//$mes=$this->interested($req->mobile);
+                          $mes=0;
         	             	 	if($mes==0){ $status="msm"; }
         	             	 }
                             $arra=array( "lead_type"=>$req->lead_type_id ,   
                                    "remark"=>$req->remark,
                                    "lead_status_id"=>$req->lead_status_id,
-                                  "followup_date"=>date('Y-m-d H:i:s'),
+                                  "followup_date"=>$followup,
                                    "lead_date"=>date('Y-m-d H:i:s'),
                         	);   DB::table('raw_lead_master')  ->where('id',$req->lead_id) ->update($arra); 
                          $error=0; 

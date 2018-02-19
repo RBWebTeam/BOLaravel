@@ -27,7 +27,7 @@ class LoginController extends InitialController
    }else{
           
 
-           $query=DB::select('call spValidateLogin(?,?,?,?,?)',array($request->email,$request->password,'0','0','0'));
+           $query=DB::select('call spValidateLogin(?,?,?,?,?,?)',array($request->email,$request->password,'0','0','0','0'));
            $val=$query[0];
            
          if($val->SuccessStatus==1){

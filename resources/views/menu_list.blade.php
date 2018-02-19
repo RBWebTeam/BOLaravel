@@ -4,20 +4,10 @@
 
 
        <div class="container-fluid white-bg">
-       <div class="col-md-12"><h3 class="mrg-btm">Import in Database</h3></div>
+       <div class="col-md-12"><h3 class="mrg-btm">Menu List</h3></div>
        
      
-
-     @if($message = Session::get('success'))
-    <div class="alert alert-info alert-dismissible fade in" role="alert">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">×</span>
-        </button>
-        <strong>Success!</strong> {{ $message }}
-      </div>
-     @endif
-   {!! Session::forget('success') !!}
-
+ 
 
 <p > <a href="#" id="add_menu_id"> Add Menu </a></p>
  
@@ -68,10 +58,18 @@
             <input type="text" name="menu" id="menu_name_id"  class="form-control" >
             </div>
   </div> 
+
+
+   <div class="form-group">
+            <label for="inputEmail" class="control-label col-xs-2">Menu URL</label>
+            <div class="col-xs-10">
+            <input type="text" name="url_link" id="url_link"  class="form-control" >
+            </div>
+  </div> 
    
 
 
-        <div class="form-group">
+       <!--  <div class="form-group">
             <label for="inputEmail" class="control-label col-xs-2"> Menu Group</label>
             <div class="col-xs-10">
             <select class="form-control" name="menu_group_id" id="lead_status_id">
@@ -84,7 +82,7 @@
         </select>
                   <span id="valid_ag_rto_id" class="help-inline"></span>
             </div>
-        </div>
+        </div> -->
 
 
          

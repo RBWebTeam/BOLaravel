@@ -159,6 +159,16 @@
         </div>
 
 
+ <div class="form-group" id="lead_status_followup" style="display: none">
+            <label for="inputEmail" class="control-label col-xs-2">Follow Up Date</label>
+            <div class="col-xs-10">
+          <div id="datepicker" class="input-group date" data-date-format="yyyy-mm-dd">
+               <input class="form-control" type="text" placeholder="From Date" name="lead_followup"  id="lead_followup"  />
+              <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+              </div>
+            </div>
+</div> 
+
         <div class="form-group">
             <label for="inputEmail" class="control-label col-xs-2">lead type   </label>
             <div class="col-xs-10">

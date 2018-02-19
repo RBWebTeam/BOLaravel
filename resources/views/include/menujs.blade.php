@@ -1,7 +1,26 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css" />
 <script type="text/javascript">
 	
 
 	$(document).ready(function(){
+
+	 
+ $("#menu_group_mapping").change(function(event){  event.preventDefault(); 	 
+ 	
+ 	$('#Menu_Mapping').show();
+
+
+});
+
+  $('#framework').multiselect({
+  nonSelectedText: 'Select Framework',
+  enableFiltering: true,
+  enableCaseInsensitiveFiltering: true,
+  buttonWidth:'400px'
+ });
+
+
  
  $("#add_menu_id").click(function(event){  event.preventDefault(); 	
    $('#menu-list-Modal').modal('show');

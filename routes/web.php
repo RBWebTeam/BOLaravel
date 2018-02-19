@@ -102,6 +102,8 @@ Route::get('book-appointment','BookAppointmentController@book_appointment');
 /*Menu List*/ 
 Route::get('menu-list','MenuController@menu_list');
 Route::post('menu-add','MenuController@menu_add');
+Route::get('menu-mapping','MenuController@mapping');
+Route::post('menu-mapping-save','MenuController@menu_mapping_save');
 
   /************
 //  LEAD  RM
