@@ -15,5 +15,13 @@ class BookAppointmentController extends Controller
        public function book_appointment(){
        	return view('book-appointment');
        }
+
+
+  //      public function backoffice_city_master(){
+	 //    $query = DB::table('city_master')->select('city_id', 'cityname')->get();
+	 //    // print_r($query);exit();
+
+	 //    echo json_encode($query);
+  // } 
         
 }

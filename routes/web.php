@@ -97,7 +97,7 @@ Route::get('queries','QueriesController@queries');
 
 /*Book Appointment*/
 Route::get('book-appointment','BookAppointmentController@book_appointment');
- 
+Route::get('backoffice-city-master','BookAppointmentController@backoffice_city_master'); 
 
 
  
