@@ -26,23 +26,46 @@ class LoginController extends InitialController
     ->withInput();
    }else{
           
-          $value=DB::table('emp_login')->where('emailid','=',$request->email)
-          ->where('password','=', $request->password)
-          ->first();
-          	if($value!=''){ 
-		          	  $request->session()->put('emailid',$value->emailid);
-		          	  $request->session()->put('emptype',$value->emptype);
-		              $request->session()->put('emp_id',$value->emp_id);
-		              $request->session()->put('username',$value->username);
-                  $request->session()->put('last_login',$value->last_login);
+
+           $query=DB::select('call spValidateLogin(?,?,?,?,?,?)',array($request->email,$request->password,'0','0','0','0'));
+           $val=$query[0];
+           
+         if($val->SuccessStatus==1){
+         
+                   $request->session()->put('emailid',$val->CustID);
+                   $request->session()->put('emp_id',$val->CustID);
+                   // Session::put('username',$query->username);
+                   // Session::put('last_login',$query->last_login);
+
+                 
+              return redirect()->intended('dashboard');
+        }else{
+                      Session::flash('msg', "Invalid email or password. Please Try again! ");
+                       return Redirect::back();
+               
+ }
+
+
+          // $value=DB::table('emp_login')->where('emailid','=',$request->email)
+          // ->where('password','=', $request->password)
+          // ->first();
+          // 	if($value!=''){ 
+		        //   	  $request->session()->put('emailid',$value->emailid);
+		        //   	  $request->session()->put('emptype',$value->emptype);
+		        //       $request->session()->put('emp_id',$value->emp_id);
+		        //       $request->session()->put('username',$value->username);
+          //         $request->session()->put('last_login',$value->last_login);
 		              
 		             
-                 return redirect()->intended('dashboard');
-                }else{
-               	      Session::flash('msg', "Invalid email or password. Please Try again! ");
-                       return Redirect::back();
+          //        return redirect()->intended('dashboard');
+          //       }else{
+          //      	      Session::flash('msg', "Invalid email or password. Please Try again! ");
+          //              return Redirect::back();
                	  
-             }
+          //    }
+
+
+
            }
 
        }

@@ -54,13 +54,20 @@ class LeaduploadController extends Controller{
     'email' =>  'required|email|unique:raw_lead_master',
     'panno' =>  'required',
     'pincode' =>  'required',
-      ]);$arra=array(
-   'name'=>$value['name'],
-   'mobile'=>$value['mobile'],
-     'email'=>$value['email'],
-      'dob'=>$value['dob'],
-       'profession'=>$value['profession'],
-        'monthly_income'=>$value['monthlyincome'],
+
+      ]);
+
+
+
+
+      if ($val->passes()){ 
+        $arra=array(
+         'name'=>$value['name'],
+         'mobile'=>$value['mobile'],
+         'email'=>$value['email'],
+         'dob'=>$value['dob'],
+         'profession'=>$value['profession'],
+         'monthly_income'=>$value['monthlyincome'],
          'pan'=>$value['panno'],
           'city_id'=>1,
            'address'=>$value['address'],
@@ -68,34 +75,44 @@ class LeaduploadController extends Controller{
             'campaign_id'=>$value['campaign'],
             'user_id'=>Session::get('emp_id'),
             'ip_address'=>\Request::ip(),
-            'created_on'=>date('Y-m-d H:i:s'),); if ($val->passes()){ DB::table('raw_lead_master')->insert($arra);} 
+            'created_on'=>date('Y-m-d H:i:s'),); 
+      	DB::table('raw_lead_master')->insert($arra);} 
   }
 
         
 
         public function lead_update(Request $req){
+        	           $status=null;
+        	           $error=1;
+                     $followup= $req['lead_followup']?$req['lead_followup']:null; 
+
+        	           $arr=array();
         	             try{
-                        $arra=array( 
-                        	      "lead_type"=>$req->lead_type_id ,   
+        	             	 if($req->lead_status_id==14){
+        	             	 	//$mes=$this->interested($req->mobile);
+                          $mes=0;
+        	             	 	if($mes==0){ $status="msm"; }
+        	             	 }
+                            $arra=array( "lead_type"=>$req->lead_type_id ,   
                                    "remark"=>$req->remark,
                                    "lead_status_id"=>$req->lead_status_id,
-                                  "followup_date"=>date('Y-m-d H:i:s'),
+                                  "followup_date"=>$followup,
                                    "lead_date"=>date('Y-m-d H:i:s'),
                         	);   DB::table('raw_lead_master')  ->where('id',$req->lead_id) ->update($arra); 
                          $error=0; 
-                      }catch (Exception $e){  $error=1;  }
-                       return $error;
+                        }catch (Exception $e){  $error=1;  }
+                       return $arr[]=array('status'=>$status,'error'=>$error);
 
 }
 
-        public   function interested(Request $req){
+        public   function interested($mobile){
 
 
           try{
             $error=null;
             $post_data='{
             "mobNo":"8898540057",
-            "msgData":"'.$req->message.','.$req->link.'"}';
+            "msgData":"Dear ...,http://localhost:8000/lead-up-load"}';
 
             $url ="http://services.rupeeboss.com/LoginDtls.svc/xmlservice/sendSMS";
             $result=$this->call_json($url,$post_data);
@@ -107,9 +124,8 @@ class LeaduploadController extends Controller{
             }else{
               $error=1;
             }
-
-             return $error;
             }catch (Exception $e){  $error=1;  }
+            return $error;
 
   
         

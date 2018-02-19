@@ -74,7 +74,7 @@
                                       @foreach($query as $val)
                                         <tr>
                                        
-                                       <td> <a href="#" onclick="get_fn_id('{{$val->id}}')" >{{$val->id}}</a> </td>
+                                       <td> <a href="#" onclick="get_fn_id('{{$val->id}}','{{$val->mobile}}')" >{{$val->id}}</a> </td>
                                          
                                        <td>{{$val->name}}</td>
                                        <td>{{$val->mobile}}</td>
@@ -128,6 +128,7 @@
       <div class="modal-body">
       <form class="form-horizontal" method="post"  id="lead_up_from" > {{ csrf_field() }}
       <input type="hidden" name="lead_id" id="lead_id"  >
+       <input type="hidden" name="mobile" id="lead_id_mobile" >
 
        
 
@@ -158,6 +159,16 @@
         </div>
 
 
+ <div class="form-group" id="lead_status_followup" style="display: none">
+            <label for="inputEmail" class="control-label col-xs-2">Follow Up Date</label>
+            <div class="col-xs-10">
+          <div id="datepicker" class="input-group date" data-date-format="yyyy-mm-dd">
+               <input class="form-control" type="text" placeholder="From Date" name="lead_followup"  id="lead_followup"  />
+              <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+              </div>
+            </div>
+</div> 
+
         <div class="form-group">
             <label for="inputEmail" class="control-label col-xs-2">lead type   </label>
             <div class="col-xs-10">
@@ -186,7 +197,7 @@
 </div>
 
 
-<div class="modal fade" id="interested_id-Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="Test-interested_id-Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
