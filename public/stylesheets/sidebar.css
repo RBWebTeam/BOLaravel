@@ -119,7 +119,7 @@ a[aria-expanded="true"]::before {
 ul ul a {
     font-size: 0.9em !important;
     padding-left: 30px !important;
-    background: #6d7fcc;
+    /*background: #6d7fcc;*/
 }
 
 ul.CTAs {
@@ -155,6 +155,7 @@ a.article, a.article:hover {
     transition: all 0.3s;
 	background:#f5f5fa;
 	width: 100%;
+    overflow: hidden;
 	
 }
 

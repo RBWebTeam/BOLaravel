@@ -54,6 +54,18 @@ Route::post('Fsm-Register','FsmRegisterController@insertfsm');
 
  //send sms
 
+
+
+
+ // Route::get('send-sms','SendSMSController@ViewSendSMSDetails');
+ 
+
+Route::get('send-notification','SendNotificationController@sendnotification');
+//send sms
+Route::get('send-sms','SendSMSController@ViewSendSMSDetails');
+// Route::get('send-sms','SendSMSController@sms_load');
+
+
  /*Route::get('send-sms','SendSMSController@ViewSendSMSDetails');
  Route::get('send-sms','SendSMSController@sms_load');*/
 
@@ -61,10 +73,49 @@ Route::get('send-notification','SendNotificationController@sendnotification');
 //send sms
 /*Route::get('send-sms','SendSMSController@ViewSendSMSDetails');*/
 
+
+
  //Otp Detail
  Route::get('otp-details','OtpDetailsController@otp_details');
  Route::get('log-out','LoginController@logout');
 
 //genrate lead
  Route::get('genrate-lead','genrateleadController@getlead');
+
+
+
+
+// Bankoffer
+
+ Route::get('bankoffer','bankofferController@bank_offer');
+
+
+
+Route::get('payment-history','PaymentHistoryController@payment_history');
+ 
+Route::get('queries','QueriesController@queries');
+
+/*Book Appointment*/
+Route::get('book-appointment','BookAppointmentController@book_appointment');
+ 
+
+/*Menu List*/ 
+Route::get('menu-list','MenuController@menu_list');
+Route::post('menu-add','MenuController@menu_add');
+Route::get('menu-mapping','MenuController@mapping');
+Route::post('menu-mapping-save','MenuController@menu_mapping_save');
+
+  /************
+//  LEAD  RM
+******************/
+Route::group(['namespace' => 'leadController',  ], function() {
+Route::get('lead-up-load','LeaduploadController@lead_up_load');
+Route::post('import-excel','LeaduploadController@importExcel');        
+Route::post('lead-update','LeaduploadController@lead_update');          
+Route::post('lead-interested','LeaduploadController@interested'); 
+});
+
+
  });
+
+ 

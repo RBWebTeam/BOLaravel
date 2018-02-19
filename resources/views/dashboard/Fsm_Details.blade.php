@@ -7,7 +7,7 @@
 			
 			 
 			 <!-- Filter End -->
-			 <div class="col-md-11">
+			 <div class="col-md-12">
 			 <div class="panel panel-primary">
 			 <div class="panel-heading">
 						<h3 class="panel-title">FSM Details</h3>
@@ -25,7 +25,7 @@
 			 
 			 <div class="col-md-12">
 			 <div class="overflow-scroll">
-			 <div class="table-responsive container">
+			 <div class="table-responsive">
 			<table class="datatable-responsive table table-striped table-bordered dt-responsive nowrap" id="example">
                  <thead>
                   <tr>
