@@ -32,12 +32,21 @@ class LoginController extends InitialController
 
          
            
-         if($val->SuccessStatus==1){
-         
+         if($val->SuccessStatus==1){  
+                   $request->session()->flush();
                    $request->session()->put('emailid',$val->CustID);
+
+                   $request->session()->put('emp_id',$val->CustID); 
+                   $request->session()->put('FullName',$val->FullName); 
+                  $request->session()->put('LastloginDate',$val->LastloginDate); 
+                
+                   // Session::put('username',$query->username);
+                   // Session::put('last_login',$query->last_login);
+
                    $request->session()->put('emp_id',$val->CustID);
                    //Session::put('FullName',$query->FullName);
                    //Session::put('LastloginDate',$query->LastloginDate);
+
 
                  
               return redirect()->intended('dashboard');
@@ -48,8 +57,8 @@ class LoginController extends InitialController
  }
 
 
-          // $value=DB::table('emp_login')->where('emailid','=',$request->email)
-          // ->where('password','=', $request->password)
+           // $value=DB::table('emp_login')->where('emailid','=',$request->email)
+           // ->where('password','=', $request->password)
           // ->first();
           // 	if($value!=''){ 
 		        //   	  $request->session()->put('emailid',$value->emailid);

@@ -87,27 +87,8 @@ $(document).ready(function(){
 
              }
           
-                                   // Sent sms popup
-            /*$('.message_sms_id').click(function(event){  event.preventDefault();
-                       var sms=$('.sms_id').val();
-                                
-                          if(sms){
-                              $.post('/fba-list', $('#message_sms_id').serialize())
-                               .done(function(msg){ 
-                                  //{ message: 'SMS Sent', status: 'success', statusId: 0 }
-                                      if(msg.statusId==0){
-                                         $('#strong_id').html('<strong>Success!</strong> SMS Sent successful..');
-                                      }
-                                   console.log(msg);
-                               }).fail(function(xhr, status, error) {
-                               console.log(error);
-                               });
-                          }else{
-                              alert("abc..");
-                          }
-            });
-*/
 /* Extend dataTables search*/
+
  $(document).ready(function(){
                   $.fn.dataTable.ext.search.push(
                   function (settings, data, dataIndex) {
@@ -266,9 +247,11 @@ $('.unblock').click(function(){
 $('.posp_from_id').click(function(){
   var flag=$(this).closest('div').find('input[name="flage_id"]').val();
   var fbaid=$(this).closest('div').find('input[name="fbaid"]').val();
+  
   if($('#posp_name_id').val()!="")  {
      var value=$("#posp_name_id").val();
      $.ajax({
+
             type: "GET",
             url:'fba-list/'+fbaid+'/'+value+'/'+flag, 
             success: function( msg ) {
@@ -276,12 +259,14 @@ $('.posp_from_id').click(function(){
              alert("posp updated successfully..!");
             $('.updatePosp').modal('hide');
             $('#posp_name_id').val('');
+
            }
         });
    }
-   else{
+  else{
     alert('posp no field can not blank.')
   }
+
 });
 
 
@@ -316,15 +301,16 @@ $('.loan_from_id').click(function(){
             console.log(msg);
              alert("loan id updated successfully..!");
              $('.updateLoan').modal('hide');
-             $('#loan_id').val('');
+            $('#loan_id').val('');
+
            }
         });
-  }
-  else{
+    }
+else{
     alert('loan no field can not blank.')
   }
- 
-});
+ });
+
 
 //send sms from fba
 $('.message_sms_id').click(function(){
@@ -455,6 +441,7 @@ $('.message_sms_id').click(function(){
 
  });
   });
+
 </script>
 
 <script type="text/javascript">

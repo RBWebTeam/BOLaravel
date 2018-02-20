@@ -20,9 +20,12 @@
 
 <div class="col-md-5 col-xs-5 no-mob-pad">
 <div class="pull-right log-txt">
-<p><span class="hidden-xs">Welcome </span><b>Mr. Goving Dharne</b></p>
-<p><span class="hidden-xs">Last login - Date / Time :</span> <b>22-09-2017 / 12.45 pm</b>
-</p>
+
+
+<?php $request=Session::get('FullName'); ?>
+<?php $request1=Session::get('LastloginDate'); ?>
+<p><span class="hidden-xs">Welcome </span><b><?php echo $request ?></b></p>
+<p><span class="hidden-xs">Last login - Date / Time :</span> <b><?php echo $request1 ?></b></p>
 </div>
 </div>
 

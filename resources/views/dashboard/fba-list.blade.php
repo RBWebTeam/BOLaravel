@@ -226,6 +226,7 @@
     </div>
   </div>
 </div>
+
 <!-- sales update -->
 
 <div class="salesupdate modal fade" role="dialog">   
@@ -254,6 +255,7 @@
     </div>
   </div>
 </div>
+
 <!-- update posp -->
 <div class="updatePosp modal fade" role="dialog">   
   <div class="modal-dialog" role="document">
