@@ -79,13 +79,20 @@
                                     </thead>
 					                <tbody>
 					              @foreach($query as $val)
-					                 <tr>
+                        <?php if($val->PayStatus =="S"){ ?>
+                                      
+                                       
+					                 <tr style="color:Black;background-color:LightGreen;">
 					                  <td><?php echo $val->FullName; ?></td>
 					                  <td><?php echo $val->createdate; ?></td>
 					                  <td><?php echo $val->MobiNumb1; ?></td>
 					                  <td><?php echo $val->EMaiID; ?></td>
 
-					                  <td><a href="#" class="popover-Payment" data-toggle="popover" title="Payment link" data-content="<?php echo $val->Link; ?>">Payment link</a></td>
+					                  <td><?php if($val->Link == ""){ ?>
+                                        <a>Payment link</a>
+                                       <?php  } else {?>  
+                                       <a href="#" class="popover-Payment" data-toggle="popover" title="Payment link" data-content="<?php echo $val->Link; ?>">Payment link</a>
+                                       <?php } ?></td>
 					                  <td><a href="#" class="popover-Password" data-toggle="popover" title="Show Password" data-content="<?php echo $val->Password; ?>">*****</a></td>
 					                  <td><?php echo $val->city; ?></td>
 					                  <td><?php echo $val->Pincode; ?></td>
@@ -108,10 +115,51 @@
 					                  <td><a href="" data-toggle="modal" data-target="#partnerInfo">partner info</a></td>
 					                  <td>Pending</td>
 					                  <td><?php echo $val->bankaccount; ?></td>
-					                   <td><a href="#" data-toggle="modal" data-target="#sms_sent_id" onclick="SMS_FN(<?php echo $val->fbaid;?>,<?php echo $val->MobiNumb1;?>)">sms</a></td>
-					                  <td><a href="#">update</a></td>
+					                   <td><a href="#" data-toggle="modal" data-target="#sms_sent_id" onclick="SMS_FN(<?php echo $val->fbaid;?>,7218150396)"><span class="glyphicon glyphicon-envelope"></span></a></td>
+					                  <td><a href="#" style="" data-toggle="modal" data-target='.salesupdate'>update</a></td>
 					                  
 					              </tr>
+                        <?php  }
+                        else {?>
+                        <tr>
+                            <td><?php echo $val->FullName; ?></td>
+                            <td><?php echo $val->createdate; ?></td>
+                            <td><?php echo $val->MobiNumb1; ?></td>
+                            <td><?php echo $val->EMaiID; ?></td>
+
+                            <td><?php if($val->Link == ""){ ?>
+                                        <a>Payment link</a>
+                                       <?php  } else {?>  
+                                       <a href="#" class="popover-Payment" data-toggle="popover" title="Payment link" data-content="<?php echo $val->Link; ?>">Payment link</a>
+                                       <?php } ?></td>
+                            <td><a href="#" class="popover-Password" data-toggle="popover" title="Show Password" data-content="<?php echo $val->Password; ?>">*****</a></td>
+                            <td><?php echo $val->city; ?></td>
+                            <td><?php echo $val->Pincode; ?></td>
+                            <td><a href="#" style="" data-toggle="modal" data-target='.fsmdetails'>Fsm details</a></td>
+                            <td><?php if($val->POSPNo == ""){ ?>
+                                        <a href="#" style="" class="checkPosp" data-toggle="modal" data-target="#updatePosp" onclick="POSP_UPDATE(<?php echo $val->fbaid; ?>)">update</a>
+                                       <?php  } else {?>  
+                                       <?php echo $val->POSPNo; ?>
+                                       <?php } ?>
+                             </td>
+                            <td>
+                              <?php if($val->LoanID == ""){ ?>
+                                        <a href="#" style="" class="checkloan" data-toggle="modal" data-target="#updateLoan" onclick="LoanID_UPDATE(<?php echo $val->fbaid; ?>)">update</a>
+
+                            <?php } else {?>  
+                            <?php echo $val->LoanID; ?>
+                            <?php } ?>
+                            </td>
+                            <td><?php echo $val->pospname; ?></td>
+                            <td><a href="" data-toggle="modal" data-target="#partnerInfo">partner info</a></td>
+                            <td>Pending</td>
+                            <td><?php echo $val->bankaccount; ?></td>
+                             <td><a href="#" data-toggle="modal" data-target="#sms_sent_id" onclick="SMS_FN(<?php echo $val->fbaid;?>,7218150396)"><span class="glyphicon glyphicon-envelope"></span></a></td>
+                            <td><a href="#" style="" data-toggle="modal" data-target='.salesupdate'>update</a></td>
+                            
+                        </tr>
+
+                        <?php } ?>
 					              @endforeach
 					              </tbody>
 		       
@@ -178,6 +226,37 @@
     </div>
   </div>
 </div>
+<<<<<<< HEAD
+=======
+<!-- sales update -->
+
+<div class="salesupdate modal fade" role="dialog">   
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+        <h4 class="modal-title">Partner Detail</h4>
+      </div>
+      <div class="modal-body">
+        <form id="posp_from_id">
+          <div class="form-group">
+            
+          </div>
+          <div class="form-group">
+            <label class="control-label" for="message-text">Enter Remark : </label>
+            <input type="text" class="recipient-name form-control" id="" name="" required="" />
+          </div>
+        </form>
+        <div class="modal-footer"> 
+          <button class="btn btn-default" type="button" data-dismiss="modal">Close</button>
+          <button id="" class="btn btn-primary" type="button">Update</button><b class="alert-success primary" id=""></b>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- update posp -->
 <div class="updatePosp modal fade" role="dialog">   
   <div class="modal-dialog" role="document">

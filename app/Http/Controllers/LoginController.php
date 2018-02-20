@@ -29,16 +29,24 @@ class LoginController extends InitialController
 
            $query=DB::select('call spValidateLogin(?,?,?,?,?,?)',array($request->email,$request->password,'0','0','0','0'));
            $val=$query[0];
+
+         
            
          if($val->SuccessStatus==1){  
                    $request->session()->flush();
                    $request->session()->put('emailid',$val->CustID);
+
                    $request->session()->put('emp_id',$val->CustID); 
                    $request->session()->put('FullName',$val->FullName); 
                   $request->session()->put('LastloginDate',$val->LastloginDate); 
                 
                    // Session::put('username',$query->username);
                    // Session::put('last_login',$query->last_login);
+
+                   $request->session()->put('emp_id',$val->CustID);
+                   //Session::put('FullName',$query->FullName);
+                   //Session::put('LastloginDate',$query->LastloginDate);
+
 
                  
               return redirect()->intended('dashboard');
