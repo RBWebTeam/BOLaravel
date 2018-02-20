@@ -84,4 +84,3 @@ public function insertfsm(Request $req){
 }
 }
 
-/*1,shubham,khandekar,rupeeboss,shubhamkhandekar2@gmail.com,7218150396,02-15-2018,on,,abcd1234,490380602929,400708,mumbai,1,1000016,Employee,18,163,123456789,2,12345,12345,kotak,mumbai,mumbai*/

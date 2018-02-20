@@ -12,7 +12,7 @@ use URL;
 use Mail;
 class FbaController extends InitialController
 {
-       
+      
         public function fba_list()
         {
 

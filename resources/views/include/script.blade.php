@@ -45,10 +45,11 @@ $(document).ready(function(){
              });
 
   $(document).ready(function() {
-
+         
           $('#example').DataTable({
           "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]]
           });
+          
           });
   // start test
 
@@ -105,53 +106,11 @@ $(document).ready(function(){
                               alert("abc..");
                           }
             });
-// POSP UPADTE MODEL
-            /* $('.posp_from_id').click(function(event){  event.preventDefault();
-                       var sms=$('#posp_name_id').val();
-                                 
-                          if(sms){
-                              $.post('/fba-list/posp-update', $('#posp_from_id').serialize())
-                               .done(function(msg){ 
-                                              if(msg.status==0){
-                                                                    
-                                                                   $('#strong_lead').html('<strong>Success!</strong>  update..');
-                                                                    if($('#flage_id').val()==1){
-                                                                    fba_id_posp=$('#fba_id_posp').val();
-                                                                    $('#'+fba_id_posp).empty();
-                                                                    $('#'+fba_id_posp).append($('#posp_name_id').val());
-                                                                    }if($('#flage_id').val()==2){
-                                                                         //LoanID
 
-                                                                    fba_id_posp=$('#fba_id_posp').val();
-                                                                      alert(fba_id_posp);
-                                                                     $('#LoanID'+fba_id_posp).empty();
-                                                                     $('#LoanID'+fba_id_posp).append($('#posp_name_id').val());
-                                                                    }
-                                                   
-
-                                                        setTimeout(function () {
-                                                             $( '#posp_from_id' ).each(function(){
-                                                                this.reset();
-                                                            }); 
-                                                                       
-                                                                   
-                                                            $('.updatePosp').modal('hide');
-                                                            $('#strong_lead').empty();
-                                                    },1000);
-                                                
-                                              }
-                                   
-                               }).fail(function(xhr, status, error) {
-                               console.log(error);
-                               });
-                          }else{
-                              alert("abc..");
-                          }
-            })*/
  // Extend dataTables search
  $(document).ready(function(){
                   $.fn.dataTable.ext.search.push(
-                 /* function (settings, data, dataIndex) {
+                  function (settings, data, dataIndex) {
                       var min = $('#min').datepicker("getDate");
                       var max = $('#max').datepicker("getDate");
                       var startDate = new Date(data[1]);
@@ -160,12 +119,12 @@ $(document).ready(function(){
                       if(max == null && startDate >= min) {return true;}
                       if (startDate <= max && startDate >= min) { return true; }
                       return false;
-                  }*/
+                  }
                   );
 
                 
-                      /*$("#min").datepicker({ onSelect: function () { table.draw(); }, changeMonth: true, changeYear: true });
-                      $("#max").datepicker({ onSelect: function () { table.draw(); }, changeMonth: true, changeYear: true });*/
+                      $("#min").datepicker({ onSelect: function () { table.draw(); }, changeMonth: true, changeYear: true });
+                      $("#max").datepicker({ onSelect: function () { table.draw(); }, changeMonth: true, changeYear: true });
                       var table = $('#example').DataTable();
 
                       // Event listener to the two range filtering inputs to redraw on input
@@ -258,7 +217,6 @@ function insertfsm() {
    success: function(msg)  
    {
     console.log(msg);
-    alert("Record saved successfully..");
    }
 
 });
@@ -309,16 +267,17 @@ $('.posp_from_id').click(function(){
   var flag=$(this).closest('div').find('input[name="flage_id"]').val();
   var fbaid=$(this).closest('div').find('input[name="fbaid"]').val();
   var value=$("#posp_name_id").val();
- $.ajax({
+
+  $.ajax({
             type: "GET",
             url:'fba-list/'+fbaid+'/'+value+'/'+flag, 
             success: function( msg ) {
             console.log(msg);
+             alert("posp updated successfully..!");
+            $('.updatePosp').modal('hide');
            }
         });
- alert("posp updated successfully..!");
- $('.updatePosp').modal('hide');
- location.reload();
+
 });
 
 
@@ -350,30 +309,11 @@ $('.loan_from_id').click(function(){
             url:'fba-list/'+fbaid+'/'+value+'/'+flag, 
             success: function( msg ) {
             console.log(msg);
+             alert("loan id updated successfully..!");
+             $('.updateLoan').modal('hide');
            }
         });
- alert("loan id updated successfully..!");
- $('.updateLoan').modal('hide');
- location.reload();
 });
-
-function chkpospid(){
-  if($("#txtPosp").val()!="")
-  {
-     $('.check').css("display", "none");
-  }
-  else if($("#txtloan").val()!=""){
-    $('.checkloan').css("display", "none");
-  }
-  else{
-   $('.check').css("display", "");
-   $('.checkloan').css("display", "");
-  }
-}
- $(document).ready(function(){
-   chkpospid();
- });
-
 </script>
 
 
