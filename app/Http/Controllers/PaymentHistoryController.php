@@ -30,6 +30,9 @@ class PaymentHistoryController extends CallApiController
 	            $update_user='';
 	            $obj = json_decode($m);
 
+
+	          //  print_r($http_result);exit;
+
                     if($obj->message->Status='1'){
 
                     	 $respon=($obj->message->lstPaymTrackDeta);
