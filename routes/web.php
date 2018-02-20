@@ -104,6 +104,11 @@ Route::get('menu-list','MenuController@menu_list');
 Route::post('menu-add','MenuController@menu_add');
 Route::get('menu-mapping','MenuController@mapping');
 Route::post('menu-mapping-save','MenuController@menu_mapping_save');
+Route::get('menu-list-select','MenuController@menu_list_select');
+Route::post('menu-list-add','MenuController@menu_list_add');
+Route::get('menu-test','MenuController@menu_test');
+Route::get('menu-group','MenuController@menu_group');
+Route::post('menu-group-save','MenuController@menu_group_save');
 
   /************
 //  LEAD  RM
