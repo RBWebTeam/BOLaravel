@@ -115,7 +115,7 @@
 					                  <td><a href="" data-toggle="modal" data-target="#partnerInfo">partner info</a></td>
 					                  <td>Pending</td>
 					                  <td><?php echo $val->bankaccount; ?></td>
-					                   <td><a href="#" data-toggle="modal" data-target="#sms_sent_id" onclick="SMS_FN(<?php echo $val->fbaid;?>,7218150396)"><span class="glyphicon glyphicon-envelope"></span></a></td>
+					                   <td><a href="#" data-toggle="modal" data-target="#sms_sent_id" onclick="SMS_FN(<?php echo $val->fbaid;?>,<?php echo $val->MobiNumb1;?>)"><span class="glyphicon glyphicon-envelope"></span></a></td>
 					                  <td><a href="#" style="" data-toggle="modal" data-target='.salesupdate'>update</a></td>
 					                  
 					              </tr>
@@ -154,7 +154,7 @@
                             <td><a href="" data-toggle="modal" data-target="#partnerInfo">partner info</a></td>
                             <td>Pending</td>
                             <td><?php echo $val->bankaccount; ?></td>
-                             <td><a href="#" data-toggle="modal" data-target="#sms_sent_id" onclick="SMS_FN(<?php echo $val->fbaid;?>,7218150396)"><span class="glyphicon glyphicon-envelope"></span></a></td>
+                             <td><a href="#" data-toggle="modal" data-target="#sms_sent_id" onclick="SMS_FN(<?php echo $val->fbaid;?>,<?php echo $val->MobiNumb1;?>)"><span class="glyphicon glyphicon-envelope"></span></a></td>
                             <td><a href="#" style="" data-toggle="modal" data-target='.salesupdate'>update</a></td>
                             
                         </tr>

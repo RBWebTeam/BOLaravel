@@ -346,9 +346,10 @@ $('.message_sms_id').click(function(){
       alert('SMS Field can not be blank');
     }
   });
-</script>
+</script> 
 
-<!-- <script type="text/javascript">
+
+<script type="text/javascript">
    $.ajax({ 
    url: "{{URL::to('sales-material-product')}}",
    method:"GET",
@@ -369,7 +370,7 @@ $('.message_sms_id').click(function(){
    },
 
  });
-</script> -->
+</script> 
 
 <!-- <script type="text/javascript">
    $.ajax({ 
@@ -421,17 +422,16 @@ $('.message_sms_id').click(function(){
             }
         });
   });
-</script>
 
-<script type="text/javascript">
+
+
   $('#reset').click(function(){
    $("#Product").val("");
    $("#image_file").val("");
    $("#Company").val("");
   });
-</script>
 
-<script type="text/javascript">
+
   $('#sales_submit').click(function(){
     $.ajax({ 
    url: "{{URL::to('sales-material-update')}}",
