@@ -1,95 +1,132 @@
-<!doctype html>
-<html lang="{{ app()->getLocale() }}">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="javascript:void(0)">GLMS</a>
+    </div>
+    <ul class="nav navbar-nav">
+     <!-- <li><a href="{{URL::to('index')}}">HOME</a></li>-->
+    </ul>
+    <form class="navbar-form navbar-right">
+     <a href="{{URL::to('index')}}" style="color: #fff;">Switch To User</a>
+     <span style="color: #fff"> | Welcome User</span>
+    </form>
+  </div>
+</nav>
+@include('layout.adminheader')
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
+<style type="text/css">
+  .nav {
+    padding-left: 44px;
+  }
+</style>
 
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Raleway', sans-serif;
-                font-weight: 100;
-                height: 100vh;
-                margin: 0;
+<div class="col-md-9">
+<center><h3><b>Add Course Topic</b></h3></center>
+  <div class="well" style="width:900px; padding: 8px 0;float: left;">
+    <div style="overflow-y: scroll; overflow-x: hidden; height: 350px;" id="maindiv">
+      <ul class="nav nav-list navtree"></ul>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="col-md-3">
+
+</div>
+<div class="col-md-1">
+<label>Topic&nbsp;Name</label>
+</div>
+<form id="add_form" name="add_form" method="POST">
+{{ csrf_field() }}
+<div class="col-md-4">
+    <input type="text" name="courseid" id="courseid">
+    <input type="text" name="name" id="name" class="form-control">
+</div>
+
+<div class="col-md-3">
+  <button type="button" class="btn btn-success" id="add" onclick="Validate();">ADD</button>
+</div>
+</form>
+<script type="text/javascript">   
+var TopicId=0;
+    $(document).ready(function () {
+    $.ajax({ 
+   url: "{{URL::to('tree')}}",
+   method:"GET",
+   success: function(datas)  {
+    var data=$.parseJSON(datas);
+    console.log(data);
+
+for (var i = 0; i < data.length ;i++) {
+    var hasChild = false;
+    if (data[i].parent_id!=0) {
+    for (var j = i; j < data.length ;j++) { 
+    if(data[i].id == data[j].parent_id) {
+        hasChild = true;
+        break;
+    }
+}
+    if(hasChild){
+        $('#'+data[i].parent_id).append('<li><input type="radio" onClick="radioButtonClicked('+data[i].id+')" name="topictype"><label class="tree-toggler nav-header">'+data[i].name+'</label><ul class="nav nav-list tree hide" id="'+data[i].id+'"></ul></li>');
+    }
+        else{
+        $('#'+data[i].parent_id).append('<li id="'+data[i].id+'"><input type="radio" class="radioTopic" onClick="radioButtonClicked('+data[i].id+')" name="topictype" id="'+data[i].id+'"><span>'+data[i].name+'</span></li>');
+    }
+    
+     }else{
+        $('.navtree').append('<li><input type="radio" onClick="radioButtonClicked('+data[i].id+')" name="topictype"><label class="tree-toggler nav-header">'+data[i].name+'</label><ul class="nav nav-list tree hide" id="'+data[i].id+'"></ul></li><li class="divider"></li>');
+     }
+}
+$('label.tree-toggler').click(function () {
+        $(this).parent().children('ul.tree').toggle(300);
+        $(this).parent().children('ul.tree').removeClass('hide');
+    });
+   },
+ });
+
+    $("#txtnoofqustion,#txtduration,#txtpassing,#txtnoofatempts").keypress(function (e) {
+     //if the letter is not digit then display error and don't type anything
+     if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+        //display error message
+         $(this).closest('td').find('span').text("Digits Only").show().fadeOut("slow");
+         return false;
+    }
+   });
+});
+
+function radioButtonClicked(id){
+     document.getElementById('courseid').value =id;
+}
+</script>
+<script type="text/javascript">
+  $('#add').click(function(){
+  $.ajax({  
+         type: "POST",  
+         url: "{{URL::to('add-tree')}}",
+         data : $('#add_form').serialize(),
+         success: function(data){
+            if (data) {
+             alert('Added course topic successfully');
+              window.location.reload();
+            }else{
+               alert('Couldnt Add. Error In Adding');
             }
+         }  
+      });   
+     
+  });
+</script>
+<script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+<script type="text/javascript">
 
-            .full-height {
-                height: 100vh;
-            }
-
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
-
-            .position-ref {
-                position: relative;
-            }
-
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
-            .content {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 84px;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 12px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-                        <a href="{{ route('register') }}">Register</a>
-                    @endauth
-                </div>
-            @endif
-
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
-                </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
-            </div>
-        </div>
-    </body>
-</html>
+function Validate()
+{
+    var topictype =document.add_form.name
+    if (topictype.value =="")
+    {
+        window.alert("Please provide Topic Name.");
+    }
+}
+</script>

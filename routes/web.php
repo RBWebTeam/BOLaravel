@@ -98,13 +98,26 @@ Route::get('queries','QueriesController@queries');
 
 /*Book Appointment*/
 Route::get('book-appointment','BookAppointmentController@book_appointment');
- 
+Route::get('backoffice-city-master','BookAppointmentController@backoffice_city_master');
+
+/*Sales Material*/ 
+Route::get('sales-material-upload','BookAppointmentController@sales_material_upload');
+
+Route::post('sales-material-upload-submit','BookAppointmentController@sales_material_upload_submit');
+Route::get('sales-material','BookAppointmentController@sales_material');
+Route::post('sales-material-update','BookAppointmentController@sales_material_update');
+
 
 /*Menu List*/ 
 Route::get('menu-list','MenuController@menu_list');
 Route::post('menu-add','MenuController@menu_add');
 Route::get('menu-mapping','MenuController@mapping');
 Route::post('menu-mapping-save','MenuController@menu_mapping_save');
+Route::get('menu-list-select','MenuController@menu_list_select');
+Route::post('menu-list-add','MenuController@menu_list_add');
+Route::get('menu-test','MenuController@menu_test');
+Route::get('menu-group','MenuController@menu_group');
+Route::post('menu-group-save','MenuController@menu_group_save');
 
   /************
 //  LEAD  RM

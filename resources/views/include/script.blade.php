@@ -348,6 +348,172 @@ $('.message_sms_id').click(function(){
   });
 </script>
 
+<!-- <script type="text/javascript">
+   $.ajax({ 
+   url: "{{URL::to('sales-material-product')}}",
+   method:"GET",
+   success: function(datas)  
+   {
+  
+    var data=$.parseJSON(datas);
+   console.log(data);
+   if(data)
+      {      $.each(data, function( index, value ) {
+            $('#Product').append('<option value="'+value.Product_Id+'">'+value.Product_Name+'</option>');
+
+        }); 
+    }else{
+      $('#Product').empty().append('No Result Found');
+    }
+
+   },
+
+ });
+</script> -->
+
+<!-- <script type="text/javascript">
+   $.ajax({ 
+   url: "{{URL::to('sales-material-company')}}",
+   method:"GET",
+   success: function(datas)  
+   {
+  
+    var data=$.parseJSON(datas);
+   console.log(data);
+   if(data)
+      {      $.each(data, function( index, value ) {
+            $('#Company').append('<option value="'+value.Company_Id+'">'+value.Company_Name+'</option>');
+
+        }); 
+    }else{
+      $('#Company').empty().append('No Result Found');
+    }
+
+   },
+
+ });
+</script>
+ -->
+
+<script type="text/javascript">
+  $('#submit').click(function(){
+  alert('okae');
+  $.ajax({
+          url:"{{URL::to('sales-material-upload-submit')}}" ,  
+          data:new FormData($("#sales_material_upload")[0]),
+          dataType:'json',
+          async:false,
+          type:'POST',
+          processData: false,
+          contentType: false,
+          success: function(msg){
+             console.log(msg.status);
+             if (msg.status==0) 
+              {
+                alert('Uploaded Successfully');
+              } 
+              else {
+               alert('Could Not Upload');
+              }
+             
+              
+            
+            }
+        });
+  });
+</script>
+
+<script type="text/javascript">
+  $('#reset').click(function(){
+   $("#Product").val("");
+   $("#image_file").val("");
+   $("#Company").val("");
+  });
+</script>
+
+<script type="text/javascript">
+  $('#sales_submit').click(function(){
+    $.ajax({ 
+   url: "{{URL::to('sales-material-update')}}",
+   method:"POST",
+   data : $('#sales_material').serialize(),
+   success: function(msg)  
+   {
+  
+     var tablerows = new Array();
+                         $.each(msg, function( index, value ) {
+            tablerows.push('<tr><td style="font-family: monospace"><img style="position:absolute;" src="/' + value.image_path + '"/></td></tr>');
+        }); 
+
+       if(msg){
+                            $('#docs').empty().append('<table class="table table-striped table-bordered table-responsive"><tr class="text-capitalize"><td style="font-family: monospace">Image Path</td></tr>'+tablerows+'</table>');
+                         }else{
+                            $('#docs').empty().append('No Result Found');
+                         }
+
+   },
+
+ });
+  });
+</script>
+
+<script type="text/javascript">
+  $('#Product').on('change', function() {
+    var Product=$('#Product').find(":selected").val();
+    console.log(Product);
+    if ( Product == '1')
+      {
+       $("#Company option[value='1']").show();
+        $("#Company option[value='2']").show();
+        $("#Company option[value='3']").show();
+        $("#Company option[value='4']").show();
+          
+      }
+      if (Product == '2') 
+      {
+        $("#Company option[value='1']").show();
+        $("#Company option[value='2']").show();
+        $("#Company option[value='3']").show();
+        $("#Company option[value='5']").show();
+        $("#Company option[value='6']").show();
+        $("#Company option[value='7']").show();
+        $("#Company option[value='8']").show();
+      }
+      if (Product=='3') 
+      {
+         $("#Company option[value='1']").show();
+        $("#Company option[value='2']").show();
+        $("#Company option[value='3']").show();
+        $("#Company option[value='4']").show();
+         $("#Company option[value='5']").show();
+        $("#Company option[value='8']").show();
+      }
+      if (Product=='4') 
+      {
+         $("#Company option[value='1']").show();
+        $("#Company option[value='2']").show();
+        $("#Company option[value='4']").show();
+        $("#Company option[value='5']").show();
+         $("#Company option[value='8']").show();
+        $("#Company option[value='9']").show();
+        $("#Company option[value='10']").show();
+        $("#Company option[value='11']").show();
+      }
+      if (Product=='5') 
+      {
+         $("#Company option[value='1']").show();
+        $("#Company option[value='2']").show();
+        $("#Company option[value='3']").show();
+        $("#Company option[value='4']").show();
+         $("#Company option[value='5']").show();
+        $("#Company option[value='8']").show();
+      }
+     
+        
+      
+        
+      });
+</script>
 
 
    
