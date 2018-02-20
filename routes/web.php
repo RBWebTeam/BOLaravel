@@ -97,7 +97,15 @@ Route::get('queries','QueriesController@queries');
 
 /*Book Appointment*/
 Route::get('book-appointment','BookAppointmentController@book_appointment');
-Route::get('backoffice-city-master','BookAppointmentController@backoffice_city_master'); 
+Route::get('backoffice-city-master','BookAppointmentController@backoffice_city_master');
+
+/*Sales Material*/ 
+Route::get('sales-material-upload','BookAppointmentController@sales_material_upload');
+
+Route::post('sales-material-upload-submit','BookAppointmentController@sales_material_upload_submit');
+Route::get('sales-material','BookAppointmentController@sales_material');
+Route::post('sales-material-update','BookAppointmentController@sales_material_update');
+
 
 /*Menu List*/ 
 Route::get('menu-list','MenuController@menu_list');
