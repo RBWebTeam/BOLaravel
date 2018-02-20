@@ -76,7 +76,7 @@ class QueriesController extends Controller
                
                 $status=4;
                }else if($req->queries==5 || $req->export==5){
-                     $query=DB::select('call usp_load_fba_never_logged() ');
+                     $query=DB::select('call usp_load_inactive_posp() ');
                                if(isset( $req->export)){
                                     $data = json_decode( json_encode($query), true) ;
                       return Excel::create('laravelcode', function($excel) use ($data) {
@@ -106,7 +106,7 @@ class QueriesController extends Controller
                
                 $status=6;
                }else if($req->queries==7 || $req->export==7){
-                     $query=DB::select('call usp_load_tran_det_pospnc() ');
+                     $query=DB::select('call usp_load_without_payment() ');
                                if(isset( $req->export)){
                                     $data = json_decode( json_encode($query), true) ;
                       return Excel::create('laravelcode', function($excel) use ($data) {
@@ -121,7 +121,7 @@ class QueriesController extends Controller
                
                 $status=7;
                }else if($req->queries==8 || $req->export==8){
-                     $query=DB::select('call usp_load_tran_det_pospnc() ');
+                     $query=DB::select('call usp_load_transactions_today() ');
                                if(isset( $req->export)){
                                     $data = json_decode( json_encode($query), true) ;
                       return Excel::create('laravelcode', function($excel) use ($data) {
@@ -137,7 +137,8 @@ class QueriesController extends Controller
                 $status=8;
                }
 
-               //print_r($query);exit;
+
+               
 
         	     return view('dashboard/queries',['query'=>$query,'status'=>$status]);
         }

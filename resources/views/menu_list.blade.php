@@ -1,101 +1,78 @@
 @extends('include.master')
 @section('content')
+<style type="text/css">
+  .nav {
+    padding-left: 44px;
+  }
+</style>
 
-
-
-       <div class="container-fluid white-bg">
-       <div class="col-md-12"><h3 class="mrg-btm">Menu List</h3></div>
-       
-     
- 
-
-<p > <a href="#" id="add_menu_id"> Add Menu </a></p>
- 
-       <div class="col-md-12">
-       <div class="overflow-scroll">
-       <div class="table-responsive" >
-
-      <table class="datatable-responsive table table-striped table-bordered dt-responsive nowrap" id="example">
-                                    <thead>
-                                       <tr>
-                                       <th>ID</th>
-                                      <th>Name</th>
-                                      </tr>
-                                    </thead>
-                                    <tbody>
-                                    @foreach($menu as $vl)
-                                      <tr>
-                                      <td>{{$vl->id}}</td>
-                                      <td>{{$vl->name}}</td>
-                                      </tr>
-                                    @endforeach
-                                  </tbody>
-           
-            </table>
-      </div>
-      </div>
-      </div>
-      </div>
-
- 
-            
- <div class="modal fade" id="menu-list-Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Lead</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-      <form class="form-horizontal" method="post"  id="menu_list_from" > {{ csrf_field() }}
-    
-        
-   <div class="form-group">
-            <label for="inputEmail" class="control-label col-xs-2">Menu Name</label>
-            <div class="col-xs-10">
-            <input type="text" name="menu" id="menu_name_id"  class="form-control" >
-            </div>
-  </div> 
-
-
-   <div class="form-group">
-            <label for="inputEmail" class="control-label col-xs-2">Menu URL</label>
-            <div class="col-xs-10">
-            <input type="text" name="url_link" id="url_link"  class="form-control" >
-            </div>
-  </div> 
-   
-
-
-       <!--  <div class="form-group">
-            <label for="inputEmail" class="control-label col-xs-2"> Menu Group</label>
-            <div class="col-xs-10">
-            <select class="form-control" name="menu_group_id" id="lead_status_id">
-               <option value="0" > SELECT --</option>
-               
-               @foreach($menu_group as $le)
-                   <option value="{{$le->id}}" >{{$le->name}}</option>
-               @endforeach
-
-        </select>
-                  <span id="valid_ag_rto_id" class="help-inline"></span>
-            </div>
-        </div> -->
-
-
-         
-
-        
-      </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" id="menu_list_ID">Save changes</button>
-      </div>
+<div class="container-fluid white-bg">
+<div class="col-md-9">
+  <div class="well" style="width:900px; padding: 8px 0;float: left;">
+    <div style="overflow-y: scroll; overflow-x: hidden; height: 350px;" id="maindiv">
+      <ul class="nav nav-list navtree"></ul>
     </div>
   </div>
+</div>
+
+
+
+ 
+<!-- <form id="add_form" name="add_form" method="POST">
+{{ csrf_field() }}
+<div class="col-md-4">
+    <input type="hidden" name="courseid" id="courseid">
+    <input type="text" name="name" id="name" class="form-control">
+</div>
+
+<div class="col-md-3">
+  <button type="button" class="btn btn-success" id="add" onclick="Validate();">ADD</button>
+</div>
+</form> -->
+
+
+
+<form class="form-horizontal"  method="post" action="{{url('menu-list-add')}}" >{{ csrf_field() }}
+  <div class="form-group">
+       <input type="hidden" name="parent_id" id="parent_id">     
+  </div>
+ <div class="form-group">
+            <label for="inputEmail" class="control-label col-xs-2">Menu Add</label>
+            <div class="col-xs-6">
+            <input type="text" name="menu_name" id="menu_name"  class="form-control" >
+
+    @if ($errors->has('menu_name'))<label class="control-label" for="inputError"> {{ $errors->first('menu_name') }}</label>@endif
+            </div>
+</div>
+
+   <div class="form-group">
+            <label for="inputEmail" class="control-label col-xs-2">Level Name</label>
+            <div class="col-xs-6">
+            <input type="text" name="level_name"  onkeypress="return Numeric(event)"  class="form-control" >
+            </div>
+  </div>
+
+     <div class="form-group">
+            <label for="inputEmail" class="control-label col-xs-2">URL LINK</label>
+            <div class="col-xs-6">
+            <input type="text" name="url_link"    class="form-control" >
+             @if ($errors->has('url_link'))<label class="control-label" for="inputError"> {{ $errors->first('url_link') }}</label>@endif
+            </div>
+  </div>
+
+
+
+
+<div class="form-group">
+            <label for="inputEmail" class="control-label col-xs-2"></label>
+            <div class="col-xs-6">
+             <button type="submit" class="btn btn-default">Submit</button>
+            </div>
+</div>
+
+
+</form>
+
 </div>
 
 @endsection

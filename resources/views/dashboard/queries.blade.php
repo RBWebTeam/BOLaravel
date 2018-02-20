@@ -16,8 +16,12 @@
   <a href="{{url('queries')}}?queries=8"  class="btn btn-primary"  >Transaction Tody</a>
 </div>
 
+<br>
+<br>
 
  <div id="export_id"></div>
+<br>
+
 
 
 <div class="col-md-12">
@@ -60,15 +64,17 @@
                @elseif($status==4)
                 <td> {{$val->CreaOn}}</td>
                @elseif($status==5)
-                <td>werw</td>Created_Date
-                <td>werw</td>
-                <td>werw</td>
+                 <td> {{$val->created_date}}</td>
+                  <td> {{$val->HEALTH}}</td>
+               <td> {{$val->MOTOR}}</td>
+               
+               <td> {{$val->TWO_WHEELER}}</td>
                @elseif($status==6)
                <td> {{$val->Created_Date}}</td>
                 <td>{{$val->PospName}}</td>
                @elseif($status==7)
-                  <td> we</td>
-                 <td>PospName</td>
+                 <td> {{$val->Created_Date}}</td>
+                <td> {{$val->POSPName}}</td>
                @elseif($status==8)
                <td> {{$val->HEALTH}}</td>
                <td> {{$val->MOTOR}}</td>

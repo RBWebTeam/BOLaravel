@@ -35,6 +35,7 @@
                  <thead>
                   <tr>
                    <th>Customer Name</th>
+                   <th>Customer ID</th>
                    <th>Mobile</th>
                    <th>Email</th>
                     <th>  Payment Date</th>
@@ -48,8 +49,10 @@
 
                  @if(isset($respon))
                  @foreach($respon as $val)
-                 <tr>
-                   <td>{{$val->CustName}}</td>
+                 <tr>   
+                   <?php   $customer_id =preg_split('/-/', $val->CustName); ?>
+                   <td><?php  echo ($customer_id[0]);  ?></td>
+                    <td><?php  echo ($customer_id[1]);  ?></td>
                     <td>{{$val->Mobile}}</td>
                    <td>{{$val->Email}}</td>
                    <td>{{$val->PaymDate }}</td>
