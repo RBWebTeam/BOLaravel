@@ -10,9 +10,9 @@ use Redirect;
 use Session;
 use URL;
 use Mail;
-class FbaController extends InitialController
+class FbaController extends CallApiController
 {
-       
+      
         public function fba_list()
         {
 
@@ -25,6 +25,21 @@ class FbaController extends InitialController
           DB::select("call usp_update_posploanid('$fbaid','$value','$flag')");
           return redirect('fba-list');
         }
+        public function sendsms($Mobile_no,$message_text) {
+               
+              $post_data="";
+              $result=$this->call_json_data_api('http://vas.mobilogi.com/api.php?username=rupeeboss&password=pass1234&route=1&sender=FINMRT&mobile[]='.$Mobile_no.'&message[]='.$message_text,$post_data);
+              $http_result=$result['http_result'];
+              $error=$result['error'];
+              $st=str_replace('"{', "{", $http_result);
+              $s=str_replace('}"', "}", $st);
+              $m=$s=str_replace('\\', "", $s);
+              $update_user='';
+              $obj = json_decode($m);
+
+        }
+
+
 }
 
 

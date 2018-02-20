@@ -34,8 +34,8 @@ class LoginController extends InitialController
          
                    $request->session()->put('emailid',$val->CustID);
                    $request->session()->put('emp_id',$val->CustID);
-                   // Session::put('username',$query->username);
-                   // Session::put('last_login',$query->last_login);
+                   //Session::put('FullName',$query->FullName);
+                   Session::put('LastloginDate',$query->LastloginDate);
 
                  
               return redirect()->intended('dashboard');
