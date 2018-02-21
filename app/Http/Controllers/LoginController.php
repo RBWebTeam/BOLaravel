@@ -30,12 +30,13 @@ class LoginController extends InitialController
            $query=DB::select('call spValidateLogin(?,?,?,?,?,?)',array($request->email,$request->password,'0','0','0','0'));
            $val=$query[0];
 
-         
+          
            
          if($val->SuccessStatus==1){
          
-                   $request->session()->put('emailid',$val->CustID);
-                   $request->session()->put('emp_id',$val->CustID);
+                    $request->session()->put('emailid',$val->UserName);
+                    $request->session()->put('emp_id',$val->CustID);
+                    $request->session()->put('UserType',$val->UserType);
                    // Session::put('username',$query->username);
                    // Session::put('last_login',$query->last_login);
 
@@ -72,7 +73,7 @@ class LoginController extends InitialController
 
        }
 
-                public function register_user(){
+                public function register_user() {
 
                 return view('register-user');
         }
