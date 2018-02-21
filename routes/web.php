@@ -34,6 +34,7 @@ Route::get('dashboard','DashboardController@dashboard');
 //Fba details
 Route::get('fba-list','FbaController@fba_list');
 Route::get('fba-list/{fbaid}/{value}/{flag}',array('as'=>'fba-list.ajax','uses'=>'FbaController@updateposp'));
+Route::get('fba-list/{Mobile_no}/{message_text}',array('as'=>'fba-list.ajax','uses'=>'FbaController@sendsms'));
 Route::get('fba-blocklist','fbablocklistController@fbablocklist');
 Route::get('fba-blocklist/{flag}/{value}',array('as'=>'fbablocklist.ajax','uses'=>'fbablocklistController@fbablockunblock'));
 Route::get('lead-details','LeadDetailsController@lead_details1');
@@ -97,7 +98,15 @@ Route::get('queries','QueriesController@queries');
 
 /*Book Appointment*/
 Route::get('book-appointment','BookAppointmentController@book_appointment');
- 
+Route::get('backoffice-city-master','BookAppointmentController@backoffice_city_master');
+
+/*Sales Material*/ 
+Route::get('sales-material-upload','BookAppointmentController@sales_material_upload');
+
+Route::post('sales-material-upload-submit','BookAppointmentController@sales_material_upload_submit');
+Route::get('sales-material','BookAppointmentController@sales_material');
+Route::post('sales-material-update','BookAppointmentController@sales_material_update');
+
 
 /*Menu List*/ 
 Route::get('menu-list','MenuController@menu_list');

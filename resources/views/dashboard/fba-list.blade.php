@@ -31,8 +31,8 @@
 			  <div class="form-group">
 			   
                 <p>From Date</p>
-			   <div id="datepicker" class="input-group date" data-date-format="dd-mm-yyyy">
-               <input class="form-control" type="text" placeholder="From Date" / value="01-01-2017">
+			   <div id="min"  class="input-group date" data-date-format="dd-mm-yyyy">
+               <input class="form-control" type="text" name="fdate" placeholder="From Date" value="01-01-2017">
               <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
               </div>
             </div>
@@ -40,8 +40,8 @@
 		   <div class="col-md-4">
 			 <div class="form-group">
 			 <p>To Date</p>
-			   <div id="datepicker1" class="input-group date" data-date-format="dd-mm-yyyy">
-           <input class="form-control" type="text" placeholder="From Date" / value="<?php echo date('d-m-y');?>">
+			   <div id="max" class="input-group date" data-date-format="dd-mm-yyyy">
+           <input class="form-control" type="text" name="tdate" placeholder="From Date" value="<?php echo date("d-m-Y");?>"/>
               <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
               </div>
             </div>
@@ -56,52 +56,110 @@
 			 <div class="table-responsive" >
 
 			<table class="datatable-responsive table table-striped table-bordered dt-responsive nowrap" id="example">
-                                    <thead>
+                          <thead>
 					                  <tr>
 					                   <th>Full Name</th>
 					                   <th>Created Date</th>
 					                   <th>Mobile No</th>
 					                   <th>Email ID</th>
-									   <th>Payment Link</th>
-									   <th>Password</th>
+									           <th>Payment Link</th>
+									           <th>Password</th>
 					                   <th>City</th>
-									   <th>Pincode</th>
+									           <th>Pincode</th>
 					                   <th>FSM Details</th>
 					                   <th>POSP No</th>
-									   <th>Loan ID</th>
+									           <th>Loan ID</th>
 					                   <th>Posp Name</th>
 					                   <th>Partner Info</th>
 					                   <th>Documents</th>
-									   <th>Bank Account</th>
-									   <th>SMS</th>
-									   <th>sales code</th>
+									           <th>Bank Account</th>
+									           <th>SMS</th>
+									           <th>sales code</th>
                                      </tr>
                                     </thead>
 					                <tbody>
 					              @foreach($query as $val)
-					                 <tr>
+                        <?php if($val->PayStatus =="S"){ ?>
+                                      
+                                       
+					                 <tr style="color:Black;background-color:LightGreen;">
 					                  <td><?php echo $val->FullName; ?></td>
 					                  <td><?php echo $val->createdate; ?></td>
 					                  <td><?php echo $val->MobiNumb1; ?></td>
 					                  <td><?php echo $val->EMaiID; ?></td>
 
-					                  <td><a href="#" class="popover-Payment" data-toggle="popover" title="Payment link" data-content="<?php echo $val->Link; ?>">Payment link</a></td>
+					                  <td><?php if($val->Link == ""){ ?>
+                                        <a>Payment link</a>
+                                       <?php  } else {?>  
+                                       <a href="#" class="popover-Payment" data-toggle="popover" title="Payment link" data-content="<?php echo $val->Link; ?>">Payment link</a>
+                                       <?php } ?></td>
 					                  <td><a href="#" class="popover-Password" data-toggle="popover" title="Show Password" data-content="<?php echo $val->Password; ?>">*****</a></td>
 					                  <td><?php echo $val->city; ?></td>
 					                  <td><?php echo $val->Pincode; ?></td>
-					                  <td>Fsm Details</td>
-					                  <td><?php echo $val->POSPNo; ?><a href="#" style="" class="check" data-toggle="modal" data-target="#updatePosp" onclick="POSP_UPDATE(<?php echo $val->fbaid; ?>)">update</a>
-					                   <input id="txtPosp" value="<?php echo $val->POSPNo; ?>" type="hidden" name=""/></td>
-					                  <td><?php echo $val->LoanID; ?><a href="#" style="" class="checkloan" data-toggle="modal" data-target="#updateLoan" onclick="LoanID_UPDATE(<?php echo $val->fbaid; ?>)">update</a>
-					                   <input id="txtloan" value="<?php echo $val->LoanID; ?>" type="hidden" name=""/></td>
+					                  <td><a href="#" style="" data-toggle="modal" data-target='.fsmdetails'>Fsm details</a></td>
+					                  <td><?php if($val->POSPNo == ""){ ?>
+                                        <a href="#" style="" class="checkPosp" data-toggle="modal" data-target="#updatePosp" onclick="POSP_UPDATE(<?php echo $val->fbaid; ?>)">update</a>
+                                       <?php	} else {?>	
+                                       <?php echo $val->POSPNo; ?>
+                                       <?php } ?>
+					                   </td>
+					                  <td>
+					                  	<?php if($val->LoanID == ""){ ?>
+                                        <a href="#" style="" class="checkloan" data-toggle="modal" data-target="#updateLoan" onclick="LoanID_UPDATE(<?php echo $val->fbaid; ?>)">update</a>
+
+					                  <?php	} else {?>	
+					                  <?php echo $val->LoanID; ?>
+					                  <?php } ?>
+                            </td>
 					                  <td><?php echo $val->pospname; ?></td>
 					                  <td><a href="" data-toggle="modal" data-target="#partnerInfo">partner info</a></td>
 					                  <td>Pending</td>
 					                  <td><?php echo $val->bankaccount; ?></td>
-					                   <td><a href="#" data-toggle="modal" data-target="#sms_sent_id" onclick="SMS_FN(<?php echo $val->fbaid;?>,<?php echo $val->MobiNumb1;?>)">sms</a></td>
-					                  <td><a href="#">update</a></td>
+					                   <td><a href="#" data-toggle="modal" data-target="#sms_sent_id" onclick="SMS_FN(<?php echo $val->fbaid;?>,<?php echo $val->MobiNumb1;?>)"><span class="glyphicon glyphicon-envelope"></span></a></td>
+					                  <td><a href="#" style="" data-toggle="modal" data-target='.salesupdate'>update</a></td>
 					                  
 					              </tr>
+                        <?php  }
+                        else {?>
+                        <tr>
+                            <td><?php echo $val->FullName; ?></td>
+                            <td><?php echo $val->createdate; ?></td>
+                            <td><?php echo $val->MobiNumb1; ?></td>
+                            <td><?php echo $val->EMaiID; ?></td>
+
+                            <td><?php if($val->Link == ""){ ?>
+                                        <a>Payment link</a>
+                                       <?php  } else {?>  
+                                       <a href="#" class="popover-Payment" data-toggle="popover" title="Payment link" data-content="<?php echo $val->Link; ?>">Payment link</a>
+                                       <?php } ?></td>
+                            <td><a href="#" class="popover-Password" data-toggle="popover" title="Show Password" data-content="<?php echo $val->Password; ?>">*****</a></td>
+                            <td><?php echo $val->city; ?></td>
+                            <td><?php echo $val->Pincode; ?></td>
+                            <td><a href="#" style="" data-toggle="modal" data-target='.fsmdetails'>Fsm details</a></td>
+                            <td><?php if($val->POSPNo == ""){ ?>
+                                        <a href="#" style="" class="checkPosp" data-toggle="modal" data-target="#updatePosp" onclick="POSP_UPDATE(<?php echo $val->fbaid; ?>)">update</a>
+                                       <?php  } else {?>  
+                                       <?php echo $val->POSPNo; ?>
+                                       <?php } ?>
+                             </td>
+                            <td>
+                              <?php if($val->LoanID == ""){ ?>
+                                        <a href="#" style="" class="checkloan" data-toggle="modal" data-target="#updateLoan" onclick="LoanID_UPDATE(<?php echo $val->fbaid; ?>)">update</a>
+
+                            <?php } else {?>  
+                            <?php echo $val->LoanID; ?>
+                            <?php } ?>
+                            </td>
+                            <td><?php echo $val->pospname; ?></td>
+                            <td><a href="" data-toggle="modal" data-target="#partnerInfo">partner info</a></td>
+                            <td>Pending</td>
+                            <td><?php echo $val->bankaccount; ?></td>
+                             <td><a href="#" data-toggle="modal" data-target="#sms_sent_id" onclick="SMS_FN(<?php echo $val->fbaid;?>,<?php echo $val->MobiNumb1;?>)"><span class="glyphicon glyphicon-envelope"></span></a></td>
+                            <td><a href="#" style="" data-toggle="modal" data-target='.salesupdate'>update</a></td>
+                            
+                        </tr>
+
+                        <?php } ?>
 					              @endforeach
 					              </tbody>
 		       
@@ -140,6 +198,64 @@
     </div>
   </div>
 </div>
+ <!-- fsm details -->
+ <div class="fsmdetails modal fade" role="dialog">   
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+        <h4 class="modal-title">FSM Details</h4>
+      </div>
+      <div class="modal-body">
+        <form id="posp_from_id">
+          <div class="form-group">
+            
+          </div>
+          <div class="form-group">
+            <label class="control-label" for="message-text">FSM Email Id : </label>
+          </div>
+           <div class="form-group">
+            <label class="control-label" for="message-text">FSM Mobile No : </label>
+            
+          </div>
+        </form>
+        <div class="modal-footer"> 
+          <button class="btn btn-default" type="button" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- sales update -->
+
+<div class="salesupdate modal fade" role="dialog">   
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+        <h4 class="modal-title">Partner Detail</h4>
+      </div>
+      <div class="modal-body">
+        <form id="posp_from_id">
+          <div class="form-group">
+            
+          </div>
+          <div class="form-group">
+            <label class="control-label" for="message-text">Enter Remark : </label>
+            <input type="text" class="recipient-name form-control" id="" name="" required="" />
+          </div>
+        </form>
+        <div class="modal-footer"> 
+          <button class="btn btn-default" type="button" data-dismiss="modal">Close</button>
+          <button id="" class="btn btn-primary" type="button">Update</button><b class="alert-success primary" id=""></b>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- update posp -->
 <div class="updatePosp modal fade" role="dialog">   
   <div class="modal-dialog" role="document">
@@ -167,10 +283,6 @@
       </div>
     </div>
   </div>
-
-
-
-
 </div>
 <!-- update Loan -->
 <div class="updateLoan modal fade" role="dialog">   
@@ -205,8 +317,7 @@
 <!-- Partner Info Start -->
 <div id="partnerInfo" class="modal fade" role="dialog">
   <div class="modal-dialog">
-
-    <!-- Modal content-->
+   <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -238,8 +349,6 @@
   </div>
 </div>
 <!-- Partner Info End -->
-
-
 @endsection
 
 

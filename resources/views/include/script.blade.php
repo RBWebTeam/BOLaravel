@@ -45,10 +45,11 @@ $(document).ready(function(){
              });
 
   $(document).ready(function() {
-
+         
           $('#example').DataTable({
           "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]]
           });
+          
           });
   // start test
 
@@ -86,72 +87,11 @@ $(document).ready(function(){
 
              }
           
-                                   // Sent sms popup
-            $('.message_sms_id').click(function(event){  event.preventDefault();
-                       var sms=$('.sms_id').val();
-                                
-                          if(sms){
-                              $.post('/fba-list/sms', $('#message_sms_id').serialize())
-                               .done(function(msg){ 
-                                  //{ message: 'SMS Sent', status: 'success', statusId: 0 }
-                                      if(msg.statusId==0){
-                                         $('#strong_id').html('<strong>Success!</strong> SMS Sent successful..');
-                                      }
-                                   console.log(msg);
-                               }).fail(function(xhr, status, error) {
-                               console.log(error);
-                               });
-                          }else{
-                              alert("abc..");
-                          }
-            });
-// POSP UPADTE MODEL
-            /* $('.posp_from_id').click(function(event){  event.preventDefault();
-                       var sms=$('#posp_name_id').val();
-                                 
-                          if(sms){
-                              $.post('/fba-list/posp-update', $('#posp_from_id').serialize())
-                               .done(function(msg){ 
-                                              if(msg.status==0){
-                                                                    
-                                                                   $('#strong_lead').html('<strong>Success!</strong>  update..');
-                                                                    if($('#flage_id').val()==1){
-                                                                    fba_id_posp=$('#fba_id_posp').val();
-                                                                    $('#'+fba_id_posp).empty();
-                                                                    $('#'+fba_id_posp).append($('#posp_name_id').val());
-                                                                    }if($('#flage_id').val()==2){
-                                                                         //LoanID
+/* Extend dataTables search*/
 
-                                                                    fba_id_posp=$('#fba_id_posp').val();
-                                                                      alert(fba_id_posp);
-                                                                     $('#LoanID'+fba_id_posp).empty();
-                                                                     $('#LoanID'+fba_id_posp).append($('#posp_name_id').val());
-                                                                    }
-                                                   
-
-                                                        setTimeout(function () {
-                                                             $( '#posp_from_id' ).each(function(){
-                                                                this.reset();
-                                                            }); 
-                                                                       
-                                                                   
-                                                            $('.updatePosp').modal('hide');
-                                                            $('#strong_lead').empty();
-                                                    },1000);
-                                                
-                                              }
-                                   
-                               }).fail(function(xhr, status, error) {
-                               console.log(error);
-                               });
-                          }else{
-                              alert("abc..");
-                          }
-            })*/
- // Extend dataTables search
  $(document).ready(function(){
                   $.fn.dataTable.ext.search.push(
-                 /* function (settings, data, dataIndex) {
+                  function (settings, data, dataIndex) {
                       var min = $('#min').datepicker("getDate");
                       var max = $('#max').datepicker("getDate");
                       var startDate = new Date(data[1]);
@@ -160,12 +100,12 @@ $(document).ready(function(){
                       if(max == null && startDate >= min) {return true;}
                       if (startDate <= max && startDate >= min) { return true; }
                       return false;
-                  }*/
+                  }
                   );
 
                 
-                      /*$("#min").datepicker({ onSelect: function () { table.draw(); }, changeMonth: true, changeYear: true });
-                      $("#max").datepicker({ onSelect: function () { table.draw(); }, changeMonth: true, changeYear: true });*/
+                      $("#min").datepicker({ onSelect: function () { table.draw(); }, changeMonth: true, changeYear: true });
+                      $("#max").datepicker({ onSelect: function () { table.draw(); }, changeMonth: true, changeYear: true });
                       var table = $('#example').DataTable();
 
                       // Event listener to the two range filtering inputs to redraw on input
@@ -258,7 +198,6 @@ function insertfsm() {
    success: function(msg)  
    {
     console.log(msg);
-    alert("Record saved successfully..");
    }
 
 });
@@ -304,21 +243,30 @@ $('.unblock').click(function(){
 });
  
 
-
+//update posp from fba
 $('.posp_from_id').click(function(){
   var flag=$(this).closest('div').find('input[name="flage_id"]').val();
   var fbaid=$(this).closest('div').find('input[name="fbaid"]').val();
-  var value=$("#posp_name_id").val();
- $.ajax({
+  
+  if($('#posp_name_id').val()!="")  {
+     var value=$("#posp_name_id").val();
+     $.ajax({
+
             type: "GET",
             url:'fba-list/'+fbaid+'/'+value+'/'+flag, 
             success: function( msg ) {
             console.log(msg);
+             alert("posp updated successfully..!");
+            $('.updatePosp').modal('hide');
+            $('#posp_name_id').val('');
+
            }
         });
- alert("posp updated successfully..!");
- $('.updatePosp').modal('hide');
- location.reload();
+   }
+  else{
+    alert('posp no field can not blank.')
+  }
+
 });
 
 
@@ -339,45 +287,220 @@ $('.posp_from_id').click(function(){
 //  });
 // }   
 
-
+//update loan id from fba
 $('.loan_from_id').click(function(){
   var flag=$(this).closest('div').find('input[name="flage_idloan"]').val();
   var fbaid=$(this).closest('div').find('input[name="fba_id_loan"]').val();
-  var value=$("#loan_id").val();
   
- $.ajax({
+  if($('#loan_id').val()!="")  {
+    var value=$("#loan_id").val();
+    $.ajax({
             type: "GET",
             url:'fba-list/'+fbaid+'/'+value+'/'+flag, 
             success: function( msg ) {
             console.log(msg);
+             alert("loan id updated successfully..!");
+             $('.updateLoan').modal('hide');
+            $('#loan_id').val('');
+
            }
         });
- alert("loan id updated successfully..!");
- $('.updateLoan').modal('hide');
- location.reload();
-});
-
-
-
-/*function chkpospid(){
-  if($("#txtPosp").val()!="")
-  {
-     $('.check').css("display", "none");
+    }
+else{
+    alert('loan no field can not blank.')
   }
-  else if($("#txtloan").val()!=""){
-    $('.checkloan').css("display", "none");
-  }
-  else{
-   $('.check').css("display", " ");
-   $('.checkloan').css("display", " ");
-  }
-}
- $(document).ready(function(){
-   chkisblock();
  });
-*/
+
+
+//send sms from fba
+$('.message_sms_id').click(function(){
+  var Mobile_no= $('#recipient-name').val();
+  if($('#message-text').val()!="")  {
+      var message_text=$('#message-text').val();
+      $.ajax({
+            type: "GET",
+            url:'fba-list/'+Mobile_no+'/'+message_text, 
+            success: function( msg ) {
+            console.log(msg);
+            alert('message send successfully..');
+           $('.sms_sent_id').modal('hide');
+            $('#message-text').val('');
+          }
+        });
+    }
+  else{
+      alert('SMS Field can not be blank');
+    }
+  });
+</script> 
+
+
+<script type="text/javascript">
+   $.ajax({ 
+   url: "{{URL::to('sales-material-product')}}",
+   method:"GET",
+   success: function(datas)  
+   {
+  
+    var data=$.parseJSON(datas);
+   console.log(data);
+   if(data)
+      {      $.each(data, function( index, value ) {
+            $('#Product').append('<option value="'+value.Product_Id+'">'+value.Product_Name+'</option>');
+
+        }); 
+    }else{
+      $('#Product').empty().append('No Result Found');
+    }
+
+   },
+
+ });
+</script> 
+
+<!-- <script type="text/javascript">
+   $.ajax({ 
+   url: "{{URL::to('sales-material-company')}}",
+   method:"GET",
+   success: function(datas)  
+   {
+  
+    var data=$.parseJSON(datas);
+   console.log(data);
+   if(data)
+      {      $.each(data, function( index, value ) {
+            $('#Company').append('<option value="'+value.Company_Id+'">'+value.Company_Name+'</option>');
+
+        }); 
+    }else{
+      $('#Company').empty().append('No Result Found');
+    }
+
+   },
+
+ });
+</script>
+ -->
+
+<script type="text/javascript">
+  $('#submit').click(function(){
+  alert('okae');
+  $.ajax({
+          url:"{{URL::to('sales-material-upload-submit')}}" ,  
+          data:new FormData($("#sales_material_upload")[0]),
+          dataType:'json',
+          async:false,
+          type:'POST',
+          processData: false,
+          contentType: false,
+          success: function(msg){
+             console.log(msg.status);
+             if (msg.status==0) 
+              {
+                alert('Uploaded Successfully');
+              } 
+              else {
+               alert('Could Not Upload');
+              }
+             
+              
+            
+            }
+        });
+  });
+
+
+
+  $('#reset').click(function(){
+   $("#Product").val("");
+   $("#image_file").val("");
+   $("#Company").val("");
+  });
+
+
+  $('#sales_submit').click(function(){
+    $.ajax({ 
+   url: "{{URL::to('sales-material-update')}}",
+   method:"POST",
+   data : $('#sales_material').serialize(),
+   success: function(msg)  
+   {
+  
+     var tablerows = new Array();
+                         $.each(msg, function( index, value ) {
+            tablerows.push('<tr><td style="font-family: monospace"><img style="position:absolute;" src="/' + value.image_path + '"/></td></tr>');
+        }); 
+
+       if(msg){
+                            $('#docs').empty().append('<table class="table table-striped table-bordered table-responsive"><tr class="text-capitalize"><td style="font-family: monospace">Image Path</td></tr>'+tablerows+'</table>');
+                         }else{
+                            $('#docs').empty().append('No Result Found');
+                         }
+
+   },
+
+ });
+  });
+
 </script>
 
+<script type="text/javascript">
+  $('#Product').on('change', function() {
+    var Product=$('#Product').find(":selected").val();
+    console.log(Product);
+    if ( Product == '1')
+      {
+       $("#Company option[value='1']").show();
+        $("#Company option[value='2']").show();
+        $("#Company option[value='3']").show();
+        $("#Company option[value='4']").show();
+          
+      }
+      if (Product == '2') 
+      {
+        $("#Company option[value='1']").show();
+        $("#Company option[value='2']").show();
+        $("#Company option[value='3']").show();
+        $("#Company option[value='5']").show();
+        $("#Company option[value='6']").show();
+        $("#Company option[value='7']").show();
+        $("#Company option[value='8']").show();
+      }
+      if (Product=='3') 
+      {
+         $("#Company option[value='1']").show();
+        $("#Company option[value='2']").show();
+        $("#Company option[value='3']").show();
+        $("#Company option[value='4']").show();
+         $("#Company option[value='5']").show();
+        $("#Company option[value='8']").show();
+      }
+      if (Product=='4') 
+      {
+         $("#Company option[value='1']").show();
+        $("#Company option[value='2']").show();
+        $("#Company option[value='4']").show();
+        $("#Company option[value='5']").show();
+         $("#Company option[value='8']").show();
+        $("#Company option[value='9']").show();
+        $("#Company option[value='10']").show();
+        $("#Company option[value='11']").show();
+      }
+      if (Product=='5') 
+      {
+         $("#Company option[value='1']").show();
+        $("#Company option[value='2']").show();
+        $("#Company option[value='3']").show();
+        $("#Company option[value='4']").show();
+         $("#Company option[value='5']").show();
+        $("#Company option[value='8']").show();
+      }
+     
+        
+      
+        
+      });
+</script>
 
 
    
