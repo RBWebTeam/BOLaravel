@@ -16,7 +16,7 @@ class LeaduploadController extends Controller{
                   $lead_status=DB::table('lead_status_master')->get();
                   $lead_type=DB::table('lead_type_master')->get();
          
-         $query=DB::select('call sp_raw_lead_master(?)',array(Session::get('emp_id')));
+           $query=DB::select('call sp_raw_lead_master(?)',array(Session::get('emp_id')));
 
  
 
@@ -54,13 +54,14 @@ class LeaduploadController extends Controller{
     'email' =>  'required|email|unique:raw_lead_master',
     'panno' =>  'required',
     'pincode' =>  'required',
+     'city' =>  'required',
 
       ]);
 
 
-
-
-      if ($val->passes()){ 
+if ($val->passes()){ 
+$city= DB::table('city_master')->where('cityname', 'LIKE', "%{$value['city']}%")->first();
+if(isset($city->city_id)){
         $arra=array(
          'name'=>$value['name'],
          'mobile'=>$value['mobile'],
@@ -69,14 +70,14 @@ class LeaduploadController extends Controller{
          'profession'=>$value['profession'],
          'monthly_income'=>$value['monthlyincome'],
          'pan'=>$value['panno'],
-          'city_id'=>1,
+          'city_id'=>$city->city_id,
            'address'=>$value['address'],
             'pincode'=>$value['pincode'],
             'campaign_id'=>$value['campaign'],
             'user_id'=>Session::get('emp_id'),
             'ip_address'=>\Request::ip(),
             'created_on'=>date('Y-m-d H:i:s'),); 
-      	DB::table('raw_lead_master')->insert($arra);} 
+      	DB::table('raw_lead_master')->insert($arra);    } } 
   }
 
         
@@ -84,20 +85,27 @@ class LeaduploadController extends Controller{
         public function lead_update(Request $req){
         	           $status=null;
         	           $error=1;
+                     $check=0;
                      $followup= $req['lead_followup']?$req['lead_followup']:null; 
 
         	           $arr=array();
         	             try{
         	             	 if($req->lead_status_id==14){
-        	             	 	//$mes=$this->interested($req->mobile);
-                          $mes=0;
-        	             	 	if($mes==0){ $status="msm"; }
+        	             	 // $mes=$this->interested($req->mobile,$req->lead_id);
+                           $mes=0;
+        	             	 	if($mes==0){ $status="msm"; 
+                             $check=1;
+                          }else{
+                             $check=0;
+                          }
         	             	 }
+                          
                             $arra=array( "lead_type"=>$req->lead_type_id ,   
                                    "remark"=>$req->remark,
                                    "lead_status_id"=>$req->lead_status_id,
                                   "followup_date"=>$followup,
                                    "lead_date"=>date('Y-m-d H:i:s'),
+                                   "conf_status"=>$check,
                         	);   DB::table('raw_lead_master')  ->where('id',$req->lead_id) ->update($arra); 
                          $error=0; 
                         }catch (Exception $e){  $error=1;  }
@@ -105,22 +113,41 @@ class LeaduploadController extends Controller{
 
 }
 
-        public   function interested($mobile){
+        public   function interested($mobile,$lead_type_id){
+ 
+//https://play.google.com/store/apps/details?id=com.datacomp.magicfinmart&referrer=abcd123
 
+ 
 
+$referrer_id="abcd123";
+$arra=array(
+    'ref_code'=>$referrer_id,
+    'ref_type'=>Session()->get('UserType'),
+    'ref_id'=>Session()->get('emp_id'),
+    "created_on"=>date('Y-m-d H:i:s'),
+    'lead_id'=>$lead_type_id,
+  );
+ 
+ $link="https://play.google.com/store/apps/details?id=com.datacomp.magicfinmart&referrer='".$referrer_id."'";
+ 
           try{
             $error=null;
             $post_data='{
             "mobNo":"8898540057",
-            "msgData":"Dear ...,http://localhost:8000/lead-up-load"}';
-
+            "msgData":"'.$link.'",
+             }';
+ 
             $url ="http://services.rupeeboss.com/LoginDtls.svc/xmlservice/sendSMS";
             $result=$this->call_json($url,$post_data);
             $http_result=$result['http_result'];
             $error=$result['error'];
-            $obj = json_decode($http_result);
+             $obj = json_decode($http_result);
+ 
             if($obj->status=='success'){
+
+               DB::table('referral_master')->insert($arra);
               $error=0;
+
             }else{
               $error=1;
             }
