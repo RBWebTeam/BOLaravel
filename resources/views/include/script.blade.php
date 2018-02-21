@@ -86,10 +86,10 @@ $(document).ready(function(){
                        $('.updateLoan').modal('show');
 
              }
+
           
 /* Extend dataTables search*/
-
- $(document).ready(function(){
+$(document).ready(function(){
                   $.fn.dataTable.ext.search.push(
                   function (settings, data, dataIndex) {
                       var min = $('#min').datepicker("getDate");
@@ -112,7 +112,7 @@ $(document).ready(function(){
                       $('#min, #max').change(function () {
                           table.draw();
                       });
-                  });
+});
 
 //script for fsm register..
 
@@ -317,27 +317,26 @@ else{
 
 //send sms from fba
 $('.message_sms_id').click(function(){
-  var Mobile_no= $('#recipient-name').val();
   if($('#message-text').val()!="")  {
-      var message_text=$('#message-text').val();
-      $.ajax({
-            type: "GET",
-            url:'fba-list/'+Mobile_no+'/'+message_text, 
-            success: function( msg ) {
-            console.log(msg);
-            alert('message send successfully..');
-           $('.sms_sent_id').modal('hide');
-            $('#message-text').val('');
-
-
-          }
-        });
-    }
-  else{
-      alert('SMS Field can not be blank');
-      $( "#message-text" ).focus();
-    }
-  });
+  console.log($('#message_sms_from').serialize());
+   $.ajax({ 
+   url: "{{URL::to('fba-list')}}",
+   method:"POST",
+   data: $('#message_sms_from').serialize(),
+   success: function(msg)  
+   {
+    console.log(msg);
+    alert('SMS send successfully..')
+    $('.sms_sent_id').modal('hide');
+    $('#message-text').val('');
+   }
+});
+ }
+ else{
+  alert('sms field can not blank')
+  $( "#message-text" ).focus();
+ }
+});
 </script> 
 
 

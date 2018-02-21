@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+
 use DB;
 use Response;
 use Validator;
@@ -18,17 +19,18 @@ class FbaController extends CallApiController
 
          $query=DB::select("call usp_load_fbalist_new(0)");
          // print_r($query); exit();
-          return view('dashboard.fba-list',['query'=>$query]);
+          return view('dashboard.fba-list',compact('query'));
         }
 
         public function updateposp($fbaid,$value,$flag) {
           DB::select("call usp_update_posploanid('$fbaid','$value','$flag')");
           return redirect('fba-list');
         }
-        public function sendsms($Mobile_no,$message_text) {
-               
+        public function sendsms(Request $req) {
+
+              $newsms = str_replace(' ', '%20', $req->sms);
               $post_data="";
-              $result=$this->call_json_data_api('http://vas.mobilogi.com/api.php?username=rupeeboss&password=pass1234&route=1&sender=FINMRT&mobile[]='.$Mobile_no.'&message[]='.$message_text,$post_data);
+              $result=$this->call_json_data_api('http://vas.mobilogi.com/api.php?username=rupeeboss&password=pass1234&route=1&sender=FINMRT&mobile[]='.$req->mobile_no.'&message[]='.$newsms,$post_data);
               $http_result=$result['http_result'];
               $error=$result['error'];
               $st=str_replace('"{', "{", $http_result);
