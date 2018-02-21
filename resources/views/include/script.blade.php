@@ -259,12 +259,14 @@ $('.posp_from_id').click(function(){
              alert("posp updated successfully..!");
             $('.updatePosp').modal('hide');
             $('#posp_name_id').val('');
+            $( "#posp_name_id" ).focus();
 
            }
         });
    }
   else{
     alert('posp no field can not blank.')
+    $( "#posp_name_id" ).focus();
   }
 
 });
@@ -302,12 +304,13 @@ $('.loan_from_id').click(function(){
              alert("loan id updated successfully..!");
              $('.updateLoan').modal('hide');
             $('#loan_id').val('');
-
+            
            }
         });
     }
 else{
     alert('loan no field can not blank.')
+    $( "#loan_id" ).focus();
   }
  });
 
@@ -325,11 +328,14 @@ $('.message_sms_id').click(function(){
             alert('message send successfully..');
            $('.sms_sent_id').modal('hide');
             $('#message-text').val('');
+
+
           }
         });
     }
   else{
       alert('SMS Field can not be blank');
+      $( "#message-text" ).focus();
     }
   });
 </script> 
