@@ -3,7 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
-
+use Session;
 class CheckAuth
 {
     /**
@@ -24,16 +24,12 @@ class CheckAuth
 
   //$sql=\DB::table('menu_master')->select('id','name','menu_group_id','url_link')->where('menu_group_id','=',2)->get();
 
+ 
 
 
 
 
-
-
-
-
-
-         $sql=\DB::table('menu_master')->select('id','name','menu_group_id','url_link')->where('menu_group_id','=',2)->get();
+    $sql=\DB::table('view_user_right_group')->select('id','name','menu_group_id','url_link','parent_id')->where('menu_group_id','=',Session::get('usergroup'))->get();
         \Menu::make('MyNavBar', function ($menu) use($sql) {
            foreach ($sql as $key => $value) {
                 //$menu->add($value->name,'dashboard')

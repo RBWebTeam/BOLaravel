@@ -21,6 +21,13 @@
 <?php $request1=Session::get('LastloginDate'); ?>
 <p><span class="hidden-xs">Welcome </span><b><?php echo $request ?></b></p>
 <p><span class="hidden-xs">Last login - Date / Time :</span> <b><?php echo $request1 ?></b></p>
+
+
+<!-- <p><span class="hidden-xs">Welcome </span><b>Mr. Goving Dharne</b></p>
+<p><span class="hidden-xs">Last login - Date / Time :</span> <b>22-09-2017 / 12.45 pm</b> -->
+</p>
+
+
 </div>
 </div>
 <div class="col-md-1 col-xs-2 no-mob-pad"><a href="log-out" class="pull-right log-btn"><span class="logout-btn"><img src="images/icon/exit.png"></span></a></div>

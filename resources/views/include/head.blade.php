@@ -11,5 +11,6 @@
         <link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <link href="{{url('stylesheets/datepicker.css')}}" rel="stylesheet" type="text/css" />
         <link type="text/css" rel="stylesheet" href="{{url('stylesheets/bootstrap/dataTables.bootstrap.min.css')}}">
-        
+        <!-- <link type="text/css" rel="stylesheet" href="{{url('stylesheets/bootstrap/jquery.dataTables.min.css')}}"> -->
+         <!-- <link type="text/css" rel="stylesheet" href="{{url('stylesheets/bootstrap/jquery.dataTables.css')}}"> -->
    </head>

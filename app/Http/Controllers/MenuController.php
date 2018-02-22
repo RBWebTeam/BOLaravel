@@ -14,6 +14,8 @@ use Validator;
 class MenuController extends Controller{
     
 
+    
+
     public function menu_list(Request $req){
              $menu_group=DB::table('menu_group_master')->select('id','name')->get();
               $menu=DB::table('menu_master')->select('id','name')->get();

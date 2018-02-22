@@ -2,14 +2,14 @@
  @section('content')
     <div id="content" style="overflow:scroll;">
        <div class="container-fluid white-bg">
-       <div class="col-md-12"><h3 class="mrg-btm">OTP Details</h3></div>
+       <div class="col-md-12"><h3 class="mrg-btm">Payment History</h3></div>
        <!-- Date Start -->
-        <form action="{{url('payment-history')}}" method="GET">
+        <form  >
        <div class="col-md-4">
       <div class="form-group">
       <p>From Date</p>
-         <div id="datepicker" class="input-group date" data-date-format="dd-mm-yyyy">
-               <input class="form-control" type="text" placeholder="From Date" name="fdate" />
+         <div id="datepicker" class="input-group date" data-date-format="mm/dd/yyyy">
+               <input class="form-control" type="text" placeholder="From Date" name="fromdate" id="min" />
               <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
               </div>
             </div>
@@ -17,15 +17,15 @@
        <div class="col-md-4">
        <div class="form-group">
        <p>To Date</p>
-       <div id="datepicker1" class="input-group date" data-date-format="mm-dd-yyyy">
-               <input class="form-control" type="text" placeholder="To Date"  name="tdate" />
+       <div id="datepicker1" class="input-group date" data-date-format="dd/mm/yyyy">
+               <input class="form-control" type="text" placeholder="To Date"  name="tromdate"  id="max" />
               <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
               </div>
             </div>
            </div>
-       <div class="col-md-4">
+      <!--  <div class="col-md-4">
        <div class="form-group"> <input type="submit" name=""  class="mrg-top common-btn" value="SHOW">  </div>
-       </div>
+       </div> -->
        </form>
        <!-- Date End -->
 <div class="col-md-12">

@@ -64,7 +64,8 @@
                                        <th>Flag</th> -->
                                        <th>Date</th>
                                       <!--  <th>Updated_on</th> -->
-                                     
+                                       <th>Video click</th>
+                                       <th>Misscall  </th>
                                         
                                       </tr>
 
@@ -100,8 +101,12 @@
                                        <td>{{$val->followup_date}}</td>
                                        
                                        <td >{{$val->remark}}</td>
-                                       
                                        <td>{{$val->created_on}}</td>
+                                   
+                                      <?php  $video_click =($val->video_click==1)?'Yes': 'NO';  ?>
+                                       <?php  $misscall =($val->misscall==1)?'Yes': 'NO';  ?>
+                                        <td >{{$video_click}}</td>
+                                        <td>{{$misscall}}</td>
                                   
                                      
                                         

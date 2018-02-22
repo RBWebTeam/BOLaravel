@@ -88,12 +88,16 @@ $(document).ready(function(){
 
           
 /* Extend dataTables search*/
+
+
+
 $(document).ready(function(){
+
                   $.fn.dataTable.ext.search.push(
                   function (settings, data, dataIndex) {
                       var min = $('#min').datepicker("getDate");
                       var max = $('#max').datepicker("getDate");
-                      var startDate = new Date(data[1]);
+                      var startDate = new Date(data[4]);
                       if (min == null && max == null) { return true; }
                       if (min == null && startDate <= max) { return true;}
                       if(max == null && startDate >= min) {return true;}
@@ -108,10 +112,14 @@ $(document).ready(function(){
                       var table = $('#example').DataTable();
 
                       // Event listener to the two range filtering inputs to redraw on input
-                      $('#min, #max').change(function () {
+                      $('#min, #max').change(function () {  console.log("Sdfdsf");
                           table.draw();
                       });
-});
+
+
+                        
+
+                  });
 
 //script for fsm register..
 
