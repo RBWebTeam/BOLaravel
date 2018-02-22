@@ -33,12 +33,12 @@ class LoginController extends InitialController
           
           
          if($val->SuccessStatus==1){
-         
-                    $request->session()->put('emailid',$val->UserName);
-                    $request->session()->put('emp_id',$val->CustID);
-                    $request->session()->put('UserType',$val->UserType);
-                    $request->session()->put('FullName',$val->FullName); 
-                    $request->session()->put('LastloginDate',$val->LastloginDate); 
+      
+                   $request->session()->flush();
+                   $request->session()->put('emailid',$val->CustID);
+                   $request->session()->put('emp_id',$val->CustID); 
+                   $request->session()->put('FullName',$val->FullName); 
+                   $request->session()->put('LastloginDate',$val->LastloginDate); 
  
  
        

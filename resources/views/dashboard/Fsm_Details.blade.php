@@ -16,6 +16,7 @@
 							<span class="glyphicon glyphicon-plus mrg-tp-forteen"></span></a></span>
 						</div>
 					</div>
+					
 					<div class="panel-body filter-bdy" style="display:none">
 						<input type="text" class="form-control" id="dev-table-filter" data-action="filter" data-filters="#dev-table" placeholder="Search..." />
 					</div>
