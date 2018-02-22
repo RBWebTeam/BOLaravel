@@ -7,114 +7,168 @@
 
              <div class="container-fluid white-bg">
 				<div class="col-md-12"><h3 class="mrg-btm">REGISTER USER</h3></div>
-				<form method="post" action="{{url('register-user-save')}}">
-				{{csrf_field()}} 
-                <div class="col-md-4 col-xs-12">
-				<div class="form-group">
-				<input type="text" class="form-control" name="username" id="username" placeholder="Name"  />
-				@if ($errors->has('username'))<label class="control-label" for="inputError"> {{ $errors->first('username') }}</label>  @endif
-				</div>
-				</div>
-				
-				<div class="col-md-4 col-xs-12">
-				<div class="form-group">
-				<input type="email" class="form-control" name="Emailid" id="Emailid"  placeholder="Email Id"/>
-				@if ($errors->has('Emailid'))<label class="control-label" for="inputError"> {{ $errors->first('Emailid') }}</label>  @endif
-				</div>
-				</div>
-				
-				<div class="col-md-4 col-xs-12">
-				<div class="form-group">
-				<input type="password" class="form-control" name="password" id="password" placeholder="Password" />
-				@if ($errors->has('password'))<label class="control-label" for="inputError"> {{ $errors->first('password') }}</label>  @endif
-				</div>
-				</div>
-				
-				<div class="col-md-4 col-xs-12">
-				<div class="form-group">
-				<input type="password" class="form-control" name="confirm_password" id="password2"   placeholder="Confirm Password" />
-				</div>
-
-				@if ($errors->has('confirm_password'))<label class="control-label" for="inputError"> {{ $errors->first('confirm_password') }}</label>  @endif
-				</div>
-				
-			    <div class="col-md-4 col-xs-12">
-				<div class="form-group">
-				<select class="selectpicker select-opt form-control" name="employetype" id="employetype" required="">
-				 <option value="1">Authorities </option>
-								<option value="1">SUB CATEGORIES</option>
-								<option value="2">HEALTH INSURANCE</option>
-								<option value="3">MOTOR INSURANCE</option>
-								<option value="4">TRAVEL INSURANCE</option>
-								<option value="5">HOME LOAN</option>
-								<option value="6">PERSONAL LOAN</option>
-								<option value="7">LOAN AGAINST PROPERTY</option>
-				</select>
-				</div>
-				</div>
-				
-				
-				<div class="form-group">
-                    <div class="col-xs-12 form-padding top-lead">
-                    <div class="col-sm-6 col-xs-12 form-padding" id="AuthorityV" style="overflow-y:scroll;height:270px;">
-							<div>
-	<table class="table table-responsive table-hover reg-tabl" cellspacing="0">
-		                             <tbody>
-		                             <tr class="headerstyle" align="center">
-			                         <th scope="col">
-                                     <input type="checkbox" class="used" style="width: auto; float: left; display: inline-block; margin-right: 16px;">
-                                     <span>AUTHORITIES</span>
-                                     </th>
-		                             </tr>
-		                             @foreach($AUTHORITIES as $row)
-		                             <tr align="left tr-css">
-			                         <td>
-                                     <input name="authorise" type="hidden" value="20" class="used">
-                                     <input type="checkbox" class="used" name="author[]" value="{{ $row->Id }}">
-                                     <span>{{ $row->Menu }}</span>
-                                     </td>
-		                             </tr>
-		                              @endforeach
-		                                 
-                                      </tbody></table>
-                                      </div>
-                                      </div>
-
-                        <div class="col-sm-6 col-xs-12 form-padding" id="StatesV" style="overflow-y:scroll;height:270px;">
-							
-                      <div>
-	                  <table class="table table-responsive table-hover" cellspacing="0">
-		              <tbody>
-					  <tr class="headerstyle" align="center">
-			          <th scope="col">
-                      <input  type="checkbox" class="used">
-                       <span>States</span>
-                                      
-		                                    @foreach($query as $row)
-											  <tr align="left">
-			                                  <td>
-                                              <input type="hidden" value="18" class="used">
-                                              <input name="txtstate[]" type="checkbox" class="used" value="{{$row->state_id}}">
-                                              <span>{{ $row->state_name}}</span>
-                                              </td>
-		                                      </tr>
-		                                      @endforeach
-											
-	                                 </tbody>
-									 </table>
-                                     </div>
-                                
-                                </div>
-                        </div>
-                    </div>
-				
-				<div class="col-md-12 col-xs-12">
-				<br>
-				 <input type="submit" class="btn btn-default submit-btn border">
-				</div>
-				</form>
 
 
+<form class="form-horizontal"  method="post" action="{{url('register-user-save')}}" >{{ csrf_field() }}
+   
+ <div class="form-group">
+            <label for="inputEmail" class="control-label col-xs-2">Name</label>
+            <div class="col-xs-6">
+            <input type="text" name="name" id="name"  class="form-control" >
+    @if ($errors->has('name'))<label class="control-label" for="inputError"> {{ $errors->first('name') }}</label>@endif
+           </div>
+</div>
+
+  <div class="form-group">
+            <label for="inputEmail" class="control-label col-xs-2">Email</label>
+            <div class="col-xs-6">
+            <input type="text" name="email_id" id="email_id"  class="form-control" >
+    @if ($errors->has('email_id'))<label class="control-label" for="inputError"> {{ $errors->first('email_id') }}</label>@endif
+           </div>
+</div>
+
+<div class="form-group">
+            <label for="inputEmail" class="control-label col-xs-2">Mobile</label>
+            <div class="col-xs-6">
+            <input type="text" name="mobile" id="mobile"  class="form-control" maxlength="10"  onkeypress="return Numeric(event)" >
+    @if ($errors->has('mobile'))<label class="control-label" for="inputError"> {{ $errors->first('mobile') }}</label>@endif
+           </div>
+</div>
+  
+<!-- 
+ <div class="form-group">
+            <label for="inputEmail" class="control-label col-xs-2">UID</label>
+            <div class="col-xs-6">
+            <input type="text" name="uid" id="uid"  class="form-control" >
+    @if ($errors->has('uid'))<label class="control-label" for="inputError"> {{ $errors->first('uid') }}</label>@endif
+           </div>
+</div>
+  
+<div class="form-group">
+            <label for="inputEmail" class="control-label col-xs-2">EmpID</label>
+            <div class="col-xs-6">
+            <input type="text" name="EmpID" id="EmpID"  class="form-control" >
+    @if ($errors->has('EmpID'))<label class="control-label" for="inputError"> {{ $errors->first('EmpID') }}</label>@endif
+           </div>
+</div> -->
+  
+
+<div class="form-group">
+            <label for="inputEmail" class="control-label col-xs-2">Company </label>
+            <div class="col-xs-6">
+          
+             <select name="company_id" id="company_id"  class="form-control">
+             	<option value="0">-Select-</option>
+             	<option value="1">RupeeBoss</option>
+             	<option value="2">Datacom</option>
+             	<option value="3">PolicyBoss</option>
+             	<option value="4">LandMark</option>
+             </select>
+    @if ($errors->has('company_id'))<label class="control-label" for="inputError"> {{ $errors->first('company_id ') }}</label>@endif
+           </div>
+</div>
+
+<div class="form-group">
+            <label for="inputEmail" class="control-label col-xs-2">ReportingID </label>
+            <div class="col-xs-6">
+          
+             <select name="reporting_id" id="reporting_id"  class="form-control">
+             	<option value="0">-Select-</option>
+             	<option value="1">RupeeBoss</option>
+             	<option value="2">Datacom</option>
+             	<option value="3">PolicyBoss</option>
+             	<option value="4">LandMark</option>
+             </select>
+    @if ($errors->has('reporting_id'))<label class="control-label" for="inputError"> {{ $errors->first('reporting_id ') }}</label>@endif
+           </div>
+</div>
+ 
+<div class="form-group">
+            <label for="inputEmail" class="control-label col-xs-2">State </label>
+            <div class="col-xs-6">
+          
+             <select name="state_id" id="state_id"  class="form-control">
+             	<option value="0">-Select-</option>
+             	 @foreach($state as $val)
+                <option value="{{$val->state_id}}">{{$val->state_name}}</option>
+             	 @endforeach
+             </select>
+    @if ($errors->has('state_id'))<label class="control-label" for="inputError"> {{ $errors->first('state_id ') }}</label>@endif
+           </div>
+</div>
+
+<div class="form-group">
+            <label for="inputEmail" class="control-label col-xs-2">City </label>
+            <div class="col-xs-6">
+          
+             <select name="city_id" id="city_id"  class="form-control">
+             	<option value="0">-Select-</option>
+             	 @foreach($state as $val)
+                <option value="{{$val->state_id}}">{{$val->state_name}}</option>
+             	 @endforeach
+             </select>
+    @if ($errors->has('city_id'))<label class="control-label" for="inputError"> {{ $errors->first('city_id ') }}</label>@endif
+           </div>
+</div>
+
+
+<div class="form-group">
+            <label for="inputEmail" class="control-label col-xs-2">UserType     </label>
+            <div class="col-xs-6">
+          
+             <select name="user_type" id="user_type"  class="form-control">
+             	<option value="0">-Select-</option>
+             	 @foreach($user_type as $val)
+                <option value="{{$val->id}}">{{$val->name}}</option>
+             	 @endforeach
+             </select>
+    @if ($errors->has('user_type'))<label class="control-label" for="inputError"> {{ $errors->first('user_type ') }}</label>@endif
+           </div>
+</div>
+
+
+
+<div class="form-group">
+            <label for="inputEmail" class="control-label col-xs-2">UserGroup      </label>
+            <div class="col-xs-6">
+          
+             <select name="menu_group" id="menu_group"  class="form-control">
+             	<option value="0">-Select-</option>
+             	 @foreach($menu_group as $val)
+                <option value="{{$val->id}}">{{$val->name}}</option>
+             	 @endforeach
+             </select>
+    @if ($errors->has('menu_group'))<label class="control-label" for="inputError"> {{ $errors->first('menu_group ') }}</label>@endif
+           </div>
+</div>
+
+<div class="form-group">
+            <label for="inputEmail" class="control-label col-xs-2">Password</label>
+            <div class="col-xs-6">
+            <input type="text" name="password" id="password"  class="form-control" >
+    @if ($errors->has('password'))<label class="control-label" for="inputError"> {{ $errors->first('password') }}</label>@endif
+           </div>
+</div>
+
+
+<div class="form-group">
+            <label for="inputEmail" class="control-label col-xs-2">Confirm Password</label>
+            <div class="col-xs-6">
+            <input type="text" name="cpassword" id="cpassword"  class="form-control" >
+    @if ($errors->has('cpassword'))<label class="control-label" for="inputError"> {{ $errors->first('cpassword') }}</label>@endif
+           </div>
+</div>
+
+
+<div class="form-group">
+            <label for="inputEmail" class="control-label col-xs-2"></label>
+            <div class="col-xs-6">
+             <button type="submit" class="btn btn-default">Submit</button>
+            </div>
+</div>
+
+
+</form>
 
             </div>
 					    

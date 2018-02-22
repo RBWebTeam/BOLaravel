@@ -26,7 +26,7 @@ Route::post('admin-login','LoginController@login');
 
 Route::get('register-user','LoginController@register_user');
 Route::post('register-user','LoginController@registerinsert');
-Route::get('register-user','LoginController@getsate');
+//Route::get('register-user','LoginController@register_user');
 Route::post('register-user-save','LoginController@register_user_save');
 
 Route::get('dashboard','DashboardController@dashboard');
@@ -108,7 +108,10 @@ Route::get('sales-material','BookAppointmentController@sales_material');
 Route::post('sales-material-update','BookAppointmentController@sales_material_update');
 
 
-/*Menu List*/ 
+ 
+  /************
+//  Menu List
+******************/
 Route::get('menu-list','MenuController@menu_list');
 Route::post('menu-add','MenuController@menu_add');
 Route::get('menu-mapping','MenuController@mapping');
@@ -120,13 +123,24 @@ Route::get('menu-group','MenuController@menu_group');
 Route::post('menu-group-save','MenuController@menu_group_save');
 
   /************
-//  LEAD  RM
+//  Regional manager
+******************/
+Route::group(['namespace' => 'RM',  ], function() {
+
+Route::get('regional-manager','RegionalManagerControllar@regional_manager');
+});
+  /************
+// LEAD MANAGMENT
 ******************/
 Route::group(['namespace' => 'leadController',  ], function() {
 Route::get('lead-up-load','LeaduploadController@lead_up_load');
 Route::post('import-excel','LeaduploadController@importExcel');        
 Route::post('lead-update','LeaduploadController@lead_update');          
 Route::post('lead-interested','LeaduploadController@interested'); 
+
+Route::get('lead-test','LeaduploadController@lead_test');
+Route::get('marketing-leads','LeaduploadController@marketing_leads');
+
 });
 
 

@@ -15,8 +15,10 @@ class LeaduploadController extends Controller{
                  // $query=DB::table('raw_lead_master')->get();
                   $lead_status=DB::table('lead_status_master')->get();
                   $lead_type=DB::table('lead_type_master')->get();
+
+               
          
-           $query=DB::select('call sp_raw_lead_master(?)',array(Session::get('emp_id')));
+           $query=DB::select('call sp_raw_lead_master(?)',array(Session::get('fbauserid')));
 
  
 
@@ -74,7 +76,7 @@ if(isset($city->city_id)){
            'address'=>$value['address'],
             'pincode'=>$value['pincode'],
             'campaign_id'=>$value['campaign'],
-            'user_id'=>Session::get('emp_id'),
+            'user_id'=>Session::get('fbauserid'),
             'ip_address'=>\Request::ip(),
             'created_on'=>date('Y-m-d H:i:s'),); 
       	DB::table('raw_lead_master')->insert($arra);    } } 
@@ -91,12 +93,10 @@ if(isset($city->city_id)){
         	           $arr=array();
         	             try{
         	             	 if($req->lead_status_id==14){
-        	             	 // $mes=$this->interested($req->mobile,$req->lead_id);
+        	             	  // $mes=$this->interested($req->mobile,$req->lead_id);
                            $mes=0;
         	             	 	if($mes==0){ $status="msm"; 
                              $check=1;
-                          }else{
-                             $check=0;
                           }
         	             	 }
                           
@@ -113,26 +113,117 @@ if(isset($city->city_id)){
 
 }
 
-        public   function interested($mobile,$lead_type_id){
- 
-//https://play.google.com/store/apps/details?id=com.datacomp.magicfinmart&referrer=abcd123
-
- 
-
+public   function interested($mobile,$lead_type_id){
+$error=1;
+try{
 $referrer_id="abcd123";
-$arra=array(
+
+ 
+  $url_msg="https://www.googleapis.com/urlshortener/v1/url?key=AIzaSyC5QQQlA1pEPjcZcD86xJ7nZrGOrhMk8LI";
+  $data_msg='{
+        "longUrl":"https://play.google.com/store/apps/details?id=com.datacomp.magicfinmart&referrer='.$referrer_id.'"
+         }';
+ $result_msg=$this->call_json($url_msg,$data_msg);
+ $http_result_msg=$result_msg['http_result'];
+ $obj_msg= json_decode($http_result_msg);
+ if(isset($obj_msg->longUrl)){
+     $longUrl=$obj_msg->longUrl;
+     $link=$obj_msg->id;
+      //lecho      $link;exit;
+      if($sms_result==0){
+        $sms_result=$this->sent_msg($referrer_id,$link,$mobile,$lead_type_id);
+      $error=0;
+      }else{
+        $error=1;
+      }
+      }else{
+      $error=1; 
+      } 
+          
+            
+     }catch (Exception $e){  $error=1;  }
+return $error;
+
+  
+        
+  } 
+
+public   function lead_test(){
+
+
+
+
+
+     $query=DB::table('raw_lead_master')->select('id','mobile')->where('link','=',null)->get();
+
+
+     foreach ($query as $key => $value) {
+            if($key>19822){
+             exit;
+              }
+      $url_msg="https://www.googleapis.com/urlshortener/v1/url?key=AIzaSyC5QQQlA1pEPjcZcD86xJ7nZrGOrhMk8LI";
+      $data_msg='{
+          "longUrl":"http://bo.magicfinmart.com/marketing_leads?id='.$value->id.'"
+           }';
+   $result_msg=$this->call_json($url_msg,$data_msg);
+   $http_result_msg=$result_msg['http_result'];
+   $obj_msg= json_decode($http_result_msg);
+   if(isset($obj_msg->longUrl)){
+       $longUrl=$obj_msg->longUrl;
+       $link=$obj_msg->id;
+      $arr=array('link' =>$link);
+      DB::table('raw_lead_master')->where('id','=',$value->id)->update($arr);
+       
+    } 
+  }
+
+     
+
+
+}
+
+
+public function  marketing_leads(Request $req){
+
+  $a=array("6923","6925","6926","6927");
+$random_keys=array_rand($a,1);
+//var_dump($random_keys);
+
+         if(isset($req->id)){
+       $arr=array('video_click' =>1,
+         'video_date_time'=>date('Y-m-d H:i:s'),
+          'user_id'=> $a[$random_keys]
+         );
+       DB::table('raw_lead_master')->where('id','=',$req->id)->update($arr);
+} 
+ if(isset($req->mobile)){
+$arr=array('misscall' =>1,
+         'mc_date_time'=>date('Y-m-d H:i:s'),
+            'user_id'=>$a[$random_keys]
+         );
+       DB::table('raw_lead_master')->where('mobile','=',$req->mobile)->update($arr);
+
+  }
+
+
+ 
+
+
+
+            return  view('marketing_leads');
+
+  }
+
+public function sent_msg($referrer_id,$link,$phone,$lead_type_id){
+  try{
+  $arra=array(
     'ref_code'=>$referrer_id,
     'ref_type'=>Session()->get('UserType'),
-    'ref_id'=>Session()->get('emp_id'),
+    'ref_id'=>Session()->get('FBAId'),
     "created_on"=>date('Y-m-d H:i:s'),
     'lead_id'=>$lead_type_id,
   );
- 
- $link="https://play.google.com/store/apps/details?id=com.datacomp.magicfinmart&referrer='".$referrer_id."'";
- 
-          try{
-            $error=null;
-            $post_data='{
+$post_data='{
             "mobNo":"8898540057",
             "msgData":"'.$link.'",
              }';
@@ -144,20 +235,17 @@ $arra=array(
              $obj = json_decode($http_result);
  
             if($obj->status=='success'){
-
                DB::table('referral_master')->insert($arra);
               $error=0;
 
             }else{
               $error=1;
             }
-            }catch (Exception $e){  $error=1;  }
+         
+          }catch (Exception $e){  $error=1; }
             return $error;
 
-  
-        
-  } 
-
+}
 
 public function call_json($url,$data){
 		$ch = curl_init();
