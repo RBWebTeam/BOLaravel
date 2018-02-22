@@ -115,7 +115,7 @@
 					                  <td><a href="" data-toggle="modal" data-target="#partnerInfo">partner info</a></td>
 					                  <td>Pending</td>
 					                  <td><?php echo $val->bankaccount; ?></td>
-					                   <td><a href="#" data-toggle="modal" data-target="#sms_sent_id" onclick="SMS_FN(<?php echo $val->fbaid;?>,7218150396)"><span class="glyphicon glyphicon-envelope"></span></a></td>
+					                   <td><a href="#" data-toggle="modal" data-target="#sms_sent_id" onclick="SMS_FN(<?php echo $val->fbaid;?>,<?php echo $val->MobiNumb1;?>)"><span class="glyphicon glyphicon-envelope"></span></a></td>
 					                  <td><a href="#" style="" data-toggle="modal" data-target='.salesupdate'>update</a></td>
 					                  
 					              </tr>
@@ -154,7 +154,7 @@
                             <td><a href="" data-toggle="modal" data-target="#partnerInfo">partner info</a></td>
                             <td>Pending</td>
                             <td><?php echo $val->bankaccount; ?></td>
-                             <td><a href="#" data-toggle="modal" data-target="#sms_sent_id" onclick="SMS_FN(<?php echo $val->fbaid;?>,7218150396)"><span class="glyphicon glyphicon-envelope"></span></a></td>
+                             <td><a href="#" data-toggle="modal" data-target="#sms_sent_id" onclick="SMS_FN(<?php echo $val->fbaid;?>,<?php echo $val->MobiNumb1;?>)"><span class="glyphicon glyphicon-envelope"></span></a></td>
                             <td><a href="#" style="" data-toggle="modal" data-target='.salesupdate'>update</a></td>
                             
                         </tr>
@@ -179,12 +179,12 @@
         <h4 class="modal-title">SEND SMS</h4>
       </div>
       <div class="modal-body">
-        <form id="message_sms_id">
+        <form id="message_sms_from" method="post">
+          {{ csrf_field() }}
           <div class="form-group">
             <label class="control-label" for="recipient-name">Mobile Nubmer:</label>
-            <input class="form-control Mobile_ID" id="recipient-name" type="text" name="mobile_no" readonly=""/>
-            <input id="fba_id" type="hidden" name="fbaid"/>
-          </div>
+            <input class="form-control Mobile_ID" id="recipient" type="text" name="mobile_no" readonly=""/>
+            </div>
           <div class="form-group">
             <label class="control-label" for="message-text">SMS :</label>
             <textarea class="form-controll sms_id" id="message-text" name="sms"></textarea>

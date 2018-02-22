@@ -1,8 +1,12 @@
 <script type="text/javascript">
-	 function get_fn_id(id,mobile){
+	 function get_fn_id(id,mobile,name,conf_status){
         $('#lead_id_mobile').val(mobile);
-	 	$('#lead_id').val(id);
-       $('#lead_up_load-Modal').modal('show');
+	    	$('#lead_id').val(id);
+        $('#lead_id_lead').val(id);
+        $('#lead_id_name').val(name);
+        if(conf_status!=1){
+             $('#lead_up_load-Modal').modal('show');
+        } 
  }
 function interested_fn(id,mobile){
 $('#lead_id_interested').val(id);
@@ -86,17 +90,6 @@ $('#interested_id-Modal').modal('show');
 });
 
 
-$(document).ready(function() {
-    $('#example').DataTable( {
-        dom: 'Bfrtip',
-        buttons: [
-            'copyHtml5',
-            'excelHtml5',
-            'csvHtml5',
-            'pdfHtml5'
-        ]
-    } );
-} );
-
+ 
 
 </script>

@@ -35,7 +35,7 @@
       <table class="datatable-responsive table table-striped table-bordered dt-responsive nowrap" id="example">
                                     <thead>
                   
-                                       <tr>
+                                       <tr >
                                        
                                        <th>ID</th>
                                      <!--   <th>ref_no</th> -->
@@ -53,9 +53,9 @@
                                       <!--  <th>source_id</th>
                                        <th>lead_source</th> -->
                                        <th>Lead Type</th>
-                                       <th>Campaign ID</th>
+                                       <th>Campaign  </th>
                                        <!-- <th>User ID</th> -->
-                                       <th>IP Address</th>
+                                    <!--    <th>IP Address</th> -->
                                        <th>Lead Status</th>
                                        <th>Lead Date</th>
                                        <th>Followup Date</th>
@@ -70,28 +70,31 @@
 
                                     </thead>
                                     <tbody>
+
+
                                       
                                       @foreach($query as $val)
-                                        <tr>
-                                       
-                                       <td> <a href="#" onclick="get_fn_id('{{$val->id}}','{{$val->mobile}}')" >{{$val->id}}</a> </td>
+                              
+                                        <?php  $class =($val->conf_status==1)? 'background-color: #00C851': '';  ?>
+                                       <tr  style="{{$class}};" >
+                                       <td> <a href="#" onclick="get_fn_id('{{$val->id}}','{{$val->mobile}}','{{$val->name}}','{{$val->conf_status}}')" >{{$val->id}}</a> </td>
                                          
                                        <td>{{$val->name}}</td>
                                        <td>{{$val->mobile}}</td>
-                                       <td> <a href="#" onclick="interested_fn('{{$val->id}}','{{$val->mobile}}')" >{{$val->email}}</a> </td>
+                                       <td>  {{$val->email}} </td>
                                        <td>{{$val->dob}}</td>
                                        <td>{{$val->profession}}</td>
                                        <td>{{$val->monthly_income}}</td>
                                    
                                        <td>{{$val->pan}}</td>
-                                       <td>{{$val->city_id}}</td>
+                                       <td>{{$val->cityname}}</td>
                                        <td>{{$val->address}}</td>
                                        <td>{{$val->pincode}}</td>
                                    
                                        <td>{{$val->lead_type}}</td>
                                        <td>{{$val->campaign_id}}</td>
                                    
-                                       <td>{{$val->ip_address}}</td>
+                                       
                                        <td   >{{$val->lead_status_id}}</td>
                                        <td>{{$val->lead_date}}</td>
                                        <td>{{$val->followup_date}}</td>
@@ -132,7 +135,17 @@
 
        
 
- 
+  <div class="form-group">
+            <label for="inputEmail" class="control-label col-xs-2">ID</label>
+            <div class="col-xs-10" > <input type="text" id="lead_id_lead"  class="form-control"  readonly=""> </div>
+  </div> 
+   
+     <div class="form-group">
+            <label for="inputEmail" class="control-label col-xs-2">name</label>
+            <div class="col-xs-10" > <input type="text" id="lead_id_name"  class="form-control"  readonly=""> </div>
+  </div> 
+   
+
         
    <div class="form-group">
             <label for="inputEmail" class="control-label col-xs-2">Remark</label>
@@ -140,7 +153,7 @@
             <textarea name="remark" id="remark"></textarea>
             </div>
   </div> 
-   
+
 
 
         <div class="form-group">

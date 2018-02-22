@@ -86,34 +86,10 @@ $(document).ready(function(){
                        $('.updateLoan').modal('show');
 
              }
+
           
-                                   // Sent sms popup
-            /*$('.message_sms_id').click(function(event){  event.preventDefault();
-                       var sms=$('.sms_id').val();
-                                
-                          if(sms){
-                              $.post('/fba-list', $('#message_sms_id').serialize())
-                               .done(function(msg){ 
-                                  //{ message: 'SMS Sent', status: 'success', statusId: 0 }
-                                      if(msg.statusId==0){
-                                         $('#strong_id').html('<strong>Success!</strong> SMS Sent successful..');
-                                      }
-                                   console.log(msg);
-                               }).fail(function(xhr, status, error) {
-                               console.log(error);
-                               });
-                          }else{
-                              alert("abc..");
-                          }
-            });
-<<<<<<< HEAD
-
- // Extend dataTables search
-=======
-*/
 /* Extend dataTables search*/
-
- $(document).ready(function(){
+$(document).ready(function(){
                   $.fn.dataTable.ext.search.push(
                   function (settings, data, dataIndex) {
                       var min = $('#min').datepicker("getDate");
@@ -136,7 +112,7 @@ $(document).ready(function(){
                       $('#min, #max').change(function () {
                           table.draw();
                       });
-                  });
+});
 
 //script for fsm register..
 
@@ -271,11 +247,7 @@ $('.unblock').click(function(){
 $('.posp_from_id').click(function(){
   var flag=$(this).closest('div').find('input[name="flage_id"]').val();
   var fbaid=$(this).closest('div').find('input[name="fbaid"]').val();
-<<<<<<< HEAD
-  var value=$("#posp_name_id").val();
-
-  $.ajax({
-
+  
   if($('#posp_name_id').val()!="")  {
      var value=$("#posp_name_id").val();
      $.ajax({
@@ -286,17 +258,15 @@ $('.posp_from_id').click(function(){
             console.log(msg);
              alert("posp updated successfully..!");
             $('.updatePosp').modal('hide');
-
-           }
-        });
-
-
             $('#posp_name_id').val('');
+            $( "#posp_name_id" ).focus();
+
            }
         });
    }
-   else{
+  else{
     alert('posp no field can not blank.')
+    $( "#posp_name_id" ).focus();
   }
 
 });
@@ -333,44 +303,44 @@ $('.loan_from_id').click(function(){
             console.log(msg);
              alert("loan id updated successfully..!");
              $('.updateLoan').modal('hide');
-
+            $('#loan_id').val('');
+            
            }
         });
-};
-
-             $('#loan_id').val('');
-           }
-        });
-  }
-  else{
+    }
+else{
     alert('loan no field can not blank.')
+    $( "#loan_id" ).focus();
   }
- 
-};
+ });
+
 
 //send sms from fba
 $('.message_sms_id').click(function(){
-  var Mobile_no= $('#recipient-name').val();
   if($('#message-text').val()!="")  {
-      var message_text=$('#message-text').val();
-      $.ajax({
-            type: "GET",
-            url:'fba-list/'+Mobile_no+'/'+message_text, 
-            success: function( msg ) {
-            console.log(msg);
-            alert('message send successfully..');
-           $('.sms_sent_id').modal('hide');
-            $('#message-text').val('');
-          }
-        });
-    }
-  else{
-      alert('SMS Field can not be blank');
-    }
-  });
-</script>
+  console.log($('#message_sms_from').serialize());
+   $.ajax({ 
+   url: "{{URL::to('fba-list')}}",
+   method:"POST",
+   data: $('#message_sms_from').serialize(),
+   success: function(msg)  
+   {
+    console.log(msg);
+    alert('SMS send successfully..')
+    $('.sms_sent_id').modal('hide');
+    $('#message-text').val('');
+   }
+});
+ }
+ else{
+  alert('sms field can not blank')
+  $( "#message-text" ).focus();
+ }
+});
+</script> 
 
-<!-- <script type="text/javascript">
+
+<script type="text/javascript">
    $.ajax({ 
    url: "{{URL::to('sales-material-product')}}",
    method:"GET",
@@ -391,7 +361,7 @@ $('.message_sms_id').click(function(){
    },
 
  });
-</script> -->
+</script> 
 
 <!-- <script type="text/javascript">
    $.ajax({ 
@@ -443,17 +413,16 @@ $('.message_sms_id').click(function(){
             }
         });
   });
-</script>
 
-<script type="text/javascript">
+
+
   $('#reset').click(function(){
    $("#Product").val("");
    $("#image_file").val("");
    $("#Company").val("");
   });
-</script>
 
-<script type="text/javascript">
+
   $('#sales_submit').click(function(){
     $.ajax({ 
    url: "{{URL::to('sales-material-update')}}",
