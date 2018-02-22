@@ -226,8 +226,7 @@
     </div>
   </div>
 </div>
-<<<<<<< HEAD
-=======
+
 <!-- sales update -->
 
 <div class="salesupdate modal fade" role="dialog">   
