@@ -126,6 +126,7 @@ Route::post('menu-list-add','MenuController@menu_list_add');
 Route::get('menu-test','MenuController@menu_test');
 Route::get('menu-group','MenuController@menu_group');
 Route::post('menu-group-save','MenuController@menu_group_save');
+Route::get('menu-group-select','MenuController@menu_group_select');
 
   /************
 //  Regional manager
@@ -143,12 +144,18 @@ Route::post('import-excel','LeaduploadController@importExcel');
 Route::post('lead-update','LeaduploadController@lead_update');          
 Route::post('lead-interested','LeaduploadController@interested'); 
 
-Route::get('lead-test','LeaduploadController@lead_test');
-Route::get('marketing-leads','LeaduploadController@marketing_leads');
+
+
+Route::get('lead-test','LeaduploadController@lead_test');  
+
 
 });
 
 
  });
 
- 
+ Route::group(['namespace' => 'leadController',  ], function() {
+ Route::get('lead-test','LeaduploadController@lead_test');    // test 
+Route::get('marketing-leads','LeaduploadController@marketing_leads');   // test
+
+});

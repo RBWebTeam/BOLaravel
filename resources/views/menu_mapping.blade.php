@@ -23,16 +23,27 @@
         </div>
 
  
-         <div class="form-group" style="display: none" id="Menu_Mapping">
+         <div class="form-group"   id="Menu_Mapping">
             <label for="inputEmail" class="control-label col-xs-2"> Menu Mapping</label>
-            <div class="col-xs-10">
-                <select id="framework" name="mapping[]" multiple class="form-control" >
+            <div class="col-xs-10" id="mapping_select_id">
+               <select id="framework" name="mapping[]" multiple class="form-control framework" >
+
+               </select>
+
+                
+
+                <!-- <select id="framework11" name="mapping[]" multiple class="form-control" >
                @foreach($menu as $le)
-                   <option value="{{$le->id}}" >{{$le->name}}</option>
+                   @if($le->parent_id!=0)
+                   <option value="{{$le->id}}"  selected>{{$le->name}}</option>
+                   @else
+                    <option value="{{$le->id}}" >{{$le->name}}</option>
+                    @endif
+
                @endforeach
                     </select>
              @if ($errors->has('mapping'))<label class="control-label" for="inputError"> {{ $errors->first('mapping') }}</label>  @endif
-                   
+                    -->
             </div>
         </div>
 
