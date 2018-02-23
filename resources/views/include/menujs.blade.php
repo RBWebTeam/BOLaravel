@@ -2,18 +2,54 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css" />
 <script type="text/javascript">
 	
+
+
+
 $(document).ready(function(){
 
-	$("#menu_group_mapping").change(function(event){  event.preventDefault(); 	 
- 	$('#Menu_Mapping').show();
-});
+	$("#menu_group_mapping").change(function(event){  event.preventDefault(); 	
+         if($(this).val()!=0){
+         // $('#Menu_Mapping').show();
+            $('.framework').empty();
+                 $('#framework').empty();
+                  
+          $.get("{{url('menu-group-select')}}",{'ID':$(this).val()})
+             .done(function(data){ 
+            // var arr=Array('<select id="framework" name="mapping[]" multiple class="form-control mapping_select_id"> ');
+                var arr=Array();
 
+              $.each(data,function(index,val){  
+                      if(val.parent_id!=0){
+                        arr.push('<option value="'+val.id+'" selected >'+val.name+'</option>');
+                      }else{
+                        arr.push('<option value="'+val.id+'" >'+val.name+'</option>');
+                      }
+                    
+               });
+                   // arr.push('</select>');
+   $('.framework').append(arr);
   $('#framework').multiselect({
   nonSelectedText: 'Select Framework',
   enableFiltering: true,
   enableCaseInsensitiveFiltering: true,
   buttonWidth:'400px'
  });
+
+
+          }).fail(function(xhr, status, error) {
+                 console.log(error);
+            });
+
+
+         }
+
+
+
+
+
+   
+});
+
 
 
  

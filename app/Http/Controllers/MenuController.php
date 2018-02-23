@@ -39,13 +39,24 @@ class MenuController extends Controller{
     }
 
 
-    public function mapping(Request $req){
+    public function mapping(Request $req){  
            
                     $menu_group=DB::table('menu_group_master')->select('id','name')->get();
-                    $menu=DB::table('menu_master')->select('id','name')->get();
+                   // $menu=DB::table('menu_master')->select('id','name','parent_id')->get();
+
+                    $menu=DB::table('view_user_right_group')->select('id','name','menu_group_id','url_link','parent_id')->where('menu_group_id','=',4)->get();
+
     	      return view('menu_mapping',['menu_group'=>$menu_group,'menu'=>$menu]);
     }
 
+
+public function menu_group_select(Request $req){
+ 
+
+$menu=DB::table('view_user_right_group')->select('id','name','menu_group_id','url_link','parent_id')->where('menu_group_id','=',$req->ID)->get();
+
+     return $menu;
+}
 
     public function menu_mapping_save(Request $req){
 

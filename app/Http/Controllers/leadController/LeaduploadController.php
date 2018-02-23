@@ -154,7 +154,7 @@ public   function lead_test(){
 
 
 
-     $query=DB::table('raw_lead_master')->select('id','mobile')->where('link','=',null)->get();
+     $query=DB::table('raw_lead_master')->select('id','mobile')->get();
 
 
      foreach ($query as $key => $value) {
@@ -184,7 +184,8 @@ public   function lead_test(){
 
 
 public function  marketing_leads(Request $req){
-
+  
+  $status=null;
   $a=array("6923","6925","6926","6927");
 $random_keys=array_rand($a,1);
 //var_dump($random_keys);
@@ -195,7 +196,7 @@ $random_keys=array_rand($a,1);
           'user_id'=> $a[$random_keys]
          );
        DB::table('raw_lead_master')->where('id','=',$req->id)->update($arr);
-} 
+}  
  if(isset($req->mobile)){
 $arr=array('misscall' =>1,
          'mc_date_time'=>date('Y-m-d H:i:s'),
@@ -203,14 +204,15 @@ $arr=array('misscall' =>1,
          );
        DB::table('raw_lead_master')->where('mobile','=',$req->mobile)->update($arr);
 
-  }
+  } 
 
+ 
 
  
 
 
 
-            return  view('marketing_leads');
+            return  view('marketing_leads')->with('status',$status);
 
   }
 

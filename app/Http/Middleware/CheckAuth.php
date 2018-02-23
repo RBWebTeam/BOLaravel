@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Session;
+
 class CheckAuth
 {
     /**
@@ -25,7 +26,7 @@ class CheckAuth
   //$sql=\DB::table('menu_master')->select('id','name','menu_group_id','url_link')->where('menu_group_id','=',2)->get();
 
  
-
+          
 
 
 
@@ -38,6 +39,7 @@ class CheckAuth
             } 
     });
 
+              view()->share('user_right_group',$sql);
 
     	 	return $next($request);
     	 } 
