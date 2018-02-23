@@ -49,7 +49,6 @@ $(document).ready(function(){
           $('#example').DataTable({
           "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]]
           });
-          
           });
   // start test
 
@@ -345,6 +344,13 @@ $('.message_sms_id').click(function(){
   $( "#message-text" ).focus();
  }
 });
+// upload docs
+function uploaddoc(id){
+                $('#docfbaid').val(id);
+                $('.fbadoc').modal('show');
+     }
+
+
 </script> 
 
 

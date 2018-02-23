@@ -4,7 +4,11 @@
 
 
 			 <div class="container-fluid white-bg">
-			 <div class="col-md-12"><h3 class="mrg-btm">FBA List</h3></div>
+			 <div class="col-md-12"><h3 class="mrg-btm">FBA List<!-- <span><span style="float: right;" class="glyphicon glyphicon-filter" data-toggle="modal" data-target="#Filter" ></span>
+         <span style="float: right;" class="glyphicon glyphicon-refresh" onclick="window.location.reload()"></span> </span> --></h3>
+
+        <hr>
+       </div>
 			 
 			 
 			 <!-- Filter Strat -->
@@ -113,7 +117,7 @@
                             </td>
 					                  <td><?php echo $val->pospname; ?></td>
 					                  <td><a href="" data-toggle="modal" data-target="#partnerInfo">partner info</a></td>
-					                  <td>Pending</td>
+					                  <td><a href="#" style="" data-toggle="modal" data-target='fbadoc' onclick="uploaddoc(<?php echo $val->fbaid;?>)">Pending</a></td>
 					                  <td><?php echo $val->bankaccount; ?></td>
 					                   <td><a href="#" data-toggle="modal" data-target="#sms_sent_id" onclick="SMS_FN(<?php echo $val->fbaid;?>,<?php echo $val->MobiNumb1;?>)"><span class="glyphicon glyphicon-envelope"></span></a></td>
 					                  <td><a href="#" style="" data-toggle="modal" data-target='.salesupdate'>update</a></td>
@@ -152,7 +156,7 @@
                             </td>
                             <td><?php echo $val->pospname; ?></td>
                             <td><a href="" data-toggle="modal" data-target="#partnerInfo">partner info</a></td>
-                            <td>Pending</td>
+                            <td><a href="#" style="" data-toggle="modal" data-target='fbadoc'onclick="uploaddoc(<?php echo $val->fbaid;?>)" >Pending</a></td>
                             <td><?php echo $val->bankaccount; ?></td>
                              <td><a href="#" data-toggle="modal" data-target="#sms_sent_id" onclick="SMS_FN(<?php echo $val->fbaid;?>,<?php echo $val->MobiNumb1;?>)"><span class="glyphicon glyphicon-envelope"></span></a></td>
                             <td><a href="#" style="" data-toggle="modal" data-target='.salesupdate'>update</a></td>
@@ -227,6 +231,43 @@
   </div>
 </div>
 
+ <!-- fab document -->
+ <div class="fbadoc modal fade" role="dialog">   
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+        <h4 class="modal-title">FSM Details</h4>
+      </div>
+      <div class="modal-body">
+        <form id="posp_from_id">
+          <div class="form-group">
+            
+          </div>
+          <div class="form-group">
+            <label class="control-label" for="Document-Type">Document Type: </label>
+            <select class="form-control">
+              <option selected="selected">select Document Type</option>
+              @foreach($doctype as $val)
+             <option value="{{$val->id}}">{{$val->name}}</option>
+              @endforeach
+
+            </select>
+          </div>
+           <div class="form-group">
+            <label class="control-label" for="Document">Document</label>
+            <input type="file" name="document" class="form-control"> 
+          </div>
+        </form>
+        <div class="modal-footer"> 
+          <button class="btn btn-primary" id="btnupload" type="button">Upload</button>
+          <input id="docfbaid" type="hidden" name="docfbaid"/>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- sales update -->
 
 <div class="salesupdate modal fade" role="dialog">   
@@ -267,7 +308,6 @@
       <div class="modal-body">
         <form id="posp_from_id">
           <div class="form-group">
-            
           </div>
           <div class="form-group">
             <label class="control-label" for="message-text">POSP :</label>
@@ -295,7 +335,6 @@
       <div class="modal-body">
         <form id="posp_from_id">
           <div class="form-group">
-            
           </div>
           <div class="form-group">
             <label class="control-label" for="message-text">Loan Id:</label>
@@ -349,6 +388,37 @@
   </div>
 </div>
 <!-- Partner Info End -->
+<!--Filter -->
+<div class="Filter modal fade" id="Filter" role="dialog">   
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+        <h4 class="modal-title">Filter</h4>
+      </div>
+      <div class="modal-body">
+        <form id="posp_from_id">
+          <div class="form-group">
+          </div>
+          <div class="form-group">
+            <select class="recipient-name form-control" > 
+              <option>FBA</option>
+              <option>POSP</option>
+              <option>FBA</option>
+            </select>
+            <input type="text" class="recipient-name form-control" id="" name="" required="yes" />
+             
+          </div>
+        </form>
+        <div class="modal-footer"> 
+          <button class="btn btn-default" type="button" data-dismiss="modal">Close</button>
+          <button id="" class="btn btn-primary" type="button">search</button>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 @endsection
 
 

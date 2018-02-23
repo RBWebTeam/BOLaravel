@@ -26,7 +26,7 @@ class LoginController extends InitialController
    }else{
           
 
-          
+
 
            $query=DB::select('call sp_user_login(?,?,?)',array($request->email,$request->password,$request->ip()));
            
@@ -43,6 +43,7 @@ class LoginController extends InitialController
                     $request->session()->put('empid',$val->empid);
                     $request->session()->put('usergroup',$val->usergroup);
                     $request->session()->put('companyid',$val->companyid);
+
  
  
        
