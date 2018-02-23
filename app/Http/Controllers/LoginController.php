@@ -51,7 +51,7 @@ class LoginController extends InitialController
                  
               return redirect()->intended('dashboard');
         }else{
-                      Session::flash('msg', "Invalid email or password. Please Try again! ");
+                      Session::flash('msg', "Invalid esmail or password. Please Try again! ");
                        return Redirect::back();
                
  }

@@ -237,17 +237,17 @@
     <div class="modal-content">
       <div class="modal-header">
         <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-        <h4 class="modal-title">FSM Details</h4>
+        <h4 class="modal-title">Upload FBA Documents</h4>
       </div>
       <div class="modal-body">
-        <form id="posp_from_id">
+        <form id="fbadocupload">
           <div class="form-group">
             
           </div>
           <div class="form-group">
             <label class="control-label" for="Document-Type">Document Type: </label>
-            <select class="form-control">
-              <option selected="selected">select Document Type</option>
+            <select class="form-control" id="ddldoctype">
+              <option selected="selected" value="0">select Document Type</option>
               @foreach($doctype as $val)
              <option value="{{$val->id}}">{{$val->name}}</option>
               @endforeach

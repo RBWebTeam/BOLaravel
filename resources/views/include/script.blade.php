@@ -350,6 +350,27 @@ function uploaddoc(id){
                 $('.fbadoc').modal('show');
      }
 
+$('#btnupload').click(function(){
+  if($('ddldoctype').val()!=0)  {
+   console.log($('#fbadocupload').serialize());
+   $.ajax({ 
+   url: "{{URL::to('fba-list')}}",
+   method:"POST",
+   data: $('#fbadocupload').serialize(),
+   success: function(msg)  
+   {
+    console.log(msg);
+    alert('document uploaded successfully..')
+    $('.fbadoc').modal('hide');
+    
+   }
+});
+ }
+ else{
+  alert('document type field can not blank')
+  $( "#ddldoctype" ).focus();
+ }
+});
 
 </script> 
 
