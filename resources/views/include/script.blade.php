@@ -45,7 +45,7 @@ $(document).ready(function(){
              });
 
   $(document).ready(function() {
-
+         
           $('#example').DataTable({
           "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]]
           });
@@ -85,93 +85,40 @@ $(document).ready(function(){
                        $('.updateLoan').modal('show');
 
              }
+
           
-                                   // Sent sms popup
-            $('.message_sms_id').click(function(event){  event.preventDefault();
-                       var sms=$('.sms_id').val();
-                                
-                          if(sms){
-                              $.post('/fba-list/sms', $('#message_sms_id').serialize())
-                               .done(function(msg){ 
-                                  //{ message: 'SMS Sent', status: 'success', statusId: 0 }
-                                      if(msg.statusId==0){
-                                         $('#strong_id').html('<strong>Success!</strong> SMS Sent successful..');
-                                      }
-                                   console.log(msg);
-                               }).fail(function(xhr, status, error) {
-                               console.log(error);
-                               });
-                          }else{
-                              alert("abc..");
-                          }
-            });
-// POSP UPADTE MODEL
-            /* $('.posp_from_id').click(function(event){  event.preventDefault();
-                       var sms=$('#posp_name_id').val();
-                                 
-                          if(sms){
-                              $.post('/fba-list/posp-update', $('#posp_from_id').serialize())
-                               .done(function(msg){ 
-                                              if(msg.status==0){
-                                                                    
-                                                                   $('#strong_lead').html('<strong>Success!</strong>  update..');
-                                                                    if($('#flage_id').val()==1){
-                                                                    fba_id_posp=$('#fba_id_posp').val();
-                                                                    $('#'+fba_id_posp).empty();
-                                                                    $('#'+fba_id_posp).append($('#posp_name_id').val());
-                                                                    }if($('#flage_id').val()==2){
-                                                                         //LoanID
+/* Extend dataTables search*/
 
-                                                                    fba_id_posp=$('#fba_id_posp').val();
-                                                                      alert(fba_id_posp);
-                                                                     $('#LoanID'+fba_id_posp).empty();
-                                                                     $('#LoanID'+fba_id_posp).append($('#posp_name_id').val());
-                                                                    }
-                                                   
 
-                                                        setTimeout(function () {
-                                                             $( '#posp_from_id' ).each(function(){
-                                                                this.reset();
-                                                            }); 
-                                                                       
-                                                                   
-                                                            $('.updatePosp').modal('hide');
-                                                            $('#strong_lead').empty();
-                                                    },1000);
-                                                
-                                              }
-                                   
-                               }).fail(function(xhr, status, error) {
-                               console.log(error);
-                               });
-                          }else{
-                              alert("abc..");
-                          }
-            })*/
- // Extend dataTables search
- $(document).ready(function(){
+
+$(document).ready(function(){
+
                   $.fn.dataTable.ext.search.push(
-                 /* function (settings, data, dataIndex) {
+                  function (settings, data, dataIndex) {
                       var min = $('#min').datepicker("getDate");
                       var max = $('#max').datepicker("getDate");
-                      var startDate = new Date(data[1]);
+                      var startDate = new Date(data[4]);
                       if (min == null && max == null) { return true; }
                       if (min == null && startDate <= max) { return true;}
                       if(max == null && startDate >= min) {return true;}
                       if (startDate <= max && startDate >= min) { return true; }
                       return false;
-                  }*/
+                  }
                   );
 
                 
-                      /*$("#min").datepicker({ onSelect: function () { table.draw(); }, changeMonth: true, changeYear: true });
-                      $("#max").datepicker({ onSelect: function () { table.draw(); }, changeMonth: true, changeYear: true });*/
+                      $("#min").datepicker({ onSelect: function () { table.draw(); }, changeMonth: true, changeYear: true });
+                      $("#max").datepicker({ onSelect: function () { table.draw(); }, changeMonth: true, changeYear: true });
                       var table = $('#example').DataTable();
 
                       // Event listener to the two range filtering inputs to redraw on input
-                      $('#min, #max').change(function () {
+                      $('#min, #max').change(function () {  console.log("Sdfdsf");
                           table.draw();
                       });
+
+
+                        
+
                   });
 
 //script for fsm register..
@@ -258,7 +205,6 @@ function insertfsm() {
    success: function(msg)  
    {
     console.log(msg);
-    alert("Record saved successfully..");
    }
 
 });
@@ -304,21 +250,32 @@ $('.unblock').click(function(){
 });
  
 
-
+//update posp from fba
 $('.posp_from_id').click(function(){
   var flag=$(this).closest('div').find('input[name="flage_id"]').val();
   var fbaid=$(this).closest('div').find('input[name="fbaid"]').val();
-  var value=$("#posp_name_id").val();
- $.ajax({
+  
+  if($('#posp_name_id').val()!="")  {
+     var value=$("#posp_name_id").val();
+     $.ajax({
+
             type: "GET",
             url:'fba-list/'+fbaid+'/'+value+'/'+flag, 
             success: function( msg ) {
             console.log(msg);
+             alert("posp updated successfully..!");
+            $('.updatePosp').modal('hide');
+            $('#posp_name_id').val('');
+            $( "#posp_name_id" ).focus();
+
            }
         });
- alert("posp updated successfully..!");
- $('.updatePosp').modal('hide');
- location.reload();
+   }
+  else{
+    alert('posp no field can not blank.')
+    $( "#posp_name_id" ).focus();
+  }
+
 });
 
 
@@ -339,46 +296,65 @@ $('.posp_from_id').click(function(){
 //  });
 // }   
 
-
+//update loan id from fba
 $('.loan_from_id').click(function(){
   var flag=$(this).closest('div').find('input[name="flage_idloan"]').val();
   var fbaid=$(this).closest('div').find('input[name="fba_id_loan"]').val();
-  var value=$("#loan_id").val();
   
- $.ajax({
+  if($('#loan_id').val()!="")  {
+    var value=$("#loan_id").val();
+    $.ajax({
             type: "GET",
             url:'fba-list/'+fbaid+'/'+value+'/'+flag, 
             success: function( msg ) {
             console.log(msg);
+             alert("loan id updated successfully..!");
+             $('.updateLoan').modal('hide');
+            $('#loan_id').val('');
+            
            }
         });
- alert("loan id updated successfully..!");
- $('.updateLoan').modal('hide');
- location.reload();
-});
-
-
-
-/*function chkpospid(){
-  if($("#txtPosp").val()!="")
-  {
-     $('.check').css("display", "none");
+    }
+else{
+    alert('loan no field can not blank.')
+    $( "#loan_id" ).focus();
   }
-  else if($("#txtloan").val()!=""){
-    $('.checkloan').css("display", "none");
-  }
-  else{
-   $('.check').css("display", " ");
-   $('.checkloan').css("display", " ");
-  }
-}
- $(document).ready(function(){
-   chkisblock();
  });
-*/
-</script>
 
-<!-- <script type="text/javascript">
+
+//send sms from fba
+$('.message_sms_id').click(function(){
+  if($('#message-text').val()!="")  {
+  console.log($('#message_sms_from').serialize());
+   $.ajax({ 
+   url: "{{URL::to('fba-list')}}",
+   method:"POST",
+   data: $('#message_sms_from').serialize(),
+   success: function(msg)  
+   {
+    console.log(msg);
+    alert('SMS send successfully..')
+    $('.sms_sent_id').modal('hide');
+    $('#message-text').val('');
+   }
+});
+ }
+ else{
+  alert('sms field can not blank')
+  $( "#message-text" ).focus();
+ }
+});
+// upload docs
+function uploaddoc(id){
+                $('#docfbaid').val(id);
+                $('.fbadoc').modal('show');
+     }
+
+
+</script> 
+
+
+<script type="text/javascript">
    $.ajax({ 
    url: "{{URL::to('sales-material-product')}}",
    method:"GET",
@@ -399,7 +375,7 @@ $('.loan_from_id').click(function(){
    },
 
  });
-</script> -->
+</script> 
 
 <!-- <script type="text/javascript">
    $.ajax({ 
@@ -451,17 +427,16 @@ $('.loan_from_id').click(function(){
             }
         });
   });
-</script>
 
-<script type="text/javascript">
+
+
   $('#reset').click(function(){
    $("#Product").val("");
    $("#image_file").val("");
    $("#Company").val("");
   });
-</script>
 
-<script type="text/javascript">
+
   $('#sales_submit').click(function(){
     $.ajax({ 
    url: "{{URL::to('sales-material-update')}}",
@@ -485,6 +460,7 @@ $('.loan_from_id').click(function(){
 
  });
   });
+
 </script>
 
 <script type="text/javascript">
@@ -543,6 +519,80 @@ $('.loan_from_id').click(function(){
       
         
       });
+
+
+
+
+
+$(document).ready(function(){
+ var  st_array=Array('<option value="0">Select</option>');
+ $.ajax({
+  url: "{{ url('search-state')}}",
+  dataType: "json",
+  data: { },
+  success: function(data) {
+    $.each(data, function( key, val ) {
+      st_array.push('<option value="'+val.datavalue+'">'+val.value+'</option>');
+    });
+    $('.search_state').empty();
+    $('.search_state').append(st_array);
+     public_state=st_array;
+ 
+    $('.riskstateid').empty();
+    $('.riskstateid').append(st_array);  
+
+  }
+});
+
+});
+
+
+
+$(document).on('change', '#search_state', function() {   
+ var fstate_id=$(this).val();  
+ var  city_array=Array('<option value="0">Select</option>');  
+ $.ajax({
+  url: "{{url('search-city')}}",
+  dataType: "json",
+  data: {
+    fstate_id : fstate_id,
+  },
+  success: function(data) { 
+    $.each(data, function( key, val ) {
+      city_array.push('<option value="'+val.datavalue+'">'+val.value+'</option>');
+    });
+    $('.search_district').empty();
+    $('.search_district').append(city_array);
+
+  }
+});
+
+});
+
+
+
+
+
+   function pan_card(obj,val){  alert(obj);
+    if(obj=='pan_no' ){
+                   var str =$('#pan_no').val();
+                   var pancardPattern = /^([a-zA-Z]{5})(\d{4})([a-zA-Z]{1})$/;
+                   var res = str.match(pancardPattern);
+                   if(res){
+                     // console.log('Pancard is valid one.!!');
+                      $('#pan_number').hide();
+
+                  }else{
+                    // console.log('Oops.Please Enter Valid Pan Number.!!');
+                    $('#pan_number').show();
+
+                    return false;
+                  }
+                  
+  }
+}
+
+
 </script>
 
 

@@ -25,8 +25,16 @@ Route::post('admin-login','LoginController@login');
  
 
 Route::get('register-user','LoginController@register_user');
+Route::get('register-update/{id}','LoginController@register_update');
+Route::post('register-user-update','LoginController@register_user_update');
+ // city  state
+Route::get('search-state','LoginController@search_state');
+Route::get('search-city','LoginController@search_city');
+
+// end city state
+
 Route::post('register-user','LoginController@registerinsert');
-Route::get('register-user','LoginController@getsate');
+//Route::get('register-user','LoginController@register_user');
 Route::post('register-user-save','LoginController@register_user_save');
 
 Route::get('dashboard','DashboardController@dashboard');
@@ -34,6 +42,11 @@ Route::get('dashboard','DashboardController@dashboard');
 //Fba details
 Route::get('fba-list','FbaController@fba_list');
 Route::get('fba-list/{fbaid}/{value}/{flag}',array('as'=>'fba-list.ajax','uses'=>'FbaController@updateposp'));
+Route::post('fba-list','FbaController@sendsms');
+
+//fba documents 
+Route::get('Fba-document','fbadocumentsController@fbadocument');
+
 Route::get('fba-blocklist','fbablocklistController@fbablocklist');
 Route::get('fba-blocklist/{flag}/{value}',array('as'=>'fbablocklist.ajax','uses'=>'fbablocklistController@fbablockunblock'));
 Route::get('lead-details','LeadDetailsController@lead_details1');
@@ -107,7 +120,10 @@ Route::get('sales-material','BookAppointmentController@sales_material');
 Route::post('sales-material-update','BookAppointmentController@sales_material_update');
 
 
-/*Menu List*/ 
+ 
+  /************
+//  Menu List
+******************/
 Route::get('menu-list','MenuController@menu_list');
 Route::post('menu-add','MenuController@menu_add');
 Route::get('menu-mapping','MenuController@mapping');
@@ -117,18 +133,38 @@ Route::post('menu-list-add','MenuController@menu_list_add');
 Route::get('menu-test','MenuController@menu_test');
 Route::get('menu-group','MenuController@menu_group');
 Route::post('menu-group-save','MenuController@menu_group_save');
+Route::get('menu-group-select','MenuController@menu_group_select');
 
   /************
-//  LEAD  RM
+//  Regional manager
+******************/
+Route::group(['namespace' => 'RM',  ], function() {
+
+Route::get('regional-manager','RegionalManagerControllar@regional_manager');
+});
+  /************
+// LEAD MANAGMENT
 ******************/
 Route::group(['namespace' => 'leadController',  ], function() {
 Route::get('lead-up-load','LeaduploadController@lead_up_load');
 Route::post('import-excel','LeaduploadController@importExcel');        
 Route::post('lead-update','LeaduploadController@lead_update');          
 Route::post('lead-interested','LeaduploadController@interested'); 
+Route::post('lead-management-update','LeaduploadController@lead_management_update');
+Route::get('lead-status','LeadstatusController@lead_status');
+
+
+
+Route::get('lead-test','LeaduploadController@lead_test');  
+
+
 });
 
 
  });
 
- 
+ Route::group(['namespace' => 'leadController',  ], function() {
+ Route::get('lead-test','LeaduploadController@lead_test');    // test 
+Route::get('marketing-leads','LeaduploadController@marketing_leads');   // test
+
+});

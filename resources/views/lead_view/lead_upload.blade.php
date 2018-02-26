@@ -3,6 +3,7 @@
 
 
 
+ 
        <div class="container-fluid white-bg">
        <div class="col-md-12"><h3 class="mrg-btm">Import in Database</h3></div>
        
@@ -35,7 +36,7 @@
       <table class="datatable-responsive table table-striped table-bordered dt-responsive nowrap" id="example">
                                     <thead>
                   
-                                       <tr>
+                                       <tr >
                                        
                                        <th>ID</th>
                                      <!--   <th>ref_no</th> -->
@@ -46,16 +47,16 @@
                                        <th>Profession</th>
                                        <th>Monthly_income</th>
                                      <!--   <th>product_id</th> -->
-                                       <th>Mobile No</th>
+                                       <th>Pan No</th>
                                        <th>City Name</th>
                                        <th>Address</th>
                                        <th>Pin code</th>
                                       <!--  <th>source_id</th>
                                        <th>lead_source</th> -->
                                        <th>Lead Type</th>
-                                       <th>Campaign ID</th>
+                                       <th>Campaign  </th>
                                        <!-- <th>User ID</th> -->
-                                       <th>IP Address</th>
+                                    <!--    <th>IP Address</th> -->
                                        <th>Lead Status</th>
                                        <th>Lead Date</th>
                                        <th>Followup Date</th>
@@ -64,41 +65,53 @@
                                        <th>Flag</th> -->
                                        <th>Date</th>
                                       <!--  <th>Updated_on</th> -->
-                                     
+                                       <th>Video click</th>
+                                       <th>Misscall  </th>
+                                         <th>languages   </th>
                                         
                                       </tr>
 
                                     </thead>
                                     <tbody>
+
+
                                       
                                       @foreach($query as $val)
-                                        <tr>
-                                       
-                                       <td> <a href="#" onclick="get_fn_id('{{$val->id}}','{{$val->mobile}}')" >{{$val->id}}</a> </td>
+                              
+                                        <?php  $class =($val->conf_status==1)? 'background-color: #00C851': '';  ?>
+                                       <tr  style="{{$class}};" >
+                                       <td> <a href="#" onclick="get_fn_id('{{$val->id}}','{{$val->mobile}}','{{$val->name}}','{{$val->conf_status}}')" >{{$val->id}}</a> </td>
                                          
                                        <td>{{$val->name}}</td>
-                                       <td>{{$val->mobile}}</td>
-                                       <td> <a href="#" onclick="interested_fn('{{$val->id}}','{{$val->mobile}}')" >{{$val->email}}</a> </td>
+                                       <td><a href="#" onclick="leadd_update_client('{{$val->id}}','{{$val->mobile}}','{{$val->name}}','{{$val->email}}','{{$val->dob}}','{{$val->profession}}','{{$val->monthly_income}}','{{$val->pan}}','{{$val->cityname}}','{{$val->address}}','{{$val->pincode}}','{{$val->campaign_id}}')" >{{$val->mobile}}</a></td>  
+                                       <td>  {{$val->email}} </td>
                                        <td>{{$val->dob}}</td>
                                        <td>{{$val->profession}}</td>
                                        <td>{{$val->monthly_income}}</td>
                                    
                                        <td>{{$val->pan}}</td>
-                                       <td>{{$val->city_id}}</td>
+                                       <td>{{$val->cityname}}</td>
                                        <td>{{$val->address}}</td>
                                        <td>{{$val->pincode}}</td>
                                    
                                        <td>{{$val->lead_type}}</td>
                                        <td>{{$val->campaign_id}}</td>
                                    
-                                       <td>{{$val->ip_address}}</td>
+                                       
                                        <td   >{{$val->lead_status_id}}</td>
                                        <td>{{$val->lead_date}}</td>
                                        <td>{{$val->followup_date}}</td>
                                        
                                        <td >{{$val->remark}}</td>
-                                       
                                        <td>{{$val->created_on}}</td>
+                                   
+                                      <?php  $video_click =($val->video_click==1)?'Yes': 'NO';  ?>
+                                       <?php  $misscall =($val->misscall==1)?'Yes': 'NO';  ?>
+                                        <td >{{$video_click}}</td>
+                                        <td>{{$misscall}}</td>
+                                        <td>{{$val->lang}}</td>
+
+                                        
                                   
                                      
                                         
@@ -132,7 +145,17 @@
 
        
 
- 
+  <div class="form-group">
+            <label for="inputEmail" class="control-label col-xs-2">ID</label>
+            <div class="col-xs-10" > <input type="text" id="lead_id_lead"  class="form-control"  readonly=""> </div>
+  </div> 
+   
+     <div class="form-group">
+            <label for="inputEmail" class="control-label col-xs-2">name</label>
+            <div class="col-xs-10" > <input type="text" id="lead_id_name"  class="form-control"  readonly=""> </div>
+  </div> 
+   
+
         
    <div class="form-group">
             <label for="inputEmail" class="control-label col-xs-2">Remark</label>
@@ -140,7 +163,7 @@
             <textarea name="remark" id="remark"></textarea>
             </div>
   </div> 
-   
+
 
 
         <div class="form-group">
@@ -231,6 +254,145 @@
     </div>
   </div>
 </div>
+
+
+
+
+
+
+
+
+<div class="modal fade" id="lead-update-client-Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Lead Upadte</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <form class="form-horizontal" method="post"  id="lead_update_client_form" > {{ csrf_field() }}
+      <input type="hidden" name="lead_id" id="clientId" >
+       <div class="form-group">
+                <label for="inputEmail" class="control-label col-xs-2">Name</label>
+                <div class="col-xs-10">
+                  <input type="text" name="name" id="clientName"  class="form-control" required   >
+                  <label class="control-label" for="inputError" id="Errorname"></label>
+                </div>
+      </div> 
+       <div class="form-group">
+                  <label for="inputEmail" class="control-label col-xs-2">Mobile</label>
+                  <div class="col-xs-10">
+          <input type="text" name="mobile" id="clientMobile"  maxlength="10" onkeypress="return Numeric(event)"  class="form-control" >
+
+           <label class="control-label" for="inputError" id="Errormobile"></label>
+                  </div>
+        </div> 
+
+          <div class="form-group">
+                  <label for="inputEmail" class="control-label col-xs-2">Email</label>
+                  <div class="col-xs-10">
+                    <input type="text" name="email" id="clientEmail"  class="form-control" >
+                    <label class="control-label" for="inputError" id="Erroremail"></label>
+                  </div>
+         </div> 
+
+
+         <div class="form-group">
+                  <label for="inputEmail" class="control-label col-xs-2">DOB</label>
+                  <div class="col-xs-10">
+                          
+                      <div id="min"  class="input-group date" data-date-format="dd-mm-yyyy">
+                       <input class="form-control" type="text" name="dob" placeholder="From Date" id="clientDOB"  >
+                      <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+
+                     
+                      </div>
+                        <label class="control-label" for="inputError" id="Errordob"></label>
+
+                  </div>
+        </div> 
+
+
+
+         <div class="form-group">
+                  <label for="inputEmail" class="control-label col-xs-2">Profession</label>
+                  <div class="col-xs-10">
+                    <input type="text" name="profession" id="clientProfession"  class="form-control" >
+                    <label class="control-label" for="inputError" id="Errorprofession"></label>
+                  </div>
+        </div> 
+
+
+        <div class="form-group">
+                  <label for="inputEmail" class="control-label col-xs-2">Monthly income</label>
+                  <div class="col-xs-10">
+                    <input type="text" name="monthly_income" id="clientMonthly_income"  class="form-control" >
+                     <label class="control-label" for="inputError" id="Error"></label>
+                  </div>
+        </div> 
+
+
+
+        <div class="form-group">
+                  <label for="inputEmail" class="control-label col-xs-2">Pan No</label>
+                  <div class="col-xs-10">
+                    <input type="text" name="pan_no" id="pan_no"  class="form-control clientPan" oninput="pan_card('pan_no')" maxlength="10"  >
+                    <span id="pan_number" style="display:none;color: red;">Oops.Please Enter Valid Pan Number.!!</span>
+                  </div>
+        </div> 
+
+
+        <div class="form-group">
+                  <label for="inputEmail" class="control-label col-xs-2">City Name</label>
+                  <div class="col-xs-10">
+                    <input type="text" name="cityname" id="clientCityname"  class="form-control" >
+                  </div>
+        </div> 
+
+
+          <div class="form-group">
+                  <label for="inputEmail" class="control-label col-xs-2">Address</label>
+                  <div class="col-xs-10">
+                    <input type="text" name="address" id="clientAddress"  class="form-control" >
+                  </div>
+        </div> 
+
+
+          <div class="form-group">
+                  <label for="inputEmail" class="control-label col-xs-2">Pin code</label>
+                  <div class="col-xs-10">
+                    <input type="text" name="pincode" id="clientPincode"  onkeypress="return Numeric(event)"  class="form-control" >
+                  </div>
+        </div> 
+
+ 
+
+           <div class="form-group">
+                  <label for="inputEmail" class="control-label col-xs-2">Campaign</label>
+                  <div class="col-xs-10">
+                    <input type="text" name="campaign" id="clientCampaign_id"  class="form-control" >
+                  </div>
+          </div> 
+
+
+          
+
+
+
+      </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" id="lead_update_client_id">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+ 
+                                       
 
 
 @endsection

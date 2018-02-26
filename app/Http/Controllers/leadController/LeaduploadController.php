@@ -15,8 +15,10 @@ class LeaduploadController extends Controller{
                  // $query=DB::table('raw_lead_master')->get();
                   $lead_status=DB::table('lead_status_master')->get();
                   $lead_type=DB::table('lead_type_master')->get();
+
+               
          
-         $query=DB::select('call sp_raw_lead_master(?)',array(Session::get('emp_id')));
+           $query=DB::select('call sp_raw_lead_master(?)',array(Session::get('fbauserid')));
 
  
 
@@ -54,13 +56,14 @@ class LeaduploadController extends Controller{
     'email' =>  'required|email|unique:raw_lead_master',
     'panno' =>  'required',
     'pincode' =>  'required',
+     'city' =>  'required',
 
       ]);
 
 
-
-
-      if ($val->passes()){ 
+if ($val->passes()){ 
+$city= DB::table('city_master')->where('cityname', 'LIKE', "%{$value['city']}%")->first();
+if(isset($city->city_id)){
         $arra=array(
          'name'=>$value['name'],
          'mobile'=>$value['mobile'],
@@ -69,14 +72,14 @@ class LeaduploadController extends Controller{
          'profession'=>$value['profession'],
          'monthly_income'=>$value['monthlyincome'],
          'pan'=>$value['panno'],
-          'city_id'=>1,
+          'city_id'=>$city->city_id,
            'address'=>$value['address'],
             'pincode'=>$value['pincode'],
             'campaign_id'=>$value['campaign'],
-            'user_id'=>Session::get('emp_id'),
+            'user_id'=>Session::get('fbauserid'),
             'ip_address'=>\Request::ip(),
             'created_on'=>date('Y-m-d H:i:s'),); 
-      	DB::table('raw_lead_master')->insert($arra);} 
+      	DB::table('raw_lead_master')->insert($arra);    } } 
   }
 
         
@@ -84,20 +87,25 @@ class LeaduploadController extends Controller{
         public function lead_update(Request $req){
         	           $status=null;
         	           $error=1;
+                     $check=0;
                      $followup= $req['lead_followup']?$req['lead_followup']:null; 
 
         	           $arr=array();
         	             try{
         	             	 if($req->lead_status_id==14){
-        	             	 	//$mes=$this->interested($req->mobile);
-                          $mes=0;
-        	             	 	if($mes==0){ $status="msm"; }
+        	             	  // $mes=$this->interested($req->mobile,$req->lead_id);
+                           $mes=0;
+        	             	 	if($mes==0){ $status="msm"; 
+                             $check=1;
+                          }
         	             	 }
+                          
                             $arra=array( "lead_type"=>$req->lead_type_id ,   
                                    "remark"=>$req->remark,
                                    "lead_status_id"=>$req->lead_status_id,
                                   "followup_date"=>$followup,
                                    "lead_date"=>date('Y-m-d H:i:s'),
+                                   "conf_status"=>$check,
                         	);   DB::table('raw_lead_master')  ->where('id',$req->lead_id) ->update($arra); 
                          $error=0; 
                         }catch (Exception $e){  $error=1;  }
@@ -105,32 +113,147 @@ class LeaduploadController extends Controller{
 
 }
 
-        public   function interested($mobile){
+public   function interested($mobile,$lead_type_id){
+$error=1;
+try{
+$referrer_id="abcd123";
 
-
-          try{
-            $error=null;
-            $post_data='{
-            "mobNo":"8898540057",
-            "msgData":"Dear ...,http://localhost:8000/lead-up-load"}';
-
-            $url ="http://services.rupeeboss.com/LoginDtls.svc/xmlservice/sendSMS";
-            $result=$this->call_json($url,$post_data);
-            $http_result=$result['http_result'];
-            $error=$result['error'];
-            $obj = json_decode($http_result);
-            if($obj->status=='success'){
-              $error=0;
-            }else{
-              $error=1;
-            }
-            }catch (Exception $e){  $error=1;  }
-            return $error;
+ 
+  $url_msg="https://www.googleapis.com/urlshortener/v1/url?key=AIzaSyC5QQQlA1pEPjcZcD86xJ7nZrGOrhMk8LI";
+  $data_msg='{
+        "longUrl":"https://play.google.com/store/apps/details?id=com.datacomp.magicfinmart&referrer='.$referrer_id.'"
+         }';
+ $result_msg=$this->call_json($url_msg,$data_msg);
+ $http_result_msg=$result_msg['http_result'];
+ $obj_msg= json_decode($http_result_msg);
+ if(isset($obj_msg->longUrl)){
+     $longUrl=$obj_msg->longUrl;
+     $link=$obj_msg->id;
+      //lecho      $link;exit;
+      if($sms_result==0){
+        $sms_result=$this->sent_msg($referrer_id,$link,$mobile,$lead_type_id);
+      $error=0;
+      }else{
+        $error=1;
+      }
+      }else{
+      $error=1; 
+      } 
+          
+            
+     }catch (Exception $e){  $error=1;  }
+return $error;
 
   
         
   } 
 
+public   function lead_test(){
+
+
+
+
+
+     $query=DB::table('raw_lead_master')->select('id','mobile')->get();
+
+
+     foreach ($query as $key => $value) {
+            if($key>19822){
+             exit;
+              }
+      $url_msg="https://www.googleapis.com/urlshortener/v1/url?key=AIzaSyC5QQQlA1pEPjcZcD86xJ7nZrGOrhMk8LI";
+      $data_msg='{
+          "longUrl":"http://bo.magicfinmart.com/marketing_leads?id='.$value->id.'"
+           }';
+   $result_msg=$this->call_json($url_msg,$data_msg);
+   $http_result_msg=$result_msg['http_result'];
+   $obj_msg= json_decode($http_result_msg);
+   if(isset($obj_msg->longUrl)){
+       $longUrl=$obj_msg->longUrl;
+       $link=$obj_msg->id;
+      $arr=array('link' =>$link);
+      DB::table('raw_lead_master')->where('id','=',$value->id)->update($arr);
+       
+    } 
+  }
+
+     
+
+
+}
+
+
+public function  marketing_leads(Request $req){
+  $lang=null;
+  
+  $status=null;
+  $a=array("6923","6925","6926","6927");
+$random_keys=array_rand($a,1);
+//var_dump($random_keys);
+
+         if(isset($req->id)){
+       $arr=array('video_click' =>1,
+         'video_date_time'=>date('Y-m-d H:i:s'),
+          'user_id'=> $a[$random_keys]
+         );
+       $query=DB::table('raw_lead_master')->where('id','=',$req->id)->update($arr);
+       $select=DB::table('raw_lead_master')->where('id','=',$req->id)->first();
+        $lang=$select->lang;
+
+}  
+ if(isset($req->mobile)){
+$arr=array('misscall' =>1,
+         'mc_date_time'=>date('Y-m-d H:i:s'),
+            'user_id'=>$a[$random_keys]
+         );
+       DB::table('raw_lead_master')->where('mobile','=',$req->mobile)->update($arr);
+        
+        $select=DB::table('raw_lead_master')->where('mobile','=',$req->mobile)->first();
+        $lang=$select->lang;
+  } 
+
+ 
+
+ 
+
+
+
+            return  view('marketing_leads')->with('lang',$lang);
+
+  }
+
+public function sent_msg($referrer_id,$link,$phone,$lead_type_id){
+  try{
+  $arra=array(
+    'ref_code'=>$referrer_id,
+    'ref_type'=>Session()->get('UserType'),
+    'ref_id'=>Session()->get('FBAId'),
+    "created_on"=>date('Y-m-d H:i:s'),
+    'lead_id'=>$lead_type_id,
+  );
+$post_data='{
+            "mobNo":"8898540057",
+            "msgData":"'.$link.'",
+             }';
+ 
+            $url ="http://services.rupeeboss.com/LoginDtls.svc/xmlservice/sendSMS";
+            $result=$this->call_json($url,$post_data);
+            $http_result=$result['http_result'];
+            $error=$result['error'];
+             $obj = json_decode($http_result);
+ 
+            if($obj->status=='success'){
+               DB::table('referral_master')->insert($arra);
+              $error=0;
+
+            }else{
+              $error=1;
+            }
+         
+          }catch (Exception $e){  $error=1; }
+            return $error;
+
+}
 
 public function call_json($url,$data){
 		$ch = curl_init();
@@ -150,6 +273,65 @@ public function call_json($url,$data){
 
 		return $result;
 	}
+
+
+
+
+
+
+
+
+public function lead_management_update(Request $req){   
+
+$error=null;
+   try{
+              $val =Validator::make($req->all(), [
+                'name' => 'required',
+                'mobile' => 'required',
+                'email' => 'required',
+                'dob' => 'required',
+                'profession' => 'required',
+                'monthly_income' => 'required',
+                'pan_no' => 'required',
+                'cityname' => 'required',
+                'address' => 'required',
+                'pincode' => 'required',
+                'campaign' => 'required',
+
+
+                            ]);
+           if ($val->fails()){
+              return response()->json($val->messages(), 200);
+           }else{
+
+                          $arra=array(
+                           'name'=>$req->name,
+                           'mobile'=>$req->mobile,
+                           'email'=>$req->email,
+                           'dob'=>$req->dob,
+                           'profession'=>$req->profession,
+                           'monthly_income'=>$req->monthly_income,
+                           'pan'=>$req->pan_no,
+                           // 'city_id'=>$city->cityname,
+                             'address'=>$req->address ,
+                              'pincode'=>$req->pincode ,
+                              'campaign_id'=>$req->campaign ,
+                              'user_id'=>Session::get('fbauserid'),
+                              'ip_address'=>\Request::ip(),
+                              'created_on'=>date('Y-m-d H:i:s'),); 
+                          
+
+                            //  $query=DB::table('raw_lead_master')->where('id','=',$req->lead_id)->update($arra);
+                   $error=0;
+             }
+             }catch (Exception $e){  $error=1; }
+
+             return $error;
+          
+        
+
+}
+
 
 
 public function sms($mob,$mess){
