@@ -324,6 +324,7 @@ else{
 
 //send sms from fba
 $('.message_sms_id').click(function(){
+
   if($('#message-text').val()!="")  {
   console.log($('#message_sms_from').serialize());
    $.ajax({ 
@@ -340,6 +341,7 @@ $('.message_sms_id').click(function(){
 });
  }
  else{
+
   alert('sms field can not blank')
   $( "#message-text" ).focus();
  }
@@ -350,25 +352,33 @@ function uploaddoc(id){
                 $('.fbadoc').modal('show');
      }
 
-$('#btnupload').click(function(){
-  if($('ddldoctype').val()!=0)  {
-   console.log($('#fbadocupload').serialize());
+$('#btnupload').click(function(event){
+event.preventDefault();
+var formData = new FormData($(this)[0])
+
+  if($("#ddldoctype").val()!==0  && $("#document").val()!=="") {
+  /* console.log($('#fbadocupload').serialize());*/
    $.ajax({ 
-   url: "{{URL::to('fba-list')}}",
+
+   url: "{{URL::to('fba-listdocument')}}",
    method:"POST",
-   data: $('#fbadocupload').serialize(),
+   enctype: 'multipart/form-data',
+   processData: false,  // Important!
+   contentType: false,
+   data: formData,
    success: function(msg)  
    {
     console.log(msg);
-    alert('document uploaded successfully..')
+    alert('document uploaded successfully..');
     $('.fbadoc').modal('hide');
     
    }
 });
  }
  else{
-  alert('document type field can not blank')
+  alert('All field are requried');
   $( "#ddldoctype" ).focus();
+  $( "#document" ).focus();
  }
 });
 

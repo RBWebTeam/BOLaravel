@@ -35,7 +35,7 @@ Route::get('dashboard','DashboardController@dashboard');
 Route::get('fba-list','FbaController@fba_list');
 Route::get('fba-list/{fbaid}/{value}/{flag}',array('as'=>'fba-list.ajax','uses'=>'FbaController@updateposp'));
 Route::post('fba-list','FbaController@sendsms');
-
+Route::post('fba-listdocument','FbaController@uploaddoc');
 
 //fba documents 
 Route::get('Fba-document','fbadocumentsController@fbadocument');

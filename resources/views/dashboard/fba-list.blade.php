@@ -240,23 +240,22 @@
         <h4 class="modal-title">Upload FBA Documents</h4>
       </div>
       <div class="modal-body">
-        <form id="fbadocupload">
+        <form id="fbadocupload" method="POST" enctype="multipart/form-data">
           <div class="form-group">
             
           </div>
           <div class="form-group">
             <label class="control-label" for="Document-Type">Document Type: </label>
-            <select class="form-control" id="ddldoctype">
+            <select class="form-control" id="ddldoctype" name="ddldoctype">
               <option selected="selected" value="0">select Document Type</option>
               @foreach($doctype as $val)
              <option value="{{$val->id}}">{{$val->name}}</option>
               @endforeach
-
-            </select>
+           </select>
           </div>
            <div class="form-group">
             <label class="control-label" for="Document">Document</label>
-            <input type="file" name="document" class="form-control"> 
+            <input type="file" id="document" name="document" class="form-control"> 
           </div>
         </form>
         <div class="modal-footer"> 
