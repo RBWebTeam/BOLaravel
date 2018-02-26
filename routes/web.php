@@ -25,6 +25,14 @@ Route::post('admin-login','LoginController@login');
  
 
 Route::get('register-user','LoginController@register_user');
+Route::get('register-update/{id}','LoginController@register_update');
+Route::post('register-user-update','LoginController@register_user_update');
+ // city  state
+Route::get('search-state','LoginController@search_state');
+Route::get('search-city','LoginController@search_city');
+
+// end city state
+
 Route::post('register-user','LoginController@registerinsert');
 //Route::get('register-user','LoginController@register_user');
 Route::post('register-user-save','LoginController@register_user_save');
@@ -142,6 +150,8 @@ Route::get('lead-up-load','LeaduploadController@lead_up_load');
 Route::post('import-excel','LeaduploadController@importExcel');        
 Route::post('lead-update','LeaduploadController@lead_update');          
 Route::post('lead-interested','LeaduploadController@interested'); 
+Route::post('lead-management-update','LeaduploadController@lead_management_update');
+Route::get('lead-status','LeadstatusController@lead_status');
 
 
 

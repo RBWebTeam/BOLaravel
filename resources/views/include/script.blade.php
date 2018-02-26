@@ -519,6 +519,80 @@ function uploaddoc(id){
       
         
       });
+
+
+
+
+
+$(document).ready(function(){
+ var  st_array=Array('<option value="0">Select</option>');
+ $.ajax({
+  url: "{{ url('search-state')}}",
+  dataType: "json",
+  data: { },
+  success: function(data) {
+    $.each(data, function( key, val ) {
+      st_array.push('<option value="'+val.datavalue+'">'+val.value+'</option>');
+    });
+    $('.search_state').empty();
+    $('.search_state').append(st_array);
+     public_state=st_array;
+ 
+    $('.riskstateid').empty();
+    $('.riskstateid').append(st_array);  
+
+  }
+});
+
+});
+
+
+
+$(document).on('change', '#search_state', function() {   
+ var fstate_id=$(this).val();  
+ var  city_array=Array('<option value="0">Select</option>');  
+ $.ajax({
+  url: "{{url('search-city')}}",
+  dataType: "json",
+  data: {
+    fstate_id : fstate_id,
+  },
+  success: function(data) { 
+    $.each(data, function( key, val ) {
+      city_array.push('<option value="'+val.datavalue+'">'+val.value+'</option>');
+    });
+    $('.search_district').empty();
+    $('.search_district').append(city_array);
+
+  }
+});
+
+});
+
+
+
+
+
+   function pan_card(obj,val){  alert(obj);
+    if(obj=='pan_no' ){
+                   var str =$('#pan_no').val();
+                   var pancardPattern = /^([a-zA-Z]{5})(\d{4})([a-zA-Z]{1})$/;
+                   var res = str.match(pancardPattern);
+                   if(res){
+                     // console.log('Pancard is valid one.!!');
+                      $('#pan_number').hide();
+
+                  }else{
+                    // console.log('Oops.Please Enter Valid Pan Number.!!');
+                    $('#pan_number').show();
+
+                    return false;
+                  }
+                  
+  }
+}
+
+
 </script>
 
 

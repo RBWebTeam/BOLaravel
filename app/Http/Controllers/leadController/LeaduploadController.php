@@ -184,6 +184,7 @@ public   function lead_test(){
 
 
 public function  marketing_leads(Request $req){
+  $lang=null;
   
   $status=null;
   $a=array("6923","6925","6926","6927");
@@ -195,7 +196,10 @@ $random_keys=array_rand($a,1);
          'video_date_time'=>date('Y-m-d H:i:s'),
           'user_id'=> $a[$random_keys]
          );
-       DB::table('raw_lead_master')->where('id','=',$req->id)->update($arr);
+       $query=DB::table('raw_lead_master')->where('id','=',$req->id)->update($arr);
+       $select=DB::table('raw_lead_master')->where('id','=',$req->id)->first();
+        $lang=$select->lang;
+
 }  
  if(isset($req->mobile)){
 $arr=array('misscall' =>1,
@@ -203,7 +207,9 @@ $arr=array('misscall' =>1,
             'user_id'=>$a[$random_keys]
          );
        DB::table('raw_lead_master')->where('mobile','=',$req->mobile)->update($arr);
-
+        
+        $select=DB::table('raw_lead_master')->where('mobile','=',$req->mobile)->first();
+        $lang=$select->lang;
   } 
 
  
@@ -212,7 +218,7 @@ $arr=array('misscall' =>1,
 
 
 
-            return  view('marketing_leads')->with('status',$status);
+            return  view('marketing_leads')->with('lang',$lang);
 
   }
 
@@ -267,6 +273,65 @@ public function call_json($url,$data){
 
 		return $result;
 	}
+
+
+
+
+
+
+
+
+public function lead_management_update(Request $req){   
+
+$error=null;
+   try{
+              $val =Validator::make($req->all(), [
+                'name' => 'required',
+                'mobile' => 'required',
+                'email' => 'required',
+                'dob' => 'required',
+                'profession' => 'required',
+                'monthly_income' => 'required',
+                'pan_no' => 'required',
+                'cityname' => 'required',
+                'address' => 'required',
+                'pincode' => 'required',
+                'campaign' => 'required',
+
+
+                            ]);
+           if ($val->fails()){
+              return response()->json($val->messages(), 200);
+           }else{
+
+                          $arra=array(
+                           'name'=>$req->name,
+                           'mobile'=>$req->mobile,
+                           'email'=>$req->email,
+                           'dob'=>$req->dob,
+                           'profession'=>$req->profession,
+                           'monthly_income'=>$req->monthly_income,
+                           'pan'=>$req->pan_no,
+                           // 'city_id'=>$city->cityname,
+                             'address'=>$req->address ,
+                              'pincode'=>$req->pincode ,
+                              'campaign_id'=>$req->campaign ,
+                              'user_id'=>Session::get('fbauserid'),
+                              'ip_address'=>\Request::ip(),
+                              'created_on'=>date('Y-m-d H:i:s'),); 
+                          
+
+                            //  $query=DB::table('raw_lead_master')->where('id','=',$req->lead_id)->update($arra);
+                   $error=0;
+             }
+             }catch (Exception $e){  $error=1; }
+
+             return $error;
+          
+        
+
+}
+
 
 
 public function sms($mob,$mess){

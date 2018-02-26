@@ -9,15 +9,16 @@
         <form class="form-horizontal" method="post" action="{{url('menu-mapping-save')}}"    > {{ csrf_field() }}
         <div class="form-group">
             <label for="inputEmail" class="control-label col-xs-2"> Menu Group</label>
-            <div class="col-xs-10">
-            <select class="form-control" name="menu_group_mapping" id="menu_group_mapping">
-               <option value="0" > SELECT --</option>
-               
+            <div class="col-xs-6">
+            <select class="form-control" name="menu_group_id" id="menu_group_id">
+              
                @foreach($menu_group as $le)
-                   <option value="{{$le->id}}" >{{$le->name}}</option>
+               @if($menu_group_id==$le->id)
+                   <option value="{{$le->id}}" selected="" >{{$le->name}}</option>
+               @endif    
                @endforeach
              </select>
-               @if ($errors->has('menu_group_mapping'))<label class="control-label" for="inputError"> {{ $errors->first('menu_group_mapping') }}</label>  @endif
+               @if ($errors->has('menu_group_id'))<label class="control-label" for="inputError"> {{ $errors->first('menu_group_id') }}</label>  @endif
                   
             </div>
         </div>
@@ -25,16 +26,11 @@
  
          <div class="form-group"   id="Menu_Mapping">
             <label for="inputEmail" class="control-label col-xs-2"> Menu Mapping</label>
-            <div class="col-xs-10" id="mapping_select_id">
-               <select id="framework" name="mapping[]" multiple class="form-control framework" >
-
-               </select>
-
-                
-
-                <!-- <select id="framework11" name="mapping[]" multiple class="form-control" >
-               @foreach($menu as $le)
-                   @if($le->parent_id!=0)
+            <div class="col-xs-6" id="mapping_select_id">
+                <select id="framework" name="menu_id[]" multiple class="form-control" >
+               @foreach($menu as $key=>$le)
+                     <?php if(isset($m_p[$key]->menu_id)){echo $m_p[$key]->menu_id; } ?>
+                   @if(isset($m_p[$key]->menu_id)==$le->id)
                    <option value="{{$le->id}}"  selected>{{$le->name}}</option>
                    @else
                     <option value="{{$le->id}}" >{{$le->name}}</option>
@@ -42,8 +38,8 @@
 
                @endforeach
                     </select>
-             @if ($errors->has('mapping'))<label class="control-label" for="inputError"> {{ $errors->first('mapping') }}</label>  @endif
-                    -->
+             @if ($errors->has('menu_id'))<label class="control-label" for="inputError"> {{ $errors->first('menu_id') }}</label>  @endif
+                   
             </div>
         </div>
 
