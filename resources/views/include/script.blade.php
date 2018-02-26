@@ -472,7 +472,7 @@ $('.loan_from_id').click(function(){
   
      var tablerows = new Array();
                          $.each(msg, function( index, value ) {
-            tablerows.push('<tr><td style="font-family: monospace"><img style="position:absolute;" src="/' + value.image_path + '"/></td></tr>');
+            tablerows.push('<tr><td style="font-family: monospace"><img class="img-responsive" src="/' + value.image_path + '" width="699" height="1176"/></td></tr>');
         }); 
 
        if(msg){
