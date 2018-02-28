@@ -17,3 +17,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 Route::post('test','UserController@data');
+Route::post('sales-material','ApiController@sales_material');

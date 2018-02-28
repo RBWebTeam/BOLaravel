@@ -44,17 +44,20 @@
 
 				
 
-				
+				<div class="col-md-4">
 	            <input type="hidden" name="UserId" id="UserId" value="<?php echo Session::get('emp_id');?>">
                
-
+               <br>
 				<a type="button" id="sales_submit" name="sales_submit" class="btn btn-primary">SUBMIT</a>
-			
+			   <div>
+                </div>
+                </div>
 
 
-				<div id="docs"></div>	
+
+				<div id="docs" class="col-md-12"></div>
 				</form>
-				
+					
 
 
 

@@ -86,6 +86,12 @@ $(document).ready(function(){
 
              }
 
+           function sales_update_fn(id){
+
+                 $('#p_fbaid').empty();
+                $('#p_fbaid').val(id);
+                $('#salesupdate_modal_fade').modal('show');
+           }
           
 /* Extend dataTables search*/
 
@@ -447,7 +453,7 @@ function uploaddoc(id){
   
      var tablerows = new Array();
                          $.each(msg, function( index, value ) {
-            tablerows.push('<tr><td style="font-family: monospace"><img style="position:absolute;" src="/' + value.image_path + '"/></td></tr>');
+            tablerows.push('<tr><td style="font-family: monospace"><img class="img-responsive" src="/' + value.image_path + '" width="699" height="1176"/></td></tr>');
         }); 
 
        if(msg){
@@ -593,6 +599,36 @@ $(document).on('change', '#search_state', function() {
 }
 
 
+</script>
+
+<script type="text/javascript">
+  $('#sales_update').click(function(){
+    alert('okae');
+    var id = $('#p_fbaid').val();
+    var sales_update=$('#p_remark').val();
+    console.log(sales_update);
+    $('#update_'+id).text(sales_update);
+    if (!$('#update_remark').valid()) 
+    {
+
+    } 
+    else 
+    {
+      $.ajax({  
+         type: "POST",  
+         url: "{{URL::to('sales-update')}}",
+         data : $('#update_remark').serialize(),
+         success: function(msg){
+        
+       
+              // console.log(msg[0].Result);
+
+              
+              
+        }  
+      });
+    }
+  })
 </script>
 
 

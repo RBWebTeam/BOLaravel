@@ -131,11 +131,9 @@
                             <td><?php echo $val->MobiNumb1; ?></td>
                             <td><?php echo $val->EMaiID; ?></td>
 
-                            <td><?php if($val->Link == ""){ ?>
-                                        <a>Payment link</a>
-                                       <?php  } else {?>  
+                            <td>  
                                        <a href="#" class="popover-Payment" data-toggle="popover" title="Payment link" data-content="<?php echo $val->Link; ?>">Payment link</a>
-                                       <?php } ?></td>
+                                      </td>
                             <td><a href="#" class="popover-Password" data-toggle="popover" title="Show Password" data-content="<?php echo $val->Password; ?>">*****</a></td>
                             <td><?php echo $val->city; ?></td>
                             <td><?php echo $val->Pincode; ?></td>
@@ -158,8 +156,20 @@
                             <td><a href="" data-toggle="modal" data-target="#partnerInfo">partner info</a></td>
                             <td><a href="#" style="" data-toggle="modal" data-target='fbadoc'onclick="uploaddoc(<?php echo $val->fbaid;?>)" >Pending</a></td>
                             <td><?php echo $val->bankaccount; ?></td>
+
                              <td><a href="#" data-toggle="modal" data-target="#sms_sent_id" onclick="SMS_FN(<?php echo $val->fbaid;?>,<?php echo $val->MobiNumb1;?>)"><span class="glyphicon glyphicon-envelope"></span></a></td>
-                            <td><a href="#" style="" data-toggle="modal" data-target='.salesupdate'>update</a></td>
+
+
+                            <td>
+                              <?php if(isset($val->salescode)){?>
+                            <a  id="update_<?php echo $val->fbaid;?>" onclick="sales_update_fn(<?php echo $val->fbaid;?>)" ><?php echo $val->salescode;?></a>
+                            <?php }else{?>
+                              <a  id="update_<?php echo $val->fbaid;?>" onclick="sales_update_fn(<?php echo $val->fbaid;?>)" >Update</a>
+                            <?php } ?>
+
+
+                            </td>
+                            
                             
                         </tr>
 
@@ -270,7 +280,7 @@
 
 <!-- sales update -->
 
-<div class="salesupdate modal fade" role="dialog">   
+<div class="salesupdate modal fade" role="dialog" id="salesupdate_modal_fade">   
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -278,18 +288,17 @@
         <h4 class="modal-title">Partner Detail</h4>
       </div>
       <div class="modal-body">
-        <form id="posp_from_id">
-          <div class="form-group">
-            
-          </div>
-          <div class="form-group">
+        <form name="update_remark" id="update_remark">
+         {{ csrf_field() }}
+         <div class="form-group">
+            <input type="text" name="p_fbaid" id="p_fbaid" value=" ">
             <label class="control-label" for="message-text">Enter Remark : </label>
-            <input type="text" class="recipient-name form-control" id="" name="" required="" />
+            <input type="text" class="recipient-name form-control" id="p_remark" name="p_remark" required="" />
           </div>
         </form>
         <div class="modal-footer"> 
           <button class="btn btn-default" type="button" data-dismiss="modal">Close</button>
-          <button id="" class="btn btn-primary" type="button">Update</button><b class="alert-success primary" id=""></b>
+          <a id="sales_update" class="btn btn-primary" type="button">Update</a><b class="alert-success primary" id=""></b>
           
         </div>
       </div>
