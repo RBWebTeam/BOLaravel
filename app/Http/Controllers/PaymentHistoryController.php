@@ -10,13 +10,17 @@ class PaymentHistoryController extends CallApiController
 
       public function payment_history(Request $req){
                 
-                if(isset($req->fdate) && isset($req->tdate)){
-	      	     $data=array("FromDate"=>$req->fdate,"ToDate"=>$req->tdate);
+                if(isset($req->fdate) && isset($req->todate)){
+	      	     $data=array("FromDate"=>$req->fdate,"ToDate"=>$req->todate);
+
+	      	      
 	      	 }else{
-                 $data=array("FromDate"=>Date('m-d-Y'),"ToDate"=>Date('m-d-Y', strtotime("+7 days Last Sunday")));
+                 $data=array("FromDate"=>Date('m-d-Y', strtotime("-7 days")),"ToDate"=>Date('m-d-Y'));
                  //$data=array("FromDate"=>"01-02-2018","ToDate"=>"01-28-2018");
 	      	 }
 
+
+//print_r(  $data);exit;
  
 
 
