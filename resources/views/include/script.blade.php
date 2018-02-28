@@ -44,12 +44,12 @@ $(document).ready(function(){
                  });
              });
 
-  $(document).ready(function() {
+  // $(document).ready(function() {
          
-          $('#example').DataTable({
-          "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]]
-          });
-          });
+  //         $('#example').DataTable({
+  //         "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]]
+  //         });
+  //         });
   // start test
 
   // end test
@@ -97,35 +97,35 @@ $(document).ready(function(){
 
 
 
-$(document).ready(function(){
+// $(document).ready(function(){
 
-                  $.fn.dataTable.ext.search.push(
-                  function (settings, data, dataIndex) {
-                      var min = $('#min').datepicker("getDate");
-                      var max = $('#max').datepicker("getDate");
-                      var startDate = new Date(data[4]);
-                      if (min == null && max == null) { return true; }
-                      if (min == null && startDate <= max) { return true;}
-                      if(max == null && startDate >= min) {return true;}
-                      if (startDate <= max && startDate >= min) { return true; }
-                      return false;
-                  }
-                  );
+//                   $.fn.dataTable.ext.search.push(
+//                   function (settings, data, dataIndex) {
+//                       var min = $('#min').datepicker("getDate");
+//                       var max = $('#max').datepicker("getDate");
+//                       var startDate = new Date(data[4]);
+//                       if (min == null && max == null) { return true; }
+//                       if (min == null && startDate <= max) { return true;}
+//                       if(max == null && startDate >= min) {return true;}
+//                       if (startDate <= max && startDate >= min) { return true; }
+//                       return false;
+//                   }
+//                   );
 
                 
-                      $("#min").datepicker({ onSelect: function () { table.draw(); }, changeMonth: true, changeYear: true });
-                      $("#max").datepicker({ onSelect: function () { table.draw(); }, changeMonth: true, changeYear: true });
-                      var table = $('#example').DataTable();
+//                       $("#min").datepicker({ onSelect: function () { table.draw(); }, changeMonth: true, changeYear: true });
+//                       $("#max").datepicker({ onSelect: function () { table.draw(); }, changeMonth: true, changeYear: true });
+//                       var table = $('#example').DataTable();
 
-                      // Event listener to the two range filtering inputs to redraw on input
-                      $('#min, #max').change(function () {  console.log("Sdfdsf");
-                          table.draw();
-                      });
+//                       // Event listener to the two range filtering inputs to redraw on input
+//                       $('#min, #max').change(function () {  console.log("Sdfdsf");
+//                           table.draw();
+//                       });
 
 
                         
 
-                  });
+//                   });
 
 //script for fsm register..
 
@@ -636,3 +636,60 @@ $(document).on('change', '#search_state', function() {
 
 
 
+ <script>
+    $(document).ready(function() {
+
+
+
+
+        // $('#example').DataTable({
+        //     responsive: true,
+        // });
+
+
+    
+    // Bootstrap datepicker
+$('.input-daterange input').each(function() {
+  $(this).datepicker('clearDates');
+});
+
+// Set up your table
+table = $('#example').DataTable({
+  paging: false,
+  info: false
+});
+
+
+// Extend dataTables search
+$.fn.dataTable.ext.search.push(
+  function(settings, data, dataIndex) {
+    var min = $('#min-date').val();
+    var max = $('#max-date').val();
+    var createdAt = data[4] || 0; // Our date column in the table
+
+    if (
+      (min == "" || max == "") ||
+      (moment(createdAt).isSameOrAfter(min) && moment(createdAt).isSameOrBefore(max))
+    ) {
+      return true;
+    }
+    return false;
+  }
+);
+
+// Re-draw the table when the a date range filter changes
+$('.date-range-filter').change(function() {
+  table.draw();
+});
+
+$('#my-table_filter').hide();
+
+ 
+
+});
+
+
+
+
+
+    </script>

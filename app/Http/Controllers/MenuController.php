@@ -39,37 +39,97 @@ class MenuController extends Controller{
     }
 
 
-    public function mapping(Request $req){  
+    public function mapping(Request $req){    
+
+
+        $recfn='';
+
                   $menu_group_id=0;
                    if(isset($req->id)){
                     $menu_group_id=$req->id;
                   }else{
-                        $menu_group_id=0;
+                         return Back();
                   }
+
+                   
+
+                     
+
                     $menu_group=DB::table('menu_group_master')->select('id','name')->get();
                     $menu=DB::table('menu_master')->select('id','name','parent_id')->get();
-                    $m_p=DB::table('menu_mapping')->where('menu_group_id','=',$menu_group_id)->get();
- 
-                   
- 
-                    // $menu=DB::table('view_user_right_group')->select('id','name','menu_group_id','url_link','parent_id')->where('menu_group_id','=',4)->get();
+                    $m_p=DB::table('menu_mapping')->where('menu_group_id','=',$menu_group_id)->get();   
 
-    	      return view('menu_mapping',['menu_group'=>$menu_group,'menu'=>$menu,'menu_group_id'=>$menu_group_id,'m_p'=>$m_p]);
+ 
+                       $recfn=$this->recursiveFN($menu_group_id,$id=0);
+
+   
+                    return view('menu_mapping',['menu_group'=>$menu_group,'menu'=>$menu,'menu_group_id'=>$menu_group_id,'m_p'=>$m_p,'recfn'=>$recfn]);
     }
 
 
-public function menu_group_select(Request $req){
+
+public function recursiveFN($menu_group_id,$parent_id=0){
+                          
  
 
-$menu=DB::table('view_user_right_group')->select('id','name','menu_group_id','url_link','parent_id')->where('menu_group_id','=',$req->ID)->get();
 
+ 
+                      $menu='';
+                      $sql='';
+                      $m_p='';
+                      $is_select='';
+                      if($parent_id==0){
+           // $sql=DB::table('menu_master')->select('id','name','parent_id')->where('parent_id','=',0)->get();
+
+                      $sql=DB::select('call sp_recursive_mapping(?,?)',array(0,$menu_group_id));
+             
+                     }else{
+           // $sql= DB::table('menu_master')->select('id','name','parent_id')->where('parent_id','=',$parent_id)->get();  
+                         $sql=DB::select('call sp_recursive_mapping(?,?)',array($parent_id,$menu_group_id));
+             
+                     }
+  
+ 
+                    foreach ($sql as $key => $value) {
+                           
+                        if($value->menu_group_id==$menu_group_id){
+                          $menu.='<li><label><input   type="checkbox" name="menu_id[]" checked value="'.$value->id.'" >'.$value->name.' </label>';
+                     }else{
+                        $menu.='<li><label><input   type="checkbox" name="menu_id[]"  value="'.$value->id.'"   >'.$value->name.' </label>';
+                       }
+                              
+                       
+                     
+                       $menu.='<ul  class="sub-menu" >'.$this->recursiveFN($menu_group_id,$value->id).'</ul>';
+                       
+                       $menu.='</li>';
+                        
+                    }
+
+
+
+
+                    return $menu;
+
+
+}
+
+
+public function chield_id($parent_id){
+
+return DB::table('menu_master')->select('id','name','parent_id')->where('parent_id','=',$parent_id)->get();
+
+}
+
+public function menu_group_select(Request $req){
+$menu=DB::table('view_user_right_group')->select('id','name','menu_group_id','url_link','parent_id')->where('menu_group_id','=',$req->ID)->get();
      return $menu;
 }
 
     public function menu_mapping_save(Request $req){
 
 
-
+ 
                  $val =Validator::make($req->all(), 
                  [
                  'menu_group_id' =>'required|not_in:0',

@@ -181,25 +181,25 @@ function radioButtonClicked(id){
 
  
  
-// $("ul.menu").find('> li').hover(
-//     function() {
-//         $(this).find('> ul').slideDown();
-//     },
-//     function() {
-//         $(this).find('> ul').hide();
-//     }
+$("ul.menu").find('> li').hover(
+    function() {
+        $(this).find('> ul').slideDown();
+    },
+    function() {
+        $(this).find('> ul').hide();
+    }
 
 
-// );
+);
 
-// $("ul.sub-menu").find('> li').hover(
-//     function() {
-//         $(this).find('> ul').slideDown();
-//     },
-//     function() {
-//         $(this).find('> ul').hide();
-//     }
-// );
+$("ul.sub-menu").find('> li').hover(
+    function() {
+        $(this).find('> ul').slideDown();
+    },
+    function() {
+        $(this).find('> ul').hide();
+    }
+);
  
 
  
