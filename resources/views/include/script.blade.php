@@ -642,47 +642,47 @@ $(document).on('change', '#search_state', function() {
 
 
 
-        // $('#example').DataTable({
-        //     responsive: true,
-        // });
+        $('#example').DataTable({
+            responsive: true,
+        });
 
 
     
-    // Bootstrap datepicker
-$('.input-daterange input').each(function() {
-  $(this).datepicker('clearDates');
-});
+//     // Bootstrap datepicker
+// $('.input-daterange input').each(function() {
+//   $(this).datepicker('clearDates');
+// });
 
-// Set up your table
-table = $('#example').DataTable({
-  paging: false,
-  info: false
-});
+// // Set up your table
+// table = $('#example').DataTable({
+//   paging: false,
+//   info: false
+// });
 
 
-// Extend dataTables search
-$.fn.dataTable.ext.search.push(
-  function(settings, data, dataIndex) {
-    var min = $('#min-date').val();
-    var max = $('#max-date').val();
-    var createdAt = data[4] || 0; // Our date column in the table
+// // Extend dataTables search
+// $.fn.dataTable.ext.search.push(
+//   function(settings, data, dataIndex) {
+//     var min = $('#min-date').val();
+//     var max = $('#max-date').val();
+//     var createdAt = data[4] || 0; // Our date column in the table
 
-    if (
-      (min == "" || max == "") ||
-      (moment(createdAt).isSameOrAfter(min) && moment(createdAt).isSameOrBefore(max))
-    ) {
-      return true;
-    }
-    return false;
-  }
-);
+//     if (
+//       (min == "" || max == "") ||
+//       (moment(createdAt).isSameOrAfter(min) && moment(createdAt).isSameOrBefore(max))
+//     ) {
+//       return true;
+//     }
+//     return false;
+//   }
+// );
 
-// Re-draw the table when the a date range filter changes
-$('.date-range-filter').change(function() {
-  table.draw();
-});
+// // Re-draw the table when the a date range filter changes
+// $('.date-range-filter').change(function() {
+//   table.draw();
+// });
 
-$('#my-table_filter').hide();
+// $('#my-table_filter').hide();
 
  
 

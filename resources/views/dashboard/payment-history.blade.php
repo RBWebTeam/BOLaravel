@@ -20,16 +20,30 @@
   </div>
 </div>
  -->
+            
+          <?php 
+
+           $fromdate='';
+           $todate='';
+            if(isset($_GET['fdate']) && isset($_GET['todate'])){
+                 $fromdate=$_GET['fdate'];
+                 $todate=$_GET['todate'];
+           }else{
+                 
+                 $fromdate= Date('m-d-Y', strtotime('-7 days'));
+                 $todate=Date('m-d-Y');
+           }
 
 
-
-
-        <form  >
+           ?>
+  
+ 
+        <form  method="get" action="{{url('payment-history')}}" >
        <div class="col-md-4">
       <div class="form-group">
       <p>From Date</p>
-         <div id="datepicker" class="input-group date" data-date-format="mm/dd/yyyy">
-               <input class="form-control date-range-filter" type="text" placeholder="From Date" name="fromdate" id="min-date"  />
+         <div id="datepicker" class="input-group date" data-date-format="mm-dd-yyyy">
+               <input class="form-control date-range-filter" value="{{$fromdate}}" type="text" placeholder="From Date" name="fdate" id="min-date"  />
               <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
               </div>
             </div>
@@ -37,15 +51,15 @@
        <div class="col-md-4">
        <div class="form-group">
        <p>To Date</p>
-       <div id="datepicker1" class="input-group date" data-date-format="mm/dd/yyyy">
-               <input class="form-control date-range-filter " type="text"  placeholder="To Date"  name="tromdate"  id="max-date"   />
+       <div id="datepicker1" class="input-group date" data-date-format="mm-dd-yyyy">
+               <input class="form-control date-range-filter " value="{{$todate}}" type="text"  placeholder="To Date"  name="todate"  id="max-date"   />
               <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
               </div>
             </div>
            </div>
-      <!--  <div class="col-md-4">
+       <div class="col-md-4">
        <div class="form-group"> <input type="submit" name=""  class="mrg-top common-btn" value="SHOW">  </div>
-       </div> -->
+       </div>
        </form>
        <!-- Date End -->
 <div class="col-md-12">
