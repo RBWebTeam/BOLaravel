@@ -275,7 +275,6 @@ if (window.location.href.indexOf('?smid=') > 0) {
         
         var data = JSON.parse(fsmmsg);
         alert(fsmmsg);
- alert(data);
               
         }  
       });
