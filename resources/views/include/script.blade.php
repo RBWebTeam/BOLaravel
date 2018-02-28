@@ -354,7 +354,14 @@ function uploaddoc(id){
 
 $('#btnupload').click(function(event){
 event.preventDefault();
-var formData = new FormData($(this)[0])
+var form = $('#fbadocupload')[0];
+
+var data = new FormData(form);
+
+/*for (var value of data.values()) {
+   console.log(value); 
+}
+alert(JSON.stringify(data));*/
 
   if($("#ddldoctype").val()!==0  && $("#document").val()!=="") {
   /* console.log($('#fbadocupload').serialize());*/
@@ -365,7 +372,7 @@ var formData = new FormData($(this)[0])
    enctype: 'multipart/form-data',
    processData: false,  // Important!
    contentType: false,
-   data: formData,
+   data: data,
    success: function(msg)  
    {
     console.log(msg);

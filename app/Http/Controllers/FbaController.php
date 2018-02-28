@@ -46,7 +46,7 @@ class FbaController extends CallApiController
          public function uploaddoc(Request $req) {
              
              $data=$req->all();
-             $data = $this->request->input('json_decode');
+            /* $data = $this->request->input('json_decode');*/
              print_r($data); exit();
               $post_data=$data;
               $result=$this->call_json_data_api('api.magicfinmart.com/api/upload-doc',$post_data);
