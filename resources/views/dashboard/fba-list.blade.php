@@ -164,7 +164,7 @@
                               <?php if(isset($val->salescode)){?>
                             <a  id="update_<?php echo $val->fbaid;?>" onclick="sales_update_fn(<?php echo $val->fbaid;?>)" ><?php echo $val->salescode;?></a>
                             <?php }else{?>
- <a  id="update_<?php echo $val->fbaid;?>" onclick="sales_update_fn(<?php echo $val->fbaid;?>)" >Update</a>
+                              <a  id="update_<?php echo $val->fbaid;?>" onclick="sales_update_fn(<?php echo $val->fbaid;?>)" >Update</a>
                             <?php } ?>
 
 
