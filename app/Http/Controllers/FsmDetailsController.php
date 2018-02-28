@@ -24,5 +24,13 @@ class FsmDetailsController extends Controller
 
         }
 
+//////////////////////////////GOVIND/////////////////////////////////////////
+        public function fsmfbalist($smid)
+        {        	
+        	$fsmfbaquery = DB::select("call usp_load_fba_by_sm($smid)");
+			//print_r($fsmfbaquery);exit();
+        	return json_encode($fsmfbaquery);       		        	 
+        }
+/////////////////////////////END/////////////////////////////////////////////
         
 }

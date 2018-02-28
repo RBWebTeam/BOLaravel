@@ -263,5 +263,24 @@
 			</div>
 			</div>
             </div>
+<script>
+$(document).ready(function(){
 
+if (window.location.href.indexOf('?smid=') > 0) {
+        var smid = window.location.href.split('?smid=')[1];  
+		$.ajax({  
+         type: "GET",  
+         url:'FsmRegister/'+smid,//"{{URL::to('Fsm-Details')}}",
+         success: function(fsmmsg){
+        
+        var data = JSON.parse(fsmmsg);
+        alert(fsmmsg);
+              
+        }  
+      });
+    }
+});
+</script>
 @endsection
+
+

@@ -556,7 +556,11 @@ $(document).on('change', '#search_state', function() {
 
 <script type="text/javascript">
   $('#sales_update').click(function(){
+<<<<<<< HEAD
     // alert('okae');
+=======
+    
+>>>>>>> 3ec86996cfc01135d81f56920fcee99941f067e9
     var id = $('#p_fbaid').val();
     var sales_update=$('#p_remark').val();
     console.log(sales_update);
@@ -724,6 +728,65 @@ $('#my-table_filter').hide();
 
 });
 
+
+/////////////////GOVIND////////////////////
+
+
+function getfsmfbalist(smid)
+{
+
+$('#fsmid').val(smid);
+
+
+
+$.ajax({  
+         type: "GET",  
+         url:'Fsm-Details/'+smid,//"{{URL::to('Fsm-Details')}}",
+         success: function(fsmmsg){
+        
+        var data = JSON.parse(fsmmsg);
+       var str = "<table class='table'><tr style='height:30px;margin:5px;'><th>Name</th><th>Email</th><th>Mobile</th></tr>";
+       for (var i = 0; i < data.length; i++) {
+
+         str = str + "<tr style='height:30px;margin:5px;'><td>"+data[i].Name+"</td><td>"+data[i].Email+"</td><td>"+data[i].Mobile+"</td></tr>";
+      
+       }
+              // console.log(msg[0].Result);
+str = str + "</table>";
+           $('#popupfbalist').html(str);   
+              
+        }  
+      });
+
+// $.ajax({
+//                 url: 'fsm-fba-list',
+//                 dataType: 'json',
+//                 type: 'post',
+//                 data:'{"smid":'+smid+'}';
+//                 contentType: 'application/json',                
+//                 success: function(data){
+//                   alert('success');
+//                     alert(data);
+//                 },
+//                 error: function(error){
+//                   alert('error');
+//                     alert(error);
+//                 }
+// });
+
+ //      $.ajax({ 
+ //            url: "fsm-fba-list",
+ //            method:"POST",
+ //            data : "{""smid"":"+smid+"}",
+ //   success: function(msg)  
+ //   {
+ //      alert(msg);
+ //   }
+
+ // });
+}
+
+////////////////END////////////////////////
 
 
 
