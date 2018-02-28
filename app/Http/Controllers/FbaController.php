@@ -43,6 +43,16 @@ class FbaController extends CallApiController
 
         }
 
+        public function sales(Request $req){
+       
+        $query=DB::table('fbamast')
+            ->where('FBAID','=',$req->p_fbaid)
+            ->update(['salescode' =>$req->p_remark]);
+           if ( $query) {
+              return response()->json(array('status' =>0,'message'=>"success"));
+            }
+        }
+
 
 
 
