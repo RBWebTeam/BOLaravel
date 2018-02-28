@@ -287,7 +287,26 @@ if (window.location.href.indexOf('?smid=') > 0) {
         $('#txtmanager').val(data[0].ManagerMap);
         $('#txtAadhar').val(data[0].AdhardNo);
         $('#txtPincode').val(data[0].Pincode);
-        $('#txtyes').val(data[0].IsLeadRecipient);
+        if(data[0].IsLeadRecipient == "Yes"){
+        	$('#txtyes').val("ON");
+        	$('#txtno').val("OFF");
+        }
+        else if(data[0].IsLeadRecipient == "No"){
+        	$('#txtyes').val("OFF");
+        	$('#txtno').val("ON");
+        }
+
+        $('#txtmapstate').val(data[0].FSMType);
+        $('#txtbankacno').val(data[0].BankAccoNo);
+        $('#txtactype').val(data[0].BankAccoType);
+        $('#txtifsc').val(data[0].BankIFSCCode);
+        $('#txtmicr').val(data[0].BankMICRCode);
+        $('#txtbankname').val(data[0].BankName);
+        $('#txtbankbrach').val(data[0].BankBranch);
+        $('#txtbankcity').val(data[0].BankCity);
+
+        	
+
 
 
 
