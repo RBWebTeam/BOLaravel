@@ -23,9 +23,9 @@
 				<div class="form-group">
 				 <select id="txttitle" name="txttitle" class="selectpicker select-opt form-control">
 			     <option selected="selected" value="0">Title</option>
-		         <option value="1">Mr</option>
-		         <option value="2">Mrs</option>
-				 <option value="2">Ms</option>
+		         <option value="MR">Mr</option>
+		         <option value="MRS">Mrs</option>
+				 <option value="MS">Ms</option>
 		         </select>
 				</div>
 				</div>
@@ -274,8 +274,23 @@ if (window.location.href.indexOf('?smid=') > 0) {
          success: function(fsmmsg){
         
         var data = JSON.parse(fsmmsg);
-        alert(fsmmsg);
-              
+        $('#txttitle').val(data[0].Salutation);
+        $('#txtFname').val(data[0].FName);
+        $('#txtLname').val(data[0].LastName);
+        $('#txtCname').val(data[0].CompanyName);
+        $('#txtemail').val(data[0].Email);
+        $('#txtMobile').val(data[0].MobileNo);
+        $('#txtdate').val(data[0].DateOfBirth);
+        $('#txtpan').val(data[0].PancardNo);
+        $('#txtCity').val(data[0].City);
+        $('#txtstate').val(data[0].State);
+        $('#txtmanager').val(data[0].ManagerMap);
+        $('#txtAadhar').val(data[0].AdhardNo);
+        $('#txtPincode').val(data[0].Pincode);
+        $('#txtyes').val(data[0].IsLeadRecipient);
+
+
+
         }  
       });
     }
