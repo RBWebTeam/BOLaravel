@@ -45,6 +45,9 @@ Route::get('dashboard','DashboardController@dashboard');
 //Fba details
 Route::get('fba-list','FbaController@fba_list');
 Route::post('sales-update','FbaController@sales');
+Route::post('loan-update','FbaController@loan');
+Route::post('posp-update','FbaController@posp');
+
 
 Route::get('fba-list/{fbaid}/{value}/{flag}',array('as'=>'fba-list.ajax','uses'=>'FbaController@updateposp'));
 Route::post('fba-list','FbaController@sendsms');

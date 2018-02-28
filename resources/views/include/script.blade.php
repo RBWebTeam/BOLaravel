@@ -72,16 +72,13 @@ $(document).ready(function(){
              }
 
              function POSP_UPDATE(id){
-                            
-                       $('#flage_id').val(1);
-                       $('#fba_id_posp').val(id);
+                      $('#fbaid').val(id);
                        $('.updatePosp').modal('show');
                     
              }
 
              function LoanID_UPDATE(id){
-                       $('#flage_idloan').val(2);
-                       $('#fba_id_loan').val(id);
+                       $('#fba_id').val(id);
                        $('.updateLoan').modal('show');
 
              }
@@ -92,6 +89,8 @@ $(document).ready(function(){
                 $('#p_fbaid').val(id);
                 $('#salesupdate_modal_fade').modal('show');
            }
+
+
           
 /* Extend dataTables search*/
 
@@ -255,52 +254,6 @@ $('.unblock').click(function(){
         });
 });
  
-
-//update posp from fba
-$('.posp_from_id').click(function(){
-  var flag=$(this).closest('div').find('input[name="flage_id"]').val();
-  var fbaid=$(this).closest('div').find('input[name="fbaid"]').val();
-  
-  if($('#posp_name_id').val()!="")  {
-     var value=$("#posp_name_id").val();
-     $.ajax({
-
-            type: "GET",
-            url:'fba-list/'+fbaid+'/'+value+'/'+flag, 
-            success: function( msg ) {
-            console.log(msg);
-             alert("posp updated successfully..!");
-            $('.updatePosp').modal('hide');
-            $('#posp_name_id').val('');
-            $( "#posp_name_id" ).focus();
-
-           }
-        });
-   }
-  else{
-    alert('posp no field can not blank.')
-    $( "#posp_name_id" ).focus();
-  }
-
-});
-
-
-
-// function sendsmsrecipients(){
-//   var smslist = document.getElementById("smslist");
-//   console.log(smslist);
-//   // alert("test");
-//      $.ajax({ 
-//    url: "{{URL::to('send-sms')}}",
-//    method:"GET",
-//    data:{smslist:smslist},
-//    success: function(msg)  
-//    {
-// console.log(msg);
-//    }
-
-//  });
-// }   
 
 //update loan id from fba
 $('.loan_from_id').click(function(){
@@ -603,7 +556,7 @@ $(document).on('change', '#search_state', function() {
 
 <script type="text/javascript">
   $('#sales_update').click(function(){
-    alert('okae');
+    // alert('okae');
     var id = $('#p_fbaid').val();
     var sales_update=$('#p_remark').val();
     console.log(sales_update);
@@ -621,7 +574,14 @@ $(document).on('change', '#search_state', function() {
          success: function(msg){
         
        
-              // console.log(msg[0].Result);
+              
+              if (msg.status==0) 
+                {
+                  alert('Updated Successfully');
+                } 
+                else {
+                  alert('Could not updated successfully');
+                }
 
               
               
@@ -632,57 +592,133 @@ $(document).on('change', '#search_state', function() {
 </script>
 
 
+<script type="text/javascript">
+  $('#loan_update').click(function(){
+    // alert('okae');
+    var id = $('#fba_id').val();
+    var loan_update=$('#remark').val();
+    console.log(loan_update);
+    $('#loan_'+id).text(loan_update);
+    if (!$('#update_loan').valid()) 
+    {
+
+    } 
+    else 
+    {
+      $.ajax({  
+         type: "POST",  
+         url: "{{URL::to('loan-update')}}",
+         data : $('#update_loan').serialize(),
+         success: function(msg){
+        
+       
+             
+              if (msg.status==0) 
+                {
+                  alert('Updated Successfully');
+                } 
+                else {
+                  alert('Could not updated successfully');
+                }
+
+              
+              
+        }  
+      });
+    }
+  })
+</script>
+
+
+<script type="text/javascript">
+  $('#posp_update').click(function(){
+    // alert('okae');
+    var id = $('#fbaid').val();
+    var posp_update=$('#posp_remark').val();
+    console.log(posp_update);
+    $('#posp_'+id).text(posp_update);
+    if (!$('#update_posp').valid()) 
+    {
+
+    } 
+    else 
+    {
+      $.ajax({  
+         type: "POST",  
+         url: "{{URL::to('posp-update')}}",
+         data : $('#update_posp').serialize(),
+         success: function(msg){
+        
+       
+             
+              if (msg.status==0) 
+                {
+                  alert('Updated Successfully');
+                } 
+                else {
+                  alert('Could not updated successfully');
+                }
+
+              
+              
+        }  
+      });
+    }
+  })
+</script>
+
+
+
+
    
 
 
 
  <script>
     $(document).ready(function() {
-
-
-
-
         $('#example').DataTable({
+          paging: true,
             responsive: false,
         });
 
 
     
-//     // Bootstrap datepicker
-// $('.input-daterange input').each(function() {
-//   $(this).datepicker('clearDates');
-// });
+    // Bootstrap datepicker
+$('.input-daterange input').each(function() {
+  $(this).datepicker('clearDates');
+});
 
-// // Set up your table
-// table = $('#example').DataTable({
-//   paging: false,
-//   info: false
-// });
+// Set up your table
+table = $('#example_1').DataTable({
+  paging: true,
+  info: false,
+   responsive: false,
+});
 
 
-// // Extend dataTables search
-// $.fn.dataTable.ext.search.push(
-//   function(settings, data, dataIndex) {
-//     var min = $('#min-date').val();
-//     var max = $('#max-date').val();
-//     var createdAt = data[4] || 0; // Our date column in the table
+// Extend dataTables search
+$.fn.dataTable.ext.search.push(
+  function(settings, data, dataIndex) {
+    var min = $('#min-date').val();
+    var max = $('#max-date').val();
+    var createdAt = data[1] || 0; // Our date column in the table
 
-//     if (
-//       (min == "" || max == "") ||
-//       (moment(createdAt).isSameOrAfter(min) && moment(createdAt).isSameOrBefore(max))
-//     ) {
-//       return true;
-//     }
-//     return false;
-//   }
-// );
+    if (
+      (min == "" || max == "") ||
+      (moment(createdAt).isSameOrAfter(min) && moment(createdAt).isSameOrBefore(max))
+    ) {
+      return true;
+    }
+    return false;
+  }
+);
 
-// // Re-draw the table when the a date range filter changes
-// $('.date-range-filter').change(function() {
-//   table.draw();
-// });
+// Re-draw the table when the a date range filter changes
+$('.date-range-filter1').change(function() {
+  table.draw();
+});
 
-// $('#my-table_filter').hide();
+$('#my-table_filter').hide();
 
  
 
