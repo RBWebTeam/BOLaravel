@@ -607,7 +607,7 @@ $(document).on('change', '#search_state', function() {
 
 
         $('#example').DataTable({
-            responsive: true,
+            responsive: false,
         });
 
 
