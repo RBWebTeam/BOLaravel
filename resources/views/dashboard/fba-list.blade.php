@@ -30,36 +30,36 @@
 			 </div> -->
 			 <!-- Filter End -->
 			 
-			 <!-- Date Start -->
-			 <div class="col-md-4">
-			  <div class="form-group">
-			   
-                <p>From Date</p>
-			   <div id="min"  class="input-group date" data-date-format="dd-mm-yyyy">
-               <input class="form-control" type="text" name="fdate" placeholder="From Date" value="01-01-2017">
+			 <form    >
+       <div class="col-md-4">
+      <div class="form-group">
+      <p>From Date</p>
+         <div id="datepicker" class="input-group date" data-date-format="mm-dd-yyyy">
+               <input class="form-control date-range-filter" type="text" placeholder="From Date" name="fdate" id="min-date"  />
               <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
               </div>
             </div>
            </div>
-		   <div class="col-md-4">
-			 <div class="form-group">
-			 <p>To Date</p>
-			   <div id="max" class="input-group date" data-date-format="dd-mm-yyyy">
-           <input class="form-control" type="text" name="tdate" placeholder="From Date" value="<?php echo date("d-m-Y");?>"/>
+       <div class="col-md-4">
+       <div class="form-group">
+       <p>To Date</p>
+       <div id="datepicker1" class="input-group date" data-date-format="mm-dd-yyyy">
+               <input class="form-control date-range-filter1 " type="text"  placeholder="To Date"  name="todate"  id="max-date"   />
               <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
               </div>
             </div>
            </div>
-		   <div class="col-md-4">
-		   <div class="form-group"> <button class="common-btn mrg-top">SHOW</button></div>
-		   </div>
+       <div class="col-md-4">
+       <div class="form-group"> <input type="submit" name=""  class="mrg-top common-btn" value="SHOW">  </div>
+       </div>
+       </form>
 		   <!-- Date End -->
 		
 			 <div class="col-md-12">
 			 <div class="overflow-scroll">
 			 <div class="table-responsive" >
 
-			<table class="datatable-responsive table table-striped table-bordered dt-responsive nowrap" id="example">
+			<table class="datatable-responsive table table-striped table-bordered dt-responsive nowrap" id="example_1">
                           <thead>
 					                  <tr>
 					                   <th>Full Name</th>
@@ -83,48 +83,10 @@
                                     </thead>
 					                <tbody>
 					              @foreach($query as $val)
-                        <?php if($val->PayStatus =="S"){ ?>
+                     
                                       
-                                       
-					                 <tr style="color:Black;background-color:LightGreen;">
-					                  <td><?php echo $val->FullName; ?></td>
-					                  <td><?php echo $val->createdate; ?></td>
-					                  <td><?php echo $val->MobiNumb1; ?></td>
-					                  <td><?php echo $val->EMaiID; ?></td>
-
-					                  <td><?php if($val->Link == ""){ ?>
-                                        <a>Payment link</a>
-                                       <?php  } else {?>  
-                                       <a href="#" class="popover-Payment" data-toggle="popover" title="Payment link" data-content="<?php echo $val->Link; ?>">Payment link</a>
-                                       <?php } ?></td>
-					                  <td><a href="#" class="popover-Password" data-toggle="popover" title="Show Password" data-content="<?php echo $val->Password; ?>">*****</a></td>
-					                  <td><?php echo $val->city; ?></td>
-					                  <td><?php echo $val->Pincode; ?></td>
-					                  <td><a href="#" style="" data-toggle="modal" data-target='.fsmdetails'>Fsm details</a></td>
-					                  <td><?php if($val->POSPNo == ""){ ?>
-                                        <a href="#" style="" class="checkPosp" data-toggle="modal" data-target="#updatePosp" onclick="POSP_UPDATE(<?php echo $val->fbaid; ?>)">update</a>
-                                       <?php	} else {?>	
-                                       <?php echo $val->POSPNo; ?>
-                                       <?php } ?>
-					                   </td>
-					                  <td>
-					                  	<?php if($val->LoanID == ""){ ?>
-                                        <a href="#" style="" class="checkloan" data-toggle="modal" data-target="#updateLoan" onclick="LoanID_UPDATE(<?php echo $val->fbaid; ?>)">update</a>
-
-					                  <?php	} else {?>	
-					                  <?php echo $val->LoanID; ?>
-					                  <?php } ?>
-                            </td>
-					                  <td><?php echo $val->pospname; ?></td>
-					                  <td><a href="" data-toggle="modal" data-target="#partnerInfo">partner info</a></td>
-					                  <td><a href="#" style="" data-toggle="modal" data-target='fbadoc' onclick="uploaddoc(<?php echo $val->fbaid;?>)">Pending</a></td>
-					                  <td><?php echo $val->bankaccount; ?></td>
-					                   <td><a href="#" data-toggle="modal" data-target="#sms_sent_id" onclick="SMS_FN(<?php echo $val->fbaid;?>,<?php echo $val->MobiNumb1;?>)"><span class="glyphicon glyphicon-envelope"></span></a></td>
-					                  <td><a href="#" style="" data-toggle="modal" data-target='.salesupdate'>update</a></td>
-					                  
-					              </tr>
-                        <?php  }
-                        else {?>
+                                    
+					          
                         <tr>
                             <td><?php echo $val->FullName; ?></td>
                             <td><?php echo $val->createdate; ?></td>
@@ -139,14 +101,14 @@
                             <td><?php echo $val->Pincode; ?></td>
                             <td><a href="#" style="" data-toggle="modal" data-target='.fsmdetails'>Fsm details</a></td>
                             <td><?php if($val->POSPNo == ""){ ?>
-                                        <a href="#" style="" class="checkPosp" data-toggle="modal" data-target="#updatePosp" onclick="POSP_UPDATE(<?php echo $val->fbaid; ?>)">update</a>
+                                        <a id="posp_<?php echo $val->fbaid;?>" class="checkPosp" data-toggle="modal" data-target="#updatePosp" onclick="POSP_UPDATE(<?php echo $val->fbaid; ?>)">update</a>
                                        <?php  } else {?>  
                                        <?php echo $val->POSPNo; ?>
                                        <?php } ?>
                              </td>
                             <td>
                               <?php if($val->LoanID == ""){ ?>
-                                        <a href="#" style="" class="checkloan" data-toggle="modal" data-target="#updateLoan" onclick="LoanID_UPDATE(<?php echo $val->fbaid; ?>)">update</a>
+                                        <a id="loan_<?php echo $val->fbaid;?>" class="checkloan" data-toggle="modal" data-target="#updateLoan" onclick="LoanID_UPDATE(<?php echo $val->fbaid; ?>)">update</a>
 
                             <?php } else {?>  
                             <?php echo $val->LoanID; ?>
@@ -173,7 +135,7 @@
                             
                         </tr>
 
-                        <?php } ?>
+                      
 					              @endforeach
 					              </tbody>
 		       
@@ -306,6 +268,9 @@
   </div>
 </div>
 
+
+
+
 <!-- update posp -->
 <div class="updatePosp modal fade" role="dialog">   
   <div class="modal-dialog" role="document">
@@ -314,25 +279,28 @@
         <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
         <h4 class="modal-title">UPDATE POSP</h4>
       </div>
-      <div class="modal-body">
-        <form id="posp_from_id">
-          <div class="form-group">
-          </div>
-          <div class="form-group">
-            <label class="control-label" for="message-text">POSP :</label>
-            <input type="number" class="recipient-name form-control" id="posp_name_id" name="posp_name" required="yes" />
+       <div class="modal-body">
+        <form name="update_posp" id="update_posp">
+         {{ csrf_field() }}
+         <div class="form-group">
+            <input type="text" name="fbaid" id="fbaid" value=" ">
+            <label class="control-label" for="message-text">Enter Remark : </label>
+            <input type="text" class="recipient-name form-control" id="posp_remark" name="posp_remark" required="" />
           </div>
         </form>
         <div class="modal-footer"> 
           <button class="btn btn-default" type="button" data-dismiss="modal">Close</button>
-          <button id="btnpospupdate" class="btn btn-primary posp_from_id" type="button">Save changes</button><b class="alert-success primary" id="strong_lead"></b>
-          <input id="fba_id_posp" type="hidden" name="fbaid"/>
-          <input id="flage_id" type="hidden" name="flage_id"/>
+          <a id="posp_update" class="btn btn-primary" type="button">Update</a><b class="alert-success primary" id=""></b>
+          
         </div>
       </div>
     </div>
   </div>
 </div>
+
+
+
+
 <!-- update Loan -->
 <div class="updateLoan modal fade" role="dialog">   
   <div class="modal-dialog" role="document">
@@ -342,22 +310,21 @@
         <h4 class="modal-title">UPDATE LOAN</h4>
       </div>
       <div class="modal-body">
-        <form id="posp_from_id">
-          <div class="form-group">
-          </div>
-          <div class="form-group">
-            <label class="control-label" for="message-text">Loan Id:</label>
-            <input type="number" class="recipient-name form-control" id="loan_id" type="text" name="posp_name"/>
+        <form name="update_loan" id="update_loan">
+         {{ csrf_field() }}
+         <div class="form-group">
+            <input type="text" name="fba_id" id="fba_id" value=" ">
+            <label class="control-label" for="remark">Enter Remark : </label>
+            <input type="text" class="recipient-name form-control" id="remark" name="remark" required="" />
           </div>
         </form>
         <div class="modal-footer"> 
           <button class="btn btn-default" type="button" data-dismiss="modal">Close</button>
-          <button id="btnloanupdate" class="btn btn-primary loan_from_id" type="button">Save changes</button>
-          <input id="fba_id_loan" type="hidden" name="fba_id_loan"/>
-          <input id="flage_idloan" type="hidden" name="flage_idloan"/>
-          <b class="alert-success primary" id="strong_lead"></b>
+          <a id="loan_update" class="btn btn-primary" type="button">Update</a><b class="alert-success primary" id=""></b>
+          
         </div>
       </div>
+    </div>
     </div>
   </div>
 </div>
