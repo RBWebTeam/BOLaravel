@@ -121,7 +121,7 @@ class LoginController extends InitialController
               'reporting_id' =>'required|not_in:0',
               //'state_id' =>'required|not_in:0',
              // 'city_id' =>'required|not_in:0',
-              'user_type' =>'required|not_in:0',
+              //'user_type' =>'required|not_in:0',
               'menu_group' =>'required|not_in:0',
              'password' =>'required|min:6',
              'cpassword' => 'required|min:6|same:password',
@@ -143,7 +143,7 @@ class LoginController extends InitialController
          'stateid' =>$req->state_id,
           'cityid' =>$req->city_id,
            'user_id' =>Session::get('fbauserid'),
-           'user_type_id' =>$req->user_type,
+           'user_type_id' =>1,
             'usergroup' =>$req->menu_group,
              'uid' =>$req->uid,
              'password' =>$req->password]);
@@ -152,7 +152,7 @@ class LoginController extends InitialController
    }
 
     
-           return redirect ('register-user');
+           return redirect ('register-user-list');
  
 
 }
@@ -208,7 +208,7 @@ public function register_user_update(Request $req){
          'stateid' =>$req->state_id,
           'cityid' =>$req->city_id,
            'user_id' =>Session::get('fbauserid'),
-           'user_type_id' =>$req->user_type,
+           'user_type_id' =>1,
             'usergroup' =>$req->menu_group,
              'uid' =>$req->uid,
              'password' =>$req->password]);
@@ -216,7 +216,17 @@ public function register_user_update(Request $req){
     Session::flash('message', 'Register successfully Update...!'); 
    }
 
- return redirect ('register-user');
+ return redirect ('register-user-list');
+}
+
+
+public function register_user_list(){
+
+  $query = DB::select("call sp_register_user_list()");
+
+    //$query=DB::table('FBAUsers')->select('UserName','email','mobile','')->where('user_type_id','=',1)->get();
+  return view('register-user-list',['query'=>$query]);
+
 }
 
 public function logout(Request $req) {
