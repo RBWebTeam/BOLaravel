@@ -26,7 +26,7 @@
                                     @foreach($menu_group as $vl)
                                       <tr>
                                       <td>{{$vl->id}}</td>
-                                      <td>{{$vl->name}}</td>
+                                      <td  ><a href="{{url('menu-mapping')}}?id={{$vl->id}}"> {{$vl->name}} </a></td>
                                       </tr>
                                     @endforeach
                                   </tbody>

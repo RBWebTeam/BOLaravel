@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use Response;
-use Validator;
+//use Validator;
 use Redirect;
 use Session;
 use URL;
 use Mail;
+ 
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 class LoginController extends InitialController
 {
@@ -99,26 +101,28 @@ class LoginController extends InitialController
           }
                  
                  public function register_user(){
-                 $state = DB::select("call usp_load_state_list()");
-
+                  $state = DB::select("call usp_load_state_list()");
                   $user_type=DB::table('user_type_master')->get();
                   $menu_group=DB::table('menu_group_master')->get();
+                  $city=DB::table('CityStateList')->select('DCCityID','CityName')->get();
                   
-
-                return view('register-user',['state' => $state,'user_type'=>$user_type,'menu_group'=>$menu_group]);
+                return view('register-user',['state' => $state,'user_type'=>$user_type,'menu_group'=>$menu_group,'city'=>$city]);
                 }
 
-           public function register_user_save(Request $req){    
- 
- 
+           public function register_user_save(Request $req){  
+
+
+
+  
            $validator =Validator::make($req->all(), [
-             'name' => 'required',
-             'email_id' => 'required',
+             
+               'UserName' => 'required|string|max:20|unique:FBAUsers',
+              'email' => 'required|string|email|max:255|unique:FBAUsers',
               'mobile' => 'required',
               'company_id' =>'required|not_in:0',
               'reporting_id' =>'required|not_in:0',
-              'state_id' =>'required|not_in:0',
-              'city_id' =>'required|not_in:0',
+              //'state_id' =>'required|not_in:0',
+             // 'city_id' =>'required|not_in:0',
               'user_type' =>'required|not_in:0',
               'menu_group' =>'required|not_in:0',
              'password' =>'required|min:6',
@@ -129,44 +133,95 @@ class LoginController extends InitialController
              ->withErrors($validator)
              ->withInput();
             }else{
-
-
-
-$value=DB::table('emp_login')->where('email_id','=',$req->email_id)
-          ->first();
-
  
 
 
-        if($value['email_id']==$req->email_id){ 
-         Session::flash('message', 'email is already exists ....'); 
-          return redirect ('register-user');
-         }else{
-       DB::table('emp_login')->insert(
-    [ 'username' =>$req->name,
-     'email_id' =>$req->email_id,
+       DB::table('FBAUsers')->insert(
+       [ 'UserName' =>$req->UserName,
+       'email' =>$req->email,
       'mobile' =>$req->mobile,
-       'company_id' =>$req->company_id,
-        'reportingID' =>$req->reporting_id,
-         'state_id' =>$req->state_id,
-          'city_id' =>$req->city_id,
-           'user_type' =>$req->user_type,
-            'user_group_id' =>$req->menu_group,
-             'ip' =>\Request::ip(),
+       'companyid' =>$req->company_id,
+        'reportingid' =>$req->reporting_id,
+         'stateid' =>$req->state_id,
+          'cityid' =>$req->city_id,
+           'user_id' =>Session::get('fbauserid'),
+           'user_type_id' =>$req->user_type,
+            'usergroup' =>$req->menu_group,
+             'uid' =>$req->uid,
              'password' =>$req->password]);
 
-   
-}
+    Session::flash('message', 'Register successfully...!'); 
+   }
 
-           Session::flash('message', 'Register successfully...!'); 
-             
+    
            return redirect ('register-user');
-}
+ 
 
 }
 
-public function logout(Request $req) 
-{
+
+
+
+public function register_update(Request $req){
+
+             // $query=DB::table('FBAUsers')->where('fbauserid','=',$req->id)->first();
+                 $query=DB::select("call sp_fba_update(?)",[$req->id]);
+
+ 
+                  $state = DB::select("call usp_load_state_list()");
+                  $user_type=DB::table('user_type_master')->get();
+                  $menu_group=DB::table('menu_group_master')->get();
+                  $city=DB::table('CityStateList')->select('DCCityID','CityName')->get();
+                  
+                return view('register-update',['state' => $state,'user_type'=>$user_type,'menu_group'=>$menu_group,'city'=>$city,'query'=>$query[0]]);
+
+}
+
+
+public function register_user_update(Request $req){
+
+
+           $validator =Validator::make($req->all(), [
+             
+              //  'UserName' => 'required|string|max:20|unique:FBAUsers',
+              // 'email' => 'required|string|email|max:255|unique:FBAUsers',
+              'mobile' => 'required',
+              'company_id' =>'required|not_in:0',
+              'reporting_id' =>'required|not_in:0',
+              // 'state_id' =>'required|not_in:0',
+              // 'city_id' =>'required|not_in:0',
+              'user_type' =>'required|not_in:0',
+              'menu_group' =>'required|not_in:0',
+             'password' =>'required|min:6',
+             'cpassword' => 'required|min:6|same:password',
+                            ]);
+             if ($validator->fails()) {
+             return redirect('register-user')
+             ->withErrors($validator)
+             ->withInput();
+            }else{
+ 
+       DB::table('FBAUsers')->where('FBAUserId','=',$req->FBAUserId)->update(
+       [ 'UserName' =>$req->UserName,
+       'email' =>$req->email,
+      'mobile' =>$req->mobile,
+       'companyid' =>$req->company_id,
+        'reportingid' =>$req->reporting_id,
+         'stateid' =>$req->state_id,
+          'cityid' =>$req->city_id,
+           'user_id' =>Session::get('fbauserid'),
+           'user_type_id' =>$req->user_type,
+            'usergroup' =>$req->menu_group,
+             'uid' =>$req->uid,
+             'password' =>$req->password]);
+
+    Session::flash('message', 'Register successfully Update...!'); 
+   }
+
+ return redirect ('register-user');
+}
+
+public function logout(Request $req) {
   $req->session()->flush();
    return redirect('/');
 }
@@ -267,5 +322,58 @@ public function logout(Request $req)
  //        }
 
  
+
+ public function search_state(){
+
+ // $term = Input::get('term');
+ // $products=DB::table('state_master')->select('state','state_id')
+ // ->get();
+
+ 
+ $products = DB::select("call usp_load_state_list()");
+        
+ $data=array();
+ foreach ($products as $product) {
+  $data[]=array('value'=>$product->state_name,'datavalue'=>$product->state_id);
+}
+if(count($data)){
+           //    print_r($data);
+ return $data;
+}
+else
+  return ['value'=>'No Result Found'];
+}
+
+
+public function search_city(Request $req){
+
+ 
+   $term = $req->fstate_id; 
+
+
+ $products=DB::table('CityStateList')->select('CityName','DCCityID','StatID')
+ ->where('StatID',$term)->distinct()
+ ->get();
+
+
+ // $term = Input::get('fstate_id');
+ // $products=DB::table('districtwise_zone_master')->select('district_name','district_id')
+ // ->where('state_id',$term)
+ // ->get();
+ 
+ $data=array();
+ foreach ($products as $product) {
+  $data[]=array('value'=>$product->CityName,'datavalue'=>$product->DCCityID);
+}
+if(count($data)){
+           //    print_r($data);
+ return $data;
+}
+else
+  return ['value'=>'No Result Found'];
+}
+
+
+
 
 }

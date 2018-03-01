@@ -6,7 +6,15 @@
 
 
 $(document).ready(function(){
+   // $('.framework').append(arr);
+  $('#framework').multiselect({
+  nonSelectedText: 'Select Framework',
+  enableFiltering: true,
+  enableCaseInsensitiveFiltering: true,
+  buttonWidth:'400px'
+ });
 
+  
 	$("#menu_group_mapping").change(function(event){  event.preventDefault(); 	
          if($(this).val()!=0){
          // $('#Menu_Mapping').show();
@@ -27,13 +35,13 @@ $(document).ready(function(){
                     
                });
                    // arr.push('</select>');
-   $('.framework').append(arr);
-  $('#framework').multiselect({
-  nonSelectedText: 'Select Framework',
-  enableFiltering: true,
-  enableCaseInsensitiveFiltering: true,
-  buttonWidth:'400px'
- });
+ //   $('.framework').append(arr);
+ //  $('#framework').multiselect({
+ //  nonSelectedText: 'Select Framework',
+ //  enableFiltering: true,
+ //  enableCaseInsensitiveFiltering: true,
+ //  buttonWidth:'400px'
+ // });
 
 
           }).fail(function(xhr, status, error) {

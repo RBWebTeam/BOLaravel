@@ -9,8 +9,8 @@ class RegionalManagerControllar extends Controller
 {
       public function regional_manager(){
             
-            $fbamaster=DB::table('FBAMast')->get();
-
+            
+            $fbamaster=DB::table('FBAMast')->where('rm_id','=',0)->get();
       	    return view('rm',['fbamaster'=>$fbamaster]);
       }
 }

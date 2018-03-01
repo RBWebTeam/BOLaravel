@@ -6,7 +6,9 @@
   }
 </style>
 
-<div class="container-fluid white-bg">
+
+
+<!-- <div class="container-fluid white-bg">
 <div class="col-md-9">
   <div class="well" style="width:900px; padding: 8px 0;float: left;">
     <div style="overflow-y: scroll; overflow-x: hidden; height: 350px;" id="maindiv">
@@ -14,10 +16,8 @@
     </div>
   </div>
 </div>
+ -->
 
-
-
- 
 <!-- <form id="add_form" name="add_form" method="POST">
 {{ csrf_field() }}
 <div class="col-md-4">
@@ -36,8 +36,27 @@
   <div class="form-group">
        <input type="hidden" name="parent_id" id="parent_id">     
   </div>
+
  <div class="form-group">
-            <label for="inputEmail" class="control-label col-xs-2">Menu Add</label>
+            <label for="inputEmail" class="control-label col-xs-2">Parent Menu  </label>
+            <div class="col-xs-6">
+              
+               <select class="control-label"  name="parent_id"> 
+               <option value="0">--Parent Level--</option>
+@foreach($menu as $val)
+
+  <option value="{{$val->id}}" > {{$val->name}} </option>
+
+@endforeach
+ </select>
+ 
+            </div>
+</div>
+
+
+
+ <div class="form-group">
+            <label for="inputEmail" class="control-label col-xs-2">Menu Name</label>
             <div class="col-xs-6">
             <input type="text" name="menu_name" id="menu_name"  class="form-control" >
 
@@ -46,11 +65,20 @@
 </div>
 
    <div class="form-group">
-            <label for="inputEmail" class="control-label col-xs-2">Level Name</label>
+            <label for="inputEmail" class="control-label col-xs-2">Level </label>
             <div class="col-xs-6">
             <input type="text" name="level_name"  onkeypress="return Numeric(event)"  class="form-control" >
             </div>
   </div>
+
+   <div class="form-group">
+            <label for="inputEmail" class="control-label col-xs-2">Sequence </label>
+            <div class="col-xs-6">
+            <input type="text" name="sequence"  onkeypress="return Numeric(event)"  class="form-control" >
+            </div>
+  </div>
+
+
 
      <div class="form-group">
             <label for="inputEmail" class="control-label col-xs-2">URL LINK</label>

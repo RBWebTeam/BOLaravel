@@ -14,16 +14,16 @@
  <div class="form-group">
             <label for="inputEmail" class="control-label col-xs-2">Name</label>
             <div class="col-xs-6">
-            <input type="text" name="name" id="name"  class="form-control" >
-    @if ($errors->has('name'))<label class="control-label" for="inputError"> {{ $errors->first('name') }}</label>@endif
+            <input type="text" name="UserName" id="UserName"  class="form-control" >
+    @if ($errors->has('UserName'))<label class="control-label" for="inputError"> {{ $errors->first('UserName') }}</label>@endif
            </div>
 </div>
 
   <div class="form-group">
             <label for="inputEmail" class="control-label col-xs-2">Email</label>
             <div class="col-xs-6">
-            <input type="text" name="email_id" id="email_id"  class="form-control" >
-    @if ($errors->has('email_id'))<label class="control-label" for="inputError"> {{ $errors->first('email_id') }}</label>@endif
+            <input type="text" name="email" id="email"  class="form-control" >
+    @if ($errors->has('email'))<label class="control-label" for="inputError"> {{ $errors->first('email') }}</label>@endif
            </div>
 </div>
 
@@ -35,7 +35,7 @@
            </div>
 </div>
   
-<!-- 
+
  <div class="form-group">
             <label for="inputEmail" class="control-label col-xs-2">UID</label>
             <div class="col-xs-6">
@@ -44,7 +44,7 @@
            </div>
 </div>
   
-<div class="form-group">
+<!-- <div class="form-group">
             <label for="inputEmail" class="control-label col-xs-2">EmpID</label>
             <div class="col-xs-6">
             <input type="text" name="EmpID" id="EmpID"  class="form-control" >
@@ -87,27 +87,31 @@
             <label for="inputEmail" class="control-label col-xs-2">State </label>
             <div class="col-xs-6">
           
-             <select name="state_id" id="state_id"  class="form-control">
+         <!--     <select name="state_id" id="state_id"  class="form-control">
              	<option value="0">-Select-</option>
              	 @foreach($state as $val)
                 <option value="{{$val->state_id}}">{{$val->state_name}}</option>
              	 @endforeach
-             </select>
-    @if ($errors->has('state_id'))<label class="control-label" for="inputError"> {{ $errors->first('state_id ') }}</label>@endif
+             </select> -->
+ <select class="form-control  search_state " name="state_id"   placeholder="Search State" id="search_state" required></select>
+             
+    <!-- @if ($errors->has('state_id'))<label class="control-label" for="inputError"> {{ $errors->first('state_id ') }}</label>@endif -->
            </div>
 </div>
 
 <div class="form-group">
             <label for="inputEmail" class="control-label col-xs-2">City </label>
             <div class="col-xs-6">
-          
-             <select name="city_id" id="city_id"  class="form-control">
+            <select class="form-control  search_district " name="city_id"   placeholder="Search State" id="search_district" required> </select>
+
+
+             <!-- <select name="city_id" id="city_id"  class="form-control">
              	<option value="0">-Select-</option>
-             	 @foreach($state as $val)
-                <option value="{{$val->state_id}}">{{$val->state_name}}</option>
+             	 @foreach($city as $val)
+                <option value="{{$val->DCCityID}}">{{$val->CityName}}</option>
              	 @endforeach
-             </select>
-    @if ($errors->has('city_id'))<label class="control-label" for="inputError"> {{ $errors->first('city_id ') }}</label>@endif
+             </select> -->
+   <!--  @if ($errors->has('city_id'))<label class="control-label" for="inputError"> {{ $errors->first('city_id ') }}</label>@endif -->
            </div>
 </div>
 

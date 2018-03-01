@@ -58,8 +58,7 @@ $('#interested_id-Modal').modal('show');
 });
 
 
- $("#interested_id").click(function(event){  event.preventDefault(); 	 alert($('#interested_form').serialize());
-
+ $("#interested_id").click(function(event){  event.preventDefault(); 	 //alert($('#interested_form').serialize());
    if($('#message_id').val()!=0 && $('#link_id').val()!=0  && $('#lead_id_interested').val()!=0 && $('#url_link').val()!=0 ){ 
             $.post("{{url('lead-interested')}}",$('#interested_form').serialize())
              .done(function(msg){ 
@@ -85,11 +84,73 @@ $('#interested_id-Modal').modal('show');
 
 
 
+});
 
+
+
+//Lead Insert
+
+function leadd_update_client(id,mobile,name,email,dob,profession,monthly_income,pan,cityname,address,pincode,campaign_id){   
+    $('#clientId').val(id);
+    $('#clientName').val(name);
+    $('#clientMobile').val(mobile);
+    $('#clientEmail').val(email);
+    $('#clientDOB').val(dob);
+    $('#clientProfession').val(profession);
+    $('#clientMonthly_income').val(monthly_income);
+    $('.clientPan').val(pan);
+    $('#clientCityname').val(cityname);
+    $('#clientAddress').val(address);
+    $('#clientPincode').val(pincode);
+    $('#clientCampaign_id').val(campaign_id);
+    $('#lead-update-client-Modal').modal('show');
+}
+
+
+   $("#lead_update_client_id").click(function(event){  event.preventDefault(); 
+   $.post("{{url('lead-management-update')}}",$('#lead_update_client_form').serialize())
+             .done(function(msg){ 
+                if(msg.name){ 
+                $('#Errorname').text(msg.name);
+                }else{
+                   $('#Errorname').empty();
+                }
+                if(msg.mobile){ 
+                $('#Errormobile').text(msg.mobile);
+                }else{
+                   $('#Errormobile').empty();
+                }
+
+                 if(msg.email){ 
+                 $('#Erroremail').text(msg.email);
+                }else{
+                   $('#Erroremail').empty();
+                }
+
+                if(msg.dob){ 
+                 $('#Errordob').text(msg.dob);
+                }else{
+                   $('#Errordob').empty();
+                }
+
+           
+             if(msg==0){
+                  alert("Successfully updated ....");
+               //$('#lead-update-client-Modal').modal('hide');
+               window.location.href = "{{url('lead-up-load')}}";
+             }
+
+             
+                  
+            }).fail(function(xhr, status, error) {
+                 console.log(error);
+            });
+      
 
 });
 
 
- 
+
+
 
 </script>

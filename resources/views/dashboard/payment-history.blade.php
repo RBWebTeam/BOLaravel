@@ -1,15 +1,35 @@
 @extends('include.master')
  @section('content')
+
+
     <div id="content" style="overflow:scroll;">
        <div class="container-fluid white-bg">
        <div class="col-md-12"><h3 class="mrg-btm">Payment History</h3></div>
        <!-- Date Start -->
+<!-- <div class="container">
+  <div class="col-md-4 pull-right">
+    <div class="input-group input-daterange">
+
+      <input type="text" id="min-date" class="form-control date-range-filter" data-date-format="mm/dd/yyyy" placeholder="From:">
+
+      <div class="input-group-addon">to</div>
+
+      <input type="text" id="max-date" class="form-control date-range-filter" data-date-format="mm/dd/yyyy" placeholder="To:">
+
+    </div>
+  </div>
+</div>
+ -->
+
+
+
+
         <form  >
        <div class="col-md-4">
       <div class="form-group">
       <p>From Date</p>
          <div id="datepicker" class="input-group date" data-date-format="mm/dd/yyyy">
-               <input class="form-control" type="text" placeholder="From Date" name="fromdate" id="min" />
+               <input class="form-control date-range-filter" type="text" placeholder="From Date" name="fromdate" id="min-date"  />
               <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
               </div>
             </div>
@@ -17,8 +37,8 @@
        <div class="col-md-4">
        <div class="form-group">
        <p>To Date</p>
-       <div id="datepicker1" class="input-group date" data-date-format="dd/mm/yyyy">
-               <input class="form-control" type="text" placeholder="To Date"  name="tromdate"  id="max" />
+       <div id="datepicker1" class="input-group date" data-date-format="mm/dd/yyyy">
+               <input class="form-control date-range-filter " type="text"  placeholder="To Date"  name="tromdate"  id="max-date"   />
               <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
               </div>
             </div>
@@ -31,7 +51,7 @@
 <div class="col-md-12">
 			 <div class="overflow-scroll">
 			 <div class="table-responsive" >
-				<table id="example" class="table table-bordered table-striped tbl" >
+				<table id="example" class="table table-bordered table-striped tbl " >
                  <thead>
                   <tr>
                    <th>Customer Name</th>
@@ -45,7 +65,11 @@
                  </tr>
                 </thead>
                 <tbody>
+               
+
               
+
+                      
 
                  @if(isset($respon))
                  @foreach($respon as $val)
@@ -55,7 +79,9 @@
                     <td><?php  echo ($customer_id[1]);  ?></td>
                     <td>{{$val->Mobile}}</td>
                    <td>{{$val->Email}}</td>
-                   <td>{{$val->PaymDate }}</td>
+                     <?php $dt = new DateTime($val->PaymDate);
+                      $date = $dt->format('m/d/Y'); ?>
+                   <td>{{$date}}</td>
                    <td>{{$val->Amount}}</td>
                     <td>{{$val->PaymType}}</td>
                     <td>{{$val->PaymStatus}}</td>
