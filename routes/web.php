@@ -44,6 +44,11 @@ Route::get('dashboard','DashboardController@dashboard');
 
 //Fba details
 Route::get('fba-list','FbaController@fba_list');
+Route::post('sales-update','FbaController@sales');
+Route::post('loan-update','FbaController@loan');
+Route::post('posp-update','FbaController@posp');
+
+
 Route::get('fba-list/{fbaid}/{value}/{flag}',array('as'=>'fba-list.ajax','uses'=>'FbaController@updateposp'));
 Route::post('fba-list','FbaController@sendsms');
 Route::post('fba-listdocument','FbaController@uploaddoc');
@@ -58,6 +63,11 @@ Route::get('register-form','RegisterFormController@register_form');
 
 //FSM Details
 Route::get('Fsm-Details','FsmDetailsController@FsmDetails');
+
+//////GOVIND
+Route::get('Fsm-Details/{smid}','FsmDetailsController@fsmfbalist');
+Route::get('FsmRegister/{smid}','FsmRegisterController@getfsmdetail');
+///END
 Route::get('Fsm-Register','FsmRegisterController@getsate');
 Route::get('Fsm-Register/{id}',array('as'=>'FSMRegister.ajax','uses'=>'FsmRegisterController@getcity'));
 Route::get('Fsm-Register/{flag}/{value}',array('as'=>'FSMRegister.ajax','uses'=>'FsmRegisterController@getpincode'));
@@ -170,5 +180,14 @@ Route::get('lead-test','LeaduploadController@lead_test');
  Route::group(['namespace' => 'leadController',  ], function() {
  Route::get('lead-test','LeaduploadController@lead_test');    // test 
 Route::get('marketing-leads','LeaduploadController@marketing_leads');   // test
+
+
+
+/////////////////////////GOVIND////////////////////////////////////
+
+// Route::get('fsm-fba-list/{fsmid}','FsmDetailsController@fsmfbalist');
+/*Route::get('Fsm-Details/{smid}',array('as'=>'FsmDetails.ajax','uses'=>'FsmDetailsController@fsmfbalist'));*/
+
+//////////////////////////END//////////////////////////////////////
 
 });

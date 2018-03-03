@@ -82,5 +82,15 @@ public function insertfsm(Request $req){
         return redirect('Fsm-Register');
   }
 }
+
+
+public function getfsmdetail($smid)
+{        
+    $fsmfbaquery = DB::select("call usp_get_fsm_detail($smid)");
+    return json_encode($fsmfbaquery);                      
+        
+}
+
+
 }
 

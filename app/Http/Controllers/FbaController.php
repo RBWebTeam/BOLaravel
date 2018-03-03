@@ -43,6 +43,7 @@ class FbaController extends CallApiController
 
         }
 
+
          public function uploaddoc(Request $req) {
              
              $data=$req->all();
@@ -57,6 +58,36 @@ class FbaController extends CallApiController
               $m=$s=str_replace('\\', "", $s);
               $update_user='';
               $obj = json_decode($m);
+}
+
+        public function sales(Request $req){
+       
+        $query=DB::table('fbamast')
+            ->where('FBAID','=',$req->p_fbaid)
+            ->update(['salescode' =>$req->p_remark]);
+           if ( $query) {
+              return response()->json(array('status' =>0,'message'=>"success"));
+            }
+        }
+
+        public function loan(Request $req){
+          // print_r($req->all());exit();
+          $query=DB::table('fbarepresentations')
+            ->where('FBAID','=',$req->fba_id)
+            ->update(['LoanID' =>$req->remark]);
+           if ( $query) {
+              return response()->json(array('status' =>0,'message'=>"success"));
+            }
+        }
+
+        public function posp(Request $req){
+          // print_r($req->all());exit();
+          $query=DB::table('fbarepresentations')
+            ->where('FBAID','=',$req->fbaid)
+            ->update(['POSPNo' =>$req->posp_remark]);
+           if ( $query) {
+              return response()->json(array('status' =>0,'message'=>"success"));
+            }
 
         }
 

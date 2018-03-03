@@ -48,14 +48,19 @@
                 <tbody>
                 @foreach($query as $val)
                 <tr>
-                  <td><a href=""><?php echo $val->Name; ?></a></td>
+                  <td><a href="Fsm-Register?smid=<?php echo $val->SMID;?>"><?php echo $val->Name; ?></a></td>
                   <td><?php echo $val->DOB; ?></td>
                   <td><?php echo $val->Email; ?></td>
                   <td><a href="#" class="popover-Password" data-toggle="popover" title="Show Password" data-content="<?php echo $val->Password; ?>">*****</a></td>
 				  <td><?php echo $val->MobileNo; ?></td>
 				  <td><?php echo $val->PancardNo; ?></td>
-                  <td>0</td>
-                  <td>0</td>
+                  <td><?php echo $val->AllLeads; ?></td>
+                  <td>
+                  	<?php if($val->RegisteredLeads > 0){?>
+						<a href="#" data-toggle="modal" data-target="#myModal" onclick="getfsmfbalist(<?php echo $val->SMID; ?>)" ><?php echo $val->RegisteredLeads; ?></a>
+						<?php } else { echo 0;}?>
+
+                  </td>
                   <td><?php echo $val->AdharNo; ?></td>
                   <td><?php echo $val->Pincode; ?></td>
                   <td><?php echo $val->City; ?></td>
@@ -65,9 +70,35 @@
                 </tbody>
 		       
             </table>
+
+            <form name="fsmremark" id="fsmremark">
+            	<input type="hidden" id="fsmid" name="fsmid">
+            </form>
 			</div>
 			</div>
 			</div>
 			</div>
+
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">FBA List</h4>
+      </div>
+      <div class="modal-body">
+        <div id="popupfbalist">
+ 
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
 		
 			@endsection

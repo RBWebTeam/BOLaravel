@@ -1,9 +1,9 @@
 <div class="scrolling">
     <nav id="sidebar">
-<<<<<<< HEAD
+
     <ul class="list-unstyled components" style="overflow: hidden; width: auto; height: 95%;">
      <li class="nav-item"><a href="{{url('dashboard')}}"><span class="sp-nav"><img src="images/icon/home.png"></span>&nbsp;&nbsp; Home Page</a></li>
-=======
+
   <!--  <ul class="list-unstyled components" style="overflow: hidden; width: auto; height: 95%;" id="navtree1">
 
     <li class="nav-item">
@@ -120,7 +120,7 @@ $arrayCategories = array();
                                   
                                    foreach($third_level as $key =>$third_row ){?>  
                              
-                               <!--  <li><label class="tree-toggle nav-header"><a href="#"><span class="sp-nav"><img src="images/icon/home.png"></span>&nbsp;&nbsp; Home Page 3</a></label> -->
+                               <!  <li><label class="tree-toggle nav-header"><a href="#"><span class="sp-nav"><img src="images/icon/home.png"></span>&nbsp;&nbsp; Home Page 3</a></label> -->
                                    
                                         <li><a href="{{url('')}}/{{$third_row->url_link}}"><?php  echo  $third_row->name; ?></a>
 
@@ -187,8 +187,7 @@ $arrayCategories = array();
  <script type='text/javascript'>
         
         $(document).ready(function() {
-        
-            $('.tree-toggle').click(function () {
+        $('.tree-toggle').click(function () {
     $(this).parent().children('ul.tree').toggle(200);
 });
 $(function(){
