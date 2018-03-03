@@ -30,6 +30,8 @@ Route::post('admin-login','LoginController@login');
 Route::get('register-user','LoginController@register_user');
 Route::get('register-update/{id}','LoginController@register_update');
 Route::post('register-user-update','LoginController@register_user_update');
+Route::get('register-user-list','LoginController@register_user_list');
+
  // city  state
 Route::get('search-state','LoginController@search_state');
 Route::get('search-city','LoginController@search_city');
