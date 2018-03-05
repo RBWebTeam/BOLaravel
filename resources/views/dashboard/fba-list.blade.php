@@ -382,13 +382,11 @@
               <option>FBA</option>
             </select>
             <input type="text" class="recipient-name form-control" id="" name="" required="yes" />
-             
-          </div>
+        </div>
         </form>
         <div class="modal-footer"> 
           <button class="btn btn-default" type="button" data-dismiss="modal">Close</button>
           <button id="" class="btn btn-primary" type="button">search</button>
-          
         </div>
       </div>
     </div>

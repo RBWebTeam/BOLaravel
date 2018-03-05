@@ -607,20 +607,14 @@ $(document).on('change', '#search_state', function() {
          url: "{{URL::to('sales-update')}}",
          data : $('#update_remark').serialize(),
          success: function(msg){
-        
-       
-              
-              if (msg.status==0) 
+         if (msg.status==0) 
                 {
                   alert('Updated Successfully');
                 } 
                 else {
                   alert('Could not updated successfully');
                 }
-
-              
-              
-        }  
+          }  
       });
     }
   })
