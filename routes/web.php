@@ -68,6 +68,7 @@ Route::get('Fsm-Details','FsmDetailsController@FsmDetails');
 //////GOVIND
 Route::get('Fsm-Details/{smid}','FsmDetailsController@fsmfbalist');
 Route::get('FsmRegister/{smid}','FsmRegisterController@getfsmdetail');
+Route::get('fba-list/{partnerid}','FbaController@getfbapartner');
 ///END
 Route::get('Fsm-Register','FsmRegisterController@getsate');
 Route::get('Fsm-Register/{id}',array('as'=>'FSMRegister.ajax','uses'=>'FsmRegisterController@getcity'));
@@ -197,8 +198,8 @@ Route::get('marketing-leads','LeaduploadController@marketing_leads');   // test
 
 /////////////////////////GOVIND////////////////////////////////////
 
-// Route::get('fsm-fba-list/{fsmid}','FsmDetailsController@fsmfbalist');
-/*Route::get('Fsm-Details/{smid}',array('as'=>'FsmDetails.ajax','uses'=>'FsmDetailsController@fsmfbalist'));*/
+//Route::get('fsm-fba-list/{fsmid}','FsmDetailsController@fsmfbalist');
+//Route::get('Fsm-Details/{smid}',array('as'=>'FsmDetails.ajax','uses'=>'FsmDetailsController@fsmfbalist'));*/
 
 //////////////////////////END//////////////////////////////////////
 

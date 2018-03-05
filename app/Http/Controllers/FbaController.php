@@ -73,6 +73,12 @@ class FbaController extends CallApiController
             }
         }
 
+        public function getfbapartner($partnerid)
+        {          
+          $fsmfbaquery = DB::select("call usp_load_partner_info($partnerid)");
+          return json_encode($fsmfbaquery);    
+        }
+
 
 
 

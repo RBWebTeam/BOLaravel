@@ -59,11 +59,13 @@
 			 <div class="overflow-scroll">
 			 <div class="table-responsive" >
 
-			<table class="datatable-responsive table table-striped table-bordered dt-responsive nowrap" id="example_1">
+			<table class="datatable-responsive table table-striped table-bordered dt-responsive nowrap" data-sort-name="stargazers_count"
+   data-sort-order="desc" id="example_1">
                           <thead>
-					                  <tr>
+					                  <tr>                             
+                             <th>FBA ID</th>
 					                   <th>Full Name</th>
-					                   <th>Created Date</th>
+                             <th>Created Date</th>
 					                   <th>Mobile No</th>
 					                   <th>Email ID</th>
 									           <th>Payment Link</th>
@@ -88,15 +90,16 @@
                                     
 					          
                         <tr>
+                            <td><?php echo $val->fbaid;?></td>
                             <td><?php echo $val->FullName; ?></td>
-                            <td><?php echo $val->createdate; ?></td>
+                            <td><?php echo $val->createdate; ?></td>                                                      
                             <td><?php echo $val->MobiNumb1; ?></td>
                             <td><?php echo $val->EMaiID; ?></td>
 
                             <td>  
-                                       <a href="#" class="popover-Payment" data-toggle="popover" title="Payment link" data-content="<?php echo $val->Link; ?>">Payment link</a>
+                                       <a href="" class="popover-Payment" data-toggle="popover" title="Payment link" data-content="<?php echo $val->Link; ?>">Payment link</a>
                                       </td>
-                            <td><a href="#" class="popover-Password" data-toggle="popover" title="Show Password" data-content="<?php echo $val->Password; ?>">*****</a></td>
+                            <td><a href="" class="popover-Password" data-toggle="popover" title="Show Password" data-content="<?php echo $val->Password; ?>">*****</a></td>
                             <td><?php echo $val->city; ?></td>
                             <td><?php echo $val->Pincode; ?></td>
                             <td><a href="#" style="" data-toggle="modal" data-target='.fsmdetails'>Fsm details</a></td>
@@ -115,7 +118,13 @@
                             <?php } ?>
                             </td>
                             <td><?php echo $val->pospname; ?></td>
-                            <td><a href="" data-toggle="modal" data-target="#partnerInfo">partner info</a></td>
+                            <td>
+
+                      
+                            <a href="#" data-toggle="modal" data-target="#partnerInfo" onclick="getpartnerinfo(<?php echo $val->fbaid; ?>)" >partner info</a>
+                            <!-- <a href="" data-toggle="modal" data-target="#partnerInfo">partner info</a> -->
+
+                            </td>
                             <td><a href="#" style="" data-toggle="modal" data-target='fbadoc'onclick="uploaddoc(<?php echo $val->fbaid;?>)" >Pending</a></td>
                             <td><?php echo $val->bankaccount; ?></td>
 
@@ -320,8 +329,7 @@
         </form>
         <div class="modal-footer"> 
           <button class="btn btn-default" type="button" data-dismiss="modal">Close</button>
-          <a id="loan_update" class="btn btn-primary" type="button">Update</a><b class="alert-success primary" id=""></b>
-          
+          <a id="loan_update" class="btn btn-primary" type="button">Update</a><b class="alert-success primary" id=""></b>          
         </div>
       </div>
     </div>
@@ -339,8 +347,8 @@
         <h4 class="modal-title">Partner Info</h4>
       </div>
       <div class="modal-body">
-	  <div class="table-responsive">
-        <table class="table table-bordered table-striped">
+	  <div id="divpartnertable" class="table-responsive">
+        <!-- <table class="table table-bordered table-striped">
 		    <tr>
 			 <td>Partner ID</td>
 			 <td>Name</td>
@@ -357,7 +365,7 @@
 			 <td>Bangalore</td>
 			 <td>560021</td>
 			</tr>
-		</table>
+		</table> -->
 		</div>
       </div>
     </div>
@@ -395,6 +403,14 @@
     </div>
   </div>
 </div>
+<script type="text/javascript">
+
+
+
+
+</script>
+
+
 @endsection
 
 

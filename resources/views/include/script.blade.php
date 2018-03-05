@@ -556,7 +556,7 @@ $(document).on('change', '#search_state', function() {
 
 <script type="text/javascript">
   $('#sales_update').click(function(){
- 
+
     var id = $('#p_fbaid').val();
     var sales_update=$('#p_remark').val();
     console.log(sales_update);
@@ -598,7 +598,7 @@ $(document).on('change', '#search_state', function() {
     var id = $('#fba_id').val();
     var loan_update=$('#remark').val();
     console.log(loan_update);
-    $('#loan_'+id).text(loan_update);
+    
     if (!$('#update_loan').valid()) 
     {
 
@@ -616,6 +616,8 @@ $(document).on('change', '#search_state', function() {
               if (msg.status==0) 
                 {
                   alert('Updated Successfully');
+                  $('#loan_'+id).text(loan_update);
+                  $('.updateLoan').hide();
                 } 
                 else {
                   alert('Could not updated successfully');
@@ -636,7 +638,7 @@ $(document).on('change', '#search_state', function() {
     var id = $('#fbaid').val();
     var posp_update=$('#posp_remark').val();
     console.log(posp_update);
-    $('#posp_'+id).text(posp_update);
+    
     if (!$('#update_posp').valid()) 
     {
 
@@ -654,6 +656,8 @@ $(document).on('change', '#search_state', function() {
               if (msg.status==0) 
                 {
                   alert('Updated Successfully');
+                  $('#posp_'+id).text(posp_update);
+                  $('.updatePosp').hide();
                 } 
                 else {
                   alert('Could not updated successfully');
@@ -678,7 +682,7 @@ $(document).on('change', '#search_state', function() {
     $(document).ready(function() {
         $('#example').DataTable({
           paging: true,
-            responsive: false,
+          responsive: false,
         });
 
 
@@ -757,32 +761,34 @@ str = str + "</table>";
         }  
       });
 
-// $.ajax({
-//                 url: 'fsm-fba-list',
-//                 dataType: 'json',
-//                 type: 'post',
-//                 data:'{"smid":'+smid+'}';
-//                 contentType: 'application/json',                
-//                 success: function(data){
-//                   alert('success');
-//                     alert(data);
-//                 },
-//                 error: function(error){
-//                   alert('error');
-//                     alert(error);
-//                 }
-// });
+}
 
- //      $.ajax({ 
- //            url: "fsm-fba-list",
- //            method:"POST",
- //            data : "{""smid"":"+smid+"}",
- //   success: function(msg)  
- //   {
- //      alert(msg);
- //   }
 
- // });
+function getpartnerinfo(fbaid)
+{
+
+$.ajax({  
+         type: "GET",  
+         url:'fba-list/'+fbaid,//"{{URL::to('Fsm-Details')}}",
+         success: function(fsmmsg){
+        
+
+
+        var data = JSON.parse(fsmmsg);
+
+
+       var str = "<table class='table'><tr style='height:30px;margin:5px;'><td>Partner ID</td><td>Name</td><td>Mobile No</td><td>Email</td><td>City</td><td>Pincode</td></tr>";
+       for (var i = 0; i < data.length; i++) {
+
+         str = str + "<tr style='height:30px;margin:5px;'><td>"+data[i].PartnerID+"</td><td>"+data[i].pname+"</td><td>"+data[i].pmobile+"</td><td>"+data[i].pemail+"</td><td>"+data[i].pcity+"</td><td>"+data[i].ppincode+"</td></tr>";
+      
+       }
+              // console.log(msg[0].Result);
+            str = str + "</table>";
+           $('#divpartnertable').html(str);   
+              
+        }  
+      });
 }
 
 ////////////////END////////////////////////
