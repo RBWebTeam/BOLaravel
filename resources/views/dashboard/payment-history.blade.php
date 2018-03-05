@@ -30,7 +30,7 @@
                  $todate=$_GET['todate'];
            }else{
                  
-                 $fromdate= Date('m-d-Y', strtotime('-7 days'));
+                 $fromdate= Date('m-d-Y', strtotime('-28 days'));
                  $todate=Date('m-d-Y');
            }
 

@@ -116,7 +116,8 @@
 </div>
 
 
-<div class="form-group">
+
+<!-- <div class="form-group">
             <label for="inputEmail" class="control-label col-xs-2">UserType     </label>
             <div class="col-xs-6">
           
@@ -128,12 +129,12 @@
              </select>
     @if ($errors->has('user_type'))<label class="control-label" for="inputError"> {{ $errors->first('user_type ') }}</label>@endif
            </div>
-</div>
+</div> -->
 
 
 
 <div class="form-group">
-            <label for="inputEmail" class="control-label col-xs-2">UserGroup      </label>
+            <label for="inputEmail" class="control-label col-xs-2">UserType      </label>
             <div class="col-xs-6">
           
              <select name="menu_group" id="menu_group"  class="form-control">

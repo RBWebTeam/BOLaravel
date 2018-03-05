@@ -17,7 +17,7 @@ class PaymentHistoryController extends CallApiController
 
 
 	      	 }else{
-                 $data=array("FromDate"=>Date('m-d-Y', strtotime("-7 days")),"ToDate"=>Date('m-d-Y'));
+                 $data=array("FromDate"=>Date('m-d-Y', strtotime("-28 days")),"ToDate"=>Date('m-d-Y'));
                  //$data=array("FromDate"=>"01-02-2018","ToDate"=>"01-28-2018");
 	      	 }
 
@@ -36,7 +36,7 @@ class PaymentHistoryController extends CallApiController
 	            $update_user='';
 	            $obj = json_decode($m);
 
-  
+ 
 
                    if($obj->message->Status='1'){
 
