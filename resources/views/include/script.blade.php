@@ -693,14 +693,19 @@ $('.input-daterange input').each(function() {
 });
 
 // Set up your table
-table = $('#example_1').DataTable({
+table1 = $('#example_1').DataTable({
   paging: true,
   info: false,
    responsive: false,
 });
 
 
-// Extend dataTables search
+
+
+// Re-draw the table when the a date range filter changes
+$('.date-range-filter1').change(function() {
+
+  // Extend dataTables search
 $.fn.dataTable.ext.search.push(
   function(settings, data, dataIndex) {
     var min = $('#min-date').val();
@@ -717,9 +722,7 @@ $.fn.dataTable.ext.search.push(
   }
 );
 
-// Re-draw the table when the a date range filter changes
-$('.date-range-filter1').change(function() {
-  table.draw();
+  table1.draw();
 });
 
 $('#my-table_filter').hide();
