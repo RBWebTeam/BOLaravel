@@ -764,7 +764,7 @@ str = str + "</table>";
 function getpartnerinfo(fbaid)
 {
 
-
+alert(fbaid);
 $.ajax({  
          type: "GET",  
          url:'fba-list/'+fbaid,//"{{URL::to('Fsm-Details')}}",
@@ -784,7 +784,7 @@ alert(data);
        }
               // console.log(msg[0].Result);
 str = str + "</table>";
-           $('#popupfbalist').html(str);   
+           $('#divpartnertable').html(str);   
               
         }  
       });

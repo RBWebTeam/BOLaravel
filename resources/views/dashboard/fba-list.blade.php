@@ -121,7 +121,7 @@
                             <td>
 
                       
-                            <a href="#" data-toggle="modal" data-target="#myModal" onclick="getpartnerinfo(<?php echo $val->fbaid; ?>)" >partner info</a>
+                            <a href="#" data-toggle="modal" data-target="#partnerInfo" onclick="getpartnerinfo(<?php echo $val->fbaid; ?>)" >partner info</a>
                             <!-- <a href="" data-toggle="modal" data-target="#partnerInfo">partner info</a> -->
 
                             </td>
@@ -347,8 +347,8 @@
         <h4 class="modal-title">Partner Info</h4>
       </div>
       <div class="modal-body">
-	  <div class="table-responsive">
-        <table class="table table-bordered table-striped">
+	  <div id="divpartnertable" class="table-responsive">
+        <!-- <table class="table table-bordered table-striped">
 		    <tr>
 			 <td>Partner ID</td>
 			 <td>Name</td>
@@ -365,7 +365,7 @@
 			 <td>Bangalore</td>
 			 <td>560021</td>
 			</tr>
-		</table>
+		</table> -->
 		</div>
       </div>
     </div>
