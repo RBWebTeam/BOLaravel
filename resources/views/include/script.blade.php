@@ -764,7 +764,6 @@ str = str + "</table>";
 function getpartnerinfo(fbaid)
 {
 
-alert(fbaid);
 $.ajax({  
          type: "GET",  
          url:'fba-list/'+fbaid,//"{{URL::to('Fsm-Details')}}",
@@ -774,16 +773,15 @@ $.ajax({
 
         var data = JSON.parse(fsmmsg);
 
-alert(data);
 
-       var str = "<table class='table'><tr style='height:30px;margin:5px;'><th>Name</th><th>Email</th><th>Mobile</th></tr>";
+       var str = "<table class='table'><tr style='height:30px;margin:5px;'><td>Partner ID</td><td>Name</td><td>Mobile No</td><td>Email</td><td>City</td><td>Pincode</td></tr>";
        for (var i = 0; i < data.length; i++) {
 
-         str = str + "<tr style='height:30px;margin:5px;'><td>"+data[i].Name+"</td><td>"+data[i].Email+"</td><td>"+data[i].Mobile+"</td></tr>";
+         str = str + "<tr style='height:30px;margin:5px;'><td>"+data[i].PartnerID+"</td><td>"+data[i].pname+"</td><td>"+data[i].pmobile+"</td><td>"+data[i].pemail+"</td><td>"+data[i].pcity+"</td><td>"+data[i].ppincode+"</td></tr>";
       
        }
               // console.log(msg[0].Result);
-str = str + "</table>";
+            str = str + "</table>";
            $('#divpartnertable').html(str);   
               
         }  
