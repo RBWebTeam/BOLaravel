@@ -93,7 +93,7 @@ $arrayCategories = array();
 
 
 <ul class="nav nav-list" style="overflow: hidden; width: auto; height: 95%;">
-<li><label ><a href="#"><span class="sp-nav"><img src="{{url('images/icon/home.png')}}"></span>&nbsp;&nbsp; Home Home</a></label></li>   
+<!-- <li><label ><a href="#"><span class="sp-nav"><img src="{{url('images/icon/home.png')}}"></span>&nbsp;&nbsp; Home Home</a></label></li>   --> 
                         
 <?php foreach ($user_right_group as $key => $current) { 
 
