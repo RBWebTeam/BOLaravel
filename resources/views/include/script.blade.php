@@ -556,11 +556,7 @@ $(document).on('change', '#search_state', function() {
 
 <script type="text/javascript">
   $('#sales_update').click(function(){
-<<<<<<< HEAD
-    // alert('okae');
-=======
-    
->>>>>>> 3ec86996cfc01135d81f56920fcee99941f067e9
+ 
     var id = $('#p_fbaid').val();
     var sales_update=$('#p_remark').val();
     console.log(sales_update);
@@ -693,14 +689,19 @@ $('.input-daterange input').each(function() {
 });
 
 // Set up your table
-table = $('#example_1').DataTable({
+table1 = $('#example_1').DataTable({
   paging: true,
   info: false,
    responsive: false,
 });
 
 
-// Extend dataTables search
+
+
+// Re-draw the table when the a date range filter changes
+$('.date-range-filter1').change(function() {
+
+  // Extend dataTables search
 $.fn.dataTable.ext.search.push(
   function(settings, data, dataIndex) {
     var min = $('#min-date').val();
@@ -717,9 +718,7 @@ $.fn.dataTable.ext.search.push(
   }
 );
 
-// Re-draw the table when the a date range filter changes
-$('.date-range-filter1').change(function() {
-  table.draw();
+  table1.draw();
 });
 
 $('#my-table_filter').hide();
