@@ -71,36 +71,65 @@ class MenuController extends Controller{
 public function recursiveFN($menu_group_id,$parent_id=0){
                           
  
+                    //   $menu='';
+                    //   $sql='';
+                    //   $m_p='';
+                    //   $is_select='';
+                    //   if($parent_id==0){
+                    //   $sql=DB::select('call sp_recursive_mapping(?,?)',array(0,$menu_group_id));
+                    //    }else{
+                    //      $sql=DB::select('call sp_recursive_mapping(?,?)',array($parent_id,$menu_group_id));
+                    //    }
+  
+                    // foreach ($sql as $key => $value) {
+                           
+                    //     if($value->menu_group_id==$menu_group_id){
+                    //       $menu.='<li><label><input   type="checkbox" name="menu_id[]" checked value="'.$value->id.'" >'.$value->name.' </label>';
+                    //  }else{
+                    //     $menu.='<li><label><input   type="checkbox" name="menu_id[]"  value="'.$value->id.'"   >'.$value->name.' </label>';
+                    //    }
+                              
+                       
+                     
+                    //    $menu.='<ul  class="sub-menu" >'.$this->recursiveFN($menu_group_id,$value->id).'</ul>';
+                       
+                    //    $menu.='</li>';
+                        
+                    // }
 
 
- 
-                      $menu='';
+
+
+                    // return $menu;
+
+
+
+
+
+
+
+
+   $menu='';
                       $sql='';
                       $m_p='';
                       $is_select='';
                       if($parent_id==0){
-           // $sql=DB::table('menu_master')->select('id','name','parent_id')->where('parent_id','=',0)->get();
-
                       $sql=DB::select('call sp_recursive_mapping(?,?)',array(0,$menu_group_id));
-             
-                     }else{
-           // $sql= DB::table('menu_master')->select('id','name','parent_id')->where('parent_id','=',$parent_id)->get();  
+                       }else{
                          $sql=DB::select('call sp_recursive_mapping(?,?)',array($parent_id,$menu_group_id));
-             
-                     }
+                       }
   
- 
                     foreach ($sql as $key => $value) {
                            
                         if($value->menu_group_id==$menu_group_id){
-                          $menu.='<li><label><input   type="checkbox" name="menu_id[]" checked value="'.$value->id.'" >'.$value->name.' </label>';
+                          $menu.='<li><label class="tree-toggle nav-header"><a href="#"><span class="sp-nav"> <input   type="checkbox" name="menu_id[]" checked value="'.$value->id.'"   ></span> '.$value->name.'</a></label>';
                      }else{
-                        $menu.='<li><label><input   type="checkbox" name="menu_id[]"  value="'.$value->id.'"   >'.$value->name.' </label>';
+                        $menu.='<li><label class="tree-toggle nav-header"><a href="#"><span class="sp-nav"> <input   type="checkbox" name="menu_id[]"   value="'.$value->id.'"   > </span>'.$value->name.'</a> </label>';
                        }
                               
                        
                      
-                       $menu.='<ul  class="sub-menu" >'.$this->recursiveFN($menu_group_id,$value->id).'</ul>';
+                       $menu.='<ul  class="nav nav-list tree" >'.$this->recursiveFN($menu_group_id,$value->id).'</ul>';
                        
                        $menu.='</li>';
                         
@@ -110,6 +139,8 @@ public function recursiveFN($menu_group_id,$parent_id=0){
 
 
                     return $menu;
+
+
 
 
 }

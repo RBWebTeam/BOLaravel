@@ -31,39 +31,28 @@
             <label for="inputEmail" class="control-label col-xs-2"> Menu Mapping</label>
             <div class="col-xs-6" id="mapping_select_id">
 
-            <ul class='menu'>
+           <!--  <ul class='menu'>
         <?php  echo $recfn; ?>
-             </ul>
+             </ul> -->
 
-               <!--  <select id="framework" name="menu_id[]" multiple class="form-control" >
-               @foreach($menu as $key=>$le)
-                     <?php if(isset($m_p[$key]->menu_id)){echo $m_p[$key]->menu_id; } ?>
-                   @if(isset($m_p[$key]->menu_id)==$le->id)
-                   <option value="{{$le->id}}"  selected>{{$le->name}}</option>
-                   @else
-                    <option value="{{$le->id}}" >{{$le->name}}</option>
-                    @endif
+             <ul class="nav nav-list" style="overflow: hidden; width: auto; height: 95%;">
 
-               @endforeach
-                    </select>
-             @if ($errors->has('menu_id'))<label class="control-label" for="inputError"> {{ $errors->first('menu_id') }}</label>  @endif
-                    -->
+ <?php  echo $recfn; ?>
+                
+
+    </ul>
+    
+ 
             </div>
         </div>
           
         
 
 
-<!-- <div class="container-fluid white-bg">
-<div class="col-md-9">
-  <div class="well" style="width:900px; padding: 8px 0;float: left;">
-    <div style="overflow-y: scroll; overflow-x: hidden; height: 350px;" id="maindiv">
-      <ul class="nav nav-list navtree"></ul>
-    </div>
-  </div>
-</div>
- -->
 
+
+
+ 
 
      <div class="col-md-12 col-xs-12">
        
