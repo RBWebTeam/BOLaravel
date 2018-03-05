@@ -4,12 +4,12 @@
 
 
        <div class="container-fluid white-bg">
-       <div class="col-md-12"><h3 class="mrg-btm">Menu Group List</h3></div>
+       <div class="col-md-12"><h3 class="mrg-btm">  User Rights </h3></div>
        
      
  
 
-<p > <a href="#" class="menu_group_id_model"> Add Menu Group </a></p>
+<p > <a href="#" class="menu_group_id_model"> Add   User Rights </a></p>
  
        <div class="col-md-12">
        <div class="overflow-scroll">
