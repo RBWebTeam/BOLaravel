@@ -43,7 +43,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Lead</h5>
+        <h5 class="modal-title" id="exampleModalLabel">User Rights</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -53,7 +53,7 @@
     
         
    <div class="form-group">
-            <label for="inputEmail" class="control-label col-xs-2">Menu group Name</label>
+            <label for="inputEmail" class="control-label col-xs-2"> Name</label>
             <div class="col-xs-10">
             <input type="text" name="menu_group" id="menu__group"  class="form-control" >
             </div>

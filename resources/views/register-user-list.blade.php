@@ -15,7 +15,7 @@
        <div class="overflow-scroll">
        <div class="table-responsive" >
 
-      <table class="datatable-responsive table table-striped table-bordered dt-responsive nowrap" id="example1">
+      <table class="datatable-responsive table table-striped table-bordered dt-responsive nowrap" id="example">
                                     <thead>
                                        <tr>
                                        <th>UserName</th>
@@ -29,6 +29,7 @@
                                           <th>User Type </th>
                                           <th>UID</th>
                                            <th>Password</th>
+                                           <th>Edit</th>
                                       </tr>
                                     </thead>
                                     <tbody>
@@ -37,13 +38,40 @@
                                       <td>{{$vl->UserName}}</td>
                                        <td>{{$vl->email}}</td>
                                          <td>{{$vl->mobile}}</td>
-                                           <td>{{$vl->companyid}}</td>
-                                             <td>{{$vl->reportingid}}</td>
+
+                                           <td>
+                                            @if($vl->companyid==1)
+                                               RupeeBoss
+                                            @elseif($vl->companyid==2) 
+                                            Datacom 
+                                            @elseif($vl->companyid==3) 
+                                                PolicyBoss
+                                            @elseif($vl->companyid==4) 
+                                            LandMark   
+                                            @else
+                                            @endif
+                                           </td>
+                                             <td>
+                                             @if($vl->reportingid==1)
+                                               RupeeBoss
+                                            @elseif($vl->reportingid==2) 
+                                            Datacom 
+                                            @elseif($vl->reportingid==3) 
+                                                PolicyBoss
+                                            @elseif($vl->reportingid==4) 
+                                            LandMark   
+                                            @else
+                                            @endif
+                                            </td>
+
+
                                                <td>{{$vl->state_name}}</td>
                                                  <td>{{$vl->CityName}}</td>
                                                  <td>{{$vl->username}}</td>
                                                  <td>{{$vl->uid}}</td>
                                                  <td>{{$vl->password}}</td>
+
+                                                 <td><a href="{{url('register-update')}}/{{$vl->FBAUserId}}">Edit</a>    </td>
                                        
                                       </tr>
                                     @endforeach

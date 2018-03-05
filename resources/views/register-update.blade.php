@@ -85,20 +85,10 @@
 <div class="form-group">
             <label for="inputEmail" class="control-label col-xs-2">State </label>
             <div class="col-xs-6">
-           
- 
-
-               <select class="form-control search_state " name="state_id"   placeholder="Search State" id="search_state" required> 
+               <select class="form-control search_state1" name="state_id"   placeholder="Search State" id="search_state" required> 
                     <option value="{{$query->stateid}}"  selected="" >{{$query->state_name}}</option>
-
                   </select>
-
-             <!-- 	<option value="0">-Select-</option>
-             	 @foreach($state as $val)
-                  <option value="{{$val->state_id}}" <?php //if($query->stateid==$val->state_id){echo "selected";} ?>  " selected="">{{$val->state_name}}</option>
-             	 @endforeach
-             </select> -->
-   <!--  @if ($errors->has('state_id'))<label class="control-label" for="inputError"> {{ $errors->first('state_id ') }}</label>@endif -->
+ 
            </div>
 </div>
 
@@ -109,14 +99,7 @@
              <select class="form-control search_district " name="city_id"   placeholder="Search State" id="search_district" required> 
                     <option value="{{$query->cityid}}" selected=""  >{{$query->CityName}}</option>
                   </select>
-          <!-- 
-           <select name="city_id" id="city_id"  class="form-control">
-             	<option value="0">-Select-</option>
-             	 @foreach($city as $val)
-                <option value="{{$val->DCCityID}}" <?php //if($query->cityid==$val->DCCityID){echo "selected";} ?> >{{$val->CityName}}</option>
-             	 @endforeach
-             </select>
-    @if ($errors->has('city_id'))<label class="control-label" for="inputError"> {{ $errors->first('city_id ') }}</label>@endif -->
+          
            </div>  
 </div>
 
