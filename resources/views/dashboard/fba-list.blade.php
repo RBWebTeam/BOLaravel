@@ -30,7 +30,7 @@
 			 </div> -->
 			 <!-- Filter End -->
 			 
-			 <form    >
+			 <form>
        <div class="col-md-4">
       <div class="form-group">
       <p>From Date</p>
@@ -292,7 +292,7 @@
         <form name="update_posp" id="update_posp">
          {{ csrf_field() }}
          <div class="form-group">
-            <input type="text" name="fbaid" id="fbaid" value=" ">
+            <input type="hidden" name="fbaid" id="fbaid" value=" ">
             <label class="control-label" for="message-text">Enter Remark : </label>
             <input type="text" class="recipient-name form-control" id="posp_remark" name="posp_remark" required="" />
           </div>
@@ -322,7 +322,7 @@
         <form name="update_loan" id="update_loan">
          {{ csrf_field() }}
          <div class="form-group">
-            <input type="text" name="fba_id" id="fba_id" value=" ">
+            <input type="hidden" name="fba_id" id="fba_id" value=" ">
             <label class="control-label" for="remark">Enter Remark : </label>
             <input type="text" class="recipient-name form-control" id="remark" name="remark" required="" />
           </div>
