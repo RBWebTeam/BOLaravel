@@ -34,7 +34,7 @@
        <div class="col-md-4">
       <div class="form-group">
       <p>From Date</p>
-         <div id="datepicker" class="input-group date" data-date-format="mm-dd-yyyy">
+         <div id="datepicker" class="input-group date" data-date-format="dd-mm-yyyy">
                <input class="form-control date-range-filter" type="text" placeholder="From Date" name="fdate" id="min-date"  />
               <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
               </div>
@@ -43,7 +43,7 @@
        <div class="col-md-4">
        <div class="form-group">
        <p>To Date</p>
-       <div id="datepicker1" class="input-group date" data-date-format="mm-dd-yyyy">
+       <div id="datepicker1" class="input-group date" data-date-format="dd-mm-yyyy">
                <input class="form-control date-range-filter1 " type="text"  placeholder="To Date"  name="todate"  id="max-date"   />
               <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
               </div>
@@ -140,9 +140,7 @@
 
 
                             </td>
-                            
-                            
-                        </tr>
+                          </tr>
 
                       
 					              @endforeach
