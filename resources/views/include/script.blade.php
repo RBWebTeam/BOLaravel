@@ -485,6 +485,7 @@ function uploaddoc(id){
 
 $(document).ready(function(){
  var  st_array=Array('<option value="0">Select</option>');
+
  $.ajax({
   url: "{{ url('search-state')}}",
   dataType: "json",
@@ -502,6 +503,27 @@ $(document).ready(function(){
 
   }
 });
+
+ //  update state
+ var  st_array1=Array();
+  $.ajax({
+  url: "{{ url('search-state')}}",
+  dataType: "json",
+  data: { },
+  success: function(data) {
+    $.each(data, function( key, val ) {
+      st_array1.push('<option value="'+val.datavalue+'">'+val.value+'</option>');
+    });
+    $('.search_state1').empty();
+    $('.search_state1').append(st_array1);
+     public_state=st_array1;
+ 
+    $('.riskstateid').empty();
+    $('.riskstateid').append(st_array1);  
+
+  }
+});
+
 
 });
 

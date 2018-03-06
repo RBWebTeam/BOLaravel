@@ -27,10 +27,10 @@ Route::post('admin-login','LoginController@login');
 
  
 
-Route::get('register-user','LoginController@register_user');
-Route::get('register-update/{id}','LoginController@register_update');
-Route::post('register-user-update','LoginController@register_user_update');
-Route::get('register-user-list','LoginController@register_user_list');
+Route::get('register-user','LoginController@register_user')->middleware('CheckRole');
+Route::get('register-update/{id}','LoginController@register_update')->middleware('CheckRole');
+Route::post('register-user-update','LoginController@register_user_update')->middleware('CheckRole');
+Route::get('register-user-list','LoginController@register_user_list')->middleware('CheckRole');
 
  // city  state
 Route::get('search-state','LoginController@search_state');
@@ -38,7 +38,7 @@ Route::get('search-city','LoginController@search_city');
 
 // end city state
 
-Route::post('register-user','LoginController@registerinsert');
+Route::post('register-user','LoginController@registerinsert')->middleware('CheckRole');
 //Route::get('register-user','LoginController@register_user');
 Route::post('register-user-save','LoginController@register_user_save');
 
@@ -151,16 +151,16 @@ Route::post('sales-material-update','BookAppointmentController@sales_material_up
   /************
 //  Menu List
 ******************/
-Route::get('menu-list','MenuController@menu_list');
-Route::post('menu-add','MenuController@menu_add');
-Route::get('menu-mapping','MenuController@mapping');
-Route::post('menu-mapping-save','MenuController@menu_mapping_save');
-Route::get('menu-list-select','MenuController@menu_list_select');
-Route::post('menu-list-add','MenuController@menu_list_add');
-Route::get('menu-test','MenuController@menu_test');
-Route::get('menu-group','MenuController@menu_group');
-Route::post('menu-group-save','MenuController@menu_group_save');
-Route::get('menu-group-select','MenuController@menu_group_select');
+Route::get('menu-list','MenuController@menu_list')->middleware('CheckRole');
+Route::post('menu-add','MenuController@menu_add')->middleware('CheckRole');
+Route::get('menu-mapping','MenuController@mapping')->middleware('CheckRole');
+Route::post('menu-mapping-save','MenuController@menu_mapping_save')->middleware('CheckRole');
+Route::get('menu-list-select','MenuController@menu_list_select')->middleware('CheckRole');
+Route::post('menu-list-add','MenuController@menu_list_add')->middleware('CheckRole');
+Route::get('menu-test','MenuController@menu_test')->middleware('CheckRole');
+Route::get('menu-group','MenuController@menu_group')->middleware('CheckRole');
+Route::post('menu-group-save','MenuController@menu_group_save')->middleware('CheckRole');
+Route::get('menu-group-select','MenuController@menu_group_select')->middleware('CheckRole');
 
   /************
 //  Regional manager
