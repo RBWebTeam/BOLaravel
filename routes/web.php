@@ -171,8 +171,8 @@ Route::get('regional-manager','RegionalManagerControllar@regional_manager');
 });
   /************
 // LEAD MANAGMENT
-******************/
-Route::group(['namespace' => 'leadController',  ], function() {
+******************/  
+Route::group(['namespace' => 'leadController','middleware'=>'CheckMidd'  ], function() {
 Route::get('lead-up-load','LeaduploadController@lead_up_load');
 Route::post('import-excel','LeaduploadController@importExcel');        
 Route::post('lead-update','LeaduploadController@lead_update');          
@@ -181,8 +181,10 @@ Route::post('lead-management-update','LeaduploadController@lead_management_updat
 Route::get('lead-status','LeadstatusController@lead_status');
 
 
-
+ 
 Route::get('lead-test','LeaduploadController@lead_test');  
+Route::get('assign-task','LeadstatusController@assign_task');
+Route::post('assign-task-save','LeadstatusController@assign_task_save');
 
 
 });
