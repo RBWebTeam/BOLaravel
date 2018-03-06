@@ -59,6 +59,7 @@
              <div class="overflow-scroll">
              <div class="table-responsive" >
 
+
             <table class="datatable-responsive table table-striped table-bordered  nowrap" id="fba-list-table">
                           <thead>
                                       <tr>
@@ -84,6 +85,7 @@
                                     </thead>
  
                
+
             </table>
             </div>
             </div>
@@ -265,8 +267,7 @@
         </form>
         <div class="modal-footer"> 
           <button class="btn btn-default" type="button" data-dismiss="modal">Close</button>
-          <a id="loan_update" class="btn btn-primary" type="button">Update</a><b class="alert-success primary" id=""></b>
-          
+          <a id="loan_update" class="btn btn-primary" type="button">Update</a><b class="alert-success primary" id=""></b>          
         </div>
       </div>
     </div>
@@ -284,6 +285,7 @@
         <h4 class="modal-title">Partner Info</h4>
       </div>
       <div class="modal-body">
+
       <div class="table-responsive">
         <table class="table table-bordered table-striped">
             <tr>
@@ -304,6 +306,7 @@
             </tr>
         </table>
         </div>
+
       </div>
     </div>
   </div>
@@ -340,6 +343,14 @@
     </div>
   </div>
 </div>
+<script type="text/javascript">
+
+
+
+
+</script>
+
+
 @endsection
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>

@@ -160,11 +160,10 @@ class LoginController extends InitialController
 
 
 
-public function register_update(Request $req){
+public function register_update(Request $req){  
 
              // $query=DB::table('FBAUsers')->where('fbauserid','=',$req->id)->first();
                  $query=DB::select("call sp_fba_update(?)",[$req->id]);
-
  
                   $state = DB::select("call usp_load_state_list()");
                   $user_type=DB::table('user_type_master')->get();

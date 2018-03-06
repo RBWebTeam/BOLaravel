@@ -5,6 +5,10 @@ namespace App\Http\Controllers\leadController;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use DB;
+use Session;
+use Validator;
+use Redirect;
+
 class LeadstatusController extends Controller
 {
      
@@ -13,5 +17,52 @@ class LeadstatusController extends Controller
 
                 
                 
+        }
+
+
+        public function assign_task(Request $req){
+
+        	 // $query=DB::select('call sp_raw_lead_master(?)',array(Session::get('fbauserid')));
+        	  $userlist=DB::select('call sp_assign_list()');  // create live
+        	  $assign_task=DB::select('call sp_assign_task()');  // create live
+
+   	  
+   
+
+             return view('lead_view.assign_task',['assign_task'=>$assign_task,'userlist'=>$userlist]);
+
+        }
+
+
+        public function assign_task_save(Request $req){
+          
+
+            $validator =Validator::make($req->all(), [
+              
+              'user_id' =>'required|not_in:0',
+              'lead_id' =>'required|not_in:--SELECT--',
+              
+                            ]);
+             if ($validator->fails()) {
+             return redirect('assign-task')
+             ->withErrors($validator)
+             ->withInput();
+            }else{
+
+
+
+              
+              foreach ($req->lead_id as $key => $val) {
+                        
+                       DB::table('raw_lead_master')->where('id','=',$val)->update([ 'user_id'=>$req->user_id]);
+              }
+                 
+                   
+            Session::flash('msg', "Successfully Assign Task.. ");
+                       return Redirect::back();
+             
+             }
+
+
         }
 }

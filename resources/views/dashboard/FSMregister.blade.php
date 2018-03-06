@@ -20,6 +20,8 @@
               <div id="home" class="tab-pane fade in active">
               <h4 class="text-center">FSM Basic Info</h4>
 			  <div class="col-md-4 col-xs-12">
+
+			  	<input id="fsmid" type="hidden" value="0">
 				<div class="form-group">
 				 <select id="txttitle" name="txttitle" class="selectpicker select-opt form-control">
 			     <option selected="selected" value="0">Title</option>
@@ -169,38 +171,7 @@
 										    </tbody>
 									 </table>
                                      </div>
-									</div>
-									
-						<!-- <div class="col-md-2">
-						 <input type="submit" value=">" class="btn btn-primary btn-large map-btn block">
-						 <input type="submit" value=">>" class="btn btn-primary btn-large map-btn block">
-						 <input type="submit" value="<" class="btn btn-primary btn-large map-btn block">
-						 <input type="submit" value="<<" class="btn btn-primary btn-large map-btn block">
-						</div>
-						
-				<div class="col-sm-5 col-xs-12 form-padding" id="StatesV" style="overflow-y:scroll;height:270px;">
-							
-                                              <div>
-	                                          <table class="table table-responsive table-hover" cellspacing="0">
-		                                       <tbody>
-											   <tr class="headerstyle" align="center">
-			                                    <th scope="col">
-                                                <input  type="checkbox" class="used">
-                                                <span>Select All</span>
-                                                </th>
-		                                       </tr>
-											
-		                                    <tr align="left">
-			                               <td>
-                                                <input type="hidden" value="4" class="used">
-                                                <input  type="checkbox" class="used">
-                                                <span>456456</span>
-                                            </td>
-		                                   </tr>
-										    </tbody>
-									 </table>
-                                     </div>
-									</div> -->
+									</div>									
               </div>
 			  
 			  
@@ -274,6 +245,7 @@ if (window.location.href.indexOf('?smid=') > 0) {
          success: function(fsmmsg){
         
         var data = JSON.parse(fsmmsg);
+        $('#fsmid').val(data[0].SMId);
         $('#txttitle').val(data[0].Salutation);
         $('#txtFname').val(data[0].FName);
         $('#txtLname').val(data[0].LastName);
@@ -305,10 +277,7 @@ if (window.location.href.indexOf('?smid=') > 0) {
         $('#txtbankbrach').val(data[0].BankBranch);
         $('#txtbankcity').val(data[0].BankCity);
 
-        	
-
-
-
+     	
 
         }  
       });
