@@ -30,6 +30,14 @@ $(document).ready(function(){
         todayHighlight: true
   }).datepicker("getDate");
 });
+
+    $(function () {
+  $("#datepicker_date").datepicker({ 
+        autoclose: true, 
+        todayHighlight: true
+  }).datepicker("getDate");
+});
+ 
  
   $(function () {
   $("#datepicker1").datepicker({ 

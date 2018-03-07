@@ -298,46 +298,27 @@ public function call_json($url,$data){
 public function lead_management_update(Request $req){   
 
 $error=null;
-   try{
-              $val =Validator::make($req->all(), [
-                'name' => 'required',
-                'mobile' => 'required',
-                'email' => 'required',
-                'dob' => 'required',
-                'profession' => 'required',
-                'monthly_income' => 'required',
-                'pan_no' => 'required',
-                'cityname' => 'required',
-                'address' => 'required',
-                'pincode' => 'required',
-                'campaign' => 'required',
-
-
-                            ]);
-           if ($val->fails()){
-              return response()->json($val->messages(), 200);
-           }else{
-
-                          $arra=array(
-                           'name'=>$req->name,
-                           'mobile'=>$req->mobile,
-                           'email'=>$req->email,
-                           'dob'=>$req->dob,
-                           'profession'=>$req->profession,
-                           'monthly_income'=>$req->monthly_income,
-                           'pan'=>$req->pan_no,
+   try{ 
+                            $arra=array(
+                           'name'=>$req->name?$req->name:null,
+                           'mobile'=>$req->mobile?$req->mobile:null,
+                           'email'=>$req->email?$req->email:null,
+                           'dob'=>$req->dob?$req->dob:null,
+                           'profession'=>$req->profession?$req->profession:null,
+                           'monthly_income'=>$req->monthly_income?$req->monthly_income:null,
+                           'pan'=>$req->pan_no?$req->pan_no:null,
                            // 'city_id'=>$city->cityname,
-                             'address'=>$req->address ,
-                              'pincode'=>$req->pincode ,
-                              'campaign_id'=>$req->campaign ,
+                             'address'=>$req->address?$req->address:null ,
+                              'pincode'=>$req->pincode?$req->pincode:null ,
+                              'campaign_id'=>$req->campaign?$req->campaign:null ,
                               'user_id'=>Session::get('fbauserid'),
                               'ip_address'=>\Request::ip(),
                               'created_on'=>date('Y-m-d H:i:s'),); 
                           
 
-                            //  $query=DB::table('raw_lead_master')->where('id','=',$req->lead_id)->update($arra);
-                   $error=0;
-             }
+                             $query=DB::table('raw_lead_master')->where('id','=',$req->lead_id)->update($arra);
+                             $error=0;
+            
              }catch (Exception $e){  $error=1; }
 
              return $error;

@@ -304,9 +304,9 @@
          <div class="form-group">
                   <label for="inputEmail" class="control-label col-xs-2">DOB</label>
                   <div class="col-xs-10">
-                          
-                      <div id="min"  class="input-group date" data-date-format="dd-mm-yyyy">
-                       <input class="form-control" type="text" name="dob" placeholder="From Date" id="clientDOB"  >
+                   
+                      <div id="datepicker_date"  class="input-group date" data-date-format="dd-mm-yyyy">
+                       <input class="form-control" type="text" name="dob" placeholder="From Date" id="datepicker_date"  >
                       <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
 
                      
@@ -442,6 +442,9 @@
 
        
     }
+
+
+ 
 </script>
 
 <style type="text/css">
@@ -449,7 +452,7 @@
   .radio-green [type="radio"]:checked+label:after {
     border-color: #00C851;
     background-color: #00C851;
-}
+}l
 /*Gap*/
 
 .radio-green-gap [type="radio"].with-gap:checked+label:before {
