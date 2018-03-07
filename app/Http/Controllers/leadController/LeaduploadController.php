@@ -15,12 +15,12 @@ class LeaduploadController extends Controller{
                  // $query=DB::table('raw_lead_master')->get();
                   $lead_status=DB::table('lead_status_master')->get();
                   $lead_type=DB::table('lead_type_master')->get();
-
-               
-         
-           $query=DB::select('call sp_raw_lead_master(?)',array(Session::get('fbauserid')));
+                
+                 
+            $query=DB::select('call sp_raw_lead_master(?)',array(Session::get('fbauserid')));
 
  
+     //print_r($followup_lead);exit;
 
       	     return view('lead_view.lead_upload',['query'=>$query,'lead_type'=>$lead_type,'lead_status'=>$lead_status]);
       }
@@ -106,7 +106,22 @@ if(isset($city->city_id)){
                                   "followup_date"=>$followup,
                                    "lead_date"=>date('Y-m-d H:i:s'),
                                    "conf_status"=>$check,
-                        	);   DB::table('raw_lead_master')  ->where('id',$req->lead_id) ->update($arra); 
+                        	);   DB::table('raw_lead_master')->where('id',$req->lead_id) ->update($arra); 
+
+                       
+                          //  followup table
+                           $history=array( 'lead_status_id'=>$req->lead_status_id,
+                              'lead_type_id'=>$req->lead_type_id,
+                              'remark'=>$req->remark,
+                              'lead_id'=>$req->lead_id,
+                              'user_id'=>Session::get('fbauserid'),
+                              'user_type'=>'caller',
+                              'created_on'=>date('Y-m-d H:i:s'),
+
+                              );
+                          DB::table('followup_details_history')->insert($history);
+
+
                          $error=0; 
                         }catch (Exception $e){  $error=1;  }
                        return $arr[]=array('status'=>$status,'error'=>$error);
@@ -331,6 +346,9 @@ $error=null;
         
 
 }
+
+
+
 
 
 

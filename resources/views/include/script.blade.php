@@ -201,7 +201,7 @@ $('#chkselectall').click(function () {
 });
 // insert Fsm details
 function insertfsm() {
-  console.log($('#fsmregister').serialize());
+  //console.log($('#fsmregister').serialize());
    $.ajax({ 
    url: "{{URL::to('Fsm-Register')}}",
    method:"POST",
@@ -209,7 +209,7 @@ function insertfsm() {
 
    success: function(msg)  
    {
-    console.log(msg);
+    //console.log(msg);
    }
 
 });
@@ -228,7 +228,7 @@ function insertfsm() {
             url:'fba-blocklist/'+flag+'/'+value, 
                      
            success: function( msg ) {
-                 console.log(msg);
+                // console.log(msg);
             }
         });
 
@@ -249,7 +249,7 @@ $('.unblock').click(function(){
             url:'fba-blocklist/'+flag+'/'+value, 
                      
            success: function( msg ) {
-                 console.log(msg);
+                // console.log(msg);
             }
         });
 });
@@ -266,7 +266,7 @@ $('.loan_from_id').click(function(){
             type: "GET",
             url:'fba-list/'+fbaid+'/'+value+'/'+flag, 
             success: function( msg ) {
-            console.log(msg);
+            //console.log(msg);
              alert("loan id updated successfully..!");
              $('.updateLoan').modal('hide');
             $('#loan_id').val('');
@@ -284,14 +284,14 @@ else{
 //send sms from fba
 $('.message_sms_id').click(function(){
   if($('#message-text').val()!="")  {
-  console.log($('#message_sms_from').serialize());
+  //console.log($('#message_sms_from').serialize());
    $.ajax({ 
    url: "{{URL::to('fba-list')}}",
    method:"POST",
    data: $('#message_sms_from').serialize(),
    success: function(msg)  
    {
-    console.log(msg);
+    //console.log(msg);
     alert('SMS send successfully..')
     $('.sms_sent_id').modal('hide');
     $('#message-text').val('');
@@ -313,7 +313,7 @@ function uploaddoc(id){
 </script> 
 
 
-<script type="text/javascript">
+<!-- <script type="text/javascript">
    $.ajax({ 
    url: "{{URL::to('sales-material-product')}}",
    method:"GET",
@@ -321,7 +321,7 @@ function uploaddoc(id){
    {
   
     var data=$.parseJSON(datas);
-   console.log(data);
+  
    if(data)
       {      $.each(data, function( index, value ) {
             $('#Product').append('<option value="'+value.Product_Id+'">'+value.Product_Name+'</option>');
@@ -334,7 +334,7 @@ function uploaddoc(id){
    },
 
  });
-</script> 
+</script>  -->
 
 <!-- <script type="text/javascript">
    $.ajax({ 
@@ -372,7 +372,7 @@ function uploaddoc(id){
           processData: false,
           contentType: false,
           success: function(msg){
-             console.log(msg.status);
+            // console.log(msg.status);
              if (msg.status==0) 
               {
                 alert('Uploaded Successfully');
@@ -425,7 +425,7 @@ function uploaddoc(id){
 <script type="text/javascript">
   $('#Product').on('change', function() {
     var Product=$('#Product').find(":selected").val();
-    console.log(Product);
+   // console.log(Product);
     if ( Product == '1')
       {
        $("#Company option[value='1']").show();

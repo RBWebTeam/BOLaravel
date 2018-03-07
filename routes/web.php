@@ -179,6 +179,7 @@ Route::post('lead-update','LeaduploadController@lead_update');
 Route::post('lead-interested','LeaduploadController@interested'); 
 Route::post('lead-management-update','LeaduploadController@lead_management_update');
 Route::get('lead-status','LeadstatusController@lead_status');
+Route::get('followup-history','LeadstatusController@followup_history');
 
 
  
