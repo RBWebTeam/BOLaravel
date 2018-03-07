@@ -26,7 +26,7 @@
    <div class="col-md-12">
        <div class="overflow-scroll">
        <div class="table-responsive" >
-				<table id="tblqueries" class="datatable-responsive table table-striped table-bordered dt-responsive nowrap" >
+				<table id="example" class="datatable-responsive table table-striped table-bordered dt-responsive nowrap" >
                  <thead >
                  <tr class="thead_cl">
 

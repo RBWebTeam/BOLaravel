@@ -69,6 +69,7 @@ Route::get('Fsm-Details','FsmDetailsController@FsmDetails');
 Route::get('Fsm-Details/{smid}','FsmDetailsController@fsmfbalist');
 Route::get('FsmRegister/{smid}','FsmRegisterController@getfsmdetail');
 Route::get('fba-list/{partnerid}','FbaController@getfbapartner');
+Route::get('assignrm','AssignrmController@loadrm');
 ///END
 Route::get('Fsm-Register','FsmRegisterController@getsate');
 Route::get('Fsm-Register/{id}',array('as'=>'FSMRegister.ajax','uses'=>'FsmRegisterController@getcity'));
