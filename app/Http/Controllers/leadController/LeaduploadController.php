@@ -110,18 +110,17 @@ if(isset($city->city_id)){
 
                        
                           //  followup table
-                           $history=array( 'lead_status_id'=>$req->lead_status_id,
-                              'lead_type_id'=>$req->lead_type_id,
-                              'remark'=>$req->remark,
-                              'lead_id'=>$req->lead_id,
-                              'user_id'=>Session::get('fbauserid'),
-                              'user_type'=>'caller',
-                              'created_on'=>date('Y-m-d H:i:s'),
-
-                              );
-                          DB::table('followup_details_history')->insert($history);
-
-
+                           $history=array(
+                                   $req->lead_id,
+                                   Session::get('fbauserid'),
+                                   $req->lead_status_id,
+                                   $req->lead_type_id,
+                                   $req->remark,
+                                   'caller',
+                                   date('Y-m-d H:i:s') );
+                      
+                         DB::select('call sp_followup_details_history_insert(?,?,?,?,?,?,?)',$history);
+                       
                          $error=0; 
                         }catch (Exception $e){  $error=1;  }
                        return $arr[]=array('status'=>$status,'error'=>$error);

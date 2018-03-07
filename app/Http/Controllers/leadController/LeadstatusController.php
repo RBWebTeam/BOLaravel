@@ -71,7 +71,7 @@ class LeadstatusController extends Controller
 
         public function followup_history(Request $req){
 
-       $followup_lead=DB::select('call sp_followup_lead_history(?)',array($req->ID));
+           $followup_lead=DB::select('call sp_followup_lead_history(?)',array($req->ID));
 
     return $followup_lead;
 }

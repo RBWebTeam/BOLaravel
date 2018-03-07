@@ -400,7 +400,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Action-history </h5>
+        <h5 class="modal-title" id="exampleModalLabel">View-history </h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -409,7 +409,7 @@
        
         <table class="datatable-responsive table table-striped table-bordered dt-responsive nowrap" id="example">
 
-          <thead><tr><th>ID</th></tr></thead>
+          <thead><tr><th>ID</th><th>Lead Type</th><th>Lead Status</th> <th>Remark</th></tr></thead>
           <tbody id="followup_history_id"></tbody> 
         </table>
       </div>
@@ -427,24 +427,18 @@
 
 
 <script type="text/javascript">
-  
     function viewdetilas(argument) {
-            
-            $('#followup-history-Modal').modal('show');
-       $.get("{{url('followup-history')}}",{'ID':argument})
-             .done(function(data){ 
+              $('#followup_history_id').empty();
+              $('#followup-history-Modal').modal('show');
+              $.get("{{url('followup-history')}}",{'ID':argument}).done(function(data){ 
                 var arr=Array();
-        
-              $.each(data,function(index,val){  
-                       
-                    arr.push('<tr><td>'+index+'</td></tr>');
+              $.each(data,function(index,val){      
+                    arr.push('<tr><td>'+index+'</td><td>'+val.lead_type+'</td><td>'+val.lead_status_id+'</td><td>'+val.remark+'</td></tr>');
                });
-              
               $('#followup_history_id').append(arr);
-
-          }).fail(function(xhr, status, error) {
+               }).fail(function(xhr, status, error) {
                  console.log(error);
-            });
+                });
 
        
     }

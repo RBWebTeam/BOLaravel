@@ -173,7 +173,7 @@ Route::get('regional-manager','RegionalManagerControllar@regional_manager');
   /************
 // LEAD MANAGMENT
 ******************/  
-Route::group(['namespace' => 'leadController','middleware'=>'CheckMidd'  ], function() {
+Route::group(['namespace' => 'leadController','middleware'=>'CheckRole'  ], function() {
 Route::get('lead-up-load','LeaduploadController@lead_up_load');
 Route::post('import-excel','LeaduploadController@importExcel');        
 Route::post('lead-update','LeaduploadController@lead_update');          
