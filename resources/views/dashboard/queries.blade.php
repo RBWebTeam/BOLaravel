@@ -6,14 +6,14 @@
        
 
 <div class="btn-group"   >
-  <a href="{{url('queries')}}?queries=1" class="btn btn-primary" style="margin-right:3px; padding:6px 10px; font-size:13px;">POSP Transaction</a>
-  <a href="{{url('queries')}}?queries=2"  class="btn btn-primary" style="margin-right:3px;padding:6px 10px; font-size:13px;">Not POSP</a>
-  <a href="{{url('queries')}}?queries=3" class="btn btn-primary" style="margin-right:3px;padding:6px 10px; font-size:13px;">Policy Sold</a>
-  <a href="{{url('queries')}}?queries=4" class="btn btn-primary" style="margin-right:3px;padding:6px 10px; font-size:13px;">FBA Never Logged In</a>
-  <a href="{{url('queries')}}?queries=5" class="btn btn-primary" style="margin-right:3px;padding:6px 10px; font-size:13px;">Inactive POSP </a>
-  <a href="{{url('queries')}}?queries=6" class="btn btn-primary" style="margin-right:3px;padding:6px 10px; font-size:13px;">POSP Without POSP No</a>
-  <a href="{{url('queries')}}?queries=7" class="btn btn-primary" style="margin-right:3px;padding:6px 10px; font-size:13px;">POSP Without Payment</a>
-  <a href="{{url('queries')}}?queries=8"  class="btn btn-primary" style="padding:6px 10px; font-size:13px;">Transaction Today</a>
+  <a href="{{url('queries')}}?queries=1" class="btn btn-primary" style="margin-right:3px; padding:6px 10px;">POSP Transaction</a>
+  <a href="{{url('queries')}}?queries=2"  class="btn btn-primary" style="margin-right:3px;padding:6px 10px;">Not POSP</a>
+  <a href="{{url('queries')}}?queries=3" class="btn btn-primary" style="margin-right:3px;padding:6px 10px;">Policy Sold</a>
+  <a href="{{url('queries')}}?queries=4" class="btn btn-primary" style="margin-right:3px;padding:6px 10px;">FBA Never Logged In</a>
+  <a href="{{url('queries')}}?queries=5" class="btn btn-primary" style="margin-right:3px;padding:6px 10px;">Inactive POSP </a>
+  <a href="{{url('queries')}}?queries=6" class="btn btn-primary" style="margin-right:3px;padding:6px 10px;">POSP Without POSP No</a>
+  <a href="{{url('queries')}}?queries=7" class="btn btn-primary" style="margin-right:3px;padding:6px 10px;">POSP Without Payment</a>
+  <a href="{{url('queries')}}?queries=8"  class="btn btn-primary" style="padding:6px 10px;">Transaction Today</a>
 </div>
 
 <br>

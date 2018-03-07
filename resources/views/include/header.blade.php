@@ -6,7 +6,7 @@
   <div class="bar3"></div>
   </div>
 </div>
-<div class="col-md-2 col-xs-4 no-mob-pad"><img src="images/logo1.png" class="img-responsive logo pull-left"/></div>
+<div class="col-md-2 col-xs-4 no-mob-pad"><a href="http://localhost:8000/dashboard"><img src="images/logo1.png" class="img-responsive logo pull-left"/></a></div>
 <div class="col-md-3">
 <div class="search-dv pull-left">
 <div class="input-group">
@@ -19,8 +19,8 @@
 <div class="pull-right log-txt">
 <?php $request=Session::get('FullName'); ?>
 <?php $request1=Session::get('LastloginDate'); ?>
-<p><span class="hidden-xs">Welcome </span><b><?php echo $request ?></b></p>
-<p><span class="hidden-xs">Last login - Date / Time :</span> <b><?php echo $request1 ?></b></p>
+<div><span class="hidden-xs">Welcome </span><b><?php echo $request ?>User1</b></div>
+<div><span class="hidden-xs">Last login - Date / Time :</span> <b><?php echo $request1 ?></div></p>
 
 
 <!-- <p><span class="hidden-xs">Welcome </span><b>Mr. Goving Dharne</b></p>
