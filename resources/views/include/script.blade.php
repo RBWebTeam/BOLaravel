@@ -822,6 +822,95 @@ $.ajax({
       });
 }
 
+function getfbaassignlist(ddl)
+{  
+  if($(ddl).val() > 0)
+  getfbalist(1,$(ddl).val());
+}
+
+function showfbaassignlist()
+{
+  getfbalist(2,$('#txtpincode').val()); 
+}
+
+function getfbalist(flag,val)
+{
+
+$.ajax({  
+         type: "GET",  
+         url:'assign-rm-load/'+flag+'/'+val,//"{{URL::to('Fsm-Details')}}",
+         success: function(msg){
+        
+
+
+        var data = JSON.parse(msg);
+
+$('#ddlfba').empty();   
+       var str = "";
+       for (var i = 0; i < data.length; i++) {
+
+         str = str + "<option value='"+data[i].FBAId+"'>"+data[i].Name+"</option>";
+      
+       }
+              // console.log(msg[0].Result);
+           $('#ddlfba').append(str);   
+              
+        }  
+      });
+}
+
+function fbarmassignlist(){
+
+// alert('hhdhd');
+// $('#ddlfba option:selected').each(function(){ 
+//     //alert($(this).text()+' - '+$(this).val());
+
+   //  var responsedata = '{"fbaid":'+$(this).val()+',"rm_id":'+$('#ddlrmlist').val()+'}';
+
+     $.ajax({  
+         type: "POST",  
+         url: "assign-rm-update",
+         data : $('#assignrm').serialize(),
+         success: function(msg){                        
+              if (msg.status==0) 
+                {
+                  alert('Updated Successfully');
+                } 
+                else {
+                  alert('Could not updated successfully');
+                }
+
+              
+              
+        }  
+
+      }); 
+
+// });
+
+
+
+ /*$.ajax({  
+         type: "POST",  
+         url: "{{URL::to('assign-rm-update')}}",
+         data : $('#assignrm').serialize(),
+         success: function(msg){
+                        
+alert(msg);
+              if (msg.status==0) 
+                {
+                  alert('Updated Successfully');
+                } 
+                else {
+                  alert('Could not updated successfully');
+                }
+
+              
+              
+        }  
+
+      }); */
+}
 ////////////////END////////////////////////
 
 

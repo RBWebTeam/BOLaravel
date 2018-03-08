@@ -43,13 +43,13 @@ public function getfba($flag,$value)
       
 }
 public function insertntf(Request $req){
-   $image = $req->file('fileupload');
-        $name = time().'.'.$image->getClientOriginalName();
-        $destinationPath = public_path('savaimages/'); //->save image folder 
-        $image->move($destinationPath, $name); 
-        DB::table('Notification_Master')->insert(
-      ['ImagePath' => $name]
-    );
+   // $image = $req->file('fileupload');
+   //      $name = time().'.'.$image->getClientOriginalName();
+   //      $destinationPath = public_path('savaimages/'); //->save image folder 
+   //      $image->move($destinationPath, $name); 
+   //      DB::table('Notification_Master')->insert(
+   //    ['ImagePath' => $name]
+   //  );
 
  $var=$req->personal_dob.' '.$req->notificationhours.':'.$req->notificationminutes;
 
