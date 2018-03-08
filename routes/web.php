@@ -191,30 +191,25 @@ Route::post('lead-interested','LeaduploadController@interested');
 Route::post('lead-management-update','LeaduploadController@lead_management_update');
 Route::get('lead-status','LeadstatusController@lead_status');
 Route::get('followup-history','LeadstatusController@followup_history');
-
-
- 
 Route::get('lead-test','LeaduploadController@lead_test');  
 Route::get('assign-task','LeadstatusController@assign_task');
 Route::post('assign-task-save','LeadstatusController@assign_task_save');
+Route::get('marketing-leads','LeaduploadController@marketing_leads');   
+});
+/************
+// END LEAD MANAGMENT
+******************/ 
+
+ /************
+// Product Controller 
+******************/
+Route::get('product-authorized','ProductController@product_authorized');
+Route::post('product-save','ProductController@product_save');
+
+
+
 
 
 });
 
-
- });
-
- Route::group(['namespace' => 'leadController',  ], function() {
- Route::get('lead-test','LeaduploadController@lead_test');    // test 
-Route::get('marketing-leads','LeaduploadController@marketing_leads');   // test
-
-
-
-/////////////////////////GOVIND////////////////////////////////////
-
-//Route::get('fsm-fba-list/{fsmid}','FsmDetailsController@fsmfbalist');
-//Route::get('Fsm-Details/{smid}',array('as'=>'FsmDetails.ajax','uses'=>'FsmDetailsController@fsmfbalist'));*/
-
-//////////////////////////END//////////////////////////////////////
-
-});
+ 
