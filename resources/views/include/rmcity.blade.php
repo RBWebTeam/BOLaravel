@@ -1,20 +1,24 @@
 <script type="text/javascript">
 
 $(document).ready(function(){
-    $('#lstStates').multiselect({ 
+    $('#rmname').multiselect({ 
         buttonText: function(options, select) {
-                return 'Select State';
+                return 'Select RM';
         }
     
     });
 
-    
-     $('#sms').multiselect({
+    $('#ddlstate').multiselect({ 
         buttonText: function(options, select) {
-                return 'Select Recipient';
+                return 'Select state';
         }
 
-     
-});
 
-</script>
+    
+    });
+
+   </script>
+
+    
+    
+

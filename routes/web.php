@@ -113,6 +113,13 @@ Route::get('send-notification','SendNotificationController@sendnotification');
 //send sms
 /*Route::get('send-sms','SendSMSController@ViewSendSMSDetails');*/
 
+/// vikaas rm city
+Route::get('rm_city_master','rmcitymappingController@rmcitymapping');
+Route::get('rm_city_master','rmcitymappingController@getrm');
+Route::get('rm_city_master/{state_id}','rmcitymappingController@getcity');
+Route::post('rm_city_master','rmcitymappingController@rmcityinsert');
+
+// Route::get('rm_city_master','rmcitymappingController@rmcityupdate');
 
 
  //Otp Detail
@@ -168,6 +175,7 @@ Route::get('menu-group-select','MenuController@menu_group_select')->middleware('
 Route::group(['namespace' => 'RM',  ], function() {
 
 Route::get('regional-manager','RegionalManagerControllar@regional_manager');
+
 });
   /************
 // LEAD MANAGMENT
@@ -202,5 +210,9 @@ Route::get('marketing-leads','LeaduploadController@marketing_leads');   // test
 //Route::get('Fsm-Details/{smid}',array('as'=>'FsmDetails.ajax','uses'=>'FsmDetailsController@fsmfbalist'));*/
 
 //////////////////////////END//////////////////////////////////////
+
+// Rm city mapping
+
+
 
 });

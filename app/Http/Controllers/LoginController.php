@@ -134,8 +134,8 @@ class LoginController extends InitialController
 
        DB::table('FBAUsers')->insert(
        [ 'UserName' =>$req->UserName,
-       'email' =>$req->email,
-      'mobile' =>$req->mobile,
+          'email' =>$req->email,
+          'mobile' =>$req->mobile,
        'companyid' =>$req->company_id,
         'reportingid' =>$req->reporting_id,
          'stateid' =>$req->state_id,
@@ -146,7 +146,8 @@ class LoginController extends InitialController
              'uid' =>$req->uid,
              'password' =>$req->password]);
 
-    Session::flash('message', 'Register successfully...!'); 
+       
+Session::flash('message', 'Register successfully...!'); 
    }
 
     

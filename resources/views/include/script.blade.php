@@ -813,6 +813,31 @@ $.ajax({
       });
 }
 
+$('#ddlstate').on('change', function() {
+            var state_id = $(this).val();
+            if(state_id) {
+                $.ajax({
+                    url: 'rm_city_master/'+state_id,
+                    type: "GET",
+                    dataType: "json",
+                    success:function(data) {
+                        $('#ddlcity').empty();
+                        $('#ddlcity').append('<option value="0">select city</option>');
+                        $.each(data, function(key, value) {
+
+                            $('#ddlcity').append('<option value ="'+ key +'">'+ value +'</option>');
+                        });
+                     }
+                });
+            }else{
+                $('select[name="city"]').empty();
+            }
+        });
+
+
+
+
+
 ////////////////END////////////////////////
 
 
