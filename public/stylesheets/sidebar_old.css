@@ -79,13 +79,14 @@ a, a:hover, a:focus {
 }
 
 #sidebar ul li a {
-    padding: 10px;
+    padding: 12px;
     font-size: 1.1em;
+	width:248px;
+	text-transform:uppercase;
     display: block;
 	color:#b9ccd4;
-	border-bottom: 1px solid #3398c3;
-	width:250px;
-	font-family: 'Cambay';font-size: 15px !important;
+	border-bottom: 1px solid #237294;
+	font-weight: normal;
 }
 #sidebar ul li a:hover {text-decoration:none; color:#fff;}
 /*#sidebar ul li a:hover {
@@ -94,7 +95,6 @@ a, a:hover, a:focus {
 	text-decoration:none;
 	
 }*/
-#sidebar ul li a ul li a {color:#ff0000 !important;}
 
 #sidebar ul li.active > a, a[aria-expanded="true"] {
     color: #fff;
@@ -159,7 +159,7 @@ a.article, a.article:hover {
 	background:#f5f5fa;
 	width: 100%;
     overflow: hidden;
-	font-family: 'Cambay' !important;
+	
 }
 
 /* ---------------------------------------------------

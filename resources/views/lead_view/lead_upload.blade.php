@@ -68,6 +68,8 @@
                                        <th>Video click</th>
                                        <th>Misscall  </th>
                                          <th>languages   </th>
+
+                                          <th>view detials </th>
                                         
                                       </tr>
 
@@ -112,7 +114,7 @@
                                         <td>{{$val->lang}}</td>
 
                                         
-                                  
+                                       <td> <a href="#" onclick="viewdetilas('{{$val->id}}');">view</a> </td>
                                      
                                         
                                       </tr>
@@ -302,9 +304,9 @@
          <div class="form-group">
                   <label for="inputEmail" class="control-label col-xs-2">DOB</label>
                   <div class="col-xs-10">
-                          
-                      <div id="min"  class="input-group date" data-date-format="dd-mm-yyyy">
-                       <input class="form-control" type="text" name="dob" placeholder="From Date" id="clientDOB"  >
+                   
+                      <div id="datepicker_date"  class="input-group date" data-date-format="dd-mm-yyyy">
+                       <input class="form-control" type="text" name="dob" placeholder="From Date" id="datepicker_date"  >
                       <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
 
                      
@@ -392,20 +394,65 @@
 </div>
 
  
-                                       
+ 
+   <!--    followup_history -->
+ <div class="modal fade" id="followup-history-Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">View-history </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+       
+        <table class="datatable-responsive table table-striped table-bordered dt-responsive nowrap" id="example">
+
+          <thead><tr><th>ID</th><th>Lead Type</th><th>Lead Status</th> <th>Remark</th></tr></thead>
+          <tbody id="followup_history_id"></tbody> 
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        
+      </div>
+    </div>
+  </div>
+</div>
+                                      
 
 
 @endsection
 
 
+<script type="text/javascript">
+    function viewdetilas(argument) {
+              $('#followup_history_id').empty();
+              $('#followup-history-Modal').modal('show');
+              $.get("{{url('followup-history')}}",{'ID':argument}).done(function(data){ 
+                var arr=Array();
+              $.each(data,function(index,val){      
+                    arr.push('<tr><td>'+index+'</td><td>'+val.lead_type+'</td><td>'+val.lead_status_id+'</td><td>'+val.remark+'</td></tr>');
+               });
+              $('#followup_history_id').append(arr);
+               }).fail(function(xhr, status, error) {
+                 console.log(error);
+                });
 
+       
+    }
+
+
+ 
+</script>
 
 <style type="text/css">
   
   .radio-green [type="radio"]:checked+label:after {
     border-color: #00C851;
     background-color: #00C851;
-}
+}l
 /*Gap*/
 
 .radio-green-gap [type="radio"].with-gap:checked+label:before {
