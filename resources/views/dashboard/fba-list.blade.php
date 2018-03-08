@@ -9,28 +9,30 @@
 
         <hr>
        </div>
-             
-             
-             <!-- Filter Strat -->
-             <!-- <div class="col-md-12">
-             <div class="panel panel-primary">
-             <div class="panel-heading">
-                        <h3 class="panel-title">Filter</h3>
-                        <div class="pull-right">
-                            <span class="clickable filter" data-toggle="tooltip" data-container="body">
-                            <span class="glyphicon glyphicon-plus glyphicon1"></span> &nbsp;&nbsp;
-                                <span class="glyphicon glyphicon-filter glyphicon1 fltr-tog"></span>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="panel-body filter-bdy" style="display:none">
-                        <input type="text" class="form-control" id="dev-table-filter" data-action="filter" data-filters="#dev-table" placeholder="Search..." />
-                    </div>
-             </div>
-             </div> -->
-             <!-- Filter End -->
-             
-             <form    >
+
+			 
+			 
+			 <!-- Filter Strat -->
+			 <!-- <div class="col-md-12">
+			 <div class="panel panel-primary">
+			 <div class="panel-heading">
+						<h3 class="panel-title">Filter</h3>
+						<div class="pull-right">
+							<span class="clickable filter" data-toggle="tooltip" data-container="body">
+							<span class="glyphicon glyphicon-plus glyphicon1"></span> &nbsp;&nbsp;
+								<span class="glyphicon glyphicon-filter glyphicon1 fltr-tog"></span>
+							</span>
+						</div>
+					</div>
+					<div class="panel-body filter-bdy" style="display:none">
+						<input type="text" class="form-control" id="dev-table-filter" data-action="filter" data-filters="#dev-table" placeholder="Search..." />
+					</div>
+			 </div>
+			 </div> -->
+			 <!-- Filter End -->
+			 
+			 <form>
+
        <div class="col-md-4">
       <div class="form-group">
       <p>From Date</p>
@@ -200,7 +202,7 @@
         <form name="update_remark" id="update_remark">
          {{ csrf_field() }}
          <div class="form-group">
-            <input type="text" name="p_fbaid" id="p_fbaid" value=" ">
+            <input type="hidden" name="p_fbaid" id="p_fbaid" value="">
             <label class="control-label" for="message-text">Enter Remark : </label>
             <input type="text" class="recipient-name form-control" id="p_remark" name="p_remark" required="" />
           </div>
@@ -230,7 +232,7 @@
         <form name="update_posp" id="update_posp">
          {{ csrf_field() }}
          <div class="form-group">
-            <input type="text" name="fbaid" id="fbaid" value=" ">
+            <input type="hidden" name="fbaid" id="fbaid" value=" ">
             <label class="control-label" for="message-text">Enter Remark : </label>
             <input type="text" class="recipient-name form-control" id="posp_remark" name="posp_remark" required="" />
           </div>
@@ -260,7 +262,7 @@
         <form name="update_loan" id="update_loan">
          {{ csrf_field() }}
          <div class="form-group">
-            <input type="text" name="fba_id" id="fba_id" value=" ">
+            <input type="hidden" name="fba_id" id="fba_id" value=" ">
             <label class="control-label" for="remark">Enter Remark : </label>
             <input type="text" class="recipient-name form-control" id="remark" name="remark" required="" />
           </div>
