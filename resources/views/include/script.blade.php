@@ -957,7 +957,7 @@ productid.push($(this).val())
 $('#txtproductid').val(productid);
 console.log($('#rmfolloupdetails').serialize());
    $.ajax({ 
-   url: "{{URL::to('Rmfolloup')}}",
+   url: "{{URL::to('Rmfollowup')}}",
    method:"POST",
    data: $('#rmfolloupdetails').serialize(),
   success: function(msg)  
@@ -976,7 +976,7 @@ function viewhistory(fbaid){
 
 $.ajax({  
          type: "GET",  
-         url:'Rmfolloup/'+fbaid,
+         url:'Rmfollowup/'+fbaid,
          success: function(fsmmsg){
         
 
@@ -991,8 +991,7 @@ $.ajax({
          str = str + "<tr style='height:30px;margin:5px;'><td>"+data[i].lead_id+"</td><td>"+data[i].FullName+"</td><td>"+data[i].user_type+"</td><td>"+data[i].status_name+"</td><td>"+data[i].remark+"</td></tr>";
       
        }
-              // console.log(msg[0].Result);
-            str = str + "</table>";
+         str = str + "</table>";
            $('#divpartnertable').html(str);   
               
         }  
@@ -1002,35 +1001,6 @@ $.ajax({
 
 
 </script>
-
-// $(function () { 
-//     $('#lstStates').multiselect({ 
-//         buttonText: function(options, select) {
-//             console.log(select[0].length);
-//             if (options.length === 0) {
-//                 return 'None selected';
-//             }
-//             if (options.length === select[0].length) {
-//                 return 'All selected ('+select[0].length+')';
-//             }
-//             else if (options.length >= 4) {
-//                 return options.length + ' selected';
-//             }
-//             else {
-//                 var labels = [];
-//                 console.log(options);
-//                 options.each(function() {
-//                     labels.push($(this).val());
-//                 });
-//                 return labels.join(', ') + '';
-//             }
-//         }
-    
-//     });
-// });
-
-
-
-    </script>
+</script>
 
 

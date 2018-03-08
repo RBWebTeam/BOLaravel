@@ -69,9 +69,9 @@ Route::get('Fsm-Details','FsmDetailsController@FsmDetails');
 
 /// shubham 
 
-Route::get('Rmfolloup','RMfollowupController@RMfollowup');
-Route::post('Rmfolloup','RMfollowupController@insertrmfollowup');
-Route::get('Rmfolloup/{fbaid}','RMfollowupController@gethistory');
+Route::get('Rmfollowup','RMfollowupController@RMfollowup');
+Route::post('Rmfollowup','RMfollowupController@insertrmfollowup');
+Route::get('Rmfollowup/{fbaid}','RMfollowupController@gethistory');
 
 //////GOVIND
 Route::get('Fsm-Details/{smid}','FsmDetailsController@fsmfbalist');

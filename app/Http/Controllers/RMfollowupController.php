@@ -36,7 +36,7 @@ public function insertrmfollowup(Request $req)
     "RM" ,
     null ));
 
-  DB::statement('call ups_update_intrestedproduct(?,?)',
+  DB::statement('call usp_update_intrestedproduct(?,?)',
   	array($req->txtproductid,
   	      $req->txtfbaid));
 }   
