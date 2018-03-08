@@ -40,6 +40,8 @@
                                        
                                        <th>ID</th>
                                      <!--   <th>ref_no</th> -->
+                                      
+
                                        <th>Name</th>
                                        <th>Mobile</th>
                                        <th>Email</th>
@@ -69,7 +71,7 @@
                                        <th>Misscall  </th>
                                          <th>languages   </th>
 
-                                          <th>view detials </th>
+                                          <th>View History </th>
                                         
                                       </tr>
 
@@ -286,7 +288,7 @@
        <div class="form-group">
                   <label for="inputEmail" class="control-label col-xs-2">Mobile</label>
                   <div class="col-xs-10">
-          <input type="text" name="mobile" id="clientMobile"  maxlength="10" onkeypress="return Numeric(event)"  class="form-control" >
+          <input type="text" name="mobile" id="clientMobile"  maxlength="10" onkeypress="return Numeric(event)"  class="form-control" readonly="" >
 
            <label class="control-label" for="inputError" id="Errormobile"></label>
                   </div>

@@ -25,8 +25,8 @@ class LeadstatusController extends Controller
         	 // follow up details   table
 
         	 // $query=DB::select('call sp_raw_lead_master(?)',array(Session::get('fbauserid')));
-        	  $userlist=DB::select('call sp_assign_list()');  // create live
-        	  $assign_task=DB::select('call sp_assign_task()');  // create live
+        	  $userlist=DB::select('call sp_assign_list()');   
+        	  $assign_task=DB::select('call sp_assign_task()');  
 
    	  
    
