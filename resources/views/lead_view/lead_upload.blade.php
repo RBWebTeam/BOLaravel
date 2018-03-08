@@ -318,22 +318,22 @@
 
 
 
-         <div class="form-group">
+      <!--    <div class="form-group">
                   <label for="inputEmail" class="control-label col-xs-2">Profession</label>
                   <div class="col-xs-10">
                     <input type="text" name="profession" id="clientProfession"  class="form-control" >
                     <label class="control-label" for="inputError" id="Errorprofession"></label>
                   </div>
-        </div> 
+        </div>  -->
 
 
-        <div class="form-group">
+        <!-- <div class="form-group">
                   <label for="inputEmail" class="control-label col-xs-2">Monthly income</label>
                   <div class="col-xs-10">
                     <input type="text" name="monthly_income" id="clientMonthly_income"  class="form-control" >
                      <label class="control-label" for="inputError" id="Error"></label>
                   </div>
-        </div> 
+        </div>  -->
 
 
 
@@ -346,12 +346,12 @@
         </div> 
 
 
-        <div class="form-group">
+        <!-- <div class="form-group">
                   <label for="inputEmail" class="control-label col-xs-2">City Name</label>
                   <div class="col-xs-10">
                     <input type="text" name="cityname" id="clientCityname"  class="form-control" >
                   </div>
-        </div> 
+        </div> --> 
 
 
           <div class="form-group">
@@ -371,12 +371,12 @@
 
  
 
-           <div class="form-group">
+           <!-- <div class="form-group">
                   <label for="inputEmail" class="control-label col-xs-2">Campaign</label>
                   <div class="col-xs-10">
                     <input type="text" name="campaign" id="clientCampaign_id"  class="form-control" >
                   </div>
-          </div> 
+          </div>  -->
 
 
           
