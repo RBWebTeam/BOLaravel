@@ -1003,7 +1003,7 @@ $.ajax({
 
 </script>
 
-// $(function () { 
+<!-- // $(function () { 
 //     $('#lstStates').multiselect({ 
 //         buttonText: function(options, select) {
 //             console.log(select[0].length);
@@ -1028,9 +1028,8 @@ $.ajax({
     
 //     });
 // });
+ -->
 
 
-
-    </script>
-
+    
 

@@ -10,7 +10,7 @@
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
           <span aria-hidden="true">×</span>
         </button>
-        <strong>Success!</strong> {{ $message }}
+        <strong>{{ $message }}</strong> 
       </div>
   @endif
 
@@ -21,8 +21,8 @@
         <div class="form-group">
             <label for="inputEmail" class="control-label col-xs-2">Users</label>
             <div class="col-xs-6">
-            <select class="form-control" name="user_name" >
-               <option value="0" >--SELECT--</option>
+            <select class="form-control" name="user_name" onchange="get_user_selected(this.value); "  >
+               <option value="0"  >--SELECT--</option>
                
                @foreach($userlist as $lty)
                    <option value="{{$lty->FBAUserId}}" >{{$lty->UserName}}</option>
@@ -38,12 +38,9 @@
   <div class="form-group">
             <label for="inputEmail" class="control-label col-xs-2">Product Name</label>
             <div class="col-xs-6">
-            <select class="form-control " name="product_name[]"   multiple=""  >
-               <option value="0" >--SELECT--</option>
-               @foreach($product as $val)
-                   <option value="{{$val->Product_Id}}" >  {{$val->Product_Name}}  </option>
-               @endforeach
-         </select>
+            <select class="form-control " name="product_name[]"   multiple="" id="product_name_id"   >
+               
+           </select>
                   @if ($errors->has('product_name'))<label class="control-label" for="inputError"> {{ $errors->first('product_name') }}</label>@endif
        </div>
  </div>
@@ -62,7 +59,27 @@
       </div>
       </div>
 
+<script type="text/javascript">
+ function get_user_selected(ID){
+ $.get("{{url('product-authorized')}}",{'ID':ID}).done(function(data){ 
+              var arr=Array('<option value="0">--Slect--</option>');
+               $('#product_name_id').empty();
+              $.each(data,function(index,val){ 
+                   if(val.Product_Id==val.maping_id){
+                       arr.push('<option value="'+val.Product_Id+'" selected >'+val.Product_Name+'</option>');
+                   }else{
+                      arr.push('<option value="'+val.Product_Id+'">'+val.Product_Name+'</option>');
+                   }
+                 });
+               $('#product_name_id').append(arr);
+               }).fail(function(xhr, status, error) {
+                 console.log(error);
+                });
 
+
+ }
+
+</script>
  
 
 @endsection
