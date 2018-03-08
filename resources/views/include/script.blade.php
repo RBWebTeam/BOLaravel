@@ -521,6 +521,7 @@ alert(JSON.stringify(data));*/
 
 $(document).ready(function(){
  var  st_array=Array('<option value="0">Select</option>');
+
  $.ajax({
   url: "{{ url('search-state')}}",
   dataType: "json",
@@ -538,6 +539,27 @@ $(document).ready(function(){
 
   }
 });
+
+ //  update state
+ var  st_array1=Array();
+  $.ajax({
+  url: "{{ url('search-state')}}",
+  dataType: "json",
+  data: { },
+  success: function(data) {
+    $.each(data, function( key, val ) {
+      st_array1.push('<option value="'+val.datavalue+'">'+val.value+'</option>');
+    });
+    $('.search_state1').empty();
+    $('.search_state1').append(st_array1);
+     public_state=st_array1;
+ 
+    $('.riskstateid').empty();
+    $('.riskstateid').append(st_array1);  
+
+  }
+});
+
 
 });
 
@@ -627,7 +649,7 @@ $(document).on('change', '#search_state', function() {
     var id = $('#fba_id').val();
     var loan_update=$('#remark').val();
     console.log(loan_update);
-    $('#loan_'+id).text(loan_update);
+    
     if (!$('#update_loan').valid()) 
     {
 
@@ -645,6 +667,8 @@ $(document).on('change', '#search_state', function() {
               if (msg.status==0) 
                 {
                   alert('Updated Successfully');
+                  $('#loan_'+id).text(loan_update);
+                  $('.updateLoan').hide();
                 } 
                 else {
                   alert('Could not updated successfully');
@@ -665,7 +689,7 @@ $(document).on('change', '#search_state', function() {
     var id = $('#fbaid').val();
     var posp_update=$('#posp_remark').val();
     console.log(posp_update);
-    $('#posp_'+id).text(posp_update);
+    
     if (!$('#update_posp').valid()) 
     {
 
@@ -680,6 +704,8 @@ $(document).on('change', '#search_state', function() {
               if (msg.status==0) 
                 {
                   alert('Updated Successfully');
+                  $('#posp_'+id).text(posp_update);
+                  $('.updatePosp').hide();
                 } 
                 else {
                   alert('Could not updated successfully');
@@ -762,38 +788,106 @@ $.ajax({
       
        }
               // console.log(msg[0].Result);
-str = str + "</table>";
+         str = str + "</table>";
            $('#popupfbalist').html(str);   
               
         }  
       });
 
-// $.ajax({
-//                 url: 'fsm-fba-list',
-//                 dataType: 'json',
-//                 type: 'post',
-//                 data:'{"smid":'+smid+'}';
-//                 contentType: 'application/json',                
-//                 success: function(data){
-//                   alert('success');
-//                     alert(data);
-//                 },
-//                 error: function(error){
-//                   alert('error');
-//                     alert(error);
-//                 }
-// });
+}
 
- //      $.ajax({ 
- //            url: "fsm-fba-list",
- //            method:"POST",
- //            data : "{""smid"":"+smid+"}",
- //   success: function(msg)  
- //   {
- //      alert(msg);
- //   }
 
- // });
+function getpartnerinfo(fbaid)
+{
+
+$.ajax({  
+         type: "GET",  
+         url:'fba-list/'+fbaid,//"{{URL::to('Fsm-Details')}}",
+         success: function(fsmmsg){
+        
+
+
+        var data = JSON.parse(fsmmsg);
+
+
+       var str = "<table class='table'><tr style='height:30px;margin:5px;'><td>Partner ID</td><td>Name</td><td>Mobile No</td><td>Email</td><td>City</td><td>Pincode</td></tr>";
+       for (var i = 0; i < data.length; i++) {
+
+         str = str + "<tr style='height:30px;margin:5px;'><td>"+data[i].PartnerID+"</td><td>"+data[i].pname+"</td><td>"+data[i].pmobile+"</td><td>"+data[i].pemail+"</td><td>"+data[i].pcity+"</td><td>"+data[i].ppincode+"</td></tr>";
+      
+       }
+              // console.log(msg[0].Result);
+            str = str + "</table>";
+           $('#divpartnertable').html(str);   
+              
+        }  
+      });
+}
+
+
+///shubham rm folloup 
+
+$('#chkproduct').click(function () {    
+     $('.chkproductname').prop('checked', this.checked);    
+ });
+
+
+function getfollowup(id){
+  $('#fbaid').val(id);
+  $('.rmfolloup').modal('show');
+ }
+
+
+
+$('#btn_subbmit').click(function() {
+
+var productid = []
+$('input:checkbox[name=txtproduct]:checked').each(function() {
+productid.push($(this).val())
+})
+$('#txtproductid').val(productid);
+console.log($('#rmfolloupdetails').serialize());
+   $.ajax({ 
+   url: "{{URL::to('Rmfolloup')}}",
+   method:"POST",
+   data: $('#rmfolloupdetails').serialize(),
+  success: function(msg)  
+   {
+    console.log(msg);
+    alert("inserted successfully");
+    $('.rmfolloup').modal('hide');
+    $("#rmfolloupdetails").trigger('reset');
+   }
+
+});
+
+
+})
+function viewhistory(fbaid){
+
+$.ajax({  
+         type: "GET",  
+         url:'Rmfolloup/'+fbaid,
+         success: function(fsmmsg){
+        
+
+
+        var data = JSON.parse(fsmmsg);
+
+
+       var str = "<table class='table'><tr style='height:30px;margin:5px;'><td>Lead ID</td><td>Name</td><td>User Type</td><td>Status</td><td>Remark</td></tr>";
+       for (var i = 0; i < data.length; i++) {
+
+         str = str + "<tr style='height:30px;margin:5px;'><td>"+data[i].lead_id+"</td><td>"+data[i].FullName+"</td><td>"+data[i].user_type+"</td><td>"+data[i].status_name+"</td><td>"+data[i].remark+"</td></tr>";
+      
+       }
+              // console.log(msg[0].Result);
+            str = str + "</table>";
+           $('#divpartnertable').html(str);   
+              
+        }  
+      });
+
 }
 
 ////////////////END////////////////////////

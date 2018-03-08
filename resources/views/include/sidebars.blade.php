@@ -98,7 +98,7 @@ $arrayCategories = array();
 
 
 <ul class="nav nav-list" style="overflow: hidden; width: auto; height: 95%;">
-<li><label ><a href="#"><span class="sp-nav"><img src="{{url('images/icon/home.png')}}"></span>&nbsp;&nbsp; Home Home</a></label></li>   
+<!-- <li><label ><a href="#"><span class="sp-nav"><img src="{{url('images/icon/home.png')}}"></span>&nbsp;&nbsp; Home Home</a></label></li>   --> 
                         
 <?php foreach ($user_right_group as $key => $current) { 
 
@@ -107,12 +107,24 @@ $arrayCategories = array();
      ?>
 
                      
-                        <li><label class="tree-toggle nav-header"><a href="{{url('')}}/{{$current->url_link}}"><span class="sp-nav"><img src="{{url('images/icon/home.png')}}"></span>&nbsp;&nbsp;<?php echo $current->name; ?></a></label>
+                        <li><label class="tree-toggle nav-header">
+                        @if($current->url_link=="#")
+                        <a href="#"><span class="sp-nav"><img src="{{url('images/icon/home.png')}}"></span>&nbsp;&nbsp;<?php echo $current->name; ?></a>
+                        @else
+                             <a href="{{url('')}}/{{$current->url_link}}"><span class="sp-nav"><img src="{{url('images/icon/home.png')}}"></span>&nbsp;&nbsp;<?php echo $current->name; ?></a>
+                        @endif
+
+
+                        </label>
                            
                             <ul class="nav nav-list tree">
                             <?php foreach($second_level as $key =>$second_row ){?>  
                               
-                                <li><label class="tree-toggle nav-header"><a href="{{url('')}}/{{$second_row->url_link}}" ><?php  echo  $second_row->name; ?></a></label>
+                                <li><label class="tree-toggle nav-header"> @if($second_row->url_link=="#")<a href="#" ><?php  echo  $second_row->name; ?></a>
+                                 @else
+                                 <a href="{{url('')}}/{{$second_row->url_link}}" ><?php  echo  $second_row->name; ?></a>
+                                @endif
+                                </label>
                                   
                                      <ul class="nav nav-list tree">
                                    <?php 
@@ -122,7 +134,11 @@ $arrayCategories = array();
                              
                                <!  <li><label class="tree-toggle nav-header"><a href="#"><span class="sp-nav"><img src="images/icon/home.png"></span>&nbsp;&nbsp; Home Page 3</a></label> -->
                                    
-                                        <li><a href="{{url('')}}/{{$third_row->url_link}}"><?php  echo  $third_row->name; ?></a>
+                                        <li>@if($second_row->url_link=="#")<a href="#"><?php  echo  $third_row->name; ?></a> @else
+                                             <a href="{{url('')}}/{{$third_row->url_link}}"><?php  echo  $third_row->name; ?></a>
+
+                                          @endif
+
 
                                         </li>
                       

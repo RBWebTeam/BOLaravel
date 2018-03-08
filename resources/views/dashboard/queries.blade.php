@@ -23,11 +23,10 @@
 <br>
 
 
-
-<div class="col-md-12">
-			 <div class="overflow-scroll">
-			 <div class="table-responsive" >
-				<table id="example" class="table table-bordered table-striped tbl" >
+   <div class="col-md-12">
+       <div class="overflow-scroll">
+       <div class="table-responsive" >
+				<table id="tblqueries" class="datatable-responsive table table-striped table-bordered dt-responsive nowrap" >
                  <thead >
                  <tr class="thead_cl">
 
@@ -98,4 +97,24 @@
 			</div>
       </div>
       </div>
+
+<script type="text/javascript">
+  $(document).ready(function () {
+    
+    if ($.fn.dataTable.isDataTable('#tblqueries')) {
+    table = $('#tblqueries').DataTable({
+      paging:true;
+      searching: true;
+
+    });
+}
+else {
+
+    table = $('#tblqueries').DataTable( {
+        paging: false
+    } );
+}
+
+});
+      </script>
  @endsection
