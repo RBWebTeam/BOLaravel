@@ -957,7 +957,7 @@ productid.push($(this).val())
 $('#txtproductid').val(productid);
 console.log($('#rmfolloupdetails').serialize());
    $.ajax({ 
-   url: "{{URL::to('Rmfolloup')}}",
+   url: "{{URL::to('Rmfollowup')}}",
    method:"POST",
    data: $('#rmfolloupdetails').serialize(),
   success: function(msg)  
@@ -976,7 +976,7 @@ function viewhistory(fbaid){
 
 $.ajax({  
          type: "GET",  
-         url:'Rmfolloup/'+fbaid,
+         url:'Rmfollowup/'+fbaid,
          success: function(fsmmsg){
         
 
@@ -991,8 +991,7 @@ $.ajax({
          str = str + "<tr style='height:30px;margin:5px;'><td>"+data[i].lead_id+"</td><td>"+data[i].FullName+"</td><td>"+data[i].user_type+"</td><td>"+data[i].status_name+"</td><td>"+data[i].remark+"</td></tr>";
       
        }
-              // console.log(msg[0].Result);
-            str = str + "</table>";
+         str = str + "</table>";
            $('#divpartnertable').html(str);   
               
         }  
@@ -1002,6 +1001,7 @@ $.ajax({
 
 
 </script>
+ 
 
 <!-- // $(function () { 
 //     $('#lstStates').multiselect({ 
@@ -1030,6 +1030,4 @@ $.ajax({
 // });
  -->
 
-
-    
-
+ 

@@ -1,7 +1,7 @@
 @extends('include.master')
 @section('content')
 <div class="container-fluid white-bg">
-<div class="col-md-12"><h3 class="mrg-btm">RM Folloup Details</h3>
+<div class="col-md-12"><h3 class="mrg-btm">RM Follow-up Details</h3>
 	<table class="datatable-responsive table table-striped table-bordered dt-responsive nowrap" data-sort-name="stargazers_count"
    data-sort-order="desc" id="example_1">
                           <thead>
