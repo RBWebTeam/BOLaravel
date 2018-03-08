@@ -43,6 +43,23 @@ class FbaController extends CallApiController
 
         }
 
+
+         public function uploaddoc(Request $req) {
+             
+             $data=$req->all();
+            /* $data = $this->request->input('json_decode');*/
+             print_r($data); exit();
+              $post_data=$data;
+              $result=$this->call_json_data_api('api.magicfinmart.com/api/upload-doc',$post_data);
+              $http_result=$result['http_result'];
+              $error=$result['error'];
+              $st=str_replace('"{', "{", $http_result);
+              $s=str_replace('}"', "}", $st);
+              $m=$s=str_replace('\\', "", $s);
+              $update_user='';
+              $obj = json_decode($m);
+}
+
         public function sales(Request $req){
        
         $query=DB::table('fbamast')
@@ -71,6 +88,7 @@ class FbaController extends CallApiController
            if ( $query) {
               return response()->json(array('status' =>0,'message'=>"success"));
             }
+
         }
 
         public function getfbapartner($partnerid)

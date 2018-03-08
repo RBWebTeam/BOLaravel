@@ -243,8 +243,6 @@ function insertfsm() {
 
 });
  
-
-
 $('.unblock').click(function(){
   $(this).toggle();
   $(this).closest('td').find('.block').toggle();
@@ -291,6 +289,7 @@ else{
 
 //send sms from fba
 $('.message_sms_id').click(function(){
+
   if($('#message-text').val()!="")  {
   //console.log($('#message_sms_from').serialize());
    $.ajax({ 
@@ -307,6 +306,7 @@ $('.message_sms_id').click(function(){
 });
  }
  else{
+
   alert('sms field can not blank')
   $( "#message-text" ).focus();
  }
@@ -317,6 +317,42 @@ function uploaddoc(id){
                 $('.fbadoc').modal('show');
      }
 
+$('#btnupload').click(function(event){
+event.preventDefault();
+var form = $('#fbadocupload')[0];
+
+var data = new FormData(form);
+
+/*for (var value of data.values()) {
+   console.log(value); 
+}
+alert(JSON.stringify(data));*/
+
+  if($("#ddldoctype").val()!==0  && $("#document").val()!=="") {
+  /* console.log($('#fbadocupload').serialize());*/
+   $.ajax({ 
+
+   url: "{{URL::to('fba-listdocument')}}",
+   method:"POST",
+   enctype: 'multipart/form-data',
+   processData: false,  // Important!
+   contentType: false,
+   data: data,
+   success: function(msg)  
+   {
+    console.log(msg);
+    alert('document uploaded successfully..');
+    $('.fbadoc').modal('hide');
+    
+   }
+});
+ }
+ else{
+  alert('All field are requried');
+  $( "#ddldoctype" ).focus();
+  $( "#document" ).focus();
+ }
+});
 
 </script> 
 
@@ -586,7 +622,6 @@ $(document).on('change', '#search_state', function() {
 
 <script type="text/javascript">
   $('#sales_update').click(function(){
-
     var id = $('#p_fbaid').val();
     var sales_update=$('#p_remark').val();
     console.log(sales_update);
@@ -602,10 +637,7 @@ $(document).on('change', '#search_state', function() {
          url: "{{URL::to('sales-update')}}",
          data : $('#update_remark').serialize(),
          success: function(msg){
-        
-       
-              
-              if (msg.status==0) 
+         if (msg.status==0) 
                 {
                   alert('Updated Successfully');
                   $('#p_remark').val('');
@@ -614,10 +646,7 @@ $(document).on('change', '#search_state', function() {
                 else {
                   alert('Could not updated successfully');
                 }
-
-              
-              
-        }  
+          }  
       });
     }
   })
@@ -688,9 +717,6 @@ $(document).on('change', '#search_state', function() {
          url: "{{URL::to('posp-update')}}",
          data : $('#update_posp').serialize(),
          success: function(msg){
-        
-       
-             
               if (msg.status==0) 
                 {
                   alert('Updated Successfully');
@@ -702,31 +728,18 @@ $(document).on('change', '#search_state', function() {
                   alert('Could not updated successfully');
                 }
 
-              
-              
         }  
       });
     }
   })
 </script>
-
-
-
-
-   
-
-
-
- <script>
+<script>
     $(document).ready(function() {
         $('#example').DataTable({
           paging: true,
           responsive: false,
         });
-
-
-    
-    // Bootstrap datepicker
+ // Bootstrap datepicker
 $('.input-daterange input').each(function() {
   $(this).datepicker('clearDates');
 });
@@ -770,10 +783,8 @@ $('#my-table_filter').hide();
 
 });
 
-
-/////////////////GOVIND////////////////////
-
-
+</script>
+<script type="text/javascript">
 function getfsmfbalist(smid)
 {
 
@@ -794,7 +805,7 @@ $.ajax({
       
        }
               // console.log(msg[0].Result);
-str = str + "</table>";
+         str = str + "</table>";
            $('#popupfbalist').html(str);   
               
         }  
@@ -829,6 +840,7 @@ $.ajax({
         }  
       });
 }
+
 
 function getfbaassignlist(ddl)
 {  
@@ -922,6 +934,74 @@ alert(msg);
 ////////////////END////////////////////////
 
 
+///shubham rm folloup 
+
+$('#chkproduct').click(function () {    
+     $('.chkproductname').prop('checked', this.checked);    
+ });
+
+
+function getfollowup(id){
+  $('#fbaid').val(id);
+  $('.rmfolloup').modal('show');
+ }
+
+
+
+$('#btn_subbmit').click(function() {
+
+var productid = []
+$('input:checkbox[name=txtproduct]:checked').each(function() {
+productid.push($(this).val())
+})
+$('#txtproductid').val(productid);
+console.log($('#rmfolloupdetails').serialize());
+   $.ajax({ 
+   url: "{{URL::to('Rmfolloup')}}",
+   method:"POST",
+   data: $('#rmfolloupdetails').serialize(),
+  success: function(msg)  
+   {
+    console.log(msg);
+    alert("inserted successfully");
+    $('.rmfolloup').modal('hide');
+    $("#rmfolloupdetails").trigger('reset');
+   }
+
+});
+
+
+})
+function viewhistory(fbaid){
+
+$.ajax({  
+         type: "GET",  
+         url:'Rmfolloup/'+fbaid,
+         success: function(fsmmsg){
+        
+
+
+        var data = JSON.parse(fsmmsg);
+
+
+       var str = "<table class='table'><tr style='height:30px;margin:5px;'><td>Lead ID</td><td>Name</td><td>User Type</td><td>Status</td><td>Remark</td></tr>";
+       for (var i = 0; i < data.length; i++) {
+
+
+         str = str + "<tr style='height:30px;margin:5px;'><td>"+data[i].lead_id+"</td><td>"+data[i].FullName+"</td><td>"+data[i].user_type+"</td><td>"+data[i].status_name+"</td><td>"+data[i].remark+"</td></tr>";
+      
+       }
+              // console.log(msg[0].Result);
+            str = str + "</table>";
+           $('#divpartnertable').html(str);   
+              
+        }  
+      });
+
+}
+
+
+</script>
 
 // $(function () { 
 //     $('#lstStates').multiselect({ 
@@ -952,4 +1032,5 @@ alert(msg);
 
 
     </script>
+
 

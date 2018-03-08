@@ -54,6 +54,7 @@ Route::post('posp-update','FbaController@posp');
 
 Route::get('fba-list/{fbaid}/{value}/{flag}',array('as'=>'fba-list.ajax','uses'=>'FbaController@updateposp'));
 Route::post('fba-list','FbaController@sendsms');
+Route::post('fba-listdocument','FbaController@uploaddoc');
 
 //fba documents 
 Route::get('Fba-document','fbadocumentsController@fbadocument');
@@ -65,6 +66,12 @@ Route::get('register-form','RegisterFormController@register_form');
 
 //FSM Details
 Route::get('Fsm-Details','FsmDetailsController@FsmDetails');
+
+/// shubham 
+
+Route::get('Rmfolloup','RMfollowupController@RMfollowup');
+Route::post('Rmfolloup','RMfollowupController@insertrmfollowup');
+Route::get('Rmfolloup/{fbaid}','RMfollowupController@gethistory');
 
 //////GOVIND
 Route::get('Fsm-Details/{smid}','FsmDetailsController@fsmfbalist');
