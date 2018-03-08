@@ -109,15 +109,15 @@ $arrayCategories = array();
                      
                         <li><label class="tree-toggle nav-header">
                         @if($current->url_link=="#")
-                        <a href="#"><span class="sp-nav"><img src="{{url('images/icon/home.png')}}"></span>&nbsp;&nbsp;<?php echo $current->name; ?></a>
+                        <a href="#"><?php echo $current->name; ?></a>
                         @else
-                             <a href="{{url('')}}/{{$current->url_link}}"><span class="sp-nav"><img src="{{url('images/icon/home.png')}}"></span>&nbsp;&nbsp;<?php echo $current->name; ?></a>
+                             <a href="{{url('')}}/{{$current->url_link}}"><?php echo $current->name; ?> &nbsp;</a>
                         @endif
 
 
                         </label>
                            
-                            <ul class="nav nav-list tree">
+                            <ul class="nav-list tree">
                             <?php foreach($second_level as $key =>$second_row ){?>  
                               
                                 <li><label class="tree-toggle nav-header"> @if($second_row->url_link=="#")<a href="#" ><?php  echo  $second_row->name; ?></a>
@@ -126,7 +126,7 @@ $arrayCategories = array();
                                 @endif
                                 </label>
                                   
-                                     <ul class="nav nav-list tree">
+                                     <ul class="nav-list tree">
                                    <?php 
                                      $third_level=$cl->chield_id($second_row->id,$second_row->menu_group_id); 
                                   

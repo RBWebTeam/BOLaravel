@@ -30,6 +30,14 @@ $(document).ready(function(){
         todayHighlight: true
   }).datepicker("getDate");
 });
+
+    $(function () {
+  $("#datepicker_date").datepicker({ 
+        autoclose: true, 
+        todayHighlight: true
+  }).datepicker("getDate");
+});
+ 
  
   $(function () {
   $("#datepicker1").datepicker({ 
@@ -201,7 +209,7 @@ $('#chkselectall').click(function () {
 });
 // insert Fsm details
 function insertfsm() {
-  console.log($('#fsmregister').serialize());
+  //console.log($('#fsmregister').serialize());
    $.ajax({ 
    url: "{{URL::to('Fsm-Register')}}",
    method:"POST",
@@ -209,7 +217,7 @@ function insertfsm() {
 
    success: function(msg)  
    {
-    console.log(msg);
+    //console.log(msg);
    }
 
 });
@@ -228,7 +236,7 @@ function insertfsm() {
             url:'fba-blocklist/'+flag+'/'+value, 
                      
            success: function( msg ) {
-                 console.log(msg);
+                // console.log(msg);
             }
         });
 
@@ -247,7 +255,7 @@ $('.unblock').click(function(){
             url:'fba-blocklist/'+flag+'/'+value, 
                      
            success: function( msg ) {
-                 console.log(msg);
+                // console.log(msg);
             }
         });
 });
@@ -264,7 +272,7 @@ $('.loan_from_id').click(function(){
             type: "GET",
             url:'fba-list/'+fbaid+'/'+value+'/'+flag, 
             success: function( msg ) {
-            console.log(msg);
+            //console.log(msg);
              alert("loan id updated successfully..!");
              $('.updateLoan').modal('hide');
             $('#loan_id').val('');
@@ -283,14 +291,14 @@ else{
 $('.message_sms_id').click(function(){
 
   if($('#message-text').val()!="")  {
-  console.log($('#message_sms_from').serialize());
+  //console.log($('#message_sms_from').serialize());
    $.ajax({ 
    url: "{{URL::to('fba-list')}}",
    method:"POST",
    data: $('#message_sms_from').serialize(),
    success: function(msg)  
    {
-    console.log(msg);
+    //console.log(msg);
     alert('SMS send successfully..')
     $('.sms_sent_id').modal('hide');
     $('#message-text').val('');
@@ -349,7 +357,7 @@ alert(JSON.stringify(data));*/
 </script> 
 
 
-<script type="text/javascript">
+<!-- <script type="text/javascript">
    $.ajax({ 
    url: "{{URL::to('sales-material-product')}}",
    method:"GET",
@@ -357,7 +365,7 @@ alert(JSON.stringify(data));*/
    {
   
     var data=$.parseJSON(datas);
-   console.log(data);
+  
    if(data)
       {      $.each(data, function( index, value ) {
             $('#Product').append('<option value="'+value.Product_Id+'">'+value.Product_Name+'</option>');
@@ -370,7 +378,7 @@ alert(JSON.stringify(data));*/
    },
 
  });
-</script> 
+</script>  -->
 
 <!-- <script type="text/javascript">
    $.ajax({ 
@@ -408,7 +416,7 @@ alert(JSON.stringify(data));*/
           processData: false,
           contentType: false,
           success: function(msg){
-             console.log(msg.status);
+            // console.log(msg.status);
              if (msg.status==0) 
               {
                 alert('Uploaded Successfully');
@@ -461,7 +469,7 @@ alert(JSON.stringify(data));*/
 <script type="text/javascript">
   $('#Product').on('change', function() {
     var Product=$('#Product').find(":selected").val();
-    console.log(Product);
+   // console.log(Product);
     if ( Product == '1')
       {
        $("#Company option[value='1']").show();
@@ -632,6 +640,8 @@ $(document).on('change', '#search_state', function() {
          if (msg.status==0) 
                 {
                   alert('Updated Successfully');
+                  $('#p_remark').val('');
+                  $('.close').click();           
                 } 
                 else {
                   alert('Could not updated successfully');
@@ -649,7 +659,10 @@ $(document).on('change', '#search_state', function() {
     var id = $('#fba_id').val();
     var loan_update=$('#remark').val();
     console.log(loan_update);
-    
+
+  //  $('.updateLoan').show();
+//    $('.modal-backdrop').show();    
+
     if (!$('#update_loan').valid()) 
     {
 
@@ -667,8 +680,11 @@ $(document).on('change', '#search_state', function() {
               if (msg.status==0) 
                 {
                   alert('Updated Successfully');
-                  $('#loan_'+id).text(loan_update);
-                  $('.updateLoan').hide();
+                  $('#loan_'+id).text(loan_update);       
+                  $('#remark').val('');
+                  $('.close').click();           
+                  
+
                 } 
                 else {
                   alert('Could not updated successfully');
@@ -705,7 +721,8 @@ $(document).on('change', '#search_state', function() {
                 {
                   alert('Updated Successfully');
                   $('#posp_'+id).text(posp_update);
-                  $('.updatePosp').hide();
+                  $('#posp_remark').val('');
+                  $('.close').click();           
                 } 
                 else {
                   alert('Could not updated successfully');
@@ -825,6 +842,98 @@ $.ajax({
 }
 
 
+function getfbaassignlist(ddl)
+{  
+  if($(ddl).val() > 0)
+  getfbalist(1,$(ddl).val());
+}
+
+function showfbaassignlist()
+{
+  getfbalist(2,$('#txtpincode').val()); 
+}
+
+function getfbalist(flag,val)
+{
+
+$.ajax({  
+         type: "GET",  
+         url:'assign-rm-load/'+flag+'/'+val,//"{{URL::to('Fsm-Details')}}",
+         success: function(msg){
+        
+
+
+        var data = JSON.parse(msg);
+
+$('#ddlfba').empty();   
+       var str = "";
+       for (var i = 0; i < data.length; i++) {
+
+         str = str + "<option value='"+data[i].FBAId+"'>"+data[i].Name+"</option>";
+      
+       }
+              // console.log(msg[0].Result);
+           $('#ddlfba').append(str);   
+              
+        }  
+      });
+}
+
+function fbarmassignlist(){
+
+// alert('hhdhd');
+// $('#ddlfba option:selected').each(function(){ 
+//     //alert($(this).text()+' - '+$(this).val());
+
+   //  var responsedata = '{"fbaid":'+$(this).val()+',"rm_id":'+$('#ddlrmlist').val()+'}';
+
+     $.ajax({  
+         type: "POST",  
+         url: "assign-rm-update",
+         data : $('#assignrm').serialize(),
+         success: function(msg){                        
+              if (msg.status==0) 
+                {
+                  alert('Updated Successfully');
+                } 
+                else {
+                  alert('Could not updated successfully');
+                }
+
+              
+              
+        }  
+
+      }); 
+
+// });
+
+
+
+ /*$.ajax({  
+         type: "POST",  
+         url: "{{URL::to('assign-rm-update')}}",
+         data : $('#assignrm').serialize(),
+         success: function(msg){
+                        
+alert(msg);
+              if (msg.status==0) 
+                {
+                  alert('Updated Successfully');
+                } 
+                else {
+                  alert('Could not updated successfully');
+                }
+
+              
+              
+        }  
+
+      }); */
+}
+////////////////END////////////////////////
+
+
 ///shubham rm folloup 
 
 $('#chkproduct').click(function () {    
@@ -878,6 +987,7 @@ $.ajax({
        var str = "<table class='table'><tr style='height:30px;margin:5px;'><td>Lead ID</td><td>Name</td><td>User Type</td><td>Status</td><td>Remark</td></tr>";
        for (var i = 0; i < data.length; i++) {
 
+
          str = str + "<tr style='height:30px;margin:5px;'><td>"+data[i].lead_id+"</td><td>"+data[i].FullName+"</td><td>"+data[i].user_type+"</td><td>"+data[i].status_name+"</td><td>"+data[i].remark+"</td></tr>";
       
        }
@@ -890,6 +1000,37 @@ $.ajax({
 
 }
 
-////////////////END////////////////////////
+
 </script>
+
+// $(function () { 
+//     $('#lstStates').multiselect({ 
+//         buttonText: function(options, select) {
+//             console.log(select[0].length);
+//             if (options.length === 0) {
+//                 return 'None selected';
+//             }
+//             if (options.length === select[0].length) {
+//                 return 'All selected ('+select[0].length+')';
+//             }
+//             else if (options.length >= 4) {
+//                 return options.length + ' selected';
+//             }
+//             else {
+//                 var labels = [];
+//                 console.log(options);
+//                 options.each(function() {
+//                     labels.push($(this).val());
+//                 });
+//                 return labels.join(', ') + '';
+//             }
+//         }
+    
+//     });
+// });
+
+
+
+    </script>
+
 

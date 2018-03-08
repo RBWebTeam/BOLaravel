@@ -27,10 +27,10 @@ Route::post('admin-login','LoginController@login');
 
  
 
-Route::get('register-user','LoginController@register_user');
-Route::get('register-update/{id}','LoginController@register_update');
-Route::post('register-user-update','LoginController@register_user_update');
-Route::get('register-user-list','LoginController@register_user_list');
+Route::get('register-user','LoginController@register_user') ;
+Route::get('register-update/{id}','LoginController@register_update') ;
+Route::post('register-user-update','LoginController@register_user_update') ;
+Route::get('register-user-list','LoginController@register_user_list') ;
 
  // city  state
 Route::get('search-state','LoginController@search_state');
@@ -38,7 +38,7 @@ Route::get('search-city','LoginController@search_city');
 
 // end city state
 
-Route::post('register-user','LoginController@registerinsert');
+Route::post('register-user','LoginController@registerinsert') ;
 //Route::get('register-user','LoginController@register_user');
 Route::post('register-user-save','LoginController@register_user_save');
 
@@ -46,6 +46,7 @@ Route::get('dashboard','DashboardController@dashboard');
 
 //Fba details
 Route::get('fba-list','FbaController@fba_list');
+Route::get('get-fba-list','FbaController@get_fba_list');
 Route::post('sales-update','FbaController@sales');
 Route::post('loan-update','FbaController@loan');
 Route::post('posp-update','FbaController@posp');
@@ -76,6 +77,9 @@ Route::get('Rmfolloup/{fbaid}','RMfollowupController@gethistory');
 Route::get('Fsm-Details/{smid}','FsmDetailsController@fsmfbalist');
 Route::get('FsmRegister/{smid}','FsmRegisterController@getfsmdetail');
 Route::get('fba-list/{partnerid}','FbaController@getfbapartner');
+Route::get('assignrm','AssignrmController@loadrm');
+Route::get('assign-rm-load/{flag}/{value}','AssignrmController@loadfba');
+Route::post('assign-rm-update','AssignrmController@updatefba');
 ///END
 Route::get('Fsm-Register','FsmRegisterController@getsate');
 Route::get('Fsm-Register/{id}',array('as'=>'FSMRegister.ajax','uses'=>'FsmRegisterController@getcity'));
@@ -178,18 +182,21 @@ Route::get('regional-manager','RegionalManagerControllar@regional_manager');
 });
   /************
 // LEAD MANAGMENT
-******************/
-Route::group(['namespace' => 'leadController',  ], function() {
+******************/  
+Route::group(['namespace' => 'leadController' ], function() {
 Route::get('lead-up-load','LeaduploadController@lead_up_load');
 Route::post('import-excel','LeaduploadController@importExcel');        
 Route::post('lead-update','LeaduploadController@lead_update');          
 Route::post('lead-interested','LeaduploadController@interested'); 
 Route::post('lead-management-update','LeaduploadController@lead_management_update');
 Route::get('lead-status','LeadstatusController@lead_status');
+Route::get('followup-history','LeadstatusController@followup_history');
 
 
-
+ 
 Route::get('lead-test','LeaduploadController@lead_test');  
+Route::get('assign-task','LeadstatusController@assign_task');
+Route::post('assign-task-save','LeadstatusController@assign_task_save');
 
 
 });
