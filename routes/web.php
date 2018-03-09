@@ -105,47 +105,19 @@ Route::post('insertnotification','SendNotificationController@insertntf');
 Route::get('approvenotification/{msgid}/{value}','SendNotificationApproveController@approvenotification');
  //send sms
 Route::get('send-notification','SendNotificationController@sendnotification');
-
-
-
-
- // Route::get('send-sms','SendSMSController@ViewSendSMSDetails');
- 
-
 //send sms
 Route::get('send-sms','SendSMSController@ViewSendSMSDetails');
-// Route::get('send-sms','SendSMSController@sms_load');
-
-
- /*Route::get('send-sms','SendSMSController@ViewSendSMSDetails');
- Route::get('send-sms','SendSMSController@sms_load');*/
-
-Route::get('send-notification','SendNotificationController@sendnotification');
-//send sms
-/*Route::get('send-sms','SendSMSController@ViewSendSMSDetails');*/
-
-
-
- //Otp Detail
- Route::get('otp-details','OtpDetailsController@otp_details');
- Route::get('log-out','LoginController@logout');
-
-//genrate lead
- Route::get('genrate-lead','genrateleadController@getlead');
-
-
-
-
-// Bankoffer
-
- Route::get('bankoffer','bankofferController@bank_offer');
-
-
-
-Route::get('payment-history','PaymentHistoryController@payment_history');
  
+Route::get('send-notification','SendNotificationController@sendnotification');
+ //Otp Detail
+Route::get('otp-details','OtpDetailsController@otp_details');
+Route::get('log-out','LoginController@logout');
+//genrate lead
+Route::get('genrate-lead','genrateleadController@getlead');
+// Bankoffer
+Route::get('bankoffer','bankofferController@bank_offer');
+Route::get('payment-history','PaymentHistoryController@payment_history');
 Route::get('queries','QueriesController@queries');
-
 /*Book Appointment*/
 Route::get('book-appointment','BookAppointmentController@book_appointment');
 Route::get('backoffice-city-master','BookAppointmentController@backoffice_city_master');
@@ -205,9 +177,8 @@ Route::get('marketing-leads','LeaduploadController@marketing_leads');
 ******************/
 Route::get('product-authorized','ProductController@product_authorized');
 Route::post('product-save','ProductController@product_save');
-
-
-
+ 
+Route::post('send-sms-save','SendSMSController@send_sms_save');
 
 
 });

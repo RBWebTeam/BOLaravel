@@ -11,33 +11,51 @@ use Session;
 use URL;
 use Mail;
 
-class SendSMSController extends Controller
-{
+class SendSMSController extends Controller{
+
+
     public function ViewSendSMSDetails(Request $req){
-    	// $data=$req->smslist;
-    	// print_r($data);exit();
-    	
-     // print_r('smslist');exit();
+   
+
+               //  $query=DB::select("call usp_loadfsm_list(?)",[2]);
+                    
+                   if(isset($req->ID)){
+                      return DB::select('call sp_fba_sentSMS(?,?,?,?)',[0,0,0,0]);
+
+                   }
+
+                   if(isset($req->city) && isset($req->ID)){
+                        $arr=DB::select('call sp_fba_sentSMS(?,?,?,?)',[1,$req->city,0,0]);
+
+                        
+                      
+
+                   }
+
+                   if(isset($req->fDate) && isset($req->tDate)  ){
+                     return DB::select('call sp_fba_sentSMS(?,?,?,?)',[2,0,$req->fDate,$req->tDate]);
+
+                   }
 
 
-        $query=DB::select("call usp_loadfsm_list(?)",[2]);
-        
-       //  print "<pre>";
-       // print_r($query);exit();
-         return view('dashboard/send-sms',['query'=>$query]);
+ 
 
-
-
-        $query=DB::select("call usp_loadfsm_list(?)",[2]);
-        
-       //  print "<pre>";
-        /*print_r($query);exit();*/
-         return view('dashboard/send-sms',['query'=>$query]);
+                 return view('dashboard/send-sms');
        
-      
 
+    }
+
+
+    public function send_sms_save(Request $req){  
+
+            if(isset($req->fba))
+             foreach ($req->fba as $key => $fba_id) {
+            $query=DB::table('FBAMast')->select('FullName','MobiNumb1','EmailID')->where('FBAID','=',$fba_id)->first();
+               
+                
+             }
 
     }
 }
 
- //     print_r($data); exit();
+  
