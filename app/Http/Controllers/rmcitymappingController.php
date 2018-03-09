@@ -35,6 +35,7 @@ class rmcitymappingController extends Controller
                     ->pluck("cityname","city_id");
         return json_encode($cities);
 
+    
         // $in = implode(',',)
       
 }

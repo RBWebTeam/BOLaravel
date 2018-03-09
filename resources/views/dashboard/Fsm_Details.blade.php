@@ -34,16 +34,16 @@
                    <th>Date of Birth</th>
                    <th>Email ID</th>
                    <th>Password</th>
-				   <th>Mobile No.</th>
-				   <th>PAN Card</th>
+				           <th>Mobile No.</th>
+				           <th>PAN Card</th>
                    <th>Leads</th>
                    <th>Registered Leads</th>
                    <th>Aadhar No.</th>
-				   <th>Pin Code</th>
+				           <th>Pin Code</th>
                    <th>City</th>
                    <th>State</th>
-                 </tr>
-                </thead>
+                   </tr>
+                   </thead>
                 
                 <tbody>
                 @foreach($query as $val)
