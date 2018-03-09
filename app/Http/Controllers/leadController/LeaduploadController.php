@@ -15,12 +15,12 @@ class LeaduploadController extends Controller{
                  // $query=DB::table('raw_lead_master')->get();
                   $lead_status=DB::table('lead_status_master')->get();
                   $lead_type=DB::table('lead_type_master')->get();
-
-               
-         
-           $query=DB::select('call sp_raw_lead_master(?)',array(Session::get('fbauserid')));
+                
+                 
+            $query=DB::select('call sp_raw_lead_master(?)',array(Session::get('fbauserid')));
 
  
+     //print_r($followup_lead);exit;
 
       	     return view('lead_view.lead_upload',['query'=>$query,'lead_type'=>$lead_type,'lead_status'=>$lead_status]);
       }
@@ -106,7 +106,21 @@ if(isset($city->city_id)){
                                   "followup_date"=>$followup,
                                    "lead_date"=>date('Y-m-d H:i:s'),
                                    "conf_status"=>$check,
-                        	);   DB::table('raw_lead_master')  ->where('id',$req->lead_id) ->update($arra); 
+                        	);   DB::table('raw_lead_master')->where('id',$req->lead_id) ->update($arra); 
+
+                       
+                          //  followup table
+                           $history=array(
+                                   $req->lead_id,
+                                   Session::get('fbauserid'),
+                                   $req->lead_status_id,
+                                   $req->lead_type_id,
+                                   $req->remark,
+                                   'caller',
+                                   date('Y-m-d H:i:s') );
+                      
+                         DB::select('call sp_followup_details_history_insert(?,?,?,?,?,?,?)',$history);
+                       
                          $error=0; 
                         }catch (Exception $e){  $error=1;  }
                        return $arr[]=array('status'=>$status,'error'=>$error);
@@ -284,53 +298,58 @@ public function call_json($url,$data){
 public function lead_management_update(Request $req){   
 
 $error=null;
-   try{
-              $val =Validator::make($req->all(), [
-                'name' => 'required',
-                'mobile' => 'required',
-                'email' => 'required',
-                'dob' => 'required',
-                'profession' => 'required',
-                'monthly_income' => 'required',
-                'pan_no' => 'required',
-                'cityname' => 'required',
-                'address' => 'required',
-                'pincode' => 'required',
-                'campaign' => 'required',
+   try{ 
+                          //   $arra=array(
+                          //  'name'=>$req->name?$req->name:null,
+                          //  'mobile'=>$req->mobile?$req->mobile:null,
+                          //  'email'=>$req->email?$req->email:null,
+                          //  'dob'=>$req->dob?$req->dob:null,
+                          // // 'profession'=>$req->profession?$req->profession:null,
+                          // // 'monthly_income'=>$req->monthly_income?$req->monthly_income:null,
+                          //  'pan'=>$req->pan_no?$req->pan_no:null,
+                          //  // 'city_id'=>$city->cityname,
+                          //    'address'=>$req->address?$req->address:null ,
+                          //     'pincode'=>$req->pincode?$req->pincode:null ,
+                          //     // 'campaign_id'=>$req->campaign?$req->campaign:null ,
+                          //     'user_id'=>Session::get('fbauserid'),
+                          //     'ip_address'=>\Request::ip(),
+                          //     'created_on'=>date('Y-m-d H:i:s'),); 
+
+$arra=array(
+                           $req->name?$req->name:null,
+                           $req->mobile?$req->mobile:null,
+                            $req->email?$req->email:null,
+                            $req->dob?$req->dob:null,
+                            $req->pan_no?$req->pan_no:null,
+                             $req->address?$req->address:null ,
+                              $req->pincode?$req->pincode:null ,
+                              Session::get('fbauserid'),
+                              \Request::ip(),
+                               date('Y-m-d H:i:s'),
+                               $req->lead_id
+
+                               ); 
 
 
-                            ]);
-           if ($val->fails()){
-              return response()->json($val->messages(), 200);
-           }else{
-
-                          $arra=array(
-                           'name'=>$req->name,
-                           'mobile'=>$req->mobile,
-                           'email'=>$req->email,
-                           'dob'=>$req->dob,
-                           'profession'=>$req->profession,
-                           'monthly_income'=>$req->monthly_income,
-                           'pan'=>$req->pan_no,
-                           // 'city_id'=>$city->cityname,
-                             'address'=>$req->address ,
-                              'pincode'=>$req->pincode ,
-                              'campaign_id'=>$req->campaign ,
-                              'user_id'=>Session::get('fbauserid'),
-                              'ip_address'=>\Request::ip(),
-                              'created_on'=>date('Y-m-d H:i:s'),); 
+ 
                           
-
-                            //  $query=DB::table('raw_lead_master')->where('id','=',$req->lead_id)->update($arra);
-                   $error=0;
-             }
+                            DB::select('call sp_lead_management_update(?,?,?,?,?,?,?,?,?,?,?)',$arra);
+                            // $query=DB::table('raw_lead_master')->where('id','=',$req->lead_id)->update($arra);
+                             $error=0;
+            
              }catch (Exception $e){  $error=1; }
 
              return $error;
           
+
+     
+
         
 
 }
+
+
+
 
 
 

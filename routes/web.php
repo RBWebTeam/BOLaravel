@@ -27,10 +27,10 @@ Route::post('admin-login','LoginController@login');
 
  
 
-Route::get('register-user','LoginController@register_user')->middleware('CheckRole');
-Route::get('register-update/{id}','LoginController@register_update')->middleware('CheckRole');
-Route::post('register-user-update','LoginController@register_user_update')->middleware('CheckRole');
-Route::get('register-user-list','LoginController@register_user_list')->middleware('CheckRole');
+Route::get('register-user','LoginController@register_user') ;
+Route::get('register-update/{id}','LoginController@register_update') ;
+Route::post('register-user-update','LoginController@register_user_update') ;
+Route::get('register-user-list','LoginController@register_user_list') ;
 
  // city  state
 Route::get('search-state','LoginController@search_state');
@@ -38,7 +38,7 @@ Route::get('search-city','LoginController@search_city');
 
 // end city state
 
-Route::post('register-user','LoginController@registerinsert')->middleware('CheckRole');
+Route::post('register-user','LoginController@registerinsert') ;
 //Route::get('register-user','LoginController@register_user');
 Route::post('register-user-save','LoginController@register_user_save');
 
@@ -46,6 +46,7 @@ Route::get('dashboard','DashboardController@dashboard');
 
 //Fba details
 Route::get('fba-list','FbaController@fba_list');
+Route::get('get-fba-list','FbaController@get_fba_list');
 Route::post('sales-update','FbaController@sales');
 Route::post('loan-update','FbaController@loan');
 Route::post('posp-update','FbaController@posp');
@@ -53,6 +54,7 @@ Route::post('posp-update','FbaController@posp');
 
 Route::get('fba-list/{fbaid}/{value}/{flag}',array('as'=>'fba-list.ajax','uses'=>'FbaController@updateposp'));
 Route::post('fba-list','FbaController@sendsms');
+Route::post('fba-listdocument','FbaController@uploaddoc');
 
 //fba documents 
 Route::get('Fba-document','fbadocumentsController@fbadocument');
@@ -65,10 +67,19 @@ Route::get('register-form','RegisterFormController@register_form');
 //FSM Details
 Route::get('Fsm-Details','FsmDetailsController@FsmDetails');
 
+/// shubham 
+
+Route::get('Rmfollowup','RMfollowupController@RMfollowup');
+Route::post('Rmfollowup','RMfollowupController@insertrmfollowup');
+Route::get('Rmfollowup/{fbaid}','RMfollowupController@gethistory');
+
 //////GOVIND
 Route::get('Fsm-Details/{smid}','FsmDetailsController@fsmfbalist');
 Route::get('FsmRegister/{smid}','FsmRegisterController@getfsmdetail');
 Route::get('fba-list/{partnerid}','FbaController@getfbapartner');
+Route::get('assignrm','AssignrmController@loadrm');
+Route::get('assign-rm-load/{flag}/{value}','AssignrmController@loadfba');
+Route::post('assign-rm-update','AssignrmController@updatefba');
 ///END
 Route::get('Fsm-Register','FsmRegisterController@getsate');
 Route::get('Fsm-Register/{id}',array('as'=>'FSMRegister.ajax','uses'=>'FsmRegisterController@getcity'));
@@ -158,16 +169,16 @@ Route::post('sales-material-update','BookAppointmentController@sales_material_up
   /************
 //  Menu List
 ******************/
-Route::get('menu-list','MenuController@menu_list')->middleware('CheckRole');
-Route::post('menu-add','MenuController@menu_add')->middleware('CheckRole');
-Route::get('menu-mapping','MenuController@mapping')->middleware('CheckRole');
-Route::post('menu-mapping-save','MenuController@menu_mapping_save')->middleware('CheckRole');
-Route::get('menu-list-select','MenuController@menu_list_select')->middleware('CheckRole');
-Route::post('menu-list-add','MenuController@menu_list_add')->middleware('CheckRole');
-Route::get('menu-test','MenuController@menu_test')->middleware('CheckRole');
-Route::get('menu-group','MenuController@menu_group')->middleware('CheckRole');
-Route::post('menu-group-save','MenuController@menu_group_save')->middleware('CheckRole');
-Route::get('menu-group-select','MenuController@menu_group_select')->middleware('CheckRole');
+Route::get('menu-list','MenuController@menu_list');
+Route::post('menu-add','MenuController@menu_add');
+Route::get('menu-mapping','MenuController@mapping');
+Route::post('menu-mapping-save','MenuController@menu_mapping_save');
+Route::get('menu-list-select','MenuController@menu_list_select');
+Route::post('menu-list-add','MenuController@menu_list_add');
+Route::get('menu-test','MenuController@menu_test');
+Route::get('menu-group','MenuController@menu_group');
+Route::post('menu-group-save','MenuController@menu_group_save');
+Route::get('menu-group-select','MenuController@menu_group_select');
 
   /************
 //  Regional manager
@@ -179,40 +190,41 @@ Route::get('regional-manager','RegionalManagerControllar@regional_manager');
 });
   /************
 // LEAD MANAGMENT
-******************/
-Route::group(['namespace' => 'leadController',  ], function() {
+******************/  
+Route::group(['namespace' => 'leadController' ], function() {
 Route::get('lead-up-load','LeaduploadController@lead_up_load');
 Route::post('import-excel','LeaduploadController@importExcel');        
 Route::post('lead-update','LeaduploadController@lead_update');          
 Route::post('lead-interested','LeaduploadController@interested'); 
 Route::post('lead-management-update','LeaduploadController@lead_management_update');
 Route::get('lead-status','LeadstatusController@lead_status');
-
-
-
+Route::get('followup-history','LeadstatusController@followup_history');
 Route::get('lead-test','LeaduploadController@lead_test');  
+Route::get('assign-task','LeadstatusController@assign_task');
+Route::post('assign-task-save','LeadstatusController@assign_task_save');
+Route::get('marketing-leads','LeaduploadController@marketing_leads');   
+});
+/************
+// END LEAD MANAGMENT
+******************/ 
+
+ /************
+// Product Controller 
+******************/
+Route::get('product-authorized','ProductController@product_authorized');
+Route::post('product-save','ProductController@product_save');
+
+
+
 
 
 });
 
 
- });
-
- Route::group(['namespace' => 'leadController',  ], function() {
- Route::get('lead-test','LeaduploadController@lead_test');    // test 
-Route::get('marketing-leads','LeaduploadController@marketing_leads');   // test
-
-
-
-/////////////////////////GOVIND////////////////////////////////////
-
-//Route::get('fsm-fba-list/{fsmid}','FsmDetailsController@fsmfbalist');
-//Route::get('Fsm-Details/{smid}',array('as'=>'FsmDetails.ajax','uses'=>'FsmDetailsController@fsmfbalist'));*/
-
-//////////////////////////END//////////////////////////////////////
-
-// Rm city mapping
 
 
 
 });
+
+ 
+

@@ -51,7 +51,7 @@
                   <td><a href="Fsm-Register?smid=<?php echo $val->SMID;?>"><?php echo $val->Name; ?></a></td>
                   <td><?php echo $val->DOB; ?></td>
                   <td><?php echo $val->Email; ?></td>
-                  <td><a href="#" class="popover-Password" data-toggle="popover" title="Show Password" data-content="<?php echo $val->Password; ?>">*****</a></td>
+                  <td><a href="" class="popover-Password" data-toggle="popover" title="Show Password" data-content="<?php echo $val->Password; ?>">*****</a></td>
 				  <td><?php echo $val->MobileNo; ?></td>
 				  <td><?php echo $val->PancardNo; ?></td>
                   <td><?php echo $val->AllLeads; ?></td>

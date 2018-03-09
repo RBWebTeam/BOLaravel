@@ -16,12 +16,12 @@ class FbaController extends CallApiController
       
         public function fba_list()
         {
-
-         $query=DB::select("call usp_load_fbalist_new(0)");
          $doctype = DB::select("call get_document_type()");
-        
-         //print_r($doctype); exit();
-          return view('dashboard.fba-list',['query'=>$query,'doctype'=>$doctype]);
+          return view('dashboard.fba-list',['doctype'=>$doctype]);
+        }
+        public function get_fba_list(Request $req){
+          $query=DB::select("call fbaList(0)");
+          return json_encode(["data"=>$query]);
         }
 
         public function updateposp($fbaid,$value,$flag) {
@@ -42,6 +42,23 @@ class FbaController extends CallApiController
               $obj = json_decode($m);
 
         }
+
+
+         public function uploaddoc(Request $req) {
+             
+             $data=$req->all();
+            /* $data = $this->request->input('json_decode');*/
+             print_r($data); exit();
+              $post_data=$data;
+              $result=$this->call_json_data_api('api.magicfinmart.com/api/upload-doc',$post_data);
+              $http_result=$result['http_result'];
+              $error=$result['error'];
+              $st=str_replace('"{', "{", $http_result);
+              $s=str_replace('}"', "}", $st);
+              $m=$s=str_replace('\\', "", $s);
+              $update_user='';
+              $obj = json_decode($m);
+}
 
         public function sales(Request $req){
        
@@ -71,6 +88,7 @@ class FbaController extends CallApiController
            if ( $query) {
               return response()->json(array('status' =>0,'message'=>"success"));
             }
+
         }
 
         public function getfbapartner($partnerid)

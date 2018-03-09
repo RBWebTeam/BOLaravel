@@ -3,12 +3,13 @@
 
 
 
-			 <div class="container-fluid white-bg">
-			 <div class="col-md-12"><h3 class="mrg-btm">FBA List<!-- <span><span style="float: right;" class="glyphicon glyphicon-filter" data-toggle="modal" data-target="#Filter" ></span>
+             <div class="container-fluid white-bg">
+             <div class="col-md-12"><h3 class="mrg-btm">FBA List<!-- <span><span style="float: right;" class="glyphicon glyphicon-filter" data-toggle="modal" data-target="#Filter" ></span>
          <span style="float: right;" class="glyphicon glyphicon-refresh" onclick="window.location.reload()"></span> </span> --></h3>
 
         <hr>
        </div>
+
 			 
 			 
 			 <!-- Filter Strat -->
@@ -30,7 +31,8 @@
 			 </div> -->
 			 <!-- Filter End -->
 			 
-			 <form    >
+			 <form>
+
        <div class="col-md-4">
       <div class="form-group">
       <p>From Date</p>
@@ -53,36 +55,37 @@
        <div class="form-group"> <input type="submit" name=""  class="mrg-top common-btn" value="SHOW">  </div>
        </div>
        </form>
-		   <!-- Date End -->
-		
-			 <div class="col-md-12">
-			 <div class="overflow-scroll">
-			 <div class="table-responsive" >
+           <!-- Date End -->
+        
+             <div class="col-md-12">
+             <div class="overflow-scroll">
+             <div class="table-responsive" >
 
-			<table class="datatable-responsive table table-striped table-bordered dt-responsive nowrap" data-sort-name="stargazers_count"
-   data-sort-order="desc" id="example_1">
+
+            <table class="datatable-responsive table table-striped table-bordered  nowrap" id="fba-list-table">
                           <thead>
-					                  <tr>                             
-                             <th>FBA ID</th>
-					                   <th>Full Name</th>
-                             <th>Created Date</th>
-					                   <th>Mobile No</th>
-					                   <th>Email ID</th>
-									           <th>Payment Link</th>
-									           <th>Password</th>
-					                   <th>City</th>
-									           <th>Pincode</th>
-					                   <th>FSM Details</th>
-					                   <th>POSP No</th>
-									           <th>Loan ID</th>
-					                   <th>Posp Name</th>
-					                   <th>Partner Info</th>
-					                   <th>Documents</th>
-									           <th>Bank Account</th>
-									           <th>SMS</th>
-									           <th>sales code</th>
+                                      <tr>
+                                       <th>Full Name</th>
+                                       <th>Created Date</th>
+                                       <th>Mobile No</th>
+                                       <th>Email ID</th>
+                                       <th>Payment Link</th>
+                                       <th>Password</th>
+                                       <th>City</th>
+                                       <th>Pincode</th>
+                                       <th>FSM Details</th>
+                                       <th>POSP No</th>
+                                       <th>Loan ID</th>
+                                       <th>Posp Name</th>
+                                       <th>Partner Info</th>
+                                       <th>Documents</th>
+                                       <th>Bank Account</th>
+                                       <th>SMS</th>
+                                       <th>sales code</th>
+
                                      </tr>
                                     </thead>
+
 					                <tbody>
 					              @foreach($query as $val)
                      
@@ -146,11 +149,16 @@
 					              @endforeach
 					              </tbody>
 		       
+
+ 
+               
+
+
             </table>
-			</div>
-			</div>
-			</div>
-			</div>
+            </div>
+            </div>
+            </div>
+            </div>
             </div>
 
 <!-- send sms -->
@@ -216,26 +224,25 @@
     <div class="modal-content">
       <div class="modal-header">
         <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-        <h4 class="modal-title">FSM Details</h4>
+        <h4 class="modal-title">Upload FBA Documents</h4>
       </div>
       <div class="modal-body">
-        <form id="posp_from_id">
+        <form id="fbadocupload" method="POST" enctype="multipart/form-data">
           <div class="form-group">
             
           </div>
           <div class="form-group">
             <label class="control-label" for="Document-Type">Document Type: </label>
-            <select class="form-control">
-              <option selected="selected">select Document Type</option>
+            <select class="form-control" id="ddldoctype" name="ddldoctype">
+              <option selected="selected" value="0">select Document Type</option>
               @foreach($doctype as $val)
              <option value="{{$val->id}}">{{$val->name}}</option>
               @endforeach
-
-            </select>
+           </select>
           </div>
            <div class="form-group">
             <label class="control-label" for="Document">Document</label>
-            <input type="file" name="document" class="form-control"> 
+            <input type="file" id="document" name="document" class="form-control"> 
           </div>
         </form>
         <div class="modal-footer"> 
@@ -260,7 +267,7 @@
         <form name="update_remark" id="update_remark">
          {{ csrf_field() }}
          <div class="form-group">
-            <input type="text" name="p_fbaid" id="p_fbaid" value=" ">
+            <input type="hidden" name="p_fbaid" id="p_fbaid" value="">
             <label class="control-label" for="message-text">Enter Remark : </label>
             <input type="text" class="recipient-name form-control" id="p_remark" name="p_remark" required="" />
           </div>
@@ -290,7 +297,7 @@
         <form name="update_posp" id="update_posp">
          {{ csrf_field() }}
          <div class="form-group">
-            <input type="text" name="fbaid" id="fbaid" value=" ">
+            <input type="hidden" name="fbaid" id="fbaid" value=" ">
             <label class="control-label" for="message-text">Enter Remark : </label>
             <input type="text" class="recipient-name form-control" id="posp_remark" name="posp_remark" required="" />
           </div>
@@ -320,7 +327,7 @@
         <form name="update_loan" id="update_loan">
          {{ csrf_field() }}
          <div class="form-group">
-            <input type="text" name="fba_id" id="fba_id" value=" ">
+            <input type="hidden" name="fba_id" id="fba_id" value=" ">
             <label class="control-label" for="remark">Enter Remark : </label>
             <input type="text" class="recipient-name form-control" id="remark" name="remark" required="" />
           </div>
@@ -345,26 +352,28 @@
         <h4 class="modal-title">Partner Info</h4>
       </div>
       <div class="modal-body">
-	  <div id="divpartnertable" class="table-responsive">
-        <!-- <table class="table table-bordered table-striped">
-		    <tr>
-			 <td>Partner ID</td>
-			 <td>Name</td>
-			 <td>Mobile No</td>
-			 <td>Email</td>
-			 <td>City</td>
-			 <td>Pincode</td>
-			</tr>
-			<tr>
-			 <td></td>
-			 <td>Pavamaana Softech</td>
-			 <td>9845724268</td>
-			 <td>bgykumar@gmail.com</td>
-			 <td>Bangalore</td>
-			 <td>560021</td>
-			</tr>
-		</table> -->
-		</div>
+
+      <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+            <tr>
+             <td>Partner ID</td>
+             <td>Name</td>
+             <td>Mobile No</td>
+             <td>Email</td>
+             <td>City</td>
+             <td>Pincode</td>
+            </tr>
+            <tr>
+             <td></td>
+             <td>Pavamaana Softech</td>
+             <td>9845724268</td>
+             <td>bgykumar@gmail.com</td>
+             <td>Bangalore</td>
+             <td>560021</td>
+            </tr>
+        </table>
+        </div>
+
       </div>
     </div>
   </div>
@@ -389,13 +398,11 @@
               <option>FBA</option>
             </select>
             <input type="text" class="recipient-name form-control" id="" name="" required="yes" />
-             
-          </div>
+        </div>
         </form>
         <div class="modal-footer"> 
           <button class="btn btn-default" type="button" data-dismiss="modal">Close</button>
           <button id="" class="btn btn-primary" type="button">search</button>
-          
         </div>
       </div>
     </div>
@@ -410,9 +417,73 @@
 
 
 @endsection
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+    $('#fba-list-table').DataTable( {
+        "ajax": "get-fba-list",
+        "columns": [
+           
+            { "data": "FullName"},
+            { "data": "createdate" },
+            { "data": "MobiNumb1" },
+            { "data": "EMaiID" },
+            { "data": "Link",
+             "render": function ( data, type, row, meta ) {
+                return '<a href="#" class="popover-Payment" data-toggle="popover" title="Payment link" data-content="'+data+'">Payment link</a>';
+              }
+             }, 
+            {"data":"pwd" ,
+             "render": function ( data, type, row, meta ) {
+                return '<a href="#" class="popover-Password" data-toggle="popover" title="Show Password" data-content="'+data+'">*****</a>';
+              }
+            },        
+            {"data":"City"},
+            {"data":"Pincode"},
+            {"data":"fbaid"  ,
+             "render": function ( data, type, row, meta ) {
+                return '<a href="#" style="" data-toggle="modal" data-target=".fsmdetails">Fsm details</a>';
+              }
+            },
+            {"data":"POSPNo"  ,
+             "render": function ( data, type, row, meta ) {
+                return data?('<a id="posp_'+data+'" class="checkPosp" data-toggle="modal" data-target="#updatePosp" onclick="POSP_UPDATE('+data+')">update</a>'):data;
+              }
+            },  
 
 
 
+            {"data":"LoanID"  ,
+             "render": function ( data, type, row, meta ) {
+                return data?('<a id="loan_'+data+'" class="checkloan" data-toggle="modal" data-target="#updateLoan" onclick="LoanID_UPDATE('+data+')">update</a>'):data;
+              }
+            },  
+            {"data":"pospname"},  
+            {"data":"fbaid"  ,
+             "render": function ( data, type, row, meta ) {
+                return '<a href="" data-toggle="modal" data-target="#partnerInfo">partner info</a>';
+              }
+            },  
+            {"data":"fbaid" ,
+             "render": function ( data, type, row, meta ) {
+                return '<a href="#" style="" data-toggle="modal" data-target="fbadoc" onclick="uploaddoc('+data+')" >Pending</a>';
+              }
+            }, 
+            {"data":"bankaccount"} ,
+            {"data":"MobiNumb1" ,
+             "render": function ( data, type, row, meta ) {
+                return '<a href="#" data-toggle="modal" data-target="#sms_sent_id" onclick="SMS_FN(1,'+data+')"><span class="glyphicon glyphicon-envelope"></span></a>';
+              }
+            },
+            {"data":"salescode" ,
+             "render": function ( data, type, row, meta ) {
+                return data?('<a  id="update_'+data+'" onclick="sales_update_fn('+data+')" >'+data+'</a>'):('<a  id="update_'+data+'" onclick="sales_update_fn('+data+')" >Update</a>');
+              }
+            },
+            
+        ],
 
-
- 
+    } );
+} );
+</script>

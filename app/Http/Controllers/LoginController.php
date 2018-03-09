@@ -36,22 +36,40 @@ class LoginController extends InitialController
            if($query){
             // if($val->SuccessStatus==1){
             $val=$query[0];
+<<<<<<< HEAD
              $request->session()->flush();
 
              $request->session()->put('emailid',$val->email);
+=======
+                    $request->session()->put('emailid',$val->email);
+>>>>>>> 03bdd53b82112d031507a8881ec9f61eb5093a37
                     $request->session()->put('fbauserid',$val->fbauserid);
                     $request->session()->put('fbaid',$val->fbaid);
-                    $request->session()->put('username',$val->username); 
+                    $request->session()->put('username',$val->username);
                     $request->session()->put('loginame',$val->loginame);
                     $request->session()->put('uid',$val->uid);
                     $request->session()->put('mobile',$val->mobile); 
                     $request->session()->put('empid',$val->empid);
                     $request->session()->put('usergroup',$val->usergroup);
                     $request->session()->put('companyid',$val->companyid);
+<<<<<<< HEAD
                     // $request->session()->put('LastLogiDate',$val->LastLogiDate);                              
                return redirect()->intended('dashboard');
           }else{
                       Session::flash('msg', "Invalid email or password. Please Try again! ");
+=======
+                    
+
+
+ 
+ 
+       
+
+                 
+              return redirect()->intended('dashboard');
+        }else{
+                      Session::flash('msg', "Invalid esmail or password. Please Try again! ");
+>>>>>>> 03bdd53b82112d031507a8881ec9f61eb5093a37
                        return Redirect::back();
                
  }

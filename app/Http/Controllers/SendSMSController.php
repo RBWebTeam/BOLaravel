@@ -31,9 +31,9 @@ class SendSMSController extends Controller
         $query=DB::select("call usp_loadfsm_list(?)",[2]);
         
        //  print "<pre>";
-       // print_r($query);exit();
+        /*print_r($query);exit();*/
          return view('dashboard/send-sms',['query'=>$query]);
-
+       
       
 
 
