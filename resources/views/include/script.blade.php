@@ -594,11 +594,7 @@ $(document).on('change', '#search_state', function() {
 
 });
 
-
-
-
-
-   function pan_card(obj,val){  alert(obj);
+ function pan_card(obj,val){  alert(obj);
     if(obj=='pan_no' ){
                    var str =$('#pan_no').val();
                    var pancardPattern = /^([a-zA-Z]{5})(\d{4})([a-zA-Z]{1})$/;
@@ -821,18 +817,12 @@ $.ajax({
          type: "GET",  
          url:'fba-list/'+fbaid,//"{{URL::to('Fsm-Details')}}",
          success: function(fsmmsg){
-        
-
-
         var data = JSON.parse(fsmmsg);
 
-
-       var str = "<table class='table'><tr style='height:30px;margin:5px;'><td>Partner ID</td><td>Name</td><td>Mobile No</td><td>Email</td><td>City</td><td>Pincode</td></tr>";
+        var str = "<table class='table'><tr style='height:30px;margin:5px;'><td>Partner ID</td><td>Name</td><td>Mobile No</td><td>Email</td><td>City</td><td>Pincode</td></tr>";
        for (var i = 0; i < data.length; i++) {
-
          str = str + "<tr style='height:30px;margin:5px;'><td>"+data[i].PartnerID+"</td><td>"+data[i].pname+"</td><td>"+data[i].pmobile+"</td><td>"+data[i].pemail+"</td><td>"+data[i].pcity+"</td><td>"+data[i].ppincode+"</td></tr>";
-      
-       }
+          }
               // console.log(msg[0].Result);
             str = str + "</table>";
            $('#divpartnertable').html(str);   
@@ -886,7 +876,6 @@ function fbarmassignlist(){
 //     //alert($(this).text()+' - '+$(this).val());
 
    //  var responsedata = '{"fbaid":'+$(this).val()+',"rm_id":'+$('#ddlrmlist').val()+'}';
-
      $.ajax({  
          type: "POST",  
          url: "assign-rm-update",
@@ -899,10 +888,7 @@ function fbarmassignlist(){
                 else {
                   alert('Could not updated successfully');
                 }
-
-              
-              
-        }  
+         }  
 
       }); 
 
@@ -947,6 +933,7 @@ function getfollowup(id){
 
 $('#btn_subbmit').click(function() {
 
+
 var productid = []
 $('input:checkbox[name=txtproduct]:checked').each(function() {
 productid.push($(this).val())
@@ -967,6 +954,9 @@ console.log($('#rmfolloupdetails').serialize());
    }
 });
 });
+
+
+
 function viewhistory(fbaid){
 
 $.ajax({  

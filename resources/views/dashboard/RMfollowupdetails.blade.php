@@ -17,7 +17,7 @@
 					      <tbody>
 					      	@foreach($query as $val)
 					       <tr>
-					       	<td><a href="#" onclick="getfollowup(<?php echo $val->FBAID; ?>)" style="" data-toggle="modal" data-target='rmfolloup'><?php echo $val->FBAID; ?></a></td>
+					       	<td><a href="#" onclick="getfollowup(<?php echo $val->FBAID; ?>)"data-toggle="modal" data-target='rmfolloup'><?php echo $val->FBAID; ?></a></td>
 					       	<td><?php echo $val->FullName; ?></td>
 					       	<td><?php echo $val->CreaOn; ?></td>
 					       	<td><?php echo $val->MobiNumb1; ?></td>
@@ -64,7 +64,7 @@
            <div class="form-group">
            	<label class="control-label" for="message-text">RM Status: </label>
            	<select class="form-control" name="txtrmstatus" id="txtrmstatus">
-           	 <option selected="selected">-select-</option>
+           	 <option selected="selected">--Select Status--</option>
               @foreach($status as $val)
               <option value="{{$val->id}}">{{$val->status_name}}</option>
               @endforeach
