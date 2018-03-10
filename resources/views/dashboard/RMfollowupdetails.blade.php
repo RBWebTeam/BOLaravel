@@ -4,16 +4,16 @@
 <div class="col-md-12"><h3 class="mrg-btm">RM Follow-up Details</h3>
 	<table class="datatable-responsive table table-striped table-bordered dt-responsive nowrap" data-sort-name="stargazers_count"
    data-sort-order="desc" id="example_1">
-                          <thead>
+                  <thead>
 					        <tr>                             
-                             <th>FBA ID</th>
-					         <th>Full Name</th>
-                             <th>Created Date</th>
-					         <th>Mobile No</th>
-					         <th>Email ID</th>
-					         <th>View History</th>
-					         </tr>
-                          </thead>
+                  <th>FBA ID</th>
+					        <th>Full Name</th>
+                  <th>Created Date</th>
+					        <th>Mobile No</th>
+					        <th>Email ID</th>
+					        <th>View History</th>
+					        </tr>
+                  </thead>
 					      <tbody>
 					      	@foreach($query as $val)
 					       <tr>
@@ -47,20 +47,18 @@
 		   <tbody>
 				<tr class="" align="center">
 			     <th scope="col">
-                    <input type="checkbox" class="chkproduct" id="chkproduct">
-                  <span>Select All</span>
-                 </th>
-		        </tr>
+                <input type="checkbox" class="chkproduct" id="chkproduct">
+                <span>Select All</span>
+           </th>
+		    </tr>
 		        @foreach($product as $val)
 				<tr align="left">
-					
-					<td>
+		       <td>
 					   <input id="chkproductname" type="checkbox" name="txtproduct" class="chkproductname" value="{{$val->Product_Id}}"><span>{{$val->Product_Name}}</span>
 					</td>
 				</tr>
 			 @endforeach
-			 </tbody>
-									 
+			 </tbody>					 
 	       </table>
            </div>
            <div class="form-group">
@@ -73,16 +71,14 @@
             </select>
            </div>
            <div class="form-group">
-           	<label class="control-label" for="message-text">RM Remark: </label>
-           	<textarea class="form-control" id="txtrmremark" name="txtrmremark"></textarea>
+           <label class="control-label" for="message-text">RM Remark: </label>
+           <textarea class="form-control" id="txtrmremark" name="txtrmremark"></textarea>
            </div>
-       
         <div class="modal-footer"> 
-         <button class="btn btn-default" type="button" data-dismiss="modal">Close</button>
+        <button class="btn btn-default" type="button" data-dismiss="modal">Close</button>
          <input type="hidden" id="fbaid" name="txtfbaid">
          <input type="hidden" name="txtproductid" id="txtproductid">
          <a id="btn_subbmit" class="btn btn-primary" type="button">Submit</a>
-         
          </form>
         </div>
       </div>
@@ -90,7 +86,7 @@
   </div>
 </div>
 
-<!-- Partner Info Start -->
+<!-- history Info Start -->
 <div id="partnerInfo" class="modal fade partnerInfo" role="dialog">
   <div class="modal-dialog">
    <!-- Modal content-->
@@ -101,8 +97,8 @@
       </div>
       <div class="modal-body">
 	  <div id="divpartnertable" class="table-responsive">
-        <!-- <table class="table table-bordered table-striped">
-		    <tr>
+       <!-- <table class="table table-bordered table-striped">
+		   <tr>
 			 <td>Lead Id</td>
 			 <td>Name</td>
 			 <td>Mobile No</td>
@@ -125,6 +121,6 @@
     </div>
   </div>
 </div>
-<!-- Partner Info End -->
+
 @endsection
 

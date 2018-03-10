@@ -940,13 +940,10 @@ $('#chkproduct').click(function () {
      $('.chkproductname').prop('checked', this.checked);    
  });
 
-
 function getfollowup(id){
   $('#fbaid').val(id);
   $('.rmfolloup').modal('show');
  }
-
-
 
 $('#btn_subbmit').click(function() {
 
@@ -955,6 +952,7 @@ $('input:checkbox[name=txtproduct]:checked').each(function() {
 productid.push($(this).val())
 })
 $('#txtproductid').val(productid);
+
 console.log($('#rmfolloupdetails').serialize());
    $.ajax({ 
    url: "{{URL::to('Rmfollowup')}}",
@@ -963,30 +961,22 @@ console.log($('#rmfolloupdetails').serialize());
   success: function(msg)  
    {
     console.log(msg);
-    alert("inserted successfully");
+    alert("Record Has Been Saved Successfully");
     $('.rmfolloup').modal('hide');
     $("#rmfolloupdetails").trigger('reset');
    }
-
 });
-
-
-})
+});
 function viewhistory(fbaid){
 
 $.ajax({  
          type: "GET",  
          url:'Rmfollowup/'+fbaid,
          success: function(fsmmsg){
-        
 
-
-        var data = JSON.parse(fsmmsg);
-
-
-       var str = "<table class='table'><tr style='height:30px;margin:5px;'><td>Lead ID</td><td>Name</td><td>User Type</td><td>Status</td><td>Remark</td></tr>";
+      var data = JSON.parse(fsmmsg);
+      var str = "<table class='table'><tr style='height:30px;margin:5px;'><td>Lead ID</td><td>Name</td><td>User Type</td><td>Status</td><td>Remark</td></tr>";
        for (var i = 0; i < data.length; i++) {
-
 
          str = str + "<tr style='height:30px;margin:5px;'><td>"+data[i].lead_id+"</td><td>"+data[i].FullName+"</td><td>"+data[i].user_type+"</td><td>"+data[i].status_name+"</td><td>"+data[i].remark+"</td></tr>";
       
@@ -998,11 +988,6 @@ $.ajax({
       });
 
 }
-
-
-
-
-
 </script>
  
 
