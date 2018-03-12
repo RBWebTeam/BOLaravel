@@ -358,6 +358,7 @@
     $(document).ready(function() {
     $('#fba-list-table').DataTable( {
         "ajax": "get-fba-list",
+        "order": [[ 1, 'dsc' ]],
         "columns": [
            
             { "data": "FullName"},
