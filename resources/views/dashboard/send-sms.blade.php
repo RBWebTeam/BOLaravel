@@ -180,8 +180,7 @@ function FN_search(ID,city,fDate,tDate){
 
  if(search!=null){
  $.get("{{url('send-sms')}}",search).done(function(data){   var arr=Array();   $('#sendsms_id').empty();
-
- 	           if(data.sms_data){
+ 	           if(data.sms_data.length > 0){
               $.each(data.sms_data,function(index,val){ 
                     arr.push('<tr><td><input type="checkbox" name="fba[]" value="'+val.FBAID+'" >'+val.FullName	+':'+val.MobiNumb1+'</td> </tr>');  });
                 $('#sendsms_id').append(arr);
