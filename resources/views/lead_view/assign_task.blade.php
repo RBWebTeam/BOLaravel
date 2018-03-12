@@ -5,7 +5,7 @@
 
  
        <div class="container-fluid white-bg">
-       <div class="col-md-12"><h3 class="mrg-btm">Assign Task</h3></div>
+       <div class="col-md-12"><h3 class="mrg-btm">User Lead  Assignment  </h3></div>
        <div class="col-md-12">
 
         @if($message = Session::get('msg'))
@@ -13,7 +13,7 @@
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
           <span aria-hidden="true">×</span>
         </button>
-        <strong>Success!</strong> {{ $message }}
+        <strong>{{ $message }}</strong> 
       </div>
   @endif
 

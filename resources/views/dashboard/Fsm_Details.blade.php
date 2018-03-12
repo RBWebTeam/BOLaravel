@@ -34,16 +34,16 @@
                    <th>Date of Birth</th>
                    <th>Email ID</th>
                    <th>Password</th>
-				   <th>Mobile No.</th>
-				   <th>PAN Card</th>
+				           <th>Mobile No.</th>
+				           <th>PAN Card</th>
                    <th>Leads</th>
                    <th>Registered Leads</th>
                    <th>Aadhar No.</th>
-				   <th>Pin Code</th>
+				           <th>Pin Code</th>
                    <th>City</th>
                    <th>State</th>
-                 </tr>
-                </thead>
+                   </tr>
+                   </thead>
                 
                 <tbody>
                 @foreach($query as $val)
@@ -51,7 +51,7 @@
                   <td><a href="Fsm-Register?smid=<?php echo $val->SMID;?>"><?php echo $val->Name; ?></a></td>
                   <td><?php echo $val->DOB; ?></td>
                   <td><?php echo $val->Email; ?></td>
-                  <td><a href="#" class="popover-Password" data-toggle="popover" title="Show Password" data-content="<?php echo $val->Password; ?>">*****</a></td>
+                  <td><a href="" class="popover-Password" data-toggle="popover" title="Show Password" data-content="<?php echo $val->Password; ?>">*****</a></td>
 				  <td><?php echo $val->MobileNo; ?></td>
 				  <td><?php echo $val->PancardNo; ?></td>
                   <td><?php echo $val->AllLeads; ?></td>

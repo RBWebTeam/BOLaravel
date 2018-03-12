@@ -5,15 +5,15 @@
        <div class="col-md-12"><h3 class="mrg-btm">Queries</h3></div>
        
 
-<div class="btn-group"   >
-  <a href="{{url('queries')}}?queries=1" class="btn btn-primary" style="margin-right:3px; padding:6px 10px; font-size:13px;">POSP Transaction</a>
-  <a href="{{url('queries')}}?queries=2"  class="btn btn-primary" style="margin-right:3px;padding:6px 10px; font-size:13px;">Not POSP</a>
-  <a href="{{url('queries')}}?queries=3" class="btn btn-primary" style="margin-right:3px;padding:6px 10px; font-size:13px;">Policy Sold</a>
-  <a href="{{url('queries')}}?queries=4" class="btn btn-primary" style="margin-right:3px;padding:6px 10px; font-size:13px;">FBA Never Logged In</a>
-  <a href="{{url('queries')}}?queries=5" class="btn btn-primary" style="margin-right:3px;padding:6px 10px; font-size:13px;">Inactive POSP </a>
-  <a href="{{url('queries')}}?queries=6" class="btn btn-primary" style="margin-right:3px;padding:6px 10px; font-size:13px;">POSP Without POSP No</a>
-  <a href="{{url('queries')}}?queries=7" class="btn btn-primary" style="margin-right:3px;padding:6px 10px; font-size:13px;">POSP Without Payment</a>
-  <a href="{{url('queries')}}?queries=8"  class="btn btn-primary" style="padding:6px 10px; font-size:13px;">Transaction Today</a>
+<div id="myDIV">
+  <a href="{{url('queries')}}?queries=1" class="qry-btn" style="margin-right:3px;">POSP Transaction</a>
+  <a href="{{url('queries')}}?queries=2"  class="qry-btn" style="margin-right:">Not POSP</a>
+  <a href="{{url('queries')}}?queries=3" class="qry-btn" style="margin-right:3px;">Policy Sold</a>
+  <a href="{{url('queries')}}?queries=4" class="qry-btn" style="margin-right:3px;">FBA Never Logged In</a>
+  <a href="{{url('queries')}}?queries=5" class="qry-btn" style="margin-right:3px;">Inactive POSP </a>
+  <a href="{{url('queries')}}?queries=6" class="qry-btn" style="margin-right:3px;">POSP Without POSP No</a>
+  <a href="{{url('queries')}}?queries=7" class="qry-btn" style="margin-right:3px;">POSP Without Payment</a>
+  <a href="{{url('queries')}}?queries=8"  class="qry-btn" >Transaction Today</a>
 </div>
 
 <br>
@@ -26,7 +26,7 @@
    <div class="col-md-12">
        <div class="overflow-scroll">
        <div class="table-responsive" >
-				<table id="tblqueries" class="datatable-responsive table table-striped table-bordered dt-responsive nowrap" >
+				<table id="example" class="datatable-responsive table table-striped table-bordered dt-responsive nowrap" >
                  <thead >
                  <tr class="thead_cl">
 
@@ -117,4 +117,17 @@ else {
 
 });
       </script>
+	  
+	<script>
+// Add active class to the current button (highlight it)
+var header = document.getElementById("myDIV");
+var btns = header.getElementsByClassName("qry-btn");
+for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener("click", function() {
+    var current = document.getElementsByClassName("active");
+    current[0].className = current[0].className.replace(" active", "");
+    this.className += " active";
+  });
+}
+</script>
  @endsection

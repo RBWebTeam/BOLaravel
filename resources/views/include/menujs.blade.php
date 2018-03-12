@@ -76,7 +76,7 @@ $(document).ready(function(){
        if($('#menu__group').val()!=0  ){ 
             $.post("{{url('menu-group-save')}}",$('#menu_group_id_from').serialize())
              .done(function(data){ 
-             	 console.log(data);
+             	// console.log(data);
                  if(data==0){
                  window.location.href = "{{url('menu-group')}}";
                  }else{
@@ -100,7 +100,7 @@ $(document).ready(function(){
  	       if($('#menu_name_id').val()!=0 && $('#menu_group_id').val()!=0  ){ 
             $.post("{{url('menu-add')}}",$('#menu_list_from').serialize())
              .done(function(data){ 
-             	 console.log(data);
+             	// console.log(data);
                  if(data==0){
                      
                  window.location.href = "{{url('lead-up-load')}}";
@@ -132,7 +132,7 @@ var TopicId=0;
    method:"GET",
    success: function(datas)  {
     var data=$.parseJSON(datas);
-    console.log(data);
+   // console.log(data);
 
 for (var i = 0; i < data.length ;i++) {
     var hasChild = false;

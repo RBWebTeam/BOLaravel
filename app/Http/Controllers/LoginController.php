@@ -34,11 +34,18 @@ class LoginController extends InitialController
            
 
            if($query){
+            // if($val->SuccessStatus==1){
             $val=$query[0];
+
+             $request->session()->flush();
+
              $request->session()->put('emailid',$val->email);
+
+                    $request->session()->put('emailid',$val->email);
+
                     $request->session()->put('fbauserid',$val->fbauserid);
                     $request->session()->put('fbaid',$val->fbaid);
-                    $request->session()->put('username',$val->username); 
+                    $request->session()->put('username',$val->username);
                     $request->session()->put('loginame',$val->loginame);
                     $request->session()->put('uid',$val->uid);
                     $request->session()->put('mobile',$val->mobile); 
@@ -46,14 +53,24 @@ class LoginController extends InitialController
                     $request->session()->put('usergroup',$val->usergroup);
                     $request->session()->put('companyid',$val->companyid);
 
+                    // $request->session()->put('LastLogiDate',$val->LastLogiDate);                              
+               return redirect()->intended('dashboard');
+          }else{
+                      Session::flash('msg', "Invalid email or password. Please Try again! ");
+
+                    
+
+
  
  
        
 
                  
               return redirect()->intended('dashboard');
-        }else{
-                      Session::flash('msg', "Invalid email or password. Please Try again! ");
+        }
+        {
+                      Session::flash('msg', "Invalid esmail or password. Please Try again! ");
+
                        return Redirect::back();
                
  }
@@ -135,20 +152,21 @@ class LoginController extends InitialController
 
 
        DB::table('FBAUsers')->insert(
-       [ 'UserName' =>$req->UserName,
-       'email' =>$req->email,
-      'mobile' =>$req->mobile,
-       'companyid' =>$req->company_id,
-        'reportingid' =>$req->reporting_id,
-         'stateid' =>$req->state_id,
-          'cityid' =>$req->city_id,
-           'user_id' =>Session::get('fbauserid'),
-           'user_type_id' =>1,
+       [    'UserName' =>$req->UserName,
+            'email' =>$req->email,
+            'mobile' =>$req->mobile,
+            'companyid' =>$req->company_id,
+            'reportingid' =>$req->reporting_id,
+            'stateid' =>$req->state_id,
+            'cityid' =>$req->city_id,
+            'user_id' =>Session::get('fbauserid'),
+            'user_type_id' =>1,
             'usergroup' =>$req->menu_group,
-             'uid' =>$req->uid,
-             'password' =>$req->password]);
+            'uid' =>$req->uid,
+            'password' =>$req->password]);
 
-    Session::flash('message', 'Register successfully...!'); 
+       
+Session::flash('message', 'Register successfully...!'); 
    }
 
     

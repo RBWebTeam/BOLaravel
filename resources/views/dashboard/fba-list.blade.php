@@ -9,28 +9,30 @@
 
         <hr>
        </div>
-             
-             
-             <!-- Filter Strat -->
-             <!-- <div class="col-md-12">
-             <div class="panel panel-primary">
-             <div class="panel-heading">
-                        <h3 class="panel-title">Filter</h3>
-                        <div class="pull-right">
-                            <span class="clickable filter" data-toggle="tooltip" data-container="body">
-                            <span class="glyphicon glyphicon-plus glyphicon1"></span> &nbsp;&nbsp;
-                                <span class="glyphicon glyphicon-filter glyphicon1 fltr-tog"></span>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="panel-body filter-bdy" style="display:none">
-                        <input type="text" class="form-control" id="dev-table-filter" data-action="filter" data-filters="#dev-table" placeholder="Search..." />
-                    </div>
-             </div>
-             </div> -->
-             <!-- Filter End -->
-             
-             <form    >
+
+       
+       
+       <!-- Filter Strat -->
+       <!-- <div class="col-md-12">
+       <div class="panel panel-primary">
+       <div class="panel-heading">
+            <h3 class="panel-title">Filter</h3>
+            <div class="pull-right">
+              <span class="clickable filter" data-toggle="tooltip" data-container="body">
+              <span class="glyphicon glyphicon-plus glyphicon1"></span> &nbsp;&nbsp;
+                <span class="glyphicon glyphicon-filter glyphicon1 fltr-tog"></span>
+              </span>
+            </div>
+          </div>
+          <div class="panel-body filter-bdy" style="display:none">
+            <input type="text" class="form-control" id="dev-table-filter" data-action="filter" data-filters="#dev-table" placeholder="Search..." />
+          </div>
+       </div>
+       </div> -->
+       <!-- Filter End -->
+       
+       <form>
+
        <div class="col-md-4">
       <div class="form-group">
       <p>From Date</p>
@@ -60,7 +62,7 @@
              <div class="table-responsive" >
 
 
-            <table class="datatable-responsive table table-striped table-bordered  nowrap" id="fba-list-table">
+            <table class="datatable-responsive table table-striped table-bordered nowrap" id="fba-list-table">
                           <thead>
                                       <tr>
                                        <th>Full Name</th>
@@ -156,26 +158,25 @@
     <div class="modal-content">
       <div class="modal-header">
         <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-        <h4 class="modal-title">FSM Details</h4>
+        <h4 class="modal-title">Upload FBA Documents</h4>
       </div>
       <div class="modal-body">
-        <form id="posp_from_id">
+        <form id="fbadocupload" method="POST" enctype="multipart/form-data">
           <div class="form-group">
             
           </div>
           <div class="form-group">
             <label class="control-label" for="Document-Type">Document Type: </label>
-            <select class="form-control">
-              <option selected="selected">select Document Type</option>
+            <select class="form-control" id="ddldoctype" name="ddldoctype">
+              <option selected="selected" value="0">select Document Type</option>
               @foreach($doctype as $val)
              <option value="{{$val->id}}">{{$val->name}}</option>
               @endforeach
-
-            </select>
+           </select>
           </div>
            <div class="form-group">
             <label class="control-label" for="Document">Document</label>
-            <input type="file" name="document" class="form-control"> 
+            <input type="file" id="document" name="document" class="form-control"> 
           </div>
         </form>
         <div class="modal-footer"> 
@@ -200,7 +201,7 @@
         <form name="update_remark" id="update_remark">
          {{ csrf_field() }}
          <div class="form-group">
-            <input type="text" name="p_fbaid" id="p_fbaid" value=" ">
+            <input type="hidden" name="p_fbaid" id="p_fbaid" value="">
             <label class="control-label" for="message-text">Enter Remark : </label>
             <input type="text" class="recipient-name form-control" id="p_remark" name="p_remark" required="" />
           </div>
@@ -230,7 +231,7 @@
         <form name="update_posp" id="update_posp">
          {{ csrf_field() }}
          <div class="form-group">
-            <input type="text" name="fbaid" id="fbaid" value=" ">
+            <input type="hidden" name="fbaid" id="fbaid" value=" ">
             <label class="control-label" for="message-text">Enter Remark : </label>
             <input type="text" class="recipient-name form-control" id="posp_remark" name="posp_remark" required="" />
           </div>
@@ -260,7 +261,7 @@
         <form name="update_loan" id="update_loan">
          {{ csrf_field() }}
          <div class="form-group">
-            <input type="text" name="fba_id" id="fba_id" value=" ">
+            <input type="hidden" name="fba_id" id="fba_id" value=" ">
             <label class="control-label" for="remark">Enter Remark : </label>
             <input type="text" class="recipient-name form-control" id="remark" name="remark" required="" />
           </div>
@@ -287,24 +288,9 @@
       <div class="modal-body">
 
       <div class="table-responsive">
-        <table class="table table-bordered table-striped">
-            <tr>
-             <td>Partner ID</td>
-             <td>Name</td>
-             <td>Mobile No</td>
-             <td>Email</td>
-             <td>City</td>
-             <td>Pincode</td>
-            </tr>
-            <tr>
-             <td></td>
-             <td>Pavamaana Softech</td>
-             <td>9845724268</td>
-             <td>bgykumar@gmail.com</td>
-             <td>Bangalore</td>
-             <td>560021</td>
-            </tr>
-        </table>
+        <div id="divpartnertable" name="divpartnertable">
+
+        </div>
         </div>
 
       </div>
@@ -331,13 +317,11 @@
               <option>FBA</option>
             </select>
             <input type="text" class="recipient-name form-control" id="" name="" required="yes" />
-             
-          </div>
+        </div>
         </form>
         <div class="modal-footer"> 
           <button class="btn btn-default" type="button" data-dismiss="modal">Close</button>
           <button id="" class="btn btn-primary" type="button">search</button>
-          
         </div>
       </div>
     </div>
@@ -367,12 +351,12 @@
             { "data": "EMaiID" },
             { "data": "Link",
              "render": function ( data, type, row, meta ) {
-                return '<a href="#" class="popover-Payment" data-toggle="popover" title="Payment link" data-content="'+data+'">Payment link</a>';
+                return '<a href="" class="popover-Payment" data-toggle="popover" title="Payment link" data-content="'+data+'">Payment link</a>';
               }
              }, 
             {"data":"pwd" ,
              "render": function ( data, type, row, meta ) {
-                return '<a href="#" class="popover-Password" data-toggle="popover" title="Show Password" data-content="'+data+'">*****</a>';
+                return '<a class="popover-Password" data-toggle="popover" title="Show Password" data-content="'+data+'">*****</a>';
               }
             },        
             {"data":"City"},
@@ -384,7 +368,7 @@
             },
             {"data":"POSPNo"  ,
              "render": function ( data, type, row, meta ) {
-                return data?('<a id="posp_'+data+'" class="checkPosp" data-toggle="modal" data-target="#updatePosp" onclick="POSP_UPDATE('+data+')">update</a>'):data;
+                return data==""?('<a id="posp_'+data+'" class="checkPosp" data-toggle="modal" data-target="#updatePosp" onclick="POSP_UPDATE('+data+')">update</a>'):data;
               }
             },  
 
@@ -392,18 +376,18 @@
 
             {"data":"LoanID"  ,
              "render": function ( data, type, row, meta ) {
-                return data?('<a id="loan_'+data+'" class="checkloan" data-toggle="modal" data-target="#updateLoan" onclick="LoanID_UPDATE('+data+')">update</a>'):data;
+                return data==""?('<a id="loan_'+data+'" class="checkloan" data-toggle="modal" data-target="#updateLoan" onclick="LoanID_UPDATE('+data+')">update</a>'):data;
               }
             },  
             {"data":"pospname"},  
             {"data":"fbaid"  ,
              "render": function ( data, type, row, meta ) {
-                return '<a href="" data-toggle="modal" data-target="#partnerInfo">partner info</a>';
+                return '<a href="" data-toggle="modal" data-target="#partnerInfo" onclick="getpartnerinfo('+data+')">partner info</a>';
               }
             },  
             {"data":"fbaid" ,
              "render": function ( data, type, row, meta ) {
-                return '<a href="#" style="" data-toggle="modal" data-target="fbadoc" onclick="uploaddoc('+data+')" >Pending</a>';
+                return '<a href="#" style="" data-toggle="modal"  data-target="fbadoc" onclick="uploaddoc('+data+')" >Pending</a>';
               }
             }, 
             {"data":"bankaccount"} ,
@@ -414,7 +398,7 @@
             },
             {"data":"salescode" ,
              "render": function ( data, type, row, meta ) {
-                return data?('<a  id="update_'+data+'" onclick="sales_update_fn('+data+')" >'+data+'</a>'):('<a  id="update_'+data+'" onclick="sales_update_fn('+data+')" >Update</a>');
+                return data==""?('<a  id="update_'+data+'" onclick="sales_update_fn('+data+')" >'+data+'</a>'):('<a  id="update_'+data+'" onclick="sales_update_fn('+data+')" >Update</a>');
               }
             },
             
