@@ -9,7 +9,7 @@
      
  
 
-<p > <a href="{{url('register-user')}}" class="btn btn-success">   Register-User </a></p>
+<div class="col-md-12"><p > <a href="{{url('register-user')}}" class="btn btn-info mrg-btm">   Register-User </a></p></div>
  
        <div class="col-md-12">
        <div class="overflow-scroll">
