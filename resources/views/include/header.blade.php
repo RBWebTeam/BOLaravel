@@ -17,17 +17,17 @@
 </div>
 <div class="col-md-5 col-xs-5 no-mob-pad">
 <div class="pull-right log-txt">
-<<<<<<< HEAD
+
 <?php $request=Session::get('loginame'); ?>
 <?php $request1=Session::get('mobile'); ?>
 <p><span class="hidden-xs">Welcome </span><b><?php echo $request ?></b></p>
 <p><span class="hidden-xs">Last login - Date / Time :</span> <b><?php echo $request1 ?></b></p>
 
-<?php $request=Session::get('FullName'); ?>
+<!-- <?php $request=Session::get('FullName'); ?>
 <?php $request1=Session::get('LastloginDate'); ?>
 <div><span class="hidden-xs">Welcome </span><b><?php echo $request ?>User1</b></div>
 <div><span class="hidden-xs">Last login - Date / Time :</span> <b><?php echo $request1 ?></div></p>
-
+ -->
 
 
 <!-- <p><span class="hidden-xs">Welcome </span><b>Mr. Goving Dharne</b></p>

@@ -11,7 +11,7 @@
         <table id="" class="table table-responsive table-hover" cellspacing="0">
           <div class="col-md-4 col-xs-12">
         <div class="form-group">
-        <select  class="selectpicker select-opt form-control" id="rmname" name="rmname" required>
+        <select  class="selectpicker select-opt form-control" id="rmname" name="rmname" onchange="getcitystateid();" required>
          <option value="1">Select RM</option>
          
                   @foreach($query as $val) 
@@ -27,7 +27,7 @@
         <select multiple="multiple" name="ddlstate[]" class="selectpicker select-opt form-control" id="ddlstate" required>
          <option value="1">Select state</option>
                
-                @foreach($state as $val) 
+               @foreach($state as $val) 
                <option value="{{$val->state_id}}">{{$val->state_name}}</option>
                @endforeach
                 
@@ -54,3 +54,25 @@
    
 @endsection
 
+<script type="text/javascript">
+
+function getcitystateid()
+  {
+    // alert("test");
+      var rmname= document.getElementById("rmname").value;
+      console.log(rmname);
+      // alert("test");
+        $.ajax({
+                url: "{{url('rm_city_master1')}}",
+                type: 'POST',
+                data: { rmname:rmname},
+                success: function(data)
+                {
+                  console.log(data);  // alert("Test");
+                }
+        });
+       
+  }  
+
+
+   </script>

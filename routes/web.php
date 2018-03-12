@@ -130,8 +130,13 @@ Route::get('rm_city_master','rmcitymappingController@getrm');
 Route::get('rm_city_master/{state_id}','rmcitymappingController@getcity');
 Route::post('rm_city_master','rmcitymappingController@rmcityinsert');
 
-// Route::get('rm_city_master','rmcitymappingController@rmcityupdate');
+Route::post('rm_city_master1','rmcitymappingController@getstatecity');
 
+//smslog
+Route::get('sms_log','smslogController@getsmslog');
+//smstemplate
+Route::get('sms_template','smslogController@smstemplate');
+Route::post('sms_template','smslogController@smstemplateinsert');
 
  //Otp Detail
  Route::get('otp-details','OtpDetailsController@otp_details');
@@ -224,7 +229,7 @@ Route::post('product-save','ProductController@product_save');
 
 
 
-});
+// });
 
  
 
