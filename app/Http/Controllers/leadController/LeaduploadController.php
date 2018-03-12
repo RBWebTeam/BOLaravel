@@ -299,30 +299,51 @@ public function lead_management_update(Request $req){
 
 $error=null;
    try{ 
-                            $arra=array(
-                           'name'=>$req->name?$req->name:null,
-                           'mobile'=>$req->mobile?$req->mobile:null,
-                           'email'=>$req->email?$req->email:null,
-                           'dob'=>$req->dob?$req->dob:null,
-                           'profession'=>$req->profession?$req->profession:null,
-                           'monthly_income'=>$req->monthly_income?$req->monthly_income:null,
-                           'pan'=>$req->pan_no?$req->pan_no:null,
-                           // 'city_id'=>$city->cityname,
-                             'address'=>$req->address?$req->address:null ,
-                              'pincode'=>$req->pincode?$req->pincode:null ,
-                              'campaign_id'=>$req->campaign?$req->campaign:null ,
-                              'user_id'=>Session::get('fbauserid'),
-                              'ip_address'=>\Request::ip(),
-                              'created_on'=>date('Y-m-d H:i:s'),); 
-                          
+                          //   $arra=array(
+                          //  'name'=>$req->name?$req->name:null,
+                          //  'mobile'=>$req->mobile?$req->mobile:null,
+                          //  'email'=>$req->email?$req->email:null,
+                          //  'dob'=>$req->dob?$req->dob:null,
+                          // // 'profession'=>$req->profession?$req->profession:null,
+                          // // 'monthly_income'=>$req->monthly_income?$req->monthly_income:null,
+                          //  'pan'=>$req->pan_no?$req->pan_no:null,
+                          //  // 'city_id'=>$city->cityname,
+                          //    'address'=>$req->address?$req->address:null ,
+                          //     'pincode'=>$req->pincode?$req->pincode:null ,
+                          //     // 'campaign_id'=>$req->campaign?$req->campaign:null ,
+                          //     'user_id'=>Session::get('fbauserid'),
+                          //     'ip_address'=>\Request::ip(),
+                          //     'created_on'=>date('Y-m-d H:i:s'),); 
 
-                             $query=DB::table('raw_lead_master')->where('id','=',$req->lead_id)->update($arra);
+$arra=array(
+                           $req->name?$req->name:null,
+                           $req->mobile?$req->mobile:null,
+                            $req->email?$req->email:null,
+                            $req->dob?$req->dob:null,
+                            $req->pan_no?$req->pan_no:null,
+                             $req->address?$req->address:null ,
+                              $req->pincode?$req->pincode:null ,
+                              Session::get('fbauserid'),
+                              \Request::ip(),
+                               date('Y-m-d H:i:s'),
+                               $req->lead_id
+
+                               ); 
+
+
+ 
+                          
+                            DB::select('call sp_lead_management_update(?,?,?,?,?,?,?,?,?,?,?)',$arra);
+                            // $query=DB::table('raw_lead_master')->where('id','=',$req->lead_id)->update($arra);
                              $error=0;
             
              }catch (Exception $e){  $error=1; }
 
              return $error;
           
+
+     
+
         
 
 }

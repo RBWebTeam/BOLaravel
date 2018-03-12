@@ -54,6 +54,7 @@ Route::post('posp-update','FbaController@posp');
 
 Route::get('fba-list/{fbaid}/{value}/{flag}',array('as'=>'fba-list.ajax','uses'=>'FbaController@updateposp'));
 Route::post('fba-list','FbaController@sendsms');
+Route::post('fba-listdocument','FbaController@uploaddoc');
 
 //fba documents 
 Route::get('Fba-document','fbadocumentsController@fbadocument');
@@ -65,6 +66,12 @@ Route::get('register-form','RegisterFormController@register_form');
 
 //FSM Details
 Route::get('Fsm-Details','FsmDetailsController@FsmDetails');
+
+/// shubham 
+
+Route::get('Rmfollowup','RMfollowupController@RMfollowup');
+Route::post('Rmfollowup','RMfollowupController@insertrmfollowup');
+Route::get('Rmfollowup/{fbaid}','RMfollowupController@gethistory');
 
 //////GOVIND
 Route::get('Fsm-Details/{smid}','FsmDetailsController@fsmfbalist');
@@ -98,47 +105,38 @@ Route::post('insertnotification','SendNotificationController@insertntf');
 Route::get('approvenotification/{msgid}/{value}','SendNotificationApproveController@approvenotification');
  //send sms
 Route::get('send-notification','SendNotificationController@sendnotification');
-
-
-
-
- // Route::get('send-sms','SendSMSController@ViewSendSMSDetails');
- 
-
 //send sms
 Route::get('send-sms','SendSMSController@ViewSendSMSDetails');
-// Route::get('send-sms','SendSMSController@sms_load');
-
-
- /*Route::get('send-sms','SendSMSController@ViewSendSMSDetails');
- Route::get('send-sms','SendSMSController@sms_load');*/
-
+ 
 Route::get('send-notification','SendNotificationController@sendnotification');
+
 //send sms
 /*Route::get('send-sms','SendSMSController@ViewSendSMSDetails');*/
 
+/// vikaas rm city
+Route::get('rm_city_master','rmcitymappingController@rmcitymapping');
+Route::get('rm_city_master','rmcitymappingController@getrm');
+Route::get('rm_city_master/{state_id}','rmcitymappingController@getcity');
+Route::post('rm_city_master','rmcitymappingController@rmcityinsert');
+
+Route::post('rm_city_master1','rmcitymappingController@getstatecity');
+
+//smslog
+Route::get('sms_log','smslogController@getsmslog');
+//smstemplate
+Route::get('sms_template','smslogController@smstemplate');
+Route::post('sms_template','smslogController@smstemplateinsert');
 
 
  //Otp Detail
- Route::get('otp-details','OtpDetailsController@otp_details');
- Route::get('log-out','LoginController@logout');
-
+Route::get('otp-details','OtpDetailsController@otp_details');
+Route::get('log-out','LoginController@logout');
 //genrate lead
- Route::get('genrate-lead','genrateleadController@getlead');
-
-
-
-
+Route::get('genrate-lead','genrateleadController@getlead');
 // Bankoffer
-
- Route::get('bankoffer','bankofferController@bank_offer');
-
-
-
+Route::get('bankoffer','bankofferController@bank_offer');
 Route::get('payment-history','PaymentHistoryController@payment_history');
- 
 Route::get('queries','QueriesController@queries');
-
 /*Book Appointment*/
 Route::get('book-appointment','BookAppointmentController@book_appointment');
 Route::get('backoffice-city-master','BookAppointmentController@backoffice_city_master');
@@ -172,6 +170,7 @@ Route::get('menu-group-select','MenuController@menu_group_select');
 Route::group(['namespace' => 'RM',  ], function() {
 
 Route::get('regional-manager','RegionalManagerControllar@regional_manager');
+
 });
   /************
 // LEAD MANAGMENT
@@ -184,30 +183,31 @@ Route::post('lead-interested','LeaduploadController@interested');
 Route::post('lead-management-update','LeaduploadController@lead_management_update');
 Route::get('lead-status','LeadstatusController@lead_status');
 Route::get('followup-history','LeadstatusController@followup_history');
-
-
- 
 Route::get('lead-test','LeaduploadController@lead_test');  
 Route::get('assign-task','LeadstatusController@assign_task');
 Route::post('assign-task-save','LeadstatusController@assign_task_save');
+Route::get('marketing-leads','LeaduploadController@marketing_leads');   
+});
+/************
+// END LEAD MANAGMENT
+******************/ 
+
+ /************
+// Product Controller 
+******************/
+Route::get('product-authorized','ProductController@product_authorized');
+Route::post('product-save','ProductController@product_save');
+ 
+Route::post('send-sms-save','SendSMSController@send_sms_save');
 
 
 });
 
 
- });
-
- Route::group(['namespace' => 'leadController',  ], function() {
- Route::get('lead-test','LeaduploadController@lead_test');    // test 
-Route::get('marketing-leads','LeaduploadController@marketing_leads');   // test
 
 
 
-/////////////////////////GOVIND////////////////////////////////////
+// });
 
-//Route::get('fsm-fba-list/{fsmid}','FsmDetailsController@fsmfbalist');
-//Route::get('Fsm-Details/{smid}',array('as'=>'FsmDetails.ajax','uses'=>'FsmDetailsController@fsmfbalist'));*/
+ 
 
-//////////////////////////END//////////////////////////////////////
-
-});

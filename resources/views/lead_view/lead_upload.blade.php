@@ -40,6 +40,8 @@
                                        
                                        <th>ID</th>
                                      <!--   <th>ref_no</th> -->
+                                      
+
                                        <th>Name</th>
                                        <th>Mobile</th>
                                        <th>Email</th>
@@ -69,7 +71,7 @@
                                        <th>Misscall  </th>
                                          <th>languages   </th>
 
-                                          <th>view detials </th>
+                                          <th>View History </th>
                                         
                                       </tr>
 
@@ -286,7 +288,7 @@
        <div class="form-group">
                   <label for="inputEmail" class="control-label col-xs-2">Mobile</label>
                   <div class="col-xs-10">
-          <input type="text" name="mobile" id="clientMobile"  maxlength="10" onkeypress="return Numeric(event)"  class="form-control" >
+          <input type="text" name="mobile" id="clientMobile"  maxlength="10" onkeypress="return Numeric(event)"  class="form-control" readonly="" >
 
            <label class="control-label" for="inputError" id="Errormobile"></label>
                   </div>
@@ -318,22 +320,22 @@
 
 
 
-         <div class="form-group">
+      <!--    <div class="form-group">
                   <label for="inputEmail" class="control-label col-xs-2">Profession</label>
                   <div class="col-xs-10">
                     <input type="text" name="profession" id="clientProfession"  class="form-control" >
                     <label class="control-label" for="inputError" id="Errorprofession"></label>
                   </div>
-        </div> 
+        </div>  -->
 
 
-        <div class="form-group">
+        <!-- <div class="form-group">
                   <label for="inputEmail" class="control-label col-xs-2">Monthly income</label>
                   <div class="col-xs-10">
                     <input type="text" name="monthly_income" id="clientMonthly_income"  class="form-control" >
                      <label class="control-label" for="inputError" id="Error"></label>
                   </div>
-        </div> 
+        </div>  -->
 
 
 
@@ -346,12 +348,12 @@
         </div> 
 
 
-        <div class="form-group">
+        <!-- <div class="form-group">
                   <label for="inputEmail" class="control-label col-xs-2">City Name</label>
                   <div class="col-xs-10">
                     <input type="text" name="cityname" id="clientCityname"  class="form-control" >
                   </div>
-        </div> 
+        </div> --> 
 
 
           <div class="form-group">
@@ -371,12 +373,12 @@
 
  
 
-           <div class="form-group">
+           <!-- <div class="form-group">
                   <label for="inputEmail" class="control-label col-xs-2">Campaign</label>
                   <div class="col-xs-10">
                     <input type="text" name="campaign" id="clientCampaign_id"  class="form-control" >
                   </div>
-          </div> 
+          </div>  -->
 
 
           
