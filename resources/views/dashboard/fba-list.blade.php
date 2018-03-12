@@ -10,33 +10,33 @@
         <hr>
        </div>
 
-			 
-			 
-			 <!-- Filter Strat -->
-			 <!-- <div class="col-md-12">
-			 <div class="panel panel-primary">
-			 <div class="panel-heading">
-						<h3 class="panel-title">Filter</h3>
-						<div class="pull-right">
-							<span class="clickable filter" data-toggle="tooltip" data-container="body">
-							<span class="glyphicon glyphicon-plus glyphicon1"></span> &nbsp;&nbsp;
-								<span class="glyphicon glyphicon-filter glyphicon1 fltr-tog"></span>
-							</span>
-						</div>
-					</div>
-					<div class="panel-body filter-bdy" style="display:none">
-						<input type="text" class="form-control" id="dev-table-filter" data-action="filter" data-filters="#dev-table" placeholder="Search..." />
-					</div>
-			 </div>
-			 </div> -->
-			 <!-- Filter End -->
-			 
-			 <form>
+       
+       
+       <!-- Filter Strat -->
+       <!-- <div class="col-md-12">
+       <div class="panel panel-primary">
+       <div class="panel-heading">
+            <h3 class="panel-title">Filter</h3>
+            <div class="pull-right">
+              <span class="clickable filter" data-toggle="tooltip" data-container="body">
+              <span class="glyphicon glyphicon-plus glyphicon1"></span> &nbsp;&nbsp;
+                <span class="glyphicon glyphicon-filter glyphicon1 fltr-tog"></span>
+              </span>
+            </div>
+          </div>
+          <div class="panel-body filter-bdy" style="display:none">
+            <input type="text" class="form-control" id="dev-table-filter" data-action="filter" data-filters="#dev-table" placeholder="Search..." />
+          </div>
+       </div>
+       </div> -->
+       <!-- Filter End -->
+       
+       <form>
 
        <div class="col-md-4">
       <div class="form-group">
       <p>From Date</p>
-         <div id="datepicker" class="input-group date" data-date-format="dd-mm-yyyy">
+         <div id="datepicker" class="input-group date" data-date-format="mm-dd-yyyy">
                <input class="form-control date-range-filter" type="text" placeholder="From Date" name="fdate" id="min-date"  />
               <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
               </div>
@@ -45,7 +45,7 @@
        <div class="col-md-4">
        <div class="form-group">
        <p>To Date</p>
-       <div id="datepicker1" class="input-group date" data-date-format="dd-mm-yyyy">
+       <div id="datepicker1" class="input-group date" data-date-format="mm-dd-yyyy">
                <input class="form-control date-range-filter1 " type="text"  placeholder="To Date"  name="todate"  id="max-date"   />
               <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
               </div>
@@ -85,70 +85,8 @@
 
                                      </tr>
                                     </thead>
-
-					                <tbody>
-					              @foreach($query as $val)
-                       <tr>
-                            <td><?php echo $val->fbaid;?></td>
-                            <td><?php echo $val->FullName; ?></td>
-                            <td><?php echo $val->createdate; ?></td>
-                            <td><?php echo $val->MobiNumb1; ?></td>
-                            <td><?php echo $val->EMaiID; ?></td>
-                            <td>                                                       
-                            
-                             <a href="" class="popover-Payment" data-toggle="popover" title="Payment link" data-content="<?php echo $val->Link; ?>">Payment link</a>
-                            </td>
-                            <td><a href="" class="popover-Password" data-toggle="popover" title="Show Password" data-content="<?php echo $val->Password; ?>">*****</a></td>
-                            <td><?php echo $val->city; ?></td>
-                            <td><?php echo $val->Pincode; ?></td>
-                            <td><a href="#" style="" data-toggle="modal" data-target='.fsmdetails'>Fsm details</a></td>
-                            <td><?php if($val->POSPNo == ""){ ?>
-                                        <a id="posp_<?php echo $val->fbaid;?>" class="checkPosp" data-toggle="modal" data-target="#updatePosp" onclick="POSP_UPDATE(<?php echo $val->fbaid; ?>)">update</a>
-                                       <?php  } else {?>  
-                                       <?php echo $val->POSPNo; ?>
-                                       <?php } ?>
-                             </td>
-                            <td>
-                              <?php if($val->LoanID == ""){ ?>
-                                        <a id="loan_<?php echo $val->fbaid;?>" class="checkloan" data-toggle="modal" data-target="#updateLoan" onclick="LoanID_UPDATE(<?php echo $val->fbaid; ?>)">update</a>
-
-                            <?php } else {?>  
-                            <?php echo $val->LoanID; ?>
-                            <?php } ?>
-                            </td>
-                            <td><?php echo $val->pospname; ?></td>
-                            <td>
-
-                      
-                            <a href="#" data-toggle="modal" data-target="#partnerInfo" onclick="getpartnerinfo(<?php echo $val->fbaid; ?>)" >partner info</a>
-                            <!-- <a href="" data-toggle="modal" data-target="#partnerInfo">partner info</a> -->
-
-                            </td>
-                            <td><a href="#" style="" data-toggle="modal" data-target='fbadoc'onclick="uploaddoc(<?php echo $val->fbaid;?>)" >Pending</a></td>
-                            <td><?php echo $val->bankaccount; ?></td>
-
-                             <td><a href="#" data-toggle="modal" data-target="#sms_sent_id" onclick="SMS_FN(<?php echo $val->fbaid;?>,<?php echo $val->MobiNumb1;?>)"><span class="glyphicon glyphicon-envelope"></span></a></td>
-
-
-                            <td>
-                              <?php if(isset($val->salescode)){?>
-                            <a  id="update_<?php echo $val->fbaid;?>" onclick="sales_update_fn(<?php echo $val->fbaid;?>)" ><?php echo $val->salescode;?></a>
-                            <?php }else{?>
-                              <a  id="update_<?php echo $val->fbaid;?>" onclick="sales_update_fn(<?php echo $val->fbaid;?>)" >Update</a>
-                            <?php } ?>
-
-
-                            </td>
-                          </tr>
-
-                      
-					              @endforeach
-					              </tbody>
-		       
-
  
                
-
 
             </table>
             </div>
