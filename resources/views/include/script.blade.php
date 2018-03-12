@@ -815,10 +815,15 @@ $.ajax({
 function getpartnerinfo(fbaid)
 {
 
+
 $.ajax({  
          type: "GET",  
          url:'fba-list/'+fbaid,//"{{URL::to('Fsm-Details')}}",
          success: function(fsmmsg){
+<<<<<<< HEAD
+
+=======
+>>>>>>> 196fadbc8bca2f549db4792baac8db3692de4100
         var data = JSON.parse(fsmmsg);
 
         var str = "<table class='table'><tr style='height:30px;margin:5px;'><td>Partner ID</td><td>Name</td><td>Mobile No</td><td>Email</td><td>City</td><td>Pincode</td></tr>";
@@ -832,6 +837,33 @@ $.ajax({
         }  
       });
 }
+
+
+$('#ddlstate').on('change', function() {
+            var state_id = $(this).val();
+            if(state_id) {
+                $.ajax({
+                    url: 'rm_city_master/'+state_id,
+                    type: "GET",
+                    dataType: "json",
+                    success:function(data) {
+                        $('#ddlcity').empty();
+                        $('#ddlcity').append('<option value="0">select city</option>');
+                        $.each(data, function(key, value) {
+
+                            $('#ddlcity').append('<option value ="'+ key +'">'+ value +'</option>');
+                        });
+                     }
+                });
+            }else{
+                $('select[name="city"]').empty();
+            }
+        });
+
+
+
+
+
 
 
 function getfbaassignlist(ddl)
@@ -887,7 +919,7 @@ function fbarmassignlist(){
                 else {
                   alert('Could not updated successfully');
                 }
-         }  
+          }  
 
       }); 
 
@@ -916,6 +948,7 @@ alert(msg);
 
       }); */
 }
+
 ////////////////END////////////////////////
 
 
@@ -969,8 +1002,36 @@ $.ajax({
        }  
       });
 }
+
+//vikas smstemplate
+$('#btnsave').click(function() {
+
+
+console.log($('#frmsmstemplate').serialize());
+   $.ajax({ 
+   url: "{{URL::to('sms_template')}}",
+   method:"POST",
+   data: $('#frmsmstemplate').serialize(),
+  success: function(msg)  
+   {
+    console.log(msg);
+    alert("Record has been saved successfully");
+    $("#frmsmstemplate").trigger('reset');
+    
+   }
+
+});
+
+
+});
+
 </script>
  
 
 
+
  
+
+
+ 
+

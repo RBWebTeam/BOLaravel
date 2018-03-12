@@ -85,7 +85,7 @@
  
 <div class="form-group">
             <label for="inputEmail" class="control-label col-xs-2">State </label>
-            <div class="col-xs-6">
+            <div class="col-xs-6" >
           
          <!--     <select name="state_id" id="state_id"  class="form-control">
              	<option value="0">-Select-</option>
