@@ -37,10 +37,7 @@ class LeadstatusController extends Controller
 
 
         public function assign_task_save(Request $req){
-          
-
             $validator =Validator::make($req->all(), [
-              
               'user_id' =>'required|not_in:0',
               'lead_id' =>'required|not_in:--SELECT--',
               
