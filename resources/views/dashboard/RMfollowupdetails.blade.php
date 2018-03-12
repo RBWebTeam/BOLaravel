@@ -47,14 +47,14 @@
 		   <tbody>
 				<tr class="" align="center">
 			     <th scope="col">
-                <input type="checkbox" class="chkproduct" id="chkproduct">
+                <input type="checkbox" class="chkproduct" id="chkproduct" >
                 <span>Select All</span>
            </th>
 		    </tr>
 		        @foreach($product as $val)
 				<tr align="left">
 		       <td>
-					   <input id="chkproductname" type="checkbox" name="txtproduct" class="chkproductname" value="{{$val->Product_Id}}"><span>{{$val->Product_Name}}</span>
+					   <input required="yes" id="chkproductname" type="checkbox" name="txtproduct" class="chkproductname" value="{{$val->Product_Id}}"><span>{{$val->Product_Name}}</span>
 					</td>
 				</tr>
 			 @endforeach
@@ -66,13 +66,13 @@
            	<select class="form-control" name="txtrmstatus" id="txtrmstatus">
            	 <option selected="selected">--Select Status--</option>
               @foreach($status as $val)
-              <option value="{{$val->id}}">{{$val->status_name}}</option>
+              <option value="{{$val->id}}" required="yes">{{$val->status_name}}</option>
               @endforeach
             </select>
            </div>
            <div class="form-group">
            <label class="control-label" for="message-text">RM Remark: </label>
-           <textarea class="form-control" id="txtrmremark" name="txtrmremark"></textarea>
+           <textarea class="form-control" required="yes" id="txtrmremark" name="txtrmremark"></textarea>
            </div>
         <div class="modal-footer"> 
         <button class="btn btn-default" type="button" data-dismiss="modal">Close</button>
