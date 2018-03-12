@@ -46,6 +46,7 @@
             </div>
            </div>
        <div class="col-md-4">
+       <br>
        <div class="form-group"> <a href="#" class="mrg-top common-btn" id="search_fba_date">SHOW</a>   </div>
       </div>
 
@@ -184,6 +185,8 @@ function FN_search(ID,city,fDate,tDate){
               $.each(data.sms_data,function(index,val){ 
                     arr.push('<tr><td><input type="checkbox" name="fba[]" value="'+val.FBAID+'" >'+val.FullName	+':'+val.MobiNumb1+'</td> </tr>');  });
                 $('#sendsms_id').append(arr);
+                 }else{
+                 	alert("No data found...");
                  }
                }).fail(function(xhr, status, error) {
                   console.log(error);
