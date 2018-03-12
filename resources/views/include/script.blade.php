@@ -806,12 +806,11 @@ str = str + "</table>";
 function getpartnerinfo(fbaid)
 {
 
+
 $.ajax({  
          type: "GET",  
          url:'fba-list/'+fbaid,//"{{URL::to('Fsm-Details')}}",
          success: function(fsmmsg){
-        
-
 
         var data = JSON.parse(fsmmsg);
 
@@ -888,9 +887,7 @@ function fbarmassignlist(){
                   alert('Could not updated successfully');
                 }
 
-              
-              
-        }  
+          }  
 
       }); 
 
