@@ -7,18 +7,9 @@ $arrayCategories = array();
        $arrayCategories[$row->id] = array("parent_id" => $row->parent_id, "name" =>                       
          $row->name,"id" => $row->id);   
     } ?>
-
-
-
-<ul class="nav nav-list" style="overflow: hidden; width: auto; height: 95%;">
-<!-- <li><label ><a href="#"><span class="sp-nav"><img src="{{url('images/icon/home.png')}}"></span>&nbsp;&nbsp; Home Home</a></label></li>   --> 
-                        
+<ul class="nav nav-list" style="overflow: hidden; width: auto; height: 95%;">                       
 <?php foreach ($user_right_group as $key => $current) { 
-
-        $second_level=$cl->chield_id($current->id,$current->menu_group_id); 
-
-     ?>
-
+        $second_level=$cl->chield_id($current->id,$current->menu_group_id);  ?>
                      
                         <li><label class="tree-toggle nav-header">
                         @if($current->url_link=="#")
@@ -43,10 +34,7 @@ $arrayCategories = array();
                                    <?php 
                                      $third_level=$cl->chield_id($second_row->id,$second_row->menu_group_id); 
                                   
-                                   foreach($third_level as $key =>$third_row ){?>  
-                             
-                               <!--  <li><label class="tree-toggle nav-header"><a href="#"><span class="sp-nav"><img src="images/icon/home.png"></span>&nbsp;&nbsp; Home Page 3</a></label> -->
-                                   
+                                   foreach($third_level as $key =>$third_row ){?>    
                                         <li>@if($second_row->url_link=="#")<a href="#"><?php  echo  $third_row->name; ?></a> @else
                                              <a href="{{url('')}}/{{$third_row->url_link}}"><?php  echo  $third_row->name; ?></a>
 
@@ -66,52 +54,9 @@ $arrayCategories = array();
 
  <?php    }     ?>
                 
-
-
-
- 
- <?php ///echo  $cl->menu_sidebar();?>
-
     </ul>
-
- 
-
- 
-
-  
-
-
- 
-
-<!-- 
-{!! $MyNavBar->asUl() !!} -->
-
- 
-
-
-<!--  <ul class="nav nav-list tree">
-                        <li><a href="#">JavaScript</a></li>
-                        <li><a href="#">CSS</a></li>
-                        <li><label class="tree-toggle nav-header"><a href="#"><span class="sp-nav"><img src="images/icon/home.png"></span>&nbsp;&nbsp; Home Page 2</a></label>
-                            <ul class="nav nav-list tree">
-                                <li><a href="#">Colors</a></li>
-                                <li><a href="#">Sizes</a></li>
-                                <li><label class="tree-toggle nav-header"><a href="#"><span class="sp-nav"><img src="images/icon/home.png"></span>&nbsp;&nbsp; Home Page 3</a></label>
-                                    <ul class="nav nav-list tree">
-                                        <li><a href="#">Horizontal</a></li>
-                                        <li><a href="#">Vertical</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul> -->
-
-
-     
-    
      </nav>
      </div>
-
 <script type="text/javascript" src="{{url('javascripts/jquery.min.js')}}"></script>
  <script type='text/javascript'>
         

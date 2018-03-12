@@ -30,6 +30,14 @@ $(document).ready(function(){
         todayHighlight: true
   }).datepicker("getDate");
 });
+
+    $(function () {
+  $("#datepicker_date").datepicker({ 
+        autoclose: true, 
+        todayHighlight: true
+  }).datepicker("getDate");
+});
+ 
  
   $(function () {
   $("#datepicker1").datepicker({ 
@@ -237,8 +245,6 @@ function insertfsm() {
 
 });
  
-
-
 $('.unblock').click(function(){
   $(this).toggle();
   $(this).closest('td').find('.block').toggle();
@@ -285,6 +291,7 @@ else{
 
 //send sms from fba
 $('.message_sms_id').click(function(){
+
   if($('#message-text').val()!="")  {
   //console.log($('#message_sms_from').serialize());
    $.ajax({ 
@@ -301,6 +308,7 @@ $('.message_sms_id').click(function(){
 });
  }
  else{
+
   alert('sms field can not blank')
   $( "#message-text" ).focus();
  }
@@ -311,6 +319,42 @@ function uploaddoc(id){
                 $('.fbadoc').modal('show');
      }
 
+$('#btnupload').click(function(event){
+event.preventDefault();
+var form = $('#fbadocupload')[0];
+
+var data = new FormData(form);
+
+/*for (var value of data.values()) {
+   console.log(value); 
+}
+alert(JSON.stringify(data));*/
+
+  if($("#ddldoctype").val()!==0  && $("#document").val()!=="") {
+  /* console.log($('#fbadocupload').serialize());*/
+   $.ajax({ 
+
+   url: "{{URL::to('fba-listdocument')}}",
+   method:"POST",
+   enctype: 'multipart/form-data',
+   processData: false,  // Important!
+   contentType: false,
+   data: data,
+   success: function(msg)  
+   {
+    console.log(msg);
+    alert('document uploaded successfully..');
+    $('.fbadoc').modal('hide');
+    
+   }
+});
+ }
+ else{
+  alert('All field are requried');
+  $( "#ddldoctype" ).focus();
+  $( "#document" ).focus();
+ }
+});
 
 </script> 
 
@@ -580,7 +624,6 @@ $(document).on('change', '#search_state', function() {
 
 <script type="text/javascript">
   $('#sales_update').click(function(){
-
     var id = $('#p_fbaid').val();
     var sales_update=$('#p_remark').val();
     console.log(sales_update);
@@ -596,20 +639,16 @@ $(document).on('change', '#search_state', function() {
          url: "{{URL::to('sales-update')}}",
          data : $('#update_remark').serialize(),
          success: function(msg){
-        
-       
-              
-              if (msg.status==0) 
+         if (msg.status==0) 
                 {
                   alert('Updated Successfully');
+                  $('#p_remark').val('');
+                  $('.close').click();           
                 } 
                 else {
                   alert('Could not updated successfully');
                 }
-
-              
-              
-        }  
+          }  
       });
     }
   })
@@ -622,7 +661,10 @@ $(document).on('change', '#search_state', function() {
     var id = $('#fba_id').val();
     var loan_update=$('#remark').val();
     console.log(loan_update);
-    
+
+  //  $('.updateLoan').show();
+//    $('.modal-backdrop').show();    
+
     if (!$('#update_loan').valid()) 
     {
 
@@ -640,8 +682,11 @@ $(document).on('change', '#search_state', function() {
               if (msg.status==0) 
                 {
                   alert('Updated Successfully');
-                  $('#loan_'+id).text(loan_update);
-                  $('.updateLoan').hide();
+                  $('#loan_'+id).text(loan_update);       
+                  $('#remark').val('');
+                  $('.close').click();           
+                  
+
                 } 
                 else {
                   alert('Could not updated successfully');
@@ -674,44 +719,29 @@ $(document).on('change', '#search_state', function() {
          url: "{{URL::to('posp-update')}}",
          data : $('#update_posp').serialize(),
          success: function(msg){
-        
-       
-             
               if (msg.status==0) 
                 {
                   alert('Updated Successfully');
                   $('#posp_'+id).text(posp_update);
-                  $('.updatePosp').hide();
+                  $('#posp_remark').val('');
+                  $('.close').click();           
                 } 
                 else {
                   alert('Could not updated successfully');
                 }
 
-              
-              
         }  
       });
     }
   })
 </script>
-
-
-
-
-   
-
-
-
- <script>
+<script>
     $(document).ready(function() {
         $('#example').DataTable({
           paging: true,
           responsive: false,
         });
-
-
-    
-    // Bootstrap datepicker
+ // Bootstrap datepicker
 $('.input-daterange input').each(function() {
   $(this).datepicker('clearDates');
 });
@@ -755,10 +785,8 @@ $('#my-table_filter').hide();
 
 });
 
-
-/////////////////GOVIND////////////////////
-
-
+</script>
+<script type="text/javascript">
 function getfsmfbalist(smid)
 {
 
@@ -779,7 +807,7 @@ $.ajax({
       
        }
               // console.log(msg[0].Result);
-str = str + "</table>";
+         str = str + "</table>";
            $('#popupfbalist').html(str);   
               
         }  
@@ -815,11 +843,169 @@ $.ajax({
       });
 }
 
+
+function getfbaassignlist(ddl)
+{  
+  if($(ddl).val() > 0)
+  getfbalist(1,$(ddl).val());
+}
+
+function showfbaassignlist()
+{
+  getfbalist(2,$('#txtpincode').val()); 
+}
+
+function getfbalist(flag,val)
+{
+
+$.ajax({  
+         type: "GET",  
+         url:'assign-rm-load/'+flag+'/'+val,//"{{URL::to('Fsm-Details')}}",
+         success: function(msg){
+        
+
+
+        var data = JSON.parse(msg);
+
+$('#ddlfba').empty();   
+       var str = "";
+       for (var i = 0; i < data.length; i++) {
+
+         str = str + "<option value='"+data[i].FBAId+"'>"+data[i].Name+"</option>";
+      
+       }
+              // console.log(msg[0].Result);
+           $('#ddlfba').append(str);   
+              
+        }  
+      });
+}
+
+function fbarmassignlist(){
+
+// alert('hhdhd');
+// $('#ddlfba option:selected').each(function(){ 
+//     //alert($(this).text()+' - '+$(this).val());
+
+   //  var responsedata = '{"fbaid":'+$(this).val()+',"rm_id":'+$('#ddlrmlist').val()+'}';
+
+     $.ajax({  
+         type: "POST",  
+         url: "assign-rm-update",
+         data : $('#assignrm').serialize(),
+         success: function(msg){                        
+              if (msg.status==0) 
+                {
+                  alert('Updated Successfully');
+                } 
+                else {
+                  alert('Could not updated successfully');
+                }
+
+              
+              
+        }  
+
+      }); 
+
+// });
+
+
+
+ /*$.ajax({  
+         type: "POST",  
+         url: "{{URL::to('assign-rm-update')}}",
+         data : $('#assignrm').serialize(),
+         success: function(msg){
+                        
+alert(msg);
+              if (msg.status==0) 
+                {
+                  alert('Updated Successfully');
+                } 
+                else {
+                  alert('Could not updated successfully');
+                }
+
+              
+              
+        }  
+
+      }); */
+}
 ////////////////END////////////////////////
 
 
+///shubham rm folloup 
 
-// $(function () { 
+$('#chkproduct').click(function () {    
+     $('.chkproductname').prop('checked', this.checked);    
+ });
+
+
+function getfollowup(id){
+  $('#fbaid').val(id);
+  $('.rmfolloup').modal('show');
+ }
+
+
+
+$('#btn_subbmit').click(function() {
+
+var productid = []
+$('input:checkbox[name=txtproduct]:checked').each(function() {
+productid.push($(this).val())
+})
+$('#txtproductid').val(productid);
+console.log($('#rmfolloupdetails').serialize());
+   $.ajax({ 
+   url: "{{URL::to('Rmfollowup')}}",
+   method:"POST",
+   data: $('#rmfolloupdetails').serialize(),
+  success: function(msg)  
+   {
+    console.log(msg);
+    alert("inserted successfully");
+    $('.rmfolloup').modal('hide');
+    $("#rmfolloupdetails").trigger('reset');
+   }
+
+});
+
+
+})
+function viewhistory(fbaid){
+
+$.ajax({  
+         type: "GET",  
+         url:'Rmfollowup/'+fbaid,
+         success: function(fsmmsg){
+        
+
+
+        var data = JSON.parse(fsmmsg);
+
+
+       var str = "<table class='table'><tr style='height:30px;margin:5px;'><td>Lead ID</td><td>Name</td><td>User Type</td><td>Status</td><td>Remark</td></tr>";
+       for (var i = 0; i < data.length; i++) {
+
+
+         str = str + "<tr style='height:30px;margin:5px;'><td>"+data[i].lead_id+"</td><td>"+data[i].FullName+"</td><td>"+data[i].user_type+"</td><td>"+data[i].status_name+"</td><td>"+data[i].remark+"</td></tr>";
+      
+       }
+         str = str + "</table>";
+           $('#divpartnertable').html(str);   
+              
+        }  
+      });
+
+}
+
+
+</script>
+ 
+
+<!-- // $(function () { 
 //     $('#lstStates').multiselect({ 
 //         buttonText: function(options, select) {
 //             console.log(select[0].length);
@@ -844,8 +1030,6 @@ $.ajax({
     
 //     });
 // });
+ -->
 
-
-
-    </script>
-
+ 

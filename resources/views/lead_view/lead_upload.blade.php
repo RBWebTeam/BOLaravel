@@ -40,6 +40,8 @@
                                        
                                        <th>ID</th>
                                      <!--   <th>ref_no</th> -->
+                                      
+
                                        <th>Name</th>
                                        <th>Mobile</th>
                                        <th>Email</th>
@@ -69,7 +71,7 @@
                                        <th>Misscall  </th>
                                          <th>languages   </th>
 
-                                          <th>view detials </th>
+                                          <th>View History </th>
                                         
                                       </tr>
 
@@ -286,7 +288,7 @@
        <div class="form-group">
                   <label for="inputEmail" class="control-label col-xs-2">Mobile</label>
                   <div class="col-xs-10">
-          <input type="text" name="mobile" id="clientMobile"  maxlength="10" onkeypress="return Numeric(event)"  class="form-control" >
+          <input type="text" name="mobile" id="clientMobile"  maxlength="10" onkeypress="return Numeric(event)"  class="form-control" readonly="" >
 
            <label class="control-label" for="inputError" id="Errormobile"></label>
                   </div>
@@ -304,9 +306,9 @@
          <div class="form-group">
                   <label for="inputEmail" class="control-label col-xs-2">DOB</label>
                   <div class="col-xs-10">
-                          
-                      <div id="min"  class="input-group date" data-date-format="dd-mm-yyyy">
-                       <input class="form-control" type="text" name="dob" placeholder="From Date" id="clientDOB"  >
+                   
+                      <div id="datepicker_date"  class="input-group date" data-date-format="dd-mm-yyyy">
+                       <input class="form-control" type="text" name="dob" placeholder="From Date" id="datepicker_date"  >
                       <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
 
                      
@@ -318,22 +320,22 @@
 
 
 
-         <div class="form-group">
+      <!--    <div class="form-group">
                   <label for="inputEmail" class="control-label col-xs-2">Profession</label>
                   <div class="col-xs-10">
                     <input type="text" name="profession" id="clientProfession"  class="form-control" >
                     <label class="control-label" for="inputError" id="Errorprofession"></label>
                   </div>
-        </div> 
+        </div>  -->
 
 
-        <div class="form-group">
+        <!-- <div class="form-group">
                   <label for="inputEmail" class="control-label col-xs-2">Monthly income</label>
                   <div class="col-xs-10">
                     <input type="text" name="monthly_income" id="clientMonthly_income"  class="form-control" >
                      <label class="control-label" for="inputError" id="Error"></label>
                   </div>
-        </div> 
+        </div>  -->
 
 
 
@@ -346,12 +348,12 @@
         </div> 
 
 
-        <div class="form-group">
+        <!-- <div class="form-group">
                   <label for="inputEmail" class="control-label col-xs-2">City Name</label>
                   <div class="col-xs-10">
                     <input type="text" name="cityname" id="clientCityname"  class="form-control" >
                   </div>
-        </div> 
+        </div> --> 
 
 
           <div class="form-group">
@@ -371,12 +373,12 @@
 
  
 
-           <div class="form-group">
+           <!-- <div class="form-group">
                   <label for="inputEmail" class="control-label col-xs-2">Campaign</label>
                   <div class="col-xs-10">
                     <input type="text" name="campaign" id="clientCampaign_id"  class="form-control" >
                   </div>
-          </div> 
+          </div>  -->
 
 
           
@@ -400,7 +402,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Action-history </h5>
+        <h5 class="modal-title" id="exampleModalLabel">View-history </h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -409,7 +411,7 @@
        
         <table class="datatable-responsive table table-striped table-bordered dt-responsive nowrap" id="example">
 
-          <thead><tr><th>ID</th></tr></thead>
+          <thead><tr><th>ID</th><th>Lead Type</th><th>Lead Status</th> <th>Remark</th></tr></thead>
           <tbody id="followup_history_id"></tbody> 
         </table>
       </div>
@@ -427,27 +429,24 @@
 
 
 <script type="text/javascript">
-  
     function viewdetilas(argument) {
-            
-            $('#followup-history-Modal').modal('show');
-       $.get("{{url('followup-history')}}",{'ID':argument})
-             .done(function(data){ 
+              $('#followup_history_id').empty();
+              $('#followup-history-Modal').modal('show');
+              $.get("{{url('followup-history')}}",{'ID':argument}).done(function(data){ 
                 var arr=Array();
-        
-              $.each(data,function(index,val){  
-                       
-                    arr.push('<tr><td>'+index+'</td></tr>');
+              $.each(data,function(index,val){      
+                    arr.push('<tr><td>'+index+'</td><td>'+val.lead_type+'</td><td>'+val.lead_status_id+'</td><td>'+val.remark+'</td></tr>');
                });
-              
               $('#followup_history_id').append(arr);
-
-          }).fail(function(xhr, status, error) {
+               }).fail(function(xhr, status, error) {
                  console.log(error);
-            });
+                });
 
        
     }
+
+
+ 
 </script>
 
 <style type="text/css">
@@ -455,7 +454,7 @@
   .radio-green [type="radio"]:checked+label:after {
     border-color: #00C851;
     background-color: #00C851;
-}
+}l
 /*Gap*/
 
 .radio-green-gap [type="radio"].with-gap:checked+label:before {

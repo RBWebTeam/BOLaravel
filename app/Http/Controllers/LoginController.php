@@ -35,16 +35,18 @@ class LoginController extends InitialController
 
            if($query){
             $val=$query[0];
-             $request->session()->put('emailid',$val->email);
+                    $request->session()->put('emailid',$val->email);
                     $request->session()->put('fbauserid',$val->fbauserid);
                     $request->session()->put('fbaid',$val->fbaid);
-                    $request->session()->put('username',$val->username); 
+                    $request->session()->put('username',$val->username);
                     $request->session()->put('loginame',$val->loginame);
                     $request->session()->put('uid',$val->uid);
                     $request->session()->put('mobile',$val->mobile); 
                     $request->session()->put('empid',$val->empid);
                     $request->session()->put('usergroup',$val->usergroup);
                     $request->session()->put('companyid',$val->companyid);
+                    
+
 
  
  
@@ -53,7 +55,7 @@ class LoginController extends InitialController
                  
               return redirect()->intended('dashboard');
         }else{
-                      Session::flash('msg', "Invalid email or password. Please Try again! ");
+                      Session::flash('msg', "Invalid esmail or password. Please Try again! ");
                        return Redirect::back();
                
  }

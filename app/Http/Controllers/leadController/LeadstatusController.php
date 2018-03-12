@@ -25,8 +25,8 @@ class LeadstatusController extends Controller
         	 // follow up details   table
 
         	 // $query=DB::select('call sp_raw_lead_master(?)',array(Session::get('fbauserid')));
-        	  $userlist=DB::select('call sp_assign_list()');  // create live
-        	  $assign_task=DB::select('call sp_assign_task()');  // create live
+        	  $userlist=DB::select('call sp_assign_list()');   
+        	  $assign_task=DB::select('call sp_assign_task()');  
 
    	  
    
@@ -71,7 +71,7 @@ class LeadstatusController extends Controller
 
         public function followup_history(Request $req){
 
-       $followup_lead=DB::select('call sp_followup_lead_history(?)',array($req->ID));
+           $followup_lead=DB::select('call sp_followup_lead_history(?)',array($req->ID));
 
     return $followup_lead;
 }
