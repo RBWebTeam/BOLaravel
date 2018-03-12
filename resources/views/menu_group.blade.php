@@ -9,7 +9,7 @@
      
  
 
-<p > <a href="#" class="menu_group_id_model"> Add   User Rights </a></p>
+<p class="col-md-12 pad mrg-btm"> <a href="#" class="menu_group_id_model btn btn-info"> Add   User Rights </a></p>
  
        <div class="col-md-12">
        <div class="overflow-scroll">
