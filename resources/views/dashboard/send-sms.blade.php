@@ -197,7 +197,7 @@ function FN_search(ID,city,fDate,tDate){
 function SMSTemplate_fn(ID){
  $('#SMSTemplate').empty();
   $.get("{{url('send-sms')}}",{'smstemplate_id':ID}).done(function(data){ 
-               $('#SMSTemplate').append(data);
+               $('#SMSTemplate').val(data);
   	  }).fail(function(xhr, status, error) {
                   console.log(error);
      });
