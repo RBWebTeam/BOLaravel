@@ -969,6 +969,25 @@ $.ajax({
        }  
       });
 }
+
+function getprodcutdtls(product_id){
+$.ajax({  
+         type: "GET",  
+         url:'Product-followup/'+product_id,
+         success: function(fsmmsg){
+
+      var data = JSON.parse(fsmmsg);
+      var str = "<table class='table' id='example'><thead><tr style='height:30px;margin:5px;'><th>Lead ID</th><th>Name</th><th>Mobile No</th><th>Email Id</th><th>Created Date</th></tr></thead>";
+       for (var i = 0; i < data.length; i++) 
+       {
+
+         str = str + "<tbody><tr style='height:30px;margin:5px;'><td>"+data[i].FBAID+"</td><td>"+data[i].FullName+"</td><td>"+data[i].MobiNumb1+"</td><td>"+data[i].EmailID+"</td><td>"+data[i].CreaOn+"</td></tr></tbody>";
+       }
+         str = str + "</table>";
+           $('#divpartnertable').html(str);   
+       }  
+      });
+}
 </script>
  
 
