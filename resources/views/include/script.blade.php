@@ -815,10 +815,15 @@ $.ajax({
 function getpartnerinfo(fbaid)
 {
 
+
 $.ajax({  
          type: "GET",  
          url:'fba-list/'+fbaid,//"{{URL::to('Fsm-Details')}}",
          success: function(fsmmsg){
+<<<<<<< HEAD
+
+=======
+>>>>>>> 196fadbc8bca2f549db4792baac8db3692de4100
         var data = JSON.parse(fsmmsg);
 
         var str = "<table class='table'><tr style='height:30px;margin:5px;'><td>Partner ID</td><td>Name</td><td>Mobile No</td><td>Email</td><td>City</td><td>Pincode</td></tr>";
@@ -914,7 +919,7 @@ function fbarmassignlist(){
                 else {
                   alert('Could not updated successfully');
                 }
-         }  
+          }  
 
       }); 
 

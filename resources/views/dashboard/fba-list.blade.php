@@ -62,7 +62,7 @@
              <div class="table-responsive" >
 
 
-            <table class="datatable-responsive table table-striped table-bordered  nowrap" id="fba-list-table">
+            <table class="datatable-responsive table table-striped table-bordered nowrap" id="fba-list-table">
                           <thead>
                                       <tr>
                                        <th>Full Name</th>
@@ -288,24 +288,9 @@
       <div class="modal-body">
 
       <div class="table-responsive">
-        <table class="table table-bordered table-striped">
-            <tr>
-             <td>Partner ID</td>
-             <td>Name</td>
-             <td>Mobile No</td>
-             <td>Email</td>
-             <td>City</td>
-             <td>Pincode</td>
-            </tr>
-            <tr>
-             <td></td>
-             <td>Pavamaana Softech</td>
-             <td>9845724268</td>
-             <td>bgykumar@gmail.com</td>
-             <td>Bangalore</td>
-             <td>560021</td>
-            </tr>
-        </table>
+        <div id="divpartnertable" name="divpartnertable">
+
+        </div>
         </div>
 
       </div>
@@ -365,12 +350,12 @@
             { "data": "EMaiID" },
             { "data": "Link",
              "render": function ( data, type, row, meta ) {
-                return '<a href="#" class="popover-Payment" data-toggle="popover" title="Payment link" data-content="'+data+'">Payment link</a>';
+                return '<a href="" class="popover-Payment" data-toggle="popover" title="Payment link" data-content="'+data+'">Payment link</a>';
               }
              }, 
             {"data":"pwd" ,
              "render": function ( data, type, row, meta ) {
-                return '<a href="#" class="popover-Password" data-toggle="popover" title="Show Password" data-content="'+data+'">*****</a>';
+                return '<a class="popover-Password" data-toggle="popover" title="Show Password" data-content="'+data+'">*****</a>';
               }
             },        
             {"data":"City"},
@@ -382,7 +367,7 @@
             },
             {"data":"POSPNo"  ,
              "render": function ( data, type, row, meta ) {
-                return data?('<a id="posp_'+data+'" class="checkPosp" data-toggle="modal" data-target="#updatePosp" onclick="POSP_UPDATE('+data+')">update</a>'):data;
+                return data==""?('<a id="posp_'+data+'" class="checkPosp" data-toggle="modal" data-target="#updatePosp" onclick="POSP_UPDATE('+data+')">update</a>'):data;
               }
             },  
 
@@ -390,18 +375,18 @@
 
             {"data":"LoanID"  ,
              "render": function ( data, type, row, meta ) {
-                return data?('<a id="loan_'+data+'" class="checkloan" data-toggle="modal" data-target="#updateLoan" onclick="LoanID_UPDATE('+data+')">update</a>'):data;
+                return data==""?('<a id="loan_'+data+'" class="checkloan" data-toggle="modal" data-target="#updateLoan" onclick="LoanID_UPDATE('+data+')">update</a>'):data;
               }
             },  
             {"data":"pospname"},  
             {"data":"fbaid"  ,
              "render": function ( data, type, row, meta ) {
-                return '<a href="" data-toggle="modal" data-target="#partnerInfo">partner info</a>';
+                return '<a href="" data-toggle="modal" data-target="#partnerInfo" onclick="getpartnerinfo('+data+')">partner info</a>';
               }
             },  
             {"data":"fbaid" ,
              "render": function ( data, type, row, meta ) {
-                return '<a href="#" style="" data-toggle="modal" data-target="fbadoc" onclick="uploaddoc('+data+')" >Pending</a>';
+                return '<a href="#" style="" data-toggle="modal"  data-target="fbadoc" onclick="uploaddoc('+data+')" >Pending</a>';
               }
             }, 
             {"data":"bankaccount"} ,
@@ -412,7 +397,7 @@
             },
             {"data":"salescode" ,
              "render": function ( data, type, row, meta ) {
-                return data?('<a  id="update_'+data+'" onclick="sales_update_fn('+data+')" >'+data+'</a>'):('<a  id="update_'+data+'" onclick="sales_update_fn('+data+')" >Update</a>');
+                return data==""?('<a  id="update_'+data+'" onclick="sales_update_fn('+data+')" >'+data+'</a>'):('<a  id="update_'+data+'" onclick="sales_update_fn('+data+')" >Update</a>');
               }
             },
             
