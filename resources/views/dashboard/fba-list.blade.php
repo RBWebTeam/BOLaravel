@@ -352,7 +352,7 @@
             { "data": "Link",
              "render": function ( data, type, row, meta ) {
                 return '<a href="" class="popover-Payment" data-toggle="popover" title="Payment link" data-content="'+data+'">Payment link</a>';
-
+          
                 
               }
              }, 
