@@ -596,11 +596,7 @@ $(document).on('change', '#search_state', function() {
 
 });
 
-
-
-
-
-   function pan_card(obj,val){  alert(obj);
+ function pan_card(obj,val){  alert(obj);
     if(obj=='pan_no' ){
                    var str =$('#pan_no').val();
                    var pancardPattern = /^([a-zA-Z]{5})(\d{4})([a-zA-Z]{1})$/;
@@ -823,18 +819,12 @@ $.ajax({
          type: "GET",  
          url:'fba-list/'+fbaid,//"{{URL::to('Fsm-Details')}}",
          success: function(fsmmsg){
-        
-
-
         var data = JSON.parse(fsmmsg);
 
-
-       var str = "<table class='table'><tr style='height:30px;margin:5px;'><td>Partner ID</td><td>Name</td><td>Mobile No</td><td>Email</td><td>City</td><td>Pincode</td></tr>";
+        var str = "<table class='table'><tr style='height:30px;margin:5px;'><td>Partner ID</td><td>Name</td><td>Mobile No</td><td>Email</td><td>City</td><td>Pincode</td></tr>";
        for (var i = 0; i < data.length; i++) {
-
          str = str + "<tr style='height:30px;margin:5px;'><td>"+data[i].PartnerID+"</td><td>"+data[i].pname+"</td><td>"+data[i].pmobile+"</td><td>"+data[i].pemail+"</td><td>"+data[i].pcity+"</td><td>"+data[i].ppincode+"</td></tr>";
-      
-       }
+          }
               // console.log(msg[0].Result);
             str = str + "</table>";
            $('#divpartnertable').html(str);   
@@ -888,7 +878,6 @@ function fbarmassignlist(){
 //     //alert($(this).text()+' - '+$(this).val());
 
    //  var responsedata = '{"fbaid":'+$(this).val()+',"rm_id":'+$('#ddlrmlist').val()+'}';
-
      $.ajax({  
          type: "POST",  
          url: "assign-rm-update",
@@ -901,10 +890,7 @@ function fbarmassignlist(){
                 else {
                   alert('Could not updated successfully');
                 }
-
-              
-              
-        }  
+         }  
 
       }); 
 
@@ -942,21 +928,20 @@ $('#chkproduct').click(function () {
      $('.chkproductname').prop('checked', this.checked);    
  });
 
-
 function getfollowup(id){
   $('#fbaid').val(id);
   $('.rmfolloup').modal('show');
  }
 
-
-
 $('#btn_subbmit').click(function() {
+
 
 var productid = []
 $('input:checkbox[name=txtproduct]:checked').each(function() {
 productid.push($(this).val())
 })
 $('#txtproductid').val(productid);
+
 console.log($('#rmfolloupdetails').serialize());
    $.ajax({ 
    url: "{{URL::to('Rmfollowup')}}",
@@ -965,30 +950,25 @@ console.log($('#rmfolloupdetails').serialize());
   success: function(msg)  
    {
     console.log(msg);
-    alert("inserted successfully");
+    alert("Record Has Been Saved Successfully");
     $('.rmfolloup').modal('hide');
     $("#rmfolloupdetails").trigger('reset');
    }
-
+});
 });
 
 
-})
+
 function viewhistory(fbaid){
 
 $.ajax({  
          type: "GET",  
          url:'Rmfollowup/'+fbaid,
          success: function(fsmmsg){
-        
 
-
-        var data = JSON.parse(fsmmsg);
-
-
-       var str = "<table class='table'><tr style='height:30px;margin:5px;'><td>Lead ID</td><td>Name</td><td>User Type</td><td>Status</td><td>Remark</td></tr>";
+      var data = JSON.parse(fsmmsg);
+      var str = "<table class='table'><tr style='height:30px;margin:5px;'><td>Lead ID</td><td>Name</td><td>User Type</td><td>Status</td><td>Remark</td></tr>";
        for (var i = 0; i < data.length; i++) {
-
 
          str = str + "<tr style='height:30px;margin:5px;'><td>"+data[i].lead_id+"</td><td>"+data[i].FullName+"</td><td>"+data[i].user_type+"</td><td>"+data[i].status_name+"</td><td>"+data[i].remark+"</td></tr>";
       
@@ -1000,36 +980,8 @@ $.ajax({
       });
 
 }
-
-
 </script>
  
 
-<!-- // $(function () { 
-//     $('#lstStates').multiselect({ 
-//         buttonText: function(options, select) {
-//             console.log(select[0].length);
-//             if (options.length === 0) {
-//                 return 'None selected';
-//             }
-//             if (options.length === select[0].length) {
-//                 return 'All selected ('+select[0].length+')';
-//             }
-//             else if (options.length >= 4) {
-//                 return options.length + ' selected';
-//             }
-//             else {
-//                 var labels = [];
-//                 console.log(options);
-//                 options.each(function() {
-//                     labels.push($(this).val());
-//                 });
-//                 return labels.join(', ') + '';
-//             }
-//         }
-    
-//     });
-// });
- -->
 
  
