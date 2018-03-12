@@ -13,7 +13,9 @@ class ProductfollowupController extends Controller
 {
   public function getproductfollowup()
   {
-  	 return view('dashboard.productfollowup');
+  	$id=Session::get('fbauserid');
+  	 $product = DB::select("call Usp_loaduserwiseproduct(6923)");
+  	 return view('dashboard.productfollowup',['product'=>$product]);
   } 
 
   public function getproductinfo($product_id)

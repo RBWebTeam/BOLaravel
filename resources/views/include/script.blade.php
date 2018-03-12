@@ -60,9 +60,7 @@ $(document).ready(function(){
   //         "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]]
   //         });
   //         });
-  // start test
-
-  // end test
+  
           $('.popover-Payment').popover({
             trigger: 'focus'
           });
@@ -815,6 +813,7 @@ $.ajax({
 function getpartnerinfo(fbaid)
 {
 
+
 $.ajax({  
          type: "GET",  
          url:'fba-list/'+fbaid,//"{{URL::to('Fsm-Details')}}",
@@ -832,6 +831,33 @@ $.ajax({
         }  
       });
 }
+
+
+$('#ddlstate').on('change', function() {
+            var state_id = $(this).val();
+            if(state_id) {
+                $.ajax({
+                    url: 'rm_city_master/'+state_id,
+                    type: "GET",
+                    dataType: "json",
+                    success:function(data) {
+                        $('#ddlcity').empty();
+                        $('#ddlcity').append('<option value="0">select city</option>');
+                        $.each(data, function(key, value) {
+
+                            $('#ddlcity').append('<option value ="'+ key +'">'+ value +'</option>');
+                        });
+                     }
+                });
+            }else{
+                $('select[name="city"]').empty();
+            }
+        });
+
+
+
+
+
 
 
 function getfbaassignlist(ddl)
@@ -887,7 +913,7 @@ function fbarmassignlist(){
                 else {
                   alert('Could not updated successfully');
                 }
-         }  
+          }  
 
       }); 
 
@@ -916,6 +942,7 @@ alert(msg);
 
       }); */
 }
+
 ////////////////END////////////////////////
 
 
@@ -970,6 +997,7 @@ $.ajax({
       });
 }
 
+
 function getprodcutdtls(product_id){
 $.ajax({  
          type: "GET",  
@@ -988,8 +1016,35 @@ $.ajax({
        }  
       });
 }
+
+//vikas smstemplate
+$('#btnsave').click(function() {
+
+
+console.log($('#frmsmstemplate').serialize());
+   $.ajax({ 
+   url: "{{URL::to('sms_template')}}",
+   method:"POST",
+   data: $('#frmsmstemplate').serialize(),
+  success: function(msg)  
+   {
+    console.log(msg);
+    alert("Record has been saved successfully");
+    $("#frmsmstemplate").trigger('reset');
+    
+   }
+
+});
+
+
+});
 </script>
  
 
 
+
  
+
+
+ 
+

@@ -48,17 +48,12 @@
           
         
 
-
-
-
-
- 
-
      <div class="col-md-12 col-xs-12">
        
         <div class="center-obj center-multi-obj">
        
          <button id="btnsubmit" onclick="Validate()" class="common-btn">Submit</button>
+
          </div>
         </div>
 
