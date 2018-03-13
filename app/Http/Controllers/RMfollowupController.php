@@ -18,8 +18,8 @@ public function RMfollowup()
         	$id=Session::get('fbauserid');
         	
         	$query = DB::select("call usp_fbadetails($id)");
-            $product = DB::select("call Usp_productmaster()");
-            $status = DB::select("call Usp_Rmstatus()");  
+          $product = DB::select("call Usp_productmaster()");
+          $status = DB::select("call Usp_Rmstatus()");  
             return view('dashboard.RMfollowupdetails',['query'=>$query,'product'=>$product,'status'=>$status]);
         }
 
@@ -39,6 +39,11 @@ public function insertrmfollowup(Request $req)
   DB::statement('call usp_update_intrestedproduct(?,?)',
   	array($req->txtproductid,
   	      $req->txtfbaid));
+  
+  DB::statement('call usp_inserproductwiseusers(?,?,?)',
+    array($id,
+          $req->txtfbaid,
+          $req->txtproductid));
 }   
 
 public function gethistory($fbaid){
