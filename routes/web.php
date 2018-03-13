@@ -87,28 +87,44 @@ Route::get('Fsm-Register/{flag}/{value}',array('as'=>'FSMRegister.ajax','uses'=>
 Route::post('Fsm-Register','FsmRegisterController@insertfsm');
 
 
- Route::get('send-notification','SendNotificationController@sendnotification');
+//  Route::get('send-notification','SendNotificationController@sendnotification');
 
- Route::get('send-notification-approve','SendNotificationApproveController@SendnotificationApprove');
+//  Route::get('send-notification-approve','SendNotificationApproveController@SendnotificationApprove');
+//  Route::get('send-notification','SendNotificationController@getstate');
+// Route::post('send-notification/{flag}/{value}','SendNotificationController@getfbalistnotification');
+// Route::get('send-notification/{flag}/{value}',array('as'=>'send-notification.ajax','uses'=>'SendNotification@getpincode'));
+
+// Route::get('send-notification/{id}',array('as'=>'send-notification.ajax','uses'=>'SendNotificationController@getcity'));
+
+// Route::get('send-notificationfba/{flag}/{value}',array('as'=>'send-notification.ajax','uses'=>'SendNotificationController@getfba'));
+// Route::post('insertnotification','SendNotificationController@insertntf');
 
 
+//  //send sms
+// Route::get('send-notification','SendNotificationController@sendnotification');
+// Route::get('send-notification','SendNotificationController@sendnotification');
 // -------------- avinash
+
+Route::get('approvenotification/{msgid}/{value}','SendNotificationApproveController@approvenotification');
+Route::post('send-notification','SendNotificationController@sendnotification');
+
 Route::get('send-notification','SendNotificationController@getstate');
 Route::post('send-notification/{flag}/{value}','SendNotificationController@getfbalistnotification');
-Route::get('send-notification/{flag}/{value}',array('as'=>'send-notification.ajax','uses'=>'SendNotification@getpincode'));
+Route::get('send-notification-approve','SendNotificationApproveController@SendnotificationApprove');
 
 Route::get('send-notification/{id}',array('as'=>'send-notification.ajax','uses'=>'SendNotificationController@getcity'));
 
 Route::get('send-notificationfba/{flag}/{value}',array('as'=>'send-notification.ajax','uses'=>'SendNotificationController@getfba'));
-Route::post('insertnotification','SendNotificationController@insertntf');
 
-Route::get('approvenotification/{msgid}/{value}','SendNotificationApproveController@approvenotification');
- //send sms
-Route::get('send-notification','SendNotificationController@sendnotification');
+Route::post('send-notification-approve','SendNotificationController@insertntf');
+
+
+
+
 //send sms
 Route::get('send-sms','SendSMSController@ViewSendSMSDetails');
  
-Route::get('send-notification','SendNotificationController@sendnotification');
+
  //Otp Detail
 Route::get('otp-details','OtpDetailsController@otp_details');
 Route::get('log-out','LoginController@logout');
