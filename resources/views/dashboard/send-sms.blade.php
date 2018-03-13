@@ -46,6 +46,7 @@
             </div>
            </div>
        <div class="col-md-4">
+       <br>
        <div class="form-group"> <a href="#" class="mrg-top common-btn" id="search_fba_date">SHOW</a>   </div>
       </div>
 
@@ -179,11 +180,12 @@ function FN_search(ID,city,fDate,tDate){
 
  if(search!=null){
  $.get("{{url('send-sms')}}",search).done(function(data){   var arr=Array();   $('#sendsms_id').empty();
-
- 	           if(data.sms_data){
+ 	           if(data.sms_data.length > 0){
               $.each(data.sms_data,function(index,val){ 
                     arr.push('<tr><td><input type="checkbox" name="fba[]" value="'+val.FBAID+'" >'+val.FullName	+':'+val.MobiNumb1+'</td> </tr>');  });
                 $('#sendsms_id').append(arr);
+                 }else{
+                 	alert("No data found...");
                  }
                }).fail(function(xhr, status, error) {
                   console.log(error);
@@ -197,7 +199,7 @@ function FN_search(ID,city,fDate,tDate){
 function SMSTemplate_fn(ID){
  $('#SMSTemplate').empty();
   $.get("{{url('send-sms')}}",{'smstemplate_id':ID}).done(function(data){ 
-               $('#SMSTemplate').append(data);
+               $('#SMSTemplate').val(data);
   	  }).fail(function(xhr, status, error) {
                   console.log(error);
      });

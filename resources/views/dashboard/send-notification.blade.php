@@ -83,7 +83,7 @@
    </div>         
    <div class="col-md-3 col-xs-12">
    <div class="form-group  lastReporteddob" >
-  <div id="datepicker" class="input-group date" data-date-format="mm-dd-yyyy">
+  <div id="datepicker" class="input-group date" data-date-format="yyyy-mm-dd">
   <input id="txtdate" name="txtdate" class="form-control" type="text" placeholder="From Date" required>
   <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
  </div>
