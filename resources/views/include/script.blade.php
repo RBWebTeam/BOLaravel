@@ -61,13 +61,22 @@ $(document).ready(function(){
   //         });
   //         });
   
-          $('.popover-Payment').popover({
-            trigger: 'focus'
-          });
+//           $('.popover-Payment').popover({
+//             trigger: 'focus'
+//           });
+          
+          $('body').popover({
+    selector: '[data-toggle="popover"]'
+});
 
-           $('.popover-Password').popover({
-            trigger: 'focus'
-          });
+$('body').on('click',  function (e) {
+    $('[data-toggle="popover"]').each(function () {
+        if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
+            $(this).popover('destroy');
+        }
+    });
+});
+         
 
     function Sales_Code() {
               console.log('something');
@@ -81,9 +90,10 @@ $(document).ready(function(){
 
              function POSP_UPDATE(id){
                       $('#fbaid').val(id);
-                       $('.updatePosp').modal('show');
+                      $('.updatePosp').modal('show');
                     
              }
+             
 
              function LoanID_UPDATE(id){
                        $('#fba_id').val(id);
@@ -620,8 +630,8 @@ $(document).on('change', '#search_state', function() {
   $('#sales_update').click(function(){
     var id = $('#p_fbaid').val();
     var sales_update=$('#p_remark').val();
-    console.log(sales_update);
-    $('#update_'+id).text(sales_update);
+
+   
     if (!$('#update_remark').valid()) 
     {
 
@@ -636,6 +646,7 @@ $(document).on('change', '#search_state', function() {
          if (msg.status==0) 
                 {
                   alert('Updated Successfully');
+                  $('#update_'+id).closest('td').html(sales_update); 
                   $('#p_remark').val('');
                   $('.close').click();           
                 } 
@@ -676,7 +687,8 @@ $(document).on('change', '#search_state', function() {
               if (msg.status==0) 
                 {
                   alert('Updated Successfully');
-                  $('#loan_'+id).text(loan_update);       
+                  
+                  $('#loan_'+id).closest('td').html(id);     
                   $('#remark').val('');
                   $('.close').click();           
                   
@@ -685,23 +697,24 @@ $(document).on('change', '#search_state', function() {
                 else {
                   alert('Could not updated successfully');
                 }
-
-              
-              
-        }  
+}  
       });
     }
   })
 </script>
 
 
+
 <script type="text/javascript">
   $('#posp_update').click(function(){
     // alert('okae');
+
+// alert($(this).closest('tr').find('input[type=text]').val());
+
     var id = $('#fbaid').val();
     var posp_update=$('#posp_remark').val();
     console.log(posp_update);
-    
+
     if (!$('#update_posp').valid()) 
     {
 
@@ -716,7 +729,8 @@ $(document).on('change', '#search_state', function() {
               if (msg.status==0) 
                 {
                   alert('Updated Successfully');
-                  $('#posp_'+id).text(posp_update);
+
+                  $('#posp_'+id).closest('td').html(id);
                   $('#posp_remark').val('');
                   $('.close').click();           
                 } 
@@ -736,7 +750,7 @@ $(document).on('change', '#search_state', function() {
           responsive: false,
         });
  // Bootstrap datepicker
-$('.input-daterange input').each(function() {
+$('.input-group date input').each(function() {
   $(this).datepicker('clearDates');
 });
 
