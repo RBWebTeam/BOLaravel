@@ -10,6 +10,8 @@
  use Mail;
 
 class SendNotificationController extends Controller
+
+
 {
 public function Sendnotification(Request $req){
 return view('dashboard.send-notification');
@@ -20,20 +22,23 @@ return view('dashboard.send-notification');
 
   return view('dashboard.send-notification',['state'=>$state]);
   }
-  public function getcity($id)
-  {
-  $cities = DB::table("city_master")
-  ->where("stateid",$id)
-  ->pluck("cityname","city_id");
-  return json_encode($cities);
-  }
-   public function getfba($flag,$value)
-  {
-   $fbalist = DB::select("call usp_loadnotificationfba($flag,$value)");
-   return json_encode($fbalist);
-  }
- public function insertntf(Request $req){
-   $image = $req->file('notify_image');
+
+///
+  public function SendnotificationApprove(){ 
+$query=DB::select("call usp_load_fba_Notification()");
+return view ('dashboard.send-notification-approve',['query'=>$query]);
+}
+public function approvenotification($msgid,$value){
+DB::select("call sp_notification_update($msgid,$value)");
+}
+
+
+
+
+public function sendnotificationsubmit(Request $req){
+
+  
+    $image = $req->file('notify_image');
    $name = time().'.'.$image->getClientOriginalName();
    $destinationPath = public_path('upload/notification/'); //->save image folder 
    $image->move($destinationPath, $name); 
@@ -49,13 +54,37 @@ return view('dashboard.send-notification');
    1
      ));
     foreach ($req->fba_list as $key => $value) {
-   DB::select('call sp_insert_nofity_request(?,?,?,?)',array(
+    DB::select('call sp_insert_nofity_request(?,?,?,?)',array(
     $msgid[0]->id,
     $value,
     $var,
     1
     ));
-    } 
+    }
+     if ($msgid) {
+       return Response::json(array(
+        'data' => true,
+        ));
+        }else{
+        return Response::json(array(
+       'data' => false,
+     ));
+    }
+    }
+ public function getcity($id)
+  {
+  $cities = DB::table("city_master")
+  ->where("stateid",$id)
+  ->pluck("cityname","city_id");
+  return json_encode($cities);
+  }
+   public function getfba($flag,$value)
+  {
+   $fbalist = DB::select("call usp_loadnotificationfba($flag,$value)");
+   return json_encode($fbalist);
+  }
+ public function insertntf(Request $req){
+ 
     }
     }
 
