@@ -23,12 +23,11 @@ class RegionalManagerControllar extends Controller
 
 
       public function Regional_Manager_search(Request $req){
-      	 $query=DB::select('call get_details_rmid(?,?,?,?)',[$req->product_type,$req->ms_type,$req->p_rm_id,$req->p_rm_id,$req->p_fba_id,]);
+        $query=DB::select('call get_details_rmid(?,?,?,?)',[$req->product_type,$req->ms_type,$req->p_rm_id,$req->p_fba_id]);
 
-
+ 
      
-       
-
+     return view('vehiclerequest',['query'=>$query]);
 
 
       }

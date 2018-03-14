@@ -201,6 +201,8 @@ public function  marketing_leads(Request $req){
 if(isset($req->id)){
  $arr=array('ref_id' =>$req->id,'created_on' =>date('Y-m-d H:i:s'));
    DB::table('lead_campaign')->insert($arr);
+
+   echo "success...";
 }
 
  
