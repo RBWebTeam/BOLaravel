@@ -75,7 +75,7 @@ Route::get('Rmfollowup/{fbaid}','RMfollowupController@gethistory');
 
 Route::get('Product-followup','ProductfollowupController@getproductfollowup');
 Route::get('Product-followup/{product_id}','ProductfollowupController@getproductinfo');
-
+Route::Post('Product-followup','ProductfollowupController@insertproductfollowup');
 
 //////GOVIND
 Route::get('Fsm-Details/{smid}','FsmDetailsController@fsmfbalist');

@@ -28,7 +28,7 @@ public function insertrmfollowup(Request $req)
 	$id=Session::get('fbauserid');
   DB::statement('call sp_followup_details_history_insert(?,?,?,?,?,?,?)',
   	array(
-  	$req->txtfbaid,
+  	$req->txtproductfbaid,
     $id,
     $req->txtrmstatus,
     0,
@@ -49,7 +49,7 @@ public function insertrmfollowup(Request $req)
 public function gethistory($fbaid){
 	$query = DB::select("call Usp_rmhistory($fbaid)");
       return json_encode($query);
-      print_r($query); exit();
+     
 }
 
 }

@@ -953,8 +953,8 @@ $('#chkproduct').click(function () {
  });
 
 function getfollowup(id){
-  $('#fbaid').val(id);
-  $('.rmfolloup').modal('show');
+ $('#fbaid').val(id);
+ $('.rmfolloup').modal('show');
  }
 $('#btn_subbmit').click(function() {
 var productid = []
@@ -1005,11 +1005,11 @@ $.ajax({
          success: function(fsmmsg){
 
       var data = JSON.parse(fsmmsg);
-      var str = "<table class='table' id='example'><thead><tr style='height:30px;margin:5px;'><th>Lead ID</th><th>Name</th><th>Mobile No</th><th>Email Id</th><th>Created Date</th></tr></thead>";
+      var str = "<table class='table' id='example'><thead><tr style='height:30px;margin:5px;'><th>Lead ID</th><th>Name</th><th>Mobile No</th><th>Email Id</th><th>Created Date</th><th>View History</th></tr></thead>";
        for (var i = 0; i < data.length; i++) 
        {
 
-         str = str + "<tbody><tr style='height:30px;margin:5px;'><td>"+data[i].FBAID+"</td><td>"+data[i].FullName+"</td><td>"+data[i].MobiNumb1+"</td><td>"+data[i].EmailID+"</td><td>"+data[i].CreaOn+"</td></tr></tbody>";
+         str = str + "<tbody><tr style='height:30px;margin:5px;'><td><a href='#'  data-toggle='modal' onclick='getproductfollowup("+data[i].FBAID+")' data-target='productfollowup'>"+data[i].FBAID+"</a></td><td>"+data[i].FullName+"</td><td>"+data[i].MobiNumb1+"</td><td>"+data[i].EmailID+"</td><td>"+data[i].CreaOn+"</td><td><a class='btn btn-primary'>View History</a></td></tr></tbody>";
        }
          str = str + "</table>";
            $('#divpartnertable').html(str);   
@@ -1019,8 +1019,6 @@ $.ajax({
 
 //vikas smstemplate
 $('#btnsave').click(function() {
-
-
 console.log($('#frmsmstemplate').serialize());
    $.ajax({ 
    url: "{{URL::to('sms_template')}}",
@@ -1033,11 +1031,50 @@ console.log($('#frmsmstemplate').serialize());
     $("#frmsmstemplate").trigger('reset');
     
    }
-
+});
 });
 
+function getproductfollowup(fbaid){
+  $('#txtproductfbaid').val(fbaid);
+  $('.productfollowup').modal('show');
+ }
+$('#btn_productsubbmit').click(function() {
 
+  console.log($('#productfolloupdetails').serialize());
+   $.ajax({ 
+   url: "{{URL::to('Product-followup')}}",
+   method:"POST",
+   data: $('#productfolloupdetails').serialize(),
+  success: function(msg)  
+   {
+    console.log(msg);
+    alert("Record has been saved successfully");
+    $("#productfolloupdetails").trigger('reset');
+      $('.productfollowup').modal('hide');
+
+   }
 });
+ });
+
+function viewProducthistory(fbaid){
+
+$.ajax({  
+         type: "GET",  
+         url:'Rmfollowup/'+fbaid,
+         success: function(fsmmsg){
+
+      var data = JSON.parse(fsmmsg);
+      var str = "<table class='table'><tr style='height:30px;margin:5px;'><td>Lead ID</td><td>Name</td><td>User Type</td><td>Status</td><td>Remark</td></tr>";
+       for (var i = 0; i < data.length; i++) 
+       {
+
+         str = str + "<tr style='height:30px;margin:5px;'><td>"+data[i].lead_id+"</td><td>"+data[i].FullName+"</td><td>"+data[i].user_type+"</td><td>"+data[i].status_name+"</td><td>"+data[i].remark+"</td></tr>";
+       }
+         str = str + "</table>";
+           $('#divpartnertable').html(str);   
+       }  
+      });
+}
 </script>
  
 
