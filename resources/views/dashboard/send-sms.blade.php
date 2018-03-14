@@ -59,7 +59,6 @@
 
 
 				<div class="col-sm-6 col-xs-12 form-padding" id="StatesV" style="overflow-y:scroll;height:270px;">
-
 	                    <table class="table table-responsive table-hover" cellspacing="0" id="myTable">
 		                <thead>
 						<tr class="headerstyle" align="center">
@@ -79,19 +78,19 @@
 
 
 			
-	               <div class="col-sm-6 col-xs-12 form-padding">
-                    <select  name="SMSTemplate"   onchange="SMSTemplate_fn(this.value)" >
+	               <div class="col-sm-6 col-xs-12 form-padding">  
+                    <select  name="SMSTemplate" class="form-control"   onchange="SMSTemplate_fn(this.value)" >
                     <option value="0" >select</option>
                     @foreach($SMSTemplate as $sms)
                     <option value="{{$sms->SMSTemplateId}}">{{$sms->Header}}</option>
                     @endforeach
                     </select>
-
                       @if ($errors->has('SMSTemplate'))<label class="control-label" for="inputError"> {{ $errors->first('SMSTemplate') }}</label>  @endif
 
+  <br>
 
 
-	               <textarea style="padding:10px; height:200px;"  id="SMSTemplate"  name="sms_text"> </textarea>
+	               <textarea style="padding:10px; height:200px;"  id="SMSTemplate"  name="sms_text" class="form-control"> </textarea>
 	               <div class="center-obj pull-left">
 	               <button class="common-btn">SEND</button>
 
