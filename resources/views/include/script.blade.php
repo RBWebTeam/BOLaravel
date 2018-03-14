@@ -630,8 +630,8 @@ $(document).on('change', '#search_state', function() {
   $('#sales_update').click(function(){
     var id = $('#p_fbaid').val();
     var sales_update=$('#p_remark').val();
-
-   
+    console.log(sales_update);
+    $('#update_'+id).text(sales_update);
     if (!$('#update_remark').valid()) 
     {
 
@@ -646,8 +646,8 @@ $(document).on('change', '#search_state', function() {
          if (msg.status==0) 
                 {
                   alert('Updated Successfully');
-                  $('#update_'+id).closest('td').html(sales_update); 
                   $('#p_remark').val('');
+                  $('#update_'+id).closest('td').html(sales_update);
                   $('.close').click();           
                 } 
                 else {
@@ -687,8 +687,7 @@ $(document).on('change', '#search_state', function() {
               if (msg.status==0) 
                 {
                   alert('Updated Successfully');
-                  
-                  $('#loan_'+id).closest('td').html(id);     
+                  $('#loan_'+id).closest('td').html(loan_update);       
                   $('#remark').val('');
                   $('.close').click();           
                   
@@ -697,7 +696,10 @@ $(document).on('change', '#search_state', function() {
                 else {
                   alert('Could not updated successfully');
                 }
-}  
+
+              
+              
+        }  
       });
     }
   })
@@ -730,7 +732,7 @@ $(document).on('change', '#search_state', function() {
                 {
                   alert('Updated Successfully');
 
-                  $('#posp_'+id).closest('td').html(id);
+                  $('#posp_'+id).closest('td').html(posp_update);
                   $('#posp_remark').val('');
                   $('.close').click();           
                 } 
@@ -742,7 +744,7 @@ $(document).on('change', '#search_state', function() {
       });
     }
   })
-</script>
+
 <script>
     $(document).ready(function() {
         $('#example').DataTable({
@@ -1317,6 +1319,30 @@ $.ajax({
                   
   }
 }
+
+//Script By Avinash
+
+function viewhistory(fbaid){
+
+$.ajax({  
+         type: "GET",  
+         url:'fbalist-document/'+fbaid,
+         success: function(fsmmsg){
+
+      var data = JSON.parse(fsmmsg);
+      var str = "<table class='table'> <button id="myBtn">Adhar</button> <button id="myBtn">Adhar</button>"
+      ;
+       for (var i = 0; i < data.length; i++) 
+       {
+
+         str = str + "<tr style='height:30px;margin:5px;'><td>"+data[i].lead_id+"</td><td>"+data[i].FullName+"</td><td>"+data[i].user_type+"</td><td>"+data[i].status_name+"</td><td>"+data[i].remark+"</td></tr>";
+       }
+         str = str + "</table>";
+         $('#divpartnertable').html(str);   
+       }  
+      });
+      }
+
 </script>
   
 

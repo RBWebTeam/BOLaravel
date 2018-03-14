@@ -96,7 +96,14 @@ class FbaController extends CallApiController
           $fsmfbaquery = DB::select("call usp_load_partner_info($partnerid)");
           return json_encode($fsmfbaquery);    
         }
+        public function test()
 
+        {
+         $doctype = DB::select("call fba_List_Uplode()");
+         print_r($doctype);
+          return view('dashboard.fba-list-Update',['doctype'=>$doctype]);
+
+        }
 
 
 

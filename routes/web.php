@@ -51,6 +51,7 @@ Route::post('posp-update','FbaController@posp');
 
 
   Route::get('fba-list/{fbaid}/{value}/{flag}',array('as'=>'fba-list.ajax','uses'=>'FbaController@updateposp'));
+
     Route::post('fba-list','FbaController@sendsms');
 
 //fba documents 
@@ -96,7 +97,21 @@ route::get('sendnotificationnew', 'SendNotificationController@sendnotificationst
 
 
 Route::get('insert','uploadfileController@imageupload');
+/////////////////////////////////////////////////////////
 
+ Route::get('Fba-list-Update','FbaController@test');
+
+
+
+
+Route::get('fbalist-document/{flag}/{value}',array('as'=>'Fba-list-Update.ajax','uses'=>'FbaController@getfba-list'));
+
+
+
+
+
+
+ /////////////////////
 
 
 

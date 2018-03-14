@@ -152,6 +152,63 @@
   </div>
 </div>
 
+
+
+ <div class="fbadoc modal fade" role="dialog">   
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+        <h4 class="modal-title">FSM Details</h4>
+      </div>
+      <div class="modal-body">
+        <form id="posp_from_id">
+          <div class="form-group">
+            
+          </div>
+
+        
+            <!--   <button id="myBtn">POSPPhotograph
+                </button>
+              <button id="myBtn">POSPhotograph.png
+                </button>
+ -->
+
+    <tr>
+      <td style="width: 100%;" id="tdlinks">
+        <a class="btn btn-default" style="cursor:pointer;margin:5px;padding:10px;" onclick="">POSPPhotograph.jpg</a>
+        <a class="btn btn-default" style="cursor:pointer;margin:5px;padding:10px;" onclick="">POSPPanCard.jpg</a>
+        <a class="btn btn-default" style="cursor:pointer;margin:5px;padding:10px;" onclick="">POSPAadharCard.jpg</a>
+        <a class="btn btn-default" style="cursor:pointer;margin:5px;padding:10px;" onclick="">POSPCancelledChq.jpg</a>
+        <a class="btn btn-default" style="cursor:pointer;margin:5px;padding:10px;" onclick="">POSPHighestEducationProof.jpg</a>
+      </td>
+</tr>
+<!-- <div class="form-group">
+            <label class="control-label" for="Document-Type">Document Type: </label>
+            <select class="form-control">
+              <option selected="selected">select Document Type</option>
+              @foreach($doctype as $val)
+             <option value="{{$val->id}}">{{$val->name}}</option>
+              @endforeach
+            </select>
+          </div> -->
+
+
+
+         <!--   <div class="form-group">
+            <label class="control-label" for="Document">Document</label>
+            <input type="file" name="document" class="form-control"> 
+          </div> -->
+        </form>
+       <!--  <div class="modal-footer"> 
+          <button class="btn btn-primary" id="btnupload" type="button">Upload</button>
+          <input id="docfbaid" type="hidden" name="docfbaid"/>
+        </div> -->
+      </div>
+    </div>
+  </div>
+</div>
+
  <!-- fab document -->
  <!-- <div class="fbadoc modal fade" role="dialog">   
   <div class="modal-dialog" role="document">
