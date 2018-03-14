@@ -1234,7 +1234,6 @@ console.log($('#frmsmstemplate').serialize());
 });
 });
 
-<<<<<<< HEAD
 function getpaymentlink(fbaid){
   //alert(fbaid);
   // alert(data);
@@ -1266,12 +1265,12 @@ function getpaymentlink(fbaid){
 
 }
 
-=======
 function getproductfollowup(fbaid){
 
   $('#txtproductfbaid').val(fbaid);
   $('.productfollowup').modal('show');
  }
+
 $('#btn_productsubbmit').click(function() {
 
   console.log($('#productfolloupdetails').serialize());
@@ -1288,8 +1287,6 @@ $('#btn_productsubbmit').click(function() {
 
    }
 });
->>>>>>> a94c7ff163a3e97dfd316feb25b2f7836c38a6d8
-
  });
 
 function viewProducthistory(fbaid){
