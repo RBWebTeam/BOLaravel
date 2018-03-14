@@ -84,23 +84,19 @@ class SendSMSController extends Controller{
 
 
     public function sentsms($mob,$text,$fba_id,$SMSTemplateId){
-
       $arr=array('fbaid'=>$fba_id,'mobileno'=>$mob,'message'=>$text,'create_date'=>date('Y-m-d H:i:s') );
-       DB::table('SMSLog')->insert($arr);
-
-
-      // $post_data='{
-      //       "mobNo":"8898540057",
-      //       "msgData":"'.$text.'",
-      //        }';
-      //       $url ="http://services.rupeeboss.com/LoginDtls.svc/xmlservice/sendSMS";
-      //       $result=$this->call_json($url,$post_data);
-      //       $http_result=$result['http_result'];
-      //       $error=$result['error'];
-      //       $obj = json_decode($http_result);
-      //       if($obj->status=='success'){
-      //           DB::table('SMSLog')->insert($arr);
-      //       } 
+      $post_data='{
+            "mobNo":"8898540057",
+            "msgData":"'.$text.'",
+             }';
+            $url ="http://services.rupeeboss.com/LoginDtls.svc/xmlservice/sendSMS";
+            $result=$this->call_json($url,$post_data);
+            $http_result=$result['http_result'];
+            $error=$result['error'];
+            $obj = json_decode($http_result);
+            if($obj->status=='success'){
+                DB::table('SMSLog')->insert($arr);
+            } 
 
     }
 
