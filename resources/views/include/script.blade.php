@@ -61,9 +61,11 @@ $(document).ready(function(){
   //         });
   //         });
   
-//           $('.popover-Payment').popover({
-//             trigger: 'focus'
-//           });
+          // $('.popover-Payment').popover({
+          //   trigger: 'focus'
+          // });
+          // test
+
           
           $('body').popover({
     selector: '[data-toggle="popover"]'
@@ -71,7 +73,7 @@ $(document).ready(function(){
 
 $('body').on('click',  function (e) {
     $('[data-toggle="popover"]').each(function () {
-        if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
+        if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover-Password').has(e.target).length === 0) {
             $(this).popover('destroy');
         }
     });
@@ -103,7 +105,7 @@ $('body').on('click',  function (e) {
 
            function sales_update_fn(id){
 
-                 $('#p_fbaid').empty();
+                $('#p_fbaid').empty();
                 $('#p_fbaid').val(id);
                 $('#salesupdate_modal_fade').modal('show');
            }
@@ -1232,11 +1234,40 @@ console.log($('#frmsmstemplate').serialize());
     $("#frmsmstemplate").trigger('reset');
     
    }
-
+});
 });
 
+function getpaymentlink(fbaid){
+  //alert(fbaid);
+  // alert(data);
+  //$('.paylink').modal('show');
+  $.ajax({
+                    url: 'getpaymentlink/'+fbaid,
+                    type: "GET",
+                    dataType: "json",
+                    success:function(data) {
 
-});
+                      if(data.length>0){
+
+                       // alert(data[0].Link);
+                        var str = "<p>"+data[0].Link+"</p>";
+                        // alert(str)
+                        $('.divpartnertable_payment').html(str);
+                         $('.paylink_payment').modal('show');
+                          //$('#paylink').html(data[0].Link);
+                       }      
+                       for (var i = 0; i < data.length; i++) 
+       {
+
+         str = str + "<p>"+data[i].Link+"</p>";
+         // $('#paylink').html(str);
+       }
+                       
+                     }
+                });
+
+}
+
 
 
  function updatenotification(msgid,value){

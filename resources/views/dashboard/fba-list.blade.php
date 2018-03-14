@@ -330,8 +330,24 @@
     </div>
   </div>
 </div>
+<!-- paymentlink -->
+<div id="paylink_payment" class="modal fade paylink_payment" role="dialog">
+  <div class="modal-dialog">
+   <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Payment link</h4>
+      </div>
+      <div class="modal-body">
+    <div style="color: blue;" id="divpartnertable_payment" class="divpartnertable_payment">
+       
+    </div>
+      </div>
+    </div>
+  </div>
+</div>
 <script type="text/javascript">
-
 
 
 
@@ -353,9 +369,9 @@
             { "data": "EMaiID" },
             { "data": "Link",
              "render": function ( data, type, row, meta ) {
-                return '<a href="" class="popover-Payment" data-toggle="popover" title="Payment link" data-content="'+data+'">Payment link</a>';
+                return '<a id="btnviewhistory" data-toggle="modal" data-target="paylink" onclick="getpaymentlink('+row.fbaid+')">Payment link</a>';
 
-              
+             
               
               }
              }, 
