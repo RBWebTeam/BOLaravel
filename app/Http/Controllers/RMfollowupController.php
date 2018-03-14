@@ -49,7 +49,7 @@ public function insertrmfollowup(Request $req)
 public function gethistory($fbaid){
 	$query = DB::select("call Usp_rmhistory($fbaid)");
       return json_encode($query);
-      print_r($query); exit();
+     
 }
 
 }

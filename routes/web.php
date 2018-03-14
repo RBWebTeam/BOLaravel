@@ -43,6 +43,9 @@ Route::post('sales-update','FbaController@sales');
 Route::post('loan-update','FbaController@loan');
 Route::post('posp-update','FbaController@posp');
 
+Route::get('getpaymentlink/{fbaid}','FbaController@getpaymentlink');
+
+
 
 Route::get('fba-list/{fbaid}/{value}/{flag}',array('as'=>'fba-list.ajax','uses'=>'FbaController@updateposp'));
 Route::post('fba-list','FbaController@sendsms');
@@ -64,6 +67,12 @@ Route::get('Fsm-Details','FsmDetailsController@FsmDetails');
 Route::get('Rmfollowup','RMfollowupController@RMfollowup');
 Route::post('Rmfollowup','RMfollowupController@insertrmfollowup');
 Route::get('Rmfollowup/{fbaid}','RMfollowupController@gethistory');
+
+
+Route::get('Product-followup','ProductfollowupController@getproductfollowup');
+Route::get('Product-followup/{product_id}','ProductfollowupController@getproductinfo');
+Route::Post('Product-followup','ProductfollowupController@insertproductfollowup');
+
 
 //////GOVIND
 Route::get('Fsm-Details/{smid}','FsmDetailsController@fsmfbalist');
