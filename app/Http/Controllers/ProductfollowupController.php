@@ -14,8 +14,9 @@ class ProductfollowupController extends Controller
   public function getproductfollowup()
   {
   	$id=Session::get('fbauserid');
-  	 $product = DB::select("call Usp_loaduserwiseproduct(6923)");
-  	 return view('dashboard.productfollowup',['product'=>$product]);
+  	 $product = DB::select("call Usp_loaduserwiseproduct($id)");
+  	  $status = DB::select("call Usp_Rmstatus()");
+  	 return view('dashboard.productfollowup',['product'=>$product,'status'=>$status]);
   } 
 
   public function getproductinfo($product_id)
@@ -23,5 +24,18 @@ class ProductfollowupController extends Controller
 	$query = DB::select("call Usp_getproductwisefba($product_id)");
       return json_encode($query);
       print_r($query); exit();
+  }
+
+  public function insertproductfollowup(Request $req){
+  	$id=Session::get('fbauserid');
+    DB::statement('call sp_followup_details_history_insert(?,?,?,?,?,?,?)',
+  	array(
+  	$req->txtproductfbaid,
+    $id,
+    $req->txtproductstatus,
+    0,
+    $req->txtproductrmremark,
+    "Product executive",
+    null ));
   }
 }

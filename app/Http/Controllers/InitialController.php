@@ -70,4 +70,14 @@ class InitialController extends Controller
 
                            
                }
+
+
+
+
+               public function user_right_group_menu(){
+
+
+                 return $sql=\DB::table('view_user_right_group')->select('id','name','menu_group_id','url_link','parent_id','lvl')->where('menu_group_id','=',Session::get('usergroup'))->where('lvl','=',0)->orderBy('id', 'asc')->get();
+
+               }
 }
