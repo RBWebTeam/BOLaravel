@@ -27,20 +27,12 @@ Route::post('admin-login','LoginController@login');
 
  
 
-Route::get('register-user','LoginController@register_user') ;
-Route::get('register-update/{id}','LoginController@register_update') ;
-Route::post('register-user-update','LoginController@register_user_update') ;
-Route::get('register-user-list','LoginController@register_user_list') ;
 
  // city  state
 Route::get('search-state','LoginController@search_state');
 Route::get('search-city','LoginController@search_city');
 
 // end city state
-
-Route::post('register-user','LoginController@registerinsert') ;
-//Route::get('register-user','LoginController@register_user');
-Route::post('register-user-save','LoginController@register_user_save');
 
 Route::get('dashboard','DashboardController@dashboard');
 
@@ -73,9 +65,11 @@ Route::get('Rmfollowup','RMfollowupController@RMfollowup');
 Route::post('Rmfollowup','RMfollowupController@insertrmfollowup');
 Route::get('Rmfollowup/{fbaid}','RMfollowupController@gethistory');
 
+
 Route::get('Product-followup','ProductfollowupController@getproductfollowup');
 Route::get('Product-followup/{product_id}','ProductfollowupController@getproductinfo');
 Route::Post('Product-followup','ProductfollowupController@insertproductfollowup');
+
 
 //////GOVIND
 Route::get('Fsm-Details/{smid}','FsmDetailsController@fsmfbalist');
@@ -113,25 +107,6 @@ Route::get('send-notification','SendNotificationController@sendnotification');
 Route::get('send-sms','SendSMSController@ViewSendSMSDetails');
  
 Route::get('send-notification','SendNotificationController@sendnotification');
-
-//send sms
-/*Route::get('send-sms','SendSMSController@ViewSendSMSDetails');*/
-
-/// vikaas rm city
-Route::get('rm_city_master','rmcitymappingController@rmcitymapping');
-Route::get('rm_city_master','rmcitymappingController@getrm');
-Route::get('rm_city_master/{state_id}','rmcitymappingController@getcity');
-Route::post('rm_city_master','rmcitymappingController@rmcityinsert');
-
-Route::post('rm_city_master1','rmcitymappingController@getstatecity');
-
-//smslog
-Route::get('sms_log','smslogController@getsmslog');
-//smstemplate
-Route::get('sms_template','smslogController@smstemplate');
-Route::post('sms_template','smslogController@smstemplateinsert');
-
-
  //Otp Detail
 Route::get('otp-details','OtpDetailsController@otp_details');
 Route::get('log-out','LoginController@logout');
@@ -174,7 +149,6 @@ Route::get('menu-group-select','MenuController@menu_group_select');
 Route::group(['namespace' => 'RM',  ], function() {
 
 Route::get('regional-manager','RegionalManagerControllar@regional_manager');
-
 });
   /************
 // LEAD MANAGMENT
@@ -201,17 +175,22 @@ Route::get('marketing-leads','LeaduploadController@marketing_leads');
 ******************/
 Route::get('product-authorized','ProductController@product_authorized');
 Route::post('product-save','ProductController@product_save');
- 
 Route::post('send-sms-save','SendSMSController@send_sms_save');
+
+ /************
+// User Registration
+******************/
+Route::get('register-user','LoginController@register_user') ;
+Route::get('register-update/{id}','LoginController@register_update') ;
+Route::post('register-user-update','LoginController@register_user_update') ;
+Route::get('register-user-list','LoginController@register_user_list') ;
+Route::post('register-user','LoginController@registerinsert') ;
+Route::post('register-user-save','LoginController@register_user_save');
+/************
+// End
+******************/
+
 
 
 });
-
-
-
-
-
-// });
-
- 
 

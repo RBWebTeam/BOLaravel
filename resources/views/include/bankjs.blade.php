@@ -16,7 +16,8 @@ $(document).ready(function(){
 
      
 });
- }
- );
+
+});
+
 
 </script>
