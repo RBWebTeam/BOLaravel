@@ -745,7 +745,7 @@ $(document).on('change', '#search_state', function() {
     }
   })
 
-<script>
+
     $(document).ready(function() {
         $('#example').DataTable({
           paging: true,
@@ -972,11 +972,13 @@ function getfollowup(id){
  $('#fbaid').val(id);
  $('.rmfolloup').modal('show');
  }
+
 $('#btn_subbmit').click(function() {
 var productid = []
 $('input:checkbox[name=txtproduct]:checked').each(function() {
 productid.push($(this).val())
 })
+alert(productid);
 $('#txtproductid').val(productid);
 console.log($('#rmfolloupdetails').serialize());
    $.ajax({ 
@@ -994,7 +996,6 @@ console.log($('#rmfolloupdetails').serialize());
 });
 
 function viewhistory(fbaid){
-
 $.ajax({  
          type: "GET",  
          url:'Rmfollowup/'+fbaid,
@@ -1123,8 +1124,6 @@ $('#txtmapcity').on('change', function() {
 
 function BindFbas(flag,value)
 {
-
-
      $('#tblfbalist').empty();
      $.ajax({
     url: 'send-notificationfba/'+flag+'/'+value,
@@ -1234,6 +1233,7 @@ console.log($('#frmsmstemplate').serialize());
 });
 
 function getproductfollowup(fbaid){
+
   $('#txtproductfbaid').val(fbaid);
   $('.productfollowup').modal('show');
  }

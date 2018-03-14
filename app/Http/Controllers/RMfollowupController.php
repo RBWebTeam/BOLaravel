@@ -28,7 +28,7 @@ public function insertrmfollowup(Request $req)
 	$id=Session::get('fbauserid');
   DB::statement('call sp_followup_details_history_insert(?,?,?,?,?,?,?)',
   	array(
-  	$req->txtproductfbaid,
+  	$req->txtfbaid,
     $id,
     $req->txtrmstatus,
     0,
