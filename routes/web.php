@@ -143,6 +143,8 @@ Route::get('menu-group-select','MenuController@menu_group_select');
 Route::group(['namespace' => 'RM',  ], function() {
 
 Route::get('regional-manager','RegionalManagerControllar@regional_manager');
+Route::get('Regional-Manager-search','RegionalManagerControllar@Regional_Manager_search');
+
 });
   /************
 // LEAD MANAGMENT
