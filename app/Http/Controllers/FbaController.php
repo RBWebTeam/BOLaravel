@@ -21,6 +21,7 @@ class FbaController extends CallApiController
         }
         public function get_fba_list(Request $req){
           $query=DB::select("call fbaList(0)");
+
           return json_encode(["data"=>$query]);
         }
 
@@ -96,6 +97,16 @@ class FbaController extends CallApiController
           $fsmfbaquery = DB::select("call usp_load_partner_info($partnerid)");
           return json_encode($fsmfbaquery);    
         }
+
+        public function getpaymentlink($fbaid){
+          
+        
+        $paymentlink=DB::select("call Usp_paymentlink($fbaid)");
+         
+
+           return json_encode($paymentlink);
+  
+          }
 
 
 
