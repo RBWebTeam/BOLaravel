@@ -29,7 +29,7 @@
 
      <div class="col-md-4">
       <div class="form-group">
-      <p>From Date</p>
+      <p>From Registered Date</p>
          <div id="datepicker" class="input-group date" data-date-format="yyyy-mm-dd">
       <input class="form-control" type="text" placeholder="From Date" name="fdate" id="fmin_date"   />
               <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
@@ -38,7 +38,7 @@
            </div>
        <div class="col-md-4">
        <div class="form-group">
-       <p>To Date</p>
+       <p>To Registered  Date</p>
        <div id="datepicker1" class="input-group date" data-date-format="yyyy-mm-dd">
  <input class="form-control" type="text"  placeholder="To Date"  name="todate"  id="fmax_date"    />
               <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
