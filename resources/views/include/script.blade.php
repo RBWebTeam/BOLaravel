@@ -1026,10 +1026,8 @@ $.ajax({
     $('#ddlselect').on('change', function() {
    var flag=$('#ddlselect').val();
    var value=$('#txtval').val();
-
-  
-                 $.ajax({
-                    url: 'send-notification/'+flag+'/'+value,
+   $.ajax({
+    url: 'send-notification/'+flag+'/'+value,
                     type: "GET",
                     dataType: "json",
                     success:function(data) {
@@ -1199,11 +1197,6 @@ $(document).on('change', '#search_state', function() {
     $('.search_district').append(city_array);
   
 });
-
-
-
-
-
 function getprodcutdtls(product_id){
 $.ajax({  
          type: "GET",  
@@ -1271,4 +1264,64 @@ console.log($('#frmsmstemplate').serialize());
 }
 
 
+
+
+  $('#notificsubmitbtn').click(function(){
+// alert('okae');
+  if (!$('#sendnotification').valid()) {
+     alert('Not Valid');
+
+  } else {
+$.ajax({
+          url:"{{URL::to('send-notification-submit')}}" ,  
+          data:new FormData($("#sendnotification")[0]),
+          dataType:'json',
+          async:false,
+          type:'POST',
+          processData: false,
+          contentType: false,
+          success: function(msg){
+
+            console.log(msg.data);
+            if (msg.data==true) 
+              {
+                alert('Inserted Successfully');
+              } else {
+                    alert('Oops!! Could not insert successfully');
+              }
+                 }
+        });
+  }
+  
+  });
+
+
+
 </script>
+
+<script type="text/javascript">
+  function mail(obj,val){
+    // console.log(obj);
+    if(obj=='weburl' ){
+                   var str =$('#weburl').val();
+                   var emailPattern = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/; 
+                   var res = str.match(emailPattern);
+                   if(res){
+                     // console.log('Pancard is valid one.!!');
+                      $('#email').show();
+
+                  }else{
+                    // console.log('Oops.Please Enter Valid Pan Number.!!');
+                    $('#email').hide();
+
+                    return false;
+                  }
+                  
+  }
+}
+</script>
+  
+
+
+
+

@@ -73,7 +73,8 @@ Route::get('Fsm-Register/{id}',array('as'=>'FSMRegister.ajax','uses'=>'FsmRegist
 Route::get('Fsm-Register/{flag}/{value}',array('as'=>'FSMRegister.ajax','uses'=>'FsmRegisterController@getpincode'));
 
 
-Route::get('send-notification-approve','SendNotificationApproveController@SendnotificationApprove');
+Route::get('send-notification-approve','SendNotificationController@SendnotificationApprove');
+
 
 Route::post('send-notification','SendNotificationController@sendnotification');
 
@@ -90,7 +91,7 @@ Route::post('send-notification-approve','SendNotificationController@insertntf');
 
 
 
-Route::get('approvenotification/{msgid}/{value}','SendNotificationApproveController@approvenotification');
+Route::get('approvenotification/{msgid}/{value}','SendNotificationController@approvenotification');
 route::get('sendnotificationnew', 'SendNotificationController@sendnotificationstate');
 
 
@@ -99,6 +100,7 @@ Route::get('insert','uploadfileController@imageupload');
 
 
 
+route::post('send-notification-submit', 'SendNotificationController@sendnotificationsubmit');
 
 
 

@@ -1,17 +1,19 @@
 @extends('include.master')
  @section('content')
+
+
  
  <div class="container-fluid white-bg">
  <div class="col-md-12"><h3 class="mrg-btm">Send Notification</h3></div>
- <form class="form-horizontal"  id="sendnotification"  name="sendnotification"  enctype="multipart/form-data" method="POST" action="send-notification-approve">
+ <form class="form-horizontal"  id="sendnotification"  name="sendnotification"  enctype="multipart/form-data" method="POST">
    {{ csrf_field() }}
  <div class="col-md-6 col-xs-12">
   <div class="form-group">
   <select id="ddlflag" name="ddlflag" class="selectpicker select-opt form-control" onchange="loadfbasbyflag()" required>
    <option selected="selected" value="0">-SELECT-</option>
-   <option value="1">STATE</option>
+   <!-- <option value="1">STATE</option>
    <option value="2">CITY</option>
-    <option value="3">PINCODE</option>
+    <option value="3">PINCODE</option> -->
    <option value="6">FBA</option>
   </select>
   </div>
@@ -65,13 +67,14 @@
     </select>
     </div>
     </div>
-    <div class="col-md-6 col-xs- 12" id="first_nm">
-    <div class="form-group">
-    <input  type="text" class="form-control" placeholder= "Web Url" name="weburl" id="weburl" maxlength="40" required>
+    <div class="col-md-6 col-xs- 12"  >
+    <div class="form-group" id="first_nm" >
+    <input  type="text" class="form-control" oninput="mail('weburl')" placeholder= "Web Url" name="weburl" id="weburl" maxlength="40" required>
+    <div id="email" style="display:none; color:red;font-size:10px">Kindly Enter Correct URL</div>
     </div>
     </div>
-    <div class="col-md-6 col-xs- 12" id="last_nm">
-    <div class=" form-group">
+    <div class="col-md-6 col-xs- 12">
+    <div class=" form-group"  id="last_nm">
     <input  type="text" class="form-control" name="webtitle" placeholder="Web title" id="webtitle" maxlength="40" required>
     </div>
     </div>
@@ -108,8 +111,8 @@
 <div class="col-md-12 col-xs-12">
  <br>
  <div class="center-obj center-multi-obj">      
- <button a href="" class="common-btn">Back</a></button>
- <button class="common-btn" id="notificsubmitbtn" name="notificsubmitbtn">Submit</button>
+ <a  href="" class="common-btn">Back</a>
+ <a class="common-btn" id="notificsubmitbtn" name="notificsubmitbtn">Submit</a>
   </div>
   </div>
  </form>
