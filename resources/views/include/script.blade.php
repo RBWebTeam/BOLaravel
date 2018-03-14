@@ -980,7 +980,7 @@ var productid = []
 $('input:checkbox[name=txtproduct]:checked').each(function() {
 productid.push($(this).val())
 })
-alert(productid);
+
 $('#txtproductid').val(productid);
 console.log($('#rmfolloupdetails').serialize());
    $.ajax({ 
