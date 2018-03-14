@@ -1,6 +1,8 @@
 <div class="scrolling">
-    <nav id="sidebar" style="display:none;">
-<?php 
+<!--     <nav id="sidebar" style="display:none;">
+ -->
+  <nav id="sidebar" >
+ <?php 
  use App\Http\Controllers\InitialController; $cl=new InitialController();
 $arrayCategories = array();
     foreach ($user_right_group as $key => $row) {

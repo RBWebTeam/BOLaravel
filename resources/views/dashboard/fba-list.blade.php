@@ -153,30 +153,31 @@
 </div>
 
  <!-- fab document -->
- <div class="fbadoc modal fade" role="dialog">   
+ <!-- <div class="fbadoc modal fade" role="dialog">   
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-        <h4 class="modal-title">Upload FBA Documents</h4>
+        <h4 class="modal-title">FSM Details</h4>
       </div>
       <div class="modal-body">
-        <form id="fbadocupload" method="POST" enctype="multipart/form-data">
+        <form id="posp_from_id">
           <div class="form-group">
             
           </div>
           <div class="form-group">
             <label class="control-label" for="Document-Type">Document Type: </label>
-            <select class="form-control" id="ddldoctype" name="ddldoctype">
-              <option selected="selected" value="0">select Document Type</option>
+            <select class="form-control">
+              <option selected="selected">select Document Type</option>
               @foreach($doctype as $val)
              <option value="{{$val->id}}">{{$val->name}}</option>
               @endforeach
-           </select>
+
+            </select>
           </div>
-           <div class="form-group">
+           div class="form-group">
             <label class="control-label" for="Document">Document</label>
-            <input type="file" id="document" name="document" class="form-control"> 
+            <input type="file" name="document" class="form-control"> 
           </div>
         </form>
         <div class="modal-footer"> 
@@ -186,7 +187,7 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
 
 <!-- sales update -->
 
@@ -195,14 +196,14 @@
     <div class="modal-content">
       <div class="modal-header">
         <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-        <h4 class="modal-title">Partner Detail</h4>
+        <h4 class="modal-title">Sales Code</h4>
       </div>
       <div class="modal-body">
         <form name="update_remark" id="update_remark">
          {{ csrf_field() }}
          <div class="form-group">
             <input type="hidden" name="p_fbaid" id="p_fbaid" value="">
-            <label class="control-label" for="message-text">Enter Remark : </label>
+            <label class="control-label" for="message-text">Enter Sales Code : </label>
             <input type="text" class="recipient-name form-control" id="p_remark" name="p_remark" required="" />
           </div>
         </form>
@@ -232,7 +233,7 @@
          {{ csrf_field() }}
          <div class="form-group">
             <input type="hidden" name="fbaid" id="fbaid" value=" ">
-            <label class="control-label" for="message-text">Enter Remark : </label>
+            <label class="control-label" for="message-text">Enter POSP : </label>
             <input type="text" class="recipient-name form-control" id="posp_remark" name="posp_remark" required="" />
           </div>
         </form>
@@ -317,11 +318,13 @@
               <option>FBA</option>
             </select>
             <input type="text" class="recipient-name form-control" id="" name="" required="yes" />
-        </div>
+             
+          </div>
         </form>
         <div class="modal-footer"> 
           <button class="btn btn-default" type="button" data-dismiss="modal">Close</button>
           <button id="" class="btn btn-primary" type="button">search</button>
+          
         </div>
       </div>
     </div>
@@ -342,7 +345,6 @@
     $(document).ready(function() {
     $('#fba-list-table').DataTable( {
         "ajax": "get-fba-list",
-        "order": [[ 1, 'dsc' ]],
         "columns": [
            
             { "data": "FullName"},
@@ -352,8 +354,9 @@
             { "data": "Link",
              "render": function ( data, type, row, meta ) {
                 return '<a href="" class="popover-Payment" data-toggle="popover" title="Payment link" data-content="'+data+'">Payment link</a>';
-          
-                
+
+              
+              
               }
              }, 
             {"data":"pwd" ,
@@ -370,7 +373,8 @@
             },
             {"data":"POSPNo"  ,
              "render": function ( data, type, row, meta ) {
-                return data==""?('<a id="posp_'+data+'" class="checkPosp" data-toggle="modal" data-target="#updatePosp" onclick="POSP_UPDATE('+data+')">update</a>'):data;
+              // console.log(row);
+                return data==""?('<a id="posp_'+row.fbaid+'" class="checkPosp" data-toggle="modal" data-target="#updatePosp" onclick="POSP_UPDATE('+row.fbaid+')">update</a>'):data;
               }
             },  
 
@@ -378,7 +382,7 @@
 
             {"data":"LoanID"  ,
              "render": function ( data, type, row, meta ) {
-                return data==""?('<a id="loan_'+data+'" class="checkloan" data-toggle="modal" data-target="#updateLoan" onclick="LoanID_UPDATE('+data+')">update</a>'):data;
+                return data==""?('<a id="loan_'+row.fbaid+'" class="checkloan" data-toggle="modal" data-target="#updateLoan" onclick="LoanID_UPDATE('+row.fbaid+')">update</a>'):data;
               }
             },  
             {"data":"pospname"},  
@@ -400,7 +404,7 @@
             },
             {"data":"salescode" ,
              "render": function ( data, type, row, meta ) {
-                return data==""?('<a  id="update_'+data+'" onclick="sales_update_fn('+data+')" >'+data+'</a>'):('<a  id="update_'+data+'" onclick="sales_update_fn('+data+')" >Update</a>');
+                return data==""?('<a  id="update_'+data+'" onclick="sales_update_fn('+data+')" >'+data+'</a>'):('<a  id="update_'+row.fbaid+'" onclick="sales_update_fn('+row.fbaid+')" >Update</a>');
               }
             },
             
@@ -408,4 +412,6 @@
 
     } );
 } );
+
+   
 </script>

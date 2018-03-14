@@ -49,10 +49,10 @@ $(document).ready(function(){
              $(document).ready(function () {
                  $('#sidebarCollapse').click( function () {
                      $('#sidebar').slideToggle();
-					 
+           
                  });
              });
-			 
+       
 
   // $(document).ready(function() {
          
@@ -61,13 +61,22 @@ $(document).ready(function(){
   //         });
   //         });
   
-          $('.popover-Payment').popover({
-            trigger: 'focus'
-          });
+//           $('.popover-Payment').popover({
+//             trigger: 'focus'
+//           });
+          
+          $('body').popover({
+    selector: '[data-toggle="popover"]'
+});
 
-           $('.popover-Password').popover({
-            trigger: 'focus'
-          });
+$('body').on('click',  function (e) {
+    $('[data-toggle="popover"]').each(function () {
+        if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
+            $(this).popover('destroy');
+        }
+    });
+});
+         
 
     function Sales_Code() {
               console.log('something');
@@ -81,9 +90,10 @@ $(document).ready(function(){
 
              function POSP_UPDATE(id){
                       $('#fbaid').val(id);
-                       $('.updatePosp').modal('show');
+                      $('.updatePosp').modal('show');
                     
              }
+             
 
              function LoanID_UPDATE(id){
                        $('#fba_id').val(id);
@@ -620,8 +630,8 @@ $(document).on('change', '#search_state', function() {
   $('#sales_update').click(function(){
     var id = $('#p_fbaid').val();
     var sales_update=$('#p_remark').val();
-    console.log(sales_update);
-    $('#update_'+id).text(sales_update);
+
+   
     if (!$('#update_remark').valid()) 
     {
 
@@ -636,6 +646,7 @@ $(document).on('change', '#search_state', function() {
          if (msg.status==0) 
                 {
                   alert('Updated Successfully');
+                  $('#update_'+id).closest('td').html(sales_update); 
                   $('#p_remark').val('');
                   $('.close').click();           
                 } 
@@ -676,7 +687,8 @@ $(document).on('change', '#search_state', function() {
               if (msg.status==0) 
                 {
                   alert('Updated Successfully');
-                  $('#loan_'+id).text(loan_update);       
+                  
+                  $('#loan_'+id).closest('td').html(id);     
                   $('#remark').val('');
                   $('.close').click();           
                   
@@ -685,23 +697,24 @@ $(document).on('change', '#search_state', function() {
                 else {
                   alert('Could not updated successfully');
                 }
-
-              
-              
-        }  
+}  
       });
     }
   })
 </script>
 
 
+
 <script type="text/javascript">
   $('#posp_update').click(function(){
     // alert('okae');
+
+// alert($(this).closest('tr').find('input[type=text]').val());
+
     var id = $('#fbaid').val();
     var posp_update=$('#posp_remark').val();
     console.log(posp_update);
-    
+
     if (!$('#update_posp').valid()) 
     {
 
@@ -716,7 +729,8 @@ $(document).on('change', '#search_state', function() {
               if (msg.status==0) 
                 {
                   alert('Updated Successfully');
-                  $('#posp_'+id).text(posp_update);
+
+                  $('#posp_'+id).closest('td').html(id);
                   $('#posp_remark').val('');
                   $('.close').click();           
                 } 
@@ -736,7 +750,7 @@ $(document).on('change', '#search_state', function() {
           responsive: false,
         });
  // Bootstrap datepicker
-$('.input-daterange input').each(function() {
+$('.input-group date input').each(function() {
   $(this).datepicker('clearDates');
 });
 
@@ -997,6 +1011,209 @@ $.ajax({
       });
 }
 
+
+
+
+</script>
+
+
+<!-- send Notification Script By Avinash
+ -->
+   <script type="text/javascript">
+
+    $('#ddlselect').on('change', function() {
+   var flag=$('#ddlselect').val();
+   var value=$('#txtval').val();
+   $.ajax({
+    url: 'send-notification/'+flag+'/'+value,
+                    type: "GET",
+                    dataType: "json",
+                    success:function(data) {
+
+                      
+                      $('#tblpincode tr:not(:first)').remove();
+
+                      var rows = "";
+                      for(var i =0; i < data.length;i++)
+                      {
+                        rows = rows +"<tr align='left'><td>";
+                        rows = rows +"<input id='pincode' type='checkbox' class='used chk' value =''>";
+                        rows = rows +"<span>"+data[i].pincode+"</span></td></tr>";
+                      }
+
+                      $('#tblpincode > tbody:last-child').append(rows);
+                    }
+                });
+
+
+});
+
+        // $("#first_nm").hide();
+        // $("#last_nm").hide();
+
+$('#LeadType').on('change',function(){
+  var LeadType=$('#LeadType').find(":selected").val();
+
+  if ( LeadType == 'WB')
+      {
+       
+        $("#weburl").show();
+        $("#last_nm").show();
+
+      }
+      else{
+        $("#weburl").hide();
+        $("#last_nm").hide();
+
+      }
+});
+
+
+ $('#txtmapstate').on('change', function() {
+            var state_id = $(this).val();
+            if(state_id) {
+                $.ajax({
+                    url: 'send-notificationstate/'+state_id,
+                    type: "GET",
+                    dataType: "json",
+                    success:function(data) {
+                        $('#txtmapcity').empty();
+                        $('#txtmapcity').append('<option value="0">select city</option>');
+                        $.each(data, function(key, value) {
+
+                            $('#txtmapcity').append('<option value="'+ key +'">'+ value +'</option>');
+                        });
+                     }
+                });
+            }else{
+                $('select[name="city"]').empty();
+            }
+        });
+
+$('#txtmapcity').on('change', function() {
+                  BindFbas(2,$('#txtmapcity').val());
+        });
+
+  
+  $("#upload").on("click", function() {
+
+
+    var file_data = $("#sortpicture").prop("files")[0];   
+    var form_data = new FormData();
+    form_data.append("file", file_data);
+
+    $.ajax({
+        url: "../../../notificationimages",
+        dataType: 'script',
+        cache: false,
+        contentType: false,
+        processData: false,
+        data: form_data,                         
+        type: 'post',
+        success: function(){
+            alert("works"); 
+        }
+    });
+});
+
+
+
+
+function BindFbas(flag,value)
+{
+
+
+     $('#tblfbalist').empty();
+     $.ajax({
+    url: 'send-notificationfba/'+flag+'/'+value,
+        type: "GET",
+       dataType:"json",
+      success:function(data) {
+      var text = "";
+      for (var i = 0; i < data.length; i++) {
+      if(i==0)
+    {
+    text = text +'<tr><th><input  name="fba_list[]" value="0" id="selectAll" onclick="checkall()" type="checkbox" /> FBA List</th></tr>';
+  text = text +'<tr><td><input name="fba_list[]" id="chkfba" type="checkbox" class="chkfba" value="'+data[i].id+'"/><input id="hdnchk" name="hdnchk" type="hidden" value="'+data[i].id+'" />'+data[i].fullname+'</td></tr>';
+}
+else{
+text = text +'<tr><td><input id="chkfba" name="fba_list[]"  type="checkbox" class="chkfba" value="'+data[i].id+'"/><input id="hdnchk" type="hidden" value="'+data[i].id+'" />'+data[i].fullname+'</td></tr>';
+}
+
+}
+          $('#tblfbalist').append(text);
+
+                     },
+     error:function(error)
+                     {
+                      console.log(error);
+                     }
+                });
+}
+
+
+function checkall(){
+
+$('#selectAll').click(function () {    
+   $('.chkfba').prop('checked', this.checked);    
+ });
+ }
+ function getfbabypincode(txt)
+ {
+    BindFbas(3,$(txt).val());
+ }
+
+function loadfbasbyflag()
+{
+  if($('#ddlflag').val() == 6){
+  
+    BindFbas(6,'999999');
+    $('#tblmanagerlist').css("display","none");
+    $('#tblsalesmanagerlist').css("display","none");
+   }
+  }
+
+
+$(document).on('change', '#search_state', function() {   
+    var fstate_id=$(this).val();  
+    var  city_array=Array('<option value="0">Select</option>');  
+    $.ajax({
+            url: "{{url('search-city')}}",
+            dataType: "json",
+            data: {
+                    fstate_id : fstate_id,
+                  },
+            success: function(data) { 
+                $.each(data, function( key, val )
+                {
+                  city_array.push('<option value="'+val.datavalue+'">'+val.value+'</option>');
+                });
+              }
+          });
+        
+    $('.search_district').empty();
+    $('.search_district').append(city_array);
+  
+});
+function getprodcutdtls(product_id){
+$.ajax({  
+         type: "GET",  
+         url:'Product-followup/'+product_id,
+         success: function(fsmmsg){
+
+      var data = JSON.parse(fsmmsg);
+      var str = "<table class='table' id='example'><thead><tr style='height:30px;margin:5px;'><th>Lead ID</th><th>Name</th><th>Mobile No</th><th>Email Id</th><th>Created Date</th></tr></thead>";
+       for (var i = 0; i < data.length; i++) 
+       {
+
+         str = str + "<tbody><tr style='height:30px;margin:5px;'><td>"+data[i].FBAID+"</td><td>"+data[i].FullName+"</td><td>"+data[i].MobiNumb1+"</td><td>"+data[i].EmailID+"</td><td>"+data[i].CreaOn+"</td></tr></tbody>";
+       }
+         str = str + "</table>";
+           $('#divpartnertable').html(str);   
+       }  
+      });
+}
+
 //vikas smstemplate
 $('#btnsave').click(function() {
 
@@ -1019,13 +1236,90 @@ console.log($('#frmsmstemplate').serialize());
 
 });
 
+
+ function updatenotification(msgid,value){
+
+//alert(value);
+ if (confirm("Are you sure to "+(value==1?"approve":"disapprove")+" this notification")) {}
+  $.ajax({
+            type: "GET",
+            url:'approvenotification/'+msgid+'/'+value, 
+                     
+           success: function( msg ) {
+            if(value=="1"){
+              alert("Notification Approved Successfully");
+            }
+            else if(value=="0"){
+             alert("Notification Dispproved Successfully");
+               }
+                
+            }
+
+        });
+
+ return false;
+
+}
+
+
+
+
+  $('#notificsubmitbtn').click(function(){
+// alert('okae');
+  if (!$('#sendnotification').valid()) {
+     alert('Not Valid');
+
+  } else {
+$.ajax({
+          url:"{{URL::to('send-notification-submit')}}" ,  
+          data:new FormData($("#sendnotification")[0]),
+          dataType:'json',
+          async:false,
+          type:'POST',
+          processData: false,
+          contentType: false,
+          success: function(msg){
+
+            console.log(msg.data);
+            if (msg.data==true) 
+              {
+                alert('Inserted Successfully');
+              } else {
+                    alert('Oops!! Could not insert successfully');
+              }
+                 }
+        });
+  }
+  
+  });
+
+
+
 </script>
- 
+
+<script type="text/javascript">
+  function mail(obj,val){
+    // console.log(obj);
+    if(obj=='weburl' ){
+                   var str =$('#weburl').val();
+                   var emailPattern = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/; 
+                   var res = str.match(emailPattern);
+                   if(res){
+                     // console.log('Pancard is valid one.!!');
+                      $('#email').show();
+
+                  }else{
+                    // console.log('Oops.Please Enter Valid Pan Number.!!');
+                    $('#email').hide();
+
+                    return false;
+                  }
+                  
+  }
+}
+</script>
+  
 
 
 
- 
-
-
- 
 
