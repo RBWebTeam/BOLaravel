@@ -12,9 +12,9 @@ $menu_group_fn=$cl->user_right_group_menu();
          $row->name,"id" => $row->id);   
     } ?>
 
-<ul class="nav nav-list" style="overflow: hidden; width: auto; height: 95%; position:fixed;overflow:scroll;">                       
-<?php foreach ($user_right_group as $key => $current) { 
 
+<ul class="nav nav-list" style="overflow: hidden; width: auto; height: 95%; position:fixed;overflow:scroll;">                       
+<?php foreach ($menu_group_fn as $key => $current) { 
 
         $second_level=$cl->chield_id($current->id,$current->menu_group_id);  ?>
                      
