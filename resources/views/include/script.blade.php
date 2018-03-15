@@ -49,7 +49,6 @@ $(document).ready(function(){
              $(document).ready(function () {
                  $('#sidebarCollapse').click( function () {
                      $('#sidebar').slideToggle();
-           
                  });
              });
        
@@ -456,11 +455,11 @@ alert(JSON.stringify(data));*/
   
      var tablerows = new Array();
                          $.each(msg, function( index, value ) {
-            tablerows.push('<tr><td style="font-family: monospace"><img class="img-responsive" src="/' + value.image_path + '" width="699" height="1176"/></td></tr>');
+            tablerows.push('<tr><td><img class="img-responsive" src="/' + value.image_path + '" width="400" height=""/></td></tr>');
         }); 
 
        if(msg){
-                            $('#docs').empty().append('<table class="table table-striped table-bordered table-responsive"><tr class="text-capitalize"><td style="font-family: monospace">Image Path</td></tr>'+tablerows+'</table>');
+                            $('#docs').empty().append('<table class="table table-striped table-bordered"><tr class="text-capitalize"><td style="font-family: monospace">Image Path</td></tr>'+tablerows+'</table>');
                          }else{
                             $('#docs').empty().append('No Result Found');
                          }
@@ -1067,58 +1066,7 @@ $('#LeadType').on('change',function(){
 
 
 
-//  $('#txtmapstate').on('change', function() {
-//             var state_id = $(this).val();
-//             if(state_id) {
-//                 $.ajax({
-//                     url: 'sendnotificationstate/'+state_id,
-//                     type: "GET",
-//                     dataType: "json",
-//                     success:function(data) {
-//                         $('#txtmapcity').empty();
-//                         $('#txtmapcity').append('<option value="0">select city</option>');
-//                         $.each(data, function(key, value) {
-
-//                             $('#txtmapcity').append('<option value="'+ key +'">'+ value +'</option>');
-//                         });
-//                      }
-//                 });
-//             }else{
-//                 $('select[name="city"]').empty();
-//             }
-//         });
-
-// $('#txtmapcity').on('change', function() {
-//                   BindFbas(2,$('#txtmapcity').val());
-//         });
-
-  
-//   $("#upload").on("click", function() {
-
-
-//     var file_data = $("#sortpicture").prop("files")[0];   
-//     var form_data = new FormData();
-//     form_data.append("file", file_data);
-
-//     $.ajax({
-//         url: "../../../notificationimages",
-//         dataType: 'script',
-//         cache: false,
-//         contentType: false,
-//         processData: false,
-//         data: form_data,                         
-//         type: 'post',
-//         success: function(){
-//             alert("works"); 
-//         }
-//     });
-// });
-
-
-
-$(document).ready(function(){
-
-    $('#txtmapstate').on('change', function() {
+ $('#txtmapstate').on('change', function() {
             var state_id = $(this).val();
             if(state_id) {
                 $.ajax({
@@ -1139,54 +1087,105 @@ $(document).ready(function(){
             }
         });
 
-$("#basic-addon2").click(function(e){
-          e.preventDefault();
-            var flag = 0;
-            var value = "";
+$('#txtmapcity').on('change', function() {
+                  BindFbas(2,$('#txtmapcity').val());
+        });
 
-            if($(txtmappincode).val()!="")  {
-              flag = 3;
-              value = $('#txtmappincode').val();
-            }
-            else if($('#txtmapcity').val() != 0){
-              flag = 2;
-              value = $('#txtmapcity').val();
-            }
-            else if($('#txtmapstate').val() != 0)
-            {
-              flag = 1;
-              value = $('#txtmapstate').val(); 
-            }
-            else
-            {
-              alert('select atleast one option');
-            }
+  
+  $("#upload").on("click", function() {
 
-            $.ajax({
-                    url: 'sendnotificationstate/'+flag+'/'+value,
-                    type: "GET",
-                    dataType: "json",
-                    success:function(data) {
+
+    var file_data = $("#sortpicture").prop("files")[0];   
+    var form_data = new FormData();
+    form_data.append("file", file_data);
+
+    $.ajax({
+        url: "../../../notificationimages",
+        dataType: 'script',
+        cache: false,
+        contentType: false,
+        processData: false,
+        data: form_data,                         
+        type: 'post',
+        success: function(){
+            alert("works"); 
+        }
+    });
+});
+
+
+
+// $(document).ready(function(){
+
+//     $('#txtmapstate').on('change', function() {
+//             var state_id = $(this).val();
+//             if(state_id) {
+//                 $.ajax({
+//                     url: 'sendnotificationstate/'+state_id,
+//                     type: "GET",
+//                     dataType: "json",
+//                     success:function(data) {
+//                         $('#txtmapcity').empty();
+//                         $('#txtmapcity').append('<option value="0">select city</option>');
+//                         $.each(data, function(key, value) {
+
+//                             $('#txtmapcity').append('<option value="'+ key +'">'+ value +'</option>');
+//                         });
+//                      }
+//                 });
+//             }else{
+//                 $('select[name="city"]').empty();
+//             }
+//         });
+
+// $("#basic-addon2").click(function(e){
+//           e.preventDefault();
+//             var flag = 0;
+//             var value = "";
+
+//             if($(txtmappincode).val()!="")  {
+//               flag = 3;
+//               value = $('#txtmappincode').val();
+//             }
+//             else if($('#txtmapcity').val() != 0){
+//               flag = 2;
+//               value = $('#txtmapcity').val();
+//             }
+//             else if($('#txtmapstate').val() != 0)
+//             {
+//               flag = 1;
+//               value = $('#txtmapstate').val(); 
+//             }
+//             else
+//             {
+//               alert('select atleast one option');
+//             }
+
+//             $.ajax({
+//                     url: 'sendnotificationstate/'+flag+'/'+value,
+//                     type: "GET",
+//                     dataType: "json",
+//                     success:function(data) {
 
                       
-                      $('#tblpincode tr:not(:first)').remove();
+//                       $('#tblpincode tr:not(:first)').remove();
 
-                      var rows = "";
-                      for(var i =0; i < data.length;i++)
-                      {
-                        rows = rows +"<tr align='left'><td>";
-                        rows = rows +"<input id='pincode' type='checkbox' class='used chk' value =''>";
-                        rows = rows +"<span>"+data[i].pincode+"</span></td></tr>";
-                      }
+//                       var rows = "";
+//                       for(var i =0; i < data.length;i++)
+//                       {
+//                         rows = rows +"<tr align='left'><td>";
+//                         rows = rows +"<input id='pincode' type='checkbox' class='used chk' value =''>";
+//                         rows = rows +"<span>"+data[i].pincode+"</span></td></tr>";
+//                       }
 
-                      $('#tblpincode > tbody:last-child').append(rows);
-                    }
-                });
-          });
-$('#chkselectall').click(function () {    
-     $('.chk').prop('checked', this.checked);    
- });
-});
+//                       $('#tblpincode > tbody:last-child').append(rows);
+//                     }
+//                 });
+//           });
+// $('#chkselectall').click(function () {    
+//      $('.chk').prop('checked', this.checked);    
+//  });
+// });
 
 function BindFbas(flag,value)
 {
@@ -1301,6 +1300,66 @@ console.log($('#frmsmstemplate').serialize());
    }
 
 });
+});
+
+
+function getpaymentlink(fbaid){
+  //alert(fbaid);
+  // alert(data);
+  //$('.paylink').modal('show');
+  $.ajax({
+                    url: 'getpaymentlink/'+fbaid,
+                    type: "GET",
+                    dataType: "json",
+                    success:function(data) {
+
+                      if(data.length>0){
+
+                       // alert(data[0].Link);
+                        var str = "<p>"+data[0].Link+"</p>";
+                        // alert(str)
+                        $('.divpartnertable_payment').html(str);
+                         $('.paylink_payment').modal('show');
+                          //$('#paylink').html(data[0].Link);
+                       }      
+                       for (var i = 0; i < data.length; i++) 
+       {
+
+         str = str + "<p>"+data[i].Link+"</p>";
+         // $('#paylink').html(str);
+       }
+                       
+                     }
+                });
+
+}
+
+
+function getproductfollowup(fbaid){
+
+  $('#txtproductfbaid').val(fbaid);
+  $('.productfollowup').modal('show');
+ }
+
+$('#btn_productsubbmit').click(function() {
+
+  console.log($('#productfolloupdetails').serialize());
+   $.ajax({ 
+   url: "{{URL::to('Product-followup')}}",
+   method:"POST",
+   data: $('#productfolloupdetails').serialize(),
+  success: function(msg)  
+   {
+    console.log(msg);
+    alert("Record has been saved successfully");
+    $("#productfolloupdetails").trigger('reset');
+      $('.productfollowup').modal('hide');
+
+
+});
+
+
+ });
 
 
 });
@@ -1386,7 +1445,7 @@ $.ajax({
   }
 }
 
-//Script By Avinash
+//fbalist ImageView Script Start Here
 
 
 
@@ -1440,4 +1499,14 @@ $("#imgdoc").css("display","block");
 </script> 
   
 
+<!-- fbalist ImageView Script End Here.
+ -->
+
+</script>
+ 
+<script>
+   $(".nav-list > li").addClass(function(i){return "item" + (i + 1);});
+</script>
+ 
+ 
 

@@ -23,7 +23,7 @@
                     <tbody>
                       @foreach($query as $val)
                        <tr>
-                      <td> <a href="#" onclick="vehicle_fn()">{{$val->FBAID}}</a></td>
+                      <td> <a href="#" onclick="vehicle_fn('{{$val->VehicleRequestID}}','MOI','{{$val->FBAID}}')">{{$val->FBAID}}</a></td>
                       <td>{{$val->registration_no}}</td>
                      
  
@@ -45,37 +45,31 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Lead</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Comment</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-      <form class="form-horizontal" method="post"  id="menu_list_from" > {{ csrf_field() }}
+      <form class="form-horizontal" method="post"  id="vehicle_from_id" > {{ csrf_field() }}
     
+     <input type="hidden" name="Request_id" id="Request_id"  >
+     <input type="hidden" name="R_Type" id="R_Type"  >
+     <input type="hidden" name="Fba_id" id="Fba_id">
         
    <div class="form-group">
-            <label for="inputEmail" class="control-label col-xs-2">Menu Name</label>
+            <label for="inputEmail" class="control-label col-xs-2">Comment</label>
             <div class="col-xs-10">
-            <input type="text" name="menu" id="menu_name_id"  class="form-control" >
+            <textarea name="R_Comment" class="form-control"></textarea>
             </div>
   </div> 
 
-
-   <div class="form-group">
-            <label for="inputEmail" class="control-label col-xs-2">Menu URL</label>
-            <div class="col-xs-10">
-            <input type="text" name="url_link" id="url_link"  class="form-control" >
-            </div>
-  </div> 
-   
-
-        
+ 
       </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" id="menu_list_ID">Save changes</button>
+        <button type="button" class="btn btn-primary" id="vehicle_submit_id">Save changes</button>
       </div>
     </div>
   </div>
@@ -83,10 +77,26 @@
 
  
   <script type="text/javascript">
-  	function vehicle_fn(){
-
-  		 $('#vehicle-fn-Modal').modal('show');
+  	function vehicle_fn(Request_id,R_Type,Fba_id){
+                $('#Request_id').val(Request_id);
+                $('#R_Type').val(R_Type);
+                $('#Fba_id').val(Fba_id);
+  		        $('#vehicle-fn-Modal').modal('show');
   	}
+  	 $("#vehicle_submit_id").click(function(event){  event.preventDefault(); 	 
+            $.post("{{url('report-followup-history-save')}}",$('#vehicle_from_id').serialize())
+             .done(function(data){ 
+             	 if(data==0){
+                   alert("success...");
+                  $('#vehicle-fn-Modal').modal('hide');
+             	 }else{
+                       console.log(data);
+             	 }
+                
+             }).fail(function(xhr, status, error) {
+                 console.log(error);
+            });
+});
 
   </script>
 

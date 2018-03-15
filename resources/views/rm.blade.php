@@ -27,8 +27,8 @@
                       <td>{{$val->FBAID}}</td>
                       <td>{{$val->FullName}}</td>
 
-                      <td> <a href="{{url('Regional-Manager-search')}}?product_type=MOI&ms_type=Search&p_rm_id=0&p_fba_id={{$val->FBAID}}"  >{{$val->MotorSearch}}</a> </td>
-                      <td> <a href="{{url('Regional-Manager-search')}}?product_type=MOI&ms_type=Search&p_rm_id=0&p_fba_id={{$val->FBAID}}"  >{{$val->MotorSale}}</a> </td>
+                      <td> <a href="{{url('report-followup-history')}}?product_type=MOI&ms_type=Search&p_rm_id=0&p_fba_id={{$val->FBAID}}"  >{{$val->MotorSearch}}</a> </td>
+                      <td> <a href="{{url('report-followup-history')}}?product_type=MOI&ms_type=Sale&p_rm_id=0&p_fba_id={{$val->FBAID}}"  >{{$val->MotorSale}}</a> </td>
                         </tr>
                       @endforeach
                   </tbody>
