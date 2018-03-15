@@ -57,7 +57,6 @@
                <td> {{$val->TWO_WHEELER}}</td>
                 
                @elseif($status==3)
-               <td> {{$val->City}}</td>
                 <td> {{$val->HEALTH}}</td>
                 <td> {{$val->MOTOR}}</td>
                 <td> {{$val->TWO_WHEELER}}</td>

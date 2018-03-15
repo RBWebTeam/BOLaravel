@@ -78,9 +78,8 @@
         <button class="btn btn-default" type="button" data-dismiss="modal">Close</button>
          <input type="hidden" id="fbaid" name="txtfbaid">
          <input type="hidden" name="txtproductid" id="txtproductid">
-         </form>
          <a id="btn_subbmit" class="btn btn-primary" type="button">Submit</a>
-         
+         </form>
         </div>
       </div>
     </div>

@@ -31,34 +31,13 @@
        </div> -->
        <!-- Filter End -->
        
-        <?php 
+       <form>
 
-           $fromdate='';
-           $todate='';
-            if(isset($_GET['fdate']) && isset($_GET['todate'])){
-                 $fromdate=$_GET['fdate'];
-                 $todate=$_GET['todate'];
-           }else{
-                 
-                 $fromdate= Date('m-d-Y', strtotime('-28 days'));
-                 $todate=Date('m-d-Y');
-           }
-
-
-           ?>
-  
- 
-        <form  method="get" action="{{url('fba-list')}}" >
        <div class="col-md-4">
       <div class="form-group">
       <p>From Date</p>
-
          <div id="datepicker" class="input-group date" data-date-format="yyyy-mm-dd-">
                <input class="form-control date-range-filter" type="text" placeholder="From Date" name="fdate" id="min-date"  />
-
-         <div id="datepicker" class="input-group date" data-date-format="mm-dd-yyyy">
-               <input class="form-control date-range-filter" value="{{$fromdate}}" type="text" placeholder="From Date" name="fdate" id="min-date"  />
-
               <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
               </div>
             </div>
@@ -66,13 +45,8 @@
        <div class="col-md-4">
        <div class="form-group">
        <p>To Date</p>
-
        <div id="datepicker1" class="input-group date" data-date-format="yyyy-mm-dd">
                <input class="form-control date-range-filter1" type="text" placeholder="To Date"  name="todate"  id="max-date"/>
-
-       <div id="datepicker1" class="input-group date" data-date-format="mm-dd-yyyy">
-               <input class="form-control date-range-filter " value="{{$todate}}" type="text"  placeholder="To Date"  name="todate"  id="max-date"   />
-
               <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
               </div>
             </div>

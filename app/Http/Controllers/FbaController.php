@@ -20,22 +20,7 @@ class FbaController extends CallApiController
           return view('dashboard.fba-list',['doctype'=>$doctype]);
         }
         public function get_fba_list(Request $req){
-          try{
-                
-                if(isset($req->fdate) && isset($req->todate)){
-               $data=array("FromDate"=>$req->fdate,"ToDate"=>$req->todate);
-
-
-           }else{
-                 $data=array("FromDate"=>Date('m-d-Y', strtotime("-28 days")),"ToDate"=>Date('m-d-Y'));
-                 //$data=array("FromDate"=>"01-02-2018","ToDate"=>"01-28-2018");
-           }
           $query=DB::select("call fbaList(0)");
-          }catch (Exception $e){
-
-    return $e;    
-     }
-
 
           return json_encode(["data"=>$query]);
         }
@@ -78,7 +63,7 @@ class FbaController extends CallApiController
 
         public function sales(Request $req){
         // print_r($req->all());exit();
-        $query=DB::table('FBAMAST')
+        $query=DB::table('fbamast')
             ->where('FBAID','=',$req->p_fbaid)
             ->update(['salescode' =>$req->p_remark]);
            if ($query) {
@@ -88,7 +73,7 @@ class FbaController extends CallApiController
 
         public function loan(Request $req){
           // print_r($req->all());exit();
-          $query=DB::table('FBARepresentations')
+          $query=DB::table('fbarepresentations')
             ->where('FBAID','=',$req->fba_id)
             ->update(['LoanID' =>$req->remark]);
            if ( $query) {
@@ -98,7 +83,7 @@ class FbaController extends CallApiController
 
         public function posp(Request $req){
           // print_r($req->all());exit();
-          $query=DB::table('FBARepresentations')
+          $query=DB::table('fbarepresentations')
             ->where('FBAID','=',$req->fbaid)
             ->update(['POSPNo' =>$req->posp_remark]);
            if ( $query) {
