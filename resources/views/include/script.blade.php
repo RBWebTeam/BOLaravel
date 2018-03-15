@@ -1272,6 +1272,7 @@ function getproductfollowup(fbaid){
   $('#txtproductfbaid').val(fbaid);
   $('.productfollowup').modal('show');
  }
+
 $('#btn_productsubbmit').click(function() {
 
   console.log($('#productfolloupdetails').serialize());
@@ -1288,7 +1289,6 @@ $('#btn_productsubbmit').click(function() {
 
    }
 });
-
 
  });
 

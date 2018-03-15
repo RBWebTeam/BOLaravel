@@ -198,41 +198,45 @@ public   function lead_test(){
 
 
 public function  marketing_leads(Request $req){
-  $lang=null;
+if(isset($req->id)){
+ $arr=array('ref_id' =>$req->id,'created_on' =>date('Y-m-d H:i:s'));
+   DB::table('lead_campaign')->insert($arr);
+
+   echo "success...";
+}
+
+ 
+
+//   $lang=null;
   
-  $status=null;
-  $a=array("6923","6925","6926","6927");
-$random_keys=array_rand($a,1);
-//var_dump($random_keys);
+//   $status=null;
+//   $a=array("6923","6925","6926","6927");
+// $random_keys=array_rand($a,1);
+//          if(isset($req->id)){
+//        $arr=array('video_click' =>1,
+//          'video_date_time'=>date('Y-m-d H:i:s'),
+//           'user_id'=> $a[$random_keys]
+//          );
+//        $query=DB::table('raw_lead_master')->where('id','=',$req->id)->update($arr);
+//        $select=DB::table('raw_lead_master')->where('id','=',$req->id)->first();
+//         $lang=$select->lang;
 
-         if(isset($req->id)){
-       $arr=array('video_click' =>1,
-         'video_date_time'=>date('Y-m-d H:i:s'),
-          'user_id'=> $a[$random_keys]
-         );
-       $query=DB::table('raw_lead_master')->where('id','=',$req->id)->update($arr);
-       $select=DB::table('raw_lead_master')->where('id','=',$req->id)->first();
-        $lang=$select->lang;
-
-}  
- if(isset($req->mobile)){
-$arr=array('misscall' =>1,
-         'mc_date_time'=>date('Y-m-d H:i:s'),
-            'user_id'=>$a[$random_keys]
-         );
-       DB::table('raw_lead_master')->where('mobile','=',$req->mobile)->update($arr);
+// }  
+//  if(isset($req->mobile)){
+// $arr=array('misscall' =>1,
+//          'mc_date_time'=>date('Y-m-d H:i:s'),
+//             'user_id'=>$a[$random_keys]
+//          );
+//        DB::table('raw_lead_master')->where('mobile','=',$req->mobile)->update($arr);
         
-        $select=DB::table('raw_lead_master')->where('mobile','=',$req->mobile)->first();
-        $lang=$select->lang;
-  } 
+//         $select=DB::table('raw_lead_master')->where('mobile','=',$req->mobile)->first();
+//         $lang=$select->lang;
+//   } 
 
- 
-
- 
+//   return  view('marketing_leads')->with('lang',$lang);
 
 
 
-            return  view('marketing_leads')->with('lang',$lang);
 
   }
 
