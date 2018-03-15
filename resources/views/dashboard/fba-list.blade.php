@@ -375,7 +375,7 @@
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
-    $('#fba-list-table').DataTable( {
+    $('#fba-list-table').DataTable({
         "ajax": "get-fba-list",
         "columns": [
            
@@ -443,7 +443,5 @@
         ],
 
     } );
-} );
-
-   
+});  
 </script>
