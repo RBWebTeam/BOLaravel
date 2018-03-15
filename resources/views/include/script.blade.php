@@ -1234,7 +1234,7 @@ console.log($('#frmsmstemplate').serialize());
 });
 });
 
-<<<<<<< HEAD
+
 function getpaymentlink(fbaid){
   //alert(fbaid);
   // alert(data);
@@ -1266,7 +1266,7 @@ function getpaymentlink(fbaid){
 
 }
 
-=======
+
 function getproductfollowup(fbaid){
 
   $('#txtproductfbaid').val(fbaid);
@@ -1288,7 +1288,7 @@ $('#btn_productsubbmit').click(function() {
 
    }
 });
->>>>>>> a94c7ff163a3e97dfd316feb25b2f7836c38a6d8
+
 
  });
 
