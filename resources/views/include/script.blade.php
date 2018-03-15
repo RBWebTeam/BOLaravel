@@ -321,11 +321,7 @@ $('.message_sms_id').click(function(){
   $( "#message-text" ).focus();
  }
 });
-// upload docs
-function uploaddoc(id){
-                $('#docfbaid').val(id);
-                $('.fbadoc').modal('show');
-     }
+
 
 $('#btnupload').click(function(event){
 event.preventDefault();
@@ -745,7 +741,6 @@ $(document).on('change', '#search_state', function() {
     }
   })
 
-<script>
     $(document).ready(function() {
         $('#example').DataTable({
           paging: true,
@@ -1071,11 +1066,63 @@ $('#LeadType').on('change',function(){
 });
 
 
- $('#txtmapstate').on('change', function() {
+
+//  $('#txtmapstate').on('change', function() {
+//             var state_id = $(this).val();
+//             if(state_id) {
+//                 $.ajax({
+//                     url: 'sendnotificationstate/'+state_id,
+//                     type: "GET",
+//                     dataType: "json",
+//                     success:function(data) {
+//                         $('#txtmapcity').empty();
+//                         $('#txtmapcity').append('<option value="0">select city</option>');
+//                         $.each(data, function(key, value) {
+
+//                             $('#txtmapcity').append('<option value="'+ key +'">'+ value +'</option>');
+//                         });
+//                      }
+//                 });
+//             }else{
+//                 $('select[name="city"]').empty();
+//             }
+//         });
+
+// $('#txtmapcity').on('change', function() {
+//                   BindFbas(2,$('#txtmapcity').val());
+//         });
+
+  
+//   $("#upload").on("click", function() {
+
+
+//     var file_data = $("#sortpicture").prop("files")[0];   
+//     var form_data = new FormData();
+//     form_data.append("file", file_data);
+
+//     $.ajax({
+//         url: "../../../notificationimages",
+//         dataType: 'script',
+//         cache: false,
+//         contentType: false,
+//         processData: false,
+//         data: form_data,                         
+//         type: 'post',
+//         success: function(){
+//             alert("works"); 
+//         }
+//     });
+// });
+
+
+
+$(document).ready(function(){
+
+    $('#txtmapstate').on('change', function() {
             var state_id = $(this).val();
             if(state_id) {
                 $.ajax({
-                    url: 'send-notificationstate/'+state_id,
+                    url: 'sendnotificationstate/'+state_id,
                     type: "GET",
                     dataType: "json",
                     success:function(data) {
@@ -1092,34 +1139,54 @@ $('#LeadType').on('change',function(){
             }
         });
 
-$('#txtmapcity').on('change', function() {
-                  BindFbas(2,$('#txtmapcity').val());
-        });
+$("#basic-addon2").click(function(e){
+          e.preventDefault();
+            var flag = 0;
+            var value = "";
 
-  
-  $("#upload").on("click", function() {
+            if($(txtmappincode).val()!="")  {
+              flag = 3;
+              value = $('#txtmappincode').val();
+            }
+            else if($('#txtmapcity').val() != 0){
+              flag = 2;
+              value = $('#txtmapcity').val();
+            }
+            else if($('#txtmapstate').val() != 0)
+            {
+              flag = 1;
+              value = $('#txtmapstate').val(); 
+            }
+            else
+            {
+              alert('select atleast one option');
+            }
 
+            $.ajax({
+                    url: 'sendnotificationstate/'+flag+'/'+value,
+                    type: "GET",
+                    dataType: "json",
+                    success:function(data) {
 
-    var file_data = $("#sortpicture").prop("files")[0];   
-    var form_data = new FormData();
-    form_data.append("file", file_data);
+                      
+                      $('#tblpincode tr:not(:first)').remove();
 
-    $.ajax({
-        url: "../../../notificationimages",
-        dataType: 'script',
-        cache: false,
-        contentType: false,
-        processData: false,
-        data: form_data,                         
-        type: 'post',
-        success: function(){
-            alert("works"); 
-        }
-    });
+                      var rows = "";
+                      for(var i =0; i < data.length;i++)
+                      {
+                        rows = rows +"<tr align='left'><td>";
+                        rows = rows +"<input id='pincode' type='checkbox' class='used chk' value =''>";
+                        rows = rows +"<span>"+data[i].pincode+"</span></td></tr>";
+                      }
+
+                      $('#tblpincode > tbody:last-child').append(rows);
+                    }
+                });
+          });
+$('#chkselectall').click(function () {    
+     $('.chk').prop('checked', this.checked);    
+ });
 });
-
-
-
 
 function BindFbas(flag,value)
 {
@@ -1313,8 +1380,7 @@ $.ajax({
                   }else{
                     // console.log('Oops.Please Enter Valid Pan Number.!!');
                     $('#email').hide();
-
-                    return false;
+                   return false;
                   }
                   
   }
@@ -1322,30 +1388,56 @@ $.ajax({
 
 //Script By Avinash
 
-function viewhistory(fbaid){
 
+
+function uploaddoc(fbaid)
+{
+
+$('#divdocviewer').html(""); 
+$("#imgdoc").attr("src","");
+$("#imgdoc").css("display","none");
 $.ajax({  
+
          type: "GET",  
-         url:'fbalist-document/'+fbaid,
+           // url:'fbalist-document/176'+fbaid,
+         url:'fbalist-document/'+fbaid,//"{{URL::to('Fsm-Details')}}",
          success: function(fsmmsg){
-
-      var data = JSON.parse(fsmmsg);
-      var str = "<table class='table'> <button id="myBtn">Adhar</button> <button id="myBtn">Adhar</button>"
-      ;
-       for (var i = 0; i < data.length; i++) 
-       {
-
-         str = str + "<tr style='height:30px;margin:5px;'><td>"+data[i].lead_id+"</td><td>"+data[i].FullName+"</td><td>"+data[i].user_type+"</td><td>"+data[i].status_name+"</td><td>"+data[i].remark+"</td></tr>";
-       }
-         str = str + "</table>";
-         $('#divpartnertable').html(str);   
-       }  
-      });
+     // alert(fsmmsg);
+        var data = JSON.parse(fsmmsg);
+        var str = "<table class='table'><tr style='height:30px;margin:5px;'>";
+if(data.length > 0){
+        
+       for (var i = 0; i < data.length; i++) {
+        
+         str = str + "<td><input style='padding:5px;' type='button' onclick=showImage('"+data[i].FileName+"') value='"+data[i].DocType+"'/></td>";
+          }
+              //console.log(msg[0].Result);
+           str = str + "</tr></table>";
+      }
+      else
+      {
+        str = str + "<td>No documents uploaded.</td></tr></table>";
       }
 
-</script>
+//alert(str);
+           $('#divdocviewer').html(str);   
+              
+        }  
+      });
+}
+
+function showImage(test)
+{
+  //console.log(test);
   
+$("#imgdoc").css("display","block");
+  $("#imgdoc").attr("src",test);
+
+   // $("#imgdoc").attr("src", test);
+}
 
 
+</script> 
+  
 
 

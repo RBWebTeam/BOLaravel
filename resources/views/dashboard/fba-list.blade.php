@@ -166,44 +166,7 @@
           <div class="form-group">
             
           </div>
-
-        
-            <!--   <button id="myBtn">POSPPhotograph
-                </button>
-              <button id="myBtn">POSPhotograph.png
-                </button>
- -->
-
-    <tr>
-      <td style="width: 100%;" id="tdlinks">
-        <a class="btn btn-default" style="cursor:pointer;margin:5px;padding:10px;" onclick="">POSPPhotograph.jpg</a>
-        <a class="btn btn-default" style="cursor:pointer;margin:5px;padding:10px;" onclick="">POSPPanCard.jpg</a>
-        <a class="btn btn-default" style="cursor:pointer;margin:5px;padding:10px;" onclick="">POSPAadharCard.jpg</a>
-        <a class="btn btn-default" style="cursor:pointer;margin:5px;padding:10px;" onclick="">POSPCancelledChq.jpg</a>
-        <a class="btn btn-default" style="cursor:pointer;margin:5px;padding:10px;" onclick="">POSPHighestEducationProof.jpg</a>
-      </td>
-</tr>
-<!-- <div class="form-group">
-            <label class="control-label" for="Document-Type">Document Type: </label>
-            <select class="form-control">
-              <option selected="selected">select Document Type</option>
-              @foreach($doctype as $val)
-             <option value="{{$val->id}}">{{$val->name}}</option>
-              @endforeach
-            </select>
-          </div> -->
-
-
-
-         <!--   <div class="form-group">
-            <label class="control-label" for="Document">Document</label>
-            <input type="file" name="document" class="form-control"> 
-          </div> -->
         </form>
-       <!--  <div class="modal-footer"> 
-          <button class="btn btn-primary" id="btnupload" type="button">Upload</button>
-          <input id="docfbaid" type="hidden" name="docfbaid"/>
-        </div> -->
       </div>
     </div>
   </div>
@@ -356,6 +319,30 @@
   </div>
 </div>
 <!-- Partner Info End -->
+
+<div id="docviwer" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+   <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title" style="text-align:center;">Attachment</h4>
+      </div>
+      <div class="modal-body">
+
+      <div class="table-responsive">
+        <div id="divdocviewer" name="divdocviewer">
+        </div>
+        <div>
+         <img id="imgdoc" style="min-height:150px; min-width:150px;">
+         </div>
+       </div>
+     </div>
+    </div>
+  </div>
+</div>
+
+
 <!--Filter -->
 <div class="Filter modal fade" id="Filter" role="dialog">   
   <div class="modal-dialog" role="document">
@@ -387,8 +374,24 @@
     </div>
   </div>
 </div>
+<!-- paymentlink -->
+<div id="paylink_payment" class="modal fade paylink_payment" role="dialog">
+  <div class="modal-dialog">
+   <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Payment link</h4>
+      </div>
+      <div class="modal-body">
+    <div style="color: blue;" id="divpartnertable_payment" class="divpartnertable_payment">
+       
+    </div>
+      </div>
+    </div>
+  </div>
+</div>
 <script type="text/javascript">
-
 
 
 
@@ -410,9 +413,9 @@
             { "data": "EMaiID" },
             { "data": "Link",
              "render": function ( data, type, row, meta ) {
-                return '<a href="" class="popover-Payment" data-toggle="popover" title="Payment link" data-content="'+data+'">Payment link</a>';
+                return '<a id="btnviewhistory" data-toggle="modal" data-target="paylink" onclick="getpaymentlink('+row.fbaid+')">Payment link</a>';
 
-              
+             
               
               }
              }, 
@@ -450,7 +453,7 @@
             },  
             {"data":"fbaid" ,
              "render": function ( data, type, row, meta ) {
-                return '<a href="#" style="" data-toggle="modal"  data-target="fbadoc" onclick="uploaddoc('+data+')" >Pending</a>';
+                return '<a href="" style="" data-toggle="modal"  data-target="#docviwer" onclick="uploaddoc('+data+')" >Pending</a>';
               }
             }, 
             {"data":"bankaccount"} ,
