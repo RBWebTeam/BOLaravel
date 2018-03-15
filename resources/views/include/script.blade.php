@@ -1115,77 +1115,6 @@ $('#txtmapcity').on('change', function() {
 
 
 
-// $(document).ready(function(){
-
-//     $('#txtmapstate').on('change', function() {
-//             var state_id = $(this).val();
-//             if(state_id) {
-//                 $.ajax({
-//                     url: 'sendnotificationstate/'+state_id,
-//                     type: "GET",
-//                     dataType: "json",
-//                     success:function(data) {
-//                         $('#txtmapcity').empty();
-//                         $('#txtmapcity').append('<option value="0">select city</option>');
-//                         $.each(data, function(key, value) {
-
-//                             $('#txtmapcity').append('<option value="'+ key +'">'+ value +'</option>');
-//                         });
-//                      }
-//                 });
-//             }else{
-//                 $('select[name="city"]').empty();
-//             }
-//         });
-
-// $("#basic-addon2").click(function(e){
-//           e.preventDefault();
-//             var flag = 0;
-//             var value = "";
-
-//             if($(txtmappincode).val()!="")  {
-//               flag = 3;
-//               value = $('#txtmappincode').val();
-//             }
-//             else if($('#txtmapcity').val() != 0){
-//               flag = 2;
-//               value = $('#txtmapcity').val();
-//             }
-//             else if($('#txtmapstate').val() != 0)
-//             {
-//               flag = 1;
-//               value = $('#txtmapstate').val(); 
-//             }
-//             else
-//             {
-//               alert('select atleast one option');
-//             }
-
-//             $.ajax({
-//                     url: 'sendnotificationstate/'+flag+'/'+value,
-//                     type: "GET",
-//                     dataType: "json",
-//                     success:function(data) {
-
-                      
-//                       $('#tblpincode tr:not(:first)').remove();
-
-//                       var rows = "";
-//                       for(var i =0; i < data.length;i++)
-//                       {
-//                         rows = rows +"<tr align='left'><td>";
-//                         rows = rows +"<input id='pincode' type='checkbox' class='used chk' value =''>";
-//                         rows = rows +"<span>"+data[i].pincode+"</span></td></tr>";
-//                       }
-
-//                       $('#tblpincode > tbody:last-child').append(rows);
-//                     }
-//                 });
-//           });
-// $('#chkselectall').click(function () {    
-//      $('.chk').prop('checked', this.checked);    
-//  });
-// });
 
 function BindFbas(flag,value)
 {
@@ -1325,12 +1254,10 @@ $('#btn_productsubbmit').click(function() {
       $('.productfollowup').modal('hide');
 
 
-<<<<<<< HEAD
-});
-=======
 
- });
->>>>>>> 6e072f51eecb13ae9b96c6bedf2b000497227e45
+
+ }
+
 
 
  });
@@ -1444,15 +1371,14 @@ if(data.length > 0){
         
          str = str + "<td><input style='padding:5px;' type='button' onclick=showImage('"+data[i].FileName+"') value='"+data[i].DocType+"'/></td>";
           }
-              //console.log(msg[0].Result);
-           str = str + "</tr></table>";
+        str = str + "</tr></table>";
       }
       else
       {
         str = str + "<td>No documents uploaded.</td></tr></table>";
       }
 
-//alert(str);
+
            $('#divdocviewer').html(str);   
               
         }  
@@ -1513,11 +1439,5 @@ $('#msds-select').change(function () {
 <script>
 $( "#btn1" ).addClass( "qry-btn active" );
 </script>
- 
-<<<<<<< HEAD
- 
-=======
 
-
->>>>>>> 6e072f51eecb13ae9b96c6bedf2b000497227e45
 
