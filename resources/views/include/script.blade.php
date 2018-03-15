@@ -61,11 +61,9 @@ $(document).ready(function(){
   //         });
   //         });
   
-          // $('.popover-Payment').popover({
-          //   trigger: 'focus'
-          // });
-          // test
-
+//           $('.popover-Payment').popover({
+//             trigger: 'focus'
+//           });
           
           $('body').popover({
     selector: '[data-toggle="popover"]'
@@ -73,7 +71,7 @@ $(document).ready(function(){
 
 $('body').on('click',  function (e) {
     $('[data-toggle="popover"]').each(function () {
-        if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover-Password').has(e.target).length === 0) {
+        if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
             $(this).popover('destroy');
         }
     });
@@ -105,7 +103,7 @@ $('body').on('click',  function (e) {
 
            function sales_update_fn(id){
 
-                $('#p_fbaid').empty();
+                 $('#p_fbaid').empty();
                 $('#p_fbaid').val(id);
                 $('#salesupdate_modal_fade').modal('show');
            }
@@ -323,11 +321,7 @@ $('.message_sms_id').click(function(){
   $( "#message-text" ).focus();
  }
 });
-// upload docs
-function uploaddoc(id){
-                $('#docfbaid').val(id);
-                $('.fbadoc').modal('show');
-     }
+
 
 $('#btnupload').click(function(event){
 event.preventDefault();
@@ -745,7 +739,6 @@ $(document).on('change', '#search_state', function() {
     }
   })
 
-
     $(document).ready(function() {
         $('#example').DataTable({
           paging: true,
@@ -970,8 +963,8 @@ $('#chkproduct').click(function () {
  });
 
 function getfollowup(id){
- $('#fbaid').val(id);
- $('.rmfolloup').modal('show');
+  $('#fbaid').val(id);
+  $('.rmfolloup').modal('show');
  }
 $('#btn_subbmit').click(function() {
 var productid = []
@@ -1072,11 +1065,12 @@ $('#LeadType').on('change',function(){
 });
 
 
+
  $('#txtmapstate').on('change', function() {
             var state_id = $(this).val();
             if(state_id) {
                 $.ajax({
-                    url: 'send-notificationstate/'+state_id,
+                    url: 'sendnotificationstate/'+state_id,
                     type: "GET",
                     dataType: "json",
                     success:function(data) {
@@ -1121,6 +1115,77 @@ $('#txtmapcity').on('change', function() {
 
 
 
+// $(document).ready(function(){
+
+//     $('#txtmapstate').on('change', function() {
+//             var state_id = $(this).val();
+//             if(state_id) {
+//                 $.ajax({
+//                     url: 'sendnotificationstate/'+state_id,
+//                     type: "GET",
+//                     dataType: "json",
+//                     success:function(data) {
+//                         $('#txtmapcity').empty();
+//                         $('#txtmapcity').append('<option value="0">select city</option>');
+//                         $.each(data, function(key, value) {
+
+//                             $('#txtmapcity').append('<option value="'+ key +'">'+ value +'</option>');
+//                         });
+//                      }
+//                 });
+//             }else{
+//                 $('select[name="city"]').empty();
+//             }
+//         });
+
+// $("#basic-addon2").click(function(e){
+//           e.preventDefault();
+//             var flag = 0;
+//             var value = "";
+
+//             if($(txtmappincode).val()!="")  {
+//               flag = 3;
+//               value = $('#txtmappincode').val();
+//             }
+//             else if($('#txtmapcity').val() != 0){
+//               flag = 2;
+//               value = $('#txtmapcity').val();
+//             }
+//             else if($('#txtmapstate').val() != 0)
+//             {
+//               flag = 1;
+//               value = $('#txtmapstate').val(); 
+//             }
+//             else
+//             {
+//               alert('select atleast one option');
+//             }
+
+//             $.ajax({
+//                     url: 'sendnotificationstate/'+flag+'/'+value,
+//                     type: "GET",
+//                     dataType: "json",
+//                     success:function(data) {
+
+                      
+//                       $('#tblpincode tr:not(:first)').remove();
+
+//                       var rows = "";
+//                       for(var i =0; i < data.length;i++)
+//                       {
+//                         rows = rows +"<tr align='left'><td>";
+//                         rows = rows +"<input id='pincode' type='checkbox' class='used chk' value =''>";
+//                         rows = rows +"<span>"+data[i].pincode+"</span></td></tr>";
+//                       }
+
+//                       $('#tblpincode > tbody:last-child').append(rows);
+//                     }
+//                 });
+//           });
+// $('#chkselectall').click(function () {    
+//      $('.chk').prop('checked', this.checked);    
+//  });
+// });
 
 function BindFbas(flag,value)
 {
@@ -1205,11 +1270,11 @@ $.ajax({
          success: function(fsmmsg){
 
       var data = JSON.parse(fsmmsg);
-      var str = "<table class='table' id='example'><thead><tr style='height:30px;margin:5px;'><th>Lead ID</th><th>Name</th><th>Mobile No</th><th>Email Id</th><th>Created Date</th><th>View History</th></tr></thead>";
+      var str = "<table class='table' id='example'><thead><tr style='height:30px;margin:5px;'><th>Lead ID</th><th>Name</th><th>Mobile No</th><th>Email Id</th><th>Created Date</th></tr></thead>";
        for (var i = 0; i < data.length; i++) 
        {
 
-         str = str + "<tbody><tr style='height:30px;margin:5px;'><td><a href='#'  data-toggle='modal' onclick='getproductfollowup("+data[i].FBAID+")' data-target='productfollowup'>"+data[i].FBAID+"</a></td><td>"+data[i].FullName+"</td><td>"+data[i].MobiNumb1+"</td><td>"+data[i].EmailID+"</td><td>"+data[i].CreaOn+"</td><td><a class='btn btn-primary'>View History</a></td></tr></tbody>";
+         str = str + "<tbody><tr style='height:30px;margin:5px;'><td>"+data[i].FBAID+"</td><td>"+data[i].FullName+"</td><td>"+data[i].MobiNumb1+"</td><td>"+data[i].EmailID+"</td><td>"+data[i].CreaOn+"</td></tr></tbody>";
        }
          str = str + "</table>";
            $('#divpartnertable').html(str);   
@@ -1219,6 +1284,8 @@ $.ajax({
 
 //vikas smstemplate
 $('#btnsave').click(function() {
+
+
 console.log($('#frmsmstemplate').serialize());
    $.ajax({ 
    url: "{{URL::to('sms_template')}}",
@@ -1231,6 +1298,7 @@ console.log($('#frmsmstemplate').serialize());
     $("#frmsmstemplate").trigger('reset');
     
    }
+
 });
 });
 
@@ -1256,31 +1324,19 @@ $('#btn_productsubbmit').click(function() {
     $("#productfolloupdetails").trigger('reset');
       $('.productfollowup').modal('hide');
 
-   }
+
+<<<<<<< HEAD
 });
+=======
+
+ });
+>>>>>>> 6e072f51eecb13ae9b96c6bedf2b000497227e45
 
 
  });
 
-function viewProducthistory(fbaid){
 
-$.ajax({  
-         type: "GET",  
-         url:'Rmfollowup/'+fbaid,
-         success: function(fsmmsg){
-
-      var data = JSON.parse(fsmmsg);
-      var str = "<table class='table'><tr style='height:30px;margin:5px;'><td>Lead ID</td><td>Name</td><td>User Type</td><td>Status</td><td>Remark</td></tr>";
-       for (var i = 0; i < data.length; i++) 
-       {
-
-         str = str + "<tr style='height:30px;margin:5px;'><td>"+data[i].lead_id+"</td><td>"+data[i].FullName+"</td><td>"+data[i].user_type+"</td><td>"+data[i].status_name+"</td><td>"+data[i].remark+"</td></tr>";
-       }
-         str = str + "</table>";
-           $('#divpartnertable').html(str);   
-       }  
-      });
-}
+});
 
 
  function updatenotification(msgid,value){
@@ -1341,7 +1397,6 @@ $.ajax({
 
 
 
-
 </script>
 
 <script type="text/javascript">
@@ -1358,12 +1413,69 @@ $.ajax({
                   }else{
                     // console.log('Oops.Please Enter Valid Pan Number.!!');
                     $('#email').hide();
-
-                    return false;
+                   return false;
                   }
                   
   }
 }
+
+//fbalist ImageView Script Start Here
+
+
+
+function uploaddoc(fbaid)
+{
+
+$('#divdocviewer').html(""); 
+$("#imgdoc").attr("src","");
+$("#imgdoc").css("display","none");
+$.ajax({  
+
+         type: "GET",  
+           // url:'fbalist-document/176'+fbaid,
+         url:'fbalist-document/'+fbaid,//"{{URL::to('Fsm-Details')}}",
+         success: function(fsmmsg){
+     // alert(fsmmsg);
+        var data = JSON.parse(fsmmsg);
+        var str = "<table class='table'><tr style='height:30px;margin:5px;'>";
+if(data.length > 0){
+        
+       for (var i = 0; i < data.length; i++) {
+        
+         str = str + "<td><input style='padding:5px;' type='button' onclick=showImage('"+data[i].FileName+"') value='"+data[i].DocType+"'/></td>";
+          }
+              //console.log(msg[0].Result);
+           str = str + "</tr></table>";
+      }
+      else
+      {
+        str = str + "<td>No documents uploaded.</td></tr></table>";
+      }
+
+//alert(str);
+           $('#divdocviewer').html(str);   
+              
+        }  
+      });
+}
+
+function showImage(test)
+{
+  //console.log(test);
+  
+$("#imgdoc").css("display","block");
+  $("#imgdoc").attr("src",test);
+
+   // $("#imgdoc").attr("src", test);
+}
+
+
+</script> 
+  
+
+<!-- fbalist ImageView Script End Here.
+ -->
+
 </script>
 
 
@@ -1402,6 +1514,10 @@ $('#msds-select').change(function () {
 $( "#btn1" ).addClass( "qry-btn active" );
 </script>
  
+<<<<<<< HEAD
+ 
+=======
 
 
+>>>>>>> 6e072f51eecb13ae9b96c6bedf2b000497227e45
 

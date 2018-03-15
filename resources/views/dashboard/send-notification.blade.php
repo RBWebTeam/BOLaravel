@@ -11,7 +11,7 @@
   <div class="form-group">
   <select id="ddlflag" name="ddlflag" class="selectpicker select-opt form-control" onchange="loadfbasbyflag()" required>
    <option selected="selected" value="0">-SELECT-</option>
-   <!-- <option value="1">STATE</option>
+<!--    <option value="1">STATE</option>
    <option value="2">CITY</option>
     <option value="3">PINCODE</option> -->
    <option value="6">FBA</option>
