@@ -330,6 +330,8 @@
   </div>
 </div>
 <!-- paymentlink -->
+ 
+
 <div id="paylink_payment" class="modal fade paylink_payment" role="dialog">
   <div class="modal-dialog">
    <!-- Modal content-->
@@ -360,8 +362,9 @@
             { "data": "MobiNumb1" },
             { "data": "EMaiID" },
             { "data": "Link",
-           
-               "render": function ( data, type, row, meta ) {
+         
+          
+              "render": function ( data, type, row, meta ) {
                 return '<a id="btnviewhistory" data-toggle="modal" data-target="#paylink_payment" onclick="getpaymentlink('+row.fbaid+')">Payment link</a>';
               }
              }, 
@@ -379,14 +382,7 @@
             },
             {"data":"POSPNo"  ,
              "render": function ( data, type, row, meta ) {
-              // console.log(row);
-               // delc='';
-               //    if(data){
-               //      delc="POSP yes";
-               //    }else{
-               //      delc="POSP no"
-               //    }
-                return data==""?('<a id="posp_'+row.fbaid+'" class="checkPosp" data-toggle="modal" data-target="#updatePosp" onclick="POSP_UPDATE('+row.fbaid+')">update</a>'):data;
+              return data==""?('<a id="posp_'+row.fbaid+'" class="checkPosp" data-toggle="modal" data-target="#updatePosp" onclick="POSP_UPDATE('+row.fbaid+')">update</a>'):data;
               }
             },  
 
@@ -405,6 +401,7 @@
             },  
             {"data":null ,
              "render": function ( data, type, row, meta ) {
+
                 return '<a href="#" style="" data-toggle="modal"  data-target="fbadoc" onclick="uploaddoc('+row.fbaid+')" >Pending</a>';
               }
             }, 
