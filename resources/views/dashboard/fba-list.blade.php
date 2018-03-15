@@ -151,6 +151,26 @@
   </div>
 </div>
 
+
+
+ <div class="fbadoc modal fade" role="dialog">   
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+        <h4 class="modal-title">FSM Details</h4>
+      </div>
+      <div class="modal-body">
+        <form id="posp_from_id">
+          <div class="form-group">
+            
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
  <!-- fab document -->
  <!-- <div class="fbadoc modal fade" role="dialog">   
   <div class="modal-dialog" role="document">
@@ -298,6 +318,30 @@
   </div>
 </div>
 <!-- Partner Info End -->
+
+<div id="docviwer" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+   <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title" style="text-align:center;">Attachment</h4>
+      </div>
+      <div class="modal-body">
+
+      <div class="table-responsive">
+        <div id="divdocviewer" name="divdocviewer">
+        </div>
+        <div>
+         <img id="imgdoc" style="min-height:150px; min-width:150px;">
+         </div>
+       </div>
+     </div>
+    </div>
+  </div>
+</div>
+
+
 <!--Filter -->
 <div class="Filter modal fade" id="Filter" role="dialog">   
   <div class="modal-dialog" role="document">
@@ -353,7 +397,7 @@
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
-    $('#fba-list-table').DataTable( {
+    $('#fba-list-table').DataTable({
         "ajax": "get-fba-list",
         "columns": [
              { "data": "fbaid"},
@@ -402,7 +446,12 @@
             {"data":null ,
              "render": function ( data, type, row, meta ) {
 
+<<<<<<< HEAD
                 return '<a href="#" style="" data-toggle="modal"  data-target="fbadoc" onclick="uploaddoc('+row.fbaid+')" >Pending</a>';
+=======
+                return '<a href="" style="" data-toggle="modal"  data-target="#docviwer" onclick="uploaddoc('+data+')" >Pending</a>';
+
+>>>>>>> ad485be307a2d929871b65571b83ff56d2d69154
               }
             }, 
             {"data":"bankaccount"} ,
@@ -420,9 +469,8 @@
         ],
 
     } );
-} );
 
-   
+});  
 
 function myFunction() {
   var input, filter, table, tr, td, i;
@@ -441,5 +489,6 @@ function myFunction() {
     }       
   }
 }
+
 </script>
 
