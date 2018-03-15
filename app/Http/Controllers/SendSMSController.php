@@ -87,7 +87,8 @@ class SendSMSController extends Controller{
 
 
     public function sentsms($mob,$text,$fba_id,$SMSTemplateId){
-      $arr=array('fbaid'=>$fba_id,'mobileno'=>$mob,'message'=>$text,'create_date'=>date('Y-m-d H:i:s') );
+ 
+      $arr=array('fbaid'=>$fba_id,'mobileno'=>$mob,'message'=>$text,'create_date'=>date('Y-m-d H:i:s'),'group_id'=> uniqid());
        DB::table('SMSLog')->insert($arr);
        
       // $post_data='{

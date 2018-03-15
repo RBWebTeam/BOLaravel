@@ -6,19 +6,15 @@
        
 
 <div id="myDIV">
-  <a href="{{url('queries')}}?queries=1" class="qry-btn" style="margin-right:3px;">POSP Transaction</a>
-  <a href="{{url('queries')}}?queries=2"  class="qry-btn" style="margin-right:">Not POSP</a>
-  <a href="{{url('queries')}}?queries=3" class="qry-btn" style="margin-right:3px;">Policy Sold</a>
-  <a href="{{url('queries')}}?queries=4" class="qry-btn" style="margin-right:3px;">FBA Never Logged In</a>
-  <a href="{{url('queries')}}?queries=5" class="qry-btn" style="margin-right:3px;">Inactive POSP </a>
-  <a href="{{url('queries')}}?queries=6" class="qry-btn" style="margin-right:3px;">POSP Without POSP No</a>
-  <a href="{{url('queries')}}?queries=7" class="qry-btn" style="margin-right:3px;">POSP Without Payment</a>
+  <a href="{{url('queries')}}?queries=1" class="qry-btn">POSP Transaction</a>
+  <a href="{{url('queries')}}?queries=2"  class="qry-btn">Not POSP</a>
+  <a href="{{url('queries')}}?queries=3" class="qry-btn">Policy Sold</a>
+  <a href="{{url('queries')}}?queries=4" class="qry-btn">FBA Never Logged In</a>
+  <a href="{{url('queries')}}?queries=5" class="qry-btn">Inactive POSP </a>
+  <a href="{{url('queries')}}?queries=6" class="qry-btn">POSP Without POSP No</a>
+  <a href="{{url('queries')}}?queries=7" class="qry-btn">POSP Without Payment</a>
   <a href="{{url('queries')}}?queries=8"  class="qry-btn" >Transaction Today</a>
 </div>
-
-<br>
-<br>
-
  <div id="export_id"></div>
 <br>
 
@@ -57,7 +53,6 @@
                <td> {{$val->TWO_WHEELER}}</td>
                 
                @elseif($status==3)
-               <td> {{$val->City}}</td>
                 <td> {{$val->HEALTH}}</td>
                 <td> {{$val->MOTOR}}</td>
                 <td> {{$val->TWO_WHEELER}}</td>
