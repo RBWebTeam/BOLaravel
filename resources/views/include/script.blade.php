@@ -48,7 +48,7 @@ $(document).ready(function(){
  
              $(document).ready(function () {
                  $('#sidebarCollapse').click( function () {
-                     $('#sidebar').slideToggle();
+                     $('#sidebar').toggle();
 					 
                  });
              });
@@ -452,11 +452,11 @@ alert(JSON.stringify(data));*/
   
      var tablerows = new Array();
                          $.each(msg, function( index, value ) {
-            tablerows.push('<tr><td style="font-family: monospace"><img class="img-responsive" src="/' + value.image_path + '" width="699" height="1176"/></td></tr>');
+            tablerows.push('<tr><td><img class="img-responsive" src="/' + value.image_path + '" width="400" height=""/></td></tr>');
         }); 
 
        if(msg){
-                            $('#docs').empty().append('<table class="table table-striped table-bordered table-responsive"><tr class="text-capitalize"><td style="font-family: monospace">Image Path</td></tr>'+tablerows+'</table>');
+                            $('#docs').empty().append('<table class="table table-striped table-bordered"><tr class="text-capitalize"><td style="font-family: monospace">Image Path</td></tr>'+tablerows+'</table>');
                          }else{
                             $('#docs').empty().append('No Result Found');
                          }
@@ -980,6 +980,10 @@ $.ajax({
       });
 
 }
+</script>
+
+<script>
+   $(".nav-list > li").addClass(function(i){return "item" + (i + 1);});
 </script>
  
 
