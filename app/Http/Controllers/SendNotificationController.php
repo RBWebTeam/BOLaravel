@@ -11,34 +11,27 @@
 
 class SendNotificationController extends Controller
 
-
 {
-public function Sendnotification(Request $req){
-return view('dashboard.send-notification');
+public function Sendnotification(){
+$state = DB::select("call usp_load_state_list()");
+  return view('dashboard.send-notification',['state'=>$state]);
  }
- public function getstate()
-  {
-  $state = DB::select("call usp_load_state_list()");
 
+ public function getstate(){
+  $state = DB::select("call usp_load_state_list()");
   return view('dashboard.send-notification',['state'=>$state]);
   }
 
-///
-  public function SendnotificationApprove(){ 
+
+public function SendnotificationApprove(){ 
 $query=DB::select("call usp_load_fba_Notification()");
 return view ('dashboard.send-notification-approve',['query'=>$query]);
 }
 public function approvenotification($msgid,$value){
 DB::select("call sp_notification_update($msgid,$value)");
 }
-
-
-
-
 public function sendnotificationsubmit(Request $req){
-
-  
-    $image = $req->file('notify_image');
+$image = $req->file('notify_image');
    $name = time().'.'.$image->getClientOriginalName();
    $destinationPath = public_path('upload/notification/'); //->save image folder 
    $image->move($destinationPath, $name); 
@@ -86,5 +79,5 @@ public function sendnotificationsubmit(Request $req){
  public function insertntf(Request $req){
  
     }
-    }
+ }
 

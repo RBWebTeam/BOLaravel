@@ -1,5 +1,5 @@
 <div class="scrolling">
-    <nav id="sidebar">
+    <nav id="sidebar" style>
 <?php 
  use App\Http\Controllers\InitialController; $cl=new InitialController();
 $arrayCategories = array();

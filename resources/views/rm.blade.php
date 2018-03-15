@@ -13,25 +13,26 @@
        <div class="overflow-scroll">
        <div class="table-responsive" >
       <table class="datatable-responsive table table-striped table-bordered dt-responsive nowrap" id="example">
-                    <thead>
-                       <tr>
-                       <th>FBA ID</th>
-                      <th>Name</th>
-                         <th>Motor Search</th>
-                          <th>Motor Sale</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      @foreach($fbamaster as $val)
-                       <tr>
-                      <td>{{$val->FBAID}}</td>
-                      <td>{{$val->FullName}}</td>
-
-                      <td> <a href="{{url('Regional-Manager-search')}}?product_type=MOI&ms_type=Search&p_rm_id=0&p_fba_id={{$val->FBAID}}"  >{{$val->MotorSearch}}</a> </td>
-                      <td> <a href="{{url('Regional-Manager-search')}}?product_type=MOI&ms_type=Search&p_rm_id=0&p_fba_id={{$val->FBAID}}"  >{{$val->MotorSale}}</a> </td>
-                        </tr>
-                      @endforeach
-                  </tbody>
+                                    <thead>
+                                       <tr>
+                                       <th>FBA ID</th>
+                                      <th>Name</th>
+                                         <th>MobiNumb1</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                    
+                                     
+                                      @foreach($fbamaster as $val)
+                                       <tr>
+                                      <td>{{$val->FBAID}}</td>
+                                      <td>{{$val->FullName}}</td>
+                                       <td>{{$val->MobiNumb1}}</td>
+                                       </tr>
+                                      @endforeach
+                                     
+                                   
+                                  </tbody>
            
             </table>
       </div>
@@ -40,9 +41,11 @@
       </div>
 
  
-  
+   
 
 @endsection
+
+
 
 
  

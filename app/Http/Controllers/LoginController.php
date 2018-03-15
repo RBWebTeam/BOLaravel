@@ -160,7 +160,7 @@ class LoginController extends InitialController
             'stateid' =>$req->state_id,
             'cityid' =>$req->city_id,
             'user_id' =>Session::get('fbauserid'),
-           // 'user_type_id' =>1,
+            'user_type_id' =>1,
             'usergroup' =>$req->menu_group,
             'uid' =>$req->uid,
             'password' =>$req->password]);
