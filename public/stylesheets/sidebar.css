@@ -6,8 +6,8 @@
 
 
 p {
-    font-family: 'Poppins', sans-serif;
-    font-size: 1em;
+    
+    font-size: 12px;
     font-weight: 300;
     line-height: 1.5em;
     color: #999;
@@ -79,13 +79,14 @@ a, a:hover, a:focus {
 }
 
 #sidebar ul li a {
+	padding-left: 15px !important;
     padding: 10px;
-    font-size: 1.1em;
+    font-size: 1.0em;
     display: block;
 	color:#b9ccd4;
 	border-bottom: 1px solid #3398c3;
 	width:250px;
-	font-family: 'Cambay';font-size: 15px !important;
+	font-family:arial;
 }
 #sidebar ul li a:hover {text-decoration:none; color:#fff;}
 /*#sidebar ul li a:hover {
@@ -159,7 +160,7 @@ a.article, a.article:hover {
 	background:#f5f5fa;
 	width: 100%;
     overflow: hidden;
-	font-family: 'Cambay' !important;
+	font-family:arial;
 }
 
 /* ---------------------------------------------------
@@ -178,3 +179,16 @@ a.article, a.article:hover {
         display: none;
     }
 }
+
+/*
+.item1 span {background:url("../images/icon/home.png") left center no-repeat; width:16px;height:16px;position: absolute;margin: 6px; margin-top:9px;}
+.item2 span {background:url("../images/icon/fsm-detail.png") left center no-repeat; width:16px;height:16px;position: absolute;margin: 6px;margin-top:7px;}
+.item3 span {background:url("../images/icon/lead-details.png") left center no-repeat; width:16px;height:16px;position: absolute;margin: 6px;margin-top:7px;}
+.item4 span {background:url("../images/icon/fsm-detail.png") left center no-repeat; width:16px;height:16px;position: absolute;margin: 6px;margin-top:7px;}
+.item5 span {background:url("../images/icon/new-user.png") left center no-repeat; width:16px;height:16px;position: absolute;margin: 6px;margin-top:7px;}
+.item6 span {background:url("../images/icon/email.png") left center no-repeat; width:16px;height:16px;position: absolute;margin: 6px;margin-top:7px;}
+.item7 span {background:url("../images/icon/fsm-detail.png") left center no-repeat; width:16px;height:16px;position: absolute;margin: 6px;margin-top:7px;}
+.item8 span {background:url("../images/icon/fsm-detail.png") left center no-repeat; width:16px;height:16px;position: absolute;margin: 6px;margin-top:7px;}
+.item9 span {background:url("../images/icon/fsm-detail.png") left center no-repeat; width:16px;height:16px;position: absolute;margin: 6px;margin-top:7px;}
+.item10 span {background:url("../images/icon/fsm-detail.png") left center no-repeat; width:16px;height:16px;position: absolute;margin: 6px;margin-top:7px;}
+*/
