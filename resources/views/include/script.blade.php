@@ -1394,16 +1394,15 @@ $.ajax({
   }
 }
 </script>
-<<<<<<< HEAD
 
 <script>
    $(".nav-list > li").addClass(function(i){return "item" + (i + 1);});
 </script>
+
+<script>
+$( "#btn1" ).addClass( "qry-btn active" );
+</script>
  
-=======
-  
 
-
->>>>>>> caa68f9ad6e2c8aa3260d02f9069f30ec7cb70c9
 
 
