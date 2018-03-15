@@ -77,6 +77,9 @@ class SendSMSController extends Controller{
             $query=DB::table('FBAMast')->select('FBAID','FullName','MobiNumb1')->where('FBAID','=',$fba_id)->first();
             $this->sentsms($query->MobiNumb1,$req->sms_text,$query->FBAID,$req->SMSTemplate);  
              }
+
+
+             return redirect('send-sms');
             }     
 
     }
@@ -84,11 +87,10 @@ class SendSMSController extends Controller{
 
 
     public function sentsms($mob,$text,$fba_id,$SMSTemplateId){
-
-      $arr=array('fbaid'=>$fba_id,'mobileno'=>$mob,'message'=>$text,'create_date'=>date('Y-m-d H:i:s') );
+ 
+      $arr=array('fbaid'=>$fba_id,'mobileno'=>$mob,'message'=>$text,'create_date'=>date('Y-m-d H:i:s'),'group_id'=> uniqid());
        DB::table('SMSLog')->insert($arr);
-
-
+       
       // $post_data='{
       //       "mobNo":"8898540057",
       //       "msgData":"'.$text.'",
