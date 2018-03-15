@@ -62,22 +62,22 @@ Route::get('register-form','RegisterFormController@register_form');
 //FSM Details
 Route::get('Fsm-Details','FsmDetailsController@FsmDetails');
 
-/// shubham ///
+/// shubham 
 
 Route::get('Rmfollowup','RMfollowupController@RMfollowup');
 Route::post('Rmfollowup','RMfollowupController@insertrmfollowup');
 Route::get('Rmfollowup/{fbaid}','RMfollowupController@gethistory');
 
+
 Route::get('Product-followup','ProductfollowupController@getproductfollowup');
 Route::get('Product-followup/{product_id}','ProductfollowupController@getproductinfo');
 Route::Post('Product-followup','ProductfollowupController@insertproductfollowup');
 
-///shubham end ///
 
 //////GOVIND
 Route::get('Fsm-Details/{smid}','FsmDetailsController@fsmfbalist');
 Route::get('FsmRegister/{smid}','FsmRegisterController@getfsmdetail');
-Route::get('fba-list/{partnerid}','FbaController@getfbapartner');
+Route::post('get-fba-partner','FbaController@getfbapartner');
 Route::get('assignrm','AssignrmController@loadrm');
 Route::get('assign-rm-load/{flag}/{value}','AssignrmController@loadfba');
 Route::post('assign-rm-update','AssignrmController@updatefba');
@@ -152,8 +152,6 @@ Route::get('menu-group-select','MenuController@menu_group_select');
 Route::group(['namespace' => 'RM',  ], function() {
 
 Route::get('regional-manager','RegionalManagerControllar@regional_manager');
-Route::get('Regional-Manager-search','RegionalManagerControllar@Regional_Manager_search');
-
 });
   /************
 // LEAD MANAGMENT

@@ -49,6 +49,7 @@ $(document).ready(function(){
              $(document).ready(function () {
                  $('#sidebarCollapse').click( function () {
                      $('#sidebar').slideToggle();
+           
                  });
              });
        
@@ -461,11 +462,11 @@ alert(JSON.stringify(data));*/
   
      var tablerows = new Array();
                          $.each(msg, function( index, value ) {
-            tablerows.push('<tr><td><img class="img-responsive" src="/' + value.image_path + '" width="400" height=""/></td></tr>');
+            tablerows.push('<tr><td style="font-family: monospace"><img class="img-responsive" src="/' + value.image_path + '" width="699" height="1176"/></td></tr>');
         }); 
 
        if(msg){
-                            $('#docs').empty().append('<table class="table table-striped table-bordered"><tr class="text-capitalize"><td style="font-family: monospace">Image Path</td></tr>'+tablerows+'</table>');
+                            $('#docs').empty().append('<table class="table table-striped table-bordered table-responsive"><tr class="text-capitalize"><td style="font-family: monospace">Image Path</td></tr>'+tablerows+'</table>');
                          }else{
                             $('#docs').empty().append('No Result Found');
                          }
@@ -631,8 +632,8 @@ $(document).on('change', '#search_state', function() {
   $('#sales_update').click(function(){
     var id = $('#p_fbaid').val();
     var sales_update=$('#p_remark').val();
-    console.log(sales_update);
-    $('#update_'+id).text(sales_update);
+
+   
     if (!$('#update_remark').valid()) 
     {
 
@@ -647,8 +648,8 @@ $(document).on('change', '#search_state', function() {
          if (msg.status==0) 
                 {
                   alert('Updated Successfully');
+                  $('#update_'+id).closest('td').html(sales_update); 
                   $('#p_remark').val('');
-                  $('#update_'+id).closest('td').html(sales_update);
                   $('.close').click();           
                 } 
                 else {
@@ -659,6 +660,7 @@ $(document).on('change', '#search_state', function() {
     }
   })
 </script>
+
 
 
 <script type="text/javascript">
@@ -683,9 +685,7 @@ $(document).on('change', '#search_state', function() {
          data : $('#update_loan').serialize(),
          success: function(msg){
         
-       
-             
-              if (msg.status==0) 
+         if (msg.status==0) 
                 {
                   alert('Updated Successfully');
                   $('#loan_'+id).closest('td').html(loan_update);       
@@ -732,8 +732,7 @@ $(document).on('change', '#search_state', function() {
               if (msg.status==0) 
                 {
                   alert('Updated Successfully');
-
-                  $('#posp_'+id).closest('td').html(posp_update);
+                 $('#posp_'+id).closest('td').html(posp_update);
                   $('#posp_remark').val('');
                   $('.close').click();           
                 } 
@@ -829,21 +828,22 @@ $.ajax({
 
 function getpartnerinfo(fbaid)
 {
-
-
+$('#partnerInfo').show();
+console.log(fbaid);
 $.ajax({  
-         type: "GET",  
-         url:'fba-list/'+fbaid,//"{{URL::to('Fsm-Details')}}",
+         type: "POST",  
+         url:"{{URL::to('get-fba-partner')}}",//"{{URL::to('Fsm-Details')}}",
+         data:{"fbaid":fbaid,"_token":"{{csrf_token()}}"},
          success: function(fsmmsg){
-        var data = JSON.parse(fsmmsg);
+          var data = JSON.parse(fsmmsg);
 
-        var str = "<table class='table'><tr style='height:30px;margin:5px;'><td>Partner ID</td><td>Name</td><td>Mobile No</td><td>Email</td><td>City</td><td>Pincode</td></tr>";
-       for (var i = 0; i < data.length; i++) {
-         str = str + "<tr style='height:30px;margin:5px;'><td>"+data[i].PartnerID+"</td><td>"+data[i].pname+"</td><td>"+data[i].pmobile+"</td><td>"+data[i].pemail+"</td><td>"+data[i].pcity+"</td><td>"+data[i].ppincode+"</td></tr>";
-          }
-              // console.log(msg[0].Result);
-            str = str + "</table>";
-           $('#divpartnertable').html(str);   
+          var str = "<table class='table'><tr style='height:30px;margin:5px;'><td>Partner ID</td><td>Name</td><td>Mobile No</td><td>Email</td><td>City</td><td>Pincode</td></tr>";
+         for (var i = 0; i < data.length; i++) {
+           str = str + "<tr style='height:30px;margin:5px;'><td>"+data[i].PartnerID+"</td><td>"+data[i].pname+"</td><td>"+data[i].pmobile+"</td><td>"+data[i].pemail+"</td><td>"+data[i].pcity+"</td><td>"+data[i].ppincode+"</td></tr>";
+            }
+                // console.log(msg[0].Result);
+              str = str + "</table>";
+             $('#divpartnertable').html(str);   
               
         }  
       });
@@ -973,13 +973,11 @@ function getfollowup(id){
  $('#fbaid').val(id);
  $('.rmfolloup').modal('show');
  }
-
 $('#btn_subbmit').click(function() {
 var productid = []
 $('input:checkbox[name=txtproduct]:checked').each(function() {
 productid.push($(this).val())
 })
-
 $('#txtproductid').val(productid);
 console.log($('#rmfolloupdetails').serialize());
    $.ajax({ 
@@ -997,6 +995,7 @@ console.log($('#rmfolloupdetails').serialize());
 });
 
 function viewhistory(fbaid){
+
 $.ajax({  
          type: "GET",  
          url:'Rmfollowup/'+fbaid,
@@ -1125,6 +1124,8 @@ $('#txtmapcity').on('change', function() {
 
 function BindFbas(flag,value)
 {
+
+
      $('#tblfbalist').empty();
      $.ajax({
     url: 'send-notificationfba/'+flag+'/'+value,
@@ -1234,44 +1235,13 @@ console.log($('#frmsmstemplate').serialize());
 });
 
 
-function getpaymentlink(fbaid){
-  //alert(fbaid);
-  // alert(data);
-  //$('.paylink').modal('show');
-  $.ajax({
-                    url: 'getpaymentlink/'+fbaid,
-                    type: "GET",
-                    dataType: "json",
-                    success:function(data) {
 
-                      if(data.length>0){
-
-                       // alert(data[0].Link);
-                        var str = "<p>"+data[0].Link+"</p>";
-                        // alert(str)
-                        $('.divpartnertable_payment').html(str);
-                         $('.paylink_payment').modal('show');
-                          //$('#paylink').html(data[0].Link);
-                       }      
-                       for (var i = 0; i < data.length; i++) 
-       {
-
-         str = str + "<p>"+data[i].Link+"</p>";
-         // $('#paylink').html(str);
-       }
-                       
-                     }
-                });
-
-}
 
 
 function getproductfollowup(fbaid){
-
   $('#txtproductfbaid').val(fbaid);
   $('.productfollowup').modal('show');
  }
-
 $('#btn_productsubbmit').click(function() {
 
   console.log($('#productfolloupdetails').serialize());
@@ -1288,6 +1258,7 @@ $('#btn_productsubbmit').click(function() {
 
    }
 });
+
 
  });
 
@@ -1395,9 +1366,37 @@ $.ajax({
 }
 </script>
 
-<script>
-   $(".nav-list > li").addClass(function(i){return "item" + (i + 1);});
+
+
+
+<script> 
+$('#msds-select').change(function () { 
+   var table = $('#fba-list-table').DataTable(); 
+    $.fn.dataTable.ext.search.push(
+    function( settings, data, dataIndex ) {
+        var msdsSearch = $( "#msds-select option:selected" ).val();
+        var msdsValue = data[10]|| 0;
+        console.log(data);
+        var numbers = /^[0-9]+$/;
+          if(msdsSearch=="2" && msdsValue=="update"){  
+            return true;
+          }
+            if(msdsSearch=="1" && msdsValue!="update"){  
+            return true;
+          }
+          if(msdsSearch=="0"){  
+            return true;
+          }
+        return false;
+    });
+    
+     table.draw();
+    
+});
+
 </script>
+  
+
 
 <script>
 $( "#btn1" ).addClass( "qry-btn active" );
