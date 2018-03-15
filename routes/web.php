@@ -27,20 +27,12 @@ Route::post('admin-login','LoginController@login');
 
  
 
-Route::get('register-user','LoginController@register_user') ;
-Route::get('register-update/{id}','LoginController@register_update') ;
-Route::post('register-user-update','LoginController@register_user_update') ;
-Route::get('register-user-list','LoginController@register_user_list') ;
 
  // city  state
 Route::get('search-state','LoginController@search_state');
 Route::get('search-city','LoginController@search_city');
 
 // end city state
-
-Route::post('register-user','LoginController@registerinsert') ;
-//Route::get('register-user','LoginController@register_user');
-Route::post('register-user-save','LoginController@register_user_save');
 
 Route::get('dashboard','DashboardController@dashboard');
 
@@ -50,6 +42,9 @@ Route::get('get-fba-list','FbaController@get_fba_list');
 Route::post('sales-update','FbaController@sales');
 Route::post('loan-update','FbaController@loan');
 Route::post('posp-update','FbaController@posp');
+
+Route::get('getpaymentlink/{fbaid}','FbaController@getpaymentlink');
+
 
 
 Route::get('fba-list/{fbaid}/{value}/{flag}',array('as'=>'fba-list.ajax','uses'=>'FbaController@updateposp'));
@@ -67,11 +62,17 @@ Route::get('register-form','RegisterFormController@register_form');
 //FSM Details
 Route::get('Fsm-Details','FsmDetailsController@FsmDetails');
 
-/// shubham 
+/// shubham ///
 
 Route::get('Rmfollowup','RMfollowupController@RMfollowup');
 Route::post('Rmfollowup','RMfollowupController@insertrmfollowup');
 Route::get('Rmfollowup/{fbaid}','RMfollowupController@gethistory');
+
+Route::get('Product-followup','ProductfollowupController@getproductfollowup');
+Route::get('Product-followup/{product_id}','ProductfollowupController@getproductinfo');
+Route::Post('Product-followup','ProductfollowupController@insertproductfollowup');
+
+///shubham end ///
 
 //////GOVIND
 Route::get('Fsm-Details/{smid}','FsmDetailsController@fsmfbalist');
@@ -151,6 +152,8 @@ Route::get('menu-group-select','MenuController@menu_group_select');
 Route::group(['namespace' => 'RM',  ], function() {
 
 Route::get('regional-manager','RegionalManagerControllar@regional_manager');
+Route::get('Regional-Manager-search','RegionalManagerControllar@Regional_Manager_search');
+
 });
   /************
 // LEAD MANAGMENT
@@ -177,10 +180,22 @@ Route::get('marketing-leads','LeaduploadController@marketing_leads');
 ******************/
 Route::get('product-authorized','ProductController@product_authorized');
 Route::post('product-save','ProductController@product_save');
- 
 Route::post('send-sms-save','SendSMSController@send_sms_save');
+
+ /************
+// User Registration
+******************/
+Route::get('register-user','LoginController@register_user') ;
+Route::get('register-update/{id}','LoginController@register_update') ;
+Route::post('register-user-update','LoginController@register_user_update') ;
+Route::get('register-user-list','LoginController@register_user_list') ;
+Route::post('register-user','LoginController@registerinsert') ;
+Route::post('register-user-save','LoginController@register_user_save');
+/************
+// End
+******************/
+
 
 
 });
 
- 

@@ -20,7 +20,7 @@
 				</div>
 
 				<div class="form-group col-md-3">
-			       <input type="text" placeholder="City.." name="search" id="search_city" class="form-control" >  
+			       <input type="text" placeholder="City.." name="city_name" id="search_city" class="form-control" >  
 				</div>
 
 			</div> 
@@ -29,7 +29,7 @@
 
      <div class="col-md-4">
       <div class="form-group">
-      <p>From Date</p>
+      <p>From Registered Date</p>
          <div id="datepicker" class="input-group date" data-date-format="yyyy-mm-dd">
       <input class="form-control" type="text" placeholder="From Date" name="fdate" id="fmin_date"   />
               <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
@@ -38,7 +38,7 @@
            </div>
        <div class="col-md-4">
        <div class="form-group">
-       <p>To Date</p>
+       <p>To Registered  Date</p>
        <div id="datepicker1" class="input-group date" data-date-format="yyyy-mm-dd">
  <input class="form-control" type="text"  placeholder="To Date"  name="todate"  id="fmax_date"    />
               <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
@@ -46,6 +46,7 @@
             </div>
            </div>
        <div class="col-md-4">
+       <br>
        <div class="form-group"> <a href="#" class="mrg-top common-btn" id="search_fba_date">SHOW</a>   </div>
       </div>
 
@@ -58,7 +59,6 @@
 
 
 				<div class="col-sm-6 col-xs-12 form-padding" id="StatesV" style="overflow-y:scroll;height:270px;">
-
 	                    <table class="table table-responsive table-hover" cellspacing="0" id="myTable">
 		                <thead>
 						<tr class="headerstyle" align="center">
@@ -74,11 +74,27 @@
 					    </table>
                         
 			     </div>
+
+
+
 			
-	               <div class="col-sm-6 col-xs-12 form-padding">
-	               <textarea style="padding:10px; height:200px;">Type SMS</textarea>
+	               <div class="col-sm-6 col-xs-12 form-padding">  
+                    <select  name="SMSTemplate" class="form-control"   onchange="SMSTemplate_fn(this.value)" >
+                    <option value="0" >select</option>
+                    @foreach($SMSTemplate as $sms)
+                    <option value="{{$sms->SMSTemplateId}}">{{$sms->Header}}</option>
+                    @endforeach
+                    </select>
+                      @if ($errors->has('SMSTemplate'))<label class="control-label" for="inputError"> {{ $errors->first('SMSTemplate') }}</label>  @endif
+
+  <br>
+
+
+	               <textarea style="padding:10px; height:200px;"  id="SMSTemplate"  name="sms_text" class="form-control"> </textarea>
 	               <div class="center-obj pull-left">
 	               <button class="common-btn">SEND</button>
+
+	                 @if ($errors->has('sms_text'))<label class="control-label" for="inputError"> {{ $errors->first('sms_text') }}</label>  @endif
 	               </div>
 				   </div>
 
@@ -100,25 +116,7 @@ $(document).ready(function(){
 
 });
 
-
-// function myFunction() {
-//   var input, filter, table, tr, td, i;
-//   input = document.getElementById("myInput");
-//   filter = input.value.toUpperCase();
-//   table = document.getElementById("myTable");
-//   tr = table.getElementsByTagName("tr");
-//   for (i = 0; i < tr.length; i++) {
-//     td = tr[i].getElementsByTagName("td")[0];
-//     if (td) {
-//       if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
-//         tr[i].style.display = "";
-//       } else {
-//         tr[i].style.display = "none";
-//       }
-//     }       
-//   }
-// }
-
+ 
 
 
 
@@ -180,24 +178,34 @@ function FN_search(ID,city,fDate,tDate){
         
 
  if(search!=null){
- $.get("{{url('send-sms')}}",search).done(function(data){ 
-                var arr=Array();
-                 console.log(data);
-
-                     $('#sendsms_id').empty();
-              $.each(data,function(index,val){ 
-                    arr.push('<tr><td><input type="checkbox" name="fba[]" value="'+val.FBAID+'" >'+val.FullName	+':'+val.MobiNumb1+'</td> </tr>');
-
-                    
-                 });
+ $.get("{{url('send-sms')}}",search).done(function(data){   var arr=Array();   $('#sendsms_id').empty();
+ 	           if(data.sms_data.length > 0){
+              $.each(data.sms_data,function(index,val){ 
+                    arr.push('<tr><td><input type="checkbox" name="fba[]" value="'+val.FBAID+'" >'+val.FullName	+':'+val.MobiNumb1+'</td> </tr>');  });
                 $('#sendsms_id').append(arr);
+                 }else{
+                 	alert("No data found...");
+                 }
                }).fail(function(xhr, status, error) {
                   console.log(error);
                 });
+  }
 }
 
 
+
+ 
+function SMSTemplate_fn(ID){
+ $('#SMSTemplate').empty();
+  $.get("{{url('send-sms')}}",{'smstemplate_id':ID}).done(function(data){ 
+               $('#SMSTemplate').val(data);
+  	  }).fail(function(xhr, status, error) {
+                  console.log(error);
+     });
+
 }
+
+
 
 </script>
 			 @endsection

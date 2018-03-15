@@ -47,14 +47,14 @@
 		   <tbody>
 				<tr class="" align="center">
 			     <th scope="col">
-                <input type="checkbox" class="chkproduct" id="chkproduct">
+                <input type="checkbox" class="chkproduct" id="chkproduct" >
                 <span>Select All</span>
            </th>
 		    </tr>
 		        @foreach($product as $val)
 				<tr align="left">
 		       <td>
-					   <input id="chkproductname" type="checkbox" name="txtproduct" class="chkproductname" value="{{$val->Product_Id}}"><span>{{$val->Product_Name}}</span>
+					   <input required="yes" id="chkproductname" type="checkbox" name="txtproduct" class="chkproductname" value="{{$val->Product_Id}}"><span>{{$val->Product_Name}}</span>
 					</td>
 				</tr>
 			 @endforeach
@@ -66,20 +66,21 @@
            	<select class="form-control" name="txtrmstatus" id="txtrmstatus">
            	 <option selected="selected">--Select Status--</option>
               @foreach($status as $val)
-              <option value="{{$val->id}}">{{$val->status_name}}</option>
+              <option value="{{$val->id}}" required="yes">{{$val->status_name}}</option>
               @endforeach
             </select>
            </div>
            <div class="form-group">
            <label class="control-label" for="message-text">RM Remark: </label>
-           <textarea class="form-control" id="txtrmremark" name="txtrmremark"></textarea>
+           <textarea class="form-control" required="yes" id="txtrmremark" name="txtrmremark"></textarea>
            </div>
         <div class="modal-footer"> 
         <button class="btn btn-default" type="button" data-dismiss="modal">Close</button>
          <input type="hidden" id="fbaid" name="txtfbaid">
          <input type="hidden" name="txtproductid" id="txtproductid">
-         <a id="btn_subbmit" class="btn btn-primary" type="button">Submit</a>
          </form>
+         <a id="btn_subbmit" class="btn btn-primary" type="button">Submit</a>
+         
         </div>
       </div>
     </div>
@@ -97,25 +98,7 @@
       </div>
       <div class="modal-body">
 	  <div id="divpartnertable" class="table-responsive">
-       <!-- <table class="table table-bordered table-striped">
-		   <tr>
-			 <td>Lead Id</td>
-			 <td>Name</td>
-			 <td>Mobile No</td>
-			 <td>Email</td>
-			 <td>City</td>
-			 <td>Status</td>
-			
-			 </tr>
-			 <tr>
-			 <td></td>
-			 <td>Pavamaana Softech</td>
-			 <td>9845724268</td>
-			 <td>bgykumar@gmail.com</td>
-			 <td>Bangalore</td>
-			 <td>Call Back</td>
-			</tr>
-		</table> -->
+       
 		</div>
       </div>
     </div>
