@@ -77,7 +77,7 @@ Route::Post('Product-followup','ProductfollowupController@insertproductfollowup'
 //////GOVIND
 Route::get('Fsm-Details/{smid}','FsmDetailsController@fsmfbalist');
 Route::get('FsmRegister/{smid}','FsmRegisterController@getfsmdetail');
-Route::get('fba-list/{partnerid}','FbaController@getfbapartner');
+Route::post('get-fba-partner','FbaController@getfbapartner');
 Route::get('assignrm','AssignrmController@loadrm');
 Route::get('assign-rm-load/{flag}/{value}','AssignrmController@loadfba');
 Route::post('assign-rm-update','AssignrmController@updatefba');
