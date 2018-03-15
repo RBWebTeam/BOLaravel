@@ -446,12 +446,12 @@
             {"data":null ,
              "render": function ( data, type, row, meta ) {
 
-<<<<<<< HEAD
+
                 return '<a href="#" style="" data-toggle="modal"  data-target="fbadoc" onclick="uploaddoc('+row.fbaid+')" >Pending</a>';
-=======
+
                 return '<a href="" style="" data-toggle="modal"  data-target="#docviwer" onclick="uploaddoc('+data+')" >Pending</a>';
 
->>>>>>> ad485be307a2d929871b65571b83ff56d2d69154
+
               }
             }, 
             {"data":"bankaccount"} ,

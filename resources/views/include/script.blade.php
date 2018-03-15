@@ -1394,7 +1394,7 @@ $.ajax({
                   
   }
 }
-<<<<<<< HEAD
+
 
 
  
@@ -1422,8 +1422,7 @@ $('#msds-select').change(function () {
     
 });
 
-=======
->>>>>>> ad485be307a2d929871b65571b83ff56d2d69154
+
 </script>
   
 
