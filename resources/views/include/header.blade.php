@@ -6,7 +6,7 @@
   <div class="bar3"></div>
   </div>
 </div>
-<div class="col-md-2 col-xs-4 no-mob-pad"><a href="http://localhost:8000/dashboard"><img src="images/logo1.png" class="img-responsive logo pull-left"/></a></div>
+<div class="col-md-2 col-xs-4 no-mob-pad"><a href="{{url('dashboard')}}"><img src="images/logo1.png" class="img-responsive logo pull-left"/></a></div>
 <div class="col-md-3">
 <div class="search-dv pull-left">
 <!-- <div class="input-group">

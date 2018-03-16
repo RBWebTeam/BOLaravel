@@ -449,11 +449,11 @@
                 return '<a href="" data-toggle="modal" data-target="#partnerInfo" onclick="getpartnerinfo('+row.fbaid+')">partner info</a>';
               }
             },  
-            {"data":null ,
+            {"data":"fbaid" ,
              "render": function ( data, type, row, meta ) {
 
 
-                return '<a href="#" style="" data-toggle="modal"  data-target="fbadoc" onclick="uploaddoc('+row.fbaid+')" >Pending</a>';
+                // return '<a href="#" style="" data-toggle="modal"  data-target="fbadoc" onclick="uploaddoc('+row.fbaid+')" >Pending</a>';
 
                 return '<a href="" style="" data-toggle="modal"  data-target="#docviwer" onclick="uploaddoc('+data+')" >Pending</a>';
 
@@ -497,4 +497,3 @@ function myFunction() {
 }
 
 </script>
-

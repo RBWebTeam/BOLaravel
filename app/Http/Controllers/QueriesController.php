@@ -138,6 +138,7 @@ class QueriesController extends Controller
                }
 
 
+ 
                
 
         	     return view('dashboard/queries',['query'=>$query,'status'=>$status]);
