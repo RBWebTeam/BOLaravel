@@ -1434,7 +1434,7 @@ function showImage(test)
 {
 
   
-$("#imgdoc").css("display","block");
+$("#imgdoc").css( " style="display: inline-block;"");
   $("#imgdoc").attr("src",test);
 
 }

@@ -153,7 +153,7 @@
 
 
 
- <div class="fbadoc modal fade" role="dialog">   
+<!--  <div class="fbadoc modal fade" role="dialog">   
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -170,7 +170,7 @@
     </div>
   </div>
 </div>
-
+ -->
  <!-- fab document -->
  <!-- <div class="fbadoc modal fade" role="dialog">   
   <div class="modal-dialog" role="document">
@@ -333,7 +333,7 @@
         <div id="divdocviewer" name="divdocviewer">
         </div>
         <div>
-         <img id="imgdoc" style="cursor:pointer;margin:5px;padding:10px;">
+         <img id="imgdoc" style="min-height:150px; min-width:150px;">
          </div>
        </div>
      </div>

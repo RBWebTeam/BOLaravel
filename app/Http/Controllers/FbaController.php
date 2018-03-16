@@ -101,7 +101,7 @@ class FbaController extends CallApiController
 
         public function getfbalist($fbaid)
        {
-         $doctype = DB::select("call fba_List_Uplode($fbaid)");
+         $doctype = DB::select("call get_fba_doc($fbaid)");
         
           return json_encode($doctype);
         }
