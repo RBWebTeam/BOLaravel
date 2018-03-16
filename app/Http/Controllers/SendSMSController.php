@@ -10,7 +10,7 @@ use Redirect;
 use Session;
 use URL;
 use Mail;
-
+ 
 class SendSMSController extends Controller{
 
 
@@ -61,8 +61,9 @@ class SendSMSController extends Controller{
 
 
     public function send_sms_save(Request $req){  
-
-
+ 
+ 
+         $error='';
 
               $validator =Validator::make($req->all(), [
               'SMSTemplate' =>'required|not_in:0',
@@ -73,13 +74,14 @@ class SendSMSController extends Controller{
              ->withInput();
             }else{
            if(isset($req->fba))
+            $FBAID=implode(',', $req->fba); 
+            $query=DB::select('call usp_insert_smslog(?,?,?)',[ $FBAID,$req->sms_text,uniqid()]);
              foreach ($req->fba as $key => $fba_id) {
-            $query=DB::table('FBAMast')->select('FBAID','FullName','MobiNumb1')->where('FBAID','=',$fba_id)->first();
-            $this->sentsms($query->MobiNumb1,$req->sms_text,$query->FBAID,$req->SMSTemplate);  
+             $query=DB::table('FBAMast')->select('FBAID','FullName','MobiNumb1')->where('FBAID','=',$fba_id)->first();
+             $status=$this->sentsms($query->MobiNumb1,$req->sms_text,$query->FBAID,$req->SMSTemplate);
              }
-
-
-             return redirect('send-sms');
+             Session::flash('msg', "message  successfully send...");;
+                       return Redirect::back();
             }     
 
     }
@@ -87,10 +89,14 @@ class SendSMSController extends Controller{
 
 
     public function sentsms($mob,$text,$fba_id,$SMSTemplateId){
- 
-      $arr=array('fbaid'=>$fba_id,'mobileno'=>$mob,'message'=>$text,'create_date'=>date('Y-m-d H:i:s'),'group_id'=> uniqid());
-       DB::table('SMSLog')->insert($arr);
+      // $arr=array('fbaid'=>$fba_id,'mobileno'=>$mob,'message'=>$text,'create_date'=>date('Y-m-d H:i:s') );
+      //  DB::table('SMSLog')->insert($arr);
        
+
+
+
+
+
       // $post_data='{
       //       "mobNo":"8898540057",
       //       "msgData":"'.$text.'",
@@ -101,7 +107,10 @@ class SendSMSController extends Controller{
       //       $error=$result['error'];
       //       $obj = json_decode($http_result);
       //       if($obj->status=='success'){
-      //           DB::table('SMSLog')->insert($arr);
+      //           // DB::table('SMSLog')->insert($arr);
+      //           return 0;
+      //       }else{
+      //           return 1;
       //       } 
 
     }
