@@ -1441,7 +1441,7 @@ if(data.length > 0){
 
 function showImage(test)
 {
-  //console.log(test);
+//console.log(test);
   
 $("#imgdoc").css("display","block");
   $("#imgdoc").attr("src",test);
