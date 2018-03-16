@@ -1440,20 +1440,6 @@ $("#imgdoc").css("display","block");
 }
 
 
-</script> 
-  
-
-<!-- fbalist ImageView Script End Here.
- -->
-
-</script>
-
-
-
-
-<script> 
-
- 
 
 $('#msds-select').change(function () { 
    var table = $('#fba-list-table').DataTable(); 
