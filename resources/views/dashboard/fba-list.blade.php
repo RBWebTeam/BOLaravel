@@ -333,7 +333,7 @@
         <div id="divdocviewer" name="divdocviewer">
         </div>
         <div>
-         <img id="imgdoc" style="min-height:150px; min-width:150px;">
+         <img id="imgdoc" style="cursor:pointer;margin:5px;padding:10px;">
          </div>
        </div>
      </div>
