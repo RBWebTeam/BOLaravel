@@ -22,7 +22,7 @@
  <div id="export_id"></div>
 <br>
 
-
+ 
    <div class="col-md-12">
        <div class="overflow-scroll">
        <div class="table-responsive" >
@@ -57,6 +57,7 @@
                <td> {{$val->TWO_WHEELER}}</td>
                 
                @elseif($status==3)
+               <td> {{$val->City}}</td>
                 <td> {{$val->HEALTH}}</td>
                 <td> {{$val->MOTOR}}</td>
                 <td> {{$val->TWO_WHEELER}}</td>

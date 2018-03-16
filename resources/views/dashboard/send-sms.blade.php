@@ -2,11 +2,21 @@
  @section('content')
 
 <!-- Body Content Start -->
-            <div id="content" style="overflow:scroll;">
+     <div id="content" style="overflow:scroll;">
 			 <div class="container-fluid white-bg">
 			 <div class="col-md-12"><h3 class="mrg-btm">SEND SMS</h3></div>
 			 <!-- Date Start -->
 			 
+             @if($message = Session::get('msg'))
+         <div class="alert alert-info alert-dismissible fade in" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+        <strong>{{ $message }}</strong> 
+      </div>
+       @endif
+
+
 
 
 			 <div class="col-md-12 col-xs-12">

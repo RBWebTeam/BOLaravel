@@ -55,7 +55,7 @@
 
 
 
-				<div id="docs" class="col-md-12"></div>
+				<div id="docs" class="co-md-8"></div>
 				</form>
 					
 

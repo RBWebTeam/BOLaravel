@@ -97,7 +97,25 @@
       </div>
       <div class="modal-body">
 	  <div id="divpartnertable" class="table-responsive">
-       
+       <!-- <table class="table table-bordered table-striped">
+		   <tr>
+			 <td>Lead Id</td>
+			 <td>Name</td>
+			 <td>Mobile No</td>
+			 <td>Email</td>
+			 <td>City</td>
+			 <td>Status</td>
+			
+			 </tr>
+			 <tr>
+			 <td></td>
+			 <td>Pavamaana Softech</td>
+			 <td>9845724268</td>
+			 <td>bgykumar@gmail.com</td>
+			 <td>Bangalore</td>
+			 <td>Call Back</td>
+			</tr>
+		</table> -->
 		</div>
       </div>
     </div>
