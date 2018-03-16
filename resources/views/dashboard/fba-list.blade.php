@@ -444,11 +444,9 @@
             {"data":"fbaid" ,
              "render": function ( data, type, row, meta ) {
 
-
-                // return '<a href="#" style="" data-toggle="modal"  data-target="fbadoc" onclick="uploaddoc('+row.fbaid+')" >Pending</a>';
-
                 return '<a href="" style="" data-toggle="modal"  data-target="#docviwer" onclick="uploaddoc('+data+')" >Pending</a>';
 
+    
 
               }
             }, 
