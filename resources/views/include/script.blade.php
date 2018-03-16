@@ -417,7 +417,7 @@ alert(JSON.stringify(data));*/
 
 <script type="text/javascript">
   $('#submit').click(function(){
-  alert('okae');
+
   $.ajax({
           url:"{{URL::to('sales-material-upload-submit')}}" ,  
           data:new FormData($("#sales_material_upload")[0]),
@@ -431,6 +431,7 @@ alert(JSON.stringify(data));*/
              if (msg.status==0) 
               {
                 alert('Uploaded Successfully');
+                $("#sales_material_upload")[0].reset();
               } 
               else {
                alert('Could Not Upload');
@@ -460,15 +461,15 @@ alert(JSON.stringify(data));*/
    {
   
      var tablerows = new Array();
-                         $.each(msg, function( index, value ) {
+        $.each(msg, function( index, value ) {
             tablerows.push('<tr><td><img class="img-responsive" src="/' + value.image_path + '" width="400" height=""/></td></tr>');
         }); 
 
        if(msg){
-                            $('#docs').empty().append('<table class="table table-striped table-bordered"><tr class="text-capitalize"><td style="font-family: monospace">Image Path</td></tr>'+tablerows+'</table>');
-                         }else{
-                            $('#docs').empty().append('No Result Found');
-                         }
+          $('#docs').empty().append('<table class="table table-striped table-bordered"><tr class="text-capitalize"><td style="font-family: monospace">Images</td></tr>'+tablerows+'</table>');
+         }else{
+            $('#docs').empty().append('No Result Found');
+         }
 
    },
 

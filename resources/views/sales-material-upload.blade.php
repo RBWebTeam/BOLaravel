@@ -60,8 +60,7 @@
 				</div>
                 <div class="col-md-12"><br></div>
 				<div class="col-md-4 col-md-offset-4">
-	            <input type="hidden" name="UserId" id="UserId" value="<?php echo Session::get('emp_id');?>">
-				<a type="button" id="submit" name="submit" class="btn btn-primary">SUBMIT</a>
+	            <a type="button" id="submit" name="submit" class="btn btn-primary">SUBMIT</a>
 				<a type="button" id="reset" name="reset" class="btn btn-info">Reset</a>
 
                </div>
