@@ -50,6 +50,7 @@
                <td> {{$val->TWO_WHEELER}}</td>
                @elseif($status==2)
                <td> {{$val->City}}</td>
+               <td> {{$val->CreatedDate}}</td>
                <td> {{$val->HEALTH}}</td>
                <td> {{$val->MOTOR}}</td>
                <td> {{$val->HOME_LOAN}}</td>

@@ -16,8 +16,11 @@ class FbaController extends CallApiController
       
         public function fba_list()
         {
+           $query=DB::select("call usp_load_fbalist_new(0)");
          $doctype = DB::select("call get_document_type()");
-          return view('dashboard.fba-list',['doctype'=>$doctype]);
+        
+         //print_r($doctype); exit();
+          return view('dashboard.fba-list',['query'=>$query,'doctype'=>$doctype]);         
         }
         public function get_fba_list(Request $req){
           $query=DB::select("call fbaList(0)");
@@ -66,6 +69,7 @@ class FbaController extends CallApiController
             ->where('FBAID','=',$req->p_fbaid)
             ->update(['salescode' =>$req->p_remark]);
            if ( $query) {
+            
               return response()->json(array('status' =>0,'message'=>"success"));
             }
         }

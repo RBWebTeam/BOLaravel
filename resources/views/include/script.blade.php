@@ -67,9 +67,17 @@ $(document).ready(function(){
             trigger: 'focus'
           });
 
-           $('.popover-Password').popover({
-            trigger: 'focus'
-          });
+                     $('body').popover({
+    selector: '[data-toggle="popover"]'
+});
+
+$('body').on('click',  function (e) {
+    $('[data-toggle="popover"]').each(function () {
+        if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
+            $(this).popover('destroy');
+        }
+    });
+});
 
     function Sales_Code() {
               console.log('something');
@@ -639,6 +647,7 @@ $(document).on('change', '#search_state', function() {
                 {
                   alert('Updated Successfully');
                   $('#p_remark').val('');
+                  $('#update_'+id).closest('td').html(sales_update);
                   $('.close').click();           
                 } 
                 else {
@@ -678,7 +687,7 @@ $(document).on('change', '#search_state', function() {
               if (msg.status==0) 
                 {
                   alert('Updated Successfully');
-                  $('#loan_'+id).text(loan_update);       
+                  $('#loan_'+id).closest('td').html(loan_update);       
                   $('#remark').val('');
                   $('.close').click();           
                   
@@ -700,10 +709,13 @@ $(document).on('change', '#search_state', function() {
 <script type="text/javascript">
   $('#posp_update').click(function(){
     // alert('okae');
+
+// alert($(this).closest('tr').find('input[type=text]').val());
+
     var id = $('#fbaid').val();
     var posp_update=$('#posp_remark').val();
     console.log(posp_update);
-    
+
     if (!$('#update_posp').valid()) 
     {
 
@@ -718,7 +730,8 @@ $(document).on('change', '#search_state', function() {
               if (msg.status==0) 
                 {
                   alert('Updated Successfully');
-                  $('#posp_'+id).text(posp_update);
+
+                  $('#posp_'+id).closest('td').html(posp_update);
                   $('#posp_remark').val('');
                   $('.close').click();           
                 } 
@@ -746,7 +759,7 @@ $('.input-daterange input').each(function() {
 table1 = $('#example_1').DataTable({
   paging: true,
   info: false,
-   responsive: false,
+  responsive: false,
 });
 
 
@@ -820,10 +833,7 @@ $.ajax({
          type: "GET",  
          url:'fba-list/'+fbaid,//"{{URL::to('Fsm-Details')}}",
          success: function(fsmmsg){
-<<<<<<< HEAD
 
-=======
->>>>>>> 196fadbc8bca2f549db4792baac8db3692de4100
         var data = JSON.parse(fsmmsg);
 
         var str = "<table class='table'><tr style='height:30px;margin:5px;'><td>Partner ID</td><td>Name</td><td>Mobile No</td><td>Email</td><td>City</td><td>Pincode</td></tr>";
