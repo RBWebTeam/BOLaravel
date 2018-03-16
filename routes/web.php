@@ -47,9 +47,15 @@ Route::get('getpaymentlink/{fbaid}','FbaController@getpaymentlink');
 
 
 
+
+  Route::get('fba-list/{fbaid}/{value}/{flag}',array('as'=>'fba-list.ajax','uses'=>'FbaController@updateposp'));
+
+    Route::post('fba-list','FbaController@sendsms');
+
 Route::get('fba-list/{fbaid}/{value}/{flag}',array('as'=>'fba-list.ajax','uses'=>'FbaController@updateposp'));
 Route::post('fba-list','FbaController@sendsms');
 Route::post('fba-listdocument','FbaController@uploaddoc');
+
 
 //fba documents 
 Route::get('Fba-document','fbadocumentsController@fbadocument');
@@ -90,7 +96,7 @@ Route::post('Fsm-Register','FsmRegisterController@insertfsm');
 
  Route::get('send-notification','SendNotificationController@sendnotification');
 
- Route::get('send-notification-approve','SendNotificationApproveController@SendnotificationApprove');
+ Route::get('send-notification-approve','SendNotificationController@SendnotificationApprove');
 
 
 // -------------- avinash
@@ -103,9 +109,49 @@ Route::get('send-notification/{id}',array('as'=>'send-notification.ajax','uses'=
 Route::get('send-notificationfba/{flag}/{value}',array('as'=>'send-notification.ajax','uses'=>'SendNotificationController@getfba'));
 Route::post('insertnotification','SendNotificationController@insertntf');
 
-Route::get('approvenotification/{msgid}/{value}','SendNotificationApproveController@approvenotification');
+Route::post('send-notification-approve','SendNotificationController@insertntf');
+
+
+
+Route::get('approvenotification/{msgid}/{value}','SendNotificationController@approvenotification');
+route::get('sendnotificationnew', 'SendNotificationController@sendnotificationstate');
+
+
+Route::get('insert','uploadfileController@imageupload');
+Route::get('Fba-list-Update','FbaController@test');
+Route::get('fbalist-document/{fbaid}','FbaController@getfbalist');
+
+
+
+
+route::post('send-notification-submit', 'SendNotificationController@sendnotificationsubmit');
+
+
+
+
+
+//route::get('sendnotificationnew', 'SendNotificationController@send-notificationstate');
+
+Route::get('Fsm-Details','FsmDetailsController@FsmDetails');
+
+Route::get('Payment-History','PaymentHistoryController@Payment_History');
+
+
+Route::get('Fsm-Register','FsmRegisterController@bindsate');
+
+Route::get('uploadefile','uploadfileController@uplode');
+
+ Route::post('file_uplode','uploadfileController@file_uploade');
+Route::post('insertnotificationfile','uploadfileController@insertntfi');
+
+ // Route::get('send-sms','SendSMSController@ViewSendSMSDetails');
+ 
+Route::get('notification-save','SendNotificationController@sendsubmitnotification_s');
+
+Route::get('approvenotification/{msgid}/{value}','SendNotificationController@approvenotification');
  //send sms
 Route::get('send-notification','SendNotificationController@sendnotification');
+
 //send sms
 Route::get('send-sms','SendSMSController@ViewSendSMSDetails');
  

@@ -1393,10 +1393,38 @@ $.ajax({
                   
   }
 }
+
 </script>
  
 <script>
    $(".nav-list > li").addClass(function(i){return "item" + (i + 1);});
+
+ 
+$('#msds-select').change(function () { 
+   var table = $('#fba-list-table').DataTable(); 
+    $.fn.dataTable.ext.search.push(
+    function( settings, data, dataIndex ) {
+        var msdsSearch = $( "#msds-select option:selected" ).val();
+        var msdsValue = data[10]|| 0;
+        console.log(data);
+        var numbers = /^[0-9]+$/;
+          if(msdsSearch=="2" && msdsValue=="update"){  
+            return true;
+          }
+            if(msdsSearch=="1" && msdsValue!="update"){  
+            return true;
+          }
+          if(msdsSearch=="0"){  
+            return true;
+          }
+        return false;
+    });
+    
+     table.draw();
+    
+});
+
+
 </script>
  
  

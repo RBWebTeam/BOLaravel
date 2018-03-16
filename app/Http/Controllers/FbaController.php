@@ -113,6 +113,14 @@ class FbaController extends CallApiController
           return json_encode($fsmfbaquery);    
         }
 
+        public function getfbalist($fbaid)
+       {
+         $doctype = DB::select("call fba_List_Uplode($fbaid)");
+        
+          return json_encode($doctype);
+        }
+
+
         public function getpaymentlink($fbaid){
           
         

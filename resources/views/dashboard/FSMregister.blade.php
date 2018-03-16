@@ -5,7 +5,7 @@
 <p class="alert alert-info">{{ Session::get('message') }}</p>
 @endif
  <!-- Body Content Start -->
-            <div id="content" style="overflow:scroll;">
+
 			 <div class="container-fluid white-bg">
 			 <div class="col-md-12"><h3 class="mrg-btm">Register Form</h3></div>
 			 <div class="col-md-12">
@@ -18,7 +18,7 @@
               </ul>
              <div class="tab-content">
               <div id="home" class="tab-pane fade in active">
-              <h4 class="text-center">FSM Basic Info</h4>
+              <h4 class="text-center fsm-reg-heading">FSM Basic Info</h4>
 			  <div class="col-md-4 col-xs-12">
 
 			  	<input id="fsmid" type="hidden" value="0">
@@ -127,7 +127,8 @@
 				</div>
 				</div>
 			  <div id="menu1" class="tab-pane fade">
-              <h4 class="text-center">Pincode Mapping</h4>
+             <h4 class="fsm-reg-heading text-center">Pincode Mapping</h4>
+			
               <div class="col-md-4 col-xs-12">
 				<div class="form-group">
 				<select name="State"  id="txtmapstate" class="selectpicker select-opt form-control" required="">
@@ -177,7 +178,7 @@
 			  
 			  
               <div id="menu2" class="tab-pane fade">
-              <h4 class="text-center">Banking Info</h4>
+              <h4 class="text-center fsm-reg-heading">Banking Info</h4>
 			  
 			  <div class="col-md-4 col-xs-12">
 				<div class="form-group">
@@ -232,7 +233,7 @@
 			    </form>
             </div>
 			</div>
-			</div>
+			
             </div>
 <script>
 $(document).ready(function(){
