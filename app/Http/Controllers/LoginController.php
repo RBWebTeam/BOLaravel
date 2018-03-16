@@ -160,7 +160,7 @@ class LoginController extends InitialController
             'stateid' =>$req->state_id,
             'cityid' =>$req->city_id,
             'user_id' =>Session::get('fbauserid'),
-            'user_type_id' =>1,
+           // 'user_type_id' =>1,
             'usergroup' =>$req->menu_group,
             'uid' =>$req->uid,
             'password' =>$req->password]);
@@ -186,9 +186,9 @@ public function register_update(Request $req){
                   $state = DB::select("call usp_load_state_list()");
                   $user_type=DB::table('user_type_master')->get();
                   $menu_group=DB::table('menu_group_master')->get();
-                  $city=DB::table('CityStateList')->select('DCCityID','CityName')->get();
+                //  $city=DB::table('CityStateList')->select('DCCityID','CityName')->get();
                   
-                return view('register-update',['state' => $state,'user_type'=>$user_type,'menu_group'=>$menu_group,'city'=>$city,'query'=>$query[0]]);
+                return view('register-update',['state' => $state,'user_type'=>$user_type,'menu_group'=>$menu_group,'query'=>$query[0]]);
 
 }
 

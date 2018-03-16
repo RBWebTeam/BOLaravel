@@ -1,9 +1,14 @@
+.form-control {width:98% !important;}
 .mrg-btm{margin-bottom:15px !important; margin-top:0px;}
 .qry-btn:hover {text-decoration:none;color:#d1e2f1;background: #236094;}
-.active, .qry-btn:hover {
-    background-color: #666;
-    color: white;
-}
+
+.fsm-reg-heading {padding:10px;margin:15px;}
+tr td {font-size:13px;}
+tr th {font-size:14px;}
+#export_id a{background:#58cc44;text-transform: uppercase;border: 1px solid #3eab2b; width:100px;}
+.qry-btn {margin-right:2px;display: inline-block;margin-bottom:5px !important;border-radius: 5px;-moz-border-radius:5px;font-weight:normal; text-transform:uppercase; font-size:12px !important;padding:7px 10px; background:#337ab7; color:#d1e2f1;}
+#myDIV {padding-bottom:10px;  border-bottom:1px dashed #ddd; margin-bottom:10px;}
+
 #export_id a{margin:0 auto;display:block; width:100px;}
 .qry-btn {display: inline-block;margin-bottom:5px !important;font-weight:normal; text-transform:uppercase; font-size:13px !important;padding:10px; background:#337ab7; color:#d1e2f1;}
 .mrg-top{margin-top:22px;}
@@ -102,7 +107,6 @@ h1,h2,h3,h4,h5,h6{
 }	
 p{
 	margin:0;
-	color: #676a6d;
 }
 ul{
 	margin:0;
@@ -171,7 +175,7 @@ a:hover{
 .search-dv {float: left;width:300px;margin-top:23px;}
 .search-btn {position: relative;top: -47px;right: 45px;cursor: pointer;}
 .logout-btn img {padding: 28px 0px;}
-.log-txt {color:#b9ccd4;padding:0px; margin-top:15px;}
+.log-txt {color:#b9ccd4;padding:0px; margin-top:20px;}
 
 .search {
     display: block;width: 100%;height: 34px;padding: 6px 12px;font-size: 14px;line-height: 1.42857143;color: #555;background-color: #4c3d56;background-image: none;

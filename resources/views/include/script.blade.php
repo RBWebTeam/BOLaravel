@@ -49,10 +49,9 @@ $(document).ready(function(){
              $(document).ready(function () {
                  $('#sidebarCollapse').click( function () {
                      $('#sidebar').slideToggle();
-					 
                  });
              });
-			 
+       
 
   // $(document).ready(function() {
          
@@ -60,24 +59,29 @@ $(document).ready(function(){
   //         "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]]
   //         });
   //         });
-  // start test
+  
+          // $('.popover-Payment').popover({
+          //   trigger: 'focus'
+          // });
+          // test
 
-  // end test
-          $('.popover-Payment').popover({
-            trigger: 'focus'
-          });
-
-                     $('body').popover({
+          
+          $('body').popover({
     selector: '[data-toggle="popover"]'
 });
 
+
+
+
 $('body').on('click',  function (e) {
     $('[data-toggle="popover"]').each(function () {
-        if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
+        if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover-Password').has(e.target).length === 0) {
+
             $(this).popover('destroy');
         }
     });
 });
+
 
     function Sales_Code() {
               console.log('something');
@@ -91,9 +95,10 @@ $('body').on('click',  function (e) {
 
              function POSP_UPDATE(id){
                       $('#fbaid').val(id);
-                       $('.updatePosp').modal('show');
+                      $('.updatePosp').modal('show');
                     
              }
+             
 
              function LoanID_UPDATE(id){
                        $('#fba_id').val(id);
@@ -103,7 +108,7 @@ $('body').on('click',  function (e) {
 
            function sales_update_fn(id){
 
-                 $('#p_fbaid').empty();
+                $('#p_fbaid').empty();
                 $('#p_fbaid').val(id);
                 $('#salesupdate_modal_fade').modal('show');
            }
@@ -416,7 +421,7 @@ alert(JSON.stringify(data));*/
 
 <script type="text/javascript">
   $('#submit').click(function(){
-  alert('okae');
+
   $.ajax({
           url:"{{URL::to('sales-material-upload-submit')}}" ,  
           data:new FormData($("#sales_material_upload")[0]),
@@ -430,6 +435,7 @@ alert(JSON.stringify(data));*/
              if (msg.status==0) 
               {
                 alert('Uploaded Successfully');
+                $("#sales_material_upload")[0].reset();
               } 
               else {
                alert('Could Not Upload');
@@ -459,15 +465,15 @@ alert(JSON.stringify(data));*/
    {
   
      var tablerows = new Array();
-                         $.each(msg, function( index, value ) {
-            tablerows.push('<tr><td style="font-family: monospace"><img class="img-responsive" src="/' + value.image_path + '" width="699" height="1176"/></td></tr>');
+        $.each(msg, function( index, value ) {
+            tablerows.push('<tr><td><img class="img-responsive" src="/' + value.image_path + '" width="400" height=""/></td></tr>');
         }); 
 
        if(msg){
-                            $('#docs').empty().append('<table class="table table-striped table-bordered table-responsive"><tr class="text-capitalize"><td style="font-family: monospace">Image Path</td></tr>'+tablerows+'</table>');
-                         }else{
-                            $('#docs').empty().append('No Result Found');
-                         }
+          $('#docs').empty().append('<table class="table table-striped table-bordered"><tr class="text-capitalize"><td style="font-family: monospace">Images</td></tr>'+tablerows+'</table>');
+         }else{
+            $('#docs').empty().append('No Result Found');
+         }
 
    },
 
@@ -706,6 +712,7 @@ $(document).on('change', '#search_state', function() {
 </script>
 
 
+
 <script type="text/javascript">
   $('#posp_update').click(function(){
     // alert('okae');
@@ -743,15 +750,18 @@ $(document).on('change', '#search_state', function() {
       });
     }
   })
-</script>
-<script>
+
+
     $(document).ready(function() {
-        $('#example').DataTable({
+       var exampleInstance = $('#example').DataTable({
           paging: true,
           responsive: false,
+
         });
+
+       exampleInstance.column( '0:visible' ).order('desc').draw();
  // Bootstrap datepicker
-$('.input-daterange input').each(function() {
+$('.input-group date input').each(function() {
   $(this).datepicker('clearDates');
 });
 
@@ -969,14 +979,16 @@ $('#chkproduct').click(function () {
  });
 
 function getfollowup(id){
-  $('#fbaid').val(id);
-  $('.rmfolloup').modal('show');
+ $('#fbaid').val(id);
+ $('.rmfolloup').modal('show');
  }
+
 $('#btn_subbmit').click(function() {
 var productid = []
 $('input:checkbox[name=txtproduct]:checked').each(function() {
 productid.push($(this).val())
 })
+
 $('#txtproductid').val(productid);
 console.log($('#rmfolloupdetails').serialize());
    $.ajax({ 
@@ -994,6 +1006,294 @@ console.log($('#rmfolloupdetails').serialize());
 });
 
 function viewhistory(fbaid){
+$.ajax({  
+         type: "GET",  
+         url:'Rmfollowup/'+fbaid,
+         success: function(fsmmsg){
+
+      var data = JSON.parse(fsmmsg);
+      var str = "<table class='table'><tr style='height:30px;margin:5px;'><td>Lead ID</td><td>Name</td><td>User Type</td><td>Status</td><td>Remark</td></tr>";
+       for (var i = 0; i < data.length; i++) 
+       {
+
+         str = str + "<tr style='height:30px;margin:5px;'><td>"+data[i].lead_id+"</td><td>"+data[i].FullName+"</td><td>"+data[i].user_type+"</td><td>"+data[i].status_name+"</td><td>"+data[i].remark+"</td></tr>";
+       }
+         str = str + "</table>";
+           $('#divpartnertable').html(str);   
+       }  
+      });
+}
+
+
+
+
+</script>
+
+
+<!-- send Notification Script By Avinash
+ -->
+   <script type="text/javascript">
+
+    $('#ddlselect').on('change', function() {
+   var flag=$('#ddlselect').val();
+   var value=$('#txtval').val();
+   $.ajax({
+    url: 'send-notification/'+flag+'/'+value,
+                    type: "GET",
+                    dataType: "json",
+                    success:function(data) {
+
+                      
+                      $('#tblpincode tr:not(:first)').remove();
+
+                      var rows = "";
+                      for(var i =0; i < data.length;i++)
+                      {
+                        rows = rows +"<tr align='left'><td>";
+                        rows = rows +"<input id='pincode' type='checkbox' class='used chk' value =''>";
+                        rows = rows +"<span>"+data[i].pincode+"</span></td></tr>";
+                      }
+
+                      $('#tblpincode > tbody:last-child').append(rows);
+                    }
+                });
+
+
+});
+
+        // $("#first_nm").hide();
+        // $("#last_nm").hide();
+
+$('#LeadType').on('change',function(){
+  var LeadType=$('#LeadType').find(":selected").val();
+
+  if ( LeadType == 'WB')
+      {
+       
+        $("#weburl").show();
+        $("#last_nm").show();
+
+      }
+      else{
+        $("#weburl").hide();
+        $("#last_nm").hide();
+
+      }
+});
+
+
+ $('#txtmapstate').on('change', function() {
+            var state_id = $(this).val();
+            if(state_id) {
+                $.ajax({
+                    url: 'send-notificationstate/'+state_id,
+                    type: "GET",
+                    dataType: "json",
+                    success:function(data) {
+                        $('#txtmapcity').empty();
+                        $('#txtmapcity').append('<option value="0">select city</option>');
+                        $.each(data, function(key, value) {
+
+                            $('#txtmapcity').append('<option value="'+ key +'">'+ value +'</option>');
+                        });
+                     }
+                });
+            }else{
+                $('select[name="city"]').empty();
+            }
+        });
+
+$('#txtmapcity').on('change', function() {
+                  BindFbas(2,$('#txtmapcity').val());
+        });
+
+  
+  $("#upload").on("click", function() {
+
+
+    var file_data = $("#sortpicture").prop("files")[0];   
+    var form_data = new FormData();
+    form_data.append("file", file_data);
+
+    $.ajax({
+        url: "../../../notificationimages",
+        dataType: 'script',
+        cache: false,
+        contentType: false,
+        processData: false,
+        data: form_data,                         
+        type: 'post',
+        success: function(){
+            alert("works"); 
+        }
+    });
+});
+
+
+
+
+function BindFbas(flag,value)
+{
+     $('#tblfbalist').empty();
+     $.ajax({
+    url: 'send-notificationfba/'+flag+'/'+value,
+        type: "GET",
+       dataType:"json",
+      success:function(data) {
+      var text = "";
+      for (var i = 0; i < data.length; i++) {
+      if(i==0)
+    {
+    text = text +'<tr><th><input  name="fba_list[]" value="0" id="selectAll" onclick="checkall()" type="checkbox" /> FBA List</th></tr>';
+  text = text +'<tr><td><input name="fba_list[]" id="chkfba" type="checkbox" class="chkfba" value="'+data[i].id+'"/><input id="hdnchk" name="hdnchk" type="hidden" value="'+data[i].id+'" />'+data[i].fullname+'</td></tr>';
+}
+else{
+text = text +'<tr><td><input id="chkfba" name="fba_list[]"  type="checkbox" class="chkfba" value="'+data[i].id+'"/><input id="hdnchk" type="hidden" value="'+data[i].id+'" />'+data[i].fullname+'</td></tr>';
+}
+
+}
+          $('#tblfbalist').append(text);
+
+                     },
+     error:function(error)
+                     {
+                      console.log(error);
+                     }
+                });
+}
+
+
+function checkall(){
+
+$('#selectAll').click(function () {    
+   $('.chkfba').prop('checked', this.checked);    
+ });
+ }
+ function getfbabypincode(txt)
+ {
+    BindFbas(3,$(txt).val());
+ }
+
+function loadfbasbyflag()
+{
+  if($('#ddlflag').val() == 6){
+  
+    BindFbas(6,'999999');
+    $('#tblmanagerlist').css("display","none");
+    $('#tblsalesmanagerlist').css("display","none");
+   }
+  }
+
+
+$(document).on('change', '#search_state', function() {   
+    var fstate_id=$(this).val();  
+    var  city_array=Array('<option value="0">Select</option>');  
+    $.ajax({
+            url: "{{url('search-city')}}",
+            dataType: "json",
+            data: {
+                    fstate_id : fstate_id,
+                  },
+            success: function(data) { 
+                $.each(data, function( key, val )
+                {
+                  city_array.push('<option value="'+val.datavalue+'">'+val.value+'</option>');
+                });
+              }
+          });
+        
+    $('.search_district').empty();
+    $('.search_district').append(city_array);
+  
+});
+function getprodcutdtls(product_id){
+$.ajax({  
+         type: "GET",  
+         url:'Product-followup/'+product_id,
+         success: function(fsmmsg){
+
+      var data = JSON.parse(fsmmsg);
+      var str = "<table class='table' id='example'><thead><tr style='height:30px;margin:5px;'><th>Lead ID</th><th>Name</th><th>Mobile No</th><th>Email Id</th><th>Created Date</th><th>View History</th></tr></thead>";
+       for (var i = 0; i < data.length; i++) 
+       {
+
+         str = str + "<tbody><tr style='height:30px;margin:5px;'><td><a href='#'  data-toggle='modal' onclick='getproductfollowup("+data[i].FBAID+")' data-target='productfollowup'>"+data[i].FBAID+"</a></td><td>"+data[i].FullName+"</td><td>"+data[i].MobiNumb1+"</td><td>"+data[i].EmailID+"</td><td>"+data[i].CreaOn+"</td><td><a class='btn btn-primary'>View History</a></td></tr></tbody>";
+       }
+         str = str + "</table>";
+           $('#divpartnertable').html(str);   
+       }  
+      });
+}
+
+//vikas smstemplate
+$('#btnsave').click(function() {
+console.log($('#frmsmstemplate').serialize());
+   $.ajax({ 
+   url: "{{URL::to('sms_template')}}",
+   method:"POST",
+   data: $('#frmsmstemplate').serialize(),
+  success: function(msg)  
+   {
+    console.log(msg);
+    alert("Record has been saved successfully");
+    $("#frmsmstemplate").trigger('reset');
+    
+   }
+});
+});
+
+
+function getpaymentlink(fbaid){
+ $('.divpartnertable_payment').html('');
+  $.ajax({
+                    url: 'getpaymentlink/'+fbaid,
+                    type: "GET",
+                    dataType: "json",
+                    success:function(data) {
+
+                      if(data.length>0){
+
+                       // alert(data[0].Link);
+                        var str = "<p>"+data[0].Link+"</p>";
+                        // alert(str)
+                        $('.divpartnertable_payment').html(str);
+                         $('.paylink_payment').modal('show');
+                          //$('#paylink').html(data[0].Link);
+                       }      
+  
+                       
+                     }
+                });
+
+}
+
+
+function getproductfollowup(fbaid){
+
+  $('#txtproductfbaid').val(fbaid);
+  $('.productfollowup').modal('show');
+ }
+
+$('#btn_productsubbmit').click(function() {
+
+  console.log($('#productfolloupdetails').serialize());
+   $.ajax({ 
+   url: "{{URL::to('Product-followup')}}",
+   method:"POST",
+   data: $('#productfolloupdetails').serialize(),
+  success: function(msg)  
+   {
+    console.log(msg);
+    alert("Record has been saved successfully");
+    $("#productfolloupdetails").trigger('reset');
+      $('.productfollowup').modal('hide');
+
+   }
+});
+
+ });
+
+function viewProducthistory(fbaid){
 
 $.ajax({  
          type: "GET",  
@@ -1013,35 +1313,175 @@ $.ajax({
       });
 }
 
-//vikas smstemplate
-$('#btnsave').click(function() {
+
+ function updatenotification(msgid,value){
+
+//alert(value);
+ if (confirm("Are you sure to "+(value==1?"approve":"disapprove")+" this notification")) {}
+  $.ajax({
+            type: "GET",
+            url:'approvenotification/'+msgid+'/'+value, 
+                     
+           success: function( msg ) {
+            if(value=="1"){
+              alert("Notification Approved Successfully");
+            }
+            else if(value=="0"){
+             alert("Notification Dispproved Successfully");
+               }
+                
+            }
+
+        });
+
+ return false;
+
+}
 
 
-console.log($('#frmsmstemplate').serialize());
-   $.ajax({ 
-   url: "{{URL::to('sms_template')}}",
-   method:"POST",
-   data: $('#frmsmstemplate').serialize(),
-  success: function(msg)  
-   {
-    console.log(msg);
-    alert("Record has been saved successfully");
-    $("#frmsmstemplate").trigger('reset');
+
+
+  $('#notificsubmitbtn').click(function(){
+// alert('okae');
+  if (!$('#sendnotification').valid()) {
+     alert('Not Valid');
+
+  } else {
+$.ajax({
+          url:"{{URL::to('send-notification-submit')}}" ,  
+          data:new FormData($("#sendnotification")[0]),
+          dataType:'json',
+          async:false,
+          type:'POST',
+          processData: false,
+          contentType: false,
+          success: function(msg){
+
+            console.log(msg.data);
+            if (msg.data==true) 
+              {
+                alert('Inserted Successfully');
+              } else {
+                    alert('Oops!! Could not insert successfully');
+              }
+                 }
+        });
+  }
+  
+  });
+
+
+
+  function mail(obj,val){
+    // console.log(obj);
+    if(obj=='weburl' ){
+                   var str =$('#weburl').val();
+                   var emailPattern = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/; 
+                   var res = str.match(emailPattern);
+                   if(res){
+                     // console.log('Pancard is valid one.!!');
+                      $('#email').show();
+
+                  }else{
+                    // console.log('Oops.Please Enter Valid Pan Number.!!');
+                    $('#email').hide();
+
+                    return false;
+                  }
+                  
+  }
+}
+
+
+$(".nav-list > li").addClass(function(i){return "item" + (i + 1);});
+
+
+function uploaddoc(fbaid)
+{
+
+$('#divdocviewer').html(""); 
+$("#imgdoc").attr("src","");
+$("#imgdoc").css("display","none");
+$.ajax({  
+
+         type: "GET",  
+        
+         url:'fbalist-document/'+fbaid,//"{{URL::to('Fsm-Details')}}",
+         success: function(fsmmsg){
+     
+        var data = JSON.parse(fsmmsg);
+        var str = "<table class='table'><tr style='height:30px;margin:5px;'>";
+  if(data.length > 0){
+        
+       for (var i = 0; i < data.length; i++) {
+        
+         str = str + "<td><input style='padding:5px;' type='button' onclick=showImage('"+data[i].FileName+"') value='"+data[i].DocType+"'/></td>";
+          }
+ 
+           str = str + "</tr></table>";
+
+      }
+      else
+      {
+        str = str + "<td>No documents uploaded.</td></tr></table>";
+      }
+
+           $('#divdocviewer').html(str);   
+              
+        }  
+      });
+}
+
+function showImage(test)
+{
+
+  
+  $("#imgdoc").css("display","block");
+  $("#imgdoc").attr("src",test);
+
+}
+
+
+</script> 
+  
+
+<!-- fbalist ImageView Script End Here.
+ -->
+
+</script>
+
+
+
+
+<script> 
+
+ 
+
+$('#msds-select').change(function () { 
+   var table = $('#fba-list-table').DataTable(); 
+    $.fn.dataTable.ext.search.push(
+    function( settings, data, dataIndex ) {
+        var msdsSearch = $( "#msds-select option:selected" ).val();
+        var msdsValue = data[10]|| 0;
+        console.log(data);
+        var numbers = /^[0-9]+$/;
+          if(msdsSearch=="2" && msdsValue=="update"){  
+            return true;
+          }
+            if(msdsSearch=="1" && msdsValue!="update"){  
+            return true;
+          }
+          if(msdsSearch=="0"){  
+            return true;
+          }
+        return false;
+    });
     
-   }
-
+     table.draw();
+    
 });
 
-
-});
 
 </script>
  
-
-
-
  
-
-
- 
-

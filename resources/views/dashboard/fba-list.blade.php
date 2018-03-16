@@ -33,38 +33,47 @@
        
        <form>
 
-       <div class="col-md-4">
+      <div class="col-md-4">
       <div class="form-group">
       <p>From Date</p>
-         <div id="datepicker" class="input-group date" data-date-format="mm-dd-yyyy">
+
+         <div id="datepicker" class="input-group date" data-date-format="yyyy-mm-dd">
+
                <input class="form-control date-range-filter" type="text" placeholder="From Date" name="fdate" id="min-date"  />
               <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-              </div>
+            </div>
             </div>
            </div>
        <div class="col-md-4">
        <div class="form-group">
        <p>To Date</p>
-       <div id="datepicker1" class="input-group date" data-date-format="mm-dd-yyyy">
-               <input class="form-control date-range-filter1 " type="text"  placeholder="To Date"  name="todate"  id="max-date"   />
+
+       <div id="datepicker1" class="input-group date" data-date-format="yyyy-mm-dd">
+               <input class="form-control date-range-filter1" type="text" placeholder="To Date"  name="todate"  id="max-date"/>
+
               <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
               </div>
             </div>
            </div>
        <div class="col-md-4">
-       <div class="form-group"> <input type="submit" name=""  class="mrg-top common-btn" value="SHOW">  </div>
+       <div class="form-group"> <input type="submit" name="" id="btndate"  class="mrg-top common-btn" value="SHOW">  </div>
        </div>
-       </form>
+    
+ 
+  <select  id="msds-select">
+   <option value="0">ALL</option>
+  <option value="1">POSP Yes</option>
+  <option value="2">POSP No</option>
+  </select>
+  </form>
            <!-- Date End -->
-        
              <div class="col-md-12">
              <div class="overflow-scroll">
              <div class="table-responsive" >
-
-
-            <table class="datatable-responsive table table-striped table-bordered nowrap" id="fba-list-table">
-                          <thead>
-                                      <tr>
+             <table class="datatable-responsive table table-striped table-bordered nowrap" id="fba-list-table">
+                                       <thead>
+                                       <tr>
+                                       <th>FBA ID</th> 
                                        <th>Full Name</th>
                                        <th>Created Date</th>
                                        <th>Mobile No</th>
@@ -82,12 +91,8 @@
                                        <th>Bank Account</th>
                                        <th>SMS</th>
                                        <th>sales code</th>
-
-                                     </tr>
+                                    </tr>
                                     </thead>
- 
-               
-
             </table>
             </div>
             </div>
@@ -130,23 +135,41 @@
       <div class="modal-header">
         <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
         <h4 class="modal-title">FSM Details</h4>
+        </div>
+        <div class="modal-body">
+        <form id="posp_from_id">
+        <div class="form-group">
+        </div>
+           <div class="form-group">
+           <label class="control-label" for="message-text">FSM Email Id : </label>
+           </div>
+           <div class="form-group">
+           <label class="control-label" for="message-text">FSM Mobile No : </label>
+           </div>
+        </form>
+        <div class="modal-footer"> 
+          <button class="btn btn-default" type="button" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+ <div class="fbadoc modal fade" role="dialog">   
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+        <h4 class="modal-title">FSM Details</h4>
       </div>
       <div class="modal-body">
         <form id="posp_from_id">
           <div class="form-group">
             
           </div>
-          <div class="form-group">
-            <label class="control-label" for="message-text">FSM Email Id : </label>
-          </div>
-           <div class="form-group">
-            <label class="control-label" for="message-text">FSM Mobile No : </label>
-            
-          </div>
         </form>
-        <div class="modal-footer"> 
-          <button class="btn btn-default" type="button" data-dismiss="modal">Close</button>
-        </div>
       </div>
     </div>
   </div>
@@ -293,6 +316,30 @@
   </div>
 </div>
 <!-- Partner Info End -->
+
+<div id="docviwer" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+   <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title" style="text-align:center;">Attachment</h4>
+      </div>
+      <div class="modal-body">
+
+      <div class="table-responsive">
+        <div id="divdocviewer" name="divdocviewer">
+        </div>
+        <div>
+         <img id="imgdoc" style="min-height:150px; min-width:150px;">
+         </div>
+       </div>
+     </div>
+    </div>
+  </div>
+</div>
+
+
 <!--Filter -->
 <div class="Filter modal fade" id="Filter" role="dialog">   
   <div class="modal-dialog" role="document">
@@ -324,34 +371,54 @@
     </div>
   </div>
 </div>
-<script type="text/javascript">
+<!-- paymentlink -->
+ 
 
-
-
-
-</script>
-
-
+<div id="paylink_payment" class="modal fade paylink_payment" role="dialog">
+  <div class="modal-dialog">
+   <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Payment link</h4>
+      </div>
+      <div class="modal-body">
+    <div style="color: blue;" id="divpartnertable_payment" class="divpartnertable_payment">
+       
+    </div>
+      </div>
+    </div>
+  </div>
+</div>
 @endsection
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript">
-    $(document).ready(function() {
-    var fbalistInstance = $('#fba-list-table').DataTable( {
+
+
+  $(document).ready(function() {
+    var fbalistInstance = $('#fba-list-table').DataTable({
+
+      "createdRow": function(row, data, dataIndex ) {
+      if (data.PayStat=="S" ) {
+        $(row).css({backgroundColor: 'LightGreen'});
+      }
+    },
         "ajax": "get-fba-list",
-        "aaSorting": [[ 0, "desc" ]]
         "columns": [
-           
+             { "data": "fbaid"},
             { "data": "FullName"},
             { "data": "createdate" },
             { "data": "MobiNumb1" },
             { "data": "EMaiID" },
             { "data": "Link",
-            
-             "render": function ( data, type, row, meta ) {
-                return '<a class="popover-Payment" data-toggle="popover" title="Payment link" data-content="'+data+'">Payment link</a>';
+
+              "render": function ( data, type, row, meta ) {
+                return  row.PayStat !="S"?'<a id="btnviewhistory" data-toggle="modal" data-target="#paylink_payment" onclick="getpaymentlink('+row.fbaid+')">Payment link</a>':'';
               }
-}, 
+             }, 
+
+
             {"data":"pwd" ,
              "render": function ( data, type, row, meta ) {
                 return '<a class="popover-Password" data-toggle="popover" title="Show Password" data-content="'+data+'">*****</a>';
@@ -359,15 +426,16 @@
             },        
             {"data":"City"},
             {"data":"Pincode"},
-            {"data":"fbaid"  ,
+            {"data":null  ,
              "render": function ( data, type, row, meta ) {
                 return '<a href="#" style="" data-toggle="modal" data-target=".fsmdetails">Fsm details</a>';
               }
             },
             {"data":"POSPNo"  ,
              "render": function ( data, type, row, meta ) {
-              // console.log(row);
-                return data==""?('<a id="posp_'+row.fbaid+'" class="checkPosp" data-toggle="modal" data-target="#updatePosp" onclick="POSP_UPDATE('+row.fbaid+')">update</a>'):data;
+
+              return data==""?('<a id="posp_'+row.fbaid+'" class="checkPosp" data-toggle="modal" data-target="#updatePosp" onclick="POSP_UPDATE('+row.fbaid+')">update</a>'):data;
+
               }
             },  
 
@@ -379,14 +447,20 @@
               }
             },  
             {"data":"pospname"},  
-            {"data":"fbaid"  ,
+            {"data":null  ,
              "render": function ( data, type, row, meta ) {
-                return '<a href="" data-toggle="modal" data-target="#partnerInfo" onclick="getpartnerinfo('+data+')">partner info</a>';
+                return '<a href="" data-toggle="modal" data-target="#partnerInfo" onclick="getpartnerinfo('+row.fbaid+')">partner info</a>';
               }
             },  
             {"data":"fbaid" ,
              "render": function ( data, type, row, meta ) {
-                return '<a href="#" style="" data-toggle="modal"  data-target="fbadoc" onclick="uploaddoc('+data+')" >Pending</a>';
+
+
+                // return '<a href="#" style="" data-toggle="modal"  data-target="fbadoc" onclick="uploaddoc('+row.fbaid+')" >Pending</a>';
+
+                return '<a href="" style="" data-toggle="modal"  data-target="#docviwer" onclick="uploaddoc('+data+')" >Pending</a>';
+
+
               }
             }, 
             {"data":"bankaccount"} ,
@@ -402,9 +476,33 @@
             },
             
         ],
+    });
+fbalistInstance.column( '0:visible' ).order('desc').draw();
+//fbalistInstance.order([1,'desc']).draw();
+});  
 
-    } );
+ 
+
+function myFunction() {
+  var input, filter, table, tr, td, i;
+  input = document.getElementById("#myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("fba-list-table");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[9];
+    if (td) {
+      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }       
+  }
+}
+
 
 //fbalistInstance.order([1,'desc']).draw();
-} );
+
+
 </script>

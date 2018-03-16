@@ -30,23 +30,23 @@ class CheckAuth
 
 
 
-    $sql=\DB::table('view_user_right_group')->select('id','name','menu_group_id','url_link','parent_id','lvl')->where('menu_group_id','=',Session::get('usergroup'))->where('lvl','=',0)->orderBy('id', 'asc')->get();
+    // $sql=\DB::table('view_user_right_group')->select('id','name','menu_group_id','url_link','parent_id','lvl')->where('menu_group_id','=',Session::get('usergroup'))->where('lvl','=',0)->orderBy('id', 'asc')->get();
 
     
 
-        \Menu::make('MyNavBar', function ($menu) use($sql) {
-           foreach ($sql as $key => $value) {
-                //$menu->add($value->name,'dashboard')
-                $menu->add($value->name,array('url'  =>$value->url_link,  'class' => 'nav-item'))
-               ->prepend('<span class="sp-nav"><img src="images/icon/setting-icon.png"></span>&nbsp;&nbsp;');
-            } 
-    });
+    //     \Menu::make('MyNavBar', function ($menu) use($sql) {
+    //        foreach ($sql as $key => $value) {
+    //             //$menu->add($value->name,'dashboard')
+    //             $menu->add($value->name,array('url'  =>$value->url_link,  'class' => 'nav-item'))
+    //            ->prepend('<span class="sp-nav"><img src="images/icon/setting-icon.png"></span>&nbsp;&nbsp;');
+    //         } 
+    // });
  
 
 
 
                       
-              view()->share('user_right_group',$sql);
+            //  view()->share('user_right_group',$sql);
 
     	 	return $next($request);
     	 } 
