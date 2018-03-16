@@ -406,11 +406,6 @@
             { "data": "MobiNumb1" },
             { "data": "EMaiID" },
             { "data": "Link",
-         
-          
-    
-  
-}
               "render": function ( data, type, row, meta ) {
                 return '<a id="btnviewhistory" data-toggle="modal" data-target="#paylink_payment" onclick="getpaymentlink('+row.fbaid+')">Payment link</a>';
               }
@@ -494,4 +489,3 @@ function myFunction() {
 }
 
 </script>
-
