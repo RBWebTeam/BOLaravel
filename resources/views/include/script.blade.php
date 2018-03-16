@@ -1287,12 +1287,7 @@ $('#btn_productsubbmit').click(function() {
     $("#productfolloupdetails").trigger('reset');
       $('.productfollowup').modal('hide');
 
-
-
-
-
- 
- }
+   }
 });
 
  });
@@ -1400,43 +1395,13 @@ $.ajax({
   }
 }
 
-//fbalist ImageView Script Start Here
 
-
-
-function uploaddoc(fbaid)
-{
-
-$('#divdocviewer').html(""); 
-$("#imgdoc").attr("src","");
-$("#imgdoc").css("display","none");
-$.ajax({  
-
-         type: "GET",  
-           // url:'fbalist-document/176'+fbaid,
-         url:'fbalist-document/'+fbaid,//"{{URL::to('Fsm-Details')}}",
-         success: function(fsmmsg){
-     // alert(fsmmsg);
-        var data = JSON.parse(fsmmsg);
-        var str = "<table class='table'><tr style='height:30px;margin:5px;'>";
-if(data.length > 0){
-        
-       for (var i = 0; i < data.length; i++) {
-        
-         str = str + "<td><input style='padding:5px;' type='button' onclick=showImage('"+data[i].FileName+"') value='"+data[i].DocType+"'/></td>";
-          }
-        str = str + "</tr></table>";
-      }
-      else
-      {
-        str = str + "<td>No documents uploaded.</td></tr></table>";
-      }
 
 
            $('#divdocviewer').html(str);   
               
         }  
-      });
+     // });
 }
 
 function showImage(test)
@@ -1462,6 +1427,9 @@ $("#imgdoc").css("display","block");
 
 
 <script> 
+
+ 
+
 $('#msds-select').change(function () { 
    var table = $('#fba-list-table').DataTable(); 
     $.fn.dataTable.ext.search.push(
@@ -1491,8 +1459,5 @@ $('#msds-select').change(function () {
   
 
 
-<script>
-$( "#btn1" ).addClass( "qry-btn active" );
-</script>
 
 
