@@ -186,9 +186,9 @@ public function register_update(Request $req){
                   $state = DB::select("call usp_load_state_list()");
                   $user_type=DB::table('user_type_master')->get();
                   $menu_group=DB::table('menu_group_master')->get();
-                  $city=DB::table('CityStateList')->select('DCCityID','CityName')->get();
+                //  $city=DB::table('CityStateList')->select('DCCityID','CityName')->get();
                   
-                return view('register-update',['state' => $state,'user_type'=>$user_type,'menu_group'=>$menu_group,'city'=>$city,'query'=>$query[0]]);
+                return view('register-update',['state' => $state,'user_type'=>$user_type,'menu_group'=>$menu_group,'query'=>$query[0]]);
 
 }
 
