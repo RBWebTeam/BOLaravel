@@ -759,7 +759,7 @@ $('.input-group date input').each(function() {
 });
 
 // Set up your table
-table1 = $('#example_1').DataTable({
+table1 = $('#example').DataTable({
   paging: true,
   info: false,
    responsive: false,
@@ -777,8 +777,7 @@ $.fn.dataTable.ext.search.push(
     var min = $('#min-date').val();
     var max = $('#max-date').val();
     var createdAt = data[1] || 0; // Our date column in the table
-
-    if (
+ if (
       (min == "" || max == "") ||
       (moment(createdAt).isSameOrAfter(min) && moment(createdAt).isSameOrBefore(max))
     ) {
