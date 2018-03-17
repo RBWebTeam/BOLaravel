@@ -48,9 +48,8 @@ Route::get('getpaymentlink/{fbaid}','FbaController@getpaymentlink');
 
 
 
-  Route::get('fba-list/{fbaid}/{value}/{flag}',array('as'=>'fba-list.ajax','uses'=>'FbaController@updateposp'));
-
-    Route::post('fba-list','FbaController@sendsms');
+Route::get('fba-list/{fbaid}/{value}/{flag}',array('as'=>'fba-list.ajax','uses'=>'FbaController@updateposp'));
+Route::post('fba-list','FbaController@sendsms');
 
 Route::get('fba-list/{fbaid}/{value}/{flag}',array('as'=>'fba-list.ajax','uses'=>'FbaController@updateposp'));
 Route::post('fba-list','FbaController@sendsms');
@@ -68,22 +67,22 @@ Route::get('register-form','RegisterFormController@register_form');
 //FSM Details
 Route::get('Fsm-Details','FsmDetailsController@FsmDetails');
 
-/// shubham 
+/// shubham ///
 
 Route::get('Rmfollowup','RMfollowupController@RMfollowup');
 Route::post('Rmfollowup','RMfollowupController@insertrmfollowup');
 Route::get('Rmfollowup/{fbaid}','RMfollowupController@gethistory');
 
-
 Route::get('Product-followup','ProductfollowupController@getproductfollowup');
 Route::get('Product-followup/{product_id}','ProductfollowupController@getproductinfo');
 Route::Post('Product-followup','ProductfollowupController@insertproductfollowup');
 
+///shubham end ///
 
 //////GOVIND
 Route::get('Fsm-Details/{smid}','FsmDetailsController@fsmfbalist');
 Route::get('FsmRegister/{smid}','FsmRegisterController@getfsmdetail');
-Route::post('get-fba-partner','FbaController@getfbapartner');
+Route::get('fba-list/{partnerid}','FbaController@getfbapartner');
 Route::get('assignrm','AssignrmController@loadrm');
 Route::get('assign-rm-load/{flag}/{value}','AssignrmController@loadfba');
 Route::post('assign-rm-update','AssignrmController@updatefba');
@@ -119,7 +118,7 @@ route::get('sendnotificationnew', 'SendNotificationController@sendnotificationst
 
 Route::get('insert','uploadfileController@imageupload');
 Route::get('Fba-list-Update','FbaController@test');
-Route::get('fbalist-document/{fbaid}','FbaController@getfbalist');
+Route::get('fbalist-document/{fbaid}','FbaController@getdoclistview');
 
 
 
@@ -198,6 +197,9 @@ Route::get('menu-group-select','MenuController@menu_group_select');
 Route::group(['namespace' => 'RM',  ], function() {
 
 Route::get('regional-manager','RegionalManagerControllar@regional_manager');
+Route::get('report-followup-history','RegionalManagerControllar@Regional_Manager_search');
+Route::post('report-followup-history-save','RegionalManagerControllar@report_followup_history_save');
+
 });
   /************
 // LEAD MANAGMENT
@@ -213,7 +215,7 @@ Route::get('followup-history','LeadstatusController@followup_history');
 Route::get('lead-test','LeaduploadController@lead_test');  
 Route::get('assign-task','LeadstatusController@assign_task');
 Route::post('assign-task-save','LeadstatusController@assign_task_save');
-Route::get('marketing-leads','LeaduploadController@marketing_leads');   
+ 
 });
 /************
 // END LEAD MANAGMENT
@@ -243,3 +245,8 @@ Route::post('register-user-save','LoginController@register_user_save');
 
 });
 
+
+Route::group(['namespace' => 'leadController' ], function() {
+Route::get('marketing-leads','LeaduploadController@marketing_leads');  
+
+});

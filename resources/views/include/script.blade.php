@@ -49,7 +49,6 @@ $(document).ready(function(){
              $(document).ready(function () {
                  $('#sidebarCollapse').click( function () {
                      $('#sidebar').slideToggle();
-           
                  });
              });
        
@@ -71,14 +70,18 @@ $(document).ready(function(){
     selector: '[data-toggle="popover"]'
 });
 
+
+
+
 $('body').on('click',  function (e) {
     $('[data-toggle="popover"]').each(function () {
         if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover-Password').has(e.target).length === 0) {
+
             $(this).popover('destroy');
         }
     });
 });
-         
+
 
     function Sales_Code() {
               console.log('something');
@@ -418,7 +421,7 @@ alert(JSON.stringify(data));*/
 
 <script type="text/javascript">
   $('#submit').click(function(){
-  alert('okae');
+
   $.ajax({
           url:"{{URL::to('sales-material-upload-submit')}}" ,  
           data:new FormData($("#sales_material_upload")[0]),
@@ -432,6 +435,7 @@ alert(JSON.stringify(data));*/
              if (msg.status==0) 
               {
                 alert('Uploaded Successfully');
+                $("#sales_material_upload")[0].reset();
               } 
               else {
                alert('Could Not Upload');
@@ -461,15 +465,15 @@ alert(JSON.stringify(data));*/
    {
   
      var tablerows = new Array();
-                         $.each(msg, function( index, value ) {
-            tablerows.push('<tr><td style="font-family: monospace"><img class="img-responsive" src="/' + value.image_path + '" width="699" height="1176"/></td></tr>');
+        $.each(msg, function( index, value ) {
+            tablerows.push('<tr><td><img class="img-responsive" src="/' + value.image_path + '" width="400" height=""/></td></tr>');
         }); 
 
        if(msg){
-                            $('#docs').empty().append('<table class="table table-striped table-bordered table-responsive"><tr class="text-capitalize"><td style="font-family: monospace">Image Path</td></tr>'+tablerows+'</table>');
-                         }else{
-                            $('#docs').empty().append('No Result Found');
-                         }
+          $('#docs').empty().append('<table class="table table-striped table-bordered"><tr class="text-capitalize"><td style="font-family: monospace">Images</td></tr>'+tablerows+'</table>');
+         }else{
+            $('#docs').empty().append('No Result Found');
+         }
 
    },
 
@@ -749,20 +753,23 @@ $(document).on('change', '#search_state', function() {
 
 
     $(document).ready(function() {
-        $('#example').DataTable({
+       var exampleInstance = $('#example').DataTable({
           paging: true,
           responsive: false,
+
         });
+
+       exampleInstance.column( '0:visible' ).order('desc').draw();
  // Bootstrap datepicker
 $('.input-group date input').each(function() {
   $(this).datepicker('clearDates');
 });
 
 // Set up your table
-table1 = $('#example_1').DataTable({
+table1 = $('#example').DataTable({
   paging: true,
   info: false,
-   responsive: false,
+  responsive: false,
 });
 
 
@@ -777,8 +784,7 @@ $.fn.dataTable.ext.search.push(
     var min = $('#min-date').val();
     var max = $('#max-date').val();
     var createdAt = data[1] || 0; // Our date column in the table
-
-    if (
+ if (
       (min == "" || max == "") ||
       (moment(createdAt).isSameOrAfter(min) && moment(createdAt).isSameOrBefore(max))
     ) {
@@ -836,6 +842,7 @@ $.ajax({
          type: "GET",  
          url:'fba-list/'+fbaid,//"{{URL::to('Fsm-Details')}}",
          success: function(fsmmsg){
+
         var data = JSON.parse(fsmmsg);
 
         var str = "<table class='table'><tr style='height:30px;margin:5px;'><td>Partner ID</td><td>Name</td><td>Mobile No</td><td>Email</td><td>City</td><td>Pincode</td></tr>";
@@ -1236,9 +1243,7 @@ console.log($('#frmsmstemplate').serialize());
 
 
 function getpaymentlink(fbaid){
-  //alert(fbaid);
-  // alert(data);
-  //$('.paylink').modal('show');
+ $('.divpartnertable_payment').html('');
   $.ajax({
                     url: 'getpaymentlink/'+fbaid,
                     type: "GET",
@@ -1254,12 +1259,7 @@ function getpaymentlink(fbaid){
                          $('.paylink_payment').modal('show');
                           //$('#paylink').html(data[0].Link);
                        }      
-                       for (var i = 0; i < data.length; i++) 
-       {
-
-         str = str + "<p>"+data[i].Link+"</p>";
-         // $('#paylink').html(str);
-       }
+  
                        
                      }
                 });
@@ -1371,10 +1371,6 @@ $.ajax({
 
 
 
-
-</script>
-
-<script type="text/javascript">
   function mail(obj,val){
     // console.log(obj);
     if(obj=='weburl' ){
@@ -1396,8 +1392,70 @@ $.ajax({
 }
 
 
+$(".nav-list > li").addClass(function(i){return "item" + (i + 1);});
+
+
+function uploaddoc(fbaid)
+{
+
+$('#divdocviewer').html(""); 
+$("#imgdoc").attr("src","");
+$("#imgdoc").css("display","none");
+$.ajax({  
+
+         type: "GET",  
+        
+         url:'fbalist-document/'+fbaid,//"{{URL::to('Fsm-Details')}}",
+         success: function(fsmmsg){
+     
+        var data = JSON.parse(fsmmsg);
+        var str = "<table class='table'><tr style='height:30px;margin:5px;'>";
+  if(data.length > 0){
+        
+       for (var i = 0; i < data.length; i++) {
+        
+         str = str + "<td><input style='padding:5px;' type='button' onclick=showImage('"+data[i].FileName+"') value='"+data[i].DocType+"'/></td>";
+          }
+ 
+           str = str + "</tr></table>";
+
+      }
+      else
+      {
+        str = str + "<td>No documents uploaded.</td></tr></table>";
+      }
+
+           $('#divdocviewer').html(str);   
+              
+        }  
+      });
+}
+
+function showImage(test)
+{
+
+  
+  $("#imgdoc").css("display","block");
+  $("#imgdoc").attr("src",test);
+
+}
+
+
+</script> 
+  
+
+<!-- fbalist ImageView Script End Here.
+ -->
+
+</script>
+
+
+
+
+<script> 
 
  
+
 $('#msds-select').change(function () { 
    var table = $('#fba-list-table').DataTable(); 
     $.fn.dataTable.ext.search.push(
@@ -1424,8 +1482,5 @@ $('#msds-select').change(function () {
 
 
 </script>
-  
-
-
-
-
+ 
+ 

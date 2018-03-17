@@ -33,20 +33,24 @@
        
        <form>
 
-       <div class="col-md-4">
+      <div class="col-md-4">
       <div class="form-group">
       <p>From Date</p>
-         <div id="datepicker" class="input-group date" data-date-format="yyyy-mm-dd-">
+
+         <div id="datepicker" class="input-group date" data-date-format="yyyy-mm-dd">
+
                <input class="form-control date-range-filter" type="text" placeholder="From Date" name="fdate" id="min-date"  />
               <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-              </div>
+            </div>
             </div>
            </div>
        <div class="col-md-4">
        <div class="form-group">
        <p>To Date</p>
+
        <div id="datepicker1" class="input-group date" data-date-format="yyyy-mm-dd">
                <input class="form-control date-range-filter1" type="text" placeholder="To Date"  name="todate"  id="max-date"/>
+
               <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
               </div>
             </div>
@@ -55,7 +59,7 @@
        <div class="form-group"> <input type="submit" name="" id="btndate"  class="mrg-top common-btn" value="SHOW">  </div>
        </div>
     
- <!--  <select id="myInput" onchange="myFunction()" name="msds-select"> -->
+ 
   <select  id="msds-select">
    <option value="0">ALL</option>
   <option value="1">POSP Yes</option>
@@ -236,9 +240,6 @@
   </div>
 </div>
 
-
-
-
 <!-- update posp -->
 <div class="updatePosp modal fade" role="dialog">   
   <div class="modal-dialog" role="document">
@@ -265,9 +266,6 @@
     </div>
   </div>
 </div>
-
-
-
 
 <!-- update Loan -->
 <div class="updateLoan modal fade" role="dialog">   
@@ -396,8 +394,16 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript">
-    $(document).ready(function() {
-    $('#fba-list-table').DataTable({
+
+
+  $(document).ready(function() {
+    var fbalistInstance = $('#fba-list-table').DataTable({
+
+      "createdRow": function(row, data, dataIndex ) {
+      if (data.PayStat=="S" ) {
+        $(row).css({backgroundColor: 'LightGreen'});
+      }
+    },
         "ajax": "get-fba-list",
         "columns": [
              { "data": "fbaid"},
@@ -406,12 +412,13 @@
             { "data": "MobiNumb1" },
             { "data": "EMaiID" },
             { "data": "Link",
-         
-          
+
               "render": function ( data, type, row, meta ) {
-                return '<a id="btnviewhistory" data-toggle="modal" data-target="#paylink_payment" onclick="getpaymentlink('+row.fbaid+')">Payment link</a>';
+                return  row.PayStat !="S"?'<a id="btnviewhistory" data-toggle="modal" data-target="#paylink_payment" onclick="getpaymentlink('+row.fbaid+')">Payment link</a>':'';
               }
              }, 
+
+
             {"data":"pwd" ,
              "render": function ( data, type, row, meta ) {
                 return '<a class="popover-Password" data-toggle="popover" title="Show Password" data-content="'+data+'">*****</a>';
@@ -426,7 +433,9 @@
             },
             {"data":"POSPNo"  ,
              "render": function ( data, type, row, meta ) {
+
               return data==""?('<a id="posp_'+row.fbaid+'" class="checkPosp" data-toggle="modal" data-target="#updatePosp" onclick="POSP_UPDATE('+row.fbaid+')">update</a>'):data;
+
               }
             },  
 
@@ -443,11 +452,11 @@
                 return '<a href="" data-toggle="modal" data-target="#partnerInfo" onclick="getpartnerinfo('+row.fbaid+')">partner info</a>';
               }
             },  
-            {"data":null ,
+            {"data":"fbaid" ,
              "render": function ( data, type, row, meta ) {
 
 
-                return '<a href="#" style="" data-toggle="modal"  data-target="fbadoc" onclick="uploaddoc('+row.fbaid+')" >Pending</a>';
+                // return '<a href="#" style="" data-toggle="modal"  data-target="fbadoc" onclick="uploaddoc('+row.fbaid+')" >Pending</a>';
 
                 return '<a href="" style="" data-toggle="modal"  data-target="#docviwer" onclick="uploaddoc('+data+')" >Pending</a>';
 
@@ -467,10 +476,12 @@
             },
             
         ],
-
-    } );
-
+    });
+fbalistInstance.column( '0:visible' ).order('desc').draw();
+//fbalistInstance.order([1,'desc']).draw();
 });  
+
+ 
 
 function myFunction() {
   var input, filter, table, tr, td, i;
@@ -490,5 +501,8 @@ function myFunction() {
   }
 }
 
-</script>
 
+//fbalistInstance.order([1,'desc']).draw();
+
+
+</script>

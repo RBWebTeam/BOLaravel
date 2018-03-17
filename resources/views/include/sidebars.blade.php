@@ -11,15 +11,18 @@ $menu_group_fn=$cl->user_right_group_menu();
        $arrayCategories[$row->id] = array("parent_id" => $row->parent_id, "name" =>                       
          $row->name,"id" => $row->id);   
     } ?>
+
 <ul class="nav nav-list" style="width: auto; height: 100%;">                       
+
 <?php foreach ($menu_group_fn as $key => $current) { 
+
         $second_level=$cl->chield_id($current->id,$current->menu_group_id);  ?>
                      
                         <li><label class="tree-toggle nav-header">
                         @if($current->url_link=="#")
-                        <a href="#"><?php echo $current->name; ?></a>
+                        <span class	="sp-nav"></span><a href="#"><?php echo $current->name; ?></a>
                         @else
-                             <a href="{{url('')}}/{{$current->url_link}}"><?php echo $current->name; ?> &nbsp;</a>
+                             <span class="sp-nav"></span><a href="{{url('')}}/{{$current->url_link}}"><?php echo $current->name; ?> &nbsp;</a>
                         @endif
 
 
