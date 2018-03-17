@@ -1,5 +1,5 @@
 <div class="scrolling">
-    <nav id="sidebar" style>
+    <nav id="sidebar" style="display:none;">
 <?php 
  use App\Http\Controllers\InitialController; $cl=new InitialController();
 $arrayCategories = array();
@@ -11,7 +11,7 @@ $menu_group_fn=$cl->user_right_group_menu();
        $arrayCategories[$row->id] = array("parent_id" => $row->parent_id, "name" =>                       
          $row->name,"id" => $row->id);   
     } ?>
-<ul class="nav nav-list" style="overflow: hidden; width: auto; height: 95%;">                       
+<ul class="nav nav-list" style="width: auto; height: 100%;">                       
 <?php foreach ($menu_group_fn as $key => $current) { 
         $second_level=$cl->chield_id($current->id,$current->menu_group_id);  ?>
                      
