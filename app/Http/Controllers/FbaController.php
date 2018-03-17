@@ -16,8 +16,9 @@ class FbaController extends CallApiController
       
         public function fba_list()
         {
-         $doctype = DB::select("call get_document_type()");
-          return view('dashboard.fba-list',['doctype'=>$doctype]);
+           
+         $doctype = DB::select("call get_document_type()");        
+          return view('dashboard.fba-list',['doctype'=>$doctype]);         
         }
         public function get_fba_list(Request $req){
           try{
@@ -81,6 +82,7 @@ class FbaController extends CallApiController
         $query=DB::table('fbamast')
             ->where('FBAID','=',$req->p_fbaid)
             ->update(['salescode' =>$req->p_remark]);
+
            if ($query) {
               return response()->json(array('status' =>0,'message'=>"success"));
             }
@@ -113,9 +115,9 @@ class FbaController extends CallApiController
           return json_encode($fsmfbaquery);    
         }
 
-        public function getfbalist($fbaid)
+        public function getdoclistview($fbaid)
        {
-         $doctype = DB::select("call fba_List_Uplode($fbaid)");
+         $doctype = DB::select("call get_fba_doc($fbaid)");
         
           return json_encode($doctype);
         }
@@ -130,9 +132,6 @@ class FbaController extends CallApiController
            return json_encode($paymentlink);
   
           }
-
-
-
 
 }
 

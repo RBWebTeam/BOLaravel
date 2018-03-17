@@ -46,6 +46,7 @@
                <td> {{$val->TWO_WHEELER}}</td>
                @elseif($status==2)
                <td> {{$val->City}}</td>
+               <td> {{$val->CreatedDate}}</td>
                <td> {{$val->HEALTH}}</td>
                <td> {{$val->MOTOR}}</td>
                <td> {{$val->HOME_LOAN}}</td>
@@ -54,6 +55,7 @@
                 
                @elseif($status==3)
                <td> {{$val->City}}</td>
+               <td> {{$val->Createddate}}</td>
                 <td> {{$val->HEALTH}}</td>
                 <td> {{$val->MOTOR}}</td>
                 <td> {{$val->TWO_WHEELER}}</td>
@@ -95,24 +97,12 @@
       </div>
       </div>
 
+
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript">
-  $(document).ready(function () {
-    
-    if ($.fn.dataTable.isDataTable('#tblqueries')) {
-    table = $('#tblqueries').DataTable({
-      paging:true;
-      searching: true;
-
-    });
-}
-else {
-
-    table = $('#tblqueries').DataTable( {
-        paging: false
-    } );
-}
-
-});
+  
       </script>
 	  
 	<script>
