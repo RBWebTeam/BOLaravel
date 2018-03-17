@@ -36,7 +36,9 @@
       <div class="col-md-4">
       <div class="form-group">
       <p>From Date</p>
+
          <div id="datepicker" class="input-group date" data-date-format="yyyy-mm-dd">
+
                <input class="form-control date-range-filter" type="text" placeholder="From Date" name="fdate" id="min-date"  />
               <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
             </div>
@@ -45,8 +47,10 @@
        <div class="col-md-4">
        <div class="form-group">
        <p>To Date</p>
+
        <div id="datepicker1" class="input-group date" data-date-format="yyyy-mm-dd">
                <input class="form-control date-range-filter1" type="text" placeholder="To Date"  name="todate"  id="max-date"/>
+
               <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
               </div>
             </div>
@@ -236,9 +240,6 @@
   </div>
 </div>
 
-
-
-
 <!-- update posp -->
 <div class="updatePosp modal fade" role="dialog">   
   <div class="modal-dialog" role="document">
@@ -265,9 +266,6 @@
     </div>
   </div>
 </div>
-
-
-
 
 <!-- update Loan -->
 <div class="updateLoan modal fade" role="dialog">   
@@ -397,11 +395,12 @@
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript">
 
+
   $(document).ready(function() {
-     $('#fba-list-table').DataTable({
+    var fbalistInstance = $('#fba-list-table').DataTable({
 
       "createdRow": function(row, data, dataIndex ) {
-      if ( data.PayStat=="S" ) {
+      if (data.PayStat=="S" ) {
         $(row).css({backgroundColor: 'LightGreen'});
       }
     },
@@ -413,10 +412,12 @@
             { "data": "MobiNumb1" },
             { "data": "EMaiID" },
             { "data": "Link",
+
               "render": function ( data, type, row, meta ) {
-                return '<a id="btnviewhistory" data-toggle="modal" data-target="#paylink_payment" onclick="getpaymentlink('+row.fbaid+')">Payment link</a>';
+                return  row.PayStat !="S"?'<a id="btnviewhistory" data-toggle="modal" data-target="#paylink_payment" onclick="getpaymentlink('+row.fbaid+')">Payment link</a>':'';
               }
              }, 
+
 
             {"data":"pwd" ,
              "render": function ( data, type, row, meta ) {
@@ -432,7 +433,9 @@
             },
             {"data":"POSPNo"  ,
              "render": function ( data, type, row, meta ) {
+
               return data==""?('<a id="posp_'+row.fbaid+'" class="checkPosp" data-toggle="modal" data-target="#updatePosp" onclick="POSP_UPDATE('+row.fbaid+')">update</a>'):data;
+
               }
             },  
 
@@ -472,6 +475,8 @@
             
         ],
     });
+fbalistInstance.column( '0:visible' ).order('desc').draw();
+//fbalistInstance.order([1,'desc']).draw();
 });  
 
  
@@ -493,5 +498,9 @@ function myFunction() {
     }       
   }
 }
+
+
+//fbalistInstance.order([1,'desc']).draw();
+
 
 </script>

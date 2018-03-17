@@ -70,14 +70,18 @@ $(document).ready(function(){
     selector: '[data-toggle="popover"]'
 });
 
+
+
+
 $('body').on('click',  function (e) {
     $('[data-toggle="popover"]').each(function () {
         if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover-Password').has(e.target).length === 0) {
+
             $(this).popover('destroy');
         }
     });
 });
-         
+
 
     function Sales_Code() {
               console.log('something');
@@ -749,10 +753,13 @@ $(document).on('change', '#search_state', function() {
 
 
     $(document).ready(function() {
-        $('#example').DataTable({
+       var exampleInstance = $('#example').DataTable({
           paging: true,
           responsive: false,
+
         });
+
+       exampleInstance.column( '0:visible' ).order('desc').draw();
  // Bootstrap datepicker
 $('.input-group date input').each(function() {
   $(this).datepicker('clearDates');
@@ -762,7 +769,7 @@ $('.input-group date input').each(function() {
 table1 = $('#example_1').DataTable({
   paging: true,
   info: false,
-   responsive: false,
+  responsive: false,
 });
 
 
@@ -836,6 +843,7 @@ $.ajax({
          type: "GET",  
          url:'fba-list/'+fbaid,//"{{URL::to('Fsm-Details')}}",
          success: function(fsmmsg){
+
         var data = JSON.parse(fsmmsg);
 
         var str = "<table class='table'><tr style='height:30px;margin:5px;'><td>Partner ID</td><td>Name</td><td>Mobile No</td><td>Email</td><td>City</td><td>Pincode</td></tr>";
@@ -1236,9 +1244,7 @@ console.log($('#frmsmstemplate').serialize());
 
 
 function getpaymentlink(fbaid){
-  //alert(fbaid);
-  // alert(data);
-  //$('.paylink').modal('show');
+ $('.divpartnertable_payment').html('');
   $.ajax({
                     url: 'getpaymentlink/'+fbaid,
                     type: "GET",
@@ -1254,12 +1260,7 @@ function getpaymentlink(fbaid){
                          $('.paylink_payment').modal('show');
                           //$('#paylink').html(data[0].Link);
                        }      
-                       for (var i = 0; i < data.length; i++) 
-       {
-
-         str = str + "<p>"+data[i].Link+"</p>";
-         // $('#paylink').html(str);
-       }
+  
                        
                      }
                 });
@@ -1347,6 +1348,8 @@ $.ajax({
 
   } else {
 $.ajax({
+
+  
           url:"{{URL::to('send-notification-submit')}}" ,  
           data:new FormData($("#sendnotification")[0]),
           dataType:'json',
@@ -1410,7 +1413,7 @@ $.ajax({
      
         var data = JSON.parse(fsmmsg);
         var str = "<table class='table'><tr style='height:30px;margin:5px;'>";
-if(data.length > 0){
+  if(data.length > 0){
         
        for (var i = 0; i < data.length; i++) {
         
@@ -1418,6 +1421,7 @@ if(data.length > 0){
           }
  
            str = str + "</tr></table>";
+
       }
       else
       {
@@ -1434,7 +1438,9 @@ function showImage(test)
 {
 
   
-$("#imgdoc").css( " style="display: inline-block;"");
+
+  $("#imgdoc").css("display","block");
+
   $("#imgdoc").attr("src",test);
 
 }
