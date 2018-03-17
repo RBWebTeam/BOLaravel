@@ -766,7 +766,7 @@ $('.input-group date input').each(function() {
 });
 
 // Set up your table
-table1 = $('#example_1').DataTable({
+table1 = $('#example').DataTable({
   paging: true,
   info: false,
   responsive: false,
@@ -784,8 +784,7 @@ $.fn.dataTable.ext.search.push(
     var min = $('#min-date').val();
     var max = $('#max-date').val();
     var createdAt = data[1] || 0; // Our date column in the table
-
-    if (
+ if (
       (min == "" || max == "") ||
       (moment(createdAt).isSameOrAfter(min) && moment(createdAt).isSameOrBefore(max))
     ) {
@@ -1412,14 +1411,15 @@ $.ajax({
          success: function(fsmmsg){
      
         var data = JSON.parse(fsmmsg);
-        var str = "<table class='table'><tr style='height:30px;margin:5px;'>";
+        var str = "<table class='table'><tr style='height:30px;margin:18px;'>";
   if(data.length > 0){
         
        for (var i = 0; i < data.length; i++) {
         
-         str = str + "<td><input style='padding:5px;' type='button' onclick=showImage('"+data[i].FileName+"') value='"+data[i].DocType+"'/></td>";
-          }
- 
+   
+      str = str + '<a><input  class="btn btn-default" style="margin:2px" type="button" onclick=showImage("'+data[i].FileName+'") value="'+data[i].DocType+'"/></a>';
+    }
+
            str = str + "</tr></table>";
 
       }
@@ -1473,5 +1473,4 @@ $('#msds-select').change(function () {
 
 
 </script>
- 
  

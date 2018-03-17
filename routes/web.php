@@ -97,6 +97,7 @@ Route::post('Fsm-Register','FsmRegisterController@insertfsm');
 
  Route::get('send-notification-approve','SendNotificationController@SendnotificationApprove');
 
+ Route::get('approve-notification','SendNotificationController@notificationApprove');
 
 // -------------- avinash
 Route::get('send-notification','SendNotificationController@getstate');
