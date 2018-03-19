@@ -171,6 +171,22 @@
   </div>
 </div>
 
+
+ <div class="pageloader modal fade" role="dialog" id="pageloader">   
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+     
+      <div class="modal-body">
+        <form id="posp_from_id">
+         
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
  <!-- fab document -->
  <!-- <div class="fbadoc modal fade" role="dialog">   
   <div class="modal-dialog" role="document">
@@ -392,19 +408,41 @@
     </div>
   </div>
 </div>
+
+<!-- password -->
+
+<div id="spassword" class="modal fade spassword" role="dialog">
+  <div class="modal-dialog">
+   
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">password</h4>
+      </div>
+      <div class="modal-body">
+      <div style="color: blue;" id="show_password" class="show_password">
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 @endsection
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript">
 
   $(document).ready(function() {
-     $('#fba-list-table').DataTable({
+
+    $('#fba-list-table').DataTable({
 
       "createdRow": function(row, data, dataIndex ) {
       if ( data.PayStat=="S" ) {
         $(row).css({backgroundColor: 'LightGreen'});
       }
     },
+        "order": [[ 2, "desc" ]],
         "ajax": "get-fba-list",
         "columns": [
              { "data": "fbaid"},
@@ -419,9 +457,12 @@
              }, 
 
             {"data":"pwd" ,
+           
              "render": function ( data, type, row, meta ) {
-                return '<a class="popover-Password" data-toggle="popover" title="Show Password" data-content="'+data+'">*****</a>';
+                return '<a id="btnshowpassword" data-toggle="modal" data-target="#spassword" onclick="getpassword('+data+')">*****</a>';
               }
+
+
             },        
             {"data":"City"},
             {"data":"Pincode"},
@@ -449,13 +490,13 @@
                 return '<a href="" data-toggle="modal" data-target="#partnerInfo" onclick="getpartnerinfo('+row.fbaid+')">partner info</a>';
               }
             },  
-            {"data":"fbaid" ,
+            {"data":"fdid" ,
              "render": function ( data, type, row, meta ) {
 
 
                 // return '<a href="#" style="" data-toggle="modal"  data-target="fbadoc" onclick="uploaddoc('+row.fbaid+')" >Pending</a>';
 
-                return '<a href="" style="" data-toggle="modal"  data-target="#docviwer" onclick="uploaddoc('+data+')" >Pending</a>';
+                return data==""?'<a href="" style="" data-toggle="modal"  data-target="#docviwer" onclick="uploaddoc('+data+')" >uploaded</a>':'Pending';
 
 
               }
@@ -473,27 +514,10 @@
             },
             
         ],
-    });
+
+    });//.column('0:visible').order('desc').draw();
+
+
 });  
-
- 
-
-function myFunction() {
-  var input, filter, table, tr, td, i;
-  input = document.getElementById("#myInput");
-  filter = input.value.toUpperCase();
-  table = document.getElementById("fba-list-table");
-  tr = table.getElementsByTagName("tr");
-  for (i = 0; i < tr.length; i++) {
-    td = tr[i].getElementsByTagName("td")[9];
-    if (td) {
-      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
-        tr[i].style.display = "";
-      } else {
-        tr[i].style.display = "none";
-      }
-    }       
-  }
-}
 
 </script>

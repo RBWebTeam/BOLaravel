@@ -66,18 +66,19 @@ $(document).ready(function(){
           // test
 
           
-          $('body').popover({
-    selector: '[data-toggle="popover"]'
-});
+//           $('body').popover({
+//     selector: '[data-toggle="popover"]'
+// });
 
-$('body').on('click',  function (e) {
-    $('[data-toggle="popover"]').each(function () {
-        if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover-Password').has(e.target).length === 0) {
-            $(this).popover('destroy');
-        }
-    });
-});
-         
+// $('body').on('click',  function (e) {
+//     $('[data-toggle="popover"]').each(function () {
+//         if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover-Password').has(e.target).length === 0) {
+
+//             $(this).popover('destroy');
+//         }
+//     });
+// });
+
 
     function Sales_Code() {
               console.log('something');
@@ -303,6 +304,9 @@ $('.message_sms_id').click(function(){
 
   if($('#message-text').val()!="")  {
   //console.log($('#message_sms_from').serialize());
+
+console.log($('#message_sms_from').serialize());
+
    $.ajax({ 
    url: "{{URL::to('fba-list')}}",
    method:"POST",
@@ -749,20 +753,23 @@ $(document).on('change', '#search_state', function() {
 
 
     $(document).ready(function() {
-        $('#example').DataTable({
+       var exampleInstance = $('#example').DataTable({
           paging: true,
           responsive: false,
+
         });
+
+       exampleInstance.column('0:visible').order('desc').draw();
  // Bootstrap datepicker
 $('.input-group date input').each(function() {
   $(this).datepicker('clearDates');
 });
 
 // Set up your table
-table1 = $('#example_1').DataTable({
+table1 = $('#example').DataTable({
   paging: true,
   info: false,
-   responsive: false,
+  responsive: false,
 });
 
 
@@ -777,8 +784,7 @@ $.fn.dataTable.ext.search.push(
     var min = $('#min-date').val();
     var max = $('#max-date').val();
     var createdAt = data[1] || 0; // Our date column in the table
-
-    if (
+ if (
       (min == "" || max == "") ||
       (moment(createdAt).isSameOrAfter(min) && moment(createdAt).isSameOrBefore(max))
     ) {
@@ -836,6 +842,7 @@ $.ajax({
          type: "GET",  
          url:'fba-list/'+fbaid,//"{{URL::to('Fsm-Details')}}",
          success: function(fsmmsg){
+
         var data = JSON.parse(fsmmsg);
 
         var str = "<table class='table'><tr style='height:30px;margin:5px;'><td>Partner ID</td><td>Name</td><td>Mobile No</td><td>Email</td><td>City</td><td>Pincode</td></tr>";
@@ -1236,9 +1243,7 @@ console.log($('#frmsmstemplate').serialize());
 
 
 function getpaymentlink(fbaid){
-  //alert(fbaid);
-  // alert(data);
-  //$('.paylink').modal('show');
+ $('.divpartnertable_payment').html('');
   $.ajax({
                     url: 'getpaymentlink/'+fbaid,
                     type: "GET",
@@ -1254,17 +1259,18 @@ function getpaymentlink(fbaid){
                          $('.paylink_payment').modal('show');
                           //$('#paylink').html(data[0].Link);
                        }      
-                       for (var i = 0; i < data.length; i++) 
-       {
-
-         str = str + "<p>"+data[i].Link+"</p>";
-         // $('#paylink').html(str);
-       }
-                       
                      }
                 });
 
 }
+
+ // show Password start
+ function getpassword(password){
+  // alert('Test');
+ $('#show_password').html(password);
+}
+// show password end
+
 
 
 function getproductfollowup(fbaid){
@@ -1410,7 +1416,7 @@ $.ajax({
      
         var data = JSON.parse(fsmmsg);
         var str = "<table class='table'><tr style='height:30px;margin:5px;'>";
-if(data.length > 0){
+  if(data.length > 0){
         
        for (var i = 0; i < data.length; i++) {
         
@@ -1418,6 +1424,7 @@ if(data.length > 0){
           }
  
            str = str + "</tr></table>";
+
       }
       else
       {
@@ -1434,7 +1441,7 @@ function showImage(test)
 {
 
   
-$("#imgdoc").css("display","block");
+  $("#imgdoc").css("display","block");
   $("#imgdoc").attr("src",test);
 
 }
