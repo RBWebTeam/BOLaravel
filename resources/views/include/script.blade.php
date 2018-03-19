@@ -66,21 +66,18 @@ $(document).ready(function(){
           // test
 
           
-          $('body').popover({
-    selector: '[data-toggle="popover"]'
-});
+//           $('body').popover({
+//     selector: '[data-toggle="popover"]'
+// });
 
+// $('body').on('click',  function (e) {
+//     $('[data-toggle="popover"]').each(function () {
+//         if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover-Password').has(e.target).length === 0) {
 
-
-
-$('body').on('click',  function (e) {
-    $('[data-toggle="popover"]').each(function () {
-        if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover-Password').has(e.target).length === 0) {
-
-            $(this).popover('destroy');
-        }
-    });
-});
+//             $(this).popover('destroy');
+//         }
+//     });
+// });
 
 
     function Sales_Code() {
@@ -769,7 +766,7 @@ $('.input-group date input').each(function() {
 });
 
 // Set up your table
-table1 = $('#example_1').DataTable({
+table1 = $('#example').DataTable({
   paging: true,
   info: false,
   responsive: false,
@@ -787,8 +784,7 @@ $.fn.dataTable.ext.search.push(
     var min = $('#min-date').val();
     var max = $('#max-date').val();
     var createdAt = data[1] || 0; // Our date column in the table
-
-    if (
+ if (
       (min == "" || max == "") ||
       (moment(createdAt).isSameOrAfter(min) && moment(createdAt).isSameOrBefore(max))
     ) {
@@ -1263,12 +1259,18 @@ function getpaymentlink(fbaid){
                          $('.paylink_payment').modal('show');
                           //$('#paylink').html(data[0].Link);
                        }      
-  
-                       
                      }
                 });
 
 }
+
+ // show Password start
+ function getpassword(password){
+  // alert('Test');
+ $('#show_password').html(password);
+}
+// show password end
+
 
 
 function getproductfollowup(fbaid){
