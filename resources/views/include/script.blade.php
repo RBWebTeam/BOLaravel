@@ -696,16 +696,11 @@ $(document).on('change', '#search_state', function() {
                   $('#loan_'+id).closest('td').html(loan_update);       
                   $('#remark').val('');
                   $('.close').click();           
-                  
-
-                } 
+                 } 
                 else {
                   alert('Could not updated successfully');
                 }
-
-              
-              
-        }  
+    }  
       });
     }
   })
@@ -753,7 +748,7 @@ $(document).on('change', '#search_state', function() {
 
 
     $(document).ready(function() {
-       var exampleInstance = $('#example').DataTable({
+       var exampleInstance = $('#fsm-details-table').DataTable({
           paging: true,
           responsive: false,
 
@@ -1459,9 +1454,6 @@ function showImage(test)
 
 
 <script> 
-
- 
-
 $('#msds-select').change(function () { 
    var table = $('#fba-list-table').DataTable(); 
     $.fn.dataTable.ext.search.push(
@@ -1485,7 +1477,6 @@ $('#msds-select').change(function () {
      table.draw();
     
 });
-
 
 </script>
  

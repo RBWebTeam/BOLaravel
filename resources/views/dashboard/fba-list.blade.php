@@ -57,7 +57,7 @@
     
  
   <select  id="msds-select">
-   <option value="0">ALL</option>
+   <option value="0">Posp Type</option>
   <option value="1">POSP Yes</option>
   <option value="2">POSP No</option>
   </select>
@@ -476,8 +476,6 @@
               return data==""?('<a id="posp_'+row.fbaid+'" class="checkPosp" data-toggle="modal" data-target="#updatePosp" onclick="POSP_UPDATE('+row.fbaid+')">update</a>'):data;
               }
             },  
-
-
 
             {"data":"LoanID"  ,
              "render": function ( data, type, row, meta ) {
