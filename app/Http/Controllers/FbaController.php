@@ -38,7 +38,9 @@ class FbaController extends CallApiController
         }
         public function sendsms(Request $req) {
 
-              $newsms = str_replace(' ', '%20', $req->sms);
+              $newsms = utf8_encode(htmlspecialchars($req->sms, ENT_QUOTES));//htmlspecialchars();
+
+              
               $post_data="";
               $result=$this->call_json_data_api('http://vas.mobilogi.com/api.php?username=rupeeboss&password=pass1234&route=1&sender=FINMRT&mobile[]='.$req->mobile_no.'&message[]='.$newsms,$post_data);
               $http_result=$result['http_result'];

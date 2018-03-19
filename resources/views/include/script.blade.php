@@ -1319,7 +1319,7 @@ $.ajax({
  function updatenotification(msgid,value){
 
 //alert(value);
- if (confirm("Are you sure to "+(value==1?"approve":"disapprove")+" this notification")) {}
+ if (confirm("Are you sure to "+(value==1?"approve":"reject")+" this notification")) {}
   $.ajax({
             type: "GET",
             url:'approvenotification/'+msgid+'/'+value, 
@@ -1329,7 +1329,7 @@ $.ajax({
               alert("Notification Approved Successfully");
             }
             else if(value=="0"){
-             alert("Notification Dispproved Successfully");
+             alert("Notification rejected Successfully");
                }
                 
             }
@@ -1351,8 +1351,7 @@ $.ajax({
   } else {
 $.ajax({
 
-  
-          url:"{{URL::to('send-notification-submit')}}" ,  
+ url:"{{URL::to('send-notification-submit')}}" ,  
           data:new FormData($("#sendnotification")[0]),
           dataType:'json',
           async:false,
@@ -1451,7 +1450,7 @@ function showImage(test)
 
 
 $('#msds-select').change(function () { 
-   var table = $('#fba-list-table').DataTable(); 
+ var table = $('#fba-list-table').DataTable(); 
     $.fn.dataTable.ext.search.push(
     function( settings, data, dataIndex ) {
         var msdsSearch = $( "#msds-select option:selected" ).val();

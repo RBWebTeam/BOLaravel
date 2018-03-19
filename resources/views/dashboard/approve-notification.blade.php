@@ -1,7 +1,6 @@
 
  @extends('include.master')
  @section('content') 
-
 <form id="approve" name="approve"> 
 <div id="content" style="overflow:scroll;">
  <div class="container-fluid white-bg">
@@ -18,19 +17,16 @@
      <th>mobiNumb1</th>
       <th>City</th>
       <th>Message_Id</th>
-     <th>NotificationTitle</th>
+      <th>NotificationTitle</th>
        <th>IsReceived</th>
        <th>receivedtime</th>
-        <th>IsOpened</th>
+       <th>IsOpened</th>
        <th>opendtime</th>
        <th>isapproved</th>
-         <th>DateTimeToSend</th>
-
-      </tr>
+        <th>DateTimeToSend</th>
+       </tr>
       </thead>
       <tbody>
-
-     
      @foreach($query as $val) 
      <tr>
         <td><?php echo $val->FBAID; ?></td> 
@@ -38,17 +34,15 @@
         <td><?php echo $val->EmailID; ?></td> 
         <td><?php echo $val->mobiNumb1; ?></td>
         <td><?php echo $val->City; ?></td>
-          <td><?php echo $val->Message_Id; ?></td>
-       
-       <td><?php echo $val->NotificationTitle; ?></td>
-          <td><?php echo $val->IsReceived; ?></td>
-          <td><?php echo $val->receivedtime; ?></td>
-          <td><?php echo $val->IsOpened; ?></td>
+        <td><?php echo $val->Message_Id; ?></td>
+        <td><?php echo $val->NotificationTitle; ?></td>
+        <td><?php echo $val->IsReceived; ?></td>
+        <td><?php echo $val->receivedtime; ?></td>
+        <td><?php echo $val->IsOpened; ?></td>
          <td><?php echo $val->opendtime; ?></td>
          <td><?php echo $val->isapproved; ?></td>
-          <td><?php echo $val->DateTimeToSend; ?></td>
-        
-        
+         <td><?php echo $val->DateTimeToSend; ?></td>
+            
      </tr>
       @endforeach
       </tbody>
