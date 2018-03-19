@@ -700,7 +700,7 @@ $(document).on('change', '#search_state', function() {
                 else {
                   alert('Could not updated successfully');
                 }
-    }  
+      }  
       });
     }
   })
@@ -765,7 +765,7 @@ table1 = $('#example').DataTable({
   paging: true,
   info: false,
   responsive: false,
-});
+}).column('0:visible').order('desc').draw();
 
 
 
@@ -1238,7 +1238,9 @@ console.log($('#frmsmstemplate').serialize());
 
 
 function getpaymentlink(fbaid){
- $('.divpartnertable_payment').html('');
+  //alert(fbaid);
+  // alert(data);
+  //$('.paylink').modal('show');
   $.ajax({
                     url: 'getpaymentlink/'+fbaid,
                     type: "GET",
@@ -1254,10 +1256,39 @@ function getpaymentlink(fbaid){
                          $('.paylink_payment').modal('show');
                           //$('#paylink').html(data[0].Link);
                        }      
+                       for (var i = 0; i < data.length; i++) 
+       {
+
+         str = str + "<p>"+data[i].Link+"</p>";
+         // $('#paylink').html(str);
+       }
+                       
                      }
                 });
 
 }
+
+// function getpaymentlink(fbaid){
+//  $('.divpartnertable_payment').html('');
+//   $.ajax({
+//                     url: 'getpaymentlink/'+fbaid,
+//                     type: "GET",
+//                     dataType: "json",
+//                     success:function(data) {
+
+//                       if(data.length>0){
+
+//                        // alert(data[0].Link);
+//                         var str = "<p>"+data[0].Link+"</p>";
+//                         // alert(str)
+//                         $('.divpartnertable_payment').html(str);
+//                          $('paylink_payment').modal('show');
+//                           //$('#paylink').html(data[0].Link);
+//                        }      
+//                      }
+//                 });
+
+// }
 
  // show Password start
  function getpassword(password){

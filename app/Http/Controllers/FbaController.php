@@ -130,8 +130,7 @@ class FbaController extends CallApiController
         
         $paymentlink=DB::select("call Usp_paymentlink($fbaid)");
          
-
-           return json_encode($paymentlink);
+       return json_encode($paymentlink);
   
           }
 
