@@ -304,6 +304,9 @@ $('.message_sms_id').click(function(){
 
   if($('#message-text').val()!="")  {
   //console.log($('#message_sms_from').serialize());
+
+console.log($('#message_sms_from').serialize());
+
    $.ajax({ 
    url: "{{URL::to('fba-list')}}",
    method:"POST",
@@ -756,7 +759,7 @@ $(document).on('change', '#search_state', function() {
 
         });
 
-       exampleInstance.column( '0:visible' ).order('desc').draw();
+       exampleInstance.column('0:visible').order('desc').draw();
  // Bootstrap datepicker
 $('.input-group date input').each(function() {
   $(this).datepicker('clearDates');

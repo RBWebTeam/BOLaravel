@@ -46,7 +46,6 @@
                <td> {{$val->TWO_WHEELER}}</td>
                @elseif($status==2)
                <td> {{$val->City}}</td>
-               <td> {{$val->CreatedDate}}</td>
                <td> {{$val->HEALTH}}</td>
                <td> {{$val->MOTOR}}</td>
                <td> {{$val->HOME_LOAN}}</td>
@@ -55,7 +54,6 @@
                 
                @elseif($status==3)
                <td> {{$val->City}}</td>
-               <td> {{$val->Createddate}}</td>
                 <td> {{$val->HEALTH}}</td>
                 <td> {{$val->MOTOR}}</td>
                 <td> {{$val->TWO_WHEELER}}</td>
