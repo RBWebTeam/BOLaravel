@@ -411,6 +411,7 @@
   </div>
 </div>
 
+
 @endsection
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
@@ -438,9 +439,7 @@
              }, 
 
             {"data":"pwd" ,
-             // "render": function ( data, type, row, meta ) {
-             //    return '<a class="popover-Password" data-toggle="popover" title="Show Password" data-content="'+data+'">*****</a>';
-             //  }
+           
              "render": function ( data, type, row, meta ) {
                 return '<a id="btnshowpassword" data-toggle="modal" data-target="#spassword" onclick="getpassword('+data+')">*****</a>';
               }
