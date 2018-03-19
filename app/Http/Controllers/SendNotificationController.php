@@ -30,6 +30,15 @@ return view ('dashboard.send-notification-approve',['query'=>$query]);
 public function approvenotification($msgid,$value){
 DB::select("call sp_notification_update($msgid,$value)");
 }
+
+
+public function notificationApprove(){ 
+$query=DB::select("call usp_load_notification()");
+return view ('dashboard.approve-notification',['query'=>$query]);
+}
+
+
+
 public function sendnotificationsubmit(Request $req){
 $image = $req->file('notify_image');
    $name = time().'.'.$image->getClientOriginalName();
@@ -57,9 +66,9 @@ $image = $req->file('notify_image');
      if ($msgid) {
        return Response::json(array(
         'data' => true,
-        ));
-        }else{
-        return Response::json(array(
+      ));
+      }else{
+    return Response::json(array(
        'data' => false,
      ));
     }
