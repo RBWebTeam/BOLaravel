@@ -111,12 +111,12 @@
          $.post("{{url('ticket-user-comment')}}",$('#Ticket_comment_Id_form').serialize())
              .done(function(data){ 
              console.log(data);
-                 // if(data==0){
+                 if(data==0){
                      
-                 // window.location.href = "{{url('lead-up-load')}}";
-                 // }else{
-                  
-                 // }
+                 window.location.href = "{{url('ticket-request-user-list')}}";
+                 }else{
+                  console.log("error");
+                 }
           }).fail(function(xhr, status, error) {
                  console.log(error);
             });
