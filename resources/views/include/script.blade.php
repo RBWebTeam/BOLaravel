@@ -66,21 +66,18 @@ $(document).ready(function(){
           // test
 
           
-          $('body').popover({
-    selector: '[data-toggle="popover"]'
-});
+//           $('body').popover({
+//     selector: '[data-toggle="popover"]'
+// });
 
+// $('body').on('click',  function (e) {
+//     $('[data-toggle="popover"]').each(function () {
+//         if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover-Password').has(e.target).length === 0) {
 
-
-
-$('body').on('click',  function (e) {
-    $('[data-toggle="popover"]').each(function () {
-        if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover-Password').has(e.target).length === 0) {
-
-            $(this).popover('destroy');
-        }
-    });
-});
+//             $(this).popover('destroy');
+//         }
+//     });
+// });
 
 
     function Sales_Code() {
@@ -1259,12 +1256,18 @@ function getpaymentlink(fbaid){
                          $('.paylink_payment').modal('show');
                           //$('#paylink').html(data[0].Link);
                        }      
-  
-                       
                      }
                 });
 
 }
+
+ // show Password start
+ function getpassword(password){
+  // alert('Test');
+ $('#show_password').html(password);
+}
+// show password end
+
 
 
 function getproductfollowup(fbaid){
