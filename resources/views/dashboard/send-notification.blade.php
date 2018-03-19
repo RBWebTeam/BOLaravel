@@ -1,8 +1,6 @@
 @extends('include.master')
  @section('content')
 
-
- 
  <div class="container-fluid white-bg">
  <div class="col-md-12"><h3 class="mrg-btm">Send Notification</h3></div>
  <form class="form-horizontal"  id="sendnotification"  name="sendnotification"  enctype="multipart/form-data" method="POST">
