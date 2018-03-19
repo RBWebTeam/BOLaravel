@@ -304,9 +304,6 @@ $('.message_sms_id').click(function(){
 
   if($('#message-text').val()!="")  {
   //console.log($('#message_sms_from').serialize());
-
-console.log($('#message_sms_from').serialize());
-
    $.ajax({ 
    url: "{{URL::to('fba-list')}}",
    method:"POST",
@@ -754,7 +751,7 @@ $(document).on('change', '#search_state', function() {
 
         });
 
-       exampleInstance.column('0:visible').order('desc').draw();
+       exampleInstance.column( '0:visible' ).order('desc').draw();
  // Bootstrap datepicker
 $('.input-group date input').each(function() {
   $(this).datepicker('clearDates');
@@ -1348,7 +1345,7 @@ $.ajax({
  function updatenotification(msgid,value){
 
 //alert(value);
- if (confirm("Are you sure to "+(value==1?"approve":"disapprove")+" this notification")) {}
+ if (confirm("Are you sure to "+(value==1?"approve":"reject")+" this notification")) {}
   $.ajax({
             type: "GET",
             url:'approvenotification/'+msgid+'/'+value, 
@@ -1358,7 +1355,7 @@ $.ajax({
               alert("Notification Approved Successfully");
             }
             else if(value=="0"){
-             alert("Notification Dispproved Successfully");
+             alert("Notification rejected Successfully");
                }
                 
             }
@@ -1379,7 +1376,8 @@ $.ajax({
 
   } else {
 $.ajax({
-          url:"{{URL::to('send-notification-submit')}}" ,  
+
+ url:"{{URL::to('send-notification-submit')}}" ,  
           data:new FormData($("#sendnotification")[0]),
           dataType:'json',
           async:false,
@@ -1441,14 +1439,15 @@ $.ajax({
          success: function(fsmmsg){
      
         var data = JSON.parse(fsmmsg);
-        var str = "<table class='table'><tr style='height:30px;margin:5px;'>";
+        var str = "<table class='table'><tr style='height:30px;margin:18px;'>";
   if(data.length > 0){
         
        for (var i = 0; i < data.length; i++) {
         
-         str = str + "<td><input style='padding:5px;' type='button' onclick=showImage('"+data[i].FileName+"') value='"+data[i].DocType+"'/></td>";
-          }
- 
+   
+      str = str + '<a><input  class="btn btn-default" style="margin:2px" type="button" onclick=showImage("'+data[i].FileName+'") value="'+data[i].DocType+'"/></a>';
+    }
+
            str = str + "</tr></table>";
 
       }
@@ -1467,10 +1466,13 @@ function showImage(test)
 {
 
   
+
   $("#imgdoc").css("display","block");
+
   $("#imgdoc").attr("src",test);
 
 }
+
 
 
 </script> 
@@ -1479,14 +1481,15 @@ function showImage(test)
 <!-- fbalist ImageView Script End Here.
  -->
 
-</script>
+
 
 
 
 
 <script> 
+
 $('#msds-select').change(function () { 
-   var table = $('#fba-list-table').DataTable(); 
+ var table = $('#fba-list-table').DataTable(); 
     $.fn.dataTable.ext.search.push(
     function( settings, data, dataIndex ) {
         var msdsSearch = $( "#msds-select option:selected" ).val();
@@ -1510,5 +1513,4 @@ $('#msds-select').change(function () {
 });
 
 </script>
- 
  

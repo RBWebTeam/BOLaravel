@@ -97,6 +97,7 @@ Route::post('Fsm-Register','FsmRegisterController@insertfsm');
 
  Route::get('send-notification-approve','SendNotificationController@SendnotificationApprove');
 
+ Route::get('approve-notification','SendNotificationController@notificationApprove');
 
 // -------------- avinash
 Route::get('send-notification','SendNotificationController@getstate');
@@ -119,8 +120,6 @@ route::get('sendnotificationnew', 'SendNotificationController@sendnotificationst
 Route::get('insert','uploadfileController@imageupload');
 Route::get('Fba-list-Update','FbaController@test');
 Route::get('fbalist-document/{fbaid}','FbaController@getdoclistview');
-
-
 
 
 route::post('send-notification-submit', 'SendNotificationController@sendnotificationsubmit');

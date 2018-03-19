@@ -153,7 +153,7 @@
 
 
 
- <div class="fbadoc modal fade" role="dialog">   
+<!--  <div class="fbadoc modal fade" role="dialog">   
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -170,6 +170,8 @@
     </div>
   </div>
 </div>
+<<<<<<< HEAD
+ -->
 
 
  <div class="pageloader modal fade" role="dialog" id="pageloader">   
@@ -349,7 +351,7 @@
         <div id="divdocviewer" name="divdocviewer">
         </div>
         <div>
-         <img id="imgdoc" style="min-height:150px; min-width:150px;">
+         <img id="imgdoc" style="min-height:100%; min-width:100%; overflow-y: scroll;">
          </div>
        </div>
      </div>
@@ -493,10 +495,7 @@
              "render": function ( data, type, row, meta ) {
 
 
-                // return '<a href="#" style="" data-toggle="modal"  data-target="fbadoc" onclick="uploaddoc('+row.fbaid+')" >Pending</a>';
-
                 return data==""?'<a href="" style="" data-toggle="modal"  data-target="#docviwer" onclick="uploaddoc('+data+')" >uploaded</a>':'Pending';
-
 
               }
             }, 
