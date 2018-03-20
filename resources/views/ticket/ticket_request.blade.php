@@ -17,6 +17,8 @@
                                        <th>Message</th>
                                        <th>Status</th>
                                        <th>StatusChangedBy</th>
+                                       <th>Assign</th>
+                                       <th>comment</th>
                                          
                                       </tr>
                                     </thead>
@@ -28,10 +30,12 @@
                                       <td>{{$va->CateName}}</td>
                                        <td>{{$va->QuerType}}</td>
                                         <td>{{$va->Description}}</td>
-                                         <td>{{$va->DocPath}}</td>
+                                         <td >{{$va->DocPath}}</td>
                                           <td>{{$va->Message}}</td>
                                            <td>{{$va->Status}}</td>
                                             <td>{{$va->StatusChangedBy}}</td>
+                                            <td>{{$va->user_fba_id!=null?$va->UserName:''}}</td>
+                                             <td  > <a href="#" onclick="view_comment_fn('{{$va->TicketRequestId}}')">View</a></td>
                                      </tr>
                                      @endforeach
                                     
@@ -87,19 +91,35 @@
 
 
 
+ <div class="modal fade" id="Ticket-comment-Id-Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Comment</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+       <table class="datatable-responsive table table-striped table-bordered dt-responsive nowrap" id="example">
+      <thead><tr><th>Comment</th></tr></thead>
+      <tbody id="get_comment_id"></tbody>
+      </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" id="TicketRequest_Id_save">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 
       <script type="text/javascript">
-      	
       	function TicketRequest_fn(ID){
-            
-            $('#TicketRequest_Id').val(ID);
-
-
-      		   $('#Ticket-Request-Id-Modal').modal('show');
-      	}
-
-
+             $('#TicketRequest_Id').val(ID);
+      		   $('#Ticket-Request-Id-Modal').modal('show');}
    $(document).on('click','#TicketRequest_Id_save',function(e){  e.preventDefault();
          if($('#FBAUserId').val()!=0){
          $.post("{{url('ticket-request-save')}}",$('#TicketRequest_Id_from').serialize())
@@ -121,6 +141,25 @@
 
    })
 
+ 
+
+ function view_comment_fn(ID){  
+   $('#Ticket-comment-Id-Modal').modal('show');
+   $.get("{{url('ticket-request')}}",{'TicketRequestId':ID})
+             .done(function(data){
+               arr=Array();
+               $('#get_comment_id').empty();
+              $.each(data, function(key, value) {
+                   
+                     arr.push('<tr><td>'+value.comment+'</td></tr>');
+              }); 
+              
+              $('#get_comment_id').append(arr);
+          }).fail(function(xhr, status, error) {
+                 console.log(error);
+            });
+
+ }
 
       </script>
 @endsection
