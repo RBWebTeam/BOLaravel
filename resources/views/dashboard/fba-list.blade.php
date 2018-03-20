@@ -88,7 +88,7 @@
                                        <th>SMS</th>
                                        <th>sales code</th>
                                         <th>Created Date1</th>
-                                    </tr>
+                                     </tr>
                                     </thead>
             </table>
             </div>
@@ -511,11 +511,7 @@
              "render": function ( data, type, row, meta ) {
                 return data!="Update"?data:('<a  id="update_'+row.fbaid+'" onclick="sales_update_fn('+row.fbaid+')" >'+row.salescode+'</a>');
               }
-              
-
-              
-
-
+           
             },
             { "data": "createdate1","visible":false }
             
