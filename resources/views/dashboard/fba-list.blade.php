@@ -526,12 +526,7 @@
                 return data==""?('<a  id="update_'+data+'" onclick="sales_update_fn('+data+')" >'+data+'</a>'):('<a  id="update_'+row.fbaid+'" onclick="sales_update_fn('+row.fbaid+')" >Update</a>');
               }
    
-
-              
-
-
-
-            },
+},
             { "data": "createdate1","visible":false }
             
         ],
