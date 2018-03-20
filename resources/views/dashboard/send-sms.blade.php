@@ -266,15 +266,11 @@ if($(".check_list:checkbox:checked").length > 0){
 
 
 
-
-
 });
 
 
 
 $(document).on('click','.check_list',function(){
-
-    
      len=$(".check_list:checkbox:checked").length;
      $('#msg_check').text(len+"/");
 });
