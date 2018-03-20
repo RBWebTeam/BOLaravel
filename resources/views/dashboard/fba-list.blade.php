@@ -232,7 +232,7 @@
 <div class="salesupdate modal fade" role="dialog" id="salesupdate_modal_fade">   
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-      <div class="modal-header">
+      <div class="modal-header"  >
         <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
         <h4 class="modal-title">Sales Code</h4>
       </div>
@@ -466,8 +466,7 @@
                 return '<a id="btnshowpassword" data-toggle="modal" data-target="#spassword" onclick="getpassword('+"'"+ data+"'"+')">*****</a>';
               }
 
-
-            },        
+       },         
             {"data":"City"},
             {"data":"Pincode"},
             {"data":null  ,

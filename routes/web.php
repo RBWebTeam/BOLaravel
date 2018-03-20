@@ -58,7 +58,7 @@ Route::get('fba-list/{fbaid}/{value}/{flag}',array('as'=>'fba-list.ajax','uses'=
 Route::post('fba-list','FbaController@sendsms');
 Route::post('fba-listdocument','FbaController@uploaddoc');
 // salescode
-Route::get('fba-list/{salescode}/{fbaid}',array('as'=>'fba-list.ajax','uses'=>'FbaController@updatesalescode'));
+Route::get('fba-list/{salescode}/{fbaid}',array('as'=>'fba-list.ajax','uses'=>'FbaController@salesupdate'));
 
 
 // salescode
