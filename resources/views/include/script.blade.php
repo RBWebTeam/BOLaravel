@@ -1358,6 +1358,7 @@ $.ajax({
             url:'approvenotification/'+msgid+'/'+value, 
                      
            success: function( msg ) {
+
             if(value=="1"){
               alert("Notification Approved Successfully");
             }
@@ -1372,9 +1373,6 @@ $.ajax({
  return false;
 
 }
-
-
-
 
   $('#notificsubmitbtn').click(function(){
 // alert('okae');
@@ -1434,7 +1432,6 @@ $(".nav-list > li").addClass(function(i){return "item" + (i + 1);});
 
 function uploaddoc(fbaid)
 {
-
 $('#divdocviewer').html(""); 
 $("#imgdoc").attr("src","");
 $("#imgdoc").css("display","none");
@@ -1461,7 +1458,12 @@ $.ajax({
       else
       {
         str = str + "<td>No documents uploaded.</td></tr></table>";
+
+
       }
+
+
+
 
            $('#divdocviewer').html(str);   
               
@@ -1472,13 +1474,13 @@ $.ajax({
 function showImage(test)
 {
 
-  
 
   $("#imgdoc").css("display","block");
 
   $("#imgdoc").attr("src",test);
 
 }
+
 
 
 
@@ -1519,6 +1521,9 @@ $('#msds-select').change(function () {
      table.draw();
     
 });
+
+
+
 
 </script>
  
