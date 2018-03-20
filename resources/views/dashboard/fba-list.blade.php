@@ -507,8 +507,12 @@
             },
             {"data":"salescode" ,
              "render": function ( data, type, row, meta ) {
-                return data==""?('<a  id="update_'+data+'" onclick="sales_update_fn('+data+')" >'+data+'</a>'):('<a  id="update_'+row.fbaid+'" onclick="sales_update_fn('+row.fbaid+')" >Update</a>');
+                return data!="Update"?data:('<a  id="update_'+row.fbaid+'" onclick="sales_update_fn('+row.fbaid+')" >'+row.salescode+'</a>');
               }
+
+              
+
+
             },
             
         ],
