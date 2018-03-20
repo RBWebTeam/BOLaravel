@@ -466,8 +466,7 @@
                 return '<a id="btnshowpassword" data-toggle="modal" data-target="#spassword" onclick="getpassword('+"'"+ data+"'"+')">*****</a>';
               }
 
-
-            },        
+       },         
             {"data":"City"},
             {"data":"Pincode"},
             {"data":null  ,
