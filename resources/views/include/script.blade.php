@@ -1250,11 +1250,16 @@ function getpaymentlink(fbaid){
                         $('.divpartnertable_payment').html(str);
                          $('.paylink_payment').modal('show');
                           //$('#paylink').html(data[0].Link);
-                       }      
+                       }     
+                       else{
+                        var str = "<p>No Payment Link Available</p>";
+                        // alert(str)
+                        $('.divpartnertable_payment').html(str);
+                         $('.paylink_payment').modal('show');
+                       } 
                        for (var i = 0; i < data.length; i++) 
-       {
-
-         str = str + "<p>"+data[i].Link+"</p>";
+              {
+                str = str + "<p>"+data[i].Link+"</p>";
          // $('#paylink').html(str);
        }
                        
@@ -1289,6 +1294,10 @@ function getpaymentlink(fbaid){
  function getpassword(password){
   // alert('Test');
  $('#show_password').html(password);
+}
+
+function n(n){
+    return n.length < 8  ? "0" + n :  n;
 }
 // show password end
 
@@ -1489,6 +1498,7 @@ function showImage(test)
 <script> 
 
 $('#msds-select').change(function () { 
+  debugger;
  var table = $('#fba-list-table').DataTable(); 
     $.fn.dataTable.ext.search.push(
     function( settings, data, dataIndex ) {
