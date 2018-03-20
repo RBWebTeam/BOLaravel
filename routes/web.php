@@ -86,6 +86,14 @@ Route::get('Product-followup','ProductfollowupController@getproductfollowup');
 Route::get('Product-followup/{product_id}','ProductfollowupController@getproductinfo');
 Route::Post('Product-followup','ProductfollowupController@insertproductfollowup');
 
+Route::get('RaiseaTicket','RaiserTicketController@getraiserticket');
+Route::get('RaiseaTicket/{CateCode}','RaiserTicketController@getsubcat');
+Route::get('RaiseaTicketgetcal/{QuerID}','RaiserTicketController@getclassi');
+Route::Post('RaiseaTicket','RaiserTicketController@inserraisertkt');
+
+Route::get('View-Raised-Ticket','ViewRaisedTicketController@getraisedticket');
+Route::get('View-Raised-Ticket/{ticketid}','ViewRaisedTicketController@deleteticket');
+
 ///shubham end ///
 
 //////GOVIND
