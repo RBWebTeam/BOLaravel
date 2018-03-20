@@ -170,7 +170,7 @@
     </div>
   </div>
 </div>
-<<<<<<< HEAD
+
  -->
 
 
@@ -490,14 +490,19 @@
                 return '<a href="" data-toggle="modal" data-target="#partnerInfo" onclick="getpartnerinfo('+row.fbaid+')">partner info</a>';
               }
             },  
+
+    
+
             {"data":"fdid" ,
              "render": function ( data, type, row, meta ) {
+      return data==""? '<a href="" style="" data-toggle="modal"  data-target="#docviwer" onclick="uploaddoc('+data+')" >uploaded</a>':'pending';
+      
 
-
-                return data==""?'<a href="" style="" data-toggle="modal"  data-target="#docviwer" onclick="uploaddoc('+data+')" >uploaded</a>':'Pending';
 
               }
             }, 
+
+
             {"data":"bankaccount"} ,
             {"data":"MobiNumb1" ,
              "render": function ( data, type, row, meta ) {

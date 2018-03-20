@@ -54,6 +54,12 @@ Route::post('fba-list','FbaController@sendsms');
 Route::get('fba-list/{fbaid}/{value}/{flag}',array('as'=>'fba-list.ajax','uses'=>'FbaController@updateposp'));
 Route::post('fba-list','FbaController@sendsms');
 Route::post('fba-listdocument','FbaController@uploaddoc');
+// salescode
+Route::get('fba-list/{salescode}/{fbaid}',array('as'=>'fba-list.ajax','uses'=>'FbaController@updatesalescode'));
+
+
+// salescode
+
 
 
 //fba documents 
@@ -98,6 +104,9 @@ Route::post('Fsm-Register','FsmRegisterController@insertfsm');
  Route::get('send-notification-approve','SendNotificationController@SendnotificationApprove');
 
  Route::get('approve-notification','SendNotificationController@notificationApprove');
+
+  Route::get('send_sms_log','smsLogController@getsendsmslog');
+
 
 // -------------- avinash
 Route::get('send-notification','SendNotificationController@getstate');

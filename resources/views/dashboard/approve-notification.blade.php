@@ -23,6 +23,7 @@
        <th>IsOpened</th>
        <th>opendtime</th>
        <th>isapproved</th>
+       <th>IsSend</th>
         <th>DateTimeToSend</th>
        </tr>
       </thead>
@@ -41,6 +42,7 @@
         <td><?php echo $val->IsOpened; ?></td>
          <td><?php echo $val->opendtime; ?></td>
          <td><?php echo $val->isapproved; ?></td>
+          <td><?php echo $val->IsSend; ?></td>
          <td><?php echo $val->DateTimeToSend; ?></td>
             
      </tr>

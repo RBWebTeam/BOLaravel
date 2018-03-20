@@ -20,7 +20,7 @@ class smslogController extends Controller
  return view('dashboard.sms_log',['query'=>$query]);
 
 	 }
-  
+
 
 
   // SMS TEMPLATE CONTROLLE
@@ -33,4 +33,12 @@ class smslogController extends Controller
        DB::statement('call Usp_insertsmstaplate(?,?)',array( $req->hname,$req->txtmesg ));
         return Redirect('sms_template');
             }
+  
+public function getsendsmslog(){ 
+$query1=DB::select("call usp_load_sms_log()");
+
+return view ('dashboard.send_sms_log',['query1'=>$query1]);
+}
+
  }
+

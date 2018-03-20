@@ -21,6 +21,7 @@ class FbaController extends CallApiController
            
          $doctype = DB::select("call get_document_type()");
         
+        
          //print_r($doctype); exit();
 
           
@@ -36,6 +37,16 @@ class FbaController extends CallApiController
           DB::select("call usp_update_posploanid('$fbaid','$value','$flag')");
           return redirect('fba-list');
         }
+
+        // sales code start
+        public function updatesalescode($salescode,$fbaid) {
+          DB::select("call usp_update_sales_code('$salescode','$fbaid')");
+          return redirect('fba-list');
+        }
+// sales code end
+
+
+        
         public function sendsms(Request $req) {
 
               $newsms = utf8_encode(htmlspecialchars($req->sms, ENT_QUOTES));//htmlspecialchars();
