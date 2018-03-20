@@ -46,6 +46,9 @@ Route::post('posp-update','FbaController@posp');
 Route::get('getpaymentlink/{fbaid}','FbaController@getpaymentlink');
 
 
+Route::get('fba-list/{salescode}/{fbaid}',array('as'=>'fba-list.ajax','uses'=>'FbaController@salesupdate'));
+
+
 
 
 Route::get('fba-list/{fbaid}/{value}/{flag}',array('as'=>'fba-list.ajax','uses'=>'FbaController@updateposp'));

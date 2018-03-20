@@ -669,9 +669,9 @@ $(document).on('change', '#search_state', function() {
     var id = $('#fba_id').val();
     var loan_update=$('#remark').val();
     console.log(loan_update);
-
+ 
   //  $('.updateLoan').show();
-//    $('.modal-backdrop').show();    
+   // $('.modal-backdrop').show();    
 
     if (!$('#update_loan').valid()) 
     {
@@ -685,9 +685,7 @@ $(document).on('change', '#search_state', function() {
          data : $('#update_loan').serialize(),
          success: function(msg){
         
-       
-             
-              if (msg.status==0) 
+       if (msg.status==0) 
                 {
                   alert('Updated Successfully');
                   $('#loan_'+id).closest('td').html(loan_update);       
