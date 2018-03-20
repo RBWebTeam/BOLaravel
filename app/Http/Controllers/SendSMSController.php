@@ -75,7 +75,7 @@ class SendSMSController extends Controller{
             // }else{
            if(isset($req->fba))
             $FBAID=implode(',', $req->fba); 
-            $query=DB::select('call usp_insert_smslog(?,?,?)',[ $FBAID,$req->sms_text,$uniqid,date('Y-m-d H:i:s')]);
+            $query=DB::select('call usp_insert_smslog(?,?,?,?)',[ $FBAID,$req->sms_text,$uniqid,date('Y-m-d H:i:s')]);
             $data='{"group_id":"'.$uniqid.'"}';
             $this->call_json('qa.mgfm.in/api/send-sms',$data);
              // foreach ($req->fba as $key => $fba_id) {

@@ -27,6 +27,7 @@
 				 <option value="2">FSM</option>
 				 <option value="3">FBA POSP</option>
 				</select>
+        <label class="control-label" for="inputError" id="required1"> </label>
 				</div>
 
 				<div class="form-group col-md-3">
@@ -74,15 +75,17 @@
 						<tr class="headerstyle" align="center">
 			            <th scope="col">
                         <input type="checkbox" id="checkAll" name="check" style="width: auto; float: left; display: inline-block; margin-right: 16px;">
-                        <span>RECIPIENTS</span>   <input type="text" name="search" style="margin: 0px 10px 10px 330px" id="myInput"  class="search_id" placeholder="Search for names or Mobile Number" title="Type in a name">
+                        <span>RECIPIENTS</span>   <input type="text" name="search" style="margin: 0px 10px 10px 233px " id="myInput"  class="search_id" placeholder="Search for names or Mobile Number" title="Type in a name">
                         </th>
 		                </tr>
 		         
 
                          </thead >
-                         <tbody id="sendsms_id"></tbody>
-					    </table>
-                        
+                        <tbody id="sendsms_id"></tbody>
+
+
+                       
+					    </table>            
 			     </div>
 
 
@@ -95,11 +98,12 @@
                     <option value="{{$sms->SMSTemplateId}}">{{$sms->Header}}</option>
                     @endforeach
                     </select>
-                      
+                       <label class="control-label" for="inputError" id="required2"> </label>
   <br>
 
 
 	               <textarea style="padding:10px; height:200px;"  id="SMSTemplate"  name="sms_text" class="form-control"> </textarea>
+                  <label class="control-label" for="inputError" id="required3"> </label>
 	               <div class="center-obj pull-left">
 	               <button class="common-btn" id="send_message_id">SEND</button>
  
@@ -216,14 +220,29 @@ function SMSTemplate_fn(ID){
 
 $(document).on('click','#send_message_id',function(e){
   // e.preventdefault();
- if(( $('#SMSTemplate_select').val()==0 || $('#SMSTemplate_select').val()==null) && ($('#smslist').val()==0) ||$('#smslist').val()==null ){
-     alert("Please select from drop down list.");
+
+
+ if($('#smslist').val()==0 ||$('#smslist').val()==null ){ 
+  $('#required1').text('This field is required');
+   $('#required2').text('This field is required');
   return false;
+ }else{ $('#required1').text('');}
+ if( $('#SMSTemplate_select').val()==0 || $('#SMSTemplate_select').val()==null  ){
+       $('#required2').text('This field is required');
+     //alert("Please select from drop down list.");
+  return false;
+ }else{
+       $('#required2').text('');
+      
  } 
 
+
 if($('#SMSTemplate').val()==0 || $('#SMSTemplate').val()==null){
-  alert("Please fill out this field message.");
+   $('#required3').text('This field is required');
+  //alert("Please fill out this field message.");
   return false;
+ }else{
+  $('#required3').text('');
  }
 
 // var fields = $("input[name='fba']").serializeArray(); 
@@ -234,11 +253,24 @@ if($('#SMSTemplate').val()==0 || $('#SMSTemplate').val()==null){
 
 if($(".check_list:checkbox:checked").length > 0){
   }else{
+    $('#required4').text('This field is required');
     alert("Please select  Recipient");
     return false;
   }
 
+
+
+
+
 });
+
+
+
+$(document).on('click','.check_list',function(){
+
+     alert($(".check_list:checkbox:checked").length );
+});
+
 
 </script>
 			 @endsection
