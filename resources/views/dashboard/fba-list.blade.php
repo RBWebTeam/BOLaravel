@@ -70,7 +70,7 @@
                                        <thead>
                                        <tr>
                                        <th>FBA ID</th> 
-                                       <th>Full Name</th>
+                                       <th>Full Name</th>                                    
                                        <th>Created Date</th>
                                        <th>Mobile No</th>
                                        <th>Email ID</th>
@@ -87,6 +87,7 @@
                                        <th>Bank Account</th>
                                        <th>SMS</th>
                                        <th>sales code</th>
+                                        <th>Created Date1</th>
                                     </tr>
                                     </thead>
             </table>
@@ -170,7 +171,7 @@
     </div>
   </div>
 </div>
-<<<<<<< HEAD
+
  -->
 
 
@@ -419,7 +420,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">password</h4>
+        <h4 class="modal-title">Password</h4>
       </div>
       <div class="modal-body">
       <div style="color: blue;" id="show_password" class="show_password">
@@ -444,25 +445,25 @@
         $(row).css({backgroundColor: 'LightGreen'});
       }
     },
-        "order": [[ 2, "desc" ]],
+        "order": [[ 18, "desc" ]],
         "ajax": "get-fba-list",
         "columns": [
              { "data": "fbaid"},
-            { "data": "FullName"},
+            { "data": "FullName"},            
             { "data": "createdate" },
             { "data": "MobiNumb1" },
             { "data": "EMaiID" },
             { "data": "Link",
               "render": function ( data, type, row, meta ) {
-                return row.PayStat == "P"?'<a id="btnviewhistory" data-toggle="modal" data-target="#paylink_payment" onclick="getpaymentlink('+row.fbaid+')">Payment link</a>':'';
+                return '<a id="btnviewhistory" data-toggle="modal" data-target="#paylink_payment" onclick="getpaymentlink('+row.fbaid+')">Payment link</a>';
               }
-
              }, 
 
             {"data":"pwd" ,
            
              "render": function ( data, type, row, meta ) {
-                return '<a id="btnshowpassword" data-toggle="modal" data-target="#spassword" onclick="getpassword('+data+')">*****</a>';
+              
+                return '<a id="btnshowpassword" data-toggle="modal" data-target="#spassword" onclick="getpassword('+"'"+ data+"'"+')">*****</a>';
               }
 
 
@@ -491,14 +492,29 @@
                 return '<a href="" data-toggle="modal" data-target="#partnerInfo" onclick="getpartnerinfo('+row.fbaid+')">partner info</a>';
               }
             },  
-            {"data":"fdid" ,
+
+    
+
+      //       {"data":"fdid" ,
+      //        "render": function ( data, type, row, meta ) {
+      // return data==""? '<a href="" style="" data-toggle="modal"  data-target="#docviwer" onclick="uploaddoc('+data+')" >uploaded</a>':'pending';
+      
+
+
+      //         }
+      //       }, 
+
+
+  {"data":"fdid" ,
              "render": function ( data, type, row, meta ) {
+      return  '<a href="" style="" data-toggle="modal"  data-target="#docviwer" onclick="uploaddoc('+data+')" >uploaded</a>';
+      
 
-
-                return data==""?'<a href="" style="" data-toggle="modal"  data-target="#docviwer" onclick="uploaddoc('+data+')" >uploaded</a>':'Pending';
 
               }
             }, 
+
+
             {"data":"bankaccount"} ,
             {"data":"MobiNumb1" ,
              "render": function ( data, type, row, meta ) {
@@ -507,13 +523,18 @@
             },
             {"data":"salescode" ,
              "render": function ( data, type, row, meta ) {
-                return data!="Update"?data:('<a  id="update_'+row.fbaid+'" onclick="sales_update_fn('+row.fbaid+')" >'+row.salescode+'</a>');
+                return data==""?('<a  id="update_'+data+'" onclick="sales_update_fn('+data+')" >'+data+'</a>'):('<a  id="update_'+row.fbaid+'" onclick="sales_update_fn('+row.fbaid+')" >Update</a>');
               }
+<<<<<<< HEAD
+=======
+              
 
               
 
 
+>>>>>>> ca9b34b31fc65cf61c863a6dd64fa762bfd32e2b
             },
+            { "data": "createdate1","visible":false }
             
         ],
 

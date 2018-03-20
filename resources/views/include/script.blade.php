@@ -1250,11 +1250,16 @@ function getpaymentlink(fbaid){
                         $('.divpartnertable_payment').html(str);
                          $('.paylink_payment').modal('show');
                           //$('#paylink').html(data[0].Link);
-                       }      
+                       }     
+                       else{
+                        var str = "<p>No Payment Link Available</p>";
+                        // alert(str)
+                        $('.divpartnertable_payment').html(str);
+                         $('.paylink_payment').modal('show');
+                       } 
                        for (var i = 0; i < data.length; i++) 
-       {
-
-         str = str + "<p>"+data[i].Link+"</p>";
+              {
+                str = str + "<p>"+data[i].Link+"</p>";
          // $('#paylink').html(str);
        }
                        
@@ -1289,6 +1294,10 @@ function getpaymentlink(fbaid){
  function getpassword(password){
   // alert('Test');
  $('#show_password').html(password);
+}
+
+function n(n){
+    return n.length < 8  ? "0" + n :  n;
 }
 // show password end
 
@@ -1349,6 +1358,7 @@ $.ajax({
             url:'approvenotification/'+msgid+'/'+value, 
                      
            success: function( msg ) {
+
             if(value=="1"){
               alert("Notification Approved Successfully");
             }
@@ -1363,9 +1373,6 @@ $.ajax({
  return false;
 
 }
-
-
-
 
   $('#notificsubmitbtn').click(function(){
 // alert('okae');
@@ -1425,7 +1432,6 @@ $(".nav-list > li").addClass(function(i){return "item" + (i + 1);});
 
 function uploaddoc(fbaid)
 {
-
 $('#divdocviewer').html(""); 
 $("#imgdoc").attr("src","");
 $("#imgdoc").css("display","none");
@@ -1452,7 +1458,12 @@ $.ajax({
       else
       {
         str = str + "<td>No documents uploaded.</td></tr></table>";
+
+
       }
+
+
+
 
            $('#divdocviewer').html(str);   
               
@@ -1463,13 +1474,13 @@ $.ajax({
 function showImage(test)
 {
 
-  
 
   $("#imgdoc").css("display","block");
 
   $("#imgdoc").attr("src",test);
 
 }
+
 
 
 
@@ -1487,6 +1498,7 @@ function showImage(test)
 <script> 
 
 $('#msds-select').change(function () { 
+  debugger;
  var table = $('#fba-list-table').DataTable(); 
     $.fn.dataTable.ext.search.push(
     function( settings, data, dataIndex ) {
@@ -1509,6 +1521,9 @@ $('#msds-select').change(function () {
      table.draw();
     
 });
+
+
+
 
 </script>
  

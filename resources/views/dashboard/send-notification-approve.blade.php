@@ -23,7 +23,7 @@
       </tr>
       </thead>
       <tbody>
-     @foreach($query as $val) 
+      @foreach($query as $val) 
      <tr>
         <td><?php echo $val->MessageId; ?></td> 
         <td><?php echo $val->NotificationTitle; ?></td>
