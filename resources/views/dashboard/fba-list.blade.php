@@ -70,7 +70,7 @@
                                        <thead>
                                        <tr>
                                        <th>FBA ID</th> 
-                                       <th>Full Name</th>
+                                       <th>Full Name</th>                                    
                                        <th>Created Date</th>
                                        <th>Mobile No</th>
                                        <th>Email ID</th>
@@ -87,6 +87,7 @@
                                        <th>Bank Account</th>
                                        <th>SMS</th>
                                        <th>sales code</th>
+                                        <th>Created Date1</th>
                                     </tr>
                                     </thead>
             </table>
@@ -419,7 +420,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">password</h4>
+        <h4 class="modal-title">Password</h4>
       </div>
       <div class="modal-body">
       <div style="color: blue;" id="show_password" class="show_password">
@@ -444,11 +445,11 @@
         $(row).css({backgroundColor: 'LightGreen'});
       }
     },
-        "order": [[ 2, "desc" ]],
+        "order": [[ 18, "desc" ]],
         "ajax": "get-fba-list",
         "columns": [
              { "data": "fbaid"},
-            { "data": "FullName"},
+            { "data": "FullName"},            
             { "data": "createdate" },
             { "data": "MobiNumb1" },
             { "data": "EMaiID" },
@@ -462,7 +463,8 @@
             {"data":"pwd" ,
            
              "render": function ( data, type, row, meta ) {
-                return '<a id="btnshowpassword" data-toggle="modal" data-target="#spassword" onclick="getpassword('+data+')">*****</a>';
+              
+                return '<a id="btnshowpassword" data-toggle="modal" data-target="#spassword" onclick="getpassword('+"'"+ data+"'"+')">*****</a>';
               }
 
 
@@ -509,11 +511,13 @@
              "render": function ( data, type, row, meta ) {
                 return data!="Update"?data:('<a  id="update_'+row.fbaid+'" onclick="sales_update_fn('+row.fbaid+')" >'+row.salescode+'</a>');
               }
+              
 
               
 
 
             },
+            { "data": "createdate1","visible":false }
             
         ],
 
