@@ -74,7 +74,7 @@
 						<tr class="headerstyle" align="center">
 			            <th scope="col">
                         <input type="checkbox" id="checkAll" name="check" style="width: auto; float: left; display: inline-block; margin-right: 16px;">
-                        <span>RECIPIENTS</span>   <input type="text" name="search" style="margin: 0px 10px 10px 330px" id="myInput"  class="search_id" placeholder="Search for names.." title="Type in a name">
+                        <span>RECIPIENTS</span>   <input type="text" name="search" style="margin: 0px 10px 10px 330px" id="myInput"  class="search_id" placeholder="Search for names or Mobile Number" title="Type in a name">
                         </th>
 		                </tr>
 		         
@@ -89,22 +89,20 @@
 
 			
 	               <div class="col-sm-6 col-xs-12 form-padding">  
-                    <select  name="SMSTemplate" class="form-control"   onchange="SMSTemplate_fn(this.value)" >
+                    <select  name="SMSTemplate" class="form-control"  id="SMSTemplate_select" onchange="SMSTemplate_fn(this.value)" >
                     <option value="0" >select</option>
                     @foreach($SMSTemplate as $sms)
                     <option value="{{$sms->SMSTemplateId}}">{{$sms->Header}}</option>
                     @endforeach
                     </select>
-                      @if ($errors->has('SMSTemplate'))<label class="control-label" for="inputError"> {{ $errors->first('SMSTemplate') }}</label>  @endif
-
+                      
   <br>
 
 
 	               <textarea style="padding:10px; height:200px;"  id="SMSTemplate"  name="sms_text" class="form-control"> </textarea>
 	               <div class="center-obj pull-left">
-	               <button class="common-btn">SEND</button>
-
-	                 @if ($errors->has('sms_text'))<label class="control-label" for="inputError"> {{ $errors->first('sms_text') }}</label>  @endif
+	               <button class="common-btn" id="send_message_id">SEND</button>
+ 
 	               </div>
 				   </div>
 
@@ -191,7 +189,7 @@ function FN_search(ID,city,fDate,tDate){
  $.get("{{url('send-sms')}}",search).done(function(data){   var arr=Array();   $('#sendsms_id').empty();
  	           if(data.sms_data.length > 0){
               $.each(data.sms_data,function(index,val){ 
-                    arr.push('<tr><td><input type="checkbox" name="fba[]" value="'+val.FBAID+'" >'+val.FullName	+':'+val.MobiNumb1+'</td> </tr>');  });
+                    arr.push('<tr><td><input type="checkbox" name="fba[]" class="check_list" value="'+val.FBAID+'" >'+val.FullName	+':'+val.MobiNumb1+'</td> </tr>');  });
                 $('#sendsms_id').append(arr);
                  }else{
                  	alert("No data found...");
@@ -216,6 +214,31 @@ function SMSTemplate_fn(ID){
 }
 
 
+$(document).on('click','#send_message_id',function(e){
+  // e.preventdefault();
+ if(( $('#SMSTemplate_select').val()==0 || $('#SMSTemplate_select').val()==null) && ($('#smslist').val()==0) ||$('#smslist').val()==null ){
+     alert("Please select from drop down list.");
+  return false;
+ } 
+
+if($('#SMSTemplate').val()==0 || $('#SMSTemplate').val()==null){
+  alert("Please fill out this field message.");
+  return false;
+ }
+
+// var fields = $("input[name='fba']").serializeArray(); 
+//   if (fields.length>0) { 
+//     alert("Please select  Recipient");
+//     return false;
+//   } 
+
+if($(".check_list:checkbox:checked").length > 0){
+  }else{
+    alert("Please select  Recipient");
+    return false;
+  }
+
+});
 
 </script>
 			 @endsection
