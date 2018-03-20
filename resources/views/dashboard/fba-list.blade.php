@@ -493,9 +493,19 @@
 
     
 
-            {"data":"fdid" ,
+      //       {"data":"fdid" ,
+      //        "render": function ( data, type, row, meta ) {
+      // return data==""? '<a href="" style="" data-toggle="modal"  data-target="#docviwer" onclick="uploaddoc('+data+')" >uploaded</a>':'pending';
+      
+
+
+      //         }
+      //       }, 
+
+
+  {"data":"fdid" ,
              "render": function ( data, type, row, meta ) {
-      return data==""? '<a href="" style="" data-toggle="modal"  data-target="#docviwer" onclick="uploaddoc('+data+')" >uploaded</a>':'pending';
+      return  '<a href="" style="" data-toggle="modal"  data-target="#docviwer" onclick="uploaddoc('+data+')" >uploaded</a>';
       
 
 

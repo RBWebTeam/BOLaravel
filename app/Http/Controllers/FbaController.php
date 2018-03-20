@@ -38,15 +38,16 @@ class FbaController extends CallApiController
           return redirect('fba-list');
         }
 
-        // sales code start
-        public function updatesalescode($salescode,$fbaid) {
-          DB::select("call usp_update_sales_code('$salescode','$fbaid')");
+// sales code start
+      public function salesupdate($salescode,$fbaid) {
+          DB::select("usp_update_sales_code('$salescode','$fbaid')");
           return redirect('fba-list');
         }
+
 // sales code end
 
 
-        
+
         public function sendsms(Request $req) {
 
               $newsms = utf8_encode(htmlspecialchars($req->sms, ENT_QUOTES));//htmlspecialchars();
@@ -133,7 +134,8 @@ class FbaController extends CallApiController
         
         $paymentlink=DB::select("call Usp_paymentlink($fbaid)");
          
-         return json_encode($paymentlink);
+
+       return json_encode($paymentlink);
   
           }
 

@@ -12,7 +12,16 @@ use Redirect;
 class TicketController extends Controller
 {
      
-    public function ticket_request(){
+    public function ticket_request(Request $req){
+ 
+
+     
+        if(isset($req->TicketRequestId)){
+               $comment=DB::select('call sp_ticket_comment_list('.$req->TicketRequestId.')');
+        	     return  $comment;
+        }
+
+
 
        $query=DB::select('call sp_ticket_request_list()');
        $users=DB::select('call sp_assign_list()');
@@ -24,7 +33,7 @@ class TicketController extends Controller
     public function ticket_request_save(Request $req){
            $error=''; 
             try{
-        	DB::table('ticketrequest')->where('TicketRequestId','=',$req->TicketRequestId)->update(['user_fba_id'=>$req->FBAUserId]);
+        	DB::table('TicketRequest')->where('TicketRequestId','=',$req->TicketRequestId)->update(['user_fba_id'=>$req->FBAUserId]);
                         $error=0; 
                         }catch (Exception $e){  $error=1;  }
 
