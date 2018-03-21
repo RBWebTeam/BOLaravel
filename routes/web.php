@@ -63,8 +63,6 @@ Route::get('fba-list/{salescode}/{fbaid}',array('as'=>'fba-list.ajax','uses'=>'F
 
 // salescode
 
-
-
 //fba documents 
 Route::get('Fba-document','fbadocumentsController@fbadocument');
 
@@ -135,10 +133,6 @@ Route::get('fbalist-document/{fbaid}','FbaController@getdoclistview');
 
 
 route::post('send-notification-submit', 'SendNotificationController@sendnotificationsubmit');
-
-
-
-
 
 //route::get('sendnotificationnew', 'SendNotificationController@send-notificationstate');
 

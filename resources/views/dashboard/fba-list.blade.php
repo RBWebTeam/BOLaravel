@@ -351,7 +351,7 @@
         <div id="divdocviewer" name="divdocviewer">
         </div>
         <div>
-         <img id="imgdoc" style="min-height:100%; min-width:100%; overflow-y: scroll;">
+         <img id="imgdoc" style="min-height:100%; min-width:100%;">
          </div>
        </div>
      </div>
@@ -491,17 +491,11 @@
               }
             },  
 
-    
-
-            {"data":"fdid" ,
+     {"data":"fdid" ,
              "render": function ( data, type, row, meta ) {
-      return data==""? '<a href="" style="" data-toggle="modal"  data-target="#docviwer" onclick="uploaddoc('+data+')" >uploaded</a>';
-      
-
-
-              }
-            }, 
-
+      return data == 1?'<a href="" style="" data-toggle="modal"  data-target="#docviwer" onclick="uploaddoc('+row.fbaid+')" >uploaded</a>':'pending';
+       }
+        },
 
 
             {"data":"bankaccount"} ,

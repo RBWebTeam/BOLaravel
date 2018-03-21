@@ -170,7 +170,6 @@ $(document).ready(function(){
                 $('select[name="city"]').empty();
             }
         });
-
 $("#basic-addon2").click(function(e){
           e.preventDefault();
             var flag = 0;
@@ -1427,7 +1426,7 @@ $.ajax({
 }
 
 
-$(".nav-list > li").addClass(function(i){return "item" + (i + 1);});
+// $(".nav-list > li").addClass(function(i){return "item" + (i + 1);});
 
 
 function uploaddoc(fbaid)
@@ -1462,11 +1461,9 @@ $.ajax({
 
       }
 
-
-
-
            $('#divdocviewer').html(str);   
-              
+             
+  
         }  
       });
 }
@@ -1474,15 +1471,11 @@ $.ajax({
 function showImage(test)
 {
 
-
   $("#imgdoc").css("display","block");
 
   $("#imgdoc").attr("src",test);
 
 }
-
-
-
 
 </script> 
   
