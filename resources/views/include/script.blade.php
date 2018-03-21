@@ -1516,27 +1516,7 @@ $('#msds-select').change(function () {
 });
 </script>
 
- 
- <!-- <script type="text/javascript">
-  function deleteticket($tktid,btndelete){
-    var del=confirm("Are you sure you want to delete this record?");
-    if (del==true){
-       var ticketid= $tktid;
-            $.ajax({ 
-            type: "GET",
-            url:'View-Raised-Ticket/'+ticketid,
-            success: function( msg ) {
-            console.log(msg);
-             alert("Ticket deleted successfully..!");
-             $(btndelete).closest('tr').remove();
-            }
-        });
-    }else{
-        alert("Ticket Not Deleted")
-    }
-    return del;
- }
- </script> -->
+
 
 <script type="text/javascript">
    $('#ddlsubcat').on('change', function() {
