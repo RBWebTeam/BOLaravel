@@ -634,6 +634,8 @@ $(document).on('change', '#search_state', function() {
 
 <script type="text/javascript">
   $('#sales_update').click(function(){
+
+
     var id = $('#p_fbaid').val();
     var sales_update=$('#p_remark').val();
     console.log(sales_update);
@@ -716,7 +718,7 @@ $(document).on('change', '#search_state', function() {
 
 <script type="text/javascript">
   $('#posp_update').click(function(){
-    // alert('okae');
+     
 
 // alert($(this).closest('tr').find('input[type=text]').val());
 
@@ -730,6 +732,8 @@ $(document).on('change', '#search_state', function() {
     } 
     else 
     {
+
+      console.log($('#update_posp').serialize());
       $.ajax({  
          type: "POST",  
          url: "{{URL::to('posp-update')}}",

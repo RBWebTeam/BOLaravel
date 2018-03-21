@@ -42,6 +42,7 @@ class FbaController extends CallApiController
         }
 
         public function updateposp($fbaid,$value,$flag) {
+
           DB::select("call usp_update_posploanid('$fbaid','$value','$flag')");
           return redirect('fba-list');
         }
@@ -81,7 +82,7 @@ class FbaController extends CallApiController
 
         public function sales(Request $req){
        
-        $query=DB::table('fbamast')
+        $query=DB::table('FBAMast')
             ->where('FBAID','=',$req->p_fbaid)
             ->update(['salescode' =>$req->p_remark]);
 
@@ -92,7 +93,7 @@ class FbaController extends CallApiController
 
         public function loan(Request $req){
           // print_r($req->all());exit();
-          $query=DB::table('fbarepresentations')
+          $query=DB::table('FBARepresentations')
             ->where('FBAID','=',$req->fba_id)
             ->update(['LoanID' =>$req->remark]);
            if ( $query) {
@@ -101,8 +102,8 @@ class FbaController extends CallApiController
         }
 
         public function posp(Request $req){
-          // print_r($req->all());exit();
-          $query=DB::table('fbarepresentations')
+           
+          $query=DB::table('FBARepresentations')
             ->where('FBAID','=',$req->fbaid)
             ->update(['POSPNo' =>$req->posp_remark]);
            if ( $query) {
