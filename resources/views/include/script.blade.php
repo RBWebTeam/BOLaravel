@@ -653,6 +653,7 @@ $(document).on('change', '#search_state', function() {
                   alert('Updated Successfully');
                   $('#p_remark').val('');
                   $('#update_'+id).closest('td').html(sales_update);
+                  
                   $('.close').click();           
                 } 
                 else {

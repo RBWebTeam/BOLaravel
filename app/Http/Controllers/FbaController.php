@@ -105,7 +105,7 @@ class FbaController extends CallApiController
 
         public function posp(Request $req){
           // print_r($req->all());exit();
-          $query=DB::table('fbarepresentations')
+          $query=DB::table('FBARepresentations')
             ->where('FBAID','=',$req->fbaid)
             ->update(['POSPNo' =>$req->posp_remark]);
            if ( $query) {
@@ -138,8 +138,6 @@ class FbaController extends CallApiController
        return json_encode($paymentlink);
   
           }
-
-
 }
 
 
