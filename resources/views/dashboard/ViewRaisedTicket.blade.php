@@ -40,7 +40,7 @@
                 	<td>{{$val->FullName}}</td>
                 	<td>{{$val->MobiNumb1}}</td>
                 	<td>{{$val->CreatedDate}}</td>
-                	<td><a class="btn btn-primary" href="{{url('View-Raised-Ticket')}}/{{$val->TicketRequestId}}"  >Delete</a>
+                	<td><a class="btn btn-primary" onclick="deleteticket({{$val->TicketRequestId}},this)">Delete</a>
                 	</td>
 
                 	</tr>
@@ -51,5 +51,25 @@
 </div>
 </div>
 </div>
+ <script type="text/javascript">
+  function deleteticket($tktid,btndelete){
+    var del=confirm("Are you sure you want to delete this record?");
+    if (del==true){
+       var ticketid= $tktid;
+            $.ajax({ 
+            type: "GET",
+            url:'View-Raised-Ticket/'+ticketid,
+            success: function( msg ) {
+            console.log(msg);
+             alert("Ticket deleted successfully..!");
+             $(btndelete).closest('tr').remove();
+            }
+        });
+    }else{
+        alert("Ticket Not Deleted")
+    }
+    return del;
+ }
+ </script>
 
 @endsection
