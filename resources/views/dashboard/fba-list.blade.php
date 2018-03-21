@@ -492,11 +492,11 @@
               }
             },  
 
-     {"data":"fdid" ,
+      {"data":"fdid" ,
              "render": function ( data, type, row, meta ) {
-      return data == 1?'<a href="" style="" data-toggle="modal"  data-target="#docviwer" onclick="uploaddoc('+row.fbaid+')" >uploaded</a>':data;
+      return data == 1?'<a href="" style="" data-toggle="modal"  data-target="#docviwer" onclick="uploaddoc('+row.fbaid+')" >uploaded</a>':'pending';
        }
-        }, 
+        },
 
     
 
