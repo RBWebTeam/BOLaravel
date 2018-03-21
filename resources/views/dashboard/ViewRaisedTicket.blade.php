@@ -35,7 +35,7 @@
 
                 		 </td>
                 		<?php } else { ?>
-                		<a href="http://localhost:8000/upload/Raiserticket/{{$val->DocPath}}" download class="btn btn-primary">View</a></td>
+                		<a href="{{url('upload/Raiserticket')}}/{{$val->DocPath}}" download class="btn btn-primary">View</a></td>
                 		<?php }?> 
                 	<td>{{$val->FullName}}</td>
                 	<td>{{$val->MobiNumb1}}</td>
