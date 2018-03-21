@@ -1523,8 +1523,8 @@ $('#msds-select').change(function () {
 });
 </script>
 
-<!-- Start shubham raise a ticket -->
- <script type="text/javascript">
+ 
+ <!-- <script type="text/javascript">
   function deleteticket($tktid,btndelete){
     var del=confirm("Are you sure you want to delete this record?");
     if (del==true){
@@ -1543,7 +1543,7 @@ $('#msds-select').change(function () {
     }
     return del;
  }
- </script>
+ </script> -->
 
 <script type="text/javascript">
    $('#ddlsubcat').on('change', function() {
