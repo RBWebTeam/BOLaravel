@@ -1487,14 +1487,7 @@ function showImage(test)
 </script> 
   
 
-<!-- fbalist ImageView Script End Here.
- -->
-
-
-
-
-
-
+<!-- fbalist ImageView Script End Here-->
 <script> 
 
 $('#msds-select').change(function () { 
