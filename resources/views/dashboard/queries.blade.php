@@ -33,10 +33,19 @@
                 @foreach($query as $val)
               <tr>
 
+                @if($status==3)
+                <td> {{$val->created_date}}</td>
+                <td> {{$val->FBAId}}</td>
+               <td> {{$val->FBAName}}</td>
+               <td> {{$val->Mobile}}</td>
+               <td> {{$val->Email}}</td>
+                @else
                <td> {{$val->FBAId}}</td>
                <td> {{$val->FBAName}}</td>
                <td> {{$val->Mobile}}</td>
                <td> {{$val->Email}}</td>
+                @endif
+
                 @if($status==1)
                <td> {{$val->City}}</td>
                <td> {{$val->HEALTH}}</td>
@@ -54,27 +63,31 @@
                 
                @elseif($status==3)
                <td> {{$val->City}}</td>
-                <td> {{$val->HEALTH}}</td>
-                <td> {{$val->MOTOR}}</td>
-                <td> {{$val->TWO_WHEELER}}</td>
+               <td> {{$val->pcount}}</td>
+               <td> {{$val->TName}}</td>
                @elseif($status==4)
+               <td> {{$val->City}}</td>
                 <td> {{$val->CreaOn}}</td>
                @elseif($status==5)
+               <td> {{$val->City}}</td>
                  <td> {{$val->created_date}}</td>
                   <td> {{$val->HEALTH}}</td>
                <td> {{$val->MOTOR}}</td>
                
                <td> {{$val->TWO_WHEELER}}</td>
                @elseif($status==6)
+
                <td> {{$val->Created_Date}}</td>
                 <td>{{$val->PospName}}</td>
                @elseif($status==7)
+               <td> {{$val->City}}</td>
                  <td> {{$val->Created_Date}}</td>
                 <td> {{$val->POSPName}}</td>
                @elseif($status==8)
+               <td> {{$val->City}}</td>
                <td> {{$val->HEALTH}}</td>
                <td> {{$val->MOTOR}}</td>
-               <td> {{$val->HOME_LOAN}}</td>
+               
                
                <td> {{$val->TWO_WHEELER}}</td>
                @else  

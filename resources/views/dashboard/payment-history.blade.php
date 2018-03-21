@@ -81,6 +81,7 @@
                 <tbody>
                
   @if(isset($respon))
+  
                  @foreach($respon as $val)
                  <tr>   
                    <?php   $customer_id =preg_split('/-/', $val->CustName); ?>

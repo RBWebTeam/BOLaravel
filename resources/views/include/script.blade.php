@@ -666,6 +666,7 @@ $(document).on('change', '#search_state', function() {
 </script>
 
 
+
 <script type="text/javascript">
   $('#loan_update').click(function(){
     // alert('okae');
@@ -696,7 +697,7 @@ $(document).on('change', '#search_state', function() {
                   $('#loan_'+id).closest('td').html(loan_update);       
                   $('#remark').val('');
                   $('.close').click();           
-                  
+                   
 
                 } 
                 else {
@@ -753,7 +754,7 @@ $(document).on('change', '#search_state', function() {
 
 
     $(document).ready(function() {
-       var exampleInstance = $('#example').DataTable({
+       var exampleInstance = $('#fsm-details-table').DataTable({
           paging: true,
           responsive: false,
 
@@ -770,7 +771,7 @@ table1 = $('#example').DataTable({
   paging: true,
   info: false,
   responsive: false,
-});
+}).column('0:visible').order('desc').draw();
 
 
 

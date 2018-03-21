@@ -118,7 +118,7 @@ route::get('sendnotificationnew', 'SendNotificationController@sendnotificationst
 
 Route::get('insert','uploadfileController@imageupload');
 Route::get('Fba-list-Update','FbaController@test');
-Route::get('fbalist-document/{fbaid}','FbaController@getdoclistview');
+Route::get('fbalist-document/{fbaid}','FbaController@getfbalist');
 
 
 
