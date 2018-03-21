@@ -62,27 +62,29 @@ class SendSMSController extends Controller{
 
     public function send_sms_save(Request $req){  
  
- 
-         $error='';
+          $uniqid=uniqid();
+          $error='';
 
-              $validator =Validator::make($req->all(), [
-              'SMSTemplate' =>'required|not_in:0',
-              'sms_text' =>'required ',  ]);
-             if ($validator->fails()) {
-             return redirect('send-sms')
-             ->withErrors($validator)
-             ->withInput();
-            }else{
+            //   $validator =Validator::make($req->all(), [
+            //   'SMSTemplate' =>'required|not_in:0',
+            //   'sms_text' =>'required ',  ]);
+            //  if ($validator->fails()) {
+            //  return redirect('send-sms')
+            //  ->withErrors($validator)
+            //  ->withInput();
+            // }else{
            if(isset($req->fba))
             $FBAID=implode(',', $req->fba); 
-            $query=DB::select('call usp_insert_smslog(?,?,?)',[ $FBAID,$req->sms_text,uniqid()]);
-             foreach ($req->fba as $key => $fba_id) {
-             $query=DB::table('FBAMast')->select('FBAID','FullName','MobiNumb1')->where('FBAID','=',$fba_id)->first();
-             $status=$this->sentsms($query->MobiNumb1,$req->sms_text,$query->FBAID,$req->SMSTemplate);
-             }
+            $query=DB::select('call usp_insert_smslog(?,?,?,?)',[ $FBAID,$req->sms_text,$uniqid,date('Y-m-d H:i:s')]);
+            $data='{"group_id":"'.$uniqid.'"}';
+            $this->call_json('qa.mgfm.in/api/send-sms',$data);
+             // foreach ($req->fba as $key => $fba_id) {
+             // $query=DB::table('FBAMast')->select('FBAID','FullName','MobiNumb1')->where('FBAID','=',$fba_id)->first();
+             // $status=$this->sentsms($query->MobiNumb1,$req->sms_text,$query->FBAID,$req->SMSTemplate);
+             // }
              Session::flash('msg', "message  successfully send...");;
                        return Redirect::back();
-            }     
+                
 
     }
 
@@ -119,7 +121,7 @@ class SendSMSController extends Controller{
     public function call_json($url,$data){
     $ch = curl_init();
         curl_setopt($ch, CURLOPT_VERBOSE, 1);
-        curl_setopt( $ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
+        curl_setopt( $ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json','token:1234567890'));
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);

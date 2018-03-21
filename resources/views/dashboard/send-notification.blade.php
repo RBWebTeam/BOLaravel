@@ -1,8 +1,6 @@
 @extends('include.master')
  @section('content')
 
-
- 
  <div class="container-fluid white-bg">
  <div class="col-md-12"><h3 class="mrg-btm">Send Notification</h3></div>
  <form class="form-horizontal"  id="sendnotification"  name="sendnotification"  enctype="multipart/form-data" method="POST">
@@ -11,9 +9,10 @@
   <div class="form-group">
   <select id="ddlflag" name="ddlflag" class="selectpicker select-opt form-control" onchange="loadfbasbyflag()" required>
    <option selected="selected" value="0">-SELECT-</option>
-<!--    <option value="1">STATE</option>
+   <option value="1">STATE</option>
    <option value="2">CITY</option>
-    <option value="3">PINCODE</option> -->
+    <option value="3">PINCODE</option>
+     
    <option value="6">FBA</option>
   </select>
   </div>

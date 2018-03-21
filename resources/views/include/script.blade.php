@@ -66,18 +66,19 @@ $(document).ready(function(){
           // test
 
           
-          $('body').popover({
-    selector: '[data-toggle="popover"]'
-});
+//           $('body').popover({
+//     selector: '[data-toggle="popover"]'
+// });
 
-$('body').on('click',  function (e) {
-    $('[data-toggle="popover"]').each(function () {
-        if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover-Password').has(e.target).length === 0) {
-            $(this).popover('destroy');
-        }
-    });
-});
-         
+// $('body').on('click',  function (e) {
+//     $('[data-toggle="popover"]').each(function () {
+//         if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover-Password').has(e.target).length === 0) {
+
+//             $(this).popover('destroy');
+//         }
+//     });
+// });
+
 
     function Sales_Code() {
               console.log('something');
@@ -668,9 +669,9 @@ $(document).on('change', '#search_state', function() {
     var id = $('#fba_id').val();
     var loan_update=$('#remark').val();
     console.log(loan_update);
-
+ 
   //  $('.updateLoan').show();
-//    $('.modal-backdrop').show();    
+   // $('.modal-backdrop').show();    
 
     if (!$('#update_loan').valid()) 
     {
@@ -684,24 +685,17 @@ $(document).on('change', '#search_state', function() {
          data : $('#update_loan').serialize(),
          success: function(msg){
         
-       
-             
-              if (msg.status==0) 
+       if (msg.status==0) 
                 {
                   alert('Updated Successfully');
                   $('#loan_'+id).closest('td').html(loan_update);       
                   $('#remark').val('');
                   $('.close').click();           
-                  
-
-                } 
+                 } 
                 else {
                   alert('Could not updated successfully');
                 }
-
-              
-              
-        }  
+      }  
       });
     }
   })
@@ -749,21 +743,24 @@ $(document).on('change', '#search_state', function() {
 
 
     $(document).ready(function() {
-        $('#example').DataTable({
+       var exampleInstance = $('#fsm-details-table').DataTable({
           paging: true,
           responsive: false,
+
         });
+
+       exampleInstance.column( '0:visible' ).order('desc').draw();
  // Bootstrap datepicker
 $('.input-group date input').each(function() {
   $(this).datepicker('clearDates');
 });
 
 // Set up your table
-table1 = $('#example_1').DataTable({
+table1 = $('#example').DataTable({
   paging: true,
   info: false,
-   responsive: false,
-});
+  responsive: false,
+}).column('0:visible').order('desc').draw();
 
 
 
@@ -777,8 +774,7 @@ $.fn.dataTable.ext.search.push(
     var min = $('#min-date').val();
     var max = $('#max-date').val();
     var createdAt = data[1] || 0; // Our date column in the table
-
-    if (
+ if (
       (min == "" || max == "") ||
       (moment(createdAt).isSameOrAfter(min) && moment(createdAt).isSameOrBefore(max))
     ) {
@@ -836,6 +832,7 @@ $.ajax({
          type: "GET",  
          url:'fba-list/'+fbaid,//"{{URL::to('Fsm-Details')}}",
          success: function(fsmmsg){
+
         var data = JSON.parse(fsmmsg);
 
         var str = "<table class='table'><tr style='height:30px;margin:5px;'><td>Partner ID</td><td>Name</td><td>Mobile No</td><td>Email</td><td>City</td><td>Pincode</td></tr>";
@@ -1253,11 +1250,16 @@ function getpaymentlink(fbaid){
                         $('.divpartnertable_payment').html(str);
                          $('.paylink_payment').modal('show');
                           //$('#paylink').html(data[0].Link);
-                       }      
+                       }     
+                       else{
+                        var str = "<p>No Payment Link Available</p>";
+                        // alert(str)
+                        $('.divpartnertable_payment').html(str);
+                         $('.paylink_payment').modal('show');
+                       } 
                        for (var i = 0; i < data.length; i++) 
-       {
-
-         str = str + "<p>"+data[i].Link+"</p>";
+              {
+                str = str + "<p>"+data[i].Link+"</p>";
          // $('#paylink').html(str);
        }
                        
@@ -1265,6 +1267,40 @@ function getpaymentlink(fbaid){
                 });
 
 }
+
+// function getpaymentlink(fbaid){
+//  $('.divpartnertable_payment').html('');
+//   $.ajax({
+//                     url: 'getpaymentlink/'+fbaid,
+//                     type: "GET",
+//                     dataType: "json",
+//                     success:function(data) {
+
+//                       if(data.length>0){
+
+//                        // alert(data[0].Link);
+//                         var str = "<p>"+data[0].Link+"</p>";
+//                         // alert(str)
+//                         $('.divpartnertable_payment').html(str);
+//                          $('paylink_payment').modal('show');
+//                           //$('#paylink').html(data[0].Link);
+//                        }      
+//                      }
+//                 });
+
+// }
+
+ // show Password start
+ function getpassword(password){
+  // alert('Test');
+ $('#show_password').html(password);
+}
+
+function n(n){
+    return n.length < 8  ? "0" + n :  n;
+}
+// show password end
+
 
 
 function getproductfollowup(fbaid){
@@ -1316,17 +1352,18 @@ $.ajax({
  function updatenotification(msgid,value){
 
 //alert(value);
- if (confirm("Are you sure to "+(value==1?"approve":"disapprove")+" this notification")) {}
+ if (confirm("Are you sure to "+(value==1?"approve":"reject")+" this notification")) {}
   $.ajax({
             type: "GET",
             url:'approvenotification/'+msgid+'/'+value, 
                      
            success: function( msg ) {
+
             if(value=="1"){
               alert("Notification Approved Successfully");
             }
             else if(value=="0"){
-             alert("Notification Dispproved Successfully");
+             alert("Notification rejected Successfully");
                }
                 
             }
@@ -1337,9 +1374,6 @@ $.ajax({
 
 }
 
-
-
-
   $('#notificsubmitbtn').click(function(){
 // alert('okae');
   if (!$('#sendnotification').valid()) {
@@ -1347,7 +1381,8 @@ $.ajax({
 
   } else {
 $.ajax({
-          url:"{{URL::to('send-notification-submit')}}" ,  
+
+ url:"{{URL::to('send-notification-submit')}}" ,  
           data:new FormData($("#sendnotification")[0]),
           dataType:'json',
           async:false,
@@ -1397,7 +1432,6 @@ $(".nav-list > li").addClass(function(i){return "item" + (i + 1);});
 
 function uploaddoc(fbaid)
 {
-
 $('#divdocviewer').html(""); 
 $("#imgdoc").attr("src","");
 $("#imgdoc").css("display","none");
@@ -1409,20 +1443,27 @@ $.ajax({
          success: function(fsmmsg){
      
         var data = JSON.parse(fsmmsg);
-        var str = "<table class='table'><tr style='height:30px;margin:5px;'>";
-if(data.length > 0){
+        var str = "<table class='table'><tr style='height:30px;margin:18px;'>";
+  if(data.length > 0){
         
        for (var i = 0; i < data.length; i++) {
         
-         str = str + "<td><input style='padding:5px;' type='button' onclick=showImage('"+data[i].FileName+"') value='"+data[i].DocType+"'/></td>";
-          }
- 
+   
+      str = str + '<a><input  class="btn btn-default" style="margin:2px" type="button" onclick=showImage("'+data[i].FileName+'") value="'+data[i].DocType+'"/></a>';
+    }
+
            str = str + "</tr></table>";
+
       }
       else
       {
         str = str + "<td>No documents uploaded.</td></tr></table>";
+
+
       }
+
+
+
 
            $('#divdocviewer').html(str);   
               
@@ -1433,11 +1474,14 @@ if(data.length > 0){
 function showImage(test)
 {
 
-  
-$("#imgdoc").css("display","block");
+
+  $("#imgdoc").css("display","block");
+
   $("#imgdoc").attr("src",test);
 
 }
+
+
 
 
 </script> 
@@ -1446,17 +1490,16 @@ $("#imgdoc").css("display","block");
 <!-- fbalist ImageView Script End Here.
  -->
 
-</script>
+
 
 
 
 
 <script> 
 
- 
-
 $('#msds-select').change(function () { 
-   var table = $('#fba-list-table').DataTable(); 
+  debugger;
+ var table = $('#fba-list-table').DataTable(); 
     $.fn.dataTable.ext.search.push(
     function( settings, data, dataIndex ) {
         var msdsSearch = $( "#msds-select option:selected" ).val();
@@ -1478,8 +1521,105 @@ $('#msds-select').change(function () {
      table.draw();
     
 });
-
-
 </script>
- 
- 
+
+<!-- Start shubham raise a ticket -->
+ <script type="text/javascript">
+  function deleteticket($tktid,btndelete){
+    var del=confirm("Are you sure you want to delete this record?");
+    if (del==true){
+       var ticketid= $tktid;
+            $.ajax({ 
+            type: "GET",
+            url:'View-Raised-Ticket/'+ticketid,
+            success: function( msg ) {
+            console.log(msg);
+             alert("Ticket deleted successfully..!");
+             $(btndelete).closest('tr').remove();
+            }
+        });
+    }else{
+        alert("Ticket Not Deleted")
+    }
+    return del;
+ }
+ </script>
+
+<script type="text/javascript">
+   $('#ddlsubcat').on('change', function() {
+        var QuerID = $(this).val();
+         
+            if(QuerID) {
+                $.ajax({
+                    url: 'RaiseaTicketgetcal/'+QuerID,
+                    type: "GET",
+                    dataType: "json",
+                    success:function(data) {
+                        $('#ddlClassification').empty();
+                        $('#ddlClassification').append('<option value="0">--Select Classification--</option>');
+                        
+                        $.each(data, function(key,value) {
+                             
+                            $('#ddlClassification').append('<option value="'+ value.ID +'">'+ value.Description +'</option>');
+                        });
+                     }
+                });
+            }else{
+                $('select[name="ddlClassification"]').empty();
+            }
+        });
+ </script>
+
+ <script type="text/javascript">
+   $('#btn_saveticket').click(function() {
+    
+    data1=new FormData($("#pathimgraiser"));
+  console.log($('#fromraiserticket').serialize());
+   $.ajax({ 
+   url: "{{URL::to('RaiseaTicket')}}",
+   method:"POST",
+   data: $('#fromraiserticket').serialize(),
+   dataType:'json',
+   async:false,
+   type:'POST',
+   processData: false,
+   contentType: false,
+  success: function(msg)  
+   {
+    console.log(msg);
+    alert("Record has been saved successfully");
+    $("#fromraiserticket").trigger('reset');
+   
+   }
+});
+
+ });
+$('#btn_resetticket').click(function() {
+   $("#fromraiserticket").trigger('reset');
+});
+
+ </script>
+
+ <script type="text/javascript">
+   $('#ddlCategory').on('change', function() {
+            var CateCode = $(this).val();
+            if(CateCode) {
+                $.ajax({
+                    url: 'RaiseaTicket/'+CateCode,
+                    type: "GET",
+                    dataType: "json",
+                    success:function(data) {
+                        $('#ddlsubcat').empty();
+                        $('#ddlsubcat').append('<option value="0">-- Select Sub Category--</option>');
+                        $.each(data, function(key, value) {
+                         
+                            $('#ddlsubcat').append('<option value="'+ value.QuerID +'">'+ value.QuerType +'</option>');
+                        });
+                     }
+                });
+            }else{
+                $('select[name="ddlsubcat"]').empty();
+            }
+        });
+ </script>
+ <!-- End shubham raise a ticket -->

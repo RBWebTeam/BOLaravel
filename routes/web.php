@@ -46,6 +46,9 @@ Route::post('posp-update','FbaController@posp');
 Route::get('getpaymentlink/{fbaid}','FbaController@getpaymentlink');
 
 
+Route::get('fba-list/{salescode}/{fbaid}',array('as'=>'fba-list.ajax','uses'=>'FbaController@salesupdate'));
+
+
 
 
 Route::get('fba-list/{fbaid}/{value}/{flag}',array('as'=>'fba-list.ajax','uses'=>'FbaController@updateposp'));
@@ -54,6 +57,12 @@ Route::post('fba-list','FbaController@sendsms');
 Route::get('fba-list/{fbaid}/{value}/{flag}',array('as'=>'fba-list.ajax','uses'=>'FbaController@updateposp'));
 Route::post('fba-list','FbaController@sendsms');
 Route::post('fba-listdocument','FbaController@uploaddoc');
+// salescode
+Route::get('fba-list/{salescode}/{fbaid}',array('as'=>'fba-list.ajax','uses'=>'FbaController@salesupdate'));
+
+
+// salescode
+
 
 
 //fba documents 
@@ -77,6 +86,14 @@ Route::get('Product-followup','ProductfollowupController@getproductfollowup');
 Route::get('Product-followup/{product_id}','ProductfollowupController@getproductinfo');
 Route::Post('Product-followup','ProductfollowupController@insertproductfollowup');
 
+Route::get('RaiseaTicket','RaiserTicketController@getraiserticket');
+Route::get('RaiseaTicket/{CateCode}','RaiserTicketController@getsubcat');
+Route::get('RaiseaTicketgetcal/{QuerID}','RaiserTicketController@getclassi');
+Route::Post('RaiseaTicket','RaiserTicketController@inserraisertkt');
+
+Route::get('View-Raised-Ticket','ViewRaisedTicketController@getraisedticket');
+Route::get('View-Raised-Ticket/{ticketid}','ViewRaisedTicketController@deleteticket');
+
 ///shubham end ///
 
 //////GOVIND
@@ -96,6 +113,10 @@ Route::post('Fsm-Register','FsmRegisterController@insertfsm');
  Route::get('send-notification','SendNotificationController@sendnotification');
 
  Route::get('send-notification-approve','SendNotificationController@SendnotificationApprove');
+
+ Route::get('approve-notification','SendNotificationController@notificationApprove');
+
+  Route::get('send_sms_log','smsLogController@getsendsmslog');
 
 
 // -------------- avinash
@@ -118,9 +139,7 @@ route::get('sendnotificationnew', 'SendNotificationController@sendnotificationst
 
 Route::get('insert','uploadfileController@imageupload');
 Route::get('Fba-list-Update','FbaController@test');
-Route::get('fbalist-document/{fbaid}','FbaController@getfbalist');
-
-
+Route::get('fbalist-document/{fbaid}','FbaController@getdoclistview');
 
 
 route::post('send-notification-submit', 'SendNotificationController@sendnotificationsubmit');
@@ -241,6 +260,13 @@ Route::post('register-user-save','LoginController@register_user_save');
 // End
 ******************/
 
+/************
+// Ticket-Request
+******************/
+Route::get('ticket-request','TicketController@ticket_request') ;
+Route::Post('ticket-request-save','TicketController@ticket_request_save') ;
+Route::get('ticket-request-user-list','TicketController@ticket_request_userlist') ;
+Route::Post('ticket-user-comment','TicketController@ticket_user_comment') ;
 
 
 });

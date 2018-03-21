@@ -22,11 +22,9 @@
    <div class="col-md-12">
        <div class="overflow-scroll">
        <div class="table-responsive" >
-				<table id="example" class="datatable-responsive table table-striped table-bordered dt-responsive nowrap" >
+				<table id="queries-table" class="datatable-responsive table table-striped table-bordered dt-responsive nowrap" >
                  <thead >
-                 <tr class="thead_cl">
-
-                 </tr>
+                 <tr class="thead_cl"> </tr>
 
                 </thead>
                 <tbody>
@@ -95,24 +93,12 @@
       </div>
       </div>
 
+
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript">
-  $(document).ready(function () {
-    
-    if ($.fn.dataTable.isDataTable('#tblqueries')) {
-    table = $('#tblqueries').DataTable({
-      paging:true;
-      searching: true;
-
-    });
-}
-else {
-
-    table = $('#tblqueries').DataTable( {
-        paging: false
-    } );
-}
-
-});
+  
       </script>
 	  
 	<script>
@@ -126,5 +112,28 @@ for (var i = 0; i < btns.length; i++) {
     this.className += " active";
   });
 }
+
+
+$(document).ready(function(){
+var full_url = document.URL; // Get current url
+var url_array = full_url.split('/') // Split the string into an array with / as separator
+var last_segment = url_array[url_array.length-1];  // Get the last part of the array (-1)
+if(last_segment.split("=")[1]>0){
+$(document).ready(function() {
+    $('#queries-table').DataTable( {
+     paging: true,
+  info: false,
+  responsive: false,
+}).column('0:visible').order('desc').draw();
+
+} );
+
+
+ 
+}
+
+  });
+
+
 </script>
  @endsection
