@@ -1523,9 +1523,105 @@ $('#msds-select').change(function () {
      table.draw();
     
 });
-
-
-
-
 </script>
+
  
+ <!-- <script type="text/javascript">
+  function deleteticket($tktid,btndelete){
+    var del=confirm("Are you sure you want to delete this record?");
+    if (del==true){
+       var ticketid= $tktid;
+            $.ajax({ 
+            type: "GET",
+            url:'View-Raised-Ticket/'+ticketid,
+            success: function( msg ) {
+            console.log(msg);
+             alert("Ticket deleted successfully..!");
+             $(btndelete).closest('tr').remove();
+            }
+        });
+    }else{
+        alert("Ticket Not Deleted")
+    }
+    return del;
+ }
+ </script> -->
+
+<script type="text/javascript">
+   $('#ddlsubcat').on('change', function() {
+        var QuerID = $(this).val();
+         
+            if(QuerID) {
+                $.ajax({
+                    url: 'RaiseaTicketgetcal/'+QuerID,
+                    type: "GET",
+                    dataType: "json",
+                    success:function(data) {
+                        $('#ddlClassification').empty();
+                        $('#ddlClassification').append('<option value="0">--Select Classification--</option>');
+                        
+                        $.each(data, function(key,value) {
+                             
+                            $('#ddlClassification').append('<option value="'+ value.ID +'">'+ value.Description +'</option>');
+                        });
+                     }
+                });
+            }else{
+                $('select[name="ddlClassification"]').empty();
+            }
+        });
+ </script>
+
+ <script type="text/javascript">
+   $('#btn_saveticket').click(function() {
+    
+    data1=new FormData($("#pathimgraiser"));
+  console.log($('#fromraiserticket').serialize());
+   $.ajax({ 
+   url: "{{URL::to('RaiseaTicket')}}",
+   method:"POST",
+   data: $('#fromraiserticket').serialize(),
+   dataType:'json',
+   async:false,
+   type:'POST',
+   processData: false,
+   contentType: false,
+  success: function(msg)  
+   {
+    console.log(msg);
+    alert("Record has been saved successfully");
+    $("#fromraiserticket").trigger('reset');
+   
+   }
+});
+
+ });
+$('#btn_resetticket').click(function() {
+   $("#fromraiserticket").trigger('reset');
+});
+
+ </script>
+
+ <script type="text/javascript">
+   $('#ddlCategory').on('change', function() {
+            var CateCode = $(this).val();
+            if(CateCode) {
+                $.ajax({
+                    url: 'RaiseaTicket/'+CateCode,
+                    type: "GET",
+                    dataType: "json",
+                    success:function(data) {
+                        $('#ddlsubcat').empty();
+                        $('#ddlsubcat').append('<option value="0">-- Select Sub Category--</option>');
+                        $.each(data, function(key, value) {
+                         
+                            $('#ddlsubcat').append('<option value="'+ value.QuerID +'">'+ value.QuerType +'</option>');
+                        });
+                     }
+                });
+            }else{
+                $('select[name="ddlsubcat"]').empty();
+            }
+        });
+ </script>
+ <!-- End shubham raise a ticket -->
