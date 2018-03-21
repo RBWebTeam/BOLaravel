@@ -7,7 +7,8 @@
 			 <div class="col-md-12"><h3 class="mrg-btm">SEND SMS</h3></div>
 			 <!-- Date Start -->
 			 
-             @if($message = Session::get('msg'))
+       <div id="message_toggle">
+        @if($message = Session::get('msg'))
          <div class="alert alert-info alert-dismissible fade in" role="alert">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
           <span aria-hidden="true">×</span>
@@ -15,6 +16,7 @@
         <strong>{{ $message }}</strong> 
       </div>
        @endif
+       </div>
 
 
 
@@ -274,6 +276,24 @@ $(document).on('click','.check_list',function(){
      len=$(".check_list:checkbox:checked").length;
      $('#msg_check').text(len+"/");
 });
+
+
+
+
+
+ 
+ $(document).ready(function(){
+ 
+window.setTimeout(function() {
+    $("#message_toggle").fadeTo(500, 0).slideUp(500, function(){
+        $(this).remove(); 
+    });
+}, 4000);
+ 
+
+ });
+
+  
 
 
 </script>
