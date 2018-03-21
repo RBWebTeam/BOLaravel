@@ -40,7 +40,7 @@
                 	<td>{{$val->FullName}}</td>
                 	<td>{{$val->MobiNumb1}}</td>
                 	<td>{{$val->CreatedDate}}</td>
-                	<td><a class="btn btn-primary"  onclick="deleteticket({{$val->TicketRequestId}},this)">Delete</a>
+                	<td><a class="btn btn-primary" href="{{url('View-Raised-Ticket')}}/{{$val->TicketRequestId}}"  >Delete</a>
                 	</td>
 
                 	</tr>
