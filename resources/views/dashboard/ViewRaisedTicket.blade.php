@@ -53,7 +53,6 @@
 </div>
  <script type="text/javascript">
   function deleteticket($tktid,btndelete){
-    alert($tktid);
     var del=confirm("Are you sure you want to delete this record?");
     if (del==true){
        var ticketid= $tktid;
