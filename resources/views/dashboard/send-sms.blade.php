@@ -69,7 +69,8 @@
         
 
 
-				<div class="col-sm-6 col-xs-12 form-padding" id="StatesV" style="overflow-y:scroll;height:270px;">
+				<div class="col-sm-6 col-xs-12 form-padding" id="StatesV" >
+        <div style="overflow-y:scroll;height:270px;">
 	                    <table class="table table-responsive table-hover" cellspacing="0" id="myTable">
 		                <thead>
 						<tr class="headerstyle" align="center">
@@ -85,7 +86,9 @@
 
 
                        
-					    </table>            
+					    </table>
+              </div> 
+              <h3 class="pull-left"><b>COUNT:</b><span id="msg_check" ></span><span id="msg_count">0</span><h3>    
 			     </div>
 
 
@@ -121,6 +124,8 @@
 $(document).ready(function(){   
 	 $("#checkAll").click(function () {
      $('input:checkbox').not(this).prop('checked', this.checked);
+      len=$(".check_list:checkbox:checked").length;
+          $('#msg_check').text(len+"/");
       
  });
 
@@ -190,8 +195,9 @@ function FN_search(ID,city,fDate,tDate){
         
 
  if(search!=null){
- $.get("{{url('send-sms')}}",search).done(function(data){   var arr=Array();   $('#sendsms_id').empty();
+ $.get("{{url('send-sms')}}",search).done(function(data){   var arr=Array();   $('#sendsms_id').empty();$('#msg_count').empty();
  	           if(data.sms_data.length > 0){
+              $('#msg_count').text(data.sms_data.length);
               $.each(data.sms_data,function(index,val){ 
                     arr.push('<tr><td><input type="checkbox" name="fba[]" class="check_list" value="'+val.FBAID+'" >'+val.FullName	+':'+val.MobiNumb1+'</td> </tr>');  });
                 $('#sendsms_id').append(arr);
@@ -260,15 +266,13 @@ if($(".check_list:checkbox:checked").length > 0){
 
 
 
-
-
 });
 
 
 
 $(document).on('click','.check_list',function(){
-
-     alert($(".check_list:checkbox:checked").length );
+     len=$(".check_list:checkbox:checked").length;
+     $('#msg_check').text(len+"/");
 });
 
 
