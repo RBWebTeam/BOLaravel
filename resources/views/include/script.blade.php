@@ -371,7 +371,9 @@ alert(JSON.stringify(data));*/
 
 <!-- <script type="text/javascript">
    $.ajax({ 
-   url: "{{URL::to('sales-material-product')}}",
+   url: "{{URL::to('
+
+   -material-product')}}",
    method:"GET",
    success: function(datas)  
    {
@@ -698,7 +700,7 @@ $(document).on('change', '#search_state', function() {
       }  
       });
     }
-  })
+  });
 </script>
 
 
@@ -739,7 +741,7 @@ $(document).on('change', '#search_state', function() {
         }  
       });
     }
-  })
+  });
 
 
     $(document).ready(function() {

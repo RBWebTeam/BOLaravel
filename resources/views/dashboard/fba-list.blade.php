@@ -492,27 +492,13 @@
               }
             },  
 
-    
-
-      //       {"data":"fdid" ,
-      //        "render": function ( data, type, row, meta ) {
-      // return data==""? '<a href="" style="" data-toggle="modal"  data-target="#docviwer" onclick="uploaddoc('+data+')" >uploaded</a>':'pending';
-      
-
-
-      //         }
-      //       }, 
-
-
-  {"data":"fdid" ,
+     {"data":"fdid" ,
              "render": function ( data, type, row, meta ) {
-      return  '<a href="" style="" data-toggle="modal"  data-target="#docviwer" onclick="uploaddoc('+data+')" >uploaded</a>';
-      
+      return data == 1?'<a href="" style="" data-toggle="modal"  data-target="#docviwer" onclick="uploaddoc('+row.fbaid+')" >uploaded</a>':data;
+       }
+        }, 
 
-
-              }
-            }, 
-
+    
 
             {"data":"bankaccount"} ,
             {"data":"MobiNumb1" ,
@@ -522,7 +508,8 @@
             },
             {"data":"salescode" ,
              "render": function ( data, type, row, meta ) {
-                return data==""?('<a  id="update_'+data+'" onclick="sales_update_fn('+data+')" >'+data+'</a>'):('<a  id="update_'+row.fbaid+'" onclick="sales_update_fn('+row.fbaid+')" >Update</a>');
+             
+                return data=="Update"?('<a  id="update_'+data+'" onclick="sales_update_fn('+data+')" >'+data+'</a>'):data;
               }
    
 },

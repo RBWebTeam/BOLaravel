@@ -84,7 +84,7 @@ class FbaController extends CallApiController
 
         public function sales(Request $req){
         // print_r($req->all());exit();
-        $query=DB::table('fbamast')
+        $query=DB::table('FBAMAST')
             ->where('FBAID','=',$req->p_fbaid)
             ->update(['salescode' =>$req->p_remark]);
 
@@ -95,7 +95,7 @@ class FbaController extends CallApiController
 
         public function loan(Request $req){
           // print_r($req->all());exit();
-          $query=DB::table('fbarepresentations')
+          $query=DB::table('FBARepresentations')
             ->where('FBAID','=',$req->fba_id)
             ->update(['LoanID' =>$req->remark]);
            if ( $query) {
