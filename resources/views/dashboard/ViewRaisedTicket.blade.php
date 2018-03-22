@@ -17,6 +17,7 @@
 				           <th>FBA Name</th>
 				           <th>FBA Mobile No</th>
 				           <th>Created Date</th>
+                   <th>Ticket Status</th>
 				           <th>Action</th>
                   </tr>
                    </thead>
@@ -40,6 +41,7 @@
                 	<td>{{$val->FullName}}</td>
                 	<td>{{$val->MobiNumb1}}</td>
                 	<td>{{$val->CreatedDate}}</td>
+                  <td>{{$val->StatusName}}</td>
                 	<td><a class="btn btn-primary" onclick="deleteticket({{$val->TicketRequestId}},this)">Delete</a>
                 	</td>
 
