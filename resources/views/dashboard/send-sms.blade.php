@@ -282,7 +282,7 @@ $(document).on('click','.check_list',function(){
 
 
  
- $(document).ready(function(){
+$(document).ready(function(){
  
 window.setTimeout(function() {
     $("#message_toggle").fadeTo(500, 0).slideUp(500, function(){

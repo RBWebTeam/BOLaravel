@@ -65,7 +65,7 @@
 <div class="col-md-12">
 			 <div class="overflow-scroll">
 			 <div class="table-responsive" >
-				<table id="example" class="table table-bordered table-striped tbl " >
+				<table id="payment-history-tabel" class="table table-bordered table-striped tbl " >
                  <thead>
                   <tr>
                    <th>Customer Name</th>
@@ -107,4 +107,17 @@
 			</div>
       </div>
       </div>
+
+      <script type="text/javascript">
+        
+        $('#payment-history-tabel').DataTable({
+
+      "createdRow": function(row, data, dataIndex ) {
+      // if ( data.PayStat=="S" ) {
+      //   $(row).css({backgroundColor: 'LightGreen'});
+      // }
+    },
+
+  });
+      </script>
  @endsection

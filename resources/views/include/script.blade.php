@@ -371,7 +371,9 @@ alert(JSON.stringify(data));*/
 
 <!-- <script type="text/javascript">
    $.ajax({ 
-   url: "{{URL::to('sales-material-product')}}",
+   url: "{{URL::to('
+
+   -material-product')}}",
    method:"GET",
    success: function(datas)  
    {
@@ -651,6 +653,7 @@ $(document).on('change', '#search_state', function() {
                   alert('Updated Successfully');
                   $('#p_remark').val('');
                   $('#update_'+id).closest('td').html(sales_update);
+                  
                   $('.close').click();           
                 } 
                 else {
@@ -698,7 +701,7 @@ $(document).on('change', '#search_state', function() {
       }  
       });
     }
-  })
+  });
 </script>
 
 
@@ -739,7 +742,7 @@ $(document).on('change', '#search_state', function() {
         }  
       });
     }
-  })
+  });
 
 
     $(document).ready(function() {
@@ -1487,14 +1490,7 @@ function showImage(test)
 </script> 
   
 
-<!-- fbalist ImageView Script End Here.
- -->
-
-
-
-
-
-
+<!-- fbalist ImageView Script End Here-->
 <script> 
 
 $('#msds-select').change(function () { 
@@ -1523,27 +1519,7 @@ $('#msds-select').change(function () {
 });
 </script>
 
- 
- <!-- <script type="text/javascript">
-  function deleteticket($tktid,btndelete){
-    var del=confirm("Are you sure you want to delete this record?");
-    if (del==true){
-       var ticketid= $tktid;
-            $.ajax({ 
-            type: "GET",
-            url:'View-Raised-Ticket/'+ticketid,
-            success: function( msg ) {
-            console.log(msg);
-             alert("Ticket deleted successfully..!");
-             $(btndelete).closest('tr').remove();
-            }
-        });
-    }else{
-        alert("Ticket Not Deleted")
-    }
-    return del;
- }
- </script> -->
+
 
 <script type="text/javascript">
    $('#ddlsubcat').on('change', function() {
