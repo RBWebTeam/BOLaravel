@@ -15,11 +15,14 @@
        <div class="overflow-scroll">
        <div class="table-responsive" >
 
+
       <table class="datatable-responsive table table-striped table-bordered dt-responsive nowrap" id="example">
+
                                     <thead>
                                        <tr>
                                        <th>ID</th>
                                       <th>Name</th>
+                                  
                                       </tr>
                                     </thead>
                                     <tbody>
@@ -30,8 +33,10 @@
                                       </tr>
                                     @endforeach
                                   </tbody>
-           
-            </table>
+
+
+         </table>
+
       </div>
       </div>
       </div>

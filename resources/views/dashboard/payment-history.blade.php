@@ -5,21 +5,8 @@
     <div id="content" style="overflow:scroll;">
        <div class="container-fluid white-bg">
        <div class="col-md-12"><h3 class="mrg-btm">Payment History</h3></div>
-       <!-- Date Start -->
-<!-- <div class="container">
-  <div class="col-md-4 pull-right">
-    <div class="input-group input-daterange">
+ 
 
-      <input type="text" id="min-date" class="form-control date-range-filter" data-date-format="mm/dd/yyyy" placeholder="From:">
-
-      <div class="input-group-addon">to</div>
-
-      <input type="text" id="max-date" class="form-control date-range-filter" data-date-format="mm/dd/yyyy" placeholder="To:">
-
-    </div>
-  </div>
-</div>
- -->
             
           <?php 
 
@@ -110,14 +97,14 @@
 
       <script type="text/javascript">
         
-        $('#payment-history-tabel').DataTable({
+     $(document).ready(function() {
+    $('#payment-history-tabel').DataTable( {
+     paging: true,
+  info: false,
+  responsive: false,
+}).column('0:visible').order('desc').draw();
 
-      "createdRow": function(row, data, dataIndex ) {
-      // if ( data.PayStat=="S" ) {
-      //   $(row).css({backgroundColor: 'LightGreen'});
-      // }
-    },
+} );
 
-  });
       </script>
  @endsection
