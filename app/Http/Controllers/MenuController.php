@@ -181,7 +181,7 @@ $menu=DB::table('view_user_right_group')->select('id','name','menu_group_id','ur
                            $tabel->insert(['menu_group_id'=>$menu_group_id,'menu_id'=>$val]);
                           } 
                     
-                       
+                          Session::flash('msg', "Successfully Updated..");
                      return Back();
         }
     }

@@ -46,7 +46,7 @@ Route::post('posp-update','FbaController@posp');
 Route::get('getpaymentlink/{fbaid}','FbaController@getpaymentlink');
 
 
-Route::get('fba-list/{salescode}/{fbaid}',array('as'=>'fba-list.ajax','uses'=>'FbaController@salesupdate'));
+// Route::get('fba-list/{salescode}/{fbaid}',array('as'=>'fba-list.ajax','uses'=>'FbaController@salesupdate'));
 
 
 
@@ -54,8 +54,8 @@ Route::get('fba-list/{salescode}/{fbaid}',array('as'=>'fba-list.ajax','uses'=>'F
 Route::get('fba-list/{fbaid}/{value}/{flag}',array('as'=>'fba-list.ajax','uses'=>'FbaController@updateposp'));
 Route::post('fba-list','FbaController@sendsms');
 
-Route::get('fba-list/{fbaid}/{value}/{flag}',array('as'=>'fba-list.ajax','uses'=>'FbaController@updateposp'));
-Route::post('fba-list','FbaController@sendsms');
+// Route::get('fba-list/{fbaid}/{value}/{flag}',array('as'=>'fba-list.ajax','uses'=>'FbaController@updateposp'));
+// Route::post('fba-list','FbaController@sendsms');
 Route::post('fba-listdocument','FbaController@uploaddoc');
 // salescode
 Route::get('fba-list/{salescode}/{fbaid}',array('as'=>'fba-list.ajax','uses'=>'FbaController@salesupdate'));

@@ -32,7 +32,6 @@ class RaiserTicketController extends Controller
 
 	public function inserraisertkt(Request $req){
 		$id=Session::get('fbauserid');
-
 		$validator =Validator::make($req->all(), [
               'txtraisermessage' =>'required',
                                   ]);
@@ -50,7 +49,6 @@ class RaiserTicketController extends Controller
        $image->move($destinationPath, $name);
 	   }
       
-
 		 DB::select('call Usp_inserraisertkt(?,?,?,?,?,?,?,?,?,?)',array(
 		 	$req->ddlCategory,
 		 	$req->ddlsubcat,
@@ -63,8 +61,19 @@ class RaiserTicketController extends Controller
 		 	"BO",
             $id
 		 ));
- Session::flash('message', 'Record has been saved successfully'); 
+
+	 $to = "shubhamkhandekar2@gmail.com";
+     $subject = "My subject";
+     $txt = "Hello world!";
+     $headers = "From: shubhamkhandekar2@gmail.com" . "\r\n" .
+    "CC: shubhamkhandekar2@gmail.com";
+     mail($to,$subject,$txt,$headers);
+     Session::flash('message', 'Record has been saved successfully'); 
+    
+
+
         return redirect('RaiseaTicket');
+
   }
  }
 }
