@@ -1599,3 +1599,20 @@ $('#btn_resetticket').click(function() {
         });
  </script>
  <!-- End shubham raise a ticket -->
+ <!-- Loader Script -->
+<script>
+     var $loading = $('#loading').hide();
+     //Attach the event handler to any element
+     $(document)
+       .ajaxStart(function () {
+          //ajax request went so show the loading image
+           $loading.show();
+       })
+     .ajaxStop(function () {
+         //got response so hide the loading image
+          $loading.hide();
+      });
+           //         <div id="loading">
+           //      <img src="loading.gif" />  
+           // </div>
+</script>
