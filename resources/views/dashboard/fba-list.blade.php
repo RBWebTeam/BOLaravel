@@ -254,7 +254,7 @@
         <form name="update_remark" id="update_remark">
          {{ csrf_field() }}
          <div class="form-group">
-            <input type="hidden" name="p_fbaid" id="p_fbaid" value="">
+            <input type="hidden" name="p_fbaid" id="p_fbaid">
             <label class="control-label" for="message-text">Enter Sales Code : </label>
             <input type="text" class="recipient-name form-control" id="p_remark" name="p_remark" required="" />
           </div>
