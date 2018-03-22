@@ -19,9 +19,8 @@ class PaymentHistoryController extends CallApiController
 	      	 }
 
 
-//print_r(  $data);exit;
- 
-
+                           //print_r(  $data);exit;
+                           //sp_payment_history_list()
 
 	      	    $post_data=json_encode($data);
 	      	    $result=$this->call_json_data_api('http://mswebapi.magicsales.in/api/CommonAPI/GETPaymTrackDeta',$post_data);
