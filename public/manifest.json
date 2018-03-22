@@ -1,7 +1,7 @@
 {
   "name": "Finmart",
   "short_name": "FM",
-  "description": "A funny cat image generator",
+  "description": "A funny finmart app",
   "icons": [{
     "src": "images/icons/icon-32x32.png",
     "type": "image/png",
@@ -35,8 +35,9 @@
     "sizes": "512x512"
   }
   ],
-  "start_url": "/index.php",
+  "start_url": "/dashboard",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#673ab7"
+  "background_color": "green",
+  "theme_color": "red",
+  "orientation": "landscape"
 }
