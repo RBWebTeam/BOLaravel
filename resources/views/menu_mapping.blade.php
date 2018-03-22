@@ -4,6 +4,17 @@
 
 
 
+       <div id="message_toggle">
+        @if($message = Session::get('msg'))
+         <div class="alert alert-info alert-dismissible fade in" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+        <strong>{{ $message }}</strong> 
+      </div>
+       @endif
+       </div>
+
        <div class="container-fluid white-bg">
        <div class="col-md-12"><h3 class="mrg-btm">Menu Mapping</h3></div>
         <form class="form-horizontal" method="post" action="{{url('menu-mapping-save')}}"    > {{ csrf_field() }}
@@ -76,7 +87,21 @@
 
  
             
+ <script type="text/javascript">$(document).ready(function(){
  
+window.setTimeout(function() {
+    $("#message_toggle").fadeTo(500, 0).slideUp(500, function(){
+        $(this).remove(); 
+    });
+}, 4000);
+ 
+
+ });
+
+  
+
+
+</script>
 
 @endsection
 
