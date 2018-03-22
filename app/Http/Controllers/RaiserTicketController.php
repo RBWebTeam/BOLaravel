@@ -69,10 +69,8 @@ class RaiserTicketController extends Controller
     "CC: shubhamkhandekar2@gmail.com";
      mail($to,$subject,$txt,$headers);
      Session::flash('message', 'Record has been saved successfully'); 
-    
-
-
-        return redirect('RaiseaTicket');
+     
+      return redirect('RaiseaTicket');
 
   }
  }

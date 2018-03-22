@@ -25,7 +25,6 @@
                 <tbody>
                      @foreach($query as $val)
                 	<tr>
-
                 	<td>{{$val->TicketRequestId}}</td>
                 	<td>{{$val->CateName}}</td>
                 	<td>{{$val->QuerType}}</td>
@@ -33,7 +32,7 @@
                 	<td>{{$val->Message}}</td>
                 	<td>
                 		<?php if($val->DocPath == ""){ ?>
-
+                     No Document Found
                 		 </td>
                 		<?php } else { ?>
                 		<a href="{{url('upload/Raiserticket')}}/{{$val->DocPath}}" download class="btn btn-primary">View</a></td>
@@ -44,7 +43,6 @@
                   <td>{{$val->StatusName}}</td>
                 	<td><a class="btn btn-primary" onclick="deleteticket({{$val->TicketRequestId}},this)">Delete</a>
                 	</td>
-
                 	</tr>
                 	 @endforeach
                 </tbody>
