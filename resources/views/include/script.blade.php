@@ -769,28 +769,32 @@ table1 = $('#example').DataTable({
 
 
 // Re-draw the table when the a date range filter changes
-$('.date-range-filter1').change(function() {
+// $('.date-range-filter1').change(function() {
 
-  // Extend dataTables search
-$.fn.dataTable.ext.search.push(
-  function(settings, data, dataIndex) {
-    var min = $('#min-date').val();
-    var max = $('#max-date').val();
-    var createdAt = data[1] || 0; // Our date column in the table
- if (
-      (min == "" || max == "") ||
-      (moment(createdAt).isSameOrAfter(min) && moment(createdAt).isSameOrBefore(max))
-    ) {
-      return true;
-    }
-    return false;
-  }
-);
+//  debugger;
+//  var table = $('#fba-list-table').DataTable(); 
 
-  table1.draw();
-});
+//   // Extend dataTables search
+// $.fn.dataTable.ext.search.push(
+//   function(settings, data, dataIndex) {
+//     var min = $('#min-date').val();
+//     var max = $('#max-date').val();
 
-$('#my-table_filter').hide();
+//     var createdAt = data[1] || 2; // Our date column in the table
+//  if (
+//       (min == "" || max == "") ||
+//       (moment(createdAt).isSameOrAfter(min) && moment(createdAt).isSameOrBefore(max))
+//     ) {
+//       return true;
+//     }
+//     return false;
+//   }
+// );
+
+//   table.draw();
+// });
+
+//$('#my-table_filter').hide();
 
  
 
@@ -1465,10 +1469,7 @@ $.ajax({
 
       }
 
-
-
-
-           $('#divdocviewer').html(str);   
+  $('#divdocviewer').html(str);   
               
         }  
       });
@@ -1478,9 +1479,13 @@ function showImage(test)
 {
 
 
+     var url=<?php if(isset($url))echo $url; ?>
   $("#imgdoc").css("display","block");
+  src=url+test;
+  console.log(src)
+  $("#imgdoc").attr("src" ,src);
 
-  $("#imgdoc").attr("src",test);
+
 
 }
 
