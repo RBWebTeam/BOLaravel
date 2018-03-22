@@ -52,15 +52,16 @@
             </div>
            </div>
        <div class="col-md-4">
-       <div class="form-group"> <input type="submit" name="" id="btndate"  class="mrg-top common-btn" value="SHOW">  </div>
-       </div>
-    
- <!--  <select id="myInput" onchange="myFunction()" name="msds-select"> -->
-  <select  id="msds-select">
-   <option value="0">ALL</option>
+       <div class="form-group"> <input type="submit" name="" id="btndate"  class="mrg-top common-btn pull-left" value="SHOW">  
+	   &nbsp;&nbsp;
+   <select  id="msds-select" class="pull-left mrg-top mrg-left">
   <option value="1">POSP Yes</option>
   <option value="2">POSP No</option>
   </select>
+  </div>
+       </div>
+    
+
   </form>
            <!-- Date End -->
              <div class="col-md-12">

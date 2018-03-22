@@ -11,7 +11,7 @@ $menu_group_fn=$cl->user_right_group_menu();
        $arrayCategories[$row->id] = array("parent_id" => $row->parent_id, "name" =>                       
          $row->name,"id" => $row->id);   
     } ?>
-<ul class="nav nav-list" style="width: auto; height: 100%;">                       
+<ul class="nav nav-list" style="width: auto;">                       
 <?php foreach ($menu_group_fn as $key => $current) { 
         $second_level=$cl->chield_id($current->id,$current->menu_group_id);  ?>
                      

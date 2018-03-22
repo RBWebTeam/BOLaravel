@@ -54,7 +54,6 @@
 </div>
 
 
-
  <div class="form-group">
             <label for="inputEmail" class="control-label col-xs-2">Menu Name</label>
             <div class="col-xs-6">
