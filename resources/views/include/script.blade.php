@@ -1437,11 +1437,12 @@ $.ajax({
 $(".nav-list > li").addClass(function(i){return "item" + (i + 1);});
 
 
-function uploaddoc(fbaid)
+
+function docview(fbaid)
 {
 $('#divdocviewer').html(""); 
 $("#imgdoc").attr("src","");
-$("#imgdoc").css("display","none");
+$("#imgdoc").css("display","show");
 $.ajax({  
 
          type: "GET",  
@@ -1451,17 +1452,16 @@ $.ajax({
      
         var data = JSON.parse(fsmmsg);
         var str = "<table class='table'><tr style='height:30px;margin:18px;'>";
-  if(data.length > 0){
+  if(data.data.length > 0){
+      
+       for (var i = 0; i < data.data.length; i++) {
         
-       for (var i = 0; i < data.length; i++) {
-        
-   
-      str = str + '<a><input  class="btn btn-default" style="margin:2px" type="button" onclick=showImage("'+data[i].FileName+'") value="'+data[i].DocType+'"/></a>';
+      str = str + '<a><input  class="btn btn-default" style="margin:2px" type="button" onclick=showImage("'+data.url+data.data[i].FileName+'") value="'+data.data[i].DocType+'"/></a>';
     }
-
-           str = str + "</tr></table>";
+   str = str + "</tr></table>";
 
       }
+
       else
       {
         str = str + "<td>No documents uploaded.</td></tr></table>";
@@ -1469,26 +1469,21 @@ $.ajax({
 
       }
 
-  $('#divdocviewer').html(str);   
-              
+           $('#divdocviewer').html(str);   
+             
+  
         }  
       });
 }
 
-function showImage(test)
+function showImage(src)
+
 {
 
-
-     var url=<?php if(isset($url))echo $url; ?>
   $("#imgdoc").css("display","block");
-  src=url+test;
-  console.log(src)
   $("#imgdoc").attr("src" ,src);
 
-
-
 }
-
 
 
 
