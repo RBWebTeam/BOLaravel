@@ -8,7 +8,7 @@ use api_url;
 class InitialController extends Controller
 {
 
-      public static  $api_url="qa.mgfm.in/";
+      public static  $api_url="http://qa.mgfm.in/";
       
       public function send_success_response($message,$status,$data){
       	

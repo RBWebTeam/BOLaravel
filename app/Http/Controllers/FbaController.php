@@ -121,13 +121,14 @@ class FbaController extends CallApiController
           return json_encode($fsmfbaquery);    
         }
 
-          public function getdoclistview($fbaid)
+        public function getdoclistview($fbaid)
        {
          $doctype = DB::select("call get_fba_doc($fbaid)");
           $url=$this::$api_url;
           $data = array('data' => $doctype, 'url'=>$url);
           return json_encode($data);
         }
+
 
 
 
