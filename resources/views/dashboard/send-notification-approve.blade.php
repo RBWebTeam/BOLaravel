@@ -16,6 +16,7 @@
     <th>NotificationTitle</th>
     <th>MessageType</th>
      <th>WebUrl</th>
+     <th>Message</th>
      <th>WebTitle</th>
      <th>DateTimeToSend</th>
       <th>CreatedDate</th>
@@ -29,6 +30,7 @@
         <td><?php echo $val->NotificationTitle; ?></td>
         <td><?php echo $val->MessageType; ?></td> 
         <td><?php echo $val->WebUrl; ?></td>
+        <td><?php echo $val->Message; ?></td>
         <td><?php echo $val->WebTitle; ?></td>
         <td><?php echo $val->DateTimeToSend; ?></td>
         <td><?php echo $val->CreatedDate; ?></td>
