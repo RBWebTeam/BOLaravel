@@ -22,6 +22,7 @@
                                        <tr>
                                        <th>ID</th>
                                       <th>Name</th>
+                                      <th>Edit</th>
                                   
                                       </tr>
                                     </thead>
@@ -30,9 +31,13 @@
                                       <tr>
                                       <td>{{$vl->id}}</td>
                                       <td  ><a href="{{url('menu-mapping')}}?id={{$vl->id}}"> {{$vl->name}} </a></td>
+                                      <td>
+            <button type="button" class="btn btn-link">Edit</button>
+                                   
                                       </tr>
                                     @endforeach
                                   </tbody>
+                                     </td>
 
 
          </table>
