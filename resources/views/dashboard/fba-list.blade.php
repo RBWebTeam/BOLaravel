@@ -47,7 +47,7 @@
        <div class="form-group">
        <p>To Date</p>
        <div id="datepicker1" class="input-group date" data-date-format="dd-mm-yyyy">
-               <input class="form-control date-range-filter" type="text" placeholder="To Date"  name="todate"  id="max"/>
+               <input class="form-control date-range-filter" type="text" placeholder="To Date" name="todate"  id="max"/>
               <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
               </div>
             </div>
@@ -57,7 +57,7 @@
        </div> -->
     
  
-  <select  id="msds-select">
+   <select  id="msds-select">
    <option value="0">Posp Type</option>
   <option value="1">POSP Yes</option>
   <option value="2">POSP No</option>
@@ -254,7 +254,7 @@
         <form name="update_remark" id="update_remark">
          {{ csrf_field() }}
          <div class="form-group">
-            <input type="hidden" name="p_fbaid" id="p_fbaid">
+            <input type="hidden" name="p_fbaid" id="p_fbaid" value="">
             <label class="control-label" for="message-text">Enter Sales Code : </label>
             <input type="text" class="recipient-name form-control" id="p_remark" name="p_remark" required="" />
           </div>
@@ -507,12 +507,11 @@
               }
             },  
 
-      {"data":"fdid" ,
+       {"data":"fdid" ,
              "render": function ( data, type, row, meta ) {
-      return data == 1?'<a href="" style="" data-toggle="modal"  data-target="#docviwer" onclick="uploaddoc('+row.fbaid+')" >uploaded</a>':'pending';
+      return data == 1?'<a href="" style="" data-toggle="modal"  data-target="#docviwer" onclick="docview('+row.fbaid+')" >uploaded</a>':'pending';
        }
         },
-
     
 
             {"data":"bankaccount"} ,
@@ -550,15 +549,18 @@ $(document).ready(function() {
     $(this).datepicker('clearDates');
   });
 
-  // Extend dataTables search
+// Re-draw the table when the a date range filter changes
+  $('.date-range-filter').change(function() {
+      // Extend dataTables search
   $.fn.dataTable.ext.search.push(
     function(settings, data, dataIndex) {
+
     var min = $('#min').val();
     var max = $('#max').val();
+     
     var createdAt = data[2] || 2; // Our date column in the table
 
-    if (
-      (min == "" || max == "") ||
+  if((min == "" || max == "") ||
       (moment(createdAt).isSameOrAfter(min) && moment(createdAt).isSameOrBefore(max))
     ) {
       return true;
@@ -567,12 +569,9 @@ $(document).ready(function() {
     }
   );
 
-  // Re-draw the table when the a date range filter changes
-  $('.date-range-filter').change(function() {
-    var table = $('#fba-list-table').DataTable();
+  var table = $('#fba-list-table').DataTable();
     table.draw();
   });
-
 
   $('.date-range-filter').datepicker();
 });
