@@ -32,9 +32,9 @@
        <!-- Filter End -->
        
 
-      
+       <form>
 
-      <div class="col-md-3">
+      <div class="col-md-4">
       <div class="form-group">
       <p>From Date</p>
          <div id="datepicker" class="input-group date" data-date-format="yyyy-mm-dd">
@@ -43,7 +43,7 @@
             </div>
             </div>
            </div>
-       <div class="col-md-3">
+       <div class="col-md-4">
        <div class="form-group">
        <p>To Date</p>
        <div id="datepicker1" class="input-group date" data-date-format="yyyy-mm-dd">
@@ -52,9 +52,9 @@
               </div>
             </div>
            </div>
-       <div class="col-md-4">
-       <div class="form-group"> <input type="submit" name="btndates" id="btndates"  class="mrg-top common-btn" value="SHOW">  </div>
-       </div>
+     <!--   <div class="col-md-4">
+       <div class="form-group"> <input type="submit" name="" id="btndate"  class="mrg-top common-btn" value="SHOW">  </div>
+       </div> -->
     
  
    <select  id="msds-select">
@@ -75,7 +75,7 @@
 
  
 
-  
+  </form>
            <!-- Date End -->
              <div class="col-md-12">
              <div class="overflow-scroll">
@@ -550,14 +550,14 @@ $(document).ready(function() {
   });
 
 // Re-draw the table when the a date range filter changes
-  $('#btndates').click(function(e) { 
+  $('.date-range-filter').change(function() {
       // Extend dataTables search
   $.fn.dataTable.ext.search.push(
     function(settings, data, dataIndex) {
 
     var min = $('#min').val();
     var max = $('#max').val();
-    // console.log(min);
+    console.log(min);
     
      
     var createdAt = data[18] || 18; // Our date column in the table
