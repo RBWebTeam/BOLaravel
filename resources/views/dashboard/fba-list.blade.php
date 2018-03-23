@@ -37,7 +37,7 @@
       <div class="col-md-4">
       <div class="form-group">
       <p>From Date</p>
-         <div id="datepicker" class="input-group date" data-date-format="dd-mm-yyyy">
+         <div id="datepicker" class="input-group date" data-date-format="yyyy-mm-dd">
                <input class="form-control date-range-filter" type="text" placeholder="From Date" name="fdate" id="min"  />
               <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
             </div>
@@ -46,7 +46,7 @@
        <div class="col-md-4">
        <div class="form-group">
        <p>To Date</p>
-       <div id="datepicker1" class="input-group date" data-date-format="dd-mm-yyyy">
+       <div id="datepicker1" class="input-group date" data-date-format="yyyy-mm-dd">
                <input class="form-control date-range-filter" type="text" placeholder="To Date" name="todate"  id="max"/>
               <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
               </div>
@@ -557,9 +557,12 @@ $(document).ready(function() {
 
     var min = $('#min').val();
     var max = $('#max').val();
+    console.log(min);
+    
      
-    var createdAt = data[2] || 2; // Our date column in the table
-
+    var createdAt = data[18] || 18; // Our date column in the table
+// console.log(createdAt);
+// console.log(max);
   if((min == "" || max == "") ||
       (moment(createdAt).isSameOrAfter(min) && moment(createdAt).isSameOrBefore(max))
     ) {
