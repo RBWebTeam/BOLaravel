@@ -1356,7 +1356,7 @@ $.ajax({
 }
 
 
- function updatenotification(msgid,value){
+  function updatenotification(msgid,value){
 
 //alert(value);
  if (confirm("Are you sure to "+(value==1?"approve":"reject")+" this notification")) {}
@@ -1368,9 +1368,15 @@ $.ajax({
 
             if(value=="1"){
               alert("Notification Approved Successfully");
+              $("#accept_"+msgid).css( "background",'#0fe10f');
+
             }
             else if(value=="0"){
+
+             
              alert("Notification rejected Successfully");
+              $("#reject_"+ msgid).css("background",'#ffffff');
+                $("#reject_"+ msgid).css("color",'#0c0b0b');
                }
                 
             }
@@ -1402,6 +1408,8 @@ $.ajax({
             if (msg.data==true) 
               {
                 alert('Inserted Successfully');
+                 $("#sendnotification").trigger('reset');
+
               } else {
                     alert('Oops!! Could not insert successfully');
               }
@@ -1437,11 +1445,12 @@ $.ajax({
 $(".nav-list > li").addClass(function(i){return "item" + (i + 1);});
 
 
-function uploaddoc(fbaid)
+
+function docview(fbaid)
 {
 $('#divdocviewer').html(""); 
 $("#imgdoc").attr("src","");
-$("#imgdoc").css("display","none");
+$("#imgdoc").css("display","show");
 $.ajax({  
 
          type: "GET",  
@@ -1451,17 +1460,16 @@ $.ajax({
      
         var data = JSON.parse(fsmmsg);
         var str = "<table class='table'><tr style='height:30px;margin:18px;'>";
-  if(data.length > 0){
+  if(data.data.length > 0){
+      
+       for (var i = 0; i < data.data.length; i++) {
         
-       for (var i = 0; i < data.length; i++) {
-        
-   
-      str = str + '<a><input  class="btn btn-default" style="margin:2px" type="button" onclick=showImage("'+data[i].FileName+'") value="'+data[i].DocType+'"/></a>';
+      str = str + '<a><input  class="btn btn-default" style="margin:2px" type="button" onclick=showImage("'+data.url+data.data[i].FileName+'") value="'+data.data[i].DocType+'"/></a>';
     }
-
-           str = str + "</tr></table>";
+   str = str + "</tr></table>";
 
       }
+
       else
       {
         str = str + "<td>No documents uploaded.</td></tr></table>";
@@ -1469,26 +1477,21 @@ $.ajax({
 
       }
 
-  $('#divdocviewer').html(str);   
-              
+           $('#divdocviewer').html(str);   
+             
+  
         }  
       });
 }
 
-function showImage(test)
+function showImage(src)
+
 {
 
-
-     var url=<?php if(isset($url))echo $url; ?>
   $("#imgdoc").css("display","block");
-  src=url+test;
-  console.log(src)
   $("#imgdoc").attr("src" ,src);
 
-
-
 }
-
 
 
 
@@ -1553,8 +1556,11 @@ $('#msds-select').change(function () {
 
  <script type="text/javascript">
    $('#btn_saveticket').click(function() {
-    
+    if( $('#fromraiserticket').valid())
+    {
+
     data1=new FormData($("#pathimgraiser"));
+    
   console.log($('#fromraiserticket').serialize());
    $.ajax({ 
    url: "{{URL::to('RaiseaTicket')}}",
@@ -1573,8 +1579,8 @@ $('#msds-select').change(function () {
    
    }
 });
-
- });
+}
+});
 $('#btn_resetticket').click(function() {
    $("#fromraiserticket").trigger('reset');
 });
