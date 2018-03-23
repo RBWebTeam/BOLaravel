@@ -4,36 +4,10 @@
 
 
              <div class="container-fluid white-bg">
-             <div class="col-md-12"><h3 class="mrg-btm">FBA List<!-- <span><span style="float: right;" class="glyphicon glyphicon-filter" data-toggle="modal" data-target="#Filter" ></span>
-         <span style="float: right;" class="glyphicon glyphicon-refresh" onclick="window.location.reload()"></span> </span> --></h3>
+             <div class="col-md-12"><h3 class="mrg-btm">FBA List</h3>
 
         <hr>
        </div>
-
-       
-       
-       <!-- Filter Strat -->
-       <!-- <div class="col-md-12">
-       <div class="panel panel-primary">
-       <div class="panel-heading">
-            <h3 class="panel-title">Filter</h3>
-            <div class="pull-right">
-              <span class="clickable filter" data-toggle="tooltip" data-container="body">
-              <span class="glyphicon glyphicon-plus glyphicon1"></span> &nbsp;&nbsp;
-                <span class="glyphicon glyphicon-filter glyphicon1 fltr-tog"></span>
-              </span>
-            </div>
-          </div>
-          <div class="panel-body filter-bdy" style="display:none">
-            <input type="text" class="form-control" id="dev-table-filter" data-action="filter" data-filters="#dev-table" placeholder="Search..." />
-          </div>
-       </div>
-       </div> -->
-       <!-- Filter End -->
-       
-
-      
-
       <div class="col-md-3">
       <div class="form-group">
       <p>From Date</p>
@@ -62,21 +36,7 @@
   <option value="1">POSP Yes</option>
   <option value="2">POSP No</option>
   </select>
-<!-- 
-  <div class="col-md-8">
-                            <div class="input-group input-daterange">
-                                <input type="text" class="form-control date-range-filter" placeholder="Date Start" data-date-format="mm-dd-yyyy" id="min" />
-                                <span class="input-group-addon">to</span>
-                                <input type="text" class="form-control date-range-filter" placeholder="Date End" data-date-format="mm-dd-yyyy" id="max"/>
-                            </div>
-                        </div>
- -->
 
-
- 
-
-  
-           <!-- Date End -->
              <div class="col-md-12">
              <div class="overflow-scroll">
              <div class="table-responsive" >
@@ -543,23 +503,20 @@
 
 // from date to date start
 
-$(document).ready(function() {
+$(document).ready(function(e) {
   // Bootstrap datepicker
   $('.input-daterange input').each(function() {
     $(this).datepicker('clearDates');
   });
 
 // Re-draw the table when the a date range filter changes
-  $('#btndates').click(function(e) { 
-      // Extend dataTables search
+  $('#btndates').click(function() { 
+    
   $.fn.dataTable.ext.search.push(
     function(settings, data, dataIndex) {
-
     var min = $('#min').val();
     var max = $('#max').val();
-    // console.log(min);
-    
-     
+   
     var createdAt = data[18] || 18; // Our date column in the table
 // console.log(createdAt);
 // console.log(max);
