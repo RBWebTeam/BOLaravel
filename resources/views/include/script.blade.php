@@ -1356,7 +1356,7 @@ $.ajax({
 }
 
 
- function updatenotification(msgid,value){
+  function updatenotification(msgid,value){
 
 //alert(value);
  if (confirm("Are you sure to "+(value==1?"approve":"reject")+" this notification")) {}
@@ -1368,9 +1368,15 @@ $.ajax({
 
             if(value=="1"){
               alert("Notification Approved Successfully");
+              $("#accept_"+msgid).css( "background",'#0fe10f');
+
             }
             else if(value=="0"){
+
+             
              alert("Notification rejected Successfully");
+              $("#reject_"+ msgid).css("background",'#ffffff');
+                $("#reject_"+ msgid).css("color",'#0c0b0b');
                }
                 
             }
@@ -1402,6 +1408,8 @@ $.ajax({
             if (msg.data==true) 
               {
                 alert('Inserted Successfully');
+                 $("#sendnotification").trigger('reset');
+
               } else {
                     alert('Oops!! Could not insert successfully');
               }

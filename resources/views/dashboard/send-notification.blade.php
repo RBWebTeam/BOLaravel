@@ -92,10 +92,10 @@
  </div>
  </div>
  <div class="col-md-2 col-xs-12">
-  <input type="number" class="form-control"  id="notificationhours" name="notificationhours" placeholder="Hours" required/>
+  <input type="number" class="form-control"  id="notificationhours" name="notificationhours" placeholder="Hours"  maxlength="2" required/>
  </div>
  <div class="col-md-2 col-xs-12">
- <input type="number"  class="form-control" id="notificationminutes" name="notificationminutes" placeholder="Minutes" required />
+ <input type="number"  class="form-control" id="notificationminutes" name="notificationminutes" placeholder="Minutes"  maxlength="2" required />
   </div>
   <div class="col-md-4 col-xs-12">
   <div class="form-control border-none">
@@ -104,13 +104,13 @@
  </div>
  <div class="col-md-12 col-xs-12">
  <div class="text-area padding" >
- <textarea  id="txtmessage" name="txtmessage" style="height: 20%;" placeholder="Message..." required></textarea>
+ <input  id="txtmessage" name="txtmessage" style="height: 20%; width: 100%;" placeholder="Message..." required>
 </div>
 </div>
 <div class="col-md-12 col-xs-12">
  <br>
  <div class="center-obj center-multi-obj">      
- <a  href="" class="common-btn">Back</a>
+ <a  href="" class="common-btn">Reset</a>
  <a class="common-btn" id="notificsubmitbtn" name="notificsubmitbtn">Submit</a>
   </div>
   </div>
