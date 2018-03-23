@@ -17,6 +17,7 @@
 				           <th>FBA Name</th>
 				           <th>FBA Mobile No</th>
 				           <th>Created Date</th>
+                   <th>Ticket Status</th>
 				           <th>Action</th>
                   </tr>
                    </thead>
@@ -24,7 +25,6 @@
                 <tbody>
                      @foreach($query as $val)
                 	<tr>
-
                 	<td>{{$val->TicketRequestId}}</td>
                 	<td>{{$val->CateName}}</td>
                 	<td>{{$val->QuerType}}</td>
@@ -32,7 +32,7 @@
                 	<td>{{$val->Message}}</td>
                 	<td>
                 		<?php if($val->DocPath == ""){ ?>
-
+                     No Document Found
                 		 </td>
                 		<?php } else { ?>
                 		<a href="{{url('upload/Raiserticket')}}/{{$val->DocPath}}" download class="btn btn-primary">View</a></td>
@@ -40,9 +40,9 @@
                 	<td>{{$val->FullName}}</td>
                 	<td>{{$val->MobiNumb1}}</td>
                 	<td>{{$val->CreatedDate}}</td>
+                  <td>{{$val->StatusName}}</td>
                 	<td><a class="btn btn-primary" onclick="deleteticket({{$val->TicketRequestId}},this)">Delete</a>
                 	</td>
-
                 	</tr>
                 	 @endforeach
                 </tbody>
