@@ -62,12 +62,12 @@ class RaiserTicketController extends Controller
             $id
 		 ));
 
-	 $to = "shubhamkhandekar2@gmail.com";
+	 /*$to = "shubhamkhandekar2@gmail.com";
      $subject = "My subject";
      $txt = "Hello world!";
      $headers = "From: shubhamkhandekar2@gmail.com" . "\r\n" .
     "CC: shubhamkhandekar2@gmail.com";
-     mail($to,$subject,$txt,$headers);
+     mail($to,$subject,$txt,$headers);*/
      Session::flash('message', 'Record has been saved successfully'); 
      
       return redirect('RaiseaTicket');
