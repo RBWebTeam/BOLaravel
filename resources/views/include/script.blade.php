@@ -1553,8 +1553,11 @@ $('#msds-select').change(function () {
 
  <script type="text/javascript">
    $('#btn_saveticket').click(function() {
-    
+    if( $('#fromraiserticket').valid())
+    {
+
     data1=new FormData($("#pathimgraiser"));
+    
   console.log($('#fromraiserticket').serialize());
    $.ajax({ 
    url: "{{URL::to('RaiseaTicket')}}",
@@ -1573,8 +1576,8 @@ $('#msds-select').change(function () {
    
    }
 });
-
- });
+}
+});
 $('#btn_resetticket').click(function() {
    $("#fromraiserticket").trigger('reset');
 });
