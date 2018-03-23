@@ -151,10 +151,14 @@
       if($('.search_state_error').val()==0){
           $('#error_state').text('The State field is required');
          return  false;
+      }else{
+       $('#error_state').text(' ');
       }
       if($('#search_district').val()==0){
           $('#error_city').text('The City field is required');
          return  false;
+      }else{
+            ('#error_city').text(' ');
       }
 
 

@@ -11,27 +11,18 @@
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
 
 
-Route::get('/test', function () {
-    return view('test');
-});
 
 
+
+
+Route::get('/','LoginController@checklogin');
 Route::post('admin-login','LoginController@login');
-
- Route::group(['middleware' => ['CheckMidd']], function (){
-
- 
-
-
+Route::group(['middleware' => ['CheckMidd']], function (){
  // city  state
 Route::get('search-state','LoginController@search_state');
 Route::get('search-city','LoginController@search_city');
-
 // end city state
 
 Route::get('dashboard','DashboardController@dashboard');

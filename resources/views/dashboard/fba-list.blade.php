@@ -31,13 +31,14 @@
        </div> -->
        <!-- Filter End -->
        
+
        <form>
 
       <div class="col-md-4">
       <div class="form-group">
       <p>From Date</p>
-         <div id="datepicker" class="input-group date" data-date-format="yyyy-mm-dd">
-               <input class="form-control date-range-filter" type="text" placeholder="From Date" name="fdate" id="min-date"  />
+         <div id="datepicker" class="input-group date" data-date-format="dd-mm-yyyy">
+               <input class="form-control date-range-filter" type="text" placeholder="From Date" name="fdate" id="min"  />
               <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
             </div>
             </div>
@@ -45,15 +46,15 @@
        <div class="col-md-4">
        <div class="form-group">
        <p>To Date</p>
-       <div id="datepicker1" class="input-group date" data-date-format="yyyy-mm-dd">
-               <input class="form-control date-range-filter1" type="text" placeholder="To Date"  name="todate"  id="max-date"/>
+       <div id="datepicker1" class="input-group date" data-date-format="dd-mm-yyyy">
+               <input class="form-control date-range-filter" type="text" placeholder="To Date"  name="todate"  id="max"/>
               <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
               </div>
             </div>
            </div>
-       <div class="col-md-4">
+     <!--   <div class="col-md-4">
        <div class="form-group"> <input type="submit" name="" id="btndate"  class="mrg-top common-btn" value="SHOW">  </div>
-       </div>
+       </div> -->
     
  
   <select  id="msds-select">
@@ -61,6 +62,19 @@
   <option value="1">POSP Yes</option>
   <option value="2">POSP No</option>
   </select>
+<!-- 
+  <div class="col-md-8">
+                            <div class="input-group input-daterange">
+                                <input type="text" class="form-control date-range-filter" placeholder="Date Start" data-date-format="mm-dd-yyyy" id="min" />
+                                <span class="input-group-addon">to</span>
+                                <input type="text" class="form-control date-range-filter" placeholder="Date End" data-date-format="mm-dd-yyyy" id="max"/>
+                            </div>
+                        </div>
+ -->
+
+
+ 
+
   </form>
            <!-- Date End -->
              <div class="col-md-12">
@@ -240,7 +254,7 @@
         <form name="update_remark" id="update_remark">
          {{ csrf_field() }}
          <div class="form-group">
-            <input type="hidden" name="p_fbaid" id="p_fbaid" value="">
+            <input type="hidden" name="p_fbaid" id="p_fbaid">
             <label class="control-label" for="message-text">Enter Sales Code : </label>
             <input type="text" class="recipient-name form-control" id="p_remark" name="p_remark" required="" />
           </div>
@@ -432,6 +446,7 @@
 
 
 @endsection
+
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript">
@@ -522,4 +537,44 @@
 
 });  
 
+
+
+
+
+
+// from date to date start
+
+$(document).ready(function() {
+  // Bootstrap datepicker
+  $('.input-daterange input').each(function() {
+    $(this).datepicker('clearDates');
+  });
+
+  // Extend dataTables search
+  $.fn.dataTable.ext.search.push(
+    function(settings, data, dataIndex) {
+    var min = $('#min').val();
+    var max = $('#max').val();
+    var createdAt = data[2] || 2; // Our date column in the table
+
+    if (
+      (min == "" || max == "") ||
+      (moment(createdAt).isSameOrAfter(min) && moment(createdAt).isSameOrBefore(max))
+    ) {
+      return true;
+    }
+    return false;
+    }
+  );
+
+  // Re-draw the table when the a date range filter changes
+  $('.date-range-filter').change(function() {
+    var table = $('#fba-list-table').DataTable();
+    table.draw();
+  });
+
+
+  $('.date-range-filter').datepicker();
+});
 </script>
+<!-- from date to date end -->

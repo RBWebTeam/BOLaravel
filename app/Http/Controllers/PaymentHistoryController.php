@@ -9,22 +9,18 @@ class PaymentHistoryController extends CallApiController
      
 
       public function payment_history(Request $req){
-
       	    try{
                 
                 if(isset($req->fdate) && isset($req->todate)){
 	      	     $data=array("FromDate"=>$req->fdate,"ToDate"=>$req->todate);
-
-
 	      	 }else{
                  $data=array("FromDate"=>Date('m-d-Y', strtotime("-28 days")),"ToDate"=>Date('m-d-Y'));
                  //$data=array("FromDate"=>"01-02-2018","ToDate"=>"01-28-2018");
 	      	 }
 
 
-//print_r(  $data);exit;
- 
-
+                           //print_r(  $data);exit;
+                           //sp_payment_history_list()
 
 	      	    $post_data=json_encode($data);
 	      	    $result=$this->call_json_data_api('http://mswebapi.magicsales.in/api/CommonAPI/GETPaymTrackDeta',$post_data);

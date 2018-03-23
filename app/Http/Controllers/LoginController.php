@@ -14,6 +14,17 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 class LoginController extends InitialController
 {
+
+
+public function checklogin(Request $request){
+if(!$request->session()->exists('emailid')){
+               return view('index');
+       }else{
+                return redirect('/dashboard');
+}
+
+}
+
       public function login(Request $request){
          
      $validator = Validator::make($request->all(), [
