@@ -17,8 +17,8 @@
                  $todate=$_GET['todate'];
            }else{
                  
-                 $fromdate= Date('m-d-Y', strtotime('-28 days'));
-                 $todate=Date('m-d-Y');
+                 $fromdate= Date('d-m-Y', strtotime('-28 days'));
+                 $todate=Date('d-m-Y');
            }
 
 
@@ -29,7 +29,7 @@
        <div class="col-md-4">
       <div class="form-group">
       <p>From Date</p>
-         <div id="datepicker" class="input-group date" data-date-format="mm-dd-yyyy">
+         <div id="datepicker" class="input-group date" data-date-format="dd-mm-yyyy">
                <input class="form-control date-range-filter" value="{{$fromdate}}" type="text" placeholder="From Date" name="fdate" id="min-date"  />
               <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
               </div>
@@ -38,7 +38,7 @@
        <div class="col-md-4">
        <div class="form-group">
        <p>To Date</p>
-       <div id="datepicker1" class="input-group date" data-date-format="mm-dd-yyyy">
+       <div id="datepicker1" class="input-group date" data-date-format="dd-mm-yyyy">
                <input class="form-control date-range-filter " value="{{$todate}}" type="text"  placeholder="To Date"  name="todate"  id="max-date"   />
               <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
               </div>
@@ -59,6 +59,7 @@
                    <th>Customer ID</th>
                    <th>Mobile</th>
                    <th>Email</th>
+                    <th>City</th>
                     <th>  Payment Date</th>
                      <th>Amount</th>
                       <th>Payment Type</th>
@@ -70,17 +71,18 @@
   @if(isset($respon))
                  @foreach($respon as $val)
                  <tr>   
-                   <?php   $customer_id =preg_split('/-/', $val->CustName); ?>
-                   <td><?php  echo ($customer_id[0]);  ?></td>
-                    <td><?php  echo ($customer_id[1]);  ?></td>
-                    <td>{{$val->Mobile}}</td>
-                   <td>{{$val->Email}}</td>
+                   
+                   <td> {{$val->FullName}}</td>
+                    <td>{{$val->DwtCustId}}</td>
+                    <td>{{$val->MobiNumb1}}</td>
+                   <td>{{$val->EmailID}}</td>
+                     <td>{{$val->City}}</td>
                      <?php $dt = new DateTime($val->PaymDate);
-                      $date = $dt->format('m/d/Y'); ?>
+                      $date = $dt->format('d-m-Y'); ?>
                    <td>{{$date}}</td>
                    <td>{{$val->Amount}}</td>
-                    <td>{{$val->PaymType}}</td>
-                    <td>{{$val->PaymStatus}}</td>
+                    <td><!-- CreditDebit Card --> Net Banking </td>
+                    <td>{{$val->PaymStat}}</td>
                      
                  </tr>
                  @endforeach
