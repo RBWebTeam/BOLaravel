@@ -184,6 +184,7 @@ Route::get('sales-material-upload','BookAppointmentController@sales_material_upl
 Route::post('sales-material-upload-submit','BookAppointmentController@sales_material_upload_submit');
 Route::get('sales-material','BookAppointmentController@sales_material');
 Route::post('sales-material-update','BookAppointmentController@sales_material_update');
+Route::post('sales-material-delete','BookAppointmentController@sales_material_delete');
 
 
  

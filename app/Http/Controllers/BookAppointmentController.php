@@ -53,19 +53,23 @@ class BookAppointmentController extends Controller
         $document_name="image";
     	   $user_id=Session::get('fbauserid');
         $file=$req->file('file');
+        // print_r($file);exit();
         try {
         	 if($file == null){
             throw new \Exception("Upload Document ", 1);
           }
-          $destinationPath = 'uploads/sales_material/'.$Product.'/'.$Company.'/';
-          $filename=$document_name.".".$file->getClientOriginalExtension();
+          // $destinationPath = 'uploads/sales_material/';
+          $destinationPath = public_path().'/uploads/sales_material/';
+          // print_r($destinationPath);exit();
+          $filename=rand(1, 999).$file->getClientOriginalName();
+          // print_r($filename);exit();
           $file->move($destinationPath,$filename);
            $query=DB::table('sales_material_upload')
             ->insert(['prod_id'=>$Product,
               'company_id'=>$Company,
               'language'=>$Language,
               'user_id'=>$user_id,
-              'image_path'=>$destinationPath.$filename,
+              'image_path'=>'uploads/sales_material/'.$filename,
               'is_active'=>1,
               'created_at'=>date("Y-m-d H:i:s"),
               'updated_at'=>date("Y-m-d H:i:s")]);
@@ -85,11 +89,27 @@ class BookAppointmentController extends Controller
 
       public function sales_material_update(Request $req){
       	
-      		$query = DB::table('sales_material_upload')->select('image_path')->where('prod_id','=', $req->Product)->where('company_id','=',$req->Company)->get();
+      		$query = DB::table('sales_material_upload')->select('id','image_path')->where('prod_id','=', $req->Product)->where('company_id','=',$req->Company)->get();
        	// print_r($query);exit();
       		 return $query;
 
         
+      }
+
+      public function sales_material_delete(Request $req){
+          $res['status']=0;
+          $res['msg']="success";
+          try {
+            
+           $query=DB::table('sales_material_upload')->where('id', '=', $req->id)->delete();
+          if ($query) {
+            return response()->json(array('status' =>0,'message'=>"success"));
+          }
+          } catch (Exception $e) {
+            return response()->json(array('status' =>1,'message'=>$ee->getMessage()));
+          }
+          
+          
       }
 
 

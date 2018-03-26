@@ -9,6 +9,8 @@
         <link type="text/css" rel="stylesheet" href="{{url('stylesheets/bootstrap.min.css')}}"> 
         <link type="text/css" rel="stylesheet" href="{{url('stylesheets/style.css')}}">
         <link href="{{url('stylesheets/datepicker.css')}}" rel="stylesheet" type="text/css" />
+       
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
 		<script type="text/javascript">
             if ('serviceWorker' in navigator) {
                 navigator.serviceWorker.register('service-worker.js').then(()=>{
