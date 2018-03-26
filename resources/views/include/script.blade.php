@@ -305,13 +305,13 @@ $('.message_sms_id').click(function(){
   if($('#message-text').val()!="")  {
   //console.log($('#message_sms_from').serialize());
    $.ajax({ 
-   url: "{{URL::to('fba-list')}}",
+   url: "{{URL::to('send-fba-sms')}}",
    method:"POST",
    data: $('#message_sms_from').serialize(),
    success: function(msg)  
    {
-    //console.log(msg);
-    alert('SMS send successfully..')
+    console.log(msg);
+   // alert('SMS send successfully..')
     $('.sms_sent_id').modal('hide');
     $('#message-text').val('');
    }
@@ -1609,3 +1609,20 @@ $('#btn_resetticket').click(function() {
         });
  </script>
  <!-- End shubham raise a ticket -->
+ <!-- Loader Script -->
+<script>
+     var $loading = $('#loading').hide();
+     //Attach the event handler to any element
+     $(document)
+       .ajaxStart(function () {
+          //ajax request went so show the loading image
+           $loading.show();
+       })
+     .ajaxStop(function () {
+         //got response so hide the loading image
+          $loading.hide();
+      });
+           //         <div id="loading">
+           //      <img src="loading.gif" />  
+           // </div>
+</script>
