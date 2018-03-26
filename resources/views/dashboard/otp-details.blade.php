@@ -6,7 +6,7 @@
 <div class="col-md-12">
 			 <div class="overflow-scroll">
 			 <div class="table-responsive" >
-				<table id="example" class="table table-bordered table-striped tbl" >
+				<table id="otp-details-id" class="table table-bordered table-striped tbl" >
                  <thead>
                   <tr>
                    <th>Mobile No</th>
@@ -31,4 +31,14 @@
 			</div>
       </div>
       </div>
+
+      <script type="text/javascript">
+        
+$(document).ready(function() {
+    $('#otp-details-id').DataTable( {
+        "order": [[ 2, "desc" ]]
+    } );
+} );
+
+      </script>
  @endsection

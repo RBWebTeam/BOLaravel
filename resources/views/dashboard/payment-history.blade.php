@@ -63,9 +63,9 @@
        </form>
        <!-- Date End -->
 <div class="col-md-12">
-			 <div class="overflow-scroll">
-			 <div class="table-responsive" >
-				<table id="example" class="table table-bordered table-striped tbl " >
+       <div class="overflow-scroll">
+       <div class="table-responsive" >
+        <table id="payment-history-tabel" class="table table-bordered table-striped tbl " >
                  <thead>
                   <tr>
                    <th>Customer Name</th>
@@ -102,9 +102,21 @@
                 
       </tbody>
       </table>
-			</div>
-			</div>
-			</div>
       </div>
       </div>
+      </div>
+      </div>
+      </div>
+   <script type="text/javascript">
+        
+     $(document).ready(function() {
+    $('#payment-history-tabel').DataTable( {
+     paging: true,
+  info: false,
+  responsive: false,
+}).column('0:visible').order('desc').draw();
+
+} );
+
+      </script>
  @endsection

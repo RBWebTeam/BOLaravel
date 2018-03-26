@@ -15,23 +15,34 @@
        <div class="overflow-scroll">
        <div class="table-responsive" >
 
+
       <table class="datatable-responsive table table-striped table-bordered dt-responsive nowrap" id="example">
+
                                     <thead>
                                        <tr>
                                        <th>ID</th>
                                       <th>Name</th>
+                                      <th>Edit</th>
+                                  
                                       </tr>
                                     </thead>
                                     <tbody>
                                     @foreach($menu_group as $vl)
                                       <tr>
                                       <td>{{$vl->id}}</td>
-                                      <td  ><a href="{{url('menu-mapping')}}?id={{$vl->id}}"> {{$vl->name}} </a></td>
+                                      <td> {{$vl->name}} </td>
+                                      <td>
+                             <a href="{{url('menu-mapping')}}?id={{$vl->id}}">Edit</a>
+                                     </td>
+                                   
                                       </tr>
                                     @endforeach
                                   </tbody>
-           
-            </table>
+                                     </td>
+
+
+         </table>
+
       </div>
       </div>
       </div>

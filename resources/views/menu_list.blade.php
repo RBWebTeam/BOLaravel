@@ -1,35 +1,6 @@
 @extends('include.master')
 @section('content')
-<style type="text/css">
-  .nav {
-    padding-left: 44px;
-  }
-</style>
-
-
-
-<!-- <div class="container-fluid white-bg">
-<div class="col-md-9">
-  <div class="well" style="width:900px; padding: 8px 0;float: left;">
-    <div style="overflow-y: scroll; overflow-x: hidden; height: 350px;" id="maindiv">
-      <ul class="nav nav-list navtree"></ul>
-    </div>
-  </div>
-</div>
- -->
-
-<!-- <form id="add_form" name="add_form" method="POST">
-{{ csrf_field() }}
-<div class="col-md-4">
-    <input type="hidden" name="courseid" id="courseid">
-    <input type="text" name="name" id="name" class="form-control">
-</div>
-
-<div class="col-md-3">
-  <button type="button" class="btn btn-success" id="add" onclick="Validate();">ADD</button>
-</div>
-</form> -->
-
+ 
 
 
 <form class="form-horizontal"  method="post" action="{{url('menu-list-add')}}" >{{ csrf_field() }}

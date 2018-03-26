@@ -49,7 +49,6 @@ $(document).ready(function(){
              $(document).ready(function () {
                  $('#sidebarCollapse').click( function () {
                      $('#sidebar').slideToggle();
-           
                  });
              });
        
@@ -67,18 +66,19 @@ $(document).ready(function(){
           // test
 
           
-          $('body').popover({
-    selector: '[data-toggle="popover"]'
-});
+//           $('body').popover({
+//     selector: '[data-toggle="popover"]'
+// });
 
-$('body').on('click',  function (e) {
-    $('[data-toggle="popover"]').each(function () {
-        if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover-Password').has(e.target).length === 0) {
-            $(this).popover('destroy');
-        }
-    });
-});
-         
+// $('body').on('click',  function (e) {
+//     $('[data-toggle="popover"]').each(function () {
+//         if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover-Password').has(e.target).length === 0) {
+
+//             $(this).popover('destroy');
+//         }
+//     });
+// });
+
 
     function Sales_Code() {
               console.log('something');
@@ -371,7 +371,9 @@ alert(JSON.stringify(data));*/
 
 <!-- <script type="text/javascript">
    $.ajax({ 
-   url: "{{URL::to('sales-material-product')}}",
+   url: "{{URL::to('
+
+   -material-product')}}",
    method:"GET",
    success: function(datas)  
    {
@@ -418,7 +420,7 @@ alert(JSON.stringify(data));*/
 
 <script type="text/javascript">
   $('#submit').click(function(){
-  alert('okae');
+
   $.ajax({
           url:"{{URL::to('sales-material-upload-submit')}}" ,  
           data:new FormData($("#sales_material_upload")[0]),
@@ -432,6 +434,7 @@ alert(JSON.stringify(data));*/
              if (msg.status==0) 
               {
                 alert('Uploaded Successfully');
+                $("#sales_material_upload")[0].reset();
               } 
               else {
                alert('Could Not Upload');
@@ -461,15 +464,15 @@ alert(JSON.stringify(data));*/
    {
   
      var tablerows = new Array();
-                         $.each(msg, function( index, value ) {
-            tablerows.push('<tr><td style="font-family: monospace"><img class="img-responsive" src="/' + value.image_path + '" width="699" height="1176"/></td></tr>');
+        $.each(msg, function( index, value ) {
+            tablerows.push('<tr><td><img class="img-responsive" src="/' + value.image_path + '" width="400" height=""/></td></tr>');
         }); 
 
        if(msg){
-                            $('#docs').empty().append('<table class="table table-striped table-bordered table-responsive"><tr class="text-capitalize"><td style="font-family: monospace">Image Path</td></tr>'+tablerows+'</table>');
-                         }else{
-                            $('#docs').empty().append('No Result Found');
-                         }
+          $('#docs').empty().append('<table class="table table-striped table-bordered"><tr class="text-capitalize"><td style="font-family: monospace">Images</td></tr>'+tablerows+'</table>');
+         }else{
+            $('#docs').empty().append('No Result Found');
+         }
 
    },
 
@@ -650,6 +653,7 @@ $(document).on('change', '#search_state', function() {
                   alert('Updated Successfully');
                   $('#p_remark').val('');
                   $('#update_'+id).closest('td').html(sales_update);
+                  
                   $('.close').click();           
                 } 
                 else {
@@ -668,9 +672,9 @@ $(document).on('change', '#search_state', function() {
     var id = $('#fba_id').val();
     var loan_update=$('#remark').val();
     console.log(loan_update);
-
+ 
   //  $('.updateLoan').show();
-//    $('.modal-backdrop').show();    
+   // $('.modal-backdrop').show();    
 
     if (!$('#update_loan').valid()) 
     {
@@ -684,27 +688,20 @@ $(document).on('change', '#search_state', function() {
          data : $('#update_loan').serialize(),
          success: function(msg){
         
-       
-             
-              if (msg.status==0) 
+       if (msg.status==0) 
                 {
                   alert('Updated Successfully');
                   $('#loan_'+id).closest('td').html(loan_update);       
                   $('#remark').val('');
                   $('.close').click();           
-                  
-
-                } 
+                 } 
                 else {
                   alert('Could not updated successfully');
                 }
-
-              
-              
-        }  
+      }  
       });
     }
-  })
+  });
 </script>
 
 
@@ -745,53 +742,59 @@ $(document).on('change', '#search_state', function() {
         }  
       });
     }
-  })
+  });
 
 
     $(document).ready(function() {
-        $('#example').DataTable({
+       var exampleInstance = $('#fsm-details-table').DataTable({
           paging: true,
           responsive: false,
+
         });
+
+       exampleInstance.column( '0:visible' ).order('desc').draw();
  // Bootstrap datepicker
 $('.input-group date input').each(function() {
   $(this).datepicker('clearDates');
 });
 
 // Set up your table
-table1 = $('#example_1').DataTable({
+table1 = $('#example').DataTable({
   paging: true,
   info: false,
-   responsive: false,
-});
+  responsive: false,
+}).column('0:visible').order('desc').draw();
 
 
 
 
 // Re-draw the table when the a date range filter changes
-$('.date-range-filter1').change(function() {
+// $('.date-range-filter1').change(function() {
 
-  // Extend dataTables search
-$.fn.dataTable.ext.search.push(
-  function(settings, data, dataIndex) {
-    var min = $('#min-date').val();
-    var max = $('#max-date').val();
-    var createdAt = data[1] || 0; // Our date column in the table
+//  debugger;
+//  var table = $('#fba-list-table').DataTable(); 
 
-    if (
-      (min == "" || max == "") ||
-      (moment(createdAt).isSameOrAfter(min) && moment(createdAt).isSameOrBefore(max))
-    ) {
-      return true;
-    }
-    return false;
-  }
-);
+//   // Extend dataTables search
+// $.fn.dataTable.ext.search.push(
+//   function(settings, data, dataIndex) {
+//     var min = $('#min-date').val();
+//     var max = $('#max-date').val();
 
-  table1.draw();
-});
+//     var createdAt = data[1] || 2; // Our date column in the table
+//  if (
+//       (min == "" || max == "") ||
+//       (moment(createdAt).isSameOrAfter(min) && moment(createdAt).isSameOrBefore(max))
+//     ) {
+//       return true;
+//     }
+//     return false;
+//   }
+// );
 
-$('#my-table_filter').hide();
+//   table.draw();
+// });
+
+//$('#my-table_filter').hide();
 
  
 
@@ -836,6 +839,7 @@ $.ajax({
          type: "GET",  
          url:'fba-list/'+fbaid,//"{{URL::to('Fsm-Details')}}",
          success: function(fsmmsg){
+
         var data = JSON.parse(fsmmsg);
 
         var str = "<table class='table'><tr style='height:30px;margin:5px;'><td>Partner ID</td><td>Name</td><td>Mobile No</td><td>Email</td><td>City</td><td>Pincode</td></tr>";
@@ -1253,11 +1257,16 @@ function getpaymentlink(fbaid){
                         $('.divpartnertable_payment').html(str);
                          $('.paylink_payment').modal('show');
                           //$('#paylink').html(data[0].Link);
-                       }      
+                       }     
+                       else{
+                        var str = "<p>No Payment Link Available</p>";
+                        // alert(str)
+                        $('.divpartnertable_payment').html(str);
+                         $('.paylink_payment').modal('show');
+                       } 
                        for (var i = 0; i < data.length; i++) 
-       {
-
-         str = str + "<p>"+data[i].Link+"</p>";
+              {
+                str = str + "<p>"+data[i].Link+"</p>";
          // $('#paylink').html(str);
        }
                        
@@ -1265,6 +1274,40 @@ function getpaymentlink(fbaid){
                 });
 
 }
+
+// function getpaymentlink(fbaid){
+//  $('.divpartnertable_payment').html('');
+//   $.ajax({
+//                     url: 'getpaymentlink/'+fbaid,
+//                     type: "GET",
+//                     dataType: "json",
+//                     success:function(data) {
+
+//                       if(data.length>0){
+
+//                        // alert(data[0].Link);
+//                         var str = "<p>"+data[0].Link+"</p>";
+//                         // alert(str)
+//                         $('.divpartnertable_payment').html(str);
+//                          $('paylink_payment').modal('show');
+//                           //$('#paylink').html(data[0].Link);
+//                        }      
+//                      }
+//                 });
+
+// }
+
+ // show Password start
+ function getpassword(password){
+  // alert('Test');
+ $('#show_password').html(password);
+}
+
+function n(n){
+    return n.length < 8  ? "0" + n :  n;
+}
+// show password end
+
 
 
 function getproductfollowup(fbaid){
@@ -1313,20 +1356,27 @@ $.ajax({
 }
 
 
- function updatenotification(msgid,value){
+  function updatenotification(msgid,value){
 
 //alert(value);
- if (confirm("Are you sure to "+(value==1?"approve":"disapprove")+" this notification")) {}
+ if (confirm("Are you sure to "+(value==1?"approve":"reject")+" this notification")) {}
   $.ajax({
             type: "GET",
             url:'approvenotification/'+msgid+'/'+value, 
                      
            success: function( msg ) {
+
             if(value=="1"){
               alert("Notification Approved Successfully");
+              $("#accept_"+msgid).css( "background",'#0fe10f');
+
             }
             else if(value=="0"){
-             alert("Notification Dispproved Successfully");
+
+             
+             alert("Notification rejected Successfully");
+              $("#reject_"+ msgid).css("background",'#ffffff');
+                $("#reject_"+ msgid).css("color",'#0c0b0b');
                }
                 
             }
@@ -1337,9 +1387,6 @@ $.ajax({
 
 }
 
-
-
-
   $('#notificsubmitbtn').click(function(){
 // alert('okae');
   if (!$('#sendnotification').valid()) {
@@ -1347,7 +1394,8 @@ $.ajax({
 
   } else {
 $.ajax({
-          url:"{{URL::to('send-notification-submit')}}" ,  
+
+ url:"{{URL::to('send-notification-submit')}}" ,  
           data:new FormData($("#sendnotification")[0]),
           dataType:'json',
           async:false,
@@ -1360,6 +1408,8 @@ $.ajax({
             if (msg.data==true) 
               {
                 alert('Inserted Successfully');
+                 $("#sendnotification").trigger('reset');
+
               } else {
                     alert('Oops!! Could not insert successfully');
               }
@@ -1371,10 +1421,6 @@ $.ajax({
 
 
 
-
-</script>
-
-<script type="text/javascript">
   function mail(obj,val){
     // console.log(obj);
     if(obj=='weburl' ){
@@ -1396,10 +1442,68 @@ $.ajax({
 }
 
 
+$(".nav-list > li").addClass(function(i){return "item" + (i + 1);});
 
- 
+
+
+function docview(fbaid)
+{
+$('#divdocviewer').html(""); 
+$("#imgdoc").attr("src","");
+$("#imgdoc").css("display","show");
+$.ajax({  
+
+         type: "GET",  
+        
+         url:'fbalist-document/'+fbaid,//"{{URL::to('Fsm-Details')}}",
+         success: function(fsmmsg){
+     
+        var data = JSON.parse(fsmmsg);
+        var str = "<table class='table'><tr style='height:30px;margin:18px;'>";
+  if(data.data.length > 0){
+      
+       for (var i = 0; i < data.data.length; i++) {
+        
+      str = str + '<a><input  class="btn btn-default" style="margin:2px" type="button" onclick=showImage("'+data.url+data.data[i].FileName+'") value="'+data.data[i].DocType+'"/></a>';
+    }
+   str = str + "</tr></table>";
+
+      }
+
+      else
+      {
+        str = str + "<td>No documents uploaded.</td></tr></table>";
+
+
+      }
+
+           $('#divdocviewer').html(str);   
+             
+  
+        }  
+      });
+}
+
+function showImage(src)
+
+{
+
+  $("#imgdoc").css("display","block");
+  $("#imgdoc").attr("src" ,src);
+
+}
+
+
+
+</script> 
+  
+
+<!-- fbalist ImageView Script End Here-->
+<script> 
+
 $('#msds-select').change(function () { 
-   var table = $('#fba-list-table').DataTable(); 
+  debugger;
+ var table = $('#fba-list-table').DataTable(); 
     $.fn.dataTable.ext.search.push(
     function( settings, data, dataIndex ) {
         var msdsSearch = $( "#msds-select option:selected" ).val();
@@ -1421,11 +1525,88 @@ $('#msds-select').change(function () {
      table.draw();
     
 });
-
-
 </script>
-  
 
 
 
+<script type="text/javascript">
+   $('#ddlsubcat').on('change', function() {
+        var QuerID = $(this).val();
+         
+            if(QuerID) {
+                $.ajax({
+                    url: 'RaiseaTicketgetcal/'+QuerID,
+                    type: "GET",
+                    dataType: "json",
+                    success:function(data) {
+                        $('#ddlClassification').empty();
+                        $('#ddlClassification').append('<option value="0">--Select Classification--</option>');
+                        
+                        $.each(data, function(key,value) {
+                             
+                            $('#ddlClassification').append('<option value="'+ value.ID +'">'+ value.Description +'</option>');
+                        });
+                     }
+                });
+            }else{
+                $('select[name="ddlClassification"]').empty();
+            }
+        });
+ </script>
 
+ <script type="text/javascript">
+   $('#btn_saveticket').click(function() {
+    if( $('#fromraiserticket').valid())
+    {
+
+    data1=new FormData($("#pathimgraiser"));
+    
+  console.log($('#fromraiserticket').serialize());
+   $.ajax({ 
+   url: "{{URL::to('RaiseaTicket')}}",
+   method:"POST",
+   data: $('#fromraiserticket').serialize(),
+   dataType:'json',
+   async:false,
+   type:'POST',
+   processData: false,
+   contentType: false,
+  success: function(msg)  
+   {
+    console.log(msg);
+    alert("Record has been saved successfully");
+    $("#fromraiserticket").trigger('reset');
+   
+   }
+});
+}
+});
+$('#btn_resetticket').click(function() {
+   $("#fromraiserticket").trigger('reset');
+});
+
+ </script>
+
+ <script type="text/javascript">
+   $('#ddlCategory').on('change', function() {
+            var CateCode = $(this).val();
+            if(CateCode) {
+                $.ajax({
+                    url: 'RaiseaTicket/'+CateCode,
+                    type: "GET",
+                    dataType: "json",
+                    success:function(data) {
+                        $('#ddlsubcat').empty();
+                        $('#ddlsubcat').append('<option value="0">-- Select Sub Category--</option>');
+                        $.each(data, function(key, value) {
+                         
+                            $('#ddlsubcat').append('<option value="'+ value.QuerID +'">'+ value.QuerType +'</option>');
+                        });
+                     }
+                });
+            }else{
+                $('select[name="ddlsubcat"]').empty();
+            }
+        });
+ </script>
+ <!-- End shubham raise a ticket -->

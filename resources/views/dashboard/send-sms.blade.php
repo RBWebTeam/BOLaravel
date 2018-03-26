@@ -2,11 +2,23 @@
  @section('content')
 
 <!-- Body Content Start -->
-            <div id="content" style="overflow:scroll;">
+     <div id="content" style="overflow:scroll;">
 			 <div class="container-fluid white-bg">
 			 <div class="col-md-12"><h3 class="mrg-btm">SEND SMS</h3></div>
 			 <!-- Date Start -->
 			 
+       <div id="message_toggle">
+        @if($message = Session::get('msg'))
+         <div class="alert alert-info alert-dismissible fade in" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+        <strong>{{ $message }}</strong> 
+      </div>
+       @endif
+       </div>
+
+
 
 
 			 <div class="col-md-12 col-xs-12">
@@ -17,6 +29,7 @@
 				 <option value="2">FSM</option>
 				 <option value="3">FBA POSP</option>
 				</select>
+        <label class="control-label" for="inputError" id="required1"> </label>
 				</div>
 
 				<div class="form-group col-md-3">
@@ -58,43 +71,47 @@
         
 
 
-				<div class="col-sm-6 col-xs-12 form-padding" id="StatesV" style="overflow-y:scroll;height:270px;">
+				<div class="col-sm-6 col-xs-12 form-padding" id="StatesV" >
+        <div style="overflow-y:scroll;height:270px;">
 	                    <table class="table table-responsive table-hover" cellspacing="0" id="myTable">
 		                <thead>
 						<tr class="headerstyle" align="center">
 			            <th scope="col">
                         <input type="checkbox" id="checkAll" name="check" style="width: auto; float: left; display: inline-block; margin-right: 16px;">
-                        <span>RECIPIENTS</span>   <input type="text" name="search" style="margin: 0px 10px 10px 330px" id="myInput"  class="search_id" placeholder="Search for names.." title="Type in a name">
+                        <span>RECIPIENTS</span>   <input type="text" name="search" style="margin: 0px 10px 10px 233px " id="myInput"  class="search_id" placeholder="Search for names or Mobile Number" title="Type in a name">
                         </th>
 		                </tr>
 		         
 
                          </thead >
-                         <tbody id="sendsms_id"></tbody>
+                        <tbody id="sendsms_id"></tbody>
+
+
+                       
 					    </table>
-                        
+              </div> 
+              <h3 class="pull-left"><b>COUNT:</b><span id="msg_check" ></span><span id="msg_count">0</span><h3>    
 			     </div>
 
 
 
 			
 	               <div class="col-sm-6 col-xs-12 form-padding">  
-                    <select  name="SMSTemplate" class="form-control"   onchange="SMSTemplate_fn(this.value)" >
+                    <select  name="SMSTemplate" class="form-control"  id="SMSTemplate_select" onchange="SMSTemplate_fn(this.value)" >
                     <option value="0" >select</option>
                     @foreach($SMSTemplate as $sms)
                     <option value="{{$sms->SMSTemplateId}}">{{$sms->Header}}</option>
                     @endforeach
                     </select>
-                      @if ($errors->has('SMSTemplate'))<label class="control-label" for="inputError"> {{ $errors->first('SMSTemplate') }}</label>  @endif
-
+                       <label class="control-label" for="inputError" id="required2"> </label>
   <br>
 
 
 	               <textarea style="padding:10px; height:200px;"  id="SMSTemplate"  name="sms_text" class="form-control"> </textarea>
+                  <label class="control-label" for="inputError" id="required3"> </label>
 	               <div class="center-obj pull-left">
-	               <button class="common-btn">SEND</button>
-
-	                 @if ($errors->has('sms_text'))<label class="control-label" for="inputError"> {{ $errors->first('sms_text') }}</label>  @endif
+	               <button class="common-btn" id="send_message_id">SEND</button>
+ 
 	               </div>
 				   </div>
 
@@ -109,6 +126,8 @@
 $(document).ready(function(){   
 	 $("#checkAll").click(function () {
      $('input:checkbox').not(this).prop('checked', this.checked);
+      len=$(".check_list:checkbox:checked").length;
+          $('#msg_check').text(len+"/");
       
  });
 
@@ -178,10 +197,11 @@ function FN_search(ID,city,fDate,tDate){
         
 
  if(search!=null){
- $.get("{{url('send-sms')}}",search).done(function(data){   var arr=Array();   $('#sendsms_id').empty();
+ $.get("{{url('send-sms')}}",search).done(function(data){   var arr=Array();   $('#sendsms_id').empty();$('#msg_count').empty();
  	           if(data.sms_data.length > 0){
+              $('#msg_count').text(data.sms_data.length);
               $.each(data.sms_data,function(index,val){ 
-                    arr.push('<tr><td><input type="checkbox" name="fba[]" value="'+val.FBAID+'" >'+val.FullName	+':'+val.MobiNumb1+'</td> </tr>');  });
+                    arr.push('<tr><td><input type="checkbox" name="fba[]" class="check_list" value="'+val.FBAID+'" >'+val.FullName	+':'+val.MobiNumb1+'</td> </tr>');  });
                 $('#sendsms_id').append(arr);
                  }else{
                  	alert("No data found...");
@@ -205,6 +225,75 @@ function SMSTemplate_fn(ID){
 
 }
 
+
+$(document).on('click','#send_message_id',function(e){
+  // e.preventdefault();
+
+
+ if($('#smslist').val()==0 ||$('#smslist').val()==null ){ 
+  $('#required1').text('This field is required');
+   $('#required2').text('This field is required');
+  return false;
+ }else{ $('#required1').text('');}
+ if( $('#SMSTemplate_select').val()==0 || $('#SMSTemplate_select').val()==null  ){
+       $('#required2').text('This field is required');
+     //alert("Please select from drop down list.");
+  return false;
+ }else{
+       $('#required2').text('');
+      
+ } 
+
+
+if($('#SMSTemplate').val()==0 || $('#SMSTemplate').val()==null){
+   $('#required3').text('This field is required');
+  //alert("Please fill out this field message.");
+  return false;
+ }else{
+  $('#required3').text('');
+ }
+
+// var fields = $("input[name='fba']").serializeArray(); 
+//   if (fields.length>0) { 
+//     alert("Please select  Recipient");
+//     return false;
+//   } 
+
+if($(".check_list:checkbox:checked").length > 0){
+  }else{
+    $('#required4').text('This field is required');
+    alert("Please select  Recipient");
+    return false;
+  }
+
+
+
+});
+
+
+
+$(document).on('click','.check_list',function(){
+     len=$(".check_list:checkbox:checked").length;
+     $('#msg_check').text(len+"/");
+});
+
+
+
+
+
+ 
+$(document).ready(function(){
+ 
+window.setTimeout(function() {
+    $("#message_toggle").fadeTo(500, 0).slideUp(500, function(){
+        $(this).remove(); 
+    });
+}, 4000);
+ 
+
+ });
+
+  
 
 
 </script>

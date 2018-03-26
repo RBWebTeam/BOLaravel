@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+<link rel="manifest" href="/manifest.json">
          @include('include.head')
 <body>
  

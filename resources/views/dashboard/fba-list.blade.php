@@ -4,57 +4,34 @@
 
 
              <div class="container-fluid white-bg">
-             <div class="col-md-12"><h3 class="mrg-btm">FBA List<!-- <span><span style="float: right;" class="glyphicon glyphicon-filter" data-toggle="modal" data-target="#Filter" ></span>
-         <span style="float: right;" class="glyphicon glyphicon-refresh" onclick="window.location.reload()"></span> </span> --></h3>
+             <div class="col-md-12"><h3 class="mrg-btm">FBA List</h3>
 
         <hr>
        </div>
-
-       
-       
-       <!-- Filter Strat -->
-       <!-- <div class="col-md-12">
-       <div class="panel panel-primary">
-       <div class="panel-heading">
-            <h3 class="panel-title">Filter</h3>
-            <div class="pull-right">
-              <span class="clickable filter" data-toggle="tooltip" data-container="body">
-              <span class="glyphicon glyphicon-plus glyphicon1"></span> &nbsp;&nbsp;
-                <span class="glyphicon glyphicon-filter glyphicon1 fltr-tog"></span>
-              </span>
-            </div>
-          </div>
-          <div class="panel-body filter-bdy" style="display:none">
-            <input type="text" class="form-control" id="dev-table-filter" data-action="filter" data-filters="#dev-table" placeholder="Search..." />
-          </div>
-       </div>
-       </div> -->
-       <!-- Filter End -->
-       
-       <form>
-
-       <div class="col-md-4">
+      <div class="col-md-3">
       <div class="form-group">
       <p>From Date</p>
-         <div id="datepicker" class="input-group date" data-date-format="yyyy-mm-dd-">
-               <input class="form-control date-range-filter" type="text" placeholder="From Date" name="fdate" id="min-date"  />
+         <div id="datepicker" class="input-group date" data-date-format="mm/dd/yyyy">
+               <input class="form-control date-range-filter" type="text" placeholder="From Date" name="fdate" id="min"  />
               <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-              </div>
+            </div>
             </div>
            </div>
-       <div class="col-md-4">
+       <div class="col-md-3">
        <div class="form-group">
        <p>To Date</p>
-       <div id="datepicker1" class="input-group date" data-date-format="yyyy-mm-dd">
-               <input class="form-control date-range-filter1" type="text" placeholder="To Date"  name="todate"  id="max-date"/>
+       <div id="datepicker1" class="input-group date" data-date-format="mm/dd/yyyy">
+               <input class="form-control date-range-filter" type="text" placeholder="To Date" name="todate"  id="max"/>
               <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
               </div>
             </div>
            </div>
        <div class="col-md-4">
+
        <div class="form-group"> <input type="submit" name="" id="btndate"  class="mrg-top common-btn pull-left" value="SHOW">  
 	   &nbsp;&nbsp;
    <select  id="msds-select" class="pull-left mrg-top mrg-left">
+   <option value="0">Posp Type</option>
   <option value="1">POSP Yes</option>
   <option value="2">POSP No</option>
   </select>
@@ -62,8 +39,9 @@
        </div>
     
 
-  </form>
+  
            <!-- Date End -->
+
              <div class="col-md-12">
              <div class="overflow-scroll">
              <div class="table-responsive" >
@@ -71,7 +49,7 @@
                                        <thead>
                                        <tr>
                                        <th>FBA ID</th> 
-                                       <th>Full Name</th>
+                                       <th>Full Name</th>                                    
                                        <th>Created Date</th>
                                        <th>Mobile No</th>
                                        <th>Email ID</th>
@@ -88,7 +66,8 @@
                                        <th>Bank Account</th>
                                        <th>SMS</th>
                                        <th>sales code</th>
-                                    </tr>
+                                        <th>Created Date1</th>
+                                     </tr>
                                     </thead>
             </table>
             </div>
@@ -154,7 +133,7 @@
 
 
 
- <div class="fbadoc modal fade" role="dialog">   
+<!--  <div class="fbadoc modal fade" role="dialog">   
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -171,6 +150,24 @@
     </div>
   </div>
 </div>
+
+ -->
+
+
+ <div class="pageloader modal fade" role="dialog" id="pageloader">   
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+     
+      <div class="modal-body">
+        <form id="posp_from_id">
+         
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 
  <!-- fab document -->
  <!-- <div class="fbadoc modal fade" role="dialog">   
@@ -214,7 +211,7 @@
 <div class="salesupdate modal fade" role="dialog" id="salesupdate_modal_fade">   
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-      <div class="modal-header">
+      <div class="modal-header"  >
         <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
         <h4 class="modal-title">Sales Code</h4>
       </div>
@@ -334,7 +331,7 @@
         <div id="divdocviewer" name="divdocviewer">
         </div>
         <div>
-         <img id="imgdoc" style="min-height:150px; min-width:150px;">
+         <img id="imgdoc" style="min-height:100%; min-width:100%; overflow-y: scroll;">
          </div>
        </div>
      </div>
@@ -393,31 +390,63 @@
     </div>
   </div>
 </div>
+
+<!-- password -->
+
+<div id="spassword" class="modal fade spassword" role="dialog">
+  <div class="modal-dialog">
+   
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Password</h4>
+      </div>
+      <div class="modal-body">
+      <div style="color: blue;" id="show_password" class="show_password">
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 @endsection
+
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript">
-    $(document).ready(function() {
+
+  $(document).ready(function() {
+
     $('#fba-list-table').DataTable({
+
+      "createdRow": function(row, data, dataIndex ) {
+      if ( data.PayStat=="S" ) {
+        $(row).css({backgroundColor: 'LightGreen'});
+      }
+    },
+        "order": [[ 18, "desc" ]],
         "ajax": "get-fba-list",
         "columns": [
              { "data": "fbaid"},
-            { "data": "FullName"},
+            { "data": "FullName"},            
             { "data": "createdate" },
             { "data": "MobiNumb1" },
             { "data": "EMaiID" },
             { "data": "Link",
-         
-          
               "render": function ( data, type, row, meta ) {
                 return '<a id="btnviewhistory" data-toggle="modal" data-target="#paylink_payment" onclick="getpaymentlink('+row.fbaid+')">Payment link</a>';
               }
              }, 
+
             {"data":"pwd" ,
+           
              "render": function ( data, type, row, meta ) {
-                return '<a class="popover-Password" data-toggle="popover" title="Show Password" data-content="'+data+'">*****</a>';
+              
+                return '<a id="btnshowpassword" data-toggle="modal" data-target="#spassword" onclick="getpassword('+"'"+ data+"'"+')">*****</a>';
               }
-            },        
+
+       },         
             {"data":"City"},
             {"data":"Pincode"},
             {"data":null  ,
@@ -431,8 +460,6 @@
               }
             },  
 
-
-
             {"data":"LoanID"  ,
              "render": function ( data, type, row, meta ) {
                 return data==""?('<a id="loan_'+row.fbaid+'" class="checkloan" data-toggle="modal" data-target="#updateLoan" onclick="LoanID_UPDATE('+row.fbaid+')">update</a>'):data;
@@ -444,17 +471,14 @@
                 return '<a href="" data-toggle="modal" data-target="#partnerInfo" onclick="getpartnerinfo('+row.fbaid+')">partner info</a>';
               }
             },  
-            {"data":null ,
+
+       {"data":"fdid" ,
              "render": function ( data, type, row, meta ) {
+      return data == 1?'<a href="" style="" data-toggle="modal"  data-target="#docviwer" onclick="docview('+row.fbaid+')" >uploaded</a>':'pending';
+       }
+        },
+    
 
-
-                return '<a href="#" style="" data-toggle="modal"  data-target="fbadoc" onclick="uploaddoc('+row.fbaid+')" >Pending</a>';
-
-                return '<a href="" style="" data-toggle="modal"  data-target="#docviwer" onclick="uploaddoc('+data+')" >Pending</a>';
-
-
-              }
-            }, 
             {"data":"bankaccount"} ,
             {"data":"MobiNumb1" ,
              "render": function ( data, type, row, meta ) {
@@ -463,33 +487,104 @@
             },
             {"data":"salescode" ,
              "render": function ( data, type, row, meta ) {
-                return data==""?('<a  id="update_'+data+'" onclick="sales_update_fn('+data+')" >'+data+'</a>'):('<a  id="update_'+row.fbaid+'" onclick="sales_update_fn('+row.fbaid+')" >Update</a>');
+             
+            return data=="Update"?('<a  id="update_'+row.fbaid+'" onclick="sales_update_fn('+row.fbaid+')" >'+data+'</a>'):data;
               }
-            },
+   
+},
+            { "data": "createdate1","visible":false }
             
         ],
 
-    } );
+    });//.column('0:visible').order('desc').draw();
+
 
 });  
 
-function myFunction() {
-  var input, filter, table, tr, td, i;
-  input = document.getElementById("#myInput");
-  filter = input.value.toUpperCase();
-  table = document.getElementById("fba-list-table");
-  tr = table.getElementsByTagName("tr");
-  for (i = 0; i < tr.length; i++) {
-    td = tr[i].getElementsByTagName("td")[9];
-    if (td) {
-      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
-        tr[i].style.display = "";
-      } else {
-        tr[i].style.display = "none";
-      }
-    }       
-  }
-}
 
+
+
+
+
+// from date to date start
+
+$(document).ready(function(e) {
+  // Bootstrap datepicker
+  $('.input-daterange input').each(function() {
+    $(this).datepicker('clearDates');
+  });
+
+// Re-draw the table when the a date range filter changes
+  $('#btndates').click(function() { 
+    
+   $.fn.dataTableExt.afnFiltering.push(
+
+function (oSettings, aData, iDataIndex) {
+    if (($('#min').length > 0 && $('#min').val() !== '') || ($('#max').length > 0 && $('#max').val() !== '')) {
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth();
+        var yyyy = today.getFullYear();
+//console.log(today+"-- "+dd+" --"+mm+" --"+yyyy);
+        if (dd < 10) dd = '0' + dd;
+
+        if (mm < 10) mm = '0' + mm;
+
+        today = mm + '/' + dd + '/' + yyyy;
+        var minVal = $('#min').val();
+        var maxVal = $('#max').val();
+        //alert(minVal+"   ----   "+maxVal);
+        if (minVal !== '' || maxVal !== '') {
+            var iMin_temp = minVal;
+            if (iMin_temp === '') {
+                iMin_temp = '01/01/1980';
+            }
+
+            var iMax_temp = maxVal;
+            var arr_min = iMin_temp.split("/");
+
+            var arr_date = aData[2].split("/");
+ //console.log(arr_min[2]+"-- "+arr_min[0]+" --"+arr_min[1]);
+             var iMin = new Date(arr_min[2], arr_min[0]-1, arr_min[1]);
+          //  console.log(iMin);
+           // console.log(" --"+yyy);
+           
+
+            var iMax = '';
+            if (iMax_temp != '') {
+                var arr_max = iMax_temp.split("/");
+                iMax = new Date(arr_max[2], arr_max[0]-1, arr_max[1], 0, 0, 0, 0);
+            }
+
+
+
+
+            var iDate = new Date(arr_date[2], arr_date[0]-1, arr_date[1], 0, 0, 0, 0);
+            //alert(iMin+" -- "+iMax);
+      //  console.log("Test data "+iMin+" -- "+iMax+"-- "+iDate+" --"+(iMin <= iDate && iDate <= iMax));
+            if (iMin === "" && iMax === "") {
+                return true;
+            } else if (iMin === "" && iDate < iMax) {
+                // alert("inside max values"+iDate);
+                return true;
+            } else if (iMax === "" && iDate >= iMin) {
+                // alert("inside max value is null"+iDate);                    
+                return true;
+            } else if (iMin <= iDate && iDate <= iMax) {
+              //  alert("inside both values"+iDate);
+                return true;
+            }
+            return false;
+        }
+    }
+    return true;
+});
+
+  var table = $('#fba-list-table').DataTable();
+    table.draw();
+  });
+
+  $('.date-range-filter').datepicker();
+});
 </script>
-
+<!-- from date to date end -->  

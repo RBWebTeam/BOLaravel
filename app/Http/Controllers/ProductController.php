@@ -14,6 +14,7 @@ class ProductController extends Controller
       public function product_authorized(Request $req){
             if(isset($req->ID)){
                 $query=DB::select('call sp_product_master_assign(?)',[$req->ID]);
+                
                 return   $query;
               }
  

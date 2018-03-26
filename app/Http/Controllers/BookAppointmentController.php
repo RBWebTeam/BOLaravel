@@ -44,31 +44,27 @@ class BookAppointmentController extends Controller
        // }
 
        public function sales_material_upload_submit(Request $req){
-        // print_r($req->all());
+         //print_r(Session::all());exit();
         $res['status']=0;
         $res['msg']="success";
-        $product=$req['Product'];
-         $company=$req['Company'];
-         $language=$req['Language'];
+        $Product=$req['Product'];
+         $Company=$req['Company'];
+         $Language=$req['Language'];
         $document_name="image";
-    	$user_id=$req['UserId'];
+    	   $user_id=Session::get('fbauserid');
         $file=$req->file('file');
         try {
         	 if($file == null){
             throw new \Exception("Upload Document ", 1);
           }
-          $destinationPath = 'uploads/sales_material/'.$product.'/'.$company.'/';
-          
+          $destinationPath = 'uploads/sales_material/'.$Product.'/'.$Company.'/';
           $filename=$document_name.".".$file->getClientOriginalExtension();
-
-          
-           
           $file->move($destinationPath,$filename);
            $query=DB::table('sales_material_upload')
-            ->insert(['prod_id'=>$req->Product,
-              'company_id'=>$req->Company,
-              'language'=>$req->Language,
-              'user_id'=>$req->UserId,
+            ->insert(['prod_id'=>$Product,
+              'company_id'=>$Company,
+              'language'=>$Language,
+              'user_id'=>$user_id,
               'image_path'=>$destinationPath.$filename,
               'is_active'=>1,
               'created_at'=>date("Y-m-d H:i:s"),

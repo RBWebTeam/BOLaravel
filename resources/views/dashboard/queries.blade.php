@@ -18,11 +18,11 @@
  <div id="export_id"></div>
 <br>
 
-
+ 
    <div class="col-md-12">
        <div class="overflow-scroll">
        <div class="table-responsive" >
-				<table id="example" class="datatable-responsive table table-striped table-bordered dt-responsive nowrap" >
+        <table id="example" class="datatable-responsive table table-striped table-bordered dt-responsive nowrap" >
                  <thead >
                  <tr class="thead_cl">
 
@@ -33,10 +33,19 @@
                 @foreach($query as $val)
               <tr>
 
+                @if($status==3)
+                <td> {{$val->created_date}}</td>
+                <td> {{$val->FBAId}}</td>
+               <td> {{$val->FBAName}}</td>
+               <td> {{$val->Mobile}}</td>
+               <td> {{$val->Email}}</td>
+                @else
                <td> {{$val->FBAId}}</td>
                <td> {{$val->FBAName}}</td>
                <td> {{$val->Mobile}}</td>
                <td> {{$val->Email}}</td>
+                @endif
+
                 @if($status==1)
                <td> {{$val->City}}</td>
                <td> {{$val->HEALTH}}</td>
@@ -53,27 +62,32 @@
                <td> {{$val->TWO_WHEELER}}</td>
                 
                @elseif($status==3)
-                <td> {{$val->HEALTH}}</td>
-                <td> {{$val->MOTOR}}</td>
-                <td> {{$val->TWO_WHEELER}}</td>
+               <td> {{$val->City}}</td>
+               <td> {{$val->pcount}}</td>
+               <td> {{$val->TName}}</td>
                @elseif($status==4)
+               <td> {{$val->City}}</td>
                 <td> {{$val->CreaOn}}</td>
                @elseif($status==5)
+               <td> {{$val->City}}</td>
                  <td> {{$val->created_date}}</td>
                   <td> {{$val->HEALTH}}</td>
                <td> {{$val->MOTOR}}</td>
                
                <td> {{$val->TWO_WHEELER}}</td>
                @elseif($status==6)
+
                <td> {{$val->Created_Date}}</td>
                 <td>{{$val->PospName}}</td>
                @elseif($status==7)
+               <td> {{$val->City}}</td>
                  <td> {{$val->Created_Date}}</td>
                 <td> {{$val->POSPName}}</td>
                @elseif($status==8)
+               <td> {{$val->City}}</td>
                <td> {{$val->HEALTH}}</td>
                <td> {{$val->MOTOR}}</td>
-               <td> {{$val->HOME_LOAN}}</td>
+               
                
                <td> {{$val->TWO_WHEELER}}</td>
                @else  
@@ -88,33 +102,21 @@
 
                  </tbody>
       </table>
-			</div>
-			</div>
-			</div>
+      </div>
+      </div>
+      </div>
       </div>
       </div>
 
+
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript">
-  $(document).ready(function () {
-    
-    if ($.fn.dataTable.isDataTable('#tblqueries')) {
-    table = $('#tblqueries').DataTable({
-      paging:true;
-      searching: true;
-
-    });
-}
-else {
-
-    table = $('#tblqueries').DataTable( {
-        paging: false
-    } );
-}
-
-});
+  
       </script>
-	  
-	<script>
+    
+  <script>
 // Add active class to the current button (highlight it)
 var header = document.getElementById("myDIV");
 var btns = header.getElementsByClassName("qry-btn");
