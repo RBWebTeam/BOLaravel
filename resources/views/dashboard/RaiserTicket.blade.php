@@ -38,7 +38,7 @@
 <div class="form-group">
 	    @if ($errors->has('txtraisermessage'))<label class="control-label" for="inputError"> {{ $errors->first('txtraisermessage') }}</label>  @endif
            <label class="control-label" for="message-text">Message: </label>
-           <textarea class="form-control" required="yes" id="txtraisermessage" name="txtraisermessage"></textarea>
+           <textarea class="form-control" required id="txtraisermessage" name="txtraisermessage"></textarea>
 </div>
 <div class="form-group">
            <label class="control-label" for="message-text">Image: </label>
@@ -46,11 +46,11 @@
 </div>
 <div class="form-group">
            <label class="control-label" for="message-text">To Email ID: </label>
-           <input type="Email" class="form-control" id="txttoemailid" name="txttoemailid">
+           <input type="Email" class="form-control" id="txttoemailid" name="txttoemailid" required>
 </div>
 <div class="form-group">
            <label class="control-label" for="message-text">CC Email ID: </label>
-           <input type="Email" name="" class="form-control" id="txtccemailid" name="txtccemailid">
+           <input type="Email"  class="form-control" id="txtccemailid" name="txtccemailid">
 </div>
 <div class="form-group">
 <input id="btn_saveticket" type="submit" name="btn_saveticket" class="btn btn-primary">

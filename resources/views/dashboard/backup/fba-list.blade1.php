@@ -11,7 +11,7 @@
       <div class="col-md-3">
       <div class="form-group">
       <p>From Date</p>
-         <div id="datepicker" class="input-group date" data-date-format="mm/dd/yyyy">
+         <div id="datepicker" class="input-group date" data-date-format="yyyy-mm-dd">
                <input class="form-control date-range-filter" type="text" placeholder="From Date" name="fdate" id="min"  />
               <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
             </div>
@@ -20,27 +20,22 @@
        <div class="col-md-3">
        <div class="form-group">
        <p>To Date</p>
-       <div id="datepicker1" class="input-group date" data-date-format="mm/dd/yyyy">
+       <div id="datepicker1" class="input-group date" data-date-format="yyyy-mm-dd">
                <input class="form-control date-range-filter" type="text" placeholder="To Date" name="todate"  id="max"/>
               <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
               </div>
             </div>
            </div>
        <div class="col-md-4">
-
-       <div class="form-group"> <input type="submit" name="" id="btndate"  class="mrg-top common-btn pull-left" value="SHOW">  
-	   &nbsp;&nbsp;
-   <select  id="msds-select" class="pull-left mrg-top mrg-left">
+       <div class="form-group"> <input type="submit" name="btndates" id="btndates"  class="mrg-top common-btn" value="SHOW">  </div>
+       </div>
+    
+ 
+   <select  id="msds-select">
    <option value="0">Posp Type</option>
   <option value="1">POSP Yes</option>
   <option value="2">POSP No</option>
   </select>
-  </div>
-       </div>
-    
-
-  
-           <!-- Date End -->
 
              <div class="col-md-12">
              <div class="overflow-scroll">
@@ -331,7 +326,7 @@
         <div id="divdocviewer" name="divdocviewer">
         </div>
         <div>
-         <img id="imgdoc" style=" overflow-y: scroll;">
+         <img id="imgdoc" style="min-height:100%; min-width:100%; overflow-y: scroll;">
          </div>
        </div>
      </div>
@@ -517,68 +512,22 @@ $(document).ready(function(e) {
 // Re-draw the table when the a date range filter changes
   $('#btndates').click(function() { 
     
-   $.fn.dataTableExt.afnFiltering.push(
-
-function (oSettings, aData, iDataIndex) {
-    if (($('#min').length > 0 && $('#min').val() !== '') || ($('#max').length > 0 && $('#max').val() !== '')) {
-        var today = new Date();
-        var dd = today.getDate();
-        var mm = today.getMonth();
-        var yyyy = today.getFullYear();
-//console.log(today+"-- "+dd+" --"+mm+" --"+yyyy);
-        if (dd < 10) dd = '0' + dd;
-
-        if (mm < 10) mm = '0' + mm;
-
-        today = mm + '/' + dd + '/' + yyyy;
-        var minVal = $('#min').val();
-        var maxVal = $('#max').val();
-        //alert(minVal+"   ----   "+maxVal);
-        if (minVal !== '' || maxVal !== '') {
-            var iMin_temp = minVal;
-            if (iMin_temp === '') {
-                iMin_temp = '01/01/1980';
-            }
-
-            var iMax_temp = maxVal;
-            var arr_min = iMin_temp.split("/");
-
-            var arr_date = aData[2].split("/");
- //console.log(arr_min[2]+"-- "+arr_min[0]+" --"+arr_min[1]);
-             var iMin = new Date(arr_min[2], arr_min[0]-1, arr_min[1]);
-          //  console.log(iMin);
-           // console.log(" --"+yyy);
-           
-
-            var iMax = '';
-            if (iMax_temp != '') {
-                var arr_max = iMax_temp.split("/");
-                iMax = new Date(arr_max[2], arr_max[0]-1, arr_max[1], 0, 0, 0, 0);
-            }
-
-
-
-
-            var iDate = new Date(arr_date[2], arr_date[0]-1, arr_date[1], 0, 0, 0, 0);
-            //alert(iMin+" -- "+iMax);
-      //  console.log("Test data "+iMin+" -- "+iMax+"-- "+iDate+" --"+(iMin <= iDate && iDate <= iMax));
-            if (iMin === "" && iMax === "") {
-                return true;
-            } else if (iMin === "" && iDate < iMax) {
-                // alert("inside max values"+iDate);
-                return true;
-            } else if (iMax === "" && iDate >= iMin) {
-                // alert("inside max value is null"+iDate);                    
-                return true;
-            } else if (iMin <= iDate && iDate <= iMax) {
-              //  alert("inside both values"+iDate);
-                return true;
-            }
-            return false;
-        }
+  $.fn.dataTable.ext.search.push(
+    function(settings, data, dataIndex) {
+    var min = $('#min').val();
+    var max = $('#max').val();
+   
+    var createdAt = data[18] || 18; // Our date column in the table
+// console.log(createdAt);
+// console.log(max);
+  if((min == "" || max == "") ||
+      (moment(createdAt).isSameOrAfter(min) && moment(createdAt).isSameOrBefore(max))
+    ) {
+      return true;
     }
-    return true;
-});
+    return false;
+    }
+  );
 
   var table = $('#fba-list-table').DataTable();
     table.draw();

@@ -27,20 +27,15 @@
             </div>
            </div>
        <div class="col-md-4">
-
-       <div class="form-group"> <input type="submit" name="" id="btndate"  class="mrg-top common-btn pull-left" value="SHOW">  
-	   &nbsp;&nbsp;
-   <select  id="msds-select" class="pull-left mrg-top mrg-left">
+       <div class="form-group"> <input type="submit" name="btndates" id="btndates"  class="mrg-top common-btn" value="SHOW">  </div>
+       </div>
+    
+ 
+   <select  id="msds-select">
    <option value="0">Posp Type</option>
   <option value="1">POSP Yes</option>
   <option value="2">POSP No</option>
   </select>
-  </div>
-       </div>
-    
-
-  
-           <!-- Date End -->
 
              <div class="col-md-12">
              <div class="overflow-scroll">
@@ -331,7 +326,7 @@
         <div id="divdocviewer" name="divdocviewer">
         </div>
         <div>
-         <img id="imgdoc" style=" overflow-y: scroll;">
+         <img id="imgdoc" style="min-height:100%; min-width:100%; overflow-y: scroll;">
          </div>
        </div>
      </div>

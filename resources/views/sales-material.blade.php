@@ -65,11 +65,13 @@
             </div>
 		<script type="text/javascript">
   $('#sales_submit').click(function(){
+
     if ($('#Product').val()!=0 && $('#Company').val()!=0)
     {
 
          
       
+
 
     $.ajax({ 
    url: "{{URL::to('sales-material-update')}}",
@@ -94,6 +96,7 @@
    },
 
  });
+
   }else
   {
     alert('Please Select Dropdown List');

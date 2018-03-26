@@ -19,8 +19,8 @@
   </div>
    <div class="col-md-6 col-xs-12">
    <div class="form-group">
-   <select name="State"  id="txtmapstate" class="selectpicker select-opt form-control" required="">
-   <option selected="selected"  value="0">State</option>
+   <select name="State"  id="search_state_notification" class="selectpicker select-opt form-control" required="">
+   <option selected="selected"  value="0" >State</option>
    @foreach($state as $val)
    <option value="{{$val->state_id}}">{{$val->state_name}}</option>
    @endforeach
@@ -29,7 +29,7 @@
    </div>
   <div class="col-md-6 col-xs- 12">
    <div class="form-group">
-   <select name="city" id="txtmapcity" name="txtmapcity" class="selectpicker select-opt form-control" required="">
+   <select name="city" id="txtmapcity" name="txtmapcity" class="selectpicker select-opt form-control search_district_notification" required="">
   <option selected="selected">Select City</option>
    </select>
    </div>
@@ -92,25 +92,26 @@
  </div>
  </div>
  <div class="col-md-2 col-xs-12">
-  <input type="number" class="form-control"  id="notificationhours" name="notificationhours" placeholder="Hours" required/>
+  <input type="number" class="form-control"  id="notificationhours" name="notificationhours" placeholder="Hours"  maxlength="2" required/>
  </div>
  <div class="col-md-2 col-xs-12">
- <input type="number"  class="form-control" id="notificationminutes" name="notificationminutes" placeholder="Minutes" required />
+ <input type="number"  class="form-control" id="notificationminutes" name="notificationminutes" placeholder="Minutes"  maxlength="2" required />
   </div>
   <div class="col-md-4 col-xs-12">
   <div class="form-control border-none">
  <input type="file" name="notify_image" id="notify_image" required>
  </div>
  </div>
- <div class="col-md-12 col-xs-12">
+  <div class="col-md-12 col-xs-12">
  <div class="text-area padding" >
- <textarea  id="txtmessage" name="txtmessage" style="height: 20%;" placeholder="Message..." required></textarea>
+ <input  type="text" id="txtmessage" name="txtmessage" style="height: 8vw; width: 100%;" placeholder="Message..." required>
 </div>
 </div>
+
 <div class="col-md-12 col-xs-12">
  <br>
  <div class="center-obj center-multi-obj">      
- <a  href="" class="common-btn">Back</a>
+ <a  href="" class="common-btn">Reset</a>
  <a class="common-btn" id="notificsubmitbtn" name="notificsubmitbtn">Submit</a>
   </div>
   </div>
@@ -118,6 +119,30 @@
   </div>
   </div>  
   </div>
+
+<script type="text/javascript">
+ 
+$(document).on('change', '#search_state_notification', function() {   
+ var fstate_id=$(this).val();  
+ var  city_array=Array('<option value="0">Select</option>');  
+ $.ajax({
+  url: "{{url('search-city')}}",
+  dataType: "json",
+  data: {
+    fstate_id : fstate_id,
+  },
+  success: function(data) { 
+    $.each(data, function( key, val ) {
+      city_array.push('<option value="'+val.datavalue+'">'+val.value+'</option>');
+    });
+    $('.search_district_notification').empty();
+    $('.search_district_notification').append(city_array);
+
+  }
+});
+
+});
+  </script>
     
   @endsection
 

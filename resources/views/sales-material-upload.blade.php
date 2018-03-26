@@ -72,13 +72,15 @@
             </div>
 		<script type="text/javascript">
 			$('#submit').click(function(){
+
          if ($('#sales_material_upload').valid()) 
           {
-
+              return false;
           } 
           else 
           {
               $.ajax({
+
           url:"{{URL::to('sales-material-upload-submit')}}" ,  
           data:new FormData($("#sales_material_upload")[0]),
           dataType:'json',
@@ -101,8 +103,10 @@
             
             }
         });
+
           }
  
+
   });
 
 

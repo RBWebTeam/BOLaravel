@@ -50,7 +50,7 @@ class FbaController extends CallApiController
 
         public function sendsms(Request $req) {
 
-              $newsms = utf8_encode(htmlspecialchars($req->sms, ENT_QUOTES));//htmlspecialchars();
+              $newsms = urlencode($req->sms);//htmlspecialchars();
 
               
               $post_data="";
@@ -60,9 +60,9 @@ class FbaController extends CallApiController
               $st=str_replace('"{', "{", $http_result);
               $s=str_replace('}"', "}", $st);
               $m=$s=str_replace('\\', "", $s);
-              $update_user='';
+             
               $obj = json_decode($m);
-
+              return $obj;
         }
 
 
@@ -121,13 +121,14 @@ class FbaController extends CallApiController
           return json_encode($fsmfbaquery);    
         }
 
-          public function getdoclistview($fbaid)
+        public function getdoclistview($fbaid)
        {
          $doctype = DB::select("call get_fba_doc($fbaid)");
           $url=$this::$api_url;
           $data = array('data' => $doctype, 'url'=>$url);
           return json_encode($data);
         }
+
 
 
 

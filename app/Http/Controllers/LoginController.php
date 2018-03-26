@@ -389,6 +389,7 @@ public function search_city(Request $req){
 
  $products=DB::table('CityStateList')->select('CityName','DCCityID','StatID')
  ->where('StatID',$term)->distinct()
+ ->orderBy('CityName', 'asc')
  ->get();
 
 
