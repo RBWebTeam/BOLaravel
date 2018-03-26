@@ -13,25 +13,25 @@ use Mail;
 class BookAppointmentController extends Controller
 {
        public function book_appointment(){
-       	return view('book-appointment');
+        return view('book-appointment');
        }
 
 
   //      public function backoffice_city_master(){
-	 //    $query = DB::table('city_master')->select('city_id', 'cityname')->get();
-	 //    // print_r($query);exit();
+   //    $query = DB::table('city_master')->select('city_id', 'cityname')->get();
+   //    // print_r($query);exit();
 
-	 //    echo json_encode($query);
+   //    echo json_encode($query);
   // } 
 
 
        public function sales_material_upload(){
-       	return view('sales-material-upload');
+        return view('sales-material-upload');
        }
 
        // public function sales_material_product(){
-       // 	$query = DB::table('product_master')->select('Product_Id','Product_Name')->get();
-       // 	// print_r($query);exit();
+       //   $query = DB::table('product_master')->select('Product_Id','Product_Name')->get();
+       //   // print_r($query);exit();
 
        //  echo json_encode($query);
        // }
@@ -51,45 +51,65 @@ class BookAppointmentController extends Controller
          $Company=$req['Company'];
          $Language=$req['Language'];
         $document_name="image";
-    	   $user_id=Session::get('fbauserid');
+         $user_id=Session::get('fbauserid');
         $file=$req->file('file');
+        // print_r($file);exit();
         try {
-        	 if($file == null){
+           if($file == null){
             throw new \Exception("Upload Document ", 1);
           }
-          $destinationPath = 'uploads/sales_material/'.$Product.'/'.$Company.'/';
-          $filename=$document_name.".".$file->getClientOriginalExtension();
+          // $destinationPath = 'uploads/sales_material/';
+          $destinationPath = public_path().'/uploads/sales_material/';
+          // print_r($destinationPath);exit();
+          $filename=rand(1, 999).$file->getClientOriginalName();
+          // print_r($filename);exit();
           $file->move($destinationPath,$filename);
            $query=DB::table('sales_material_upload')
             ->insert(['prod_id'=>$Product,
               'company_id'=>$Company,
               'language'=>$Language,
               'user_id'=>$user_id,
-              'image_path'=>$destinationPath.$filename,
+              'image_path'=>$filename,
               'is_active'=>1,
               'created_at'=>date("Y-m-d H:i:s"),
               'updated_at'=>date("Y-m-d H:i:s")]);
             if ($query) {
-            	return response()->json(array('status' =>0,'message'=>"success"));
+              return response()->json(array('status' =>0,'message'=>"success"));
        }
         } catch (Exception $e) {
-        		return response()->json(array('status' =>1,'message'=>$ee->getMessage()));
+            return response()->json(array('status' =>1,'message'=>$ee->getMessage()));
         }
         
        
       }
 
       public function sales_material(){
-      	return view('sales-material');
+        return view('sales-material');
       }
 
       public function sales_material_update(Request $req){
-      	
-      		$query = DB::table('sales_material_upload')->select('image_path')->where('prod_id','=', $req->Product)->where('company_id','=',$req->Company)->get();
-       	// print_r($query);exit();
-      		 return $query;
+        
+          $query = DB::table('sales_material_upload')->select('id','image_path')->where('prod_id','=', $req->Product)->where('company_id','=',$req->Company)->get();
+        // print_r($query);exit();
+           return $query;
 
         
+      }
+
+      public function sales_material_delete(Request $req){
+          $res['status']=0;
+          $res['msg']="success";
+          try {
+            
+           $query=DB::table('sales_material_upload')->where('id', '=', $req->id)->delete();
+          if ($query) {
+            return response()->json(array('status' =>0,'message'=>"success"));
+          }
+          } catch (Exception $e) {
+            return response()->json(array('status' =>1,'message'=>$ee->getMessage()));
+          }
+          
+          
       }
 
 

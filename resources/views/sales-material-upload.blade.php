@@ -71,8 +71,104 @@
 
 
             </div>
-					    
+		<script type="text/javascript">
+			$('#submit').click(function(){
+
+  $.ajax({
+          url:"{{URL::to('sales-material-upload-submit')}}" ,  
+          data:new FormData($("#sales_material_upload")[0]),
+          dataType:'json',
+          async:false,
+          type:'POST',
+          processData: false,
+          contentType: false,
+          success: function(msg){
+            // console.log(msg.status);
+             if (msg.status==0) 
+              {
+                alert('Uploaded Successfully');
+                $("#sales_material_upload")[0].reset();
+              } 
+              else {
+               alert('Could Not Upload');
+              }
+             
+              
+            
+            }
+        });
+  });
+
+
+
+  $('#reset').click(function(){
+   $("#Product").val("");
+   $("#image_file").val("");
+   $("#Company").val("");
+  });
+
+  </script>
+<script type="text/javascript">
+  $('#Product').on('change', function() {
+    var Product=$('#Product').find(":selected").val();
+   // console.log(Product);
+    if ( Product == '1')
+      {
+       $("#Company option[value='1']").show();
+        $("#Company option[value='2']").show();
+        $("#Company option[value='3']").show();
+        $("#Company option[value='4']").show();
+          
+      }
+      if (Product == '2') 
+      {
+        $("#Company option[value='1']").show();
+        $("#Company option[value='2']").show();
+        $("#Company option[value='3']").show();
+        $("#Company option[value='5']").show();
+        $("#Company option[value='6']").show();
+        $("#Company option[value='7']").show();
+        $("#Company option[value='8']").show();
+      }
+      if (Product=='3') 
+      {
+         $("#Company option[value='1']").show();
+        $("#Company option[value='2']").show();
+        $("#Company option[value='3']").show();
+        $("#Company option[value='4']").show();
+         $("#Company option[value='5']").show();
+        $("#Company option[value='8']").show();
+      }
+      if (Product=='4') 
+      {
+         $("#Company option[value='1']").show();
+        $("#Company option[value='2']").show();
+        $("#Company option[value='4']").show();
+        $("#Company option[value='5']").show();
+         $("#Company option[value='8']").show();
+        $("#Company option[value='9']").show();
+        $("#Company option[value='10']").show();
+        $("#Company option[value='11']").show();
+      }
+      if (Product=='5') 
+      {
+         $("#Company option[value='1']").show();
+        $("#Company option[value='2']").show();
+        $("#Company option[value='3']").show();
+        $("#Company option[value='4']").show();
+         $("#Company option[value='5']").show();
+        $("#Company option[value='8']").show();
+      }
+     
+        
+      
+        
+      });
+		</script>			   
+			    
 @endsection	
+
+
 
 
 

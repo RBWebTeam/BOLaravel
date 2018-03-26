@@ -1446,8 +1446,7 @@ $(".nav-list > li").addClass(function(i){return "item" + (i + 1);});
 
 
 
-function docview(fbaid)
-{
+function docview(fbaid){
 $('#divdocviewer').html(""); 
 $("#imgdoc").attr("src","");
 $("#imgdoc").css("display","show");
