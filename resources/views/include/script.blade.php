@@ -305,13 +305,13 @@ $('.message_sms_id').click(function(){
   if($('#message-text').val()!="")  {
   //console.log($('#message_sms_from').serialize());
    $.ajax({ 
-   url: "{{URL::to('fba-list')}}",
+   url: "{{URL::to('send-fba-sms')}}",
    method:"POST",
    data: $('#message_sms_from').serialize(),
    success: function(msg)  
    {
-    //console.log(msg);
-    alert('SMS send successfully..')
+    console.log(msg);
+   // alert('SMS send successfully..')
     $('.sms_sent_id').modal('hide');
     $('#message-text').val('');
    }

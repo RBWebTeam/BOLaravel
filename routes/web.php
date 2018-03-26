@@ -43,7 +43,7 @@ Route::get('getpaymentlink/{fbaid}','FbaController@getpaymentlink');
 
 
 Route::get('fba-list/{fbaid}/{value}/{flag}',array('as'=>'fba-list.ajax','uses'=>'FbaController@updateposp'));
-Route::post('fba-list','FbaController@sendsms');
+Route::post('send-fba-sms','FbaController@sendsms');
 
 // Route::get('fba-list/{fbaid}/{value}/{flag}',array('as'=>'fba-list.ajax','uses'=>'FbaController@updateposp'));
 // Route::post('fba-list','FbaController@sendsms');
