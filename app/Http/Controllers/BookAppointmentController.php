@@ -69,7 +69,7 @@ class BookAppointmentController extends Controller
               'company_id'=>$Company,
               'language'=>$Language,
               'user_id'=>$user_id,
-              'image_path'=>$filename,
+              'image_path'=>'uploads/sales_material/'.$filename,
               'is_active'=>1,
               'created_at'=>date("Y-m-d H:i:s"),
               'updated_at'=>date("Y-m-d H:i:s")]);
