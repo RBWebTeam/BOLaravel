@@ -331,7 +331,7 @@
         <div id="divdocviewer" name="divdocviewer">
         </div>
         <div>
-         <img id="imgdoc" style="min-height:100%; min-width:100%; overflow-y: scroll;">
+         <img id="imgdoc" style=" overflow-y: scroll;">
          </div>
        </div>
      </div>

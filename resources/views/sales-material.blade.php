@@ -72,8 +72,8 @@
    {
   
      var tablerows = new Array();
-     URL="{{URL::to('uploads/sales_material')}}/";
-     alert(URL);
+     URL="{{URL::to('')}}/";
+     // alert(URL);
         $.each(msg, function( index, value ) {
             tablerows.push('<tr><td id="'+index+'"><span class="glyphicon glyphicon-remove"  style="cursor:pointer"<a class="close" onclick="img_delete('+ value.id +','+index+')" href="#">Close</a></span><img class="img-responsive" src="'+URL+value.image_path+ '" width="400" height=""/></td></tr>');
         }); 
