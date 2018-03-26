@@ -48,10 +48,10 @@
 
              <ul class="nav nav-list" style="overflow: hidden; width: auto; height: 95%;">
 
- <?php  echo $recfn; ?>
+              <?php  echo $recfn; ?> <span class="glyphicon glyphicon-plus"></span>
                 
 
-    </ul>
+             </ul>
     
  
             </div>
