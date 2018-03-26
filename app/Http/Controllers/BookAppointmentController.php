@@ -88,10 +88,12 @@ class BookAppointmentController extends Controller
       }
 
       public function sales_material_update(Request $req){
-        
-          $query = DB::table('sales_material_upload')->select('id','image_path')->where('prod_id','=', $req->Product)->where('company_id','=',$req->Company)->get();
-        // print_r($query);exit();
-           return $query;
+
+      	
+      		$query = DB::table('sales_material_upload')->select('id','image_path')->where('prod_id','=', $req->Product)->where('company_id','=',$req->Company)->get();
+       	// print_r($query);exit();
+      		 return $query;
+
 
         
       }
