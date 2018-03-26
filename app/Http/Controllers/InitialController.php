@@ -4,8 +4,12 @@ namespace App\Http\Controllers;
 use Response;
 use Request;
 use Session;
+use api_url;
 class InitialController extends Controller
 {
+
+      public static  $api_url="http://qa.mgfm.in/";
+      
       public function send_success_response($message,$status,$data){
       	
       	$res = array('message' =>$message ,'status'=>$status,'status_code'=>1,'MasterData'=>$data );

@@ -62,7 +62,117 @@
 
 
             </div>
-					    
+		<script type="text/javascript">
+  $('#sales_submit').click(function(){
+    $.ajax({ 
+   url: "{{URL::to('sales-material-update')}}",
+   method:"POST",
+   data : $('#sales_material').serialize(),
+   success: function(msg)  
+   {
+  
+     var tablerows = new Array();
+     URL="{{URL::to('uploads/sales_material')}}/";
+     alert(URL);
+        $.each(msg, function( index, value ) {
+            tablerows.push('<tr><td id="'+index+'"><span class="glyphicon glyphicon-remove"  style="cursor:pointer"<a class="close" onclick="img_delete('+ value.id +','+index+')" href="#">Close</a></span><img class="img-responsive" src="'+URL+value.image_path+ '" width="400" height=""/></td></tr>');
+        }); 
+
+       if(msg){
+          $('#docs').empty().append('<table class="table table-striped table-bordered"><tr class="text-capitalize"><td style="font-family: monospace">Images</td></tr>'+tablerows+'</table>');
+         }else{
+            $('#docs').empty().append('No Result Found');
+         }
+
+   },
+
+ });
+  });
+
+  
+
+</script>
+
+<script type="text/javascript">
+ function img_delete(id,index){
+
+ $('#'+index).hide();
+  var id= id;
+  var v_token = "{{csrf_token()}}";
+   $.ajax({  
+         type: "POST",  
+         url: "{{URL::to('sales-material-delete')}}",
+         dataType:'json',
+         data : { 'id': id ,'_token': v_token},
+         success: function(msg){
+          console.log(msg);
+
+          
+            
+      }   
+     });
+
+};
+ 
+</script>
+
+<script type="text/javascript">
+  $('#Product').on('change', function() {
+    var Product=$('#Product').find(":selected").val();
+   // console.log(Product);
+    if ( Product == '1')
+      {
+       $("#Company option[value='1']").show();
+        $("#Company option[value='2']").show();
+        $("#Company option[value='3']").show();
+        $("#Company option[value='4']").show();
+          
+      }
+      if (Product == '2') 
+      {
+        $("#Company option[value='1']").show();
+        $("#Company option[value='2']").show();
+        $("#Company option[value='3']").show();
+        $("#Company option[value='5']").show();
+        $("#Company option[value='6']").show();
+        $("#Company option[value='7']").show();
+        $("#Company option[value='8']").show();
+      }
+      if (Product=='3') 
+      {
+         $("#Company option[value='1']").show();
+        $("#Company option[value='2']").show();
+        $("#Company option[value='3']").show();
+        $("#Company option[value='4']").show();
+         $("#Company option[value='5']").show();
+        $("#Company option[value='8']").show();
+      }
+      if (Product=='4') 
+      {
+         $("#Company option[value='1']").show();
+        $("#Company option[value='2']").show();
+        $("#Company option[value='4']").show();
+        $("#Company option[value='5']").show();
+         $("#Company option[value='8']").show();
+        $("#Company option[value='9']").show();
+        $("#Company option[value='10']").show();
+        $("#Company option[value='11']").show();
+      }
+      if (Product=='5') 
+      {
+         $("#Company option[value='1']").show();
+        $("#Company option[value='2']").show();
+        $("#Company option[value='3']").show();
+        $("#Company option[value='4']").show();
+         $("#Company option[value='5']").show();
+        $("#Company option[value='8']").show();
+      }
+     
+        
+      
+        
+      });
+		</script>			    
 @endsection	
 
 

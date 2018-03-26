@@ -11,27 +11,18 @@
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
 
 
-Route::get('/test', function () {
-    return view('test');
-});
 
 
+
+
+Route::get('/','LoginController@checklogin');
 Route::post('admin-login','LoginController@login');
-
- Route::group(['middleware' => ['CheckMidd']], function (){
-
- 
-
-
+Route::group(['middleware' => ['CheckMidd']], function (){
  // city  state
 Route::get('search-state','LoginController@search_state');
 Route::get('search-city','LoginController@search_city');
-
 // end city state
 
 Route::get('dashboard','DashboardController@dashboard');
@@ -189,13 +180,13 @@ Route::get('backoffice-city-master','BookAppointmentController@backoffice_city_m
 
 /*Sales Material*/ 
 Route::get('sales-material-upload','BookAppointmentController@sales_material_upload');
-
 Route::post('sales-material-upload-submit','BookAppointmentController@sales_material_upload_submit');
 Route::get('sales-material','BookAppointmentController@sales_material');
 Route::post('sales-material-update','BookAppointmentController@sales_material_update');
-
-
+Route::post('sales-material-delete','BookAppointmentController@sales_material_delete');
  
+ 
+
   /************
 //  Menu List
 ******************/

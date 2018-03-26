@@ -17,7 +17,7 @@ class FbaController extends CallApiController
         public function fba_list()
         {
 
-           //$query=DB::select("call usp_load_fbalist_new(0)");
+  //$query=DB::select("call usp_load_fbalist_new(0)");
            
          $doctype = DB::select("call get_document_type()");
         
@@ -84,7 +84,7 @@ class FbaController extends CallApiController
 
         public function sales(Request $req){
         // print_r($req->all());exit();
-        $query=DB::table('FBAMast')
+        $query=DB::table('FBAMast') 
             ->where('FBAID','=',$req->p_fbaid)
             ->update(['salescode' =>$req->p_remark]);
 
@@ -124,9 +124,12 @@ class FbaController extends CallApiController
         public function getdoclistview($fbaid)
        {
          $doctype = DB::select("call get_fba_doc($fbaid)");
-        
-          return json_encode($doctype);
+          $url=$this::$api_url;
+          $data = array('data' => $doctype, 'url'=>$url);
+          return json_encode($data);
         }
+
+
 
 
         public function getpaymentlink($fbaid){
@@ -138,6 +141,11 @@ class FbaController extends CallApiController
        return json_encode($paymentlink);
   
           }
+
+
+
+ 
 }
 
 
+    

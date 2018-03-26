@@ -31,6 +31,7 @@ class RaiserTicketController extends Controller
 	}
 
 	public function inserraisertkt(Request $req){
+
 		$id=Session::get('fbauserid');
 		$validator =Validator::make($req->all(), [
               'txtraisermessage' =>'required',
@@ -49,7 +50,7 @@ class RaiserTicketController extends Controller
        $image->move($destinationPath, $name);
 	   }
       
-		 DB::select('call Usp_inserraisertkt(?,?,?,?,?,?,?,?,?,?)',array(
+		 $lastid=DB::select('call Usp_inserraisertkt(?,?,?,?,?,?,?,?,?,?)',array(
 		 	$req->ddlCategory,
 		 	$req->ddlsubcat,
 		 	$req->ddlClassification,
@@ -61,19 +62,46 @@ class RaiserTicketController extends Controller
 		 	"BO",
             $id
 		 ));
+             
+          $data ="You have been assigned a ticket from";
+              
+                $email = $req->txttoemailid;
+                $ccemail=$req->txtccemailid;
+if($ccemail!=''){
+                
+                $mail = Mail::send('mailViews.SendTicketReqMailFormat',['data' => $data,
+                	'lastid'=>$lastid], function($message)use($email,$ccemail){
+                $message->from('wecare@rupeeboss.com', 'RupeeBoss');
+                $message->to($email)->cc($ccemail)->subject('Ticket Request');
+                });
+             
+                    if(Mail::failures()){
+                            $error=3;
+                            echo $error;
+                    }else{
 
-	 $to = "shubhamkhandekar2@gmail.com";
-     $subject = "My subject";
-     $txt = "Hello world!";
-     $headers = "From: shubhamkhandekar2@gmail.com" . "\r\n" .
-    "CC: shubhamkhandekar2@gmail.com";
-     mail($to,$subject,$txt,$headers);
+                    
+                    }
+                }
+else{
+	$mail = Mail::send('mailViews.SendTicketReqMailFormat',['data' => $data,
+                	'lastid'=>$lastid], function($message)use($email){
+                $message->from('wecare@rupeeboss.com', 'RupeeBoss');
+                $message->to($email)->subject('Ticket Request');
+                });
+              
+                    if(Mail::failures()){
+                            $error=3;
+                            echo $error;
+                    }else{
+
+                    }
+
+    }
+		 
      Session::flash('message', 'Record has been saved successfully'); 
-    
-
-
-        return redirect('RaiseaTicket');
-
-  }
+     
+      return redirect('RaiseaTicket');
+ }
  }
 }

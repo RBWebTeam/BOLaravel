@@ -11,7 +11,8 @@ use Redirect;
 use Session;
 use URL;
 use Mail;
-class ViewRaisedTicketController extends Controller
+class ViewRaisedTicketController extends 
+Controller
 {
 	
 	public function getraisedticket(){
