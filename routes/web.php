@@ -85,6 +85,8 @@ Route::Post('RaiseaTicket','RaiserTicketController@inserraisertkt');
 Route::get('View-Raised-Ticket','ViewRaisedTicketController@getraisedticket');
 Route::get('View-Raised-Ticket/{ticketid}','ViewRaisedTicketController@deleteticket');
 
+Route::get('HealthAssure','HealthAssureController@gethealthassure');
+
 ///shubham end ///
 
 //////GOVIND
