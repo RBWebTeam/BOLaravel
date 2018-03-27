@@ -2,7 +2,6 @@
 	@section('content')
 					  
  <!-- Body Content Start -->
-            <div id="content" style="overflow:scroll"; >
 			 <div class="container-fluid white-bg">
 			 <div class="col-md-12">
 			 <div class="panel panel-primary">
@@ -69,7 +68,7 @@
 			</div>
 			<div class="col-md-12"><button class="common-btn center-obj">EXPORT TO EXCEL</button></div>
 			</div>
-            </div>
+
           
         @endsection	
      
