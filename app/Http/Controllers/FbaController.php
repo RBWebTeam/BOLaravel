@@ -146,7 +146,7 @@ try{
  
      $post_data=json_encode($data);
      $type=$token;
-    $result=$this->call_other_data_api('qa.mgfm.in/api/set-cust-id',$post_data,$type);
+    $result=$this->call_other_data_api($this::$api_url.'/api/set-cust-id',$post_data,$type);
     $custrespon=$result['http_result'];
     
   }

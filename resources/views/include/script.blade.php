@@ -1624,10 +1624,10 @@ function getcustomerid(text,fbaid){
                     dataType: "json",                    
                     success:function(data) {
                       var json = JSON.parse(data);
-                      console.log(json);
+                      //console.log(json);
                       if(json.StatusNo==0){
-   
-                      $(text).closest('td').text(json.MasterData.CreateCustomerResult.CustID);                
+                      $(text).closest('td').text(json.MasterData.CreateCustomerResult.CustID);
+                      alert("Customer id updated successfully");                
                     }
                     }
                 }); 
