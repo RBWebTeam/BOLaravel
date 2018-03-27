@@ -8,21 +8,22 @@
     ?>
 
 <div class="scrolling">
-<nav id="sidebar" style="display:none;">
+<nav id="sidebar">
 <ul class="nav nav-list" style="width: auto; height: 100%;">                       
+<!-- <li><label class="tree-toggle nav-header" ><a href="#"><span class="sp-nav"></span>  Home  </a></label> </li> -->
 <?php foreach ($menu_group_fn as $key => $current) { 
                $second_level=$cl->chield_id($current->id,$current->menu_group_id);  ?>
                     <li>
                         <label class="tree-toggle nav-header">
                         @if($current->url_link=="#")
-                        <span class	="sp-nav"></span><a href="#"><?php echo $current->name; ?></a>
+                        <span class ="sp-nav"></span><a href="#"><?php echo $current->name; ?><span class="caret"></span></a>
                         @else
                              <span class="sp-nav"></span><a href="{{url('')}}/{{$current->url_link}}"><?php echo $current->name; ?> &nbsp;</a>
                         @endif 
                         </label>
                             <ul class="nav-list tree">
                             <?php foreach($second_level as $key =>$second_row ){?>  
-                                <li><label class="tree-toggle nav-header"> @if($second_row->url_link=="#")<a href="#" ><?php  echo  $second_row->name; ?></a>
+                                <li><label class="tree-toggle nav-header"> @if($second_row->url_link=="#")<a href="#" ><?php  echo  $second_row->name; ?><span class="caret"></span></a>
                                  @else
                                  <a href="{{url('')}}/{{$second_row->url_link}}" ><?php  echo  $second_row->name; ?></a>
                                 @endif

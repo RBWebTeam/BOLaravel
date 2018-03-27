@@ -45,7 +45,7 @@ Route::get('getcustomerid/{fbaid}','FbaController@getcustomerid1');
 
 
 Route::get('fba-list/{fbaid}/{value}/{flag}',array('as'=>'fba-list.ajax','uses'=>'FbaController@updateposp'));
-Route::post('fba-list','FbaController@sendsms');
+Route::post('send-fba-sms','FbaController@sendsms');
 
 // Route::get('fba-list/{fbaid}/{value}/{flag}',array('as'=>'fba-list.ajax','uses'=>'FbaController@updateposp'));
 // Route::post('fba-list','FbaController@sendsms');
@@ -181,13 +181,13 @@ Route::get('backoffice-city-master','BookAppointmentController@backoffice_city_m
 
 /*Sales Material*/ 
 Route::get('sales-material-upload','BookAppointmentController@sales_material_upload');
-
 Route::post('sales-material-upload-submit','BookAppointmentController@sales_material_upload_submit');
 Route::get('sales-material','BookAppointmentController@sales_material');
 Route::post('sales-material-update','BookAppointmentController@sales_material_update');
-
+Route::post('sales-material-delete','BookAppointmentController@sales_material_delete');
 
  
+
   /************
 //  Menu List
 ******************/

@@ -50,7 +50,7 @@ class FbaController extends CallApiController
 
         public function sendsms(Request $req) {
 
-              $newsms = utf8_encode(htmlspecialchars($req->sms, ENT_QUOTES));//htmlspecialchars();
+              $newsms = urlencode($req->sms);//htmlspecialchars();
 
               
               $post_data="";
@@ -60,9 +60,9 @@ class FbaController extends CallApiController
               $st=str_replace('"{', "{", $http_result);
               $s=str_replace('}"', "}", $st);
               $m=$s=str_replace('\\', "", $s);
-              $update_user='';
+             
               $obj = json_decode($m);
-
+              return $obj;
         }
 
 

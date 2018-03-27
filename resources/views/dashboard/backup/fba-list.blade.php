@@ -8,7 +8,6 @@
 
         <hr>
        </div>
-
       <div class="col-md-3">
       <div class="form-group">
       <p>From Date</p>
@@ -28,20 +27,15 @@
             </div>
            </div>
        <div class="col-md-4">
-
-       <div class="form-group"> <input type="submit" name="" id="btndate"  class="mrg-top common-btn pull-left" value="SHOW">  
-	   &nbsp;&nbsp;
-   <select  id="msds-select" class="pull-left mrg-top mrg-left">
+       <div class="form-group"> <input type="submit" name="btndates" id="btndates"  class="mrg-top common-btn" value="SHOW">  </div>
+       </div>
+    
+ 
+   <select  id="msds-select">
    <option value="0">Posp Type</option>
   <option value="1">POSP Yes</option>
   <option value="2">POSP No</option>
   </select>
-  </div>
-       </div>
-    
-
-  
-           <!-- Date End -->
 
              <div class="col-md-12">
              <div class="overflow-scroll">
@@ -67,8 +61,7 @@
                                        <th>Bank Account</th>
                                        <th>SMS</th>
                                        <th>sales code</th>
-                                       <th>customer id</th> 
-                                       <th>Created Date1</th>
+                                        <th>Created Date1</th>
                                      </tr>
                                     </thead>
             </table>
@@ -171,6 +164,42 @@
 
 
 
+ <!-- fab document -->
+ <!-- <div class="fbadoc modal fade" role="dialog">   
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+        <h4 class="modal-title">FSM Details</h4>
+      </div>
+      <div class="modal-body">
+        <form id="posp_from_id">
+          <div class="form-group">
+            
+          </div>
+          <div class="form-group">
+            <label class="control-label" for="Document-Type">Document Type: </label>
+            <select class="form-control">
+              <option selected="selected">select Document Type</option>
+              @foreach($doctype as $val)
+             <option value="{{$val->id}}">{{$val->name}}</option>
+              @endforeach
+
+            </select>
+          </div>
+           div class="form-group">
+            <label class="control-label" for="Document">Document</label>
+            <input type="file" name="document" class="form-control"> 
+          </div>
+        </form>
+        <div class="modal-footer"> 
+          <button class="btn btn-primary" id="btnupload" type="button">Upload</button>
+          <input id="docfbaid" type="hidden" name="docfbaid"/>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
 
 <!-- sales update -->
 
@@ -297,7 +326,7 @@
         <div id="divdocviewer" name="divdocviewer">
         </div>
         <div>
-         <img id="imgdoc" style=" overflow-y: scroll;">
+         <img id="imgdoc" style="min-height:100%; min-width:100%; overflow-y: scroll;">
          </div>
        </div>
      </div>
@@ -357,25 +386,6 @@
   </div>
 </div>
 
-<!-- Customer id start -->
-<div id="customerupdate" class="modal fade customerupdate" role="dialog">
-  <div class="modal-dialog">
-   <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Update Customer id</h4>
-      </div>
-      <div class="modal-body">
-    <div style="color: blue;" id="divCustomer_id" class="divCustomer_id">
-       
-    </div>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- Customer id end -->
-
 <!-- password -->
 
 <div id="spassword" class="modal fade spassword" role="dialog">
@@ -410,7 +420,7 @@
         $(row).css({backgroundColor: 'LightGreen'});
       }
     },
-        "order": [[ 19, "desc" ]],
+        "order": [[ 18, "desc" ]],
         "ajax": "get-fba-list",
         "columns": [
              { "data": "fbaid"},
@@ -451,11 +461,10 @@
               }
             },  
             {"data":"pospname"},  
-            {"data":null ,
+            {"data":null  ,
              "render": function ( data, type, row, meta ) {
                 return '<a href="" data-toggle="modal" data-target="#partnerInfo" onclick="getpartnerinfo('+row.fbaid+')">partner info</a>';
-              } 
-
+              }
             },  
 
        {"data":"fdid" ,
@@ -478,15 +487,7 @@
               }
    
 },
-            {"data":"CustID" ,
-              "render": function ( data, type, row, meta ) {
-             return data==""?('<a id="btnviewcid" onclick="getcustomerid(this,'+row.fbaid+')">Update</a>'):data;
-
-              }
-  
-},  
-
-  { "data": "createdate1","visible":false }
+            { "data": "createdate1","visible":false }
             
         ],
 
@@ -509,7 +510,9 @@ $(document).ready(function(e) {
   });
 
 // Re-draw the table when the a date range filter changes
-
+  $('#btndates').click(function() { 
+    
+   $.fn.dataTableExt.afnFiltering.push(
 
 function (oSettings, aData, iDataIndex) {
     if (($('#min').length > 0 && $('#min').val() !== '') || ($('#max').length > 0 && $('#max').val() !== '')) {
@@ -568,7 +571,6 @@ function (oSettings, aData, iDataIndex) {
             }
             return false;
         }
-
     }
     return true;
 });
