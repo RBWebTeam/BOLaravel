@@ -10,7 +10,7 @@
 				<div class="col-md-4 col-xs-12">
 				<label>Product</label>
 				<div class="form-group">
-				<select class="form-control drop-arr select-sty" name="Product" id="Product">
+				<select class="form-control drop-arr select-sty" name="Product" id="Product" required>
 					  <option disabled selected value="">Product</option>
 					   <option value="1">Health Insurance</option>
 					   <option value="2">Motor Insurance</option>
@@ -24,7 +24,7 @@
 				<div class="col-md-4 col-xs-12">
 				<label>Company</label>
 				<div class="form-group">
-				<select class="form-control drop-arr select-sty Company" name="Company" id="Company">
+				<select class="form-control drop-arr select-sty Company" name="Company" id="Company" required>
 					   <option disabled selected value="">Company</option>
 					   <option style="display: none;" value="1">Bharti</option>
 					   <option style="display: none;" value="2">General</option>
@@ -44,8 +44,7 @@
 				<div class="col-md-4 col-xs-12">
 				<label>Language</label>
 										<div class="form-control border-none">
-										<input type="radio"  name="Language"  class="radiob" checked value="English"> <label> English</label>
-                                        <input type="radio" name="Language" class="radiob" value="Hindi" > <label>Hindi</label>
+										<input type="radio"  name="Language"  class="radiob" checked value="English"> English <input type="radio" name="Language" class="radiob" value="Hindi" >&nbsp;Hindi
 					                    </div>
 										</div>
 
@@ -71,8 +70,115 @@
 
 
             </div>
-					    
+		<script type="text/javascript">
+			$('#submit').click(function(){
+
+         if ($('#sales_material_upload').valid()) 
+          {
+              return false;
+          } 
+          else 
+          {
+              $.ajax({
+
+          url:"{{URL::to('sales-material-upload-submit')}}" ,  
+          data:new FormData($("#sales_material_upload")[0]),
+          dataType:'json',
+          async:false,
+          type:'POST',
+          processData: false,
+          contentType: false,
+          success: function(msg){
+            // console.log(msg.status);
+             if (msg.status==0) 
+              {
+                alert('Uploaded Successfully');
+                $("#sales_material_upload")[0].reset();
+              } 
+              else {
+               alert('Could Not Upload');
+              }
+             
+              
+            
+            }
+        });
+
+          }
+ 
+
+  });
+
+
+
+  $('#reset').click(function(){
+   $("#Product").val("");
+   $("#image_file").val("");
+   $("#Company").val("");
+  });
+
+  </script>
+<script type="text/javascript">
+  $('#Product').on('change', function() {
+    var Product=$('#Product').find(":selected").val();
+   // console.log(Product);
+    if ( Product == '1')
+      {
+       $("#Company option[value='1']").show();
+        $("#Company option[value='2']").show();
+        $("#Company option[value='3']").show();
+        $("#Company option[value='4']").show();
+          
+      }
+      if (Product == '2') 
+      {
+        $("#Company option[value='1']").show();
+        $("#Company option[value='2']").show();
+        $("#Company option[value='3']").show();
+        $("#Company option[value='5']").show();
+        $("#Company option[value='6']").show();
+        $("#Company option[value='7']").show();
+        $("#Company option[value='8']").show();
+      }
+      if (Product=='3') 
+      {
+         $("#Company option[value='1']").show();
+        $("#Company option[value='2']").show();
+        $("#Company option[value='3']").show();
+        $("#Company option[value='4']").show();
+         $("#Company option[value='5']").show();
+        $("#Company option[value='8']").show();
+      }
+      if (Product=='4') 
+      {
+         $("#Company option[value='1']").show();
+        $("#Company option[value='2']").show();
+        $("#Company option[value='4']").show();
+        $("#Company option[value='5']").show();
+         $("#Company option[value='8']").show();
+        $("#Company option[value='9']").show();
+        $("#Company option[value='10']").show();
+        $("#Company option[value='11']").show();
+      }
+      if (Product=='5') 
+      {
+         $("#Company option[value='1']").show();
+        $("#Company option[value='2']").show();
+        $("#Company option[value='3']").show();
+        $("#Company option[value='4']").show();
+         $("#Company option[value='5']").show();
+        $("#Company option[value='8']").show();
+      }
+     
+        
+      
+        
+      });
+		</script>			   
+			    
 @endsection	
+
+
 
 
 
