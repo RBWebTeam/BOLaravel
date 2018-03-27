@@ -11,7 +11,9 @@
 
 <nav id="sidebar">
 
+
 <ul class="nav nav-list" style="width: auto; ">                       
+
 
 
 <?php foreach ($menu_group_fn as $key => $current) { 

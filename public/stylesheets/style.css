@@ -1,3 +1,5 @@
+th {color: #417084 !important;}
+.table {margin-top:10px;}
 #msds-select {padding:8px;}
 .mrg-left {margin-left:15px;}
 .mrg-btm{margin-bottom:15px !important; margin-top:0px;}
@@ -37,15 +39,16 @@ textarea {width:100%;}
 
 .common-btn {
   color: #302438;
-  padding:7px 25px;
+  padding:7px 20px;
     background-color: transparent;
     border: 1px solid #988ca0;
     border-radius: 50px;
   transition:all 0.3s linear;
   -moz-transition:all 0.3s linear;
   -webkit-transition:all 0.3s linear;
-  height: 34px;
+  height: 37px;
     line-height: 23px;
+
 }
 .common-btn:hover {background-color: #1c82ae; color:#fff;border: 1px solid #a9d8ec;}
 
@@ -169,7 +172,7 @@ a:hover{
     transform: rotate(45deg) translate(-7px, -7px);
 }
 
-.hedr { position: fixed; z-index:1000;top: 0px;width: 100%; background:#302438;height:81px;box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.1);-moz-box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.1);-webkit-box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.1);}
+.hedr { position: fixed; z-index:10000;top: 0px;width: 100%; background:#302438;height:81px;box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.1);-moz-box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.1);-webkit-box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.1);}
 .search-dv {float: left;width:300px;margin-top:23px;}
 .search-btn {position: relative;top: -47px;right: 45px;cursor: pointer;}
 .logout-btn img {padding: 28px 0px;}

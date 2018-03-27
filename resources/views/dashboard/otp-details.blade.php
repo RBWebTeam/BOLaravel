@@ -1,6 +1,5 @@
 @extends('include.master')
  @section('content')
-    <div id="content" style="overflow:scroll;">
        <div class="container-fluid white-bg">
        <div class="col-md-12"><h3 class="mrg-btm">OTP Details</h3></div>
 <div class="col-md-12">
@@ -29,7 +28,6 @@
 			</div>
 			</div>
 			</div>
-      </div>
       </div>
 
       <script type="text/javascript">

@@ -1,6 +1,7 @@
 @extends('include.master')
 @section('content')
  
+ <div class="container-fluid white-bg">
 
 
 <form class="form-horizontal"  method="post" action="{{url('menu-list-add')}}" >{{ csrf_field() }}
@@ -71,6 +72,7 @@
 
 </form>
 
+</div>
 </div>
 
 @endsection
