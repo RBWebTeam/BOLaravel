@@ -133,16 +133,15 @@ class FbaController extends CallApiController
 
 
         public function getpaymentlink($fbaid){
-          
-        
         $paymentlink=DB::select("call Usp_paymentlink($fbaid)");
-         
+        return json_encode($paymentlink);
+   }
 
-       return json_encode($paymentlink);
-  
-          }
+
 
          public function getcustomerid1 ($fbaid){
+
+
 try{
     $data= array("FBAId"=>"$fbaid");
     $token=array("cache-control: no-cache","content-type: application/json", "token: 1234567890");
@@ -154,10 +153,12 @@ try{
     
   }
   catch (Exception $e){
+
         return $e->getMessage();    
      }        
            return ($custrespon);      
       }
+
  
 }
 

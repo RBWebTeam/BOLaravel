@@ -110,7 +110,12 @@ $(document).ready(function(){
                 $('#p_fbaid').val(id);
                 $('#salesupdate_modal_fade').modal('show');
            }
-
+             //        function updatecustomerupdate(id){
+             //          $('#fbaid').val(id);
+             //          $('.customerupdate').modal('show');
+                    
+             // }
+             
 
           
 /* Extend dataTables search*/
@@ -1506,6 +1511,7 @@ function getcustomerid(text,fbaid){
    
                       $(text).closest('td').text(json.MasterData.CreateCustomerResult.CustID);
                        alert("Customer id updated successfully");                
+
                     }
                     }
                 }); 
