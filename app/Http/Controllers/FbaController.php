@@ -133,15 +133,28 @@ class FbaController extends CallApiController
 
 
         public function getpaymentlink($fbaid){
-          
-        
         $paymentlink=DB::select("call Usp_paymentlink($fbaid)");
+        return json_encode($paymentlink);
+   }
+
+
          
-
-       return json_encode($paymentlink);
-  
-          }
-
+public function getcustomerid1 ($fbaid){
+try{
+    $data= array("FBAId"=>"$fbaid");
+    $token=array("cache-control: no-cache","content-type: application/json", "token: 1234567890");
+ 
+     $post_data=json_encode($data);
+     $type=$token;
+    $result=$this->call_other_data_api('qa.mgfm.in/api/set-cust-id',$post_data,$type);
+    $custrespon=$result['http_result'];
+    
+  }
+  catch (Exception $e){
+        return $e;    
+     }        
+           return json_encode($custrespon);      
+      }
 
 
  

@@ -36,6 +36,8 @@ Route::post('posp-update','FbaController@posp');
 
 Route::get('getpaymentlink/{fbaid}','FbaController@getpaymentlink');
 
+Route::get('getcustomerid/{fbaid}','FbaController@getcustomerid1');
+
 
 // Route::get('fba-list/{salescode}/{fbaid}',array('as'=>'fba-list.ajax','uses'=>'FbaController@salesupdate'));
 
@@ -50,10 +52,9 @@ Route::post('fba-list','FbaController@sendsms');
 Route::post('fba-listdocument','FbaController@uploaddoc');
 // salescode
 Route::get('fba-list/{salescode}/{fbaid}',array('as'=>'fba-list.ajax','uses'=>'FbaController@salesupdate'));
-
-
 // salescode
-
+Route::get('sms_log','smslogController@getsmslog');
+Route::get('sms_template','smslogController@smstemplateinsert');
 
 
 //fba documents 

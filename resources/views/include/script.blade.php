@@ -109,7 +109,12 @@ $(document).ready(function(){
                 $('#p_fbaid').val(id);
                 $('#salesupdate_modal_fade').modal('show');
            }
-
+             //        function updatecustomerupdate(id){
+             //          $('#fbaid').val(id);
+             //          $('.customerupdate').modal('show');
+                    
+             // }
+             
 
           
 /* Extend dataTables search*/
@@ -1608,5 +1613,31 @@ $('#btn_resetticket').click(function() {
                 $('select[name="ddlsubcat"]').empty();
             }
         });
+
+function getcustomerid(text,fbaid){
+  //alert(fbaid);
+  // alert(data);
+  //$('.paylink').modal('show');
+  $.ajax({
+                    url: 'getcustomerid/'+fbaid,
+                    type: "GET",
+                    dataType: "json",                    
+                    success:function(data) {
+                      var json = JSON.parse(data);
+                      console.log(json);
+                      if(json.StatusNo==0){
+   
+                      $(text).closest('td').text(json.MasterData.CreateCustomerResult.CustID);                
+                    }
+                    }
+                }); 
+
+}
+
+
+
+
+
+
  </script>
  <!-- End shubham raise a ticket -->
