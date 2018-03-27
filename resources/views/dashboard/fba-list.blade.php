@@ -66,7 +66,8 @@
                                        <th>Bank Account</th>
                                        <th>SMS</th>
                                        <th>sales code</th>
-                                        <th>Created Date1</th>
+                                       <th>Customer ID</th>
+                                       <th>Created Date1</th>
                                      </tr>
                                     </thead>
             </table>
@@ -425,7 +426,7 @@
         $(row).css({backgroundColor: 'LightGreen'});
       }
     },
-        "order": [[ 18, "desc" ]],
+        "order": [[ 19, "desc" ]],
         "ajax": "get-fba-list",
         "columns": [
              { "data": "fbaid"},
@@ -492,6 +493,13 @@
               }
    
 },
+{"data":"CustID" ,
+              "render": function ( data, type, row, meta ) {
+             return data?('<a id="btnviewcid" onclick="getcustomerid(this,'+row.fbaid+')">Update</a>'):data;
+
+              }
+  
+}, 
             { "data": "createdate1","visible":false }
             
         ],

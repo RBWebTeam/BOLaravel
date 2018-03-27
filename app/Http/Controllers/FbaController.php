@@ -142,8 +142,22 @@ class FbaController extends CallApiController
   
           }
 
-
-
+         public function getcustomerid1 ($fbaid){
+try{
+    $data= array("FBAId"=>"$fbaid");
+    $token=array("cache-control: no-cache","content-type: application/json", "token: 1234567890");
+ 
+     $post_data=json_encode($data);
+     $type=$token;
+    $result=$this->call_other_data_api($this::$api_url.'/api/set-cust-id',$post_data,$type);
+    $custrespon=$result['http_result'];
+    
+  }
+  catch (Exception $e){
+        return $e->getMessage();    
+     }        
+           return ($custrespon);      
+      }
  
 }
 

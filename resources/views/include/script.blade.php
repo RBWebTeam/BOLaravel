@@ -1491,6 +1491,28 @@ $('#btn_resetticket').click(function() {
                 $('select[name="ddlsubcat"]').empty();
             }
         });
+
+function getcustomerid(text,fbaid){
+  //alert(fbaid);
+  // alert(data);
+  //$('.paylink').modal('show');
+  $.ajax({
+                    url: 'getcustomerid/'+fbaid,
+                    type: "GET",                  
+                    success:function(data) {
+                      var json = JSON.parse(data);
+                      console.log(json);
+                      if(json.StatusNo==0){
+   
+                      $(text).closest('td').text(json.MasterData.CreateCustomerResult.CustID);
+                       alert("Customer id updated successfully");                
+                    }
+                    }
+                }); 
+
+}
+
+
  </script>
  <!-- End shubham raise a ticket -->
  <!-- Loader Script -->
