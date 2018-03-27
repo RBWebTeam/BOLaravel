@@ -10,7 +10,7 @@
 				<div class="col-md-4 col-xs-12">
 				<label>Product</label>
 				<div class="form-group">
-				<select class="form-control drop-arr select-sty" name="Product" id="Product">
+				<select class="form-control drop-arr select-sty" name="Product" id="Product" required>
 					  <option disabled selected value="">Product</option>
 					   <option value="1">Health Insurance</option>
 					   <option value="2">Motor Insurance</option>
@@ -24,7 +24,7 @@
 				<div class="col-md-4 col-xs-12">
 				<label>Company</label>
 				<div class="form-group">
-				<select class="form-control drop-arr select-sty Company" name="Company" id="Company">
+				<select class="form-control drop-arr select-sty Company" name="Company" id="Company" required>
 					   <option disabled selected value="">Company</option>
 					   <option style="display: none;" value="1">Bharti</option>
 					   <option style="display: none;" value="2">General</option>
@@ -44,8 +44,7 @@
 				<div class="col-md-4 col-xs-12">
 				<label>Language</label>
 										<div class="form-control border-none">
-										<input type="radio"  name="Language"  class="radiob" checked value="English"> <label> English</label>
-                                        <input type="radio" name="Language" class="radiob" value="Hindi" > <label>Hindi</label>
+										<input type="radio"  name="Language"  class="radiob" checked value="English"> English <input type="radio" name="Language" class="radiob" value="Hindi" >&nbsp;Hindi
 					                    </div>
 										</div>
 
@@ -74,7 +73,14 @@
 		<script type="text/javascript">
 			$('#submit').click(function(){
 
-  $.ajax({
+         if ($('#sales_material_upload').valid()) 
+          {
+              return false;
+          } 
+          else 
+          {
+              $.ajax({
+
           url:"{{URL::to('sales-material-upload-submit')}}" ,  
           data:new FormData($("#sales_material_upload")[0]),
           dataType:'json',
@@ -97,6 +103,10 @@
             
             }
         });
+
+          }
+ 
+
   });
 
 
