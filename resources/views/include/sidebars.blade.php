@@ -8,7 +8,7 @@
     ?>
 
 <div class="scrolling">
-<nav id="sidebar" style="display:none;">
+<nav id="sidebar">
 <ul class="nav nav-list" style="width: auto; height: 100%;">                       
 <!-- <li><label class="tree-toggle nav-header" ><a href="#"><span class="sp-nav"></span>  Home  </a></label> </li> -->
 <?php foreach ($menu_group_fn as $key => $current) { 
