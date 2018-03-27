@@ -46,9 +46,10 @@ $(document).ready(function(){
   }).datepicker("getDate");
 });
  
-             $(document).ready(function () {
-                 $('#sidebarCollapse').click( function () {
-                     $('#sidebar').slideToggle();
+  $(document).ready(function () {
+                 $('#sidebarCollapse').on('click', function () {
+                     $('#sidebar').toggleClass('active');
+					 
                  });
              });
        
