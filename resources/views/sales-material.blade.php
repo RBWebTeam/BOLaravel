@@ -11,7 +11,8 @@
 				<label>Product</label>
 				<div class="form-group">
 				<select class="form-control drop-arr select-sty" name="Product" id="Product">
-					  <option disabled selected value="">Product</option>
+             <option  value="0">SELECT</option>
+					
 					   <option value="1">Health Insurance</option>
 					   <option value="2">Motor Insurance</option>
 					   <option value="3">Health Assure</option>
@@ -24,8 +25,8 @@
 				<div class="col-md-4 col-xs-12">
 				<label>Company</label>
 				<div class="form-group">
-				<select class="form-control drop-arr select-sty Company" name="Company" id="Company">
-					   <option disabled selected value="">Company</option>
+				<select class="form-control drop-arr select-sty Company" name="Company" id="Company" >
+					   <option  value="0">SELECT</option>
 					   <option style="display: none;" value="1">Bharti</option>
 					   <option style="display: none;" value="2">General</option>
 					   <option style="display: none;" value="3">Liberty Videocon</option>
@@ -64,6 +65,14 @@
             </div>
 		<script type="text/javascript">
   $('#sales_submit').click(function(){
+
+    if ($('#Product').val()!=0 && $('#Company').val()!=0)
+    {
+
+         
+      
+
+
     $.ajax({ 
    url: "{{URL::to('sales-material-update')}}",
    method:"POST",
@@ -87,7 +96,13 @@
    },
 
  });
+
+  }else
+  {
+    alert('Please Select Dropdown List');
+  }
   });
+
 
   
 
