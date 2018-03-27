@@ -19,8 +19,8 @@
   </div>
    <div class="col-md-6 col-xs-12">
    <div class="form-group">
-   <select name="State"  id="txtmapstate" class="selectpicker select-opt form-control" required="">
-   <option selected="selected"  value="0">State</option>
+   <select name="State"  id="search_state_notification" class="selectpicker select-opt form-control" required="">
+   <option selected="selected"  value="0" >State</option>
    @foreach($state as $val)
    <option value="{{$val->state_id}}">{{$val->state_name}}</option>
    @endforeach
@@ -29,7 +29,7 @@
    </div>
   <div class="col-md-6 col-xs- 12">
    <div class="form-group">
-   <select name="city" id="txtmapcity" name="txtmapcity" class="selectpicker select-opt form-control" required="">
+   <select name="city" id="txtmapcity" name="txtmapcity" class="selectpicker select-opt form-control search_district_notification" required="">
   <option selected="selected">Select City</option>
    </select>
    </div>
@@ -119,6 +119,30 @@
   </div>
   </div>  
   </div>
+
+<script type="text/javascript">
+ 
+$(document).on('change', '#search_state_notification', function() {   
+ var fstate_id=$(this).val();  
+ var  city_array=Array('<option value="0">Select</option>');  
+ $.ajax({
+  url: "{{url('search-city')}}",
+  dataType: "json",
+  data: {
+    fstate_id : fstate_id,
+  },
+  success: function(data) { 
+    $.each(data, function( key, val ) {
+      city_array.push('<option value="'+val.datavalue+'">'+val.value+'</option>');
+    });
+    $('.search_district_notification').empty();
+    $('.search_district_notification').append(city_array);
+
+  }
+});
+
+});
+  </script>
     
   @endsection
 
