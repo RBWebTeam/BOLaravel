@@ -1,6 +1,5 @@
 @extends('include.master')
  @section('content')
-    <div id="content" style="padding:1px; overflow:scroll;">
        <div class="container-fluid white-bg">
        <div class="col-md-12"><h3 class="mrg-btm">Queries</h3></div>
        
@@ -15,6 +14,7 @@
   <a href="{{url('queries')}}?queries=7" class="qry-btn">POSP Without Payment</a>
   <a href="{{url('queries')}}?queries=8"  class="qry-btn" >Transaction Today</a>
 </div>
+<br>
  <div id="export_id"></div>
 <br>
 
@@ -106,7 +106,7 @@
       </div>
       </div>
       </div>
-      </div>
+
 
 
 
