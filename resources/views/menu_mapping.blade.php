@@ -19,7 +19,10 @@
        <div class="col-md-12"><h3 class="mrg-btm">Menu Mapping</h3></div>
         <form class="form-horizontal" method="post" action="{{url('menu-mapping-save')}}"    > {{ csrf_field() }}
         <div class="form-group">
-            <label for="inputEmail" class="control-label col-xs-2"> Menu Group</label>
+            <label  for="inputEmail" class="control-label col-xs-2"> Menu Group</label>
+   
+ 
+           
             <div class="col-xs-6">
             <select class="form-control" name="menu_group_id" id="menu_group_id">
                @foreach($menu_group as $le)
@@ -28,6 +31,7 @@
                @endif    
                @endforeach
              </select>
+
                @if ($errors->has('menu_group_id'))<label class="control-label" for="inputError"> {{ $errors->first('menu_group_id') }}</label>  @endif
                   
             </div>
@@ -108,4 +112,9 @@ window.setTimeout(function() {
 
 
 
- 
+ <!--  @foreach($menu_group as $le)
+               @if($menu_group_id==$le->id)
+               <input type="hidden" name="menu_group_id" id="menu_group_id" value="{{$le->id}}" >
+             <input type="text" name="menu_group_id1" id="menu_group_id1" value="{{$le->name}}">
+             @endif    
+             @endforeach -->
