@@ -481,7 +481,7 @@
    
 },
 
-{"data":"CustID" ,
+{             "data":"CustID" ,
               "render": function ( data, type, row, meta ) {
              return data?('<a id="btnviewcid" onclick="getcustomerid(this,'+row.fbaid+')">Update</a>'):data;
 
@@ -512,7 +512,9 @@ $(document).ready(function(e) {
   });
 
 // Re-draw the table when the a date range filter changes
-
+  $('#btndates').click(function() { 
+    
+   $.fn.dataTableExt.afnFiltering.push(
 
 function (oSettings, aData, iDataIndex) {
     if (($('#min').length > 0 && $('#min').val() !== '') || ($('#max').length > 0 && $('#max').val() !== '')) {
@@ -571,7 +573,6 @@ function (oSettings, aData, iDataIndex) {
             }
             return false;
         }
-
     }
     return true;
 });
@@ -583,4 +584,3 @@ function (oSettings, aData, iDataIndex) {
   $('.date-range-filter').datepicker();
 });
 </script>
-<!-- from date to date end -->  
