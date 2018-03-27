@@ -37,7 +37,7 @@ try{
         return $e;    
      }
         
-                 
+                  
       	  return view('dashboard.HealthAssure',['respon'=>$respon]);
       }
    

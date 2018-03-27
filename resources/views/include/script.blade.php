@@ -159,7 +159,7 @@ $(document).ready(function(){
                     dataType: "json",
                     success:function(data) {
                         $('#txtmapcity').empty();
-                        $('#txtmapcity').append('<option value="0">select city</option>');
+                        $('#txtmapcity').append('<option value="0">--Select City--</option>');
                         $.each(data, function(key, value) {
 
                             $('#txtmapcity').append('<option value="'+ key +'">'+ value +'</option>');
@@ -208,7 +208,7 @@ $("#basic-addon2").click(function(e){
                       {
                         rows = rows +"<tr align='left'><td>";
                         rows = rows +"<input id='pincode' type='checkbox' class='used chk' value =''>";
-                        rows = rows +"<span>"+data[i].pincode+"</span></td></tr>";
+                        rows = rows +"<span style='color:black'>"+data[i].pincode+"</span></td></tr>";
                       }
 
                       $('#tblpincode > tbody:last-child').append(rows);
@@ -222,6 +222,7 @@ $('#chkselectall').click(function () {
 // insert Fsm details
 function insertfsm() {
   //console.log($('#fsmregister').serialize());
+  if ($('#fsmregister').valid()){
    $.ajax({ 
    url: "{{URL::to('Fsm-Register')}}",
    method:"POST",
@@ -233,6 +234,7 @@ function insertfsm() {
    }
 
 });
+ }
  }
 
 // fba  block unblock

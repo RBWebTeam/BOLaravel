@@ -148,7 +148,7 @@ Route::get('Fsm-Details','FsmDetailsController@FsmDetails');
 Route::get('Payment-History','PaymentHistoryController@Payment_History');
 
 
-Route::get('Fsm-Register','FsmRegisterController@bindsate');
+
 
 Route::get('uploadefile','uploadfileController@uplode');
 
