@@ -9,7 +9,7 @@
 
 <div class="scrolling">
 <nav id="sidebar" style="display:none;">
-<ul class="nav nav-list" style="width: auto; height: 100%;">                       
+<ul class="nav nav-list" style="width: auto;">                       
 
 <?php foreach ($menu_group_fn as $key => $current) { 
                $second_level=$cl->chield_id($current->id,$current->menu_group_id);  ?>
