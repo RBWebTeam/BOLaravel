@@ -42,7 +42,7 @@
                                 @if (Session::has('msg')) <label class="control-label" for="inputError">{{ Session::get('msg') }} </label>@endif
                </div>
 
-			  <input type="submit" class="btn btn-default submit-btn"/>
+			  <input type="Submit" class="btn btn-default submit-btn" value="Submit"/>
 			  <a href="" class="forgot-pass pull-right">Forgot Password</a>
 			 </form>
 			</div>

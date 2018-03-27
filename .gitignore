@@ -12,3 +12,4 @@ yarn-error.log
 .env
 /public/uploads/sales_material/*
 /public/uploads/notification/*
+/public/upload/Raiserticket/*

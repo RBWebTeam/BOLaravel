@@ -305,13 +305,13 @@ $('.message_sms_id').click(function(){
   if($('#message-text').val()!="")  {
   //console.log($('#message_sms_from').serialize());
    $.ajax({ 
-   url: "{{URL::to('fba-list')}}",
+   url: "{{URL::to('send-fba-sms')}}",
    method:"POST",
    data: $('#message_sms_from').serialize(),
    success: function(msg)  
    {
-    //console.log(msg);
-    alert('SMS send successfully..')
+    console.log(msg);
+   // alert('SMS send successfully..')
     $('.sms_sent_id').modal('hide');
     $('#message-text').val('');
    }
@@ -419,124 +419,7 @@ alert(JSON.stringify(data));*/
  -->
 
 <script type="text/javascript">
-  $('#submit').click(function(){
-
-  $.ajax({
-          url:"{{URL::to('sales-material-upload-submit')}}" ,  
-          data:new FormData($("#sales_material_upload")[0]),
-          dataType:'json',
-          async:false,
-          type:'POST',
-          processData: false,
-          contentType: false,
-          success: function(msg){
-            // console.log(msg.status);
-             if (msg.status==0) 
-              {
-                alert('Uploaded Successfully');
-                $("#sales_material_upload")[0].reset();
-              } 
-              else {
-               alert('Could Not Upload');
-              }
-             
-              
-            
-            }
-        });
-  });
-
-
-
-  $('#reset').click(function(){
-   $("#Product").val("");
-   $("#image_file").val("");
-   $("#Company").val("");
-  });
-
-
-  $('#sales_submit').click(function(){
-    $.ajax({ 
-   url: "{{URL::to('sales-material-update')}}",
-   method:"POST",
-   data : $('#sales_material').serialize(),
-   success: function(msg)  
-   {
   
-     var tablerows = new Array();
-        $.each(msg, function( index, value ) {
-            tablerows.push('<tr><td><img class="img-responsive" src="/' + value.image_path + '" width="400" height=""/></td></tr>');
-        }); 
-
-       if(msg){
-          $('#docs').empty().append('<table class="table table-striped table-bordered"><tr class="text-capitalize"><td style="font-family: monospace">Images</td></tr>'+tablerows+'</table>');
-         }else{
-            $('#docs').empty().append('No Result Found');
-         }
-
-   },
-
- });
-  });
-
-</script>
-
-<script type="text/javascript">
-  $('#Product').on('change', function() {
-    var Product=$('#Product').find(":selected").val();
-   // console.log(Product);
-    if ( Product == '1')
-      {
-       $("#Company option[value='1']").show();
-        $("#Company option[value='2']").show();
-        $("#Company option[value='3']").show();
-        $("#Company option[value='4']").show();
-          
-      }
-      if (Product == '2') 
-      {
-        $("#Company option[value='1']").show();
-        $("#Company option[value='2']").show();
-        $("#Company option[value='3']").show();
-        $("#Company option[value='5']").show();
-        $("#Company option[value='6']").show();
-        $("#Company option[value='7']").show();
-        $("#Company option[value='8']").show();
-      }
-      if (Product=='3') 
-      {
-         $("#Company option[value='1']").show();
-        $("#Company option[value='2']").show();
-        $("#Company option[value='3']").show();
-        $("#Company option[value='4']").show();
-         $("#Company option[value='5']").show();
-        $("#Company option[value='8']").show();
-      }
-      if (Product=='4') 
-      {
-         $("#Company option[value='1']").show();
-        $("#Company option[value='2']").show();
-        $("#Company option[value='4']").show();
-        $("#Company option[value='5']").show();
-         $("#Company option[value='8']").show();
-        $("#Company option[value='9']").show();
-        $("#Company option[value='10']").show();
-        $("#Company option[value='11']").show();
-      }
-      if (Product=='5') 
-      {
-         $("#Company option[value='1']").show();
-        $("#Company option[value='2']").show();
-        $("#Company option[value='3']").show();
-        $("#Company option[value='4']").show();
-         $("#Company option[value='5']").show();
-        $("#Company option[value='8']").show();
-      }
-     
-        
-      
-        
-      });
 
 
 
@@ -1450,8 +1333,10 @@ $.ajax({
 $(".nav-list > li").addClass(function(i){return "item" + (i + 1);});
 
 
-function uploaddoc(fbaid)
-{
+
+
+function docview(fbaid){
+
 $('#divdocviewer').html(""); 
 $("#imgdoc").attr("src","");
 $("#imgdoc").css("display","none");
@@ -1620,3 +1505,20 @@ $('#btn_resetticket').click(function() {
         });
  </script>
  <!-- End shubham raise a ticket -->
+ <!-- Loader Script -->
+<script>
+     var $loading = $('#loading').hide();
+     //Attach the event handler to any element
+     $(document)
+       .ajaxStart(function () {
+          //ajax request went so show the loading image
+           $loading.show();
+       })
+     .ajaxStop(function () {
+         //got response so hide the loading image
+          $loading.hide();
+      });
+           //         <div id="loading">
+           //      <img src="loading.gif" />  
+           // </div>
+</script>
