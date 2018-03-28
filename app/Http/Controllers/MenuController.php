@@ -120,11 +120,18 @@ public function recursiveFN($menu_group_id,$parent_id=0){
                        }
   
                     foreach ($sql as $key => $value) {
+
+                       if($value->lvl!=0){
+                                   $is_select=1;
+                                 }else{
+                                   $is_select='';
+                                 }
+
                            
                         if($value->menu_group_id==$menu_group_id){
-                          $menu.='<li><label class="tree-toggle nav-header"><a href="#"><span class="sp-nav"> <input   type="checkbox" name="menu_id[]" checked value="'.$value->id.'"   ></span> '.$value->name.'</a></label>';
+                          $menu.='<li  class="icon_'.$is_select.'" ><label class="tree-toggle nav-header"><a  href="javascript:void(0)"><span class="sp-nav"> <input   type="checkbox" name="menu_id[]" checked value="'.$value->id.'"   ></span> '.$value->name.'</a></label>';
                      }else{
-                        $menu.='<li><label class="tree-toggle nav-header"><a href="#"><span class="sp-nav"> <input   type="checkbox" name="menu_id[]"   value="'.$value->id.'"   > </span>'.$value->name.'</a> </label>';
+                        $menu.='<li class="icon_'.$is_select.'"  ><label class="tree-toggle nav-header"><a  href="javascript:void(0)" ><span class="sp-nav"> <input   type="checkbox" name="menu_id[]"   value="'.$value->id.'"   > </span>'.$value->name.'</a> </label>';
                        }
                               
                        
