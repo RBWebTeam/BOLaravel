@@ -29,8 +29,10 @@
             </div>
            
        <div class="col-md-4">
+
        <div class="form-group"> <input type="submit" name="btndate" id="btndate"  class="mrg-top common-btn pull-left" value="SHOW">  
 	   &nbsp;&nbsp;
+
    <select  id="msds-select" class="pull-left mrg-top mrg-left">
    <option value="0">Posp Type</option>
   <option value="1">POSP Yes</option>
@@ -483,7 +485,6 @@
 {             "data":"CustID" ,
               "render": function ( data, type, row, meta ) {
              return data==""?('<a id="btnviewcid" onclick="getcustomerid(this,'+row.fbaid+')">Update</a>'):data;
-
 
 
               }
