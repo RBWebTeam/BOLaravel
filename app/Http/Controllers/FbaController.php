@@ -116,7 +116,7 @@ class FbaController extends CallApiController
 
         public function getfbapartner(Request $req)
         {          
-          $fsmfbaquery = DB::select("call usp_load_partner_info(?)",[$req->fbaid]);
+          $fsmfbaquery = DB::select("call usp_load_partner_info(?)",[$req->partnerid]);
 
           return json_encode($fsmfbaquery);    
         }

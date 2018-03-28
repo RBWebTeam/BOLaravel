@@ -738,7 +738,6 @@ $.ajax({
               // console.log(msg[0].Result);
             str = str + "</table>";
            $('#divpartnertable').html(str);   
-              
         }  
       });
 }
