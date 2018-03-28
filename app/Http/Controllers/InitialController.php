@@ -58,9 +58,9 @@ class InitialController extends Controller
                       $menu='';
                       $sql='';
                      if($parent_id==0){
-                      $sql=\DB::table('view_user_right_group')->select('id','name','menu_group_id','url_link','parent_id','lvl')->where('menu_group_id','=',$usergroup)->where('parent_id','=',0)->get();
+                      $sql=\DB::table('view_user_right_group')->select('menu_id','id','name','menu_group_id','url_link','parent_id','lvl')->where('menu_group_id','=',$usergroup)->where('parent_id','=',0)->orderBy('menu_id', 'asc')->get();
                      }else{
-                    $sql=\DB::table('view_user_right_group')->select('id','name','menu_group_id','url_link','parent_id','lvl')->where('menu_group_id','=',$usergroup)->where('parent_id','=',$parent_id)->get();
+                    $sql=\DB::table('view_user_right_group')->select('menu_id','id','name','menu_group_id','url_link','parent_id','lvl')->where('menu_group_id','=',$usergroup)->where('parent_id','=',$parent_id)->orderBy('menu_id', 'asc')->get();
                      }
 
 
