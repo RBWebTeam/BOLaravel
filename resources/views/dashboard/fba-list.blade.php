@@ -514,26 +514,29 @@ $(document).ready(function() {
   });
 
   // Extend dataTables search
-   //$('.btndate').click(function() {
+
  // alert('test');
   $.fn.dataTable.ext.search.push(
     function(settings, data, dataIndex) {
     var min = $('#min').val();
     var max = $('#max').val();
+    console.log(max);
     var createdAt = data[19] || 19; // Our date column in the table
-
+   
     if (
       (min == "" || max == "") ||
-      (moment(createdAt).isSameOrAfter(min) && moment(createdAt).isSameOrBefore(max))
-    ) {
-      return true;
+      (moment(createdAt).isSameOrAfter(min) && moment(createdAt).isSameOrBefore(max,'day'))
+    ) 
+
+    {
+
+ return true;
     }
     return false;
     }
   );
 
-
-  // Re-draw the table when the a date range filter changes
+ // Re-draw the table when the a date range filter changes
   $('#btndate').on("click", function(){
     var table = $('#fba-list-table').DataTable();
     table.draw();
