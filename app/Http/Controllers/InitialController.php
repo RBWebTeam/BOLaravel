@@ -5,6 +5,7 @@ use Response;
 use Request;
 use Session;
 use api_url;
+use Illuminate\Support\Facades\URL;
 class InitialController extends Controller
 {
 
@@ -32,35 +33,46 @@ class InitialController extends Controller
 
 
 
-               public function  menu_sidebar(){
+               // public function  menu_sidebar(){
 
  
-                  return  $this->recurtionfn();
+               //    return  $this->recurtionfn();
+
+               // }
+
+
+ public function user_right_group_menu(){
+
+
+                 // return $sql=\DB::table('view_user_right_group')->select('id','name','menu_group_id','url_link','parent_id','lvl')->where('menu_group_id','=',Session::get('usergroup'))->where('lvl','=',0)->orderBy('id', 'asc')->get();
+
+
+                return    $this->recurtionfn(Session::get('usergroup'),0);
 
                }
 
 
-               public function   recurtionfn($parent_id=0){  
+              
+                public function   recurtionfn($usergroup,$parent_id=0){  
                      
-                     $menu='';
+                      $menu='';
                       $sql='';
                      if($parent_id==0){
-                 $sql=\DB::table('view_user_right_group')->select('id','name','menu_group_id','url_link','parent_id','lvl')->where('menu_group_id','=',Session::get('usergroup'))->where('parent_id','=',0)->get();
+                      $sql=\DB::table('view_user_right_group')->select('id','name','menu_group_id','url_link','parent_id','lvl')->where('menu_group_id','=',$usergroup)->where('parent_id','=',0)->get();
                      }else{
-                    $sql=\DB::table('view_user_right_group')->select('id','name','menu_group_id','url_link','parent_id','lvl')->where('menu_group_id','=',Session::get('usergroup'))->where('parent_id','=',$parent_id)->get();
+                    $sql=\DB::table('view_user_right_group')->select('id','name','menu_group_id','url_link','parent_id','lvl')->where('menu_group_id','=',$usergroup)->where('parent_id','=',$parent_id)->get();
                      }
 
 
                     foreach ($sql as $key => $value) {
 
-                      if($value->url_link=="#"){
-                         
-                          $menu.='<li><label class="tree-toggle nav-header"><a href="'.$value->url_link.'"><span class="sp-nav"><img src="images/icon/home.png"></span>&nbsp;&nbsp; '.$value->name.'</a></label>';
+                      if($value->url_link!="#"){
+                          $menu.='<li><label class="tree-toggle nav-header"><a href="'.URL('/')."/".$value->url_link.'"><span class="sp-nav"> </span>&nbsp;&nbsp; '.$value->name.'</a></label>';
                       }else{
-                           $menu.='<li><label class="tree-toggle nav-header"><a href="#"><span class="sp-nav"><img src="images/icon/home.png"></span>&nbsp;&nbsp; '.$value->name.'</a></label>';
+                           $menu.='<li  class="level1"><label class="tree-toggle nav-header"><a href="javascript:void(0)"><span class="caret"></span>&nbsp;&nbsp; '.$value->name.'</a></label>';
                       }
 
-                       $menu.='<ul class="nav nav-list tree">'.$this->recurtionfn($value->id).'</ul>';
+                       $menu.='<ul class="nav nav-list tree">'.$this->recurtionfn($usergroup,$value->id).'</ul>';
                        
                        $menu.='</li>';
                         
@@ -78,10 +90,5 @@ class InitialController extends Controller
 
 
 
-               public function user_right_group_menu(){
-
-
-                 return $sql=\DB::table('view_user_right_group')->select('id','name','menu_group_id','url_link','parent_id','lvl')->where('menu_group_id','=',Session::get('usergroup'))->where('lvl','=',0)->orderBy('id', 'asc')->get();
-
-               }
+              
 }
