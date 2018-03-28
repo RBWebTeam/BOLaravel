@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use DB;
 use Illuminate\Http\Request;
 
 class HealthAssureController extends CallApiController
@@ -37,8 +37,35 @@ try{
         return $e;    
      }
         
-                  
-      	  return view('dashboard.HealthAssure',['respon'=>$respon]);
+            $appttime = DB::select("call Usp_getappointmenttime()");       
+      	  return view('dashboard.HealthAssure',['respon'=>$respon,'appttime'=>$appttime]);
       }
-   
+
+      public function inserthealthtest(Request $req)
+      {
+
+       /*print_r($req->all()); */
+        DB::select('call usp_health_assured_booking_date(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',array(
+      $req->txtname,
+      $req->txtmono,
+      $req->txtemail,
+      $req->btngender,
+      $req->txtage,
+      $req->txtflatno,
+      $req->txtstreetadd,
+      $req->txtlandmark,
+      $req->txtcity,
+      $req->txtpincode,
+      $req->ddlappttime,
+      $req->txtdate,
+      $req->txtpackcode ,
+      $req->txtpackname,
+      $req->txtfbaid,
+      $req->txtmrp,
+      $req->txtoffer,
+      $req->txtfasting,
+      $req->txthomevisit
+     ));
+
+      }
 }

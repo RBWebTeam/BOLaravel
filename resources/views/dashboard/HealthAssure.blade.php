@@ -50,6 +50,25 @@ $(document).ready(function(){
     $(".down-arrow").click(function(){
         $(".bg-gray").toggle();
     });
+$('#btnsubmithealth').click(function() {
+    alert("test");
+if( $('#healthchekup').valid())
+    {
+  console.log($('#healthchekup').serialize());
+   $.ajax({ 
+   url: "{{URL::to('HealthAssure')}}",
+   method:"POST",
+   data: $('#healthchekup').serialize(),
+
+  success: function(msg)  
+   {
+    console.log(msg);
+    alert("Record has been saved successfully");
+    $("#healthchekup").trigger('reset');
+   }
+});
+}
+});
 
     
 });
@@ -64,13 +83,13 @@ function showtestmodel(name,model)
 	$('#testHead').append(name.replace(/_/g,' ').replace('Test','').replace('test','')+" Test");
 	var arr = model.split(',')
 	var text = "<body>";
-	$('#asshole').empty();
+	$('#tbltestlist').empty();
 	for (var i = 0; i < arr.length-1; i++) {
 		text = text + "<tr style='height:40px;border-bottom:solid 1px black;'><td>"+arr[i].replace(/_/g,' ')+"</td></tr>";
 	}
 text = text +"</body>";
 	
-	$('#asshole').html(text);
+	$('#tbltestlist').html(text);
 	$('.testCheckup').modal('show');
 }    
 
@@ -116,10 +135,7 @@ foreach ($val->ParamDetails as $key => $value) {
      sizeof($val->ParamDetails)." - Tests </a>";				
 } 
 
-   ?></li><!--  -->
-  <!--  <li><span class="glyphicon glyphicon-ok"></span> Key Lock</li>
-  <li><span class="glyphicon glyphicon-ok"></span> NCB Protection  </li>
-   <li><span class="glyphicon glyphicon-ok"></span> Zero Depreciation </li> -->
+   ?></li>
    @endforeach
    @endif
    </ul>
@@ -132,91 +148,107 @@ foreach ($val->ParamDetails as $key => $value) {
 </div>
 
 <div class="col-md-12"><p class="text-center head1">Please enter your details</p></div>
-<form action="" method="post">
+<form id="healthchekup" method="post">
+     {{ csrf_field() }}
+
 <div class="col-md-4">
+<input type="hidden" name="txtpackname" id="txtpackname" 
+    value="{{$_GET["PackName"]}}">
+ <input type="hidden" name="txtmrp" id="txtmrp" 
+    value="{{$_GET["MRP"]}}">
+<input type="hidden" name="txtoffer" id="txtoffer" 
+    value="{{$_GET["OfferPrice"]}}">
+<input type="hidden" name="txtpackcode" id="txtpackcode" 
+    value="{{$_GET["Packcode"]}}">
+<input type="hidden" name="txtfbaid" id="txtfbaid" 
+    value="{{$_GET["fbaid"]}}">
+<input type="hidden" name="txtfasting" id="txtfasting" 
+    value="{{$_GET["fasting"]}}">
+<input type="hidden" name="txthomevisit" id="txthomevisit" 
+    value="{{$_GET["homevisit"]}}">
  <label>Name</label>
- <input type="text" class="input-1"/>
+ <input type="text" id="txtname" name="txtname" class="input-1" required />
 </div>
 
 <div class="col-md-4">
  <label>Mobile No</label>
- <input type="text" class="input-1"/>
+ <input type="number" id="txtmono" name="txtmono" class="input-1" required />
 </div>
 
 <div class="col-md-4">
- <label>Email IsD</label>
- <input type="email" class="input-1"/>
+ <label>Email ID</label>
+ <input type="email" id="txtemail" name="txtemail" class="input-1" required/>
 </div>
 
 <div class="col-md-4">
 <label>Gender</label>
  <div class="form-group">
         <div data-toggle="buttons">
-          <label class="btn btn-default btn-circle btn-md active"><input type="radio" name="q1" value="0">Male</label>
-          <label class="btn btn-default btn-circle btn-md"><input type="radio" name="q1" value="1">Female</label>
+          <label class="btn btn-default btn-circle btn-md active"><input type="radio" name="btngender" id="btngender" value="0">Male</label>
+          <label class="btn btn-default btn-circle btn-md"><input type="radio" name="btngender" id="btngender" value="1">Female</label>
         </div>
       </div>
   </div>
   
  <div class="col-md-4">
  <label>Age</label>
- <input type="text" class="input-1"/>
+ <input type="number" id="txtage" name="txtage" class="input-1" required/>
 </div>
 
  <div class="col-md-4">
  <label>Flat No, Building</label>
- <input type="text" class="input-1"/>
+ <input type="text" id="txtflatno" name="txtflatno" class="input-1" required/>
 </div>
 
  <div class="col-md-4">
  <label>Street Address</label>
- <input type="text" class="input-1"/>
+ <input type="text" id="txtstreetadd" name="txtstreetadd" class="input-1" required/>
 </div>
 
  <div class="col-md-4">
  <label>Landmark</label>
- <input type="text" class="input-1"/>
+ <input type="text" id="txtlandmark" name="txtlandmark" class="input-1" required/>
 </div>
 
  <div class="col-md-4">
  <label>Pincode</label>
- <input type="text" class="input-1"/>
+ <input type="number" id="txtpincode" name="txtpincode" class="input-1" required/>
 </div>
 
 <div class="col-md-4">
  <label>City</label>
- <select  class="input-1">
-    <option>Mumbai</option>
- </select>
+ <input type="text" id="txtcity" name="txtcity" class="input-1" required/>
 </div>
 
 <div class="col-md-4">
  <label>Appt. Date</label>
- <input type="date" class="input-1"/>
+ <input type="date" id="txtdate" name="txtdate" class="input-1" required/>
 </div>
 
 <div class="col-md-4">
  <label>Appt Time Slot</label>
- <select  class="input-1">
-    <option value="1">APPT. TIME SLOT</option>
-	<option value="2">08.00 TO 08.30 AM</option>
-	<option value="3">08.30 TO 09.00 AM</option>
+ <select  class="input-1" name="ddlappttime" id="ddlappttime" required>
+    <option value="0" selected="selected">APPT. TIME SLOT</option>
+    @foreach($appttime as $val)
+	<option value="{{$val->apptid}}">{{$val->appointment_time}}</option>
+    @endforeach
+	<!-- <option value="3">08.30 TO 09.00 AM</option>
 	<option value="4">09.00 TO 09.30 AM</option>
 	<option value="5">09.30 TO 10.00 AM</option>
 	<option value="2">10.30 TO 11.00 PM</option>
-	<option value="3">11.30 TO 12.00 PM</option>
+	<option value="3">11.30 TO 12.00 PM</option> -->
  </select>
  </div>
 <div class="col-xs-12 pad-1" style="padding:0 0 12px 0;">
  <div class="col-xs-12 pad-1">
- <span cssstyle="display:block;width:auto;"><input id="chk" type="checkbox" name="chk" class="used"></span>
+ <span cssstyle="display:block;width:auto;"><input id="chkAgree " type="checkbox" name="chkAgree" class="used"></span>
    </div>    
    <div class="col-xs-11 pad pad-1">
      I Agree to the <a onclick="showtermcon()" style="color: #5b9bd5; cursor: pointer;" data-toggle="modal" data-target="myModal">Terms &amp; Conditions</a>
                                 </div>
                             </div>
  <div class="col-md-12">
- <input type="button" class="button1 col-md-12" value="NEXT: SELECT YOUR LAB"/>
+ <input type="button" id="btnsubmithealth" name="btnsubmithealth" class="button1 col-md-12" value="NEXT: SELECT YOUR LAB"/>
  </div>
  </form>
 
@@ -234,7 +266,7 @@ foreach ($val->ParamDetails as $key => $value) {
                             <h5 id="testHead" class="modal-title"></h5>
                         </div>
                         <div id="testCheckupBody" class="modal-body" style='background: #eaeff7;'>
-                        	<table id="asshole" style="width:100%">
+                        	<table id="tbltestlist" style="width:100%">
                         	</table>
 
                         </div>
