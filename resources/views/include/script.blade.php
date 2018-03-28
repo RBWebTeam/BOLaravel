@@ -1510,7 +1510,11 @@ function getcustomerid(text,fbaid){
                       if(json.StatusNo==0){
    
                       $(text).closest('td').text(json.MasterData.CreateCustomerResult.CustID);
-                       alert("Customer id updated successfully");                
+                       alert("Customer id updated successfully"); 
+
+                    }
+                    else{
+                      alert("Customer id does not exit"); 
 
                     }
                     }
