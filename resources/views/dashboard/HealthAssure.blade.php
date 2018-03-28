@@ -51,22 +51,22 @@ $(document).ready(function(){
         $(".bg-gray").toggle();
     });
 $('#btnsubmithealth').click(function() {
-    alert("test");
 if( $('#healthchekup').valid())
     {
   console.log($('#healthchekup').serialize());
    $.ajax({ 
-   url: "{{URL::to('HealthAssure')}}",
+   url: "{{URL::to('HealthAssureinsert')}}",
    method:"POST",
    data: $('#healthchekup').serialize(),
 
   success: function(msg)  
    {
     console.log(msg);
-    alert("Record has been saved successfully");
     $("#healthchekup").trigger('reset');
    }
 });
+} else{
+  alert("Please fill all mandatory field");
 }
 });
 
@@ -184,7 +184,7 @@ foreach ($val->ParamDetails as $key => $value) {
 <label>Gender</label>
  <div class="form-group">
         <div data-toggle="buttons">
-          <label class="btn btn-default btn-circle btn-md active"><input type="radio" name="btngender" id="btngender" value="0">Male</label>
+          <label class="btn btn-default btn-circle btn-md"><input type="radio" name="btngender" id="btngender" checked="checked" value="0">Male</label>
           <label class="btn btn-default btn-circle btn-md"><input type="radio" name="btngender" id="btngender" value="1">Female</label>
         </div>
       </div>
@@ -241,7 +241,7 @@ foreach ($val->ParamDetails as $key => $value) {
  </div>
 <div class="col-xs-12 pad-1" style="padding:0 0 12px 0;">
  <div class="col-xs-12 pad-1">
- <span cssstyle="display:block;width:auto;"><input id="chkAgree " type="checkbox" name="chkAgree" class="used"></span>
+ <span cssstyle="display:block;width:auto;"><input id="chkAgree " type="checkbox" name="chkAgree" class="used" required></span>
    </div>    
    <div class="col-xs-11 pad pad-1">
      I Agree to the <a onclick="showtermcon()" style="color: #5b9bd5; cursor: pointer;" data-toggle="modal" data-target="myModal">Terms &amp; Conditions</a>
