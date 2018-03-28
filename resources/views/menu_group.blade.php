@@ -27,15 +27,24 @@
                                       </tr>
                                     </thead>
                                     <tbody>
+                                    <!-- @foreach($menu_group as $vl)
+                                      <tr>
+                                      <td>{{$vl->id}}</td>
+                                      <td  ><a href="{{url('menu-mapping')}}?id={{$vl->id}}"> {{$vl->name}} </a></td>
+
+                                      <td><a href="url"><input type='submit' name='submit' value='Edit'/></a></td>
+                                      </tr>
+                                    @endforeach
+ -->
+ 
                                     @foreach($menu_group as $vl)
                                       <tr>
                                       <td>{{$vl->id}}</td>
                                       <td> {{$vl->name}} </td>
                                       <td>
-                             <a href="{{url('menu-mapping')}}?id={{$vl->id}}">Edit</a>
+                             <a href="{{url('menu-mapping')}}?id={{$vl->id}}" class="btn btn-info">Edit</a>
                                      </td>
-                                   
-                                      </tr>
+                                   </tr>
                                     @endforeach
                                   </tbody>
                                      </td>

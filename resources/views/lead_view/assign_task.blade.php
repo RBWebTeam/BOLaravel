@@ -25,8 +25,8 @@
 
  
         <div class="form-group">
-            <label for="inputEmail" class="control-label col-xs-2">Users</label>
-            <div class="col-xs-10">
+            <label for="inputEmail" class="control-label col-xs-1">Users</label>
+            <div class="col-xs-6">
             <select class="form-control" name="user_id" >
                <option value="0" >--SELECT--</option>
                
@@ -42,9 +42,9 @@
 
 
   <div class="form-group">
-            <label for="inputEmail" class="control-label col-xs-2">Assign Task</label>
-            <div class="col-xs-10">
-            <select class="form-control " name="lead_id[]"   multiple=""  >
+            <label for="inputEmail" class="control-label col-xs-1">Assign Task</label>
+            <div class="col-xs-6">
+            <select class="form-control " name="lead_id[]"   multiple="" style="height:250px;" >
                <option value="0" >--SELECT--</option>
                
                @foreach($assign_task as $val)
@@ -64,7 +64,7 @@
  </div>
 
  <div class="form-group">
-  <div class="col-xs-10">
+  <div class="col-xs-3">
   <label for="inputEmail" class="control-label col-xs-5"> </label>
   <input type="submit" name="submit" value="submit" class="btn btn-primary">
 </div>

@@ -24,14 +24,14 @@ class smslogController extends Controller
 
 
   // SMS TEMPLATE CONTROLLE
-  public function smstemplate(){
-  return view('dashboard.sms_template');
+  // public function smstemplate(){
+  // return view('dashboard.sms_template');
 
-	 }
+	 //}
 	  public function smstemplateinsert (Request $req){
               
        DB::statement('call Usp_insertsmstaplate(?,?)',array( $req->hname,$req->txtmesg ));
-        return Redirect('sms_template');
+        return view('dashboard.sms_template');
             }
   
 public function getsendsmslog(){ 
