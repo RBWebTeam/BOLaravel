@@ -539,8 +539,7 @@ $(document).ready(function() {
     table.draw();
   });
 
-
-  $('.date-range-filter').datepicker();
+$('.date-range-filter').datepicker();
 });
 </script>
 <!-- from date to date end -->  
