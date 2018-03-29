@@ -68,8 +68,8 @@
         <table id="payment-history-tabel" class="table table-bordered table-striped tbl " >
                  <thead>
                   <tr>
+                   <th> Customer ID</th>
                    <th>Customer Name</th>
-                   <th>Customer ID</th>
                    <th>Mobile</th>
                    <th>Email</th>
                     <th>  Payment Date</th>
@@ -86,9 +86,9 @@
                @if(isset($respon))
                  @foreach($respon as $val)
                  <tr>   
-                   <?php   $customer_id =preg_split('/-/', $val->CustName); ?>
-                   <td><?php  echo ($customer_id[0]);  ?></td>
-                    <td><?php  echo ($customer_id[1]);  ?></td>
+                   <?php   //$customer_id =preg_split('/-/', $val->CustName); ?>
+                   <td>{{$val->CustID}}</td>
+                    <td>{{$val->CustName}}</td>
                     <td>{{$val->Mobile}}</td>
                    <td>{{$val->Email}}</td>
                      <?php $dt = new DateTime($val->PaymDate);
@@ -115,13 +115,14 @@
                    <th> </th>
                    <th> </th>
                     <th>  </th>
-                     <th>TOTAL AMOUNT:{{$sum}}</th>
+                     <th>TOTAL AMOUNT: <i class="fa fa-rupee"></i> {{$sum}} </th>
                       <th> </th>
                        <th>  </th>
                        <th>  </th>
                        <th>  </th>
                  </tr>
                 </thead>
+
       </table>
       </div>
       </div>
@@ -133,10 +134,11 @@
      $(document).ready(function() {
     $('#payment-history-tabel').DataTable( {
      paging: true,
-     "order": [[ 4, "asc" ]]
+      "order": [[ 4, "desc" ]]
 });
 
 } );
 
       </script>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
  @endsection
