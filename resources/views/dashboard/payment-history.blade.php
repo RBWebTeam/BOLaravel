@@ -76,11 +76,14 @@
                      <th>Amount</th>
                       <th>Payment Type</th>
                        <th> Payment Status</th>
+                       <th> City</th>
+                       <th>Sales Name</th>
                  </tr>
                 </thead>
                 <tbody>
                
-  @if(isset($respon))
+               <?php $sum=0;    ?>
+               @if(isset($respon))
                  @foreach($respon as $val)
                  <tr>   
                    <?php   $customer_id =preg_split('/-/', $val->CustName); ?>
@@ -92,8 +95,12 @@
                       $date = $dt->format('m/d/Y'); ?>
                    <td>{{$date}}</td>
                    <td>{{$val->Amount}}</td>
+                   <?php $sum+=$val->Amount;?>
                     <td>{{$val->PaymType}}</td>
                     <td>{{$val->PaymStatus}}</td>
+                    <td>{{$val->City}}</td>
+                    <td>{{$val->SalesName}}</td>
+                    
                      
                  </tr>
                  @endforeach
@@ -101,6 +108,20 @@
         
                 
       </tbody>
+      <thead>
+                  <tr>
+                   <th> </th>
+                   <th> </th>
+                   <th> </th>
+                   <th> </th>
+                    <th>  </th>
+                     <th>TOTAL AMOUNT:{{$sum}}</th>
+                      <th> </th>
+                       <th>  </th>
+                       <th>  </th>
+                       <th>  </th>
+                 </tr>
+                </thead>
       </table>
       </div>
       </div>
@@ -112,9 +133,8 @@
      $(document).ready(function() {
     $('#payment-history-tabel').DataTable( {
      paging: true,
-  info: false,
-  responsive: false,
-}).column('0:visible').order('desc').draw();
+     "order": [[ 4, "asc" ]]
+});
 
 } );
 
