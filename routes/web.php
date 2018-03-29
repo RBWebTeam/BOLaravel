@@ -85,6 +85,10 @@ Route::Post('RaiseaTicket','RaiserTicketController@inserraisertkt');
 Route::get('View-Raised-Ticket','ViewRaisedTicketController@getraisedticket');
 Route::get('View-Raised-Ticket/{ticketid}','ViewRaisedTicketController@deleteticket');
 
+Route::get('HealthAssure','HealthAssureController@gethealthassure');
+Route::post('HealthAssureinsert','HealthAssureController@inserthealthtest');
+Route::get('Health-Assure-Partner','HealthAssurePartnerController@getpartnerinfo');
+
 ///shubham end ///
 
 //////GOVIND
@@ -146,7 +150,7 @@ Route::get('Fsm-Details','FsmDetailsController@FsmDetails');
 Route::get('Payment-History','PaymentHistoryController@Payment_History');
 
 
-Route::get('Fsm-Register','FsmRegisterController@bindsate');
+
 
 Route::get('uploadefile','uploadfileController@uplode');
 
