@@ -73,7 +73,7 @@
 		<script type="text/javascript">
 			$('#submit').click(function(){
 
-         if ($('#sales_material_upload').valid()) 
+         if (!$('#sales_material_upload').valid()) 
           {
               return false;
           } 
@@ -89,7 +89,7 @@
           processData: false,
           contentType: false,
           success: function(msg){
-            // console.log(msg.status);
+            console.log(msg.status);
              if (msg.status==0) 
               {
                 alert('Uploaded Successfully');
