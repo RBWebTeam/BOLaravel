@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="manifest" href="/manifest.json">
 <title>Finmart - Login</title>
 <link type="text/css" rel="stylesheet" href="{{url('stylesheets/sidebar.css')}}">
 	<link type="text/css" rel="stylesheet" href="{{url('stylesheets/bootstrap.min.css')}}"> 
@@ -11,7 +12,7 @@
 	<link type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
 	<script type="text/javascript" src="{{url('javascripts/jquery.min.js')}}"></script>
 	 <script type="text/javascript" src="{{url('javascripts/bootstrap.min.js')}}"></script>
-	 <script type="text/javascript" src="{{url('javascripts/filter.js')}}"></script>
+	 
 	 <link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	 <script type="text/javascript" src="{{url('javascripts/bootstrap-datepicker.js')}}"></script>
 	 <link href="{{url('stylesheets/datepicker.css')}}" rel="stylesheet" type="text/css" />
