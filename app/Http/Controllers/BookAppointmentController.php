@@ -10,7 +10,7 @@ use Redirect;
 use Session;
 use URL;
 use Mail;
-class BookAppointmentController extends Controller
+class BookAppointmentController extends CallApiController
 {
        public function book_appointment(){
         return view('book-appointment');
@@ -115,7 +115,51 @@ class BookAppointmentController extends Controller
       }
 
 
-       
+      public function health_packages(){
+        return view('health-packages');
+      }
+
+      public function health_insurance_packages(Request $req)
+      {
+            $post_data='{"apptrebook_input":null,"status_input":null,"apptdetail":null,"pack_details":{"username":"Datacomp","pass":"Health@1234","fromamt":0,"toamt":0,"fromage":0,"toage":0,"gender":"M"},"slot_inputdata":null,"provider_data":null,"pack_param":null}';
+            // print_r($post_data);exit();
+            $url = "http://www.healthassure.in/Products/HAMobileProductService.asmx/PackDetails";
+            $result=$this->call_json_data_api($url,$post_data);
+            $http_result=$result['http_result'];
+            $error=$result['error'];
+            $st=str_replace('"{', "{", $http_result);
+            $s=str_replace('}"', "}", $st);
+            $m=$s=str_replace('\\', "", $s);
+            // print_r($http_result);exit();
+            $obj=json_decode($m);
+            return response()->json( $obj);
+
+
+       }
+
+       public function health_insurance_analysis(Request $req)
+       {
+         // print_r($req->PackCode);exit();
+            $data=$req->PackCode;
+            $post_data='{"pack_param":{"username":"Datacomp","pass":"Health@1234","packcode":'.$req->PackCode.'}}';
+            // print_r($post_data);
+            $url = "http://www.healthassure.in/Products/HAMobileProductService.asmx/PackParam";
+            $result=$this->call_json_data_api($url,$post_data);
+            $http_result=$result['http_result'];
+            $error=$result['error'];
+            $st=str_replace('"{', "{", $http_result);
+            $s=str_replace('}"', "}", $st);
+            $m=$s=str_replace('\\', "", $s);
+            // print_r($http_result);exit();
+            $obj=json_decode($m);
+            return response()->json( $obj);
+
+       }
+
+       public function order_summary(){
+        return view('order-summary');
+      }
+
        
         
 }
