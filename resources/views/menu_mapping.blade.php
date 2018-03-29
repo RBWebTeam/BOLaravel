@@ -50,9 +50,9 @@
         <?php  echo $recfn; ?>
              </ul> -->
 
-             <ul class="nav nav-list" style="overflow: hidden; width: auto; height: 95%;">
+             <ul class="nav nav-list" style="overflow: hidden; width: auto; height: 95%;" id="Decor">
 
-              <?php  echo $recfn; ?> <span class="glyphicon glyphicon-plus"></span>
+              <?php  echo $recfn; ?>  
                 
 
              </ul>
@@ -76,17 +76,6 @@
      
  
  
-       <div class="col-md-12">
-       <div class="overflow-scroll">
-       <div class="table-responsive" >
-
-      <table class="datatable-responsive table table-striped table-bordered dt-responsive nowrap" id="example">
-                                    
-           
-            </table>
-      </div>
-      </div>
-      </div>
       </div>
 
  
@@ -104,17 +93,66 @@ window.setTimeout(function() {
 
   
 
+   $(function () {
+            // $('#Decor ul')
+            //     .hide(400)
+            //     .parent()
+            //     .prepend('<span class="icon plus"></span>');
+                
+            $('.icon_1').prepend('<span class="icon plus"></span>');
+
+            $('#Decor li').on('click', function (e) {
+                e.stopPropagation();
+                $(this).children('ul').slideToggle('slow', function () {
+                    if ($(e.target).is("span")) {
+                        $(e.target)
+                            .toggleClass('minus', $(this).is(':visible'));                        
+                    }
+                    else {
+                        $(e.target).children('span')
+                            .toggleClass('minus', $(this).is(':visible'));                        
+                    }
+                });
+            });
+
+            $('#Decor a').not('[href="#"]').attr('target', '_blank');
+        });
 
 </script>
+
+<style type="text/css">#Decor, #Decor ul {
+  list-style-type: none;
+  margin-left:15px;
+  margin-bottom:5px;
+  padding-left:20px;
+    cursor:pointer;
+}
+
+.icon { 
+  background: 
+        transparent 
+        url('../images/plus-minus.png' )
+        no-repeat left top; 
+  display:block; 
+    height:12px;
+    width:12px; 
+  float:left;
+    cursor:pointer;
+}
+
+.plus { 
+    background-position: left top; 
+    margin-top:3px;
+}
+
+.minus { 
+    background-position: left -10px;
+    margin-top:3px;
+}</style>
+ 
+ 
 
 @endsection
 
 
 
-
- <!--  @foreach($menu_group as $le)
-               @if($menu_group_id==$le->id)
-               <input type="hidden" name="menu_group_id" id="menu_group_id" value="{{$le->id}}" >
-             <input type="text" name="menu_group_id1" id="menu_group_id1" value="{{$le->name}}">
-             @endif    
-             @endforeach -->

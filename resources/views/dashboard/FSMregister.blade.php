@@ -2,7 +2,10 @@
     @section('content')
 
 @if(Session::has('message'))
+<div class="alert alert-success alert-dismissible">
+<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
 <p class="alert alert-info">{{ Session::get('message') }}</p>
+</div>
 @endif
  <!-- Body Content Start -->
 
@@ -24,7 +27,7 @@
 			  	<input id="fsmid" type="hidden" value="0">
 				<div class="form-group">
 				 <select id="txttitle" name="txttitle" class="selectpicker select-opt form-control">
-			     <option selected="selected" value="0">Title</option>
+			     <option selected="selected" value="0">--Title--</option>
 		         <option value="MR">Mr</option>
 		         <option value="MRS">Mrs</option>
 				 <option value="MS">Ms</option>
@@ -91,8 +94,8 @@
 				</div>
 				<div class="col-md-4 col-xs-12">
 				<div class="form-group">
-				<select id="txtstate" name="txtstate" class="selectpicker select-opt form-control" required="">
-			     <option selected="selected" value="0">State</option>
+				<select id="txtstate" name="txtstate" class="selectpicker select-opt form-control">
+			     <option selected="selected" value="0">--Select State--</option>
 				 @foreach($state as $val)
 			     <option value="{{$val->state_id}}">{{$val->state_name}}</option>
 		          @endforeach
@@ -101,7 +104,7 @@
 				</div>
 				<div class="col-md-4 col-xs-12">
 				<div class="form-group">
-				<select id="txtmanager" name="txtmanager" class="selectpicker select-opt form-control" required="">
+				<select id="txtmanager" name="txtmanager" class="selectpicker select-opt form-control">
 					<option>--SELECT MANAGER--</option>
 			   @foreach($manager as $val)
 		         <option value="{{$val->mgid}}">{{$val->fullname}}</option>
@@ -117,7 +120,7 @@
 				</div>
 				<div class="col-md-4 col-xs-12">
 				<div class="form-group">
-				<select id="txtfsmtype" name="txtfsmtype" class="selectpicker select-opt form-control" required="">
+				<select id="txtfsmtype" name="txtfsmtype" class="selectpicker select-opt form-control">
 			     <option>--SELECT FSM TYPE--</option>
 	             <option>Employee</option>
 	             <option>Paid Employee</option>
@@ -131,8 +134,8 @@
 			
               <div class="col-md-4 col-xs-12">
 				<div class="form-group">
-				<select name="State"  id="txtmapstate" class="selectpicker select-opt form-control" required="">
-			     <option selected="selected" value="0">State</option>
+				<select name="State"  id="txtmapstate" class="selectpicker select-opt form-control">
+			     <option selected="selected" value="0">--Select State--</option>
 		          @foreach($state as $val)
 			     <option value="{{$val->state_id}}">{{$val->state_name}}</option>
 		          @endforeach
@@ -141,8 +144,8 @@
 				</div>
 				<div class="col-md-4 col-xs-12">
 				<div class="form-group">
-				<select name="city" id="txtmapcity" class="selectpicker select-opt form-control" required="">
-			     <option>Select City</option>
+				<select name="city" id="txtmapcity" class="selectpicker select-opt form-control">
+			     <option>--Select City--</option>
 		         <!-- <option>Mumbai</option> -->
 				</select>
 				</div>
@@ -187,7 +190,7 @@
 				</div>
                <div class="col-md-4 col-xs-12">
 				<div class="form-group">
-				<select id="txtactype" name="txtactype" class="selectpicker select-opt form-control" required="">
+				<select id="txtactype" name="txtactype" class="selectpicker select-opt form-control">
 			     <option selected="selected" value="0">Account Type</option>
 		         <option value="1">Saving Account</option>
 		         <option value="2">Current Account</option>

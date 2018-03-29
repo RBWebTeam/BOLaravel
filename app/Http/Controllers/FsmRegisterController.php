@@ -79,7 +79,7 @@ public function insertfsm(Request $req){
       $req->txtbankcity
     ));
       
-    Session::flash('message', 'Register successfully...!'); 
+    Session::flash('message', 'Record Has Been Saved Successfully.!'); 
         return redirect('Fsm-Register');
   }
 }
