@@ -1030,25 +1030,32 @@ function BindFbas(flag,value)
         type: "GET",
        dataType:"json",
       success:function(data) {
+
+       // alert(data);
       var text = "";
       for (var i = 0; i < data.length; i++) {
-      if(i==0)
+
+     if(i==0)
+
     {
-    text = text +'<tr><th><input  name="fba_list[]" value="0" id="selectAll" onclick="checkall()" type="checkbox" /> FBA List</th></tr>';
-  text = text +'<tr><td><input name="fba_list[]" id="chkfba" type="checkbox" class="chkfba" value="'+data[i].id+'"/><input id="hdnchk" name="hdnchk" type="hidden" value="'+data[i].id+'" />'+data[i].fullname+'</td></tr>';
+    text = text +'<tr><th><input  name="fba_list[]" value="0" id="selectAll" onclick="checkall()" type="checkbox" /> FBA List</th><th>Mobile Number</th><th>City </th></tr>';
+
+
+   text = text +'<tr><td><input name="fba_list[]" id="chkfba" type="checkbox" class="chkfba" value="'+data[i].id+'"/><input id="hdnchk" name="hdnchk" type="hidden" value="'+data[i].id+'" />'+data[i].fullname+'</td><td>'+data[i].mobile+'</td> <td>'+data[i].City+'</td></tr>';
 }
-else{
-text = text +'<tr><td><input id="chkfba" name="fba_list[]"  type="checkbox" class="chkfba" value="'+data[i].id+'"/><input id="hdnchk" type="hidden" value="'+data[i].id+'" />'+data[i].fullname+'</td></tr>';
+
+  else{
+text = text +'<tr><td><input id="chkfba" name="fba_list[]"  type="checkbox" class="chkfba" value="'+data[i].id+'"/><input id="hdnchk" type="hidden" value="'+data[i].id+'" />'+data[i].fullname+'</td><td>'+data[i].mobile+'</td><td>'+data[i].City+'</td></tr>';
 }
 
 }
-          $('#tblfbalist').append(text);
-
+$('#tblfbalist').empty().append(text);
+        
                      },
-     error:function(error)
-                     {
-                      console.log(error);
-                     }
+              error:function(error)
+             {
+            console.log(error);
+           }
                 });
 }
 
