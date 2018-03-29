@@ -165,7 +165,7 @@ $(document).ready(function(){
                     dataType: "json",
                     success:function(data) {
                         $('#txtmapcity').empty();
-                        $('#txtmapcity').append('<option value="0">select city</option>');
+                        $('#txtmapcity').append('<option value="0">--Select City--</option>');
                         $.each(data, function(key, value) {
 
                             $('#txtmapcity').append('<option value="'+ key +'">'+ value +'</option>');
@@ -214,7 +214,7 @@ $("#basic-addon2").click(function(e){
                       {
                         rows = rows +"<tr align='left'><td>";
                         rows = rows +"<input id='pincode' type='checkbox' class='used chk' value =''>";
-                        rows = rows +"<span>"+data[i].pincode+"</span></td></tr>";
+                        rows = rows +"<span style='color:black'>"+data[i].pincode+"</span></td></tr>";
                       }
 
                       $('#tblpincode > tbody:last-child').append(rows);
@@ -228,6 +228,7 @@ $('#chkselectall').click(function () {
 // insert Fsm details
 function insertfsm() {
   //console.log($('#fsmregister').serialize());
+  if ($('#fsmregister').valid()){
    $.ajax({ 
    url: "{{URL::to('Fsm-Register')}}",
    method:"POST",
@@ -239,6 +240,7 @@ function insertfsm() {
    }
 
 });
+ }
  }
 
 // fba  block unblock
@@ -858,7 +860,8 @@ alert(msg);
 
 //shubham rm folloup 
 
-$('#chkproduct').click(function () {    
+$('#chkproduct').click(function () { 
+
      $('.chkproductname').prop('checked', this.checked);    
  });
 
@@ -868,6 +871,8 @@ function getfollowup(id){
  }
 
 $('#btn_subbmit').click(function() {
+  if( $('#rmfolloupdetails').valid())
+    {
 var productid = []
 $('input:checkbox[name=txtproduct]:checked').each(function() {
 productid.push($(this).val())
@@ -887,6 +892,7 @@ console.log($('#rmfolloupdetails').serialize());
     $("#rmfolloupdetails").trigger('reset');
    }
 });
+ }
 });
 
 function viewhistory(fbaid){
@@ -1205,7 +1211,8 @@ function getproductfollowup(fbaid){
  }
 
 $('#btn_productsubbmit').click(function() {
-
+if( $('#productfolloupdetails').valid())
+    {
   console.log($('#productfolloupdetails').serialize());
    $.ajax({ 
    url: "{{URL::to('Product-followup')}}",
@@ -1220,7 +1227,7 @@ $('#btn_productsubbmit').click(function() {
 
    }
 });
-
+}
  });
 
 function viewProducthistory(fbaid){
@@ -1334,10 +1341,12 @@ $(".nav-list > li").addClass(function(i){return "item" + (i + 1);});
 
 
 
+
 function docview(fbaid){
+
 $('#divdocviewer').html(""); 
 $("#imgdoc").attr("src","");
-$("#imgdoc").css("display","show");
+$("#imgdoc").css("display","none");
 $.ajax({  
 
          type: "GET",  
@@ -1347,16 +1356,17 @@ $.ajax({
      
         var data = JSON.parse(fsmmsg);
         var str = "<table class='table'><tr style='height:30px;margin:18px;'>";
-  if(data.data.length > 0){
-      
-       for (var i = 0; i < data.data.length; i++) {
+  if(data.length > 0){
         
-      str = str + '<a><input  class="btn btn-default" style="margin:2px" type="button" onclick=showImage("'+data.url+data.data[i].FileName+'") value="'+data.data[i].DocType+'"/></a>';
+       for (var i = 0; i < data.length; i++) {
+        
+   
+      str = str + '<a><input  class="btn btn-default" style="margin:2px" type="button" onclick=showImage("'+data[i].FileName+'") value="'+data[i].DocType+'"/></a>';
     }
-   str = str + "</tr></table>";
+
+           str = str + "</tr></table>";
 
       }
-
       else
       {
         str = str + "<td>No documents uploaded.</td></tr></table>";
@@ -1364,21 +1374,26 @@ $.ajax({
 
       }
 
-           $('#divdocviewer').html(str);   
-             
-  
+  $('#divdocviewer').html(str);   
+              
         }  
       });
 }
 
-function showImage(src)
-
+function showImage(test)
 {
 
+
+     var url=<?php if(isset($url))echo $url; ?>
   $("#imgdoc").css("display","block");
+  src=url+test;
+  console.log(src)
   $("#imgdoc").attr("src" ,src);
 
+
+
 }
+
 
 
 
@@ -1445,7 +1460,7 @@ $('#msds-select').change(function () {
    $('#btn_saveticket').click(function() {
     if( $('#fromraiserticket').valid())
     {
-
+ 
     data1=new FormData($("#pathimgraiser"));
     
   console.log($('#fromraiserticket').serialize());

@@ -63,8 +63,8 @@
            </div>
            <div class="form-group">
            	<label class="control-label" for="message-text">RM Status: </label>
-           	<select class="form-control" name="txtrmstatus" id="txtrmstatus">
-           	 <option selected="selected">--Select Status--</option>
+           	<select class="form-control" name="txtrmstatus" id="txtrmstatus" required="yes">
+           	 <option selected="selected" value="0">--Select Status--</option>
               @foreach($status as $val)
               <option value="{{$val->id}}" required="yes">{{$val->status_name}}</option>
               @endforeach
