@@ -15,9 +15,10 @@
        <div class="overflow-scroll">
        <div class="table-responsive" >
 
-      <table class="datatable-responsive table table-striped table-bordered dt-responsive nowrap" id="example">
+      <table class="datatable-responsive table table-striped table-bordered dt-responsive nowrap" id="users-list-table">
                                     <thead>
                                        <tr>
+                                       <th>ID</th>
                                        <th>UserName</th>
                                       
                                        <th>Email</th>
@@ -35,6 +36,7 @@
                                     <tbody>
                                     @foreach($query as $vl)
                                       <tr>
+                                        <td>{{$vl->FBAUserId}}</td>
                                       <td>{{$vl->UserName}}</td>
                                        <td>{{$vl->email}}</td>
                                          <td>{{$vl->mobile}}</td>
@@ -84,7 +86,19 @@
       </div>
 
  
- 
+ <script type="text/javascript">
+   
+     $(document).ready(function() {
+    $('#users-list-table').DataTable( {
+     paging: true,
+     "order": [[ 0, "desc" ]]
+});
+
+} );
+
+
+
+ </script>
 
 
 
