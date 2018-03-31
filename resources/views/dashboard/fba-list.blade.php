@@ -33,13 +33,32 @@
        <div class="form-group"> <input type="submit" name="btndate" id="btndate"  class="mrg-top common-btn pull-left" value="SHOW">  
 	   &nbsp;&nbsp;
 
-   <select  id="msds-select" class="pull-left mrg-top mrg-left">
+<!--    <select  id="msds-select" class="pull-left mrg-top mrg-left">
    <option value="0">Posp Type</option>
   <option value="1">POSP Yes</option>
   <option value="2">POSP No</option>
-  </select>
+
+  </select> -->
+   &nbsp;&nbsp;&nbsp;
+  <form name="myform">
+  <select id="msds-select" class="form-control" style="width:55%;margin:10px;margin-top:4px;display: -webkit-inline-box;"  name="one" onchange="if (this.selectedIndex==4){this.form['fbsearch'].style.visibility='visible',this.form['psearch'].style.visibility='hidden'}else {this.form['psearch'].style.visibility='visible',this.form['fbsearch'].style.visibility='hidden'};">
+<option id="msds-select"  value="" selected="selected">Search By...</option>
+   <option value="0">Posp Type</option>
+  <option value="1">POSP Yes</option>
+  <option value="2">POSP No</option>
+<option value="FBAID">FBA ID</option>
+<option value="POSPNO">POSP NO</option>
+</select>
+<input type="textbox" class="fbsearch"  name="fbsearch" style="visibility:hidden;"/>
+<input type="textbox" class="psearch" name="psearch" style="visibility:hidden;"/>
+
+</form>
+  </div> 
   </div>
-       </div>
+    <!-- <input type="text"  class="psearch" name="psearch"  placeholder="Search.."> -->
+
+ 
+
     
 
   
@@ -520,7 +539,7 @@ $(document).ready(function() {
     function(settings, data, dataIndex) {
     var min = $('#min').val();
     var max = $('#max').val();
-    console.log(max);
+   // console.log(max);
     var createdAt = data[19] || 19; // Our date column in the table
    
     if (
@@ -546,3 +565,35 @@ $('.date-range-filter').datepicker();
 });
 </script>
 <!-- from date to date end -->  
+
+
+<!-- Search Pospno and Fbaid start -->
+<script>
+$(document).ready(function(){
+    $(".psearch").keyup(function(){ 
+         table1 = $('#fba-list-table').DataTable();
+         table1.columns(10).search( this.value).draw();
+    });
+});
+
+ $(document).ready(function(){
+    $(".fbsearch").keyup(function(){ 
+         table1 = $('#fba-list-table').DataTable();
+         table1.columns(0).search( this.value).draw();
+    });
+});
+ // Search Pospno and Fbaid End
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
