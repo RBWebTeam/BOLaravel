@@ -88,10 +88,10 @@ Route::get('View-Raised-Ticket/{ticketid}','ViewRaisedTicketController@deletetic
 Route::get('HealthAssure','HealthAssureController@gethealthassure');
 Route::post('HealthAssureinsert','HealthAssureController@inserthealthtest');
 Route::get('Health-Assure-Partner','HealthAssurePartnerController@getpartnerinfo');
-
+Route::post('providerlist','HealthAssurePartnerController@providerlist');
 ///shubham end ///
 
-//////GOVIND
+//////GOVINDF
 Route::get('Fsm-Details/{smid}','FsmDetailsController@fsmfbalist');
 Route::get('FsmRegister/{smid}','FsmRegisterController@getfsmdetail');
 Route::get('fba-list/{partnerid}','FbaController@getfbapartner');
@@ -188,6 +188,12 @@ Route::post('sales-material-upload-submit','BookAppointmentController@sales_mate
 Route::get('sales-material','BookAppointmentController@sales_material');
 Route::post('sales-material-update','BookAppointmentController@sales_material_update');
 Route::post('sales-material-delete','BookAppointmentController@sales_material_delete');
+
+/*Heath Assure*/
+Route::get('health-packages','BookAppointmentController@health_packages');
+Route::post('health-insurance-packages','BookAppointmentController@health_insurance_packages');
+Route::post('health-insurance-analysis','BookAppointmentController@health_insurance_analysis');
+Route::get('order-summary','BookAppointmentController@order_summary');
 
  
 

@@ -44,13 +44,81 @@ ul li {margin:2px; padding:4px !important;}
 .input-1 {padding:10px;width:100%;border:none; border:1px solid #ddd;border-radius:3px; margin-bottom:15px;}
 .button1 {border:2px solid #f95f67; padding:10px;background:#fff; margin-bottom:20px; width:100%;}
 label {font-size: 11px;color: #666;}
+.btn-submit {
+    background-color: #fff;
+    border: 1px solid #ff5a60 !important;
+    color: #ff5a60;
+    border-radius: 0px;
+    font-size: 15px;
+    border: none;
+    outline: none;
+    text-transform: uppercase;
+    width: 100%;
+    outline: none;
+}
+.ripple-effect {
+    position: relative;
+    overflow: hidden;
+    -webkit-transform: translate3d(0, 0, 0);
+}
 </style>
 <script>
 $(document).ready(function(){
     $(".down-arrow").click(function(){
         $(".bg-gray").toggle();
     });
+
+    getproviderlist();
 });
+
+function getproviderlist()
+{
+ $.ajax({ 
+   url: "{{URL::to('providerlist')}}",
+   method:"POST",
+   data: $('#formprovidelist').serialize(),
+   success: function(msg)  
+    {
+      var obj = JSON.parse(msg);
+
+var arr = obj.d.service_provider_listdata;
+var text = "";
+for(var i = 0; i< arr.length;i++){
+
+text+="<div class='col-md-12' style='border:solid 1px lightgray; padding:1px;margin:2px;'  onclick=showDivw('"+arr[i].provider_id+"',this,'"+ arr[i].provider_name.replace(/ /g,'_')+"','"+arr[i].address.replace(/ /g,'_')+"','"+arr[i].visittype+"','"+arr[i].DCCode+"')>";
+
+  if(arr[i].DCCode == "")
+  {
+    text += "<div class='col-md-4'><img src='images/Logos/blank.png' class='img-responsive'/></div>";
+  }
+  else{
+    text +="<div class='col-md-4'><img src='images/Logos/"+arr[i].DCCode+".png' class='img-responsive'/></div>";
+  }
+text +="<div class='col-md-8'><h4>"+ arr[i].provider_name+"</h4><br/><p>"+
+  arr[i].address+"</p></div></div></div>";
+}
+
+$('#tblproviderlist').append(text);
+   
+    }
+  });
+}
+function showDivw(id,row,name,address,visittype,dccode)
+{
+  $('#txtprovider').val(id);
+  $('#txtprovidername').val(name.replace(/_/g,' '));
+  $('#txtprovideraddress').val(address.replace(/_/g,' '));
+  $('#txtprovidervisitype').val(visittype);
+  $('#txtproviderdccode').val(dccode);
+
+  $('#btndiv').css('display','');
+}
+
+
+/*function bookaapp(){
+   "Ordersummary.aspx?PackName=" + hdnpackname.Value + "&fbaname=" + Request.QueryString["fbaname"] + "&mob=" + Request.QueryString["mob"] + "&fbaid=" + hdnfbaid.Value + "&Packcode=" + hdnPackcode.Value + "&tcount=" + hdntcount.Value + "&MRP=" + hdnMRP.Value + "&OfferPrice=" + hdnOfferPrice.Value + "&homevisit=" + hdnappstat.Value + "&fasting=" + hdnfasting.Value + "&url=" + obj.d.PayURL + "&vname=" +hdnvname.Value + "&vadd=" + hdncadd.Value + "&visit=" + hdnhomevisit.Value + "&ID=" + Request.QueryString["ID"] );
+}*/
+
 </script>
 
 </head>
@@ -63,8 +131,8 @@ $(document).ready(function(){
 <h5 class="text-center pad">Health Check Up Plans selected by you</h5>
  </div>
  
-
-
+<form id="formprovidelist">
+ {{ csrf_field() }}
 <div class="col-md-12">
   <table class="table table-bordered tbl2">
     <tbody>
@@ -79,23 +147,38 @@ $(document).ready(function(){
 </div>
 <div class="col-md-12"><p class="text-center head1">Select your preferred lab from the list below</p></div>
 <div class="col-md-12">
-<table class="table table-bordered table-hover" style="border: 1px #ccc; margin-bottom: 5px;">
+<div id="tblproviderlist" style="border: 1px #ccc; margin-bottom: 5px;">
                     
-                        <tbody>
-               
-                          <tr onclick="" id="" style="cursor: pointer; background: rgb(255, 255, 255);" class="selectedtr">
-                            <td>
-                                <img src="images\Logos\SRL.png" class="img-responsive"></td>
-                            <td>
-                                <h4>SRL Wellness Centre - Goregaon</h4>
-                                <p>Prime Square Building, Plot no.1, Gaiwadi Industrial Estate, Near Kamat Club &amp; Patel Auto, S V Road, Goregaon (West)-0km</p>
-                            </td>
-                          </tr>
-                
-                       
-                        </tbody>
-</table>
+                        
 </div>
+<input type="hidden" name="txtPackName" id="txtPackName" value="{{$_GET["PackName"]}}">
+<input type="hidden" name="txtfbaname" id="txtfbaname" value="{{$_GET["fbaname"]}}">
+
+<input type="hidden" name="txtfbaid" id="txtfbaid" value="{{$_GET["fbaid"]}}">
+<input type="hidden" name="txtPackcode" id="txtPackcode" value="{{$_GET["Packcode"]}}">
+<input type="hidden" name="txttcount" id="txttcount" value="{{$_GET["tcount"]}}">
+<input type="hidden" name="txtMRP" id="txtMRP" value="{{$_GET["MRP"]}}">
+<input type="hidden" name="txtOfferPrice" id="txtOfferPrice" value="{{$_GET["OfferPrice"]}}">
+<input type="hidden" name="txthomevisit" id="txthomevisit" value="{{$_GET["homevisit"]}}">
+<input type="hidden" name="txtfasting" id="txtfasting" value="{{$_GET["fasting"]}}">
+
+
+<input type="hidden" name="txtprovider" id="txtprovider">
+<input type="hidden" name="txtprovidername" id="txtprovidername">
+<input type="hidden" name="txtprovideraddress" id="txtprovideraddress">
+<input type="hidden" name="txtprovidervisitype" id="txtprovidervisitype">
+<input type="hidden" name="txtproviderdccode" id="txtproviderdccode">
+
+
+
+<input type="hidden" name="txtID" id="txtID" value="{{$_GET["ID"]}}">
+
+<div id="btndiv" class="text-center col-md-12" style="display: none;">
+ <input type="submit" name="btnbook" value="BOOK THIS TEST" onclick="" id="btnbook" class="btn btn-submit btn-primary" style="width: auto;">
+</div>
+</div>
+</form>
+
 </div>
 </body>
 </html>

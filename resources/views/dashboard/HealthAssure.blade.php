@@ -61,8 +61,12 @@ if( $('#healthchekup').valid())
 
   success: function(msg)  
    {
-    console.log(msg);
+
+    
     $("#healthchekup").trigger('reset');
+
+    window.location.href ="{{URL::to('Health-Assure-Partner')}}?PackName="+$('#txtpackname').val()+"&Packcode="+$('#txtpackcode').val()+"&OfferPrice="+$('#txtoffer').val()+"&MRP="+$('#txtmrp').val()+"&tcount="+$('#txttcount').val()+"&fasting="+$('#txtfasting').val()+"&homevisit="+$('#txthomevisit').val()+"&fbaid="+$('#txtfbaid').val()+"&fbaname="+$('#txtfbaname').val()+"&ID="+msg[0].ID;
+
    }
 });
 } else{
@@ -166,6 +170,12 @@ foreach ($val->ParamDetails as $key => $value) {
     value="{{$_GET["fasting"]}}">
 <input type="hidden" name="txthomevisit" id="txthomevisit" 
     value="{{$_GET["homevisit"]}}">
+<input type="hidden" name="txtfbaname" id="txtfbaname" 
+    value="{{$_GET["fbaname"]}}">
+<input type="hidden" name="txttcount" id="txttcount" 
+    value="{{$_GET["tcount"]}}">
+
+
  <label>Name</label>
  <input type="text" id="txtname" name="txtname" class="input-1" required />
 </div>
