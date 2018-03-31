@@ -45,11 +45,7 @@ ul li {    float: left;display: inherit;width:48%;}
 
 <form id="health-insurance" method="POST">
    {{ csrf_field() }}
-
-
-
-<div class="header-middle text-center" style="width:100%;">HEALTH CHECK-UP PLAN</div>
-    
+<div class="header-middle text-center" style="width:100%;">HEALTH CHECK-UP PLAN</div>  
     
 <div class="container padd-top">
  <div class="col-md-12">
@@ -117,6 +113,7 @@ ul li {    float: left;display: inherit;width:48%;}
 
 
 </div>
+<<<<<<< HEAD
 </form>
 <script type="text/javascript">
 $(document).ready(function(){
@@ -134,10 +131,21 @@ function gethealthpackage()
          success: function(msg){
 
 
+
         var respon = JSON.parse(msg);
 
           var tablerows = new Array();
           $.each(respon.d.lstPackageDetails, function( index, value ) {
+
+          // console.log(msg.d.lstPackageDetails[0].OfferPrice);
+          // console.log(msg.d.lstPackageDetails[0].PackName);
+          // console.log(msg.d.lstPackageDetails[0].MRP);
+
+          // console.log(msg.d.lstPackageDetails);
+   
+          var tablerows = new Array();
+                         $.each(msg.d.lstPackageDetails, function( index, value ) {
+
             tablerows.push('<tbody><td><p><b>' + value.PackName + '</b></p><h5 class="text-danger">' + value.cnt + '&nbsp;Tests</h5> </td><td colspan="2"><p class="text-center">ACTUAL COST</p> <a href="javascript:void(0)" class="amount amunt1"><strike>' + value.MRP + '</strike></a></td><td colspan="2"><p class="text-center">OFFER COST</p> <a href="javascript:void(0)" onclick="offer_price(\'' + value.PackName + '\',' + value.PackCode + ',' + value.OfferPrice + ',' + value.MRP + ',' + value.cnt + ',\'' + value.Fasting + '\',\'' + value.VisitType + '\')" class="amount">' + value.OfferPrice + '</a></td><td><a onclick="img_delete(' + value.PackCode + ')" href="javascript:void(0)" class="down-arrow"><span  class="glyphicon glyphicon-chevron-down"></span></a></td></tr><tr><td  class="no-padding bg-gray' + value.PackCode + '" colspan="6" style="display:none;"><ul class="list1" id="Depreciation' + value.PackCode + '" ></ul></td></tr></tbody>');
           }); 
 
@@ -149,12 +157,18 @@ function gethealthpackage()
                
       }   
      });
-}
 
+});
+}
 </script> 
 
+<!-- <script>
 
-
+    $(".down-arrow").click(function(id,index){
+      alert('okae');
+        $(".bg-gray").toggle();
+    });
+</script>  -->  
 <script type="text/javascript">
 var x;
  function img_delete(PackCode){

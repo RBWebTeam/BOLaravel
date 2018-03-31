@@ -194,7 +194,6 @@ Route::get('health-packages','BookAppointmentController@health_packages');
 Route::post('health-insurance-packages','BookAppointmentController@health_insurance_packages');
 Route::post('health-insurance-analysis','BookAppointmentController@health_insurance_analysis');
 Route::get('order-summary','BookAppointmentController@order_summary');
-
  
 
   /************

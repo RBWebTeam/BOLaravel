@@ -29,8 +29,8 @@
        <td><?php echo $val->FullName; ?></td> 
        <td><?php echo $val->createdate; ?></td>
        <td><?php echo $val->MobiNumb1; ?></td> 
-       <td><?php echo $val->EMaiID; ?></td>
-       <td><?php echo $val->city; ?></td>
+       <td><?php echo $val->EMaiID; ?></td>  
+       <td><?php echo $val->City; ?></td> 
        <td><?php echo $val->Pincode; ?></td>
 
        <td>

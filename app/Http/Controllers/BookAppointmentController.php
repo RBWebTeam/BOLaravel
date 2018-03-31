@@ -115,14 +115,16 @@ class BookAppointmentController extends CallApiController
       }
 
 
-    public function health_packages(){
-          
+
+      public function health_packages(){
+
         return view('health-packages');
       }
 
       public function health_insurance_packages(Request $req)
       {
             $post_data='{"apptrebook_input":null,"status_input":null,"apptdetail":null,"pack_details":{"username":"Datacomp","pass":"Health@1234","fromamt":0,"toamt":0,"fromage":0,"toage":0,"gender":"M"},"slot_inputdata":null,"provider_data":null,"pack_param":null}';
+
 
         $result=$this->call_json_data_api('http://www.healthassure.in/Products/HAMobileProductService.asmx/PackDetails',$post_data);
 
@@ -137,6 +139,7 @@ class BookAppointmentController extends CallApiController
    
                return $m;
 
+
        }
 
        public function health_insurance_analysis(Request $req)
@@ -146,7 +149,9 @@ class BookAppointmentController extends CallApiController
             $post_data='{"pack_param":{"username":"Datacomp","pass":"Health@1234","packcode":'.$req->PackCode.'}}';
             // print_r($post_data);
             $url = "http://www.healthassure.in/Products/HAMobileProductService.asmx/PackParam";
-            $result=call_json_data_api($url,$post_data);
+
+            $result=$this->call_json_data_api($url,$post_data);
+
             $http_result=$result['http_result'];
             $error=$result['error'];
             $st=str_replace('"{', "{", $http_result);
@@ -161,8 +166,4 @@ class BookAppointmentController extends CallApiController
        public function order_summary(){
         return view('order-summary');
       }
-
-   
-       
-        
 }

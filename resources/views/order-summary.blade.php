@@ -54,6 +54,7 @@ $(document).ready(function(){
 <h5 class="text-center pad">Health Check Up Plans selected by you</h5>
  </div>
  
+<<<<<<< HEAD
 <?php if(isset($_GET['product'])){?>
                 <input type="text" name="product_id" id="product_ids" value="<?php echo $_GET['product'];?>">
                 <?php }else{?>
@@ -79,6 +80,9 @@ $(document).ready(function(){
                 <?php }else{?>
                 <input type="text" name="empcode" id="empcode" value="0">
                 <?php }?>
+=======
+
+>>>>>>> master
 
 <div class="col-md-12">
   <table class="table table-bordered tbl2">
