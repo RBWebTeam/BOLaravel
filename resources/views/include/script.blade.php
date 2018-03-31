@@ -268,7 +268,7 @@ $('.unblock').click(function(){
   $(this).closest('td').find('.block').toggle();
 
   var flag=0;
-  var value=$(this).closest('td').find('input[name="txtfbaid"]').val('return');
+  var value=$(this).closest('td').find('input[name="txtfbaid"]').val();
  
   $.ajax({
             type: "GET",
@@ -1408,6 +1408,9 @@ function showImage(test)
   
 
 <!-- fbalist ImageView Script End Here-->
+
+<!-- POSP YES OR NO Dropdown start -->
+
 <script> 
 
 $('#msds-select').change(function () { 
@@ -1417,7 +1420,7 @@ $('#msds-select').change(function () {
     function( settings, data, dataIndex ) {
         var msdsSearch = $( "#msds-select option:selected" ).val();
         var msdsValue = data[10]|| 0;
-        console.log(data);
+       // console.log(data);
         var numbers = /^[0-9]+$/;
           if(msdsSearch=="2" && msdsValue=="update"){  
             return true;
@@ -1425,9 +1428,16 @@ $('#msds-select').change(function () {
             if(msdsSearch=="1" && msdsValue!="update"){  
             return true;
           }
-          if(msdsSearch=="0"){  
+          if(msdsSearch=="0" && msdsValue){  
             return true;
           }
+          if(msdsSearch=="FBAID" && msdsValue!="draw"){
+            return true;
+          }
+          if(msdsSearch=="POSPNO" && msdsValue!="draw"){
+            return true;
+          }
+         
         return false;
     });
     
@@ -1435,7 +1445,7 @@ $('#msds-select').change(function () {
     
 });
 </script>
-
+<!-- POSP YES OR NO Dropdown end -->
 
 
 <script type="text/javascript">
@@ -1527,7 +1537,7 @@ function getcustomerid(text,fbaid){
                     type: "GET",                  
                     success:function(data) {
                       var json = JSON.parse(data);
-                      console.log(json);
+                      //console.log(json);
                       if(json.StatusNo==0){
    
                       $(text).closest('td').text(json.MasterData.CreateCustomerResult.CustID);
