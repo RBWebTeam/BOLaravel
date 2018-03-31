@@ -189,6 +189,14 @@ Route::get('sales-material','BookAppointmentController@sales_material');
 Route::post('sales-material-update','BookAppointmentController@sales_material_update');
 Route::post('sales-material-delete','BookAppointmentController@sales_material_delete');
 
+/*Heath Assure*/
+Route::get('health-packages','BookAppointmentController@health_packages');
+Route::post('health-insurance-packages','BookAppointmentController@health_insurance_packages');
+Route::post('health-insurance-analysis','BookAppointmentController@health_insurance_analysis');
+Route::get('order-summary','BookAppointmentController@order_summary');
+
+
+
  
 
   /************

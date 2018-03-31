@@ -68,32 +68,39 @@
         <table id="payment-history-tabel" class="table table-bordered table-striped tbl " >
                  <thead>
                   <tr>
+                   <th> Customer ID</th>
                    <th>Customer Name</th>
-                   <th>Customer ID</th>
                    <th>Mobile</th>
                    <th>Email</th>
                     <th>  Payment Date</th>
                      <th>Amount</th>
                       <th>Payment Type</th>
                        <th> Payment Status</th>
+                       <th> City</th>
+                       <th>Sales Name</th>
                  </tr>
                 </thead>
                 <tbody>
                
-  @if(isset($respon))
+               <?php $sum=0;    ?>
+               @if(isset($respon))
                  @foreach($respon as $val)
                  <tr>   
-                   <?php   $customer_id =preg_split('/-/', $val->CustName); ?>
-                   <td><?php  echo ($customer_id[0]);  ?></td>
-                    <td><?php  echo ($customer_id[1]);  ?></td>
+                   <?php   //$customer_id =preg_split('/-/', $val->CustName); ?>
+                   <td>{{$val->CustID}}</td>
+                    <td>{{$val->CustName}}</td>
                     <td>{{$val->Mobile}}</td>
                    <td>{{$val->Email}}</td>
                      <?php $dt = new DateTime($val->PaymDate);
                       $date = $dt->format('m/d/Y'); ?>
                    <td>{{$date}}</td>
                    <td>{{$val->Amount}}</td>
+                   <?php $sum+=$val->Amount;?>
                     <td>{{$val->PaymType}}</td>
                     <td>{{$val->PaymStatus}}</td>
+                    <td>{{$val->City}}</td>
+                    <td>{{$val->SalesName}}</td>
+                    
                      
                  </tr>
                  @endforeach
@@ -101,6 +108,21 @@
         
                 
       </tbody>
+      <thead>
+                  <tr>
+                   <th> </th>
+                   <th> </th>
+                   <th> </th>
+                   <th> </th>
+                    <th>  </th>
+                     <th>TOTAL AMOUNT: <i class="fa fa-rupee"></i> {{$sum}} </th>
+                      <th> </th>
+                       <th>  </th>
+                       <th>  </th>
+                       <th>  </th>
+                 </tr>
+                </thead>
+
       </table>
       </div>
       </div>
@@ -112,11 +134,11 @@
      $(document).ready(function() {
     $('#payment-history-tabel').DataTable( {
      paging: true,
-  info: false,
-  responsive: false,
-}).column('0:visible').order('desc').draw();
+      "order": [[ 4, "desc" ]]
+});
 
 } );
 
       </script>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
  @endsection

@@ -17,7 +17,7 @@
   
 
    <div id="loading" style="position: absolute;z-index: 1000;left: 44%;top: 40%; ">
-   <img src="loading.gif" width="100" />
+   <img src="{{url('loading.gif')}}" width="100" />
 
   </div>  
 </body>
