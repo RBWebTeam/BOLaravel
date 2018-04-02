@@ -240,9 +240,6 @@ $('#test_analysis').empty();
         
       </div>
       </div>
-      
-      
-      
     </div>
   </div>
 </div>

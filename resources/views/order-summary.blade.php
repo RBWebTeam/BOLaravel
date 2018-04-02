@@ -41,7 +41,30 @@ $(document).ready(function(){
     $(".down-arrow").click(function(){
         $(".bg-gray").toggle();
     });
+
+
 });
+function  showtermcon(){
+        $('#myModal').modal('show');
+    }
+
+function showtestmodel(name,model)
+{
+ 
+  $('#testHead').empty();
+  $('#testHead').append(name.replace(/_/g,' ').replace('Test','').replace('test','')+" Test");
+  var arr = model.split(',')
+  var text = "<body>";
+  $('#tbltestlist').empty();
+  for (var i = 0; i < arr.length-1; i++) {
+    text = text + "<tr style='height:40px;border-bottom:solid 1px black;'><td>"+arr[i].replace(/_/g,' ')+"</td></tr>";
+  }
+text = text +"</body>";
+  
+  $('#tbltestlist').html(text);
+  $('.testCheckup').modal('show');
+}    
+
 </script>
 
 <!-- <header class="main-header"> -->
@@ -94,10 +117,24 @@ $(document).ready(function(){
    <tr>
    <td class="no-padding bg-gray" colspan="6" style="display:none;">
    <ul class="list1">
-   <li><span class="glyphicon glyphicon-ok"></span> Zero Depreciation (1802.86) </li>
-   <li><span class="glyphicon glyphicon-ok"></span> Key Lock</li>
-   <li><span class="glyphicon glyphicon-ok"></span> NCB Protection  </li>
-   <li><span class="glyphicon glyphicon-ok"></span> Zero Depreciation </li>
+    @if(isset($respon))
+    @foreach($respon as $val)
+   <li><span class="glyphicon glyphicon-ok"></span>{{$val->Name}} 
+    <?php if(sizeof($val->ParamDetails)) {
+
+$str = "";
+foreach ($val->ParamDetails as $key => $value) {
+  $str = $str.str_replace(' ', '_', $value).",";
+}
+
+     echo "<a onclick=showtestmodel('".str_replace(' ', '_', $val->Name)."','".$str."') style='color: #5b9bd5; cursor: pointer;' 
+     data-toggle='modal' data-target='testCheckup'>".
+     sizeof($val->ParamDetails)." - Tests </a>";        
+} 
+
+   ?></li>
+   @endforeach
+   @endif
    </ul>
    </td>
   </tr>
@@ -188,6 +225,22 @@ $(document).ready(function(){
 
 </div>
 
+
+<div id="testCheckup" class="modal fade dignostic-modal testCheckup">
+                <div class="modal-dialog modal-sm">
+                    <div class="modal-content">
+                        <div class="modal-header" style='background: #5b9bd5; color: #fff;'>
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style='font-size: 22px; color: #fff; opacity: 0.9;'>&times;</button>
+                            <h5 id="testHead" class="modal-title"></h5>
+                        </div>
+                        <div id="testCheckupBody" class="modal-body" style='background: #eaeff7;'>
+                          <table id="tbltestlist" style="width:100%">
+                          </table>
+
+                        </div>
+                    </div>
+                </div>
+  </div>
 
 @endsection 
 

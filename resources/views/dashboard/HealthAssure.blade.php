@@ -282,7 +282,7 @@ foreach ($val->ParamDetails as $key => $value) {
                         </div>
                     </div>
                 </div>
-            </div>
+  </div>
 
 
 <!-- modal popup -->
