@@ -61,8 +61,12 @@ if($('#healthchekup').valid())
 
   success: function(msg)  
    {
-    console.log(msg);
+
+    
     $("#healthchekup").trigger('reset');
+
+    window.location.href ="{{URL::to('Health-Assure-Partner')}}?PackName="+$('#txtpackname').val()+"&Packcode="+$('#txtpackcode').val()+"&OfferPrice="+$('#txtoffer').val()+"&MRP="+$('#txtmrp').val()+"&tcount="+$('#txttcount').val()+"&fasting="+$('#txtfasting').val()+"&homevisit="+$('#txthomevisit').val()+"&fbaid="+$('#txtfbaid').val()+"&fbaname="+$('#txtfbaname').val()+"&ID="+msg[0].ID;
+
    }
 });
 } else{
@@ -166,6 +170,12 @@ foreach ($val->ParamDetails as $key => $value) {
     value="{{$_GET["fasting"]}}">
 <input type="hidden" name="txthomevisit" id="txthomevisit" 
     value="{{$_GET["homevisit"]}}">
+<input type="hidden" name="txtfbaname" id="txtfbaname" 
+    value="{{$_GET["fbaname"]}}">
+<input type="hidden" name="txttcount" id="txttcount" 
+    value="{{$_GET["tcount"]}}">
+
+
  <label>Name</label>
  <input type="text" id="txtname" name="txtname" class="input-1" required />
 </div>
@@ -184,8 +194,8 @@ foreach ($val->ParamDetails as $key => $value) {
 <label>Gender</label>
  <div class="form-group">
         <div data-toggle="buttons">
-          <label class="btn btn-default btn-circle btn-md"><input type="radio" name="btngender" id="btngender" checked="checked" value="0">Male</label>
-          <label class="btn btn-default btn-circle btn-md"><input type="radio" name="btngender" id="btngender" value="1">Female</label>
+          <label class="btn btn-default btn-circle btn-md"><input type="radio" name="btngender" id="btngender" checked="checked" value="Male">Male</label>
+          <label class="btn btn-default btn-circle btn-md"><input type="radio" name="btngender" id="btngender" value="Female">Female</label>
         </div>
       </div>
   </div>
@@ -230,7 +240,7 @@ foreach ($val->ParamDetails as $key => $value) {
  <select  class="input-1" name="ddlappttime" id="ddlappttime" required>
     <option value="0" selected="selected">APPT. TIME SLOT</option>
     @foreach($appttime as $val)
-	<option value="{{$val->apptid}}">{{$val->appointment_time}}</option>
+	<option value="{{$val->appointment_time}}">{{$val->appointment_time}}</option>
     @endforeach
 	<!-- <option value="3">08.30 TO 09.00 AM</option>
 	<option value="4">09.00 TO 09.30 AM</option>
@@ -272,7 +282,7 @@ foreach ($val->ParamDetails as $key => $value) {
                         </div>
                     </div>
                 </div>
-            </div>
+  </div>
 
 
 <!-- modal popup -->
