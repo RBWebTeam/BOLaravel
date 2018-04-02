@@ -44,8 +44,7 @@ try{
       public function inserthealthtest(Request $req)
       {
 
-    
-        DB::select('call usp_health_assured_booking_date(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',array(
+    $ID=DB::select('call usp_health_assured_booking_date(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',array(
       $req->txtname,
       $req->txtmono,
       $req->txtemail,
@@ -64,8 +63,10 @@ try{
       $req->txtmrp,
       $req->txtoffer,
       $req->txtfasting,
-      $req->txthomevisit
+      $req->txthomevisit      
      ));
+
+        return $ID;
       }
 }
  
