@@ -413,4 +413,9 @@ else
 
 
 
+public function went_wrong(Request $req){
+
+            return view('500');
+}
+
 }

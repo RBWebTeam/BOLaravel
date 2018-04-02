@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Exception;
 class PaymentHistoryController extends CallApiController
 {
      
@@ -14,17 +14,10 @@ class PaymentHistoryController extends CallApiController
                 
                 if(isset($req->fdate) && isset($req->todate)){
 	      	     $data=array("FromDate"=>$req->fdate,"ToDate"=>$req->todate);
-
-
 	      	 }else{
                  $data=array("FromDate"=>Date('m-d-Y', strtotime("-28 days")),"ToDate"=>Date('m-d-Y'));
-                 //$data=array("FromDate"=>"01-02-2018","ToDate"=>"01-28-2018");
+                
 	      	 }
-
-
-//print_r(  $data);exit;
- 
-
 
 	      	    $post_data=json_encode($data);
 	      	    $result=$this->call_json_data_api('http://mswebapi.magicsales.in/api/CommonAPI/GETPaymTrackDeta',$post_data);
@@ -35,23 +28,19 @@ class PaymentHistoryController extends CallApiController
 	            $m=$s=str_replace('\\', "", $s);
 	            $update_user='';
 	            $obj = json_decode($m);
-
- 
- 
-
-                   if($obj->message->Status='1'){
+             if($obj->message->Status='1'){
 
                     	 $respon=($obj->message->lstPaymTrackDeta);
-                    }else{
-                     	 $respon=0;
-                    }
+                    	 return view('dashboard/payment-history',['respon'=>$respon]);
+           }                  
 	}catch (Exception $e){
-
-	  return $e;    
-     }
+     
+    return view('500');
+   
+   }
 
 
                  
-      	  return view('dashboard/payment-history',['respon'=>$respon]);
+      	 
       }
 }
