@@ -51,7 +51,7 @@ $(document).ready(function(){
         $(".bg-gray").toggle();
     });
 $('#btnsubmithealth').click(function() {
-if( $('#healthchekup').valid())
+if($('#healthchekup').valid())
     {
   console.log($('#healthchekup').serialize());
    $.ajax({ 

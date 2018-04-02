@@ -146,13 +146,6 @@ ul li {    float: left;display: inherit;width:48%;}
 });
 </script> 
 
-<!-- <script>
-
-    $(".down-arrow").click(function(id,index){
-      alert('okae');
-        $(".bg-gray").toggle();
-    });
-</script>  -->  
 
 <script type="text/javascript">
 var x;
@@ -171,15 +164,16 @@ $('#Depreciation'+PackCode).empty();
           len=msg.d.lstPackParameter.length;
           arr=Array();
           Ar=[];
-         // ParamDetails=Array();
+
        for (var i =0; i<len; i++) {
-          //console.log(msg.d.lstPackParameter[i]);
-            
-            // Arra=Array(123,123);
+
+          if(msg.d.lstPackParameter[i].ParamDetails.length > 0){  
            arr.push('<li><span class="glyphicon glyphicon-ok"></span>'+msg.d.lstPackParameter[i].Name+'&nbsp;<a href="javascript:void(0)"   onClick=" ParamDetailsFN('+i+')" data-toggle="modal" data-target="#health_insurance">'+msg.d.lstPackParameter[i].ParamDetails.length+'-Tests</a></li>');
-
-          
-
+        }
+        else
+        {
+          arr.push('<li><span class="glyphicon glyphicon-ok"></span>'+msg.d.lstPackParameter[i].Name+'&nbsp;</li>');
+        }
        }
 
  
