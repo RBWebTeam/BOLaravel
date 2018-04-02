@@ -194,8 +194,8 @@ foreach ($val->ParamDetails as $key => $value) {
 <label>Gender</label>
  <div class="form-group">
         <div data-toggle="buttons">
-          <label class="btn btn-default btn-circle btn-md"><input type="radio" name="btngender" id="btngender" checked="checked" value="0">Male</label>
-          <label class="btn btn-default btn-circle btn-md"><input type="radio" name="btngender" id="btngender" value="1">Female</label>
+          <label class="btn btn-default btn-circle btn-md"><input type="radio" name="btngender" id="btngender" checked="checked" value="Male">Male</label>
+          <label class="btn btn-default btn-circle btn-md"><input type="radio" name="btngender" id="btngender" value="Female">Female</label>
         </div>
       </div>
   </div>
@@ -240,7 +240,7 @@ foreach ($val->ParamDetails as $key => $value) {
  <select  class="input-1" name="ddlappttime" id="ddlappttime" required>
     <option value="0" selected="selected">APPT. TIME SLOT</option>
     @foreach($appttime as $val)
-	<option value="{{$val->apptid}}">{{$val->appointment_time}}</option>
+	<option value="{{$val->appointment_time}}">{{$val->appointment_time}}</option>
     @endforeach
 	<!-- <option value="3">08.30 TO 09.00 AM</option>
 	<option value="4">09.00 TO 09.30 AM</option>

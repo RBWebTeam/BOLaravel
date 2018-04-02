@@ -113,16 +113,25 @@ function showDivw(id,row,name,address,visittype,dccode)
 
   $('#btndiv').css('display','');
 }
+ $("#btnbook").click(function(){
+ alert("test");
+    console.log($('#formprovidelist').serialize());
+   $.ajax({ 
+   url: "{{URL::to('Health-Assure-Partner')}}",
+   method:"POST",
+   data: $('#formprovidelist').serialize(),
+  success: function(msg)  
+   {
+    console.log(msg);
 
+    
+   }
+});
+}); 
 
-/*function bookaapp(){
-   "Ordersummary.aspx?PackName=" + hdnpackname.Value + "&fbaname=" + Request.QueryString["fbaname"] + "&mob=" + Request.QueryString["mob"] + "&fbaid=" + hdnfbaid.Value + "&Packcode=" + hdnPackcode.Value + "&tcount=" + hdntcount.Value + "&MRP=" + hdnMRP.Value + "&OfferPrice=" + hdnOfferPrice.Value + "&homevisit=" + hdnappstat.Value + "&fasting=" + hdnfasting.Value + "&url=" + obj.d.PayURL + "&vname=" +hdnvname.Value + "&vadd=" + hdncadd.Value + "&visit=" + hdnhomevisit.Value + "&ID=" + Request.QueryString["ID"] );
-}*/
 
 </script>
-
 </head>
-
 <body>
 <div class="container">
  <div class="col-md-12">
@@ -131,7 +140,7 @@ function showDivw(id,row,name,address,visittype,dccode)
 <h5 class="text-center pad">Health Check Up Plans selected by you</h5>
  </div>
  
-<form id="formprovidelist">
+<form id="formprovidelist" method="POST">
  {{ csrf_field() }}
 <div class="col-md-12">
   <table class="table table-bordered tbl2">
@@ -147,10 +156,7 @@ function showDivw(id,row,name,address,visittype,dccode)
 </div>
 <div class="col-md-12"><p class="text-center head1">Select your preferred lab from the list below</p></div>
 <div class="col-md-12">
-<div id="tblproviderlist" style="border: 1px #ccc; margin-bottom: 5px;">
-                    
-                        
-</div>
+<div id="tblproviderlist" style="border: 1px #ccc; margin-bottom: 5px;">                     </div>
 <input type="hidden" name="txtPackName" id="txtPackName" value="{{$_GET["PackName"]}}">
 <input type="hidden" name="txtfbaname" id="txtfbaname" value="{{$_GET["fbaname"]}}">
 
@@ -168,9 +174,6 @@ function showDivw(id,row,name,address,visittype,dccode)
 <input type="hidden" name="txtprovideraddress" id="txtprovideraddress">
 <input type="hidden" name="txtprovidervisitype" id="txtprovidervisitype">
 <input type="hidden" name="txtproviderdccode" id="txtproviderdccode">
-
-
-
 <input type="hidden" name="txtID" id="txtID" value="{{$_GET["ID"]}}">
 
 <div id="btndiv" class="text-center col-md-12" style="display: none;">

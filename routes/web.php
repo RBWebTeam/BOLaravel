@@ -89,6 +89,7 @@ Route::get('HealthAssure','HealthAssureController@gethealthassure');
 Route::post('HealthAssureinsert','HealthAssureController@inserthealthtest');
 Route::get('Health-Assure-Partner','HealthAssurePartnerController@getpartnerinfo');
 Route::post('providerlist','HealthAssurePartnerController@providerlist');
+Route::Post('Health-Assure-Partner','HealthAssurePartnerController@getproviderinfo');
 ///shubham end ///
 
 //////GOVINDF
