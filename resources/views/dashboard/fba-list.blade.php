@@ -41,18 +41,19 @@
   </select> -->
    &nbsp;&nbsp;&nbsp;
   <form name="myform">
-  <select id="msds-select" class="form-control" style="width:55%;margin:10px;margin-top:4px;display: -webkit-inline-box;"  name="one" onchange="if (this.selectedIndex==4){this.form['fbsearch'].style.visibility='visible',this.form['psearch'].style.visibility='hidden'}else {this.form['psearch'].style.visibility='visible',this.form['fbsearch'].style.visibility='hidden'};">
-<option id="msds-select"  value="" selected="selected">Search By...</option>
+  <select id="msds-select" class="form-control" style="width:55%;margin:10px;margin-top:4px;display: -webkit-inline-box;"  name="one" onchange="if (this.selectedIndex==4){this.form['fbsearch'].style.display='block',this.form['psearch'].style.display='none'}else {this.form['psearch'].style.display='block',this.form['fbsearch'].style.display='none'};">
+   <option id="msds-select"  value="" selected="selected">Search By...</option>
    <option value="0">Posp Type</option>
-  <option value="1">POSP Yes</option>
-  <option value="2">POSP No</option>
-<option value="FBAID">FBA ID</option>
-<option value="POSPNO">POSP NO</option>
-</select>
-<input type="textbox" class="fbsearch"  name="fbsearch" style="visibility:hidden;"/>
-<input type="textbox" class="psearch" name="psearch" style="visibility:hidden;"/>
-
-</form>
+   <option value="1">POSP Yes</option>
+   <option value="2">POSP No</option>
+   <option value="FBAID">FBA ID</option>
+   <option value="POSPNO">POSP NO</option>
+   </select>
+   <input type="textbox" class="fbsearch"  name="fbsearch" style="display:none;margin-left: 96px;"/>
+   <input type="textbox" class="psearch" name="psearch" style="display:none; margin-left: 96px;" />
+<!-- <input type="textbox" class="fbsearch"  name="fbsearch" style="visibility:hidden;margin-left: 96px;"/>
+   <input type="textbox" class="psearch" name="psearch" style="visibility :hidden; margin-left: 96px;" /> -->
+  </form>
   </div> 
   </div>
     <!-- <input type="text"  class="psearch" name="psearch"  placeholder="Search.."> -->
@@ -449,8 +450,7 @@
             {"data":"pwd" ,
            
              "render": function ( data, type, row, meta ) {
-              
-                return '<a id="btnshowpassword" data-toggle="modal" data-target="#spassword" onclick="getpassword('+"'"+ data+"'"+')">*****</a>';
+              return '<a id="btnshowpassword" data-toggle="modal" data-target="#spassword" onclick="getpassword('+"'"+ data+"'"+')">*****</a>';
               }
 
        },         
@@ -461,6 +461,7 @@
                 return '<a href="#" style="" data-toggle="modal" data-target=".fsmdetails">Fsm details</a>';
               }
             },
+
             {"data":"POSPNo"  ,
              "render": function ( data, type, row, meta ) {
               return data==""?('<a id="posp_'+row.fbaid+'" class="checkPosp" data-toggle="modal" data-target="#updatePosp" onclick="POSP_UPDATE('+row.fbaid+')">update</a>'):data;
@@ -471,7 +472,8 @@
              "render": function ( data, type, row, meta ) {
                 return data==""?('<a id="loan_'+row.fbaid+'" class="checkloan" data-toggle="modal" data-target="#updateLoan" onclick="LoanID_UPDATE('+row.fbaid+')">update</a>'):data;
               }
-            },  
+            }, 
+
             {"data":"pospname"},  
             {"data":null ,
              "render": function ( data, type, row, meta ) {
@@ -480,10 +482,10 @@
 
             },  
 
-       {"data":"fdid" ,
+          {"data":"fdid" ,
              "render": function ( data, type, row, meta ) {
-      return data == 1?'<a href="" style="" data-toggle="modal"  data-target="#docviwer" onclick="docview('+row.fbaid+')" >uploaded</a>':'pending';
-       }
+            return data == 1?'<a href="" style="" data-toggle="modal"  data-target="#docviwer" onclick="docview('+row.fbaid+')" >uploaded</a>':'pending';
+           }
         },
     
 
@@ -493,22 +495,24 @@
                 return '<a href="#" data-toggle="modal" data-target="#sms_sent_id" onclick="SMS_FN(1,'+data+')"><span class="glyphicon glyphicon-envelope"></span></a>';
               }
             },
+
             {"data":"salescode" ,
              "render": function ( data, type, row, meta ) {
              
             return data=="Update"?('<a  id="update_'+row.fbaid+'" onclick="sales_update_fn('+row.fbaid+')" >'+data+'</a>'):data;
               }
    
-},
+           },
 
-{             "data":"CustID" ,
+            {"data":"CustID" ,
               "render": function ( data, type, row, meta ) {
-             return data==""?('<a id="btnviewcid" onclick="getcustomerid(this,'+row.fbaid+')">Update</a>'):data;
 
-
-              }
+             return (data==""||data=="0")?('<a id="btnviewcid" onclick="getcustomerid(this,'+row.fbaid+')">Update</a>'):data;
+           
+           }  
   
-}, 
+        }, 
+
             { "data": "createdate1","visible":false }
 
             
