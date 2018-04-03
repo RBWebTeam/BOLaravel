@@ -86,7 +86,7 @@ public function lead_assgin_list(){
 public function lead_assgin_list_get(){
 
  
-   $query=DB::select('call sp_assign_leadd_list()');
+   //$query=DB::select('call sp_assign_leadd_list()');
    return json_encode(["data"=>$query]);
 }
 
