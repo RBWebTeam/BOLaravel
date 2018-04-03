@@ -28,8 +28,8 @@ if(!$request->session()->exists('emailid')){
       public function login(Request $request){
          
      $validator = Validator::make($request->all(), [
-    'email' => 'required',
-    'password' => 'required',
+    'email' => 'required|max:100',
+    'password' => 'required|max:100',
     ]);
 
    if ($validator->fails()) {
@@ -43,6 +43,7 @@ if(!$request->session()->exists('emailid')){
 
            $query=DB::select('call sp_user_login(?,?,?)',array($request->email,$request->password,$request->ip()));
            
+ 
 
            if($query){
             // if($val->SuccessStatus==1){
@@ -63,6 +64,9 @@ if(!$request->session()->exists('emailid')){
                     $request->session()->put('empid',$val->empid);
                     $request->session()->put('usergroup',$val->usergroup);
                     $request->session()->put('companyid',$val->companyid);
+                    $request->session()->put('last_login',$val->last_login);
+
+                    
 
                     // $request->session()->put('LastLogiDate',$val->LastLogiDate);                              
                return redirect()->intended('dashboard');

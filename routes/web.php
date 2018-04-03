@@ -235,6 +235,8 @@ Route::get('followup-history','LeadstatusController@followup_history');
 Route::get('lead-test','LeaduploadController@lead_test');  
 Route::get('assign-task','LeadstatusController@assign_task');
 Route::post('assign-task-save','LeadstatusController@assign_task_save');
+Route::get('lead-assgin-list','LeadstatusController@lead_assgin_list');
+Route::get('lead-assgin-list-get','LeadstatusController@lead_assgin_list_get');
  
 });
 /************
