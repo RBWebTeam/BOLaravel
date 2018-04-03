@@ -219,7 +219,7 @@ foreach ($val->ParamDetails as $key => $value) {
 </div>
 </div>
 
-<div class="col-md-12">
+<div class="col-md-12 text-center">
 <a type="button" class="button1 col-md-12" href="{{$url}}">CONFIRM & PAY</a>
 </div>
 
