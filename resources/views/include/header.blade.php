@@ -15,10 +15,9 @@
 <div class="col-md-5 col-xs-5 no-mob-pad">
 <div class="pull-right log-txt">
 
-<?php $request=Session::get('loginame'); ?>
-<?php $request1=Session::get('mobile'); ?>
-<p><span class="hidden-xs">Welcome </span><b><?php echo $request ?></b></p>
-<p><span class="hidden-xs">Last login - Date / Time :</span> <b><?php echo $request1 ?></b></p>
+ 
+<p><span class="hidden-xs">Welcome :</span><b>  @if($username= Session::get('username')) {{ucfirst($username)}}  @endif</b></p>
+<p><span class="hidden-xs">Last login :</span> <b>@if($last_login= Session::get('last_login')) <?php $date = date_create($last_login); ?> {{date_format($date, 'd/m/y : g:i A')}}  @endif</b></p>
 
 
  

@@ -88,10 +88,11 @@ Route::get('View-Raised-Ticket/{ticketid}','ViewRaisedTicketController@deletetic
 Route::get('HealthAssure','HealthAssureController@gethealthassure');
 Route::post('HealthAssureinsert','HealthAssureController@inserthealthtest');
 Route::get('Health-Assure-Partner','HealthAssurePartnerController@getpartnerinfo');
-
+Route::post('providerlist','HealthAssurePartnerController@providerlist');
+Route::Post('Health-Assure-Partner','HealthAssurePartnerController@getproviderinfo');
 ///shubham end ///
 
-//////GOVIND
+//////GOVINDF
 Route::get('Fsm-Details/{smid}','FsmDetailsController@fsmfbalist');
 Route::get('FsmRegister/{smid}','FsmRegisterController@getfsmdetail');
 Route::get('fba-list/{partnerid}','FbaController@getfbapartner');
@@ -194,9 +195,6 @@ Route::get('health-packages','BookAppointmentController@health_packages');
 Route::post('health-insurance-packages','BookAppointmentController@health_insurance_packages');
 Route::post('health-insurance-analysis','BookAppointmentController@health_insurance_analysis');
 Route::get('order-summary','BookAppointmentController@order_summary');
-
-
-
  
 
   /************
@@ -237,6 +235,8 @@ Route::get('followup-history','LeadstatusController@followup_history');
 Route::get('lead-test','LeaduploadController@lead_test');  
 Route::get('assign-task','LeadstatusController@assign_task');
 Route::post('assign-task-save','LeadstatusController@assign_task_save');
+Route::get('lead-assgin-list','LeadstatusController@lead_assgin_list');
+Route::get('lead-assgin-list-get','LeadstatusController@lead_assgin_list_get');
  
 });
 /************
@@ -270,6 +270,9 @@ Route::get('ticket-request','TicketController@ticket_request') ;
 Route::Post('ticket-request-save','TicketController@ticket_request_save') ;
 Route::get('ticket-request-user-list','TicketController@ticket_request_userlist') ;
 Route::Post('ticket-user-comment','TicketController@ticket_user_comment') ;
+
+
+Route::get('went-wrong','LoginController@went_wrong');
 
 
 });

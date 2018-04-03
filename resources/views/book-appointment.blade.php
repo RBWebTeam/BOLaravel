@@ -1,10 +1,5 @@
 @extends('include.master')
-@section('content')
-
-
-
-
-            
+@section('content')          
  <div id="content" style="overflow:scroll;">
 			 <div class="container-fluid white-bg">
 			 <div class="col-md-12"><h3 class="mrg-btm">BOOK A LAB APPOINTMENT</h3></div>
