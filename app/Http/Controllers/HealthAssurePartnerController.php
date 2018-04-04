@@ -47,13 +47,9 @@ public function providerlist(Request $req)
 
     try{
     $data=array("apptrebook_input"=>null,"status_input"=>null,"apptdetail"=>null,"pack_details"=>null,"slot_inputdata"=>null,"provider_data"=>array("username"=>"Datacomp","password"=>"Health@1234","latitude"=>"19.1629437","longitude"=>"72.8353005","packcode"=>$req->txtPackcode,"visittype"=>$req->txthomevisit,"apptdatetime"=>"30-03-2018"),"pack_param"=>null);
-
-     
               $m=$this->responsejson();
-                $obj = json_decode($m);
-         
-
-                return $m;
+              $obj = json_decode($m);
+              return $m;
                     }
     catch (Exception $e){
         return $e;    

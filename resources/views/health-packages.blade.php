@@ -224,7 +224,7 @@ $('#testHead').append(name.replace(/_/g,' ')+" Test");
       window.location.href ="{{URL::to('HealthAssure')}}?PackName="+PackName+"&Packcode="+PackCode+"&OfferPrice="+OfferPrice+"&MRP="+MRP+"&tcount="+cnt+"&fasting="+Fasting+"&homevisit="+VisitType+"&fbaid=1976&fbaname=LIVE%20FBA&mob=9292929292#";
   };
 </script>    
-			    
+  
 
 
 </body>
