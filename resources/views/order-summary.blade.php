@@ -1,5 +1,13 @@
-@extends('include.master')
-@section('content')
+<html>
+<head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 <style>
 body {font-size:13px;}
 p {color:#333;}
@@ -42,8 +50,8 @@ $(document).ready(function(){
         $(".bg-gray").toggle();
     });
 
-
 });
+
 function  showtermcon(){
         $('#myModal').modal('show');
     }
@@ -66,7 +74,8 @@ text = text +"</body>";
 }    
 
 </script>
-
+</head>
+<body>
 <!-- <header class="main-header"> -->
         <div class="header-middle text-center" style="width:100%;">HEALTH CHECK-UP PLAN</div>
 <!-- </header> -->
@@ -242,5 +251,6 @@ foreach ($val->ParamDetails as $key => $value) {
                 </div>
   </div>
 
-@endsection 
+</body>
+</html>
 
