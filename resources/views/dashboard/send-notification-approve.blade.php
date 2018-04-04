@@ -1,125 +1,50 @@
-@extends('include.master')
-@section('content')
-<div class="container-fluid white-bg">
+
+ @extends('include.master')
+ @section('content') 
+
+<form id="approve" name="approve"> 
+<div id="content" style="overflow:scroll;">
+ <div class="container-fluid white-bg">
  <div class="col-md-12"><h3 class="mrg-btm">Send Notification</h3></div>
- <form class="form-horizontal"  id="sendnotification"  name="sendnotification"  enctype="multipart/form-data" method="POST">
-   {{ csrf_field() }}
- <div class="col-md-6 col-xs-12">
-  <div class="form-group">
-  <select id="ddlflag" name="ddlflag" class="selectpicker select-opt form-control" onchange="loadfbasbyflag()" required>
-   <option selected="selected" value="0">-SELECT-</option>
- <!--   <option value="1">STATE</option>
-   <option value="2">CITY</option>
-   <option value="3">PINCODE</option>
-   <option value="4">MOBILE</option> -->
-   <option value="6">FBA</option>
-  </select>
+ <div class="col-md-12">
+  <div class="overflow-scroll">
+  <div class="table-responsive" >
+  <table id="example" class="table table-bordered table-striped tbl" >
+   <thead>
+   <tr>
+    <th>MessageId</th>
+    <th>NotificationTitle</th>
+    <th>MessageType</th>
+     <th>WebUrl</th>
+     <th>Message</th>
+     <th>WebTitle</th>
+     <th>DateTimeToSend</th>
+      <th>CreatedDate</th>
+      <th>isapproved</th>
+      </tr>
+      </thead>
+      <tbody>
+      @foreach($query as $val) 
+     <tr>
+        <td><?php echo $val->MessageId; ?></td> 
+        <td><?php echo $val->NotificationTitle; ?></td>
+        <td><?php echo $val->MessageType; ?></td> 
+        <td><?php echo $val->WebUrl; ?></td>
+        <td><?php echo $val->Message; ?></td>    
+        <td><?php echo $val->WebTitle; ?></td>
+        <td><?php echo $val->DateTimeToSend; ?></td>
+        <td><?php echo $val->CreatedDate; ?></td>
+          <td>
+       <button id="accept_{{$val->MessageId}}" class="btn btn-default btnupdatenot" onclick="updatenotification({{$val->MessageId}},1);return false;">Approve </button>
+         <button id="reject_{{$val->MessageId}}" class="btn btn-danger btnupdatenot" onclick="updatenotification({{$val->MessageId}},0);return false;">reject</button>
+        </td> 
+     </tr>
+      @endforeach
+      </tbody>
+      </table>
+    </div>
   </div>
   </div>
- <div class="col-md-6 col-xs-12">
- <div class="form-group">
-<select name="State"  id="txtmapstate" class="selectpicker select-opt form-control" required="">
-<option selected="selected"  value="0">State</option>
-   @foreach($state as $val)
- <option value="{{$val->state_id}}">{{$val->state_name}}</option>
-   @endforeach
-   </select>
-   </div>
-   </div>
-  <div class="col-md-6 col-xs- 12">
-   <div class="form-group">
-   <select name="city" id="txtmapcity" name="txtmapcity"  value="0" class="selectpicker select-opt form-control" required="">
-  <option selected="selected">Select City</option>
-   </select>
-   </div>
-   </div>
-
-  <div class="col-md-6 col-xs-12">
-   <div class="form-group">
-   <input id="txtPincode" name="Pincode" type="number" class="form-control" onfocusout="getfbabypincode(this)" placeholder="Pincode">@if ($errors->has('Pincode' ))<label class="control-label" for="inputError"> {{ $errors->first('Pincode') }}</label>  @endif
-  </div>
-  </div>
-  <div id="divtblsalesmanagerlist" class="col-md-6 col-xs- 12" style="height: 150px; display: none; overflow-y: scroll;">
-   <div class="form-group">
-    <table id="tblsalesmanagerlist">
-    </table>
-    </div>
-    </div>
-
-   <div id="divtblmanagerlist" class="col-md-6 col-xs- 12" style="height: 150px; display: none; overflow-y: scroll;">
-     <div class="form-group"> 
-    <table id="tblmanagerlist">
-    </table>
-    </div>
-    </div>
-
-
-    <div class="col-md-12 col-xs- 12" >
-    <div class="form-group" style="height: 250px;  overflow-y: scroll;">
-   <table id="tblfbalist">
-   </table>
-   </div>
-   </div>
-   
-    <div class="col-md-6 col-xs- 12">
-     <div class="form-group">
-  <select id="LeadType" name="LeadType" class="selectpicker select-opt form-control" required >
-    <option selected="selected" value="0"  name="message" id="messageid">MessageType</option>
-    <option value="HL">HL</option>
-    <option  value="WB">WB</option>
-    </select>
-    </div>
-    </div>
-    <div class="col-md-6 col-xs-12"  id="last_nm">
-    <div class="form-group">                
-    <input  type="text" class="form-control" placeholder="Web Url" name="weburl" id="weburl" maxlength="40"  required>
-     </div>
-    </div>
-    <div class="col-md-6 col-xs-12" id="first_nm">
-    <div class="form-group">
-    <input type="text" class="form-control" placeholder="Web Title" name="webtitle" id="webtitle" maxlength="40"  required>
-    </div>
-    </div>
-    <div class="col-md-6 col-xs-12">
-    <div class="form-group">
-    <input type="text" name="notificationtitle" id="notificationtitle" 
-    class="form-control" placeholder="Notification Title" required />
-   </div>
-   </div>         
-   <div class="col-md-3 col-xs-12">
-   <div class="form-group  lastReporteddob" >
-  <div id="datepicker" class="input-group date" data-date-format="yyyy-mm-dd">
-  <input id="txtdate" name="txtdate" class="form-control" type="text" placeholder="From Date" required>
-  <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
  </div>
- </div>
- </div>
-  <div class="col-md-2 col-xs-12">
-  <input type="number"  class="form-control"  id="notificationhours" name="notificationhours" placeholder="Hours" maxlength="2"  required/>
- </div>
- <div class="col-md-2 col-xs-12">
- <input type="number"  class="form-control" id="notificationminutes" name="notificationminutes" placeholder="Minutes"   maxlength="2" required />
-  </div>
-  <div class="col-md-4 col-xs-12">
-  <div class="form-control border-none">
- <input type="file" name="notify_image" id="notify_image" required>
- </div>
- </div>
- <div class="col-md-12 col-xs-12">
- <div class="text-area padding" >
- <textarea type="text" id="txtmessage" name="txtmessage" style="height: 8vw; width: 100%;" placeholder="Message..." required ></textarea>
-
-</div>
-</div>
-<div class="col-md-12 col-xs-12">
- <br>
- <div class="center-obj center-multi-obj">      
- <a  href="" class="common-btn">Back</a>
- <a class="common-btn" id="notificsubmitbtn" name="notificsubmitbtn">Submit</a>
-  </div>
-  </div>
  </form>
-  </div>
-  </div>  
-  </div>
-   @endsection
+@endsection

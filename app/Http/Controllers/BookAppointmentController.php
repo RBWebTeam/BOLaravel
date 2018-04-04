@@ -101,6 +101,8 @@ class BookAppointmentController extends CallApiController
 
       public function health_insurance_packages(Request $req)
       {
+
+
             $post_data='{"apptrebook_input":null,"status_input":null,"apptdetail":null,"pack_details":{"username":"Datacomp","pass":"Health@1234","fromamt":0,"toamt":0,"fromage":0,"toage":0,"gender":"B"},"slot_inputdata":null,"provider_data":null,"pack_param":null}';
 
 
@@ -108,16 +110,17 @@ class BookAppointmentController extends CallApiController
 
         
                $http_result=$result['http_result'];
-              
-               $error=$result['error'];
-               $st=str_replace('"{', "{", $http_result);
-               $s=str_replace('}"', "}", $st);
-               $m=$s=str_replace('\\', "", $s);
-               $update_user='';
-   
-               return $m;
 
+            $error=$result['error'];
+            $st=str_replace('"{', "{", $http_result);
+            $s=str_replace('}"', "}", $st);
+            $m=$s=str_replace('\\', "", $s);
+            // print_r($http_result);exit();
+            $obj=json_decode($m);
+  
+ return response()->json( $obj);
 
+               //return $m;
        }
 
        public function health_insurance_analysis(Request $req)

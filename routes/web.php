@@ -15,7 +15,19 @@
 
 
 
+Route::get('health-packages','BookAppointmentController@health_packages');
 
+Route::post('health-insurance-analysis','BookAppointmentController@health_insurance_analysis');
+Route::get('order-summary','BookAppointmentController@order_summary');
+Route::post('health-insurance-packages','BookAppointmentController@health_insurance_packages');
+ 
+ //Shubham
+Route::get('HealthAssure','HealthAssureController@gethealthassure');
+Route::post('HealthAssureinsert','HealthAssureController@inserthealthtest');
+Route::get('Health-Assure-Partner','HealthAssurePartnerController@getpartnerinfo');
+Route::post('providerlist','HealthAssurePartnerController@providerlist');
+Route::Post('Health-Assure-Partner','HealthAssurePartnerController@getproviderinfo');
+///Shubham
 
 Route::get('/','LoginController@checklogin');
 Route::post('admin-login','LoginController@login');
@@ -89,11 +101,7 @@ Route::Post('RaiseaTicket','RaiserTicketController@inserraisertkt');
 Route::get('View-Raised-Ticket','ViewRaisedTicketController@getraisedticket');
 Route::get('View-Raised-Ticket/{ticketid}','ViewRaisedTicketController@deleteticket');
 
-Route::get('HealthAssure','HealthAssureController@gethealthassure');
-Route::post('HealthAssureinsert','HealthAssureController@inserthealthtest');
-Route::get('Health-Assure-Partner','HealthAssurePartnerController@getpartnerinfo');
-Route::post('providerlist','HealthAssurePartnerController@providerlist');
-Route::Post('Health-Assure-Partner','HealthAssurePartnerController@getproviderinfo');
+
 ///shubham end ///
 
 //////GOVINDF
@@ -154,7 +162,7 @@ Route::get('Fsm-Details','FsmDetailsController@FsmDetails');
 
 Route::get('Payment-History','PaymentHistoryController@Payment_History');
 
-
+Route::post('send-sms-detail','SendSMSController@getfbalist');
 
 
 Route::get('uploadefile','uploadfileController@uplode');
@@ -196,11 +204,8 @@ Route::post('sales-material-update','BookAppointmentController@sales_material_up
 Route::post('sales-material-delete','BookAppointmentController@sales_material_delete');
 
 /*Heath Assure*/
-Route::get('health-packages','BookAppointmentController@health_packages');
-Route::post('health-insurance-packages','BookAppointmentController@health_insurance_packages');
-Route::post('health-insurance-analysis','BookAppointmentController@health_insurance_analysis');
-Route::get('order-summary','BookAppointmentController@order_summary');
- 
+
+
 
   /************
 //  Menu List

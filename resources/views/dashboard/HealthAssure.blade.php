@@ -1,5 +1,4 @@
-@extends('include.master')
- @section('content')
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,6 +14,8 @@
 
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+
 
 <style>
 body {font-size:13px;}
@@ -468,4 +469,3 @@ requirements is hereinafter referred to as an “Eligible Participant.”
             </div>
             <!-- modal popup close -->
 
-  @endsection
