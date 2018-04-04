@@ -158,7 +158,7 @@ Route::get('Fsm-Details','FsmDetailsController@FsmDetails');
 
 Route::get('Payment-History','PaymentHistoryController@Payment_History');
 
-
+Route::post('send-sms-detail','SendSMSController@getfbalist');
 
 
 Route::get('uploadefile','uploadfileController@uplode');
