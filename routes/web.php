@@ -35,8 +35,12 @@ Route::post('loan-update','FbaController@loan');
 Route::post('posp-update','FbaController@posp');
 
 Route::get('getpaymentlink/{fbaid}','FbaController@getpaymentlink');
-
 Route::get('getcustomerid/{fbaid}','FbaController@getcustomerid1');
+
+ Route::get('generatepaymentlink','generatepaylinkController@paylinkgenerate');
+ Route::get('getpaylink/{fbaid}','generatepaylinkController@getnewpaylink');
+ Route::post('generatepaymentlink','generatepaylinkController@sendpaysms');
+
 
 // Route::get('fba-list/{salescode}/{fbaid}',array('as'=>'fba-list.ajax','uses'=>'FbaController@salesupdate'));
 
@@ -168,6 +172,7 @@ Route::get('send-notification','SendNotificationController@sendnotification');
 
 //send sms
 Route::get('send-sms','SendSMSController@ViewSendSMSDetails');
+Route::post('send-sms-detail','SendSMSController@getfbalist');
  
 Route::get('send-notification','SendNotificationController@sendnotification');
  //Otp Detail

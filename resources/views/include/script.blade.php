@@ -319,7 +319,7 @@ $('.message_sms_id').click(function(){
    success: function(msg)  
    {
     console.log(msg);
-   // alert('SMS send successfully..')
+   alert('SMS send successfully..')
     $('.sms_sent_id').modal('hide');
     $('#message-text').val('');
    }
