@@ -268,11 +268,7 @@ Route::get('ticket-request','TicketController@ticket_request') ;
 Route::Post('ticket-request-save','TicketController@ticket_request_save') ;
 Route::get('ticket-request-user-list','TicketController@ticket_request_userlist') ;
 Route::Post('ticket-user-comment','TicketController@ticket_user_comment') ;
-
-
 Route::get('went-wrong','LoginController@went_wrong');
-
-
 });
 
 
