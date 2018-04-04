@@ -1,5 +1,4 @@
-@extends('include.master')
- @section('content')
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,6 +14,8 @@
 
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+
 
 <style>
 body {font-size:13px;}
@@ -51,7 +52,7 @@ $(document).ready(function(){
         $(".bg-gray").toggle();
     });
 $('#btnsubmithealth').click(function() {
-if( $('#healthchekup').valid())
+if($('#healthchekup').valid())
     {
   console.log($('#healthchekup').serialize());
    $.ajax({ 
@@ -62,7 +63,6 @@ if( $('#healthchekup').valid())
   success: function(msg)  
    {
 
-    
     $("#healthchekup").trigger('reset');
 
     window.location.href ="{{URL::to('Health-Assure-Partner')}}?PackName="+$('#txtpackname').val()+"&Packcode="+$('#txtpackcode').val()+"&OfferPrice="+$('#txtoffer').val()+"&MRP="+$('#txtmrp').val()+"&tcount="+$('#txttcount').val()+"&fasting="+$('#txtfasting').val()+"&homevisit="+$('#txthomevisit').val()+"&fbaid="+$('#txtfbaid').val()+"&fbaname="+$('#txtfbaname').val()+"&ID="+msg[0].ID;
@@ -469,4 +469,3 @@ requirements is hereinafter referred to as an “Eligible Participant.”
             </div>
             <!-- modal popup close -->
 
-  @endsection

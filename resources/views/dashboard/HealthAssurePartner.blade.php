@@ -1,5 +1,4 @@
-@extends('include.master')
- @section('content')
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,6 +14,8 @@
 
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
 
 <style>
 body {font-size:13px;}
@@ -85,7 +86,7 @@ var arr = obj.d.service_provider_listdata;
 var text = "";
 for(var i = 0; i< arr.length;i++){
 
-text+="<div class='col-md-12' style='border:solid 1px lightgray; padding:1px;margin:2px;'  onclick=showDivw('"+arr[i].provider_id+"',this,'"+ arr[i].provider_name.replace(/ /g,'_')+"','"+arr[i].address.replace(/ /g,'_')+"','"+arr[i].visittype+"','"+arr[i].DCCode+"')>";
+text+="<div class='col-md-12 divpartnerselect' style='border:solid 1px lightgray; padding:1px;margin:2px; cursor:pointer;'  onclick=showDivw('"+arr[i].provider_id+"',this,'"+ arr[i].provider_name.replace(/ /g,'_')+"','"+arr[i].address.replace(/ /g,'_')+"','"+arr[i].visittype+"','"+arr[i].DCCode+"')>";
 
   if(arr[i].DCCode == "")
   {
@@ -106,6 +107,8 @@ $('#tblproviderlist').append(text);
 }
 function showDivw(id,row,name,address,visittype,dccode)
 {
+  $('.divpartnerselect').css("background-color","");
+  $(row).css("background-color", "lightgray");
   $('#txtprovider').val(id);
   $('#txtprovidername').val(name.replace(/_/g,' '));
   $('#txtprovideraddress').val(address.replace(/_/g,' '));
@@ -115,7 +118,7 @@ function showDivw(id,row,name,address,visittype,dccode)
   $('#btndiv').css('display','');
 }
  $("#btnbook").click(function(){
- alert("test");
+
     console.log($('#formprovidelist').serialize());
    $.ajax({ 
    url: "{{URL::to('Health-Assure-Partner')}}",
@@ -243,4 +246,3 @@ foreach ($val->ParamDetails as $key => $value) {
                         </div>
                     </div>
 
-@endsection

@@ -1258,7 +1258,8 @@ $.ajax({
 }
 
 
-  function updatenotification(msgid,value){
+
+ function updatenotification(msgid,value){
 
 //alert(value);
  if (confirm("Are you sure to "+(value==1?"approve":"reject")+" this notification")) {}
@@ -1288,7 +1289,6 @@ $.ajax({
  return false;
 
 }
-
   $('#notificsubmitbtn').click(function(){
 // alert('okae');
   if (!$('#sendnotification').valid()) {
