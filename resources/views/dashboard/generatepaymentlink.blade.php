@@ -67,7 +67,7 @@
         </div>
         <div class="modal-footer">
          <input type="hidden" name="txtlink" id="txtlink">
-        <input type="hidden" name="txtmono" id="txtmono">
+         <input type="hidden" name="txtmono" id="txtmono">
        
         <a type="button" class="btn btn-success" data-dismiss="modal" onclick="sendpaymentsms()">Send SMS</a>
          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
