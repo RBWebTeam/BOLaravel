@@ -50,7 +50,7 @@ class FbaController extends CallApiController
 
         public function sendsms(Request $req) {
 
-              $newsms = urlencode($req->sms);//htmlspecialchars();
+              $newsms = urlencode($req->sms); //htmlspecialchars();
 
               
               $post_data="";
