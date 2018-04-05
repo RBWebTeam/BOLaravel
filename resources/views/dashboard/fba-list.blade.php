@@ -1,6 +1,12 @@
 @extends('include.master')
 @section('content')
 
+<style type="text/css">
+  
+  .hide {
+  display:  none;
+}
+</style>
 
 
              <div class="container-fluid white-bg">
@@ -49,21 +55,17 @@
    <option value="FBAID">FBA ID</option>
    <option value="POSPNO">POSP Number</option>
    </select>
-   <input type="textbox" class="fbsearch"  name="fbsearch" placeholder="Search FBA ID" style="display:none;margin-left: 96px;"/>
-   <input type="textbox" class="psearch" name="psearch" placeholder="Search POSP" style="display:none; margin-left: 96px;" />
+   <input type="textbox" class="fbsearch hide" name="fbsearch" placeholder="Search FBA ID" style="display:none;margin-left: 96px;"/>
+   <input type="textbox" class="psearch hide" name="psearch" placeholder="Search POSP" style="display:none; margin-left: 96px;" />
 <!-- <input type="textbox" class="fbsearch"  name="fbsearch" style="visibility:hidden;margin-left: 96px;"/>
    <input type="textbox" class="psearch" name="psearch" style="visibility :hidden; margin-left: 96px;" /> -->
   </form>
+
   </div> 
   </div>
-    <!-- <input type="text"  class="psearch" name="psearch"  placeholder="Search.."> -->
 
- 
 
-    
-
-  
-           <!-- Date End -->
+  <!-- Date End -->
 
              <div class="col-md-12">
              <div class="overflow-scroll">
@@ -574,6 +576,7 @@ $('.date-range-filter').datepicker();
 <!-- Search Pospno and Fbaid start -->
 <script>
 $(document).ready(function(){
+
     $(".psearch").keyup(function(){ 
          table1 = $('#fba-list-table').DataTable();
          table1.columns(10).search( this.value).draw();
@@ -592,8 +595,7 @@ $(document).ready(function(){
 
 
 
-
-
+ 
 
 
 
