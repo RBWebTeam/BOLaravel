@@ -319,7 +319,7 @@ $('.message_sms_id').click(function(){
    success: function(msg)  
    {
     console.log(msg);
-   // alert('SMS send successfully..')
+   alert('SMS send successfully..')
     $('.sms_sent_id').modal('hide');
     $('#message-text').val('');
    }
@@ -954,23 +954,23 @@ $.ajax({
         // $("#first_nm").hide();
         // $("#last_nm").hide();
 
+
 $('#LeadType').on('change',function(){
   var LeadType=$('#LeadType').find(":selected").val();
-
   if ( LeadType == 'WB')
       {
-       
         $("#weburl").show();
         $("#last_nm").show();
-
+         $("#wetitle").show();
+        $("#first_nm").show();
       }
       else{
         $("#weburl").hide();
         $("#last_nm").hide();
-
-      }
-});
-
+         $("#wetitle").hide();
+        $("#first_nm").hide();
+     }
+    });
 
  $('#txtmapstate').on('change', function() {
             var state_id = $(this).val();

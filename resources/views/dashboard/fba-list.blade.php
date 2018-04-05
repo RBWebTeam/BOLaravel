@@ -9,7 +9,7 @@
         <hr>
        </div>
 
-      <div class="col-md-3">
+      <div class="col-md-2">
       <div class="form-group">
     <p>From Date</p>
          <div id="datepicker" class="input-group date" data-date-format="mm-dd-yyyy">
@@ -18,7 +18,7 @@
             </div>
             </div>
            </div>
-       <div class="col-md-3">
+       <div class="col-md-2">
        <div class="form-group">
        <p>To Date</p>
        <div id="datepicker1" class="input-group date" data-date-format="mm-dd-yyyy">
@@ -42,16 +42,22 @@
    &nbsp;&nbsp;&nbsp;
   <form name="myform">
   <select id="msds-select" class="form-control" style="width:55%;margin:10px;margin-top:4px;display: -webkit-inline-box;"  name="one" onchange="if (this.selectedIndex==4){this.form['fbsearch'].style.display='block',this.form['psearch'].style.display='none'}else {this.form['psearch'].style.display='block',this.form['fbsearch'].style.display='none'};">
-   <option id="msds-select"  value="" selected="selected">Search By...</option>
-   <option value="0">Posp Type</option>
+   <option id="msds-select"  value="0" selected="selected">Search By</option>
+   <option value="0">All</option>
    <option value="1">POSP Yes</option>
    <option value="2">POSP No</option>
    <option value="FBAID">FBA ID</option>
-   <option value="POSPNO">POSP NO</option>
+   <option value="POSPNO">POSP Number</option>
    </select>
+
    <input type="textbox" class="fbsearch"  name="fbsearch" style="display:none;margin-left: 96px;"/>
    <input type="textbox" class="psearch" name="psearch" style="display:none; margin-left: 96px;" />
   <!-- <input type="textbox" class="fbsearch"  name="fbsearch" style="visibility:hidden;margin-left: 96px;"/>
+
+   <input type="textbox" class="fbsearch"  name="fbsearch" placeholder="Search FBA ID" style="display:none;margin-left: 96px;"/>
+   <input type="textbox" class="psearch" name="psearch" placeholder="Search POSP" style="display:none; margin-left: 96px;" />
+<!- <input type="textbox" class="fbsearch"  name="fbsearch" style="visibility:hidden;margin-left: 96px;"/>
+
    <input type="textbox" class="psearch" name="psearch" style="visibility :hidden; margin-left: 96px;" /> -->
   </form>
   </div> 

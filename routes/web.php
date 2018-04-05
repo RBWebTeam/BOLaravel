@@ -47,8 +47,12 @@ Route::post('loan-update','FbaController@loan');
 Route::post('posp-update','FbaController@posp');
 
 Route::get('getpaymentlink/{fbaid}','FbaController@getpaymentlink');
-
 Route::get('getcustomerid/{fbaid}','FbaController@getcustomerid1');
+
+ Route::get('generatepaymentlink','generatepaylinkController@paylinkgenerate');
+ Route::get('getpaylink/{fbaid}','generatepaylinkController@getnewpaylink');
+ Route::post('generatepaymentlink','generatepaylinkController@sendpaysms');
+
 
 // Route::get('fba-list/{salescode}/{fbaid}',array('as'=>'fba-list.ajax','uses'=>'FbaController@salesupdate'));
 
@@ -158,7 +162,7 @@ Route::get('Fsm-Details','FsmDetailsController@FsmDetails');
 
 Route::get('Payment-History','PaymentHistoryController@Payment_History');
 
-
+Route::post('send-sms-detail','SendSMSController@getfbalist');
 
 
 Route::get('uploadefile','uploadfileController@uplode');
@@ -176,6 +180,7 @@ Route::get('send-notification','SendNotificationController@sendnotification');
 
 //send sms
 Route::get('send-sms','SendSMSController@ViewSendSMSDetails');
+Route::post('send-sms-detail','SendSMSController@getfbalist');
  
 Route::get('send-notification','SendNotificationController@sendnotification');
  //Otp Detail
@@ -240,7 +245,7 @@ Route::get('followup-history','LeadstatusController@followup_history');
 Route::get('lead-test','LeaduploadController@lead_test');  
 Route::get('assign-task','LeadstatusController@assign_task');
 Route::post('assign-task-save','LeadstatusController@assign_task_save');
-Route::get('lead-assgin-list','LeadstatusController@lead_assgin_list');
+Route::get('lead-assign-list','LeadstatusController@lead_assgin_list');
 Route::get('lead-assgin-list-get','LeadstatusController@lead_assgin_list_get');
  
 });
