@@ -245,7 +245,7 @@ Route::get('followup-history','LeadstatusController@followup_history');
 Route::get('lead-test','LeaduploadController@lead_test');  
 Route::get('assign-task','LeadstatusController@assign_task');
 Route::post('assign-task-save','LeadstatusController@assign_task_save');
-Route::get('lead-assgin-list','LeadstatusController@lead_assgin_list');
+Route::get('lead-assign-list','LeadstatusController@lead_assgin_list');
 Route::get('lead-assgin-list-get','LeadstatusController@lead_assgin_list_get');
  
 });
@@ -280,11 +280,7 @@ Route::get('ticket-request','TicketController@ticket_request') ;
 Route::Post('ticket-request-save','TicketController@ticket_request_save') ;
 Route::get('ticket-request-user-list','TicketController@ticket_request_userlist') ;
 Route::Post('ticket-user-comment','TicketController@ticket_user_comment') ;
-
-
 Route::get('went-wrong','LoginController@went_wrong');
-
-
 });
 
 
