@@ -568,6 +568,7 @@ $('.date-range-filter').datepicker();
 <!-- Search Pospno and Fbaid start -->
 <script>
 $(document).ready(function(){
+  
     $(".psearch").keyup(function(){ 
          table1 = $('#fba-list-table').DataTable();
          table1.columns(10).search( this.value).draw();
@@ -575,6 +576,7 @@ $(document).ready(function(){
 });
 
  $(document).ready(function(){
+
     $(".fbsearch").keyup(function(){ 
          table1 = $('#fba-list-table').DataTable();
          table1.columns(0).search( this.value).draw();

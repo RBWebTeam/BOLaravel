@@ -1427,9 +1427,11 @@ $('#msds-select').change(function () {
             return true;
           }
           if(msdsSearch=="FBAID" && msdsValue!="draw"){
+
             return true;
           }
           if(msdsSearch=="POSPNO" && msdsValue!="draw"){
+            
             return true;
           }
          
