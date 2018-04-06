@@ -32,13 +32,18 @@
        <td><?php echo $val->EMaiID; ?></td>  
        <td><?php echo $val->City; ?></td> 
        <td><?php echo $val->Pincode; ?></td>
-
        <td>
+
+      <?php if($val->IsBlocked=="" || $val->IsBlocked=="0"){?>
       <button id="btnblock" class="btn btn-default block">Block </button>
       <button id="btnunblock" class="btn btn-danger unblock" style="display:none;">Unblock</button>
+      <?php } else { ?>
+      <button id="btnblock" class="btn btn-default block" style="display:none;">Block </button>
+      <button id="btnunblock" class="btn btn-danger unblock" >Unblock</button>
+      <?php } ?>
+      
       <input type="hidden" name="txtfbaid" id="blocksame" value="<?php echo $val->fbaid; ?>"></td>
       </tr>
-
      </tr>
 
        @endforeach

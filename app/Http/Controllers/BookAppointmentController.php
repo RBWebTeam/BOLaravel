@@ -16,35 +16,13 @@ class BookAppointmentController extends CallApiController
         return view('book-appointment');
        }
 
-
-  //      public function backoffice_city_master(){
-   //    $query = DB::table('city_master')->select('city_id', 'cityname')->get();
-   //    // print_r($query);exit();
-
-   //    echo json_encode($query);
-  // } 
-
-
        public function sales_material_upload(){
         return view('sales-material-upload');
        }
 
-       // public function sales_material_product(){
-       //   $query = DB::table('product_master')->select('Product_Id','Product_Name')->get();
-       //   // print_r($query);exit();
-
-       //  echo json_encode($query);
-       // }
-
-       // public function sales_material_company(){
-       //  $query = DB::table('company_master')->select('Company_Id','Company_Name')->get();
-       //  // print_r($query);exit();
-
-       //  echo json_encode($query);
-       // }
 
        public function sales_material_upload_submit(Request $req){
-         //print_r(Session::all());exit();
+
         $res['status']=0;
         $res['msg']="success";
         $Product=$req['Product'];
@@ -53,16 +31,16 @@ class BookAppointmentController extends CallApiController
         $document_name="image";
          $user_id=Session::get('fbauserid');
         $file=$req->file('file');
-        // print_r($file);exit();
+
         try {
            if($file == null){
             throw new \Exception("Upload Document ", 1);
           }
-          // $destinationPath = 'uploads/sales_material/';
+
           $destinationPath = public_path().'/uploads/sales_material/';
-          // print_r($destinationPath);exit();
+
           $filename=rand(1, 999).$file->getClientOriginalName();
-          // print_r($filename);exit();
+
           $file->move($destinationPath,$filename);
            $query=DB::table('sales_material_upload')
             ->insert(['prod_id'=>$Product,
@@ -91,7 +69,7 @@ class BookAppointmentController extends CallApiController
 
       	
       		$query = DB::table('sales_material_upload')->select('id','image_path')->where('prod_id','=', $req->Product)->where('company_id','=',$req->Company)->get();
-       	// print_r($query);exit();
+
       		 return $query;
 
 
@@ -115,26 +93,34 @@ class BookAppointmentController extends CallApiController
       }
 
 
+
       public function health_packages(){
+
         return view('health-packages');
       }
 
       public function health_insurance_packages(Request $req)
       {
-            $post_data='{"apptrebook_input":null,"status_input":null,"apptdetail":null,"pack_details":{"username":"Datacomp","pass":"Health@1234","fromamt":0,"toamt":0,"fromage":0,"toage":0,"gender":"M"},"slot_inputdata":null,"provider_data":null,"pack_param":null}';
-            // print_r($post_data);exit();
-            $url = "http://www.healthassure.in/Products/HAMobileProductService.asmx/PackDetails";
-            $result=$this->call_json_data_api($url,$post_data);
-            $http_result=$result['http_result'];
+
+
+            $post_data='{"apptrebook_input":null,"status_input":null,"apptdetail":null,"pack_details":{"username":"Datacomp","pass":"Health@1234","fromamt":0,"toamt":0,"fromage":0,"toage":0,"gender":"B"},"slot_inputdata":null,"provider_data":null,"pack_param":null}';
+
+
+        $result=$this->call_json_data_api('http://www.healthassure.in/Products/HAMobileProductService.asmx/PackDetails',$post_data);
+
+        
+               $http_result=$result['http_result'];
+
             $error=$result['error'];
             $st=str_replace('"{', "{", $http_result);
             $s=str_replace('}"', "}", $st);
             $m=$s=str_replace('\\', "", $s);
             // print_r($http_result);exit();
             $obj=json_decode($m);
-            return response()->json( $obj);
+  
+ return response()->json( $obj);
 
-
+               //return $m;
        }
 
        public function health_insurance_analysis(Request $req)
@@ -144,7 +130,9 @@ class BookAppointmentController extends CallApiController
             $post_data='{"pack_param":{"username":"Datacomp","pass":"Health@1234","packcode":'.$req->PackCode.'}}';
             // print_r($post_data);
             $url = "http://www.healthassure.in/Products/HAMobileProductService.asmx/PackParam";
+
             $result=$this->call_json_data_api($url,$post_data);
+
             $http_result=$result['http_result'];
             $error=$result['error'];
             $st=str_replace('"{', "{", $http_result);
@@ -159,7 +147,4 @@ class BookAppointmentController extends CallApiController
        public function order_summary(){
         return view('order-summary');
       }
-
-       
-        
 }

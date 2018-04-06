@@ -1,5 +1,22 @@
-@extends('include.master')
-@section('content')
+<!DOCTYPE html>
+<html>
+<head>
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+        <title>Finmart Home page</title>
+        <link rel="icon" href="favicon.png" type="image/x-icon" />
+        <link type="text/css" rel="stylesheet" href="{{url('stylesheets/sidebar.css')}}">
+        <link type="text/css" rel="stylesheet" href="{{url('stylesheets/bootstrap.min.css')}}"> 
+        <link type="text/css" rel="stylesheet" href="{{url('stylesheets/style.css')}}">
+        <link href="{{url('stylesheets/datepicker.css')}}" rel="stylesheet" type="text/css" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+
 <style>
 body {font-size:13px;}
 p {color:#333;}
@@ -40,15 +57,12 @@ ul li {    float: left;display: inherit;width:48%;}
 .list1 .glyphicon {margin-top: 1px;float: left; margin-right: 10px;}
 .list1 {float: left;width: 100%;background: #e2e2e2;}
 </style>
-
-
+</head>
+<body>
 
 <form id="health-insurance" method="POST">
    {{ csrf_field() }}
-</form>
-
-        <div class="header-middle text-center" style="width:100%;">HEALTH CHECK-UP PLAN</div>
-    
+<div class="header-middle text-center" style="width:100%;">HEALTH CHECK-UP PLAN</div>  
     
 <div class="container padd-top">
  <div class="col-md-12">
@@ -59,40 +73,15 @@ ul li {    float: left;display: inherit;width:48%;}
 <p class="text-center"> (+91-9292929292)</p>
 <p class="text-center">HEALTH CHECK-UP PLANS AVAILABLE FOR YOU</p>
  </div>
- 
-
-
-<!-- <div class="col-md-12">
-  <table id="health" class="table table-bordered tbl2 box-shadow">
-    <tbody>
-      
-        <td><p><b>Basic Profile</b></p><h5 class="text-danger">62 Tests</h5> </td>
-        <td colspan="2"><p class="text-center">ACTUAL COST</p> <a href="javascript:void(0)" class="amount amunt1"><strike>13949</strike></a></td>
-        <td colspan="2"><p class="text-center">OFFER COST</p> <a href="javascript:void(0)" class="amount">13949</a></td>
-      <td><a href="javascript:void(0)" class="down-arrow"><span class="glyphicon glyphicon-chevron-down"></span></a> </td>
-        </tr>
-   <tr>
-   <td class="no-padding bg-gray" colspan="6" style="display:none;">
-   <ul class="list1" >
-   <li><span class="glyphicon glyphicon-ok"></span> Zero Depreciation (1802.86) </li>
-   <li><span class="glyphicon glyphicon-ok"></span> Key Lock</li>
-  <li><span class="glyphicon glyphicon-ok"></span> NCB Protection  </li>
-   <li><span class="glyphicon glyphicon-ok"></span> Zero Depreciation </li>
-   </ul>
-   </td>
-  </tr>
-  </tbody>
-</table>
-
-</div> -->
+ <input type="hidden" value="{{$_GET["FBAID"]}}" id="txtfbaid" name="txtfbaid"/> 
+ <input type="hidden" value="{{$_GET["FBAName"]}}" id="txtfbaname" name="txtfbaname"/>  
+ <input type="hidden" value="{{$_GET["FBAMobile"]}}" id="txtfbamobile" name="txtfbamobile"/>   
+ <input type="hidden" value="{{$_GET["PackCode"]}}" id="txtpackcode" name="txtpackcode"/>
 
 <div>
   <table id="docs" class="table table-bordered tbl2 box-shadow">
   </table>
 </div>
-
-
-
 
 
 
@@ -108,30 +97,57 @@ ul li {    float: left;display: inherit;width:48%;}
                     <tr>
                         <td><img src="images/Healthspring.jpg" class="img-responsive">
                         <span  style="height: 383px; width: 383px; top: -143.5px; left: 74px;"></span></td>
-                        <td><img src="images/apollo.jpg" class="img-responsive"><span class="ink animate" style="height: 383px; width: 383px; top: -136.5px; left: 134px;"></span></td>
-                        <!-- <td><img src="images/thyr-diagnostics.jpg" class="img-responsive" style="display:none;"><span class="ink animate" style="height: 383px; width: 383px; top: -143.5px; left: -117px;"></span></td> -->
+                        <td><img src="images/apollo.jpg" class="img-responsive"><span class="ink animate" style="height: 383px; width: 383px; top: -136.5px; left: 134px;"></span></td>                        
                     </tr>
                 </tbody></table>
 </div>
 
 
 </div>
+</form>
+
+<div id="health_insurance" class="modal fade dignostic-modal testCheckup">
+                <div class="modal-dialog modal-sm">
+                    <div class="modal-content">
+                        <div class="modal-header" style='background: #5b9bd5; color: #fff;'>
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style='font-size: 22px; color: #fff; opacity: 0.9;'>&times;</button>
+                            <h5 id="testHead" class="modal-title"></h5>
+                        </div>
+                        <div id="testCheckupBody" class="modal-body" style='background: #eaeff7;'>
+                          <table id="tbltestlist" style="width:100%">
+                          </table>
+
+                        </div>
+                    </div>
+                </div>
+  </div>
+
+
 <script type="text/javascript">
-    $(document).ready(function(){
-      var v_token = "{{csrf_token()}}";
+$(document).ready(function(){
+    gethealthpackage();
+});
+
+function gethealthpackage()
+{
+
+
+        var v_token = "{{csrf_token()}}";
+        
      $.ajax({  
          type: "POST",  
          url: "{{URL::to('health-insurance-packages')}}",
          data : {'_token': v_token},
          success: function(msg){
-          // console.log(msg.d.lstPackageDetails[0].OfferPrice);
-          // console.log(msg.d.lstPackageDetails[0].PackName);
-          // console.log(msg.d.lstPackageDetails[0].MRP);
 
-          // console.log(msg.d.lstPackageDetails);
-   
+
+
+        //var respon = JSON.parse(msg);
+
           var tablerows = new Array();
-                         $.each(msg.d.lstPackageDetails, function( index, value ) {
+          
+          $.each(msg.d.lstPackageDetails, function( index, value ) {   
+      
             tablerows.push('<tbody><td><p><b>' + value.PackName + '</b></p><h5 class="text-danger">' + value.cnt + '&nbsp;Tests</h5> </td><td colspan="2"><p class="text-center">ACTUAL COST</p> <a href="javascript:void(0)" class="amount amunt1"><strike>' + value.MRP + '</strike></a></td><td colspan="2"><p class="text-center">OFFER COST</p> <a href="javascript:void(0)" onclick="offer_price(\'' + value.PackName + '\',' + value.PackCode + ',' + value.OfferPrice + ',' + value.MRP + ',' + value.cnt + ',\'' + value.Fasting + '\',\'' + value.VisitType + '\')" class="amount">' + value.OfferPrice + '</a></td><td><a onclick="img_delete(' + value.PackCode + ')" href="javascript:void(0)" class="down-arrow"><span  class="glyphicon glyphicon-chevron-down"></span></a></td></tr><tr><td  class="no-padding bg-gray' + value.PackCode + '" colspan="6" style="display:none;"><ul class="list1" id="Depreciation' + value.PackCode + '" ></ul></td></tr></tbody>');
           }); 
 
@@ -143,18 +159,9 @@ ul li {    float: left;display: inherit;width:48%;}
                
       }   
      });
-});
-</script> 
 
-<!-- <script>
+}
 
-    $(".down-arrow").click(function(id,index){
-      alert('okae');
-        $(".bg-gray").toggle();
-    });
-</script>  -->  
-
-<script type="text/javascript">
 var x;
  function img_delete(PackCode){
   var PackCode=PackCode;
@@ -171,15 +178,16 @@ $('#Depreciation'+PackCode).empty();
           len=msg.d.lstPackParameter.length;
           arr=Array();
           Ar=[];
-         // ParamDetails=Array();
+
        for (var i =0; i<len; i++) {
-          //console.log(msg.d.lstPackParameter[i]);
-            
-            // Arra=Array(123,123);
-           arr.push('<li><span class="glyphicon glyphicon-ok"></span>'+msg.d.lstPackParameter[i].Name+'&nbsp;<a href="javascript:void(0)"   onClick=" ParamDetailsFN('+i+')" data-toggle="modal" data-target="#health_insurance">'+msg.d.lstPackParameter[i].ParamDetails.length+'-Tests</a></li>');
 
-          
-
+          if(msg.d.lstPackParameter[i].ParamDetails.length > 0){  
+           arr.push('<li><span class="glyphicon glyphicon-ok"></span>'+msg.d.lstPackParameter[i].Name+'&nbsp;<a href="javascript:void(0)"   onClick=ParamDetailsFN('+i+',"'+msg.d.lstPackParameter[i].Name.replace(/ /g,'_')+'") data-toggle="modal" data-target="#health_insurance">'+msg.d.lstPackParameter[i].ParamDetails.length+'-Tests</a></li>');
+        }
+        else
+        {
+          arr.push('<li><span class="glyphicon glyphicon-ok"></span>'+msg.d.lstPackParameter[i].Name+'&nbsp;</li>');
+        }
        }
 
  
@@ -192,48 +200,35 @@ $('#Depreciation'+PackCode).empty();
 };
  
 
- function ParamDetailsFN(i){
-arr=Array();
-$('#test_analysis').empty();
+ function ParamDetailsFN(i,name){
 
-  // console.log(x[i].ParamDetails);
+$('#tbltestlist').empty();
+$('#testHead').empty();
+$('#testHead').append(name.replace(/_/g,' ')+" Test");
+
   var test_analysis = x[i].ParamDetails;
-  // alert(test_analyasis);
+
+  var text = "";
+
    for (var j =0; j<test_analysis.length; j++) {
-    arr.push('<li>'+test_analysis[j]+'</li>');
+    text = text + "<tr style='height:40px;border-bottom:solid 1px black;'><td>"+test_analysis[j]+"</td></tr>";
+
 }
-  $("#test_analysis").append(arr);
+  $("#tbltestlist").append(text);
  }
 </script>  
 
 <script type="text/javascript">
   function offer_price(PackName,PackCode,OfferPrice,MRP,cnt,Fasting,VisitType)
   {
-     // var PackName=PackName;
-     // alert(PackName);
       window.location.href ="{{URL::to('HealthAssure')}}?PackName="+PackName+"&Packcode="+PackCode+"&OfferPrice="+OfferPrice+"&MRP="+MRP+"&tcount="+cnt+"&fasting="+Fasting+"&homevisit="+VisitType+"&fbaid=1976&fbaname=LIVE%20FBA&mob=9292929292#";
   };
 </script>    
-			    
-@endsection	
+  
 
-<div class="modal fade " tabindex="-1" role="dialog" id="health_insurance">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title"><b>TESTS:</b></h4>
-        <div class="modal-body">
-        <h5 style="color: black"><ul id="test_analysis"></ul><h5>
-        
-      </div>
-      </div>
-      
-      
-      
-    </div>
-  </div>
-</div>
+
+</body>
+</html>
 
 
 	

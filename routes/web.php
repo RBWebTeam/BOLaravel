@@ -15,7 +15,19 @@
 
 
 
+Route::get('health-packages','BookAppointmentController@health_packages');
 
+Route::post('health-insurance-analysis','BookAppointmentController@health_insurance_analysis');
+Route::get('order-summary','BookAppointmentController@order_summary');
+Route::post('health-insurance-packages','BookAppointmentController@health_insurance_packages');
+ 
+ //Shubham
+Route::get('HealthAssure','HealthAssureController@gethealthassure');
+Route::post('HealthAssureinsert','HealthAssureController@inserthealthtest');
+Route::get('Health-Assure-Partner','HealthAssurePartnerController@getpartnerinfo');
+Route::post('providerlist','HealthAssurePartnerController@providerlist');
+Route::Post('Health-Assure-Partner','HealthAssurePartnerController@getproviderinfo');
+///Shubham
 
 Route::get('/','LoginController@checklogin');
 Route::post('admin-login','LoginController@login');
@@ -35,8 +47,12 @@ Route::post('loan-update','FbaController@loan');
 Route::post('posp-update','FbaController@posp');
 
 Route::get('getpaymentlink/{fbaid}','FbaController@getpaymentlink');
-
 Route::get('getcustomerid/{fbaid}','FbaController@getcustomerid1');
+
+ Route::get('generatepaymentlink','generatepaylinkController@paylinkgenerate');
+ Route::get('getpaylink/{fbaid}','generatepaylinkController@getnewpaylink');
+ Route::post('generatepaymentlink','generatepaylinkController@sendpaysms');
+
 
 // Route::get('fba-list/{salescode}/{fbaid}',array('as'=>'fba-list.ajax','uses'=>'FbaController@salesupdate'));
 
@@ -85,13 +101,10 @@ Route::Post('RaiseaTicket','RaiserTicketController@inserraisertkt');
 Route::get('View-Raised-Ticket','ViewRaisedTicketController@getraisedticket');
 Route::get('View-Raised-Ticket/{ticketid}','ViewRaisedTicketController@deleteticket');
 
-Route::get('HealthAssure','HealthAssureController@gethealthassure');
-Route::post('HealthAssureinsert','HealthAssureController@inserthealthtest');
-Route::get('Health-Assure-Partner','HealthAssurePartnerController@getpartnerinfo');
 
 ///shubham end ///
 
-//////GOVIND
+//////GOVINDF
 Route::get('Fsm-Details/{smid}','FsmDetailsController@fsmfbalist');
 Route::get('FsmRegister/{smid}','FsmRegisterController@getfsmdetail');
 Route::get('fba-list/{partnerid}','FbaController@getfbapartner');
@@ -149,7 +162,7 @@ Route::get('Fsm-Details','FsmDetailsController@FsmDetails');
 
 Route::get('Payment-History','PaymentHistoryController@Payment_History');
 
-
+Route::post('send-sms-detail','SendSMSController@getfbalist');
 
 
 Route::get('uploadefile','uploadfileController@uplode');
@@ -167,6 +180,7 @@ Route::get('send-notification','SendNotificationController@sendnotification');
 
 //send sms
 Route::get('send-sms','SendSMSController@ViewSendSMSDetails');
+Route::post('send-sms-detail','SendSMSController@getfbalist');
  
 Route::get('send-notification','SendNotificationController@sendnotification');
  //Otp Detail
@@ -190,14 +204,8 @@ Route::post('sales-material-update','BookAppointmentController@sales_material_up
 Route::post('sales-material-delete','BookAppointmentController@sales_material_delete');
 
 /*Heath Assure*/
-Route::get('health-packages','BookAppointmentController@health_packages');
-Route::post('health-insurance-packages','BookAppointmentController@health_insurance_packages');
-Route::post('health-insurance-analysis','BookAppointmentController@health_insurance_analysis');
-Route::get('order-summary','BookAppointmentController@order_summary');
 
 
-
- 
 
   /************
 //  Menu List
@@ -237,6 +245,8 @@ Route::get('followup-history','LeadstatusController@followup_history');
 Route::get('lead-test','LeaduploadController@lead_test');  
 Route::get('assign-task','LeadstatusController@assign_task');
 Route::post('assign-task-save','LeadstatusController@assign_task_save');
+Route::get('lead-assign-list','LeadstatusController@lead_assgin_list');
+Route::get('lead-assgin-list-get','LeadstatusController@lead_assgin_list_get');
  
 });
 /************
@@ -270,8 +280,7 @@ Route::get('ticket-request','TicketController@ticket_request') ;
 Route::Post('ticket-request-save','TicketController@ticket_request_save') ;
 Route::get('ticket-request-user-list','TicketController@ticket_request_userlist') ;
 Route::Post('ticket-user-comment','TicketController@ticket_user_comment') ;
-
-
+Route::get('went-wrong','LoginController@went_wrong');
 });
 
 

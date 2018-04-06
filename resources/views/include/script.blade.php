@@ -268,7 +268,7 @@ $('.unblock').click(function(){
   $(this).closest('td').find('.block').toggle();
 
   var flag=0;
-  var value=$(this).closest('td').find('input[name="txtfbaid"]').val('return');
+  var value=$(this).closest('td').find('input[name="txtfbaid"]').val();
  
   $.ajax({
             type: "GET",
@@ -319,7 +319,7 @@ $('.message_sms_id').click(function(){
    success: function(msg)  
    {
     console.log(msg);
-   // alert('SMS send successfully..')
+   alert('SMS send successfully..')
     $('.sms_sent_id').modal('hide');
     $('#message-text').val('');
    }
@@ -954,23 +954,23 @@ $.ajax({
         // $("#first_nm").hide();
         // $("#last_nm").hide();
 
+
 $('#LeadType').on('change',function(){
   var LeadType=$('#LeadType').find(":selected").val();
-
   if ( LeadType == 'WB')
       {
-       
         $("#weburl").show();
         $("#last_nm").show();
-
+         $("#wetitle").show();
+        $("#first_nm").show();
       }
       else{
         $("#weburl").hide();
         $("#last_nm").hide();
-
-      }
-});
-
+         $("#wetitle").hide();
+        $("#first_nm").hide();
+     }
+    });
 
  $('#txtmapstate').on('change', function() {
             var state_id = $(this).val();
@@ -1258,7 +1258,8 @@ $.ajax({
 }
 
 
-  function updatenotification(msgid,value){
+
+ function updatenotification(msgid,value){
 
 //alert(value);
  if (confirm("Are you sure to "+(value==1?"approve":"reject")+" this notification")) {}
@@ -1288,7 +1289,6 @@ $.ajax({
  return false;
 
 }
-
   $('#notificsubmitbtn').click(function(){
 // alert('okae');
   if (!$('#sendnotification').valid()) {
@@ -1403,6 +1403,9 @@ function showImage(src)
   
 
 <!-- fbalist ImageView Script End Here-->
+
+<!-- POSP YES OR NO Dropdown start -->
+
 <script> 
 
 $('#msds-select').change(function () { 
@@ -1412,7 +1415,7 @@ $('#msds-select').change(function () {
     function( settings, data, dataIndex ) {
         var msdsSearch = $( "#msds-select option:selected" ).val();
         var msdsValue = data[10]|| 0;
-        console.log(data);
+       // console.log(data);
         var numbers = /^[0-9]+$/;
           if(msdsSearch=="2" && msdsValue=="update"){  
             return true;
@@ -1420,9 +1423,16 @@ $('#msds-select').change(function () {
             if(msdsSearch=="1" && msdsValue!="update"){  
             return true;
           }
-          if(msdsSearch=="0"){  
+          if(msdsSearch=="0" && msdsValue){  
             return true;
           }
+          if(msdsSearch=="FBAID" && msdsValue!="draw"){
+            return true;
+          }
+          if(msdsSearch=="POSPNO" && msdsValue!="draw"){
+            return true;
+          }
+         
         return false;
     });
     
@@ -1430,7 +1440,7 @@ $('#msds-select').change(function () {
     
 });
 </script>
-
+<!-- POSP YES OR NO Dropdown end -->
 
 
 <script type="text/javascript">
@@ -1522,7 +1532,7 @@ function getcustomerid(text,fbaid){
                     type: "GET",                  
                     success:function(data) {
                       var json = JSON.parse(data);
-                      console.log(json);
+                      //console.log(json);
                       if(json.StatusNo==0){
    
                       $(text).closest('td').text(json.MasterData.CreateCustomerResult.CustID);

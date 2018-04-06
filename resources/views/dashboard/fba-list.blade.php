@@ -9,7 +9,7 @@
         <hr>
        </div>
 
-      <div class="col-md-3">
+      <div class="col-md-2">
       <div class="form-group">
     <p>From Date</p>
          <div id="datepicker" class="input-group date" data-date-format="mm-dd-yyyy">
@@ -18,7 +18,7 @@
             </div>
             </div>
            </div>
-       <div class="col-md-3">
+       <div class="col-md-2">
        <div class="form-group">
        <p>To Date</p>
        <div id="datepicker1" class="input-group date" data-date-format="mm-dd-yyyy">
@@ -33,13 +33,33 @@
        <div class="form-group"> <input type="submit" name="btndate" id="btndate"  class="mrg-top common-btn pull-left" value="SHOW">  
 	   &nbsp;&nbsp;
 
-   <select  id="msds-select" class="pull-left mrg-top mrg-left">
+<!--    <select  id="msds-select" class="pull-left mrg-top mrg-left">
    <option value="0">Posp Type</option>
   <option value="1">POSP Yes</option>
   <option value="2">POSP No</option>
-  </select>
+
+  </select> -->
+   &nbsp;&nbsp;&nbsp;
+  <form name="myform">
+  <select id="msds-select" class="form-control" style="width:55%;margin:10px;margin-top:4px;display: -webkit-inline-box;"  name="one" onchange="if (this.selectedIndex==4){this.form['fbsearch'].style.display='block',this.form['psearch'].style.display='none'}else {this.form['psearch'].style.display='block',this.form['fbsearch'].style.display='none'};">
+   <option id="msds-select"  value="0" selected="selected">Search By</option>
+   <option value="0">All</option>
+   <option value="1">POSP Yes</option>
+   <option value="2">POSP No</option>
+   <option value="FBAID">FBA ID</option>
+   <option value="POSPNO">POSP Number</option>
+   </select>
+   <input type="textbox" class="fbsearch"  name="fbsearch" placeholder="Search FBA ID" style="display:none;margin-left: 96px;"/>
+   <input type="textbox" class="psearch" name="psearch" placeholder="Search POSP" style="display:none; margin-left: 96px;" />
+<!-- <input type="textbox" class="fbsearch"  name="fbsearch" style="visibility:hidden;margin-left: 96px;"/>
+   <input type="textbox" class="psearch" name="psearch" style="visibility :hidden; margin-left: 96px;" /> -->
+  </form>
+  </div> 
   </div>
-       </div>
+    <!-- <input type="text"  class="psearch" name="psearch"  placeholder="Search.."> -->
+
+ 
+
     
 
   
@@ -430,8 +450,7 @@
             {"data":"pwd" ,
            
              "render": function ( data, type, row, meta ) {
-              
-                return '<a id="btnshowpassword" data-toggle="modal" data-target="#spassword" onclick="getpassword('+"'"+ data+"'"+')">*****</a>';
+              return '<a id="btnshowpassword" data-toggle="modal" data-target="#spassword" onclick="getpassword('+"'"+ data+"'"+')">*****</a>';
               }
 
        },         
@@ -442,6 +461,7 @@
                 return '<a href="#" style="" data-toggle="modal" data-target=".fsmdetails">Fsm details</a>';
               }
             },
+
             {"data":"POSPNo"  ,
              "render": function ( data, type, row, meta ) {
               return data==""?('<a id="posp_'+row.fbaid+'" class="checkPosp" data-toggle="modal" data-target="#updatePosp" onclick="POSP_UPDATE('+row.fbaid+')">update</a>'):data;
@@ -452,7 +472,8 @@
              "render": function ( data, type, row, meta ) {
                 return data==""?('<a id="loan_'+row.fbaid+'" class="checkloan" data-toggle="modal" data-target="#updateLoan" onclick="LoanID_UPDATE('+row.fbaid+')">update</a>'):data;
               }
-            },  
+            }, 
+
             {"data":"pospname"},  
             {"data":null ,
              "render": function ( data, type, row, meta ) {
@@ -461,10 +482,10 @@
 
             },  
 
-       {"data":"fdid" ,
+          {"data":"fdid" ,
              "render": function ( data, type, row, meta ) {
-      return data == 1?'<a href="" style="" data-toggle="modal"  data-target="#docviwer" onclick="docview('+row.fbaid+')" >uploaded</a>':'pending';
-       }
+            return data == 1?'<a href="" style="" data-toggle="modal"  data-target="#docviwer" onclick="docview('+row.fbaid+')" >uploaded</a>':'pending';
+           }
         },
     
 
@@ -474,22 +495,24 @@
                 return '<a href="#" data-toggle="modal" data-target="#sms_sent_id" onclick="SMS_FN(1,'+data+')"><span class="glyphicon glyphicon-envelope"></span></a>';
               }
             },
+
             {"data":"salescode" ,
              "render": function ( data, type, row, meta ) {
              
             return data=="Update"?('<a  id="update_'+row.fbaid+'" onclick="sales_update_fn('+row.fbaid+')" >'+data+'</a>'):data;
               }
    
-},
+           },
 
-{             "data":"CustID" ,
+            {"data":"CustID" ,
               "render": function ( data, type, row, meta ) {
-             return data==""?('<a id="btnviewcid" onclick="getcustomerid(this,'+row.fbaid+')">Update</a>'):data;
 
-
-              }
+             return (data==""||data=="0")?('<a id="btnviewcid" onclick="getcustomerid(this,'+row.fbaid+')">Update</a>'):data;
+           
+           }  
   
-}, 
+        }, 
+
             { "data": "createdate1","visible":false }
 
             
@@ -520,7 +543,7 @@ $(document).ready(function() {
     function(settings, data, dataIndex) {
     var min = $('#min').val();
     var max = $('#max').val();
-    console.log(max);
+   // console.log(max);
     var createdAt = data[19] || 19; // Our date column in the table
    
     if (
@@ -546,3 +569,35 @@ $('.date-range-filter').datepicker();
 });
 </script>
 <!-- from date to date end -->  
+
+
+<!-- Search Pospno and Fbaid start -->
+<script>
+$(document).ready(function(){
+    $(".psearch").keyup(function(){ 
+         table1 = $('#fba-list-table').DataTable();
+         table1.columns(10).search( this.value).draw();
+    });
+});
+
+ $(document).ready(function(){
+    $(".fbsearch").keyup(function(){ 
+         table1 = $('#fba-list-table').DataTable();
+         table1.columns(0).search( this.value).draw();
+    });
+});
+ // Search Pospno and Fbaid End
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+

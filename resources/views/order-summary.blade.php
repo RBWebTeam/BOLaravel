@@ -1,5 +1,13 @@
-@extends('include.master')
-@section('content')
+<html>
+<head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 <style>
 body {font-size:13px;}
 p {color:#333;}
@@ -41,9 +49,33 @@ $(document).ready(function(){
     $(".down-arrow").click(function(){
         $(".bg-gray").toggle();
     });
-});
-</script>
 
+});
+
+function  showtermcon(){
+        $('#myModal').modal('show');
+    }
+
+function showtestmodel(name,model)
+{
+ 
+  $('#testHead').empty();
+  $('#testHead').append(name.replace(/_/g,' ').replace('Test','').replace('test','')+" Test");
+  var arr = model.split(',')
+  var text = "<body>";
+  $('#tbltestlist').empty();
+  for (var i = 0; i < arr.length-1; i++) {
+    text = text + "<tr style='height:40px;border-bottom:solid 1px black;'><td>"+arr[i].replace(/_/g,' ')+"</td></tr>";
+  }
+text = text +"</body>";
+  
+  $('#tbltestlist').html(text);
+  $('.testCheckup').modal('show');
+}    
+
+</script>
+</head>
+<body>
 <!-- <header class="main-header"> -->
         <div class="header-middle text-center" style="width:100%;">HEALTH CHECK-UP PLAN</div>
 <!-- </header> -->
@@ -54,25 +86,64 @@ $(document).ready(function(){
 <h5 class="text-center pad">Health Check Up Plans selected by you</h5>
  </div>
  
+<?php if(isset($_GET['product'])){?>
+                <input type="hidden" name="product_id" id="product_ids" value="<?php echo $_GET['product'];?>">
+                <?php }else{?>
+                <input type="hidden" name="product_id" id="product_ids" value="12">
+                <?php }?>
+
+                <?php if(isset($_GET['brokerid'])){?>
+                <input type="hidden" name="brokerid" id="brokerid" value="<?php echo isset($_GET['brokerid'])?$_GET['brokerid']:'';?>">
+                <?php }else{?>
+                <input type="hidden" name="brokerid" id="brokerid" value="0">
+                <?php }?>
+
+                <?php if(isset($_GET['app'])){?>
+                <input type="hidden" name="app" id="appid" value="<?php echo isset($_GET['app'])?$_GET['app']:'';?>">
+                <?php }else{?>
+                <input type="hidden" name="app" id="appid" value="0">
+                <?php }?>
+
+                
+
+                <?php if(isset($_GET['empcode'])){?>
+                <input type="hidden" name="empcode" id="empcode" value="<?php echo isset($_GET['empcode'])?$_GET['empcode']:'';?>">
+                <?php }else{?>
+                <input type="hidden" name="empcode" id="empcode" value="0">
+                <?php }?>
 
 
 <div class="col-md-12">
   <table class="table table-bordered tbl2">
     <tbody>
       
-        <td><p><b>Basic Profile</b></p><h5 class="text-danger">62 Tests</h5> </td>
-        <td colspan="2"><p class="text-center">ACTUAL COST</p> <a href="#" class="amount amunt1"><strike>13949</strike></a></td>
-        <td colspan="2"><p class="text-center">OFFER COST</p> <a href="#" class="amount">13949</a></td>
+        <td><p><b>Basic Profile</b></p><h5 class="text-danger">{{$_GET["tcount"]}} Tests</h5> </td>
+        <td colspan="2"><p class="text-center">ACTUAL COST</p> <a href="#" class="amount amunt1"><strike>{{$_GET["MRP"]}}</strike></a></td>
+        <td colspan="2"><p class="text-center">OFFER COST</p> <a href="#" class="amount">{{$_GET["OfferPrice"]}}</a></td>
       <td><a href="#" class="down-arrow"><span class="glyphicon glyphicon-chevron-down"></span></a> </td>
         </tr>
     
    <tr>
    <td class="no-padding bg-gray" colspan="6" style="display:none;">
    <ul class="list1">
-   <li><span class="glyphicon glyphicon-ok"></span> Zero Depreciation (1802.86) </li>
-   <li><span class="glyphicon glyphicon-ok"></span> Key Lock</li>
-  <li><span class="glyphicon glyphicon-ok"></span> NCB Protection  </li>
-   <li><span class="glyphicon glyphicon-ok"></span> Zero Depreciation </li>
+    @if(isset($respon))
+    @foreach($respon as $val)
+   <li><span class="glyphicon glyphicon-ok"></span>{{$val->Name}} 
+    <?php if(sizeof($val->ParamDetails)) {
+
+$str = "";
+foreach ($val->ParamDetails as $key => $value) {
+  $str = $str.str_replace(' ', '_', $value).",";
+}
+
+     echo "<a onclick=showtestmodel('".str_replace(' ', '_', $val->Name)."','".$str."') style='color: #5b9bd5; cursor: pointer;' 
+     data-toggle='modal' data-target='testCheckup'>".
+     sizeof($val->ParamDetails)." - Tests </a>";        
+} 
+
+   ?></li>
+   @endforeach
+   @endif
    </ul>
    </td>
   </tr>
@@ -90,53 +161,66 @@ $(document).ready(function(){
  <tr>
     <td  colspan="2" class="text-center bg-primary1">Personal Particulars</td>
  </tr>
+ @foreach($query as $val)
  <tr>
     <td class="bg-info">Name</td>
-  <td>SAMEER NAIK</td>
+  <td>{{$val->FirstName}}</td>
  </tr>
  <tr>
     <td class="bg-info">Address</td>
-  <td>G SEGT TREW MUMBAI</td>
+  <td>{{$val->FlatDetails}} {{$val->StreeDetails}} {{$val->Landmark}}</td>
  </tr>
  <tr>
     <td class="bg-info">Mobile No.</td>
-  <td>9808090900</td>
+  <td>{{$val->Mobile}}</td>
  </tr>
  <tr>
     <td class="bg-info">Email ID</td>
-  <td>samnaik@gmail.com</td>
+  <td>{{$val->EmailID}}</td>
  </tr>
+
  <tr>
     <td  colspan="2" class="text-center bg-primary1">Health Check Up Details</td>
  </tr>
+
  <tr>
     <td class="bg-info">Health Plan</td>
-  <td>Basic Profile</td>
- </tr>
- <tr>
+  <td>{{$healthplan}}</td>
+  </tr>
+
+<tr>
     <td class="bg-info">Price</td>
-  <td>Rs. 913.00 special price for you</td>
+  <td><h5 id="pmrp" class="health-amt-rupee"><strike style="color:red;">Rs.{{$mrp}}</strike> special price for you</h5>
+    <h3 style="color:#0070c0;">Rs. {{$offerprice}}</h3>
+  </td>
+  
  </tr>
  <tr>
     <td class="bg-info">Lab selected</td>
-  <td>Lifecare Diagnostics and Research Pvt Ltd</td>
+  <td>{{$lab}}</td>
  </tr>
  <tr>
     <td class="bg-info">Lab Address</td>
-  <td>1st Floor, Sunshine, Opp. Shastri Nagar, Lokhandwala Complex, Andheri (W), -3km</td>
+  <td>{{$LabAddress}}</td>
  </tr>
- <tr>
-    <td class="bg-info">Blood / Urine Sample</td>
-  <td>Will visit lab to give the sample</td>
- </tr>
+ <tr> 
+  <td class="bg-info">Blood / Urine Sample</td>
+   
+  <td><?php if($homevisit!="CV"){
+    echo "Will visit lab to give the sample ";
+  } ?></td>
+ </tr> 
+
  <tr>
     <td class="bg-info">Appointment Date / Time</td>
-  <td>30-03-2018 08.00 TO 08.30 AM</td>
+  <td>{{$val->PickUptime}}</td>
  </tr>
  <tr>
     <td class="bg-info">Fasting condition</td>
-  <td>--</td>
+  <td><?php if($fasting=="Y") { 
+    echo "10-12 hours fasting required";} else{ echo "-";}?></td>
  </tr>
+  @endforeach
  </table>
 <div>
 </div>
@@ -144,13 +228,29 @@ $(document).ready(function(){
 </div>
 </div>
 
-<div class="col-md-12">
-<input type="button" class="button1 col-md-12" value="CONFIRM & PAY">
+<div class="col-md-12 text-center">
+<a type="button" class="button1 col-md-12" href="{{$url}}">CONFIRM & PAY</a>
 </div>
 
 </div>
 
 
+<div id="testCheckup" class="modal fade dignostic-modal testCheckup">
+                <div class="modal-dialog modal-sm">
+                    <div class="modal-content">
+                        <div class="modal-header" style='background: #5b9bd5; color: #fff;'>
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style='font-size: 22px; color: #fff; opacity: 0.9;'>&times;</button>
+                            <h5 id="testHead" class="modal-title"></h5>
+                        </div>
+                        <div id="testCheckupBody" class="modal-body" style='background: #eaeff7;'>
+                          <table id="tbltestlist" style="width:100%">
+                          </table>
 
-@endsection 
+                        </div>
+                    </div>
+                </div>
+  </div>
+
+</body>
+</html>
 

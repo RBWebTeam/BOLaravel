@@ -44,19 +44,12 @@
            </div>
 </div>
   
-<!-- <div class="form-group">
-            <label for="inputEmail" class="control-label col-xs-2">EmpID</label>
-            <div class="col-xs-6">
-            <input type="text" name="EmpID" id="EmpID"  class="form-control" >
-    @if ($errors->has('EmpID'))<label class="control-label" for="inputError"> {{ $errors->first('EmpID') }}</label>@endif
-           </div>
-</div> -->
-
+ 
 <div class="form-group">
             <label for="inputEmail" class="control-label col-xs-2">Company </label>
             <div class="col-xs-6">
           
-             <select name="company_id" id="company_id"  class="form-control">
+             <select name="company_id"  class="form-control">
              <option value="0">-Select-</option>
              <option value="1" <?php if($query->companyid==1){echo "selected";} ?> >RupeeBoss</option>
              <option value="2" <?php if($query->companyid==2){echo "selected";} ?>   >Datacom</option>

@@ -9,6 +9,7 @@
         <link type="text/css" rel="stylesheet" href="{{url('stylesheets/bootstrap.min.css')}}"> 
         <link type="text/css" rel="stylesheet" href="{{url('stylesheets/style.css')}}">
         <link href="{{url('stylesheets/datepicker.css')}}" rel="stylesheet" type="text/css" />
+        <link href="{{url('stylesheets/bootstrap/dataTables.bootstrap.min.css')}}" rel="stylesheet" type="text/css" />
 
 		<script type="text/javascript">
             if ('serviceWorker' in navigator) {
