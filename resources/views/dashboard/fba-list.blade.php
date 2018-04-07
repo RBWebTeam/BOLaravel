@@ -49,9 +49,15 @@
    <option value="FBAID">FBA ID</option>
    <option value="POSPNO">POSP Number</option>
    </select>
+
+   <input type="textbox" class="fbsearch"  name="fbsearch" style="display:none;margin-left: 96px;"/>
+   <input type="textbox" class="psearch" name="psearch" style="display:none; margin-left: 96px;" />
+  <!-- <input type="textbox" class="fbsearch"  name="fbsearch" style="visibility:hidden;margin-left: 96px;"/>
+
    <input type="textbox" class="fbsearch"  name="fbsearch" placeholder="Search FBA ID" style="display:none;margin-left: 96px;"/>
    <input type="textbox" class="psearch" name="psearch" placeholder="Search POSP" style="display:none; margin-left: 96px;" />
-<!-- <input type="textbox" class="fbsearch"  name="fbsearch" style="visibility:hidden;margin-left: 96px;"/>
+<!- <input type="textbox" class="fbsearch"  name="fbsearch" style="visibility:hidden;margin-left: 96px;"/>
+
    <input type="textbox" class="psearch" name="psearch" style="visibility :hidden; margin-left: 96px;" /> -->
   </form>
   </div> 
@@ -64,13 +70,12 @@
 
   
            <!-- Date End -->
-
              <div class="col-md-12">
              <div class="overflow-scroll">
              <div class="table-responsive" >
              <table class="datatable-responsive table table-striped table-bordered nowrap" id="fba-list-table">
-                                       <thead>
-                                       <tr>
+                                    <thead>
+                                      <tr>
                                        <th>FBA ID</th> 
                                        <th>Full Name</th>                                    
                                        <th>Created Date</th>
@@ -173,9 +178,7 @@
       </div>
     </div>
   </div>
-</div>
-
- -->
+</div> -->
 
 
  <div class="pageloader modal fade" role="dialog" id="pageloader">   
@@ -195,7 +198,6 @@
 
 
 <!-- sales update -->
-
 <div class="salesupdate modal fade" role="dialog" id="salesupdate_modal_fade">   
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -244,8 +246,7 @@
         </form>
         <div class="modal-footer"> 
           <button class="btn btn-default" type="button" data-dismiss="modal">Close</button>
-          <a id="posp_update" class="btn btn-primary" type="button">Update</a><b class="alert-success primary" id=""></b>
-          
+          <a id="posp_update" class="btn btn-primary" type="button">Update</a><b class="alert-success primary" id=""></b>          
         </div>
       </div>
     </div>
@@ -292,13 +293,10 @@
         <h4 class="modal-title">Partner Info</h4>
       </div>
       <div class="modal-body">
-
       <div class="table-responsive">
         <div id="divpartnertable" name="divpartnertable">
-
         </div>
         </div>
-
       </div>
     </div>
   </div>
@@ -314,7 +312,6 @@
         <h4 class="modal-title" style="text-align:center;">Attachment</h4>
       </div>
       <div class="modal-body">
-
       <div class="table-responsive">
         <div id="divdocviewer" name="divdocviewer">
         </div>
@@ -346,8 +343,7 @@
               <option>POSP</option>
               <option>FBA</option>
             </select>
-            <input type="text" class="recipient-name form-control" id="" name="" required="yes" />
-             
+            <input type="text" class="recipient-name form-control" id="" name="" required="yes" />             
           </div>
         </form>
         <div class="modal-footer"> 
@@ -371,10 +367,9 @@
         <h4 class="modal-title">Payment link</h4>
       </div>
       <div class="modal-body">
-    <div style="color: blue;" id="divpartnertable_payment" class="divpartnertable_payment">
-       
+    <div style="color: blue;" id="divpartnertable_payment" class="divpartnertable_payment">   
     </div>
-      </div>
+    </div>
     </div>
   </div>
 </div>
@@ -389,8 +384,7 @@
         <h4 class="modal-title">Update Customer id</h4>
       </div>
       <div class="modal-body">
-    <div style="color: blue;" id="divCustomer_id" class="divCustomer_id">
-       
+    <div style="color: blue;" id="divCustomer_id" class="divCustomer_id">       
     </div>
       </div>
     </div>
@@ -574,6 +568,7 @@ $('.date-range-filter').datepicker();
 <!-- Search Pospno and Fbaid start -->
 <script>
 $(document).ready(function(){
+  
     $(".psearch").keyup(function(){ 
          table1 = $('#fba-list-table').DataTable();
          table1.columns(10).search( this.value).draw();
@@ -581,6 +576,7 @@ $(document).ready(function(){
 });
 
  $(document).ready(function(){
+
     $(".fbsearch").keyup(function(){ 
          table1 = $('#fba-list-table').DataTable();
          table1.columns(0).search( this.value).draw();
