@@ -432,7 +432,7 @@
         $(row).css({backgroundColor: 'LightGreen'});
       }
     },
-        "order": [[ 19, "desc" ]],
+        "order": [[ 0, "desc" ]],
         "ajax": "get-fba-list",
         "columns": [
              { "data": "fbaid"},
