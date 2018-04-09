@@ -30,6 +30,12 @@ class RaiserTicketController extends Controller
 		   return json_encode($classi);
 	}
 
+  public function gettoccmail($Querid){
+    
+     $toccmail = DB::select("call Usp_gettoccmailraisetkt($Querid)");
+       return json_encode($toccmail);
+  }
+
 	public function inserraisertkt(Request $req){
 
 		$id=Session::get('fbauserid');
@@ -67,12 +73,21 @@ class RaiserTicketController extends Controller
               
                 $email = $req->txttoemailid;
                 $ccemail=$req->txtccemailid;
+
+                $string = $ccemail;
+
+                $cc  = explode(",", $string);
+
+                //print_r($array);exit();
+
+                
 if($ccemail!=''){
                 
                 $mail = Mail::send('mailViews.SendTicketReqMailFormat',['data' => $data,
-                	'lastid'=>$lastid], function($message)use($email,$ccemail){
-                $message->from('wecare@rupeeboss.com', 'RupeeBoss');
-                $message->to($email)->cc($ccemail)->subject('Ticket Request');
+                	'lastid'=>$lastid],
+                   function($message)use($email,$cc){
+                $message->from('wecare@rupeeboss.com', 'Finmart ');
+                $message->to($email)->cc($cc)->subject('Ticket Request');
                 });
              
                     if(Mail::failures()){

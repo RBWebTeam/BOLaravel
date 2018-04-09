@@ -61,6 +61,7 @@
 
 <script type="text/javascript">
    $('#ddlsubcat').on('change', function() {
+      gettoccmail();
         var QuerID = $(this).val();
          
             if(QuerID) {
@@ -92,13 +93,10 @@
                     dataType: "json",
                     success:function(data) {
                         $('#ddlsubcat').empty();
-                        $('#txttoemailid').val('');
-                         $('#txtccemailid').val('');
                         $('#ddlsubcat').append('<option value="0">-- Select Sub Category--</option>');
                         $.each(data, function(key, value) {
 
-                          $('#txttoemailid').val(value.toemailid);
-                          $('#txtccemailid').val(value.ccemailid);
+                       
                          $('#ddlsubcat').append('<option value="'+ value.QuerID +'">'+ value.QuerType +'</option>');
                         });
                      }
@@ -137,5 +135,33 @@ $('#btn_saveticket').click(function() {
 $('#btn_resetticket').click(function() {
    $("#fromraiserticket").trigger('reset');
 });
- </script>
+
+function gettoccmail(){
+
+  var Querid = $('#ddlsubcat').val();
+
+  if(Querid) {
+  $.ajax({
+                    url: 'RaiseaTicketgettoccmail/'+Querid,
+                    type: "GET",
+                    dataType: "json",
+                    success:function(data) {
+                      
+                        $('#txttoemailid').val('');
+                         $('#txtccemailid').val('');
+                     
+                        $.each(data, function(key, value) {
+
+                          $('#txttoemailid').val(value.toemailid);
+                          $('#txtccemailid').val(value.ccemailid);
+                      
+                        });
+                     }
+                });
+   }else{
+      $('#txttoemailid').val('');
+       $('#txtccemailid').val('');
+   }
+}
+</script>
 @endsection
