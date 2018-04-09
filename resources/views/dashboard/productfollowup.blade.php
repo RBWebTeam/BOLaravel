@@ -14,6 +14,24 @@
   <div id="divpartnertable" class="table-responsive">
   </div>
 </div>
+
+<div id="producthistory" class="modal fade producthistory" role="dialog">
+  <div class="modal-dialog">
+   <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Product History</h4>
+      </div>
+      <div class="modal-body">
+      <div id="divproducthistory" class="table-responsive">
+      
+    </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 </div>
 
 <div class="productfollowup modal fade" id="productfollowup" role="dialog">   
@@ -23,6 +41,7 @@
         <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
         <h4 class="modal-title">Product Follow Up</h4>
       </div>
+
        <div class="modal-body">
         <form name="productfolloupdetails" id="productfolloupdetails" action="Post">
          {{ csrf_field() }}
@@ -48,5 +67,4 @@
       </div>
     </div>
   </div>
-
 @endsection
