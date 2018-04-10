@@ -48,7 +48,8 @@
    <option value="2">POSP No</option>
    <option value="FBAID">FBA ID</option>
    <option value="POSPNO">POSP Number</option>
-   </select>
+   
+   </select> 
 
    <input type="textbox" class="fbsearch"  name="fbsearch" style="display:none;margin-left: 96px;"/>
    <input type="textbox" class="psearch" name="psearch" style="display:none; margin-left: 96px;" />
