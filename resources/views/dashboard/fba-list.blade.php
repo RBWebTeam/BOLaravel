@@ -1,18 +1,13 @@
 @extends('include.master')
 @section('content')
 
-<style type="text/css">
-  
-  .hide {
-  display:  none;
-}
-</style>
 
 
              <div class="container-fluid white-bg">
              <div class="col-md-12"><h3 class="mrg-btm">FBA List</h3>
-           <hr>
-           </div>
+
+        <hr>
+       </div>
 
       <div class="col-md-2">
       <div class="form-group">
@@ -36,7 +31,7 @@
        <div class="col-md-4">
 
        <div class="form-group"> <input type="submit" name="btndate" id="btndate"  class="mrg-top common-btn pull-left" value="SHOW">  
-	   &nbsp;&nbsp;
+     &nbsp;&nbsp;
 
 <!--    <select  id="msds-select" class="pull-left mrg-top mrg-left">
    <option value="0">Posp Type</option>
@@ -54,11 +49,6 @@
    <option value="FBAID">FBA ID</option>
    <option value="POSPNO">POSP Number</option>
    </select>
-<<<<<<< HEAD
-   <input type="textbox" class="fbsearch hide" name="fbsearch" placeholder="Search FBA ID" style="display:none;margin-left: 96px;"/>
-   <input type="textbox" class="psearch hide" name="psearch" placeholder="Search POSP" style="display:none; margin-left: 96px;" />
-<!-- <input type="textbox" class="fbsearch"  name="fbsearch" style="visibility:hidden;margin-left: 96px;"/>
-=======
 
    <input type="textbox" class="fbsearch"  name="fbsearch" style="display:none;margin-left: 96px;"/>
    <input type="textbox" class="psearch" name="psearch" style="display:none; margin-left: 96px;" />
@@ -68,21 +58,18 @@
    <input type="textbox" class="psearch" name="psearch" placeholder="Search POSP" style="display:none; margin-left: 96px;" />
 <!- <input type="textbox" class="fbsearch"  name="fbsearch" style="visibility:hidden;margin-left: 96px;"/>
 
->>>>>>> master
    <input type="textbox" class="psearch" name="psearch" style="visibility :hidden; margin-left: 96px;" /> -->
   </form>
-
   </div> 
   </div>
+    <!-- <input type="text"  class="psearch" name="psearch"  placeholder="Search.."> -->
 
+ 
 
-<<<<<<< HEAD
-  <!-- Date End -->
+    
 
-=======
   
            <!-- Date End -->
->>>>>>> master
              <div class="col-md-12">
              <div class="overflow-scroll">
              <div class="table-responsive" >
@@ -434,7 +421,7 @@
 
     $('#fba-list-table').DataTable({
 
-   "createdRow": function(row, data, dataIndex ) {
+      "createdRow": function(row, data, dataIndex ) {
       if ( data.PayStat=="S" ) {
         $(row).css({backgroundColor: 'LightGreen'});
       }
@@ -581,11 +568,7 @@ $('.date-range-filter').datepicker();
 <!-- Search Pospno and Fbaid start -->
 <script>
 $(document).ready(function(){
-<<<<<<< HEAD
-
-=======
   
->>>>>>> master
     $(".psearch").keyup(function(){ 
          table1 = $('#fba-list-table').DataTable();
          table1.columns(10).search( this.value).draw();
@@ -600,13 +583,13 @@ $(document).ready(function(){
     });
 });
  // Search Pospno and Fbaid End
-
 </script>
 
 
 
 
- 
+
+
 
 
 
