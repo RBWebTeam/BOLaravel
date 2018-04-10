@@ -46,7 +46,7 @@
 </div>
 <div class="form-group">
            <label class="control-label" for="message-text">To Email ID: </label>
-           <input type="Email" class="form-control" id="txttoemailid" name="txttoemailid" required>
+           <input type="Email" class="form-control" id="txttoemailid" name="txttoemailid" required readonly>
 </div>
 <div class="form-group">
            <label class="control-label" for="message-text">CC Email ID: </label>
@@ -58,4 +58,84 @@
 </div>
 </form>
 </div>
+
+<script type="text/javascript">
+   $('#ddlsubcat').on('change', function() {
+        var QuerID = $(this).val();
+         
+            if(QuerID) {
+                $.ajax({
+                    url: 'RaiseaTicketgetcal/'+QuerID,
+                    type: "GET",
+                    dataType: "json",
+                    success:function(data) {
+                        $('#ddlClassification').empty();
+                        $('#ddlClassification').append('<option value="0">--Select Classification--</option>');
+                        
+                        $.each(data, function(key,value) {
+                      
+                            $('#ddlClassification').append('<option value="'+ value.ID +'">'+ value.Description +'</option>');
+                        });
+                     }
+                });
+            }else{
+                $('select[name="ddlClassification"]').empty();
+            }
+        });
+
+   $('#ddlCategory').on('change', function() {
+            var CateCode = $(this).val();
+            if(CateCode) {
+                $.ajax({
+                    url: 'RaiseaTicket/'+CateCode,
+                    type: "GET",
+                    dataType: "json",
+                    success:function(data) {
+                        $('#ddlsubcat').empty();
+                        $('#txttoemailid').val('');
+                         $('#txtccemailid').val('');
+                        $('#ddlsubcat').append('<option value="0">-- Select Sub Category--</option>');
+                        $.each(data, function(key, value) {
+
+                          $('#txttoemailid').val(value.toemailid);
+                          $('#txtccemailid').val(value.ccemailid);
+                         $('#ddlsubcat').append('<option value="'+ value.QuerID +'">'+ value.QuerType +'</option>');
+                        });
+                     }
+                });
+            }else{
+                $('select[name="ddlsubcat"]').empty();
+            }
+        });
+
+$('#btn_saveticket').click(function() {
+    if( $('#fromraiserticket').valid())
+    {
+ 
+    data1=new FormData($("#pathimgraiser"));
+    
+  console.log($('#fromraiserticket').serialize());
+   $.ajax({ 
+   url: "{{URL::to('RaiseaTicket')}}",
+   method:"POST",
+   data: $('#fromraiserticket').serialize(),
+   dataType:'json',
+   async:false,
+   type:'POST',
+   processData: false,
+   contentType: false,
+  success: function(msg)  
+   {
+    console.log(msg);
+    alert("Record has been saved successfully");
+    $("#fromraiserticket").trigger('reset');
+   
+   }
+});
+}
+});
+$('#btn_resetticket').click(function() {
+   $("#fromraiserticket").trigger('reset');
+});
+ </script>
 @endsection

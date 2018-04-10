@@ -92,6 +92,7 @@ Route::get('Rmfollowup/{fbaid}','RMfollowupController@gethistory');
 Route::get('Product-followup','ProductfollowupController@getproductfollowup');
 Route::get('Product-followup/{product_id}','ProductfollowupController@getproductinfo');
 Route::Post('Product-followup','ProductfollowupController@insertproductfollowup');
+Route::get('view-history-Product-followup/{Lead_id}','ProductfollowupController@getproducthistory');
 
 Route::get('RaiseaTicket','RaiserTicketController@getraiserticket');
 Route::get('RaiseaTicket/{CateCode}','RaiserTicketController@getsubcat');

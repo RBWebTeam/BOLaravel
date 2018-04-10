@@ -38,4 +38,10 @@ class ProductfollowupController extends Controller
     "Product executive",
     null ));
   }
+  
+  public function getproducthistory($Lead_id){
+     $history = DB::select("call Usp_getproductwisehistory($Lead_id)");
+      return json_encode($history);
+    
+  }
 }
