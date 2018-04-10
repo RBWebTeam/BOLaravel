@@ -438,7 +438,7 @@
         $(row).css({backgroundColor: 'LightGreen'});
       }
     },
-        "order": [[ 19, "desc" ]],
+        "order": [[ 0, "desc" ]],
         "ajax": "get-fba-list",
         "columns": [
              { "data": "fbaid"},
@@ -447,8 +447,8 @@
             { "data": "MobiNumb1" },
             { "data": "EMaiID" },
             { "data": "Link",
-              "render": function ( data, type, row, meta ) {
-                 return row.PayStat == "P"?'<a id="btnviewhistory" data-toggle="modal" data-target="#paylink_payment" onclick="getpaymentlink('+row.fbaid+')">Payment link</a>':'';
+         "render": function ( data, type, row, meta ) {
+                 return row.PayStat == "S"?'':'<a id="btnviewhistory" data-toggle="modal" data-target="#paylink_payment" onclick="getpaymentlink('+row.fbaid+')">Payment link</a>';
               }
 
              }, 
