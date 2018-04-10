@@ -1409,8 +1409,11 @@ function showImage(src)
 <script> 
 
 $('#msds-select').change(function () {
-  // debugger;
+
+    // var $loading = $('#loading').hide();    
  var table = $('#fba-list-table').DataTable(); 
+
+ // $loading.show();
     $.fn.dataTable.ext.search.push(
     function( settings, data, dataIndex ) {
         var msdsSearch = $( "#msds-select option:selected" ).val();
@@ -1420,6 +1423,7 @@ $('#msds-select').change(function () {
           if(msdsSearch=="2" && msdsValue=="update"){  
             return true;
           }
+
             if(msdsSearch=="1" && msdsValue!="update"){  
             return true;
           }
@@ -1435,23 +1439,17 @@ $('#msds-select').change(function () {
          
         return false;
     });
-    
-     table.draw();
-    
+      
+    table.draw();
+     
 });
+ // $loading.hide();
 
-// posp yes fba id posp no search bar
+
+// posp yes fba id posp no search bar Hide and Show
  
     $("select").on("change",function(){
-// $("select option[value='FBAID']").remove(); // Remove default selection.
-//    // If the last value wasn't -1 ('-Select-')
-//       $(".fbsearch").val(""); // Then clear all textboxes.
-    
-
-
-
-
-  if ($('select ').val() == '1') {
+if ($('select ').val() == '1') {
     $(".fbsearch").addClass("hide");
     $(".psearch").addClass("hide");
   }else{
@@ -1464,11 +1462,10 @@ $('#msds-select').change(function () {
       $(".psearch").addClass("hide");
     }
   }
+
 });
+
   </script>
-
-
-
 <!-- POSP YES OR NO Dropdown end -->
 
 

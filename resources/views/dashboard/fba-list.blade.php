@@ -11,9 +11,8 @@
 
              <div class="container-fluid white-bg">
              <div class="col-md-12"><h3 class="mrg-btm">FBA List</h3>
-
-        <hr>
-       </div>
+           <hr>
+           </div>
 
       <div class="col-md-2">
       <div class="form-group">
@@ -429,12 +428,12 @@
 
     $('#fba-list-table').DataTable({
 
-      "createdRow": function(row, data, dataIndex ) {
+   "createdRow": function(row, data, dataIndex ) {
       if ( data.PayStat=="S" ) {
         $(row).css({backgroundColor: 'LightGreen'});
       }
     },
-        "order": [[ 19, "desc" ]],
+        "order": [[ 0, "desc" ]],
         "ajax": "get-fba-list",
         "columns": [
              { "data": "fbaid"},
@@ -590,6 +589,7 @@ $(document).ready(function(){
     });
 });
  // Search Pospno and Fbaid End
+
 </script>
 
 
