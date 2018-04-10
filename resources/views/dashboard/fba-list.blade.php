@@ -1,13 +1,18 @@
 @extends('include.master')
 @section('content')
 
+<style type="text/css">
+  
+  .hide {
+  display:  none;
+}
+</style>
 
 
              <div class="container-fluid white-bg">
              <div class="col-md-12"><h3 class="mrg-btm">FBA List</h3>
-
-        <hr>
-       </div>
+           <hr>
+           </div>
 
       <div class="col-md-2">
       <div class="form-group">
@@ -48,34 +53,25 @@
    <option value="2">POSP No</option>
    <option value="FBAID">FBA ID</option>
    <option value="POSPNO">POSP Number</option>
+
    </select>
+   <input type="textbox" class="fbsearch hide" name="fbsearch" placeholder="Search FBA ID" style="display:none;margin-left: 96px;"/>
+   <input type="textbox" class="psearch hide" name="psearch" placeholder="Search POSP" style="display:none; margin-left: 96px;" />
 
-   <input type="textbox" class="fbsearch"  name="fbsearch" style="display:none;margin-left: 96px;"/>
-   <input type="textbox" class="psearch" name="psearch" style="display:none; margin-left: 96px;" />
-  <!-- <input type="textbox" class="fbsearch"  name="fbsearch" style="visibility:hidden;margin-left: 96px;"/>
-
-   <input type="textbox" class="fbsearch"  name="fbsearch" placeholder="Search FBA ID" style="display:none;margin-left: 96px;"/>
-   <input type="textbox" class="psearch" name="psearch" placeholder="Search POSP" style="display:none; margin-left: 96px;" />
-<!- <input type="textbox" class="fbsearch"  name="fbsearch" style="visibility:hidden;margin-left: 96px;"/>
-
-   <input type="textbox" class="psearch" name="psearch" style="visibility :hidden; margin-left: 96px;" /> -->
   </form>
+
   </div> 
   </div>
-    <!-- <input type="text"  class="psearch" name="psearch"  placeholder="Search.."> -->
 
- 
 
-    
+  <!-- Date End -->
 
-  
-           <!-- Date End -->
              <div class="col-md-12">
              <div class="overflow-scroll">
              <div class="table-responsive" >
              <table class="datatable-responsive table table-striped table-bordered nowrap" id="fba-list-table">
-                                    <thead>
-                                      <tr>
+                                       <thead>
+                                       <tr>
                                        <th>FBA ID</th> 
                                        <th>Full Name</th>                                    
                                        <th>Created Date</th>
@@ -98,7 +94,7 @@
                                        <th>Created Date1</th>
                                      </tr>
                                     </thead>
-            </table>
+                                   </table>
             </div>
             </div>
             </div>
@@ -133,6 +129,7 @@
     </div>
   </div>
 </div>
+
  <!-- fsm details -->
  <div class="fsmdetails modal fade" role="dialog">   
   <div class="modal-dialog" role="document">
@@ -178,7 +175,9 @@
       </div>
     </div>
   </div>
-</div> -->
+</div>
+
+ -->
 
 
  <div class="pageloader modal fade" role="dialog" id="pageloader">   
@@ -198,6 +197,7 @@
 
 
 <!-- sales update -->
+
 <div class="salesupdate modal fade" role="dialog" id="salesupdate_modal_fade">   
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -246,7 +246,8 @@
         </form>
         <div class="modal-footer"> 
           <button class="btn btn-default" type="button" data-dismiss="modal">Close</button>
-          <a id="posp_update" class="btn btn-primary" type="button">Update</a><b class="alert-success primary" id=""></b>          
+          <a id="posp_update" class="btn btn-primary" type="button">Update</a><b class="alert-success primary" id=""></b>
+          
         </div>
       </div>
     </div>
@@ -293,10 +294,13 @@
         <h4 class="modal-title">Partner Info</h4>
       </div>
       <div class="modal-body">
+
       <div class="table-responsive">
         <div id="divpartnertable" name="divpartnertable">
+
         </div>
         </div>
+
       </div>
     </div>
   </div>
@@ -312,11 +316,12 @@
         <h4 class="modal-title" style="text-align:center;">Attachment</h4>
       </div>
       <div class="modal-body">
+
       <div class="table-responsive">
         <div id="divdocviewer" name="divdocviewer">
         </div>
         <div>
-         <img id="imgdoc"  style="min-height:100%; min-width:100%;">
+         <img id="imgdoc" style=" overflow-y: scroll;">
          </div>
        </div>
      </div>
@@ -343,7 +348,8 @@
               <option>POSP</option>
               <option>FBA</option>
             </select>
-            <input type="text" class="recipient-name form-control" id="" name="" required="yes" />             
+            <input type="text" class="recipient-name form-control" id="" name="" required="yes" />
+             
           </div>
         </form>
         <div class="modal-footer"> 
@@ -367,9 +373,10 @@
         <h4 class="modal-title">Payment link</h4>
       </div>
       <div class="modal-body">
-    <div style="color: blue;" id="divpartnertable_payment" class="divpartnertable_payment">   
+    <div style="color: blue;" id="divpartnertable_payment" class="divpartnertable_payment">
+       
     </div>
-    </div>
+      </div>
     </div>
   </div>
 </div>
@@ -384,7 +391,8 @@
         <h4 class="modal-title">Update Customer id</h4>
       </div>
       <div class="modal-body">
-    <div style="color: blue;" id="divCustomer_id" class="divCustomer_id">       
+    <div style="color: blue;" id="divCustomer_id" class="divCustomer_id">
+       
     </div>
       </div>
     </div>
@@ -421,12 +429,16 @@
 
     $('#fba-list-table').DataTable({
 
+  //     language: {
+  //   processing: "<img src='img/loading.gif'> Loading...",
+  // },
+
       "createdRow": function(row, data, dataIndex ) {
       if ( data.PayStat=="S" ) {
         $(row).css({backgroundColor: 'LightGreen'});
       }
     },
-        "order": [[ 0, "desc" ]],
+        "order": [[ 19, "desc" ]],
         "ajax": "get-fba-list",
         "columns": [
              { "data": "fbaid"},
@@ -436,7 +448,7 @@
             { "data": "EMaiID" },
             { "data": "Link",
               "render": function ( data, type, row, meta ) {
-                 return row.PayStat == "S"?'':'<a id="btnviewhistory" data-toggle="modal" data-target="#paylink_payment" onclick="getpaymentlink('+row.fbaid+')">Payment link</a>';
+                 return row.PayStat == "P"?'<a id="btnviewhistory" data-toggle="modal" data-target="#paylink_payment" onclick="getpaymentlink('+row.fbaid+')">Payment link</a>':'';
               }
 
              }, 
@@ -568,7 +580,7 @@ $('.date-range-filter').datepicker();
 <!-- Search Pospno and Fbaid start -->
 <script>
 $(document).ready(function(){
-  
+
     $(".psearch").keyup(function(){ 
          table1 = $('#fba-list-table').DataTable();
          table1.columns(10).search( this.value).draw();
@@ -576,7 +588,6 @@ $(document).ready(function(){
 });
 
  $(document).ready(function(){
-
     $(".fbsearch").keyup(function(){ 
          table1 = $('#fba-list-table').DataTable();
          table1.columns(0).search( this.value).draw();
@@ -588,8 +599,7 @@ $(document).ready(function(){
 
 
 
-
-
+ 
 
 
 
