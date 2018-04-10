@@ -1460,7 +1460,6 @@ if ($('select ').val() == '1') {
 function getcustomerid(text,fbaid){
   //alert(fbaid);
   // alert(data);
-  //$('.paylink').modal('show');
   $.ajax({
                     url: 'getcustomerid/'+fbaid,
                     type: "GET",                  
