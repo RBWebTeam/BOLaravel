@@ -543,7 +543,7 @@ $(document).on('change', '#search_state', function() {
                 {
                   alert('Updated Successfully');
                   $('#p_remark').val('');
-                  $('#update_'+id).closest('td').html(sales_update);
+                  $('#update_'+id).closest('a').html(sales_update);
                   
                   $('.close').click();           
                 } 
@@ -1390,9 +1390,12 @@ function showImage(src)
 
 <script> 
 
-$('#msds-select').change(function () { 
-  debugger;
+$('#msds-select').change(function () {
+
+    // var $loading = $('#loading').hide();    
  var table = $('#fba-list-table').DataTable(); 
+
+ // $loading.show();
     $.fn.dataTable.ext.search.push(
     function( settings, data, dataIndex ) {
         var msdsSearch = $( "#msds-select option:selected" ).val();
@@ -1402,6 +1405,7 @@ $('#msds-select').change(function () {
           if(msdsSearch=="2" && msdsValue=="update"){  
             return true;
           }
+
             if(msdsSearch=="1" && msdsValue!="update"){  
             return true;
           }
@@ -1419,11 +1423,33 @@ $('#msds-select').change(function () {
          
         return false;
     });
-    
-     table.draw();
-    
+      
+    table.draw();
+     
 });
-</script>
+ // $loading.hide();
+
+
+// posp yes fba id posp no search bar Hide and Show
+ 
+    $("select").on("change",function(){
+if ($('select ').val() == '1') {
+    $(".fbsearch").addClass("hide");
+    $(".psearch").addClass("hide");
+  }else{
+    $(".fbsearch").removeClass("hide");
+    if ($('select').val() == 'POSPNO')
+    {
+      $(".psearch").removeClass("hide");
+    }
+    else{
+      $(".psearch").addClass("hide");
+    }
+  }
+
+});
+
+  </script>
 <!-- POSP YES OR NO Dropdown end -->
 
 
