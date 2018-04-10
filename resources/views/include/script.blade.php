@@ -1363,9 +1363,8 @@ $.ajax({
       }
 
            $('#divdocviewer').html(str);   
-             
-  
         }  
+
       });
 }
 
@@ -1391,7 +1390,6 @@ function showImage(src)
 <script> 
 
 $('#msds-select').change(function () {
-
     // var $loading = $('#loading').hide();    
  var table = $('#fba-list-table').DataTable(); 
 

@@ -55,8 +55,8 @@
    <option value="POSPNO">POSP Number</option>
 
    </select>
-   <input type="textbox" class="fbsearch hide" name="fbsearch" placeholder="Search FBA ID" style="display:none;margin-left: 96px;"/>
-   <input type="textbox" class="psearch hide" name="psearch" placeholder="Search POSP" style="display:none; margin-left: 96px;" />
+   <input type="textbox" class="fbsearch hide" id="fbsearch" name="fbsearch" placeholder="Search FBA ID" style="display:none;margin-left: 96px;"/>
+   <input type="textbox" class="psearch hide" id="psearch" name="psearch" placeholder="Search POSP" style="display:none; margin-left: 96px;" />
 
   </form>
 
@@ -321,7 +321,7 @@
         <div id="divdocviewer" name="divdocviewer">
         </div>
         <div>
-         <img id="imgdoc" style="min-height:100%; min-width:100%;">
+         <img id="imgdoc" style="height:100%; width:100%;">
          
 
          </div>
@@ -384,10 +384,10 @@
 </div>
 
 <!-- Customer id start -->
-<div id="customerupdate" class="modal fade customerupdate" role="dialog">
-  <div class="modal-dialog">
+<!-- <div id="customerupdate" class="modal fade customerupdate" role="dialog">
+  <div class="modal-dialog"> -->
    <!-- Modal content-->
-    <div class="modal-content">
+   <!--  <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h4 class="modal-title">Update Customer id</h4>
@@ -399,7 +399,7 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
 <!-- Customer id end -->
 
 <!-- password -->
@@ -509,20 +509,16 @@
 
             {"data":"salescode" ,
              "render": function ( data, type, row, meta ) {
-             
-            return data=="Update"?('<a  id="update_'+row.fbaid+'" onclick="sales_update_fn('+row.fbaid+')" >'+data+'</a>'):data;
+              return data=="Update"?('<a  id="update_'+row.fbaid+'" onclick="sales_update_fn('+row.fbaid+')" >'+data+'</a>'):data;
               }
    
            },
 
             {"data":"CustID" ,
               "render": function ( data, type, row, meta ) {
-
-             return (data==""||data=="0")?('<a id="btnviewcid" onclick="getcustomerid(this,'+row.fbaid+')">Update</a>'):data;
-           
-           }  
-  
-        }, 
+               return (data==""||data=="0")?('<a id="btnviewcid" onclick="getcustomerid(this,'+row.fbaid+')">Update</a>'):data;
+             }  
+         }, 
 
             { "data": "createdate1","visible":false }
 
