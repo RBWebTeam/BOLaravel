@@ -26,7 +26,7 @@
 
                                      @foreach($query as $va)
                                      <tr>
-                                     <td><a href="#" onclick="TicketRequest_fn('{{$va->TicketRequestId}}')" >{{$va->TicketRequestId}}</a></td>
+                                     <td><a href="#" onclick="TicketRequest_fn('{{$va->TicketRequestId}}','{{$va->toemailid}}','{{$va->ccemailid}}')" >{{$va->TicketRequestId}}</a></td>
                                       <td>{{$va->CateName}}</td>
                                        <td>{{$va->QuerType}}</td>
                                         <td>{{$va->Description}}</td>
@@ -76,8 +76,20 @@
             </div>
   </div> 
 
+ <div class="form-group">
+            <label for="inputEmail" class="control-label col-xs-2"> TO mail</label>
+            <div class="col-xs-10">
+           <div class="control"  id="toemailid">  </div>
+           </div>
+ </div>
 
- 
+  <div class="form-group">
+            <label for="inputEmail" class="control-label col-xs-2"> CC mail</label>
+            <div class="col-xs-10">
+          <div class="control"  id="ccemailid">  </div>
+           </div>
+ </div>
+
         
       </form>
       </div>
@@ -117,9 +129,11 @@
 
 
       <script type="text/javascript">
-      	function TicketRequest_fn(ID){
-             $('#TicketRequest_Id').val(ID);
-      		   $('#Ticket-Request-Id-Modal').modal('show');}
+      	function TicketRequest_fn(ID,toemailid,ccemailid){     
+              $('#TicketRequest_Id').val(ID);
+              $('#toemailid').text(toemailid);
+              $('#ccemailid').text(ccemailid);
+      		    $('#Ticket-Request-Id-Modal').modal('show');}
    $(document).on('click','#TicketRequest_Id_save',function(e){  e.preventDefault();
          if($('#FBAUserId').val()!=0){
          $.post("{{url('ticket-request-save')}}",$('#TicketRequest_Id_from').serialize())

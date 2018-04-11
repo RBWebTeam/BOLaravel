@@ -543,7 +543,7 @@ $(document).on('change', '#search_state', function() {
                 {
                   alert('Updated Successfully');
                   $('#p_remark').val('');
-                  $('#update_'+id).closest('td').html(sales_update);
+                  $('#update_'+id).closest('a').html(sales_update);
                   
                   $('.close').click();           
                 } 
@@ -1103,24 +1103,6 @@ $(document).on('change', '#search_state', function() {
     $('.search_district').append(city_array);
   
 });
-function getprodcutdtls(product_id){
-$.ajax({  
-         type: "GET",  
-         url:'Product-followup/'+product_id,
-         success: function(fsmmsg){
-
-      var data = JSON.parse(fsmmsg);
-      var str = "<table class='table' id='example'><thead><tr style='height:30px;margin:5px;'><th>Lead ID</th><th>Name</th><th>Mobile No</th><th>Email Id</th><th>Created Date</th><th>View History</th></tr></thead>";
-       for (var i = 0; i < data.length; i++) 
-       {
-
-         str = str + "<tbody><tr style='height:30px;margin:5px;'><td><a href='#'  data-toggle='modal' onclick='getproductfollowup("+data[i].FBAID+")' data-target='productfollowup'>"+data[i].FBAID+"</a></td><td>"+data[i].FullName+"</td><td>"+data[i].MobiNumb1+"</td><td>"+data[i].EmailID+"</td><td>"+data[i].CreaOn+"</td><td><a class='btn btn-primary'>View History</a></td></tr></tbody>";
-       }
-         str = str + "</table>";
-           $('#divpartnertable').html(str);   
-       }  
-      });
-}
 
 //vikas smstemplate
 $('#btnsave').click(function() {
@@ -1376,28 +1358,18 @@ $.ajax({
       else
       {
         str = str + "<td>No documents uploaded.</td></tr></table>";
+   }
 
-
-      }
-
-           $('#divdocviewer').html(str);   
-             
-  
-        }  
-      });
+        $('#divdocviewer').html(str);   
+       }  
+   });
 }
 
-function showImage(src)
-
-{
+    function showImage(src){
 
   $("#imgdoc").css("display","block");
   $("#imgdoc").attr("src" ,src);
- 
-
 }
-
-
 
 </script> 
   
@@ -1408,9 +1380,13 @@ function showImage(src)
 
 <script> 
 
-$('#msds-select').change(function () { 
-  debugger;
+$('#msds-select').change(function () {
+  
+
+    // var $loading = $('#loading').hide();    
  var table = $('#fba-list-table').DataTable(); 
+
+ // $loading.show();
     $.fn.dataTable.ext.search.push(
     function( settings, data, dataIndex ) {
         var msdsSearch = $( "#msds-select option:selected" ).val();
@@ -1420,113 +1396,57 @@ $('#msds-select').change(function () {
           if(msdsSearch=="2" && msdsValue=="update"){  
             return true;
           }
-            if(msdsSearch=="1" && msdsValue!="update"){  
+           if(msdsSearch=="1" && msdsValue!="update"){  
             return true;
           }
           if(msdsSearch=="0" && msdsValue){  
             return true;
           }
           if(msdsSearch=="FBAID" && msdsValue!="draw"){
-            return true;
-          }
+           return true;
+         }
           if(msdsSearch=="POSPNO" && msdsValue!="draw"){
-            return true;
-          }
-         
-        return false;
-    });
-    
-     table.draw();
-    
+           return true;
+        }
+          return false;
+    }); 
+      
+    table.draw();
+     
 });
-</script>
+ // $loading.hide();
+
+
+// posp yes fba id posp no search bar Hide and Show
+ 
+    $("select").on("change",function(){
+if ($('select ').val() == '1') {
+    $(".fbsearch").addClass("hide");
+    $(".psearch").addClass("hide");
+  }else{
+    $(".fbsearch").removeClass("hide");
+    if ($('select').val() == 'POSPNO')
+    {
+      $(".psearch").removeClass("hide");
+    }
+    else{
+      $(".psearch").addClass("hide");
+    }
+  }
+
+});
+
+  </script>
 <!-- POSP YES OR NO Dropdown end -->
 
 
-<script type="text/javascript">
-   $('#ddlsubcat').on('change', function() {
-        var QuerID = $(this).val();
-         
-            if(QuerID) {
-                $.ajax({
-                    url: 'RaiseaTicketgetcal/'+QuerID,
-                    type: "GET",
-                    dataType: "json",
-                    success:function(data) {
-                        $('#ddlClassification').empty();
-                        $('#ddlClassification').append('<option value="0">--Select Classification--</option>');
-                        
-                        $.each(data, function(key,value) {
-                             
-                            $('#ddlClassification').append('<option value="'+ value.ID +'">'+ value.Description +'</option>');
-                        });
-                     }
-                });
-            }else{
-                $('select[name="ddlClassification"]').empty();
-            }
-        });
- </script>
+
+
 
  <script type="text/javascript">
-   $('#btn_saveticket').click(function() {
-    if( $('#fromraiserticket').valid())
-    {
- 
-    data1=new FormData($("#pathimgraiser"));
-    
-  console.log($('#fromraiserticket').serialize());
-   $.ajax({ 
-   url: "{{URL::to('RaiseaTicket')}}",
-   method:"POST",
-   data: $('#fromraiserticket').serialize(),
-   dataType:'json',
-   async:false,
-   type:'POST',
-   processData: false,
-   contentType: false,
-  success: function(msg)  
-   {
-    console.log(msg);
-    alert("Record has been saved successfully");
-    $("#fromraiserticket").trigger('reset');
-   
-   }
-});
-}
-});
-$('#btn_resetticket').click(function() {
-   $("#fromraiserticket").trigger('reset');
-});
-
- </script>
-
- <script type="text/javascript">
-   $('#ddlCategory').on('change', function() {
-            var CateCode = $(this).val();
-            if(CateCode) {
-                $.ajax({
-                    url: 'RaiseaTicket/'+CateCode,
-                    type: "GET",
-                    dataType: "json",
-                    success:function(data) {
-                        $('#ddlsubcat').empty();
-                        $('#ddlsubcat').append('<option value="0">-- Select Sub Category--</option>');
-                        $.each(data, function(key, value) {
-                         
-                            $('#ddlsubcat').append('<option value="'+ value.QuerID +'">'+ value.QuerType +'</option>');
-                        });
-                     }
-                });
-            }else{
-                $('select[name="ddlsubcat"]').empty();
-            }
-        });
-
 function getcustomerid(text,fbaid){
   //alert(fbaid);
   // alert(data);
-  //$('.paylink').modal('show');
   $.ajax({
                     url: 'getcustomerid/'+fbaid,
                     type: "GET",                  
@@ -1567,4 +1487,50 @@ function getcustomerid(text,fbaid){
            //         <div id="loading">
            //      <img src="loading.gif" />  
            // </div>
+
+
+</script>
+<script type="text/javascript">
+
+  function getprodcutdtls(product_id){
+$.ajax({  
+         type: "GET",  
+         url:'Product-followup/'+product_id,
+         success: function(fsmmsg){
+
+      var data = JSON.parse(fsmmsg);
+      var str = "<table class='table' id='example'><thead><tr style='height:30px;margin:5px;'><th>Lead ID</th><th>Name</th><th>Mobile No</th><th>Email Id</th><th>Created Date</th><th>View History</th></tr></thead>";
+       for (var i = 0; i < data.length; i++) 
+       {
+
+         str = str + "<tbody><tr style='height:30px;margin:5px;'><td><a href='#'  data-toggle='modal' onclick='getproductfollowup("+data[i].FBAID+")' data-target='productfollowup'>"+data[i].FBAID+"</a></td><td>"+data[i].FullName+"</td><td>"+data[i].MobiNumb1+"</td><td>"+data[i].EmailID+"</td><td>"+data[i].CreaOn+"</td><td><a class='btn btn-primary' id='bntviewproduthistory' data-toggle='modal' data-target='producthistory' onclick='showproducthistory("+data[i].FBAID+")'>View History</a></td></tr></tbody>";
+       }
+         str = str + "</table>";
+           $('#divpartnertable').html(str);   
+       }  
+      });
+}
+
+function showproducthistory(Lead_id){
+
+$('.producthistory').modal('show');
+$.ajax({  
+         type: "GET",  
+         url:'view-history-Product-followup/'+Lead_id,
+         success: function(fsmmsg){
+
+      var data = JSON.parse(fsmmsg);
+
+      var str = "<table class='table' id='example'><tr style='height:30px;margin:5px;'><th>Lead ID</th><th>Status</th><th>Remark</th></tr>";
+       for (var i = 0; i < data.length; i++) 
+       {
+
+         str = str + "<tr style='height:30px;margin:5px;'><td>"+data[i].lead_id+"</td><td>"+data[i].status_name+"</td><td>"+data[i].remark+"</td></tr>";
+       }
+         str = str + "</table>";
+           $('#divproducthistory').html(str);   
+       }  
+      });
+}
+
 </script>
