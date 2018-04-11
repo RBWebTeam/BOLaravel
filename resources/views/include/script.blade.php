@@ -1358,28 +1358,18 @@ $.ajax({
       else
       {
         str = str + "<td>No documents uploaded.</td></tr></table>";
+   }
 
-
-      }
-
-           $('#divdocviewer').html(str);   
-             
-  
-        }  
-      });
+        $('#divdocviewer').html(str);   
+       }  
+   });
 }
 
-function showImage(src)
-
-{
+    function showImage(src){
 
   $("#imgdoc").css("display","block");
   $("#imgdoc").attr("src" ,src);
- 
-
 }
-
-
 
 </script> 
   
@@ -1391,6 +1381,7 @@ function showImage(src)
 <script> 
 
 $('#msds-select').change(function () {
+  
 
     // var $loading = $('#loading').hide();    
  var table = $('#fba-list-table').DataTable(); 
@@ -1405,24 +1396,20 @@ $('#msds-select').change(function () {
           if(msdsSearch=="2" && msdsValue=="update"){  
             return true;
           }
-
-            if(msdsSearch=="1" && msdsValue!="update"){  
+           if(msdsSearch=="1" && msdsValue!="update"){  
             return true;
           }
           if(msdsSearch=="0" && msdsValue){  
             return true;
           }
           if(msdsSearch=="FBAID" && msdsValue!="draw"){
-
-            return true;
-          }
+           return true;
+         }
           if(msdsSearch=="POSPNO" && msdsValue!="draw"){
-            
-            return true;
-          }
-         
-        return false;
-    });
+           return true;
+        }
+          return false;
+    }); 
       
     table.draw();
      
