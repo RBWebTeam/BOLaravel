@@ -258,7 +258,7 @@
 
 
 <!-- update Loan -->
-<div class="updateLoan modal fade" role="dialog">   
+<!-- <div class="updateLoan modal fade" role="dialog">   
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -281,7 +281,7 @@
       </div>
     </div>
     </div>
-  </div>
+  </div> -->
 </div>
 
 <!-- Partner Info Start -->
@@ -481,9 +481,10 @@
 
             {"data":"LoanID"  ,
              "render": function ( data, type, row, meta ) {
-                return data==""?('<a id="loan_'+row.fbaid+'" class="checkloan" data-toggle="modal" data-target="#updateLoan" onclick="LoanID_UPDATE('+row.fbaid+')">update</a>'):data;
+                // return data==""?('<a id="loan_'+row.fbaid+'" class="checkloan" data-toggle="modal" data-target="#updateLoan" onclick="LoanID_UPDATE('+row.fbaid+')">update</a>'):data;
+                 return (data==""||data=="0")?('<a id="btnviewcid" onclick="getloanid(this,'+row.fbaid+')">Update</a>'):data;
               }
-            }, 
+         }, 
 
             {"data":"pospname"},  
             {"data":null ,
@@ -577,14 +578,14 @@ $('.date-range-filter').datepicker();
 <script>
 $(document).ready(function(){
 
-    $(".psearch").keyup(function(){ 
-         table1 = $('#fba-list-table').DataTable();
+    $(".psearch").keyup (function(){ 
+       table1 = $('#fba-list-table').DataTable();
          table1.columns(10).search( this.value).draw();
     });
 });
 
  $(document).ready(function(){
-    $(".fbsearch").keyup(function(){ 
+    $(".fbsearch").keyup (function(){ 
          table1 = $('#fba-list-table').DataTable();
          table1.columns(0).search( this.value).draw();
     });

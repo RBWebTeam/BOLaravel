@@ -1381,8 +1381,6 @@ $.ajax({
 <script> 
 
 $('#msds-select').change(function () {
-  
-
     // var $loading = $('#loading').hide();    
  var table = $('#fba-list-table').DataTable(); 
 
@@ -1391,7 +1389,7 @@ $('#msds-select').change(function () {
     function( settings, data, dataIndex ) {
         var msdsSearch = $( "#msds-select option:selected" ).val();
         var msdsValue = data[10]|| 0;
-       // console.log(data);
+       //console.log(data);
         var numbers = /^[0-9]+$/;
           if(msdsSearch=="2" && msdsValue=="update"){  
             return true;
@@ -1452,7 +1450,7 @@ function getcustomerid(text,fbaid){
                     type: "GET",                  
                     success:function(data) {
                       var json = JSON.parse(data);
-                      //console.log(json);
+                      console.log(json);
                       if(json.StatusNo==0){
    
                       $(text).closest('td').text(json.MasterData.CreateCustomerResult.CustID);
@@ -1467,9 +1465,45 @@ function getcustomerid(text,fbaid){
                 }); 
 
 }
-
-
  </script>
+<!-- Get Loan ID Start -->
+<script type="text/javascript">
+  function getloanid(text,fbaid){
+  //alert(fbaid);
+ $.ajax({
+                    url: 'getloanid/'+fbaid,
+                    type: "GET",                  
+                    success:function(data) {
+                      var json = JSON.parse(data);
+                      console.log(json);
+                      if(json.StatusNo==0){
+   //alert(json.MasterData[0].LoanID);
+                      $(text).closest('td').text(json.MasterData[0].LoanID);
+                       alert("Loan id updated successfully"); 
+
+                    }
+                    else{
+                      alert("Loan id does not exit"); 
+
+                    }
+                    }
+                }); 
+
+}
+
+
+
+
+
+
+
+
+</script>
+
+<!-- Get Loan ID End -->
+
+
+
  <!-- End shubham raise a ticket -->
  <!-- Loader Script -->
 <script>
