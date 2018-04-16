@@ -212,8 +212,10 @@
         var i =  1;
         
         $('#addScnt').on('click', function() {   
+           if( i<=3) {
                 $('<p><label for="inputEmail" class="control-label col-xs-2"> CC mail</label> <input type="text" name="ccemailid[]"  class="form-control  " style="width: 495px;"  id="ccemailid">  <a href="#" id="remScnt" class="remScnt">Remove</a></p>').appendTo(scntDiv);
                 i++;
+              }
                 return false;
         });
         

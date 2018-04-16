@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Exception;
+use Excel;
+
 class PaymentHistoryController extends CallApiController
 {
      
@@ -29,8 +31,28 @@ class PaymentHistoryController extends CallApiController
 	            $update_user='';
 	            $obj = json_decode($m);
              if($obj->message->Status='1'){
+              
+
 
                     	 $respon=($obj->message->lstPaymTrackDeta);
+
+ 
+                           
+                            if(isset($req->export)){  
+                               	    $data = json_decode( json_encode($respon), true) ;
+							        return Excel::create('payment-history', function($excel) use ($data) {
+							            $excel->sheet('mySheet', function($sheet) use ($data)
+							            {
+							                $sheet->fromArray($data);
+							            });
+							        })->download('xls');
+                               }
+
+
+
+                    	   
+
+
                     	 return view('dashboard/payment-history',['respon'=>$respon]);
            }                  
 	}catch (Exception $e){
