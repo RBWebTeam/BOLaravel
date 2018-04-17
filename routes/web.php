@@ -99,6 +99,7 @@ Route::get('RaiseaTicket','RaiserTicketController@getraiserticket');
 Route::get('RaiseaTicket/{CateCode}','RaiserTicketController@getsubcat');
 Route::get('RaiseaTicketgetcal/{QuerID}','RaiserTicketController@getclassi');
 Route::Post('RaiseaTicket','RaiserTicketController@inserraisertkt');
+Route::get('RaiseaTicketgettoccmail/{Querid}','RaiserTicketController@gettoccmail');
 
 Route::get('View-Raised-Ticket','ViewRaisedTicketController@getraisedticket');
 Route::get('View-Raised-Ticket/{ticketid}','ViewRaisedTicketController@deleteticket');
