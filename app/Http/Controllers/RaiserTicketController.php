@@ -81,7 +81,7 @@ class RaiserTicketController extends Controller
                 //print_r($array);exit();
 
                 
-if($ccemail!=''){
+/*if($ccemail!=''){
                 
                 $mail = Mail::send('mailViews.SendTicketReqMailFormat',['data' => $data,
                 	'lastid'=>$lastid],
@@ -112,7 +112,7 @@ else{
 
                     }
 
-    }
+    }*/
 		 
      Session::flash('message', 'Record has been saved successfully'); 
      
