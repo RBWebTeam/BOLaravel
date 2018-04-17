@@ -1,7 +1,9 @@
 @extends('include.master')
 @section('content')
 <div class="container-fluid white-bg">
-<div class="col-md-12"><h3 class="mrg-btm">Ticket Request</h3></div>
+ <div class="col-md-12" id="Ticket-app"><h3 class="mrg-btm">@{{ msg }}</h3></div>
+
+
 <div class="col-md-12"><p >  
        <div class="col-md-12">
        <div class="overflow-scroll">
@@ -26,7 +28,7 @@
 
                                      @foreach($query as $va)
                                      <tr>
-                                     <td><a href="#" onclick="TicketRequest_fn('{{$va->TicketRequestId}}')" >{{$va->TicketRequestId}}</a></td>
+                                     <td><a href="#" onclick="TicketRequest_fn('{{$va->TicketRequestId}}','{{$va->toemailid}}','{{$va->ccemailid}}')" >{{$va->TicketRequestId}}</a></td>
                                       <td>{{$va->CateName}}</td>
                                        <td>{{$va->QuerType}}</td>
                                         <td>{{$va->Description}}</td>
@@ -76,8 +78,28 @@
             </div>
   </div> 
 
+<!--  <div class="form-group">
+            <label for="inputEmail" class="control-label col-xs-2"> TO mail</label>
+            <div class="col-xs-10">
+         <input type="text" name="toemailid"  class="form-control"  id="toemailid">  
+           </div>
+ </div>
+
+  <div class="form-group">
+            <label for="inputEmail" class="control-label col-xs-2"> CC mail</label>
+            <div class="col-xs-10">
+                    <input type="text" name="ccemailid"  class="form-control"  id="ccemailid">  
+           </div>
+ </div> -->
+
+ <a href="#" id="addScnt">Add</a>
 
  
+<div class="form-group">
+
+<div id="pp_scents"></div>
+<div id="p_scents"></div>
+</div>
         
       </form>
       </div>
@@ -117,9 +139,30 @@
 
 
       <script type="text/javascript">
-      	function TicketRequest_fn(ID){
-             $('#TicketRequest_Id').val(ID);
-      		   $('#Ticket-Request-Id-Modal').modal('show');}
+
+
+
+      	function TicketRequest_fn(ID,toemailid,ccemailid){  
+          $('#pp_scents').empty();
+
+            // if( toemailid!=null && ccemailid!=null ){
+                 $('#pp_scents').append('<div class="form-group"><label for="inputEmail" class="control-label col-xs-2"> TO mail</label><div class="col-xs-10"><input type="text" name="toemailid"  class="form-control" value="'+toemailid+'"  id="toemailid"></div></div>');
+                
+                $('#pp_scents').append('<div class="form-group"><label for="inputEmail" class="control-label col-xs-2"> CC mail</label><div class="col-xs-10"><input type="text" name="ccemailid[]"  value="'+ccemailid+'"  class="form-control"  id="ccemailid"></div></div>');
+
+
+
+             // }else{
+             //   $('#pp_scents').append('<div class="form-group"><label for="inputEmail" class="control-label col-xs-2"> TO mail</label><div class="col-xs-10"><input type="text" name="toemailid"  class="form-control" value="'+toemailid+'"  id="toemailid"></div></div>');
+                
+             // } 
+
+
+          
+              $('#TicketRequest_Id').val(ID);
+              // $('#toemailid').val(toemailid);
+              // $('#ccemailid').val(ccemailid);
+      		    $('#Ticket-Request-Id-Modal').modal('show');}
    $(document).on('click','#TicketRequest_Id_save',function(e){  e.preventDefault();
          if($('#FBAUserId').val()!=0){
          $.post("{{url('ticket-request-save')}}",$('#TicketRequest_Id_from').serialize())
@@ -161,7 +204,53 @@
 
  }
 
+
+ 
+
+ $(function() {
+        var scntDiv = $('#p_scents');
+        var i =  1;
+        
+        $('#addScnt').on('click', function() {   
+           if( i<=3) {
+                $('<p><label for="inputEmail" class="control-label col-xs-2"> CC mail</label> <input type="text" name="ccemailid[]"  class="form-control  " style="width: 495px;"  id="ccemailid">  <a href="#" id="remScnt" class="remScnt">Remove</a></p>').appendTo(scntDiv);
+                i++;
+              }
+                return false;
+        });
+        
+        $(document).on('click','.remScnt', function() {  
+                if( i > 1 ) {
+                        $(this).parents('p').remove();
+                        i--;
+                }
+                return false;
+        });
+});
+
+
       </script>
+
+
+
+  
+
+    <script
+      src="//cdnjs.cloudflare.com/ajax/libs/vue/2.1.6/vue.min.js">
+    </script>
+
+    <script>
+      new Vue({
+        el: "#Ticket-app",
+        data() {
+          return {
+            msg: "Ticket Request"
+          }
+        }
+      });
+    </script>
+
+
 @endsection
 
 

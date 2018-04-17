@@ -8,7 +8,7 @@ use DB;
 use Session;
 use Validator;
 use Redirect;
-
+use Mail;
 class TicketController extends Controller
 {
      
@@ -31,13 +31,28 @@ class TicketController extends Controller
 
 
     public function ticket_request_save(Request $req){
+           $arr=array();
            $error=''; 
             try{
-        	DB::table('TicketRequest')->where('TicketRequestId','=',$req->TicketRequestId)->update(['user_fba_id'=>$req->FBAUserId]);
-                        $error=0; 
-                        }catch (Exception $e){  $error=1;  }
 
-                        return $error;
+                 foreach ($req->ccemailid as $key => $value) {
+                  if(isset($value)){
+                 $arr[]=$value;
+             }
+            }
+
+             $mail=$this->mail_fn($req->toemailid,$arr);
+             if($mail==0){
+        	DB::table('TicketRequest')->where('TicketRequestId','=',$req->TicketRequestId)->update(['user_fba_id'=>$req->FBAUserId]);
+            
+                        $error=0; 
+                 }else{
+                    $error=1; 
+                 }
+
+                }catch (Exception $e){  $error=1;  }
+
+         return $error;
 
     }
 
@@ -66,6 +81,29 @@ class TicketController extends Controller
    
 
 
+
+    }
+
+
+
+    public function mail_fn($email,$arrcc){
+
+                $data ="Please ";
+                $mail = Mail::send('ticket/ricket_mail_view',['data' => $data], function($message) use($email,$arrcc) {
+                $message->from('scriptdp@gmail.com', 'FinMart');
+                $message->to($email)
+                        ->cc($arrcc)
+                ->subject('Ticket Request');
+                });
+                     
+                    //  dd(Mail::failures());
+
+                    if(Mail::failures()){
+                            return 1;
+                    }else{
+                            return 0;
+
+                    }
 
     }
 }

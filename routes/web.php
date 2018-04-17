@@ -48,6 +48,7 @@ Route::post('posp-update','FbaController@posp');
 
 Route::get('getpaymentlink/{fbaid}','FbaController@getpaymentlink');
 Route::get('getcustomerid/{fbaid}','FbaController@getcustomerid1');
+Route::get('getloanid/{fbaid}','FbaController@getupdateloanid');
 
  Route::get('generatepaymentlink','generatepaylinkController@paylinkgenerate');
  Route::get('getpaylink/{fbaid}','generatepaylinkController@getnewpaylink');

@@ -56,7 +56,13 @@
 
     <div class="col-md-12 col-xs- 12" >
     <div class="form-group" style="height: 250px;  overflow-y: scroll;">
-   <table id="tblfbalist">
+
+    <th><input type="text"  class="search_id" id="myInput" placeholder="Search for names or Mobile Number" ></th>
+    
+   <table id="myTable">
+  <thead id="tblfbalisthead"></thead>
+  <tbody id="tblfbalist"></tbody>
+
    </table>
    </div>
    </div>
@@ -122,4 +128,30 @@
   </div>
   </div>  
   </div>
+
+  <script type="text/javascript">
+    
+
+    $(document).on("keyup",".search_id",function() { 
+
+   var input, filter, table, tr, td, i;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+     
+    if (td) {
+      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+     tr[i].style.display = "none";
+     }
+     }       
+    }
+    });
+
+
+  </script>
    @endsection

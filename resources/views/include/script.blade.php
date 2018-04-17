@@ -543,7 +543,7 @@ $(document).on('change', '#search_state', function() {
                 {
                   alert('Updated Successfully');
                   $('#p_remark').val('');
-                  $('#update_'+id).closest('td').html(sales_update);
+                  $('#update_'+id).closest('a').html(sales_update);
                   
                   $('.close').click();           
                 } 
@@ -1035,22 +1035,20 @@ function BindFbas(flag,value)
       var text = "";
       for (var i = 0; i < data.length; i++) {
 
-     if(i==0)
-
-    {
-    text = text +'<tr><th><input  name="fba_list[]" value="0" id="selectAll" onclick="checkall()" type="checkbox" /> FBA List</th><th>Mobile Number</th><th>City </th></tr>';
+      
+ 
 
 
-   text = text +'<tr><td><input name="fba_list[]" id="chkfba" type="checkbox" class="chkfba" value="'+data[i].id+'"/><input id="hdnchk" name="hdnchk" type="hidden" value="'+data[i].id+'" />'+data[i].fullname+'</td><td>'+data[i].mobile+'</td> <td>'+data[i].City+'</td></tr>';
-}
-
-  else{
+ 
+ 
 text = text +'<tr><td><input id="chkfba" name="fba_list[]"  type="checkbox" class="chkfba" value="'+data[i].id+'"/><input id="hdnchk" type="hidden" value="'+data[i].id+'" />'+data[i].fullname+'</td><td>'+data[i].mobile+'</td><td>'+data[i].City+'</td></tr>';
-}
+ 
 
 }
-$('#tblfbalist').empty().append(text);
-        
+
+$('#tblfbalisthead').empty().append('<tr><th><input  name="fba_list[]" value="0" id="selectAll" onclick="checkall()" type="checkbox" /> FBA List</th><th>Mobile Number</th><th>City </th>    </tr> ');
+
+        $('#tblfbalist').empty().append(text);
                      },
               error:function(error)
              {
@@ -1358,28 +1356,18 @@ $.ajax({
       else
       {
         str = str + "<td>No documents uploaded.</td></tr></table>";
+   }
 
-
-      }
-
-           $('#divdocviewer').html(str);   
-             
-  
-        }  
-      });
+        $('#divdocviewer').html(str);   
+       }  
+   });
 }
 
-function showImage(src)
-
-{
+    function showImage(src){
 
   $("#imgdoc").css("display","block");
   $("#imgdoc").attr("src" ,src);
- 
-
 }
-
-
 
 </script> 
   
@@ -1390,40 +1378,61 @@ function showImage(src)
 
 <script> 
 
-$('#msds-select').change(function () { 
-  debugger;
+$('#msds-select').change(function () {
+    // var $loading = $('#loading').hide();    
  var table = $('#fba-list-table').DataTable(); 
+
+ // $loading.show();
     $.fn.dataTable.ext.search.push(
     function( settings, data, dataIndex ) {
         var msdsSearch = $( "#msds-select option:selected" ).val();
         var msdsValue = data[10]|| 0;
-       // console.log(data);
+       //console.log(data);
         var numbers = /^[0-9]+$/;
           if(msdsSearch=="2" && msdsValue=="update"){  
             return true;
           }
-            if(msdsSearch=="1" && msdsValue!="update"){  
+           if(msdsSearch=="1" && msdsValue!="update"){  
             return true;
           }
           if(msdsSearch=="0" && msdsValue){  
             return true;
           }
           if(msdsSearch=="FBAID" && msdsValue!="draw"){
-
-            return true;
-          }
+           return true;
+         }
           if(msdsSearch=="POSPNO" && msdsValue!="draw"){
-            
-            return true;
-          }
-         
-        return false;
-    });
-    
-     table.draw();
-    
+           return true;
+        }
+          return false;
+    }); 
+      
+    table.draw();
+     
 });
-</script>
+ // $loading.hide();
+
+
+// posp yes fba id posp no search bar Hide and Show
+ 
+    $("select").on("change",function(){
+if ($('select ').val() == '1') {
+    $(".fbsearch").addClass("hide");
+    $(".psearch").addClass("hide");
+  }else{
+    $(".fbsearch").removeClass("hide");
+    if ($('select').val() == 'POSPNO')
+    {
+      $(".psearch").removeClass("hide");
+    }
+    else{
+      $(".psearch").addClass("hide");
+    }
+  }
+
+});
+
+  </script>
 <!-- POSP YES OR NO Dropdown end -->
 
 
@@ -1434,13 +1443,12 @@ $('#msds-select').change(function () {
 function getcustomerid(text,fbaid){
   //alert(fbaid);
   // alert(data);
-  //$('.paylink').modal('show');
   $.ajax({
                     url: 'getcustomerid/'+fbaid,
                     type: "GET",                  
                     success:function(data) {
                       var json = JSON.parse(data);
-                      //console.log(json);
+                      console.log(json);
                       if(json.StatusNo==0){
    
                       $(text).closest('td').text(json.MasterData.CreateCustomerResult.CustID);
@@ -1455,9 +1463,45 @@ function getcustomerid(text,fbaid){
                 }); 
 
 }
-
-
  </script>
+<!-- Get Loan ID Start -->
+<script type="text/javascript">
+  function getloanid(text,fbaid){
+  //alert(fbaid);
+ $.ajax({
+                    url: 'getloanid/'+fbaid,
+                    type: "GET",                  
+                    success:function(data) {
+                      var json = JSON.parse(data);
+                      console.log(json);
+                      if(json.StatusNo==0){
+   //alert(json.MasterData[0].LoanID);
+                      $(text).closest('td').text(json.MasterData[0].LoanID);
+                       alert("Loan id updated successfully"); 
+
+                    }
+                    else{
+                      alert("Loan id does not exit"); 
+
+                    }
+                    }
+                }); 
+
+}
+
+
+
+
+
+
+
+
+</script>
+
+<!-- Get Loan ID End -->
+
+
+
  <!-- End shubham raise a ticket -->
  <!-- Loader Script -->
 <script>
