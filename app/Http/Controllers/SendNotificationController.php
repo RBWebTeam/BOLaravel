@@ -73,15 +73,15 @@ $image = $req->file('notify_image');
     }
     }
  public function getcity($id)
-  {
+{
   $cities = DB::table("city_master")
-
-  ->where("stateid",$id)
-  
-  ->orderBy('city_master.cityname', 'asc')
-  ->pluck("cityname","city_id");
-    return json_encode($cities);
-  }
+                    ->where("stateid",$id)
+                  //  ->orderBy('cityname', 'asc')
+                   ->pluck("cityname","cityname")
+                    ;
+        return json_encode($cities);
+      
+}
    public function getfba($flag,$value)
   {
    $fbalist = DB::select("call usp_loadnotificationfba($flag,$value)");
