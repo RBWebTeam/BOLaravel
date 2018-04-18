@@ -67,5 +67,44 @@ class rmcitymappingController extends Controller
              
            // }
 
+
+
+//rm city------------
+        public function rmcityview()
+         {
+
+              return view('rm_view');
+
+          }
+
+
+
+
+
+
+        public function getrmdataview()
+
+        { 
+
+           $getrmdata =DB::select("call usp_load_rmmasterlist()");
+
+          return view('rm_view',['getrmdata'=>$getrmdata]);
+        }
+
+
+
+        public function table_view(Request $req)
+
+       {
+
+            
+             
+            $users = DB::select("call usp_getcity_view(?)",array($req->id_req));
+          
+            return response()->json($users);
+
+
+        }
+
            
        }
