@@ -58,9 +58,12 @@
             </div>
            </div>
        <div class="col-md-4">
-       <div class="form-group"> <input type="submit" name=""  class="mrg-top common-btn" value="SHOW">  </div>
+       <div class="form-group"> <input type="submit" name=""  class="mrg-top common-btn" value="SHOW"> <a href="{{url('payment-history')}}?export=1" class="qry-btn">export</a> </div>
        </div>
        </form>
+
+
+
        <!-- Date End -->
 <div class="col-md-12">
        <div class="overflow-scroll">
@@ -77,6 +80,8 @@
                       <th>Payment Type</th>
                        <th> Payment Status</th>
                        <th> City</th>
+                       <th> State</th>
+                       
                        <th>Sales Name</th>
                  </tr>
                 </thead>
@@ -99,6 +104,7 @@
                     <td>{{$val->PaymType}}</td>
                     <td>{{$val->PaymStatus}}</td>
                     <td>{{$val->City}}</td>
+                      <td>{{$val->State}}</td>
                     <td>{{$val->SalesName}}</td>
                     
                      
@@ -116,6 +122,7 @@
                    <th> </th>
                     <th>  </th>
                      <th>TOTAL AMOUNT: <i class="fa fa-rupee"></i> {{$sum}} </th>
+                      <th> </th>
                       <th> </th>
                        <th>  </th>
                        <th>  </th>
