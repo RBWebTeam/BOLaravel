@@ -15,6 +15,7 @@
 
 
 
+
 Route::get('health-packages','BookAppointmentController@health_packages');
 
 Route::post('health-insurance-analysis','BookAppointmentController@health_insurance_analysis');
@@ -52,7 +53,35 @@ Route::get('getloanid/{fbaid}','FbaController@getupdateloanid');
 
  Route::get('generatepaymentlink','generatepaylinkController@paylinkgenerate');
  Route::get('getpaylink/{fbaid}','generatepaylinkController@getnewpaylink');
- Route::post('generatepaymentlink','generatepaylinkController@sendpaysms');
+ Route::post('generatepaymentlink','generatepaylinkController@sendpsms');
+// -------------------------------------
+ Route::get('getpaylinknew/{fbaid}','FbaController@paylinkget');
+ Route::post('pmesgsend','FbaController@sendpaysms');
+ // --------------------------------------
+// vivek start
+ Route::get('state_dropdown','bankofferController@droup_state');
+Route::POST('insert_state','bankofferController@state_demo');
+Route::get('state_demo/{id}',array('as'=>'FSMRegister.ajax','uses'=>'bankofferController@get_state'));
+Route::get('state_dropdown/{cityid}','bankofferController@get_cities');
+Route::get('state_sub_dropdown/{cityid}','bankofferController@get_sub_cities');
+Route::get('city_dropdown','bankofferController@droup_city');
+Route::get('state_dropdown_id/{cityid}','bankofferController@get_state_id');
+//smstemplate
+Route::get('sms_template','smslogController@smstemplate');
+Route::post('insert_template','smslogController@insert_template_demo');
+Route::get('view_templete_table','smslogController@template_demo');
+Route::get('template_table_delete/{SMSTemplateId}','smslogController@templetedelete');
+Route::get('edit_view_templete/{SMSTemplateId}','smslogController@table_edit');
+Route::post('update_view_templete','smslogController@update_sms_table');
+//Rm city
+Route::get('rm_city_view','rmcitymappingController@rmcityview');
+Route::get('rm_city_view','rmcitymappingController@getrmdataview');
+Route::post('rm_city_view_edit','rmcitymappingController@table_view');
+//fba
+Route::get('fbamaster-edit','FbaController@fbamaster');
+Route::get('fbaid-view','FbaController@getfbaid');
+Route::post('update_fbamaster','FbaController@update_fba_table');
+
 
 
 // Route::get('fba-list/{salescode}/{fbaid}',array('as'=>'fba-list.ajax','uses'=>'FbaController@salesupdate'));
@@ -126,7 +155,7 @@ Route::post('Fsm-Register','FsmRegisterController@insertfsm');
 
  Route::get('approve-notification','SendNotificationController@notificationApprove');
 
-  Route::get('send_sms_log','smsLogController@getsendsmslog');
+  Route::get('send-sms-log','smsLogController@getsendsmslog');
 
 
 // -------------- avinash
@@ -288,5 +317,18 @@ Route::get('went-wrong','LoginController@went_wrong');
 
 Route::group(['namespace' => 'leadController' ], function() {
 Route::get('marketing-leads','LeaduploadController@marketing_leads');  
+
+
+
+// Vivek start
+
+//******state_dropdown******
+// Route::get('state_dropdown','bankofferController@droup_state');
+// Route::POST('insert_state','bankofferController@state_demo');
+// Route::get('state_demo/{id}',array('as'=>'FSMRegister.ajax','uses'=>'bankofferController@get_state'));
+// Route::get('state_dropdown/{cityid}','bankofferController@get_cities');
+// Route::get('state_sub_dropdown/{cityid}','bankofferController@get_sub_cities');
+
+
 
 });

@@ -16,6 +16,7 @@
 
       <div class="col-md-2">
       <div class="form-group">
+
     <p>From Date</p>
          <div id="datepicker" class="input-group date" data-date-format="mm-dd-yyyy">
                <input class="form-control date-range-filter" type="text" placeholder="From Date" name="fdate" id="min"/>
@@ -59,7 +60,6 @@
    <input type="textbox" class="psearch hide" id="psearch" name="psearch" placeholder="Search POSP" style="display:none; margin-left: 96px;" />
 
   </form>
-
   </div> 
   </div>
 
@@ -91,6 +91,7 @@
                                        <th>SMS</th>
                                        <th>sales code</th>
                                        <th>Customer ID</th>
+
                                        <th>Created Date1</th>
                                      </tr>
                                     </thead>
@@ -374,11 +375,37 @@
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h4 class="modal-title">Payment link</h4>
       </div>
-      <div class="modal-body">
-    <div style="color: blue;" id="divpartnertable_payment" class="divpartnertable_payment">
+
+<div class="col-md-12"> <br>
+<textarea type="text" rows="6"  id="divpartnertable_payment" class="divpartnertable_payment form-control">
+  </textarea>      
+   <br>
+  </div> 
        
+      <div class="col-md-12"> 
+    <button type="button" style="margin-left:20px;" class="btn btn-info" name="paysub" id="paysub" onclick="getpaylinknew()" >Genrate Payment link</button> &nbsp;&nbsp;
+     <button type="button" name="smspayment" id="smspayment" class="btn btn-success" data-dismiss="modal" style="padding-left:5px; " onclick="pmesgsend()">Send SMS</button>
     </div>
+
+    
+      
+<!-- <form id="modelpaylink" name="modelpaylink"> -->
+  <form method="POST" id="modelpaylink">
+  {{ csrf_field() }}
+         <div id="divlink" class="modal-body">
+
+        </div>
+        <div class="modal-footer">
+         <input type="hidden" name="fba" id="fba">
+         <input type="hidden" name="txtmono" id="txtmono">
+         <input type="hidden" name="txtlink" id="txtlink">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      <div class="modal-body">
+
+
       </div>
+      </form>
     </div>
   </div>
 </div>
@@ -453,7 +480,7 @@
                
 
          "render": function ( data, type, row, meta ) {
-         return row.PayStat == "S"?'':'<a id="btnviewhistory" data-toggle="modal" data-target="#paylink_payment" onclick="getpaymentlink('+row.fbaid+')">Payment link</a>';
+         return row.PayStat == "S"?'':'<a id="btnviewhistory" data-toggle="modal" data-target="#paylink_payment" onclick="getpaymentlink('+row.fbaid+','+row.MobiNumb1+')">Payment link</a>';
               }
 
              }, 
@@ -570,6 +597,9 @@ $(document).ready(function() {
 
 $('.date-range-filter').datepicker();
 });
+
+
+
 </script>
 <!-- from date to date end -->  
 
@@ -580,19 +610,72 @@ $(document).ready(function(){
 
     $(".psearch").keyup (function(){ 
        table1 = $('#fba-list-table').DataTable();
-         table1.columns(10).search( this.value).draw();
+      
+           if ($(this).val()!= '') {
+        table1.columns(10).search('^'+$(this).val() + '$', true, true).draw(); 
+      }
+      else
+        table1.columns(10).search($(this).val(), true, true).draw(); 
     });
 });
 
  $(document).ready(function(){
-    $(".fbsearch").keyup (function(){ 
+    $(".fbsearch").on("keyup change",function(){ 
          table1 = $('#fba-list-table').DataTable();
-         table1.columns(0).search( this.value).draw();
+         //table1.columns(0).search( this.value).draw();
+         if ($(this).val()!= '') {
+        table1.columns(0).search('^'+$(this).val() + '$', true, true).draw(); 
+      }
+      else
+        table1.columns(0).search($(this).val(), true, true).draw(); 
     });
 });
- // Search Pospno and Fbaid End
+
+
+     
+$(document).ready(function() {
+  $('#paysub').on("onclick", function(){
+    alert("test");
+  });
+});
+
 </script>
 
+
+<script type="text/javascript">
+    function getpaylinknew(){
+  $.ajax({
+  url: 'getpaylinknew/'+$('#fba').val(),
+  type: "GET",                  
+  success:function(data) {
+  var json = JSON.parse(data);
+  if(json.StatusNo==0){
+        $('#divpartnertable_payment').html(json.MasterData.PaymentURL);
+        $('#txtlink').val(json.MasterData.PaymentURL);
+      }
+          }
+
+        });
+}
+
+ function pmesgsend(){
+alert("SMS send successfully..");
+        $.ajax({ 
+        url: "{{URL::to('pmesgsend')}}",
+        method:"POST",
+        data: $('#modelpaylink').serialize(),
+        success: function(msg)  
+         {
+          console.log(msg);
+
+         }
+});
+      }
+
+
+
+
+</script>
 
 
 

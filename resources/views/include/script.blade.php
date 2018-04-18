@@ -1092,7 +1092,7 @@ $(document).on('change', '#search_state', function() {
                     fstate_id : fstate_id,
                   },
             success: function(data) { 
-                $.each(data, function( key, val )
+                $.each(data, function(key, val)
                 {
                   city_array.push('<option value="'+val.datavalue+'">'+val.value+'</option>');
                 });
@@ -1122,10 +1122,11 @@ console.log($('#frmsmstemplate').serialize());
 });
 
 
-function getpaymentlink(fbaid){
-  //alert(fbaid);
-  // alert(data);
-  //$('.paylink').modal('show');
+function getpaymentlink(fbaid,mobile){
+
+ $('#txtmono').val(mobile);
+ $('#fba').val(fbaid);
+
   $.ajax({
                     url: 'getpaymentlink/'+fbaid,
                     type: "GET",
@@ -1139,10 +1140,11 @@ function getpaymentlink(fbaid){
                         // alert(str)
                         $('.divpartnertable_payment').html(str);
                          $('.paylink_payment').modal('show');
+
                           //$('#paylink').html(data[0].Link);
                        }     
                        else{
-                        var str = "<p>No Payment Link Available</p>";
+                        var str = "No Payment Link Available...";
                         // alert(str)
                         $('.divpartnertable_payment').html(str);
                          $('.paylink_payment').modal('show');
@@ -1566,5 +1568,13 @@ $.ajax({
        }  
       });
 }
+
+
+
+
+
+
+
+
 
 </script>
