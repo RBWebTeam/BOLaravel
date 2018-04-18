@@ -28,6 +28,8 @@ Route::post('HealthAssureinsert','HealthAssureController@inserthealthtest');
 Route::get('Health-Assure-Partner','HealthAssurePartnerController@getpartnerinfo');
 Route::post('providerlist','HealthAssurePartnerController@providerlist');
 Route::Post('Health-Assure-Partner','HealthAssurePartnerController@getproviderinfo');
+Route::get('Success','HealthAssureController@Success');
+Route::get('Failure','HealthAssureController@failure');
 ///Shubham
 
 Route::get('/','LoginController@checklogin');
