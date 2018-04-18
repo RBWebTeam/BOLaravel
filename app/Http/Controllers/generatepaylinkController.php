@@ -54,7 +54,7 @@ class generatepaylinkController extends CallApiController {
 
     }
 
-    public function sendpaysms(Request $req)
+    public function sendpsms(Request $req)
     {
     	      $text="Your payment link is genrated";
               $newsms = urlencode( $text.":".$req->txtlink);//htmlspecialchars();
