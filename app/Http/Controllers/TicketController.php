@@ -41,6 +41,12 @@ class TicketController extends Controller
              }
             }
 
+
+print_r($req->example_emailSUI);
+
+
+
+exit;
              $mail=$this->mail_fn($req->toemailid,$arr);
              if($mail==0){
         	DB::table('TicketRequest')->where('TicketRequestId','=',$req->TicketRequestId)->update(['user_fba_id'=>$req->FBAUserId]);

@@ -164,7 +164,7 @@ Route::post('Fsm-Register','FsmRegisterController@insertfsm');
 
  Route::get('approve-notification','SendNotificationController@notificationApprove');
 
-  Route::get('send-sms-log','smsLogController@getsendsmslog');
+  Route::get('send-sms-log','SmslogController@getsendsmslog');
 
 
 // -------------- avinash
