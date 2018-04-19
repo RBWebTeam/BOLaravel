@@ -27,7 +27,7 @@ class bankofferController extends InitialController
   
 }
 
-    ////******state_dropdown*****////
+////******state_dropdown*****////
 
         public function droup_state()
 
@@ -74,8 +74,9 @@ class bankofferController extends InitialController
        }
 
 
+ 
 
-       //****city_dropdown****
+//****city_dropdown****
       public function droup_city ()
         {
           $users=DB::select("call usp_load_states()");
@@ -91,4 +92,7 @@ class bankofferController extends InitialController
     
        }
 
-}
+ }
+
+
+

@@ -33,12 +33,6 @@
 
 	                   </form>
 
-<!-- 
-	                 <div class="form-group">
-                 <center><button type="submit" id="sub" class="btn btn-primary">Save</button></center> 
-      </div>	
-				   -->   <!-- <div class="center-obj pull-left">
-				     <button class="common-btn" id="btnsave">Save</button>
-                     </div> -->
+
 			
         	@endsection
