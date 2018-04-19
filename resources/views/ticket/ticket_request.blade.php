@@ -162,10 +162,10 @@
           
    
        
-           // $('#example_emailSUI').val('["dp@gmail.com"]');
+           //   $('#example_emailSUI').val('["dp@gmail.com"]');
       
-        
-
+         $('#current_emailsSUI').text('["dp@gmail.com"]');
+ 
                
 
 

@@ -1,4 +1,3 @@
-
  @extends('include.master')
  @section('content') 
 <form id="approve" name="approve"> 
@@ -11,37 +10,36 @@
   <table id="example" class="table table-bordered table-striped tbl" >
    <thead>
    <tr>
-    <th>FBAID</th>
-    <th>FirsName</th>
-     <th>mobiNumb1</th>
-      <th> group_id</th>
-      <th>message</th>
-       <th>msgtime</th> 
-      <th>msgid</th> 
-      <th>issent</th>
-       </tr>
-      </thead>
-      <tbody>
-     @foreach($query1 as $val) 
+   <th>FBAID</th>
+   <th>FirstName</th>
+   <th>MobileNo</th>
+   <th> GroupId</th>
+   <th>Message</th>
+   <th>MessageTime</th> 
+   <th>MessageId</th> 
+   <th>issent</th>
+    </tr>
+    </thead>
+    <tbody>
+     @foreach($sendsms as $val) 
      <tr>
-        <td><?php echo $val->FBAID; ?></td> 
-         <td><?php echo $val->FirsName; ?></td>
-         <td><?php echo $val->mobiNumb1; ?></td>
-          <td><?php echo $val->group_id; ?></td>
-          <td><?php echo $val->message; ?></td>
-          <td><?php echo $val->msgtime; ?></td>
-          <td><?php echo $val->msgid; ?></td>
-          <td><?php echo $val->issent; ?></td>
-        
-     </tr>
-      @endforeach
-      </tbody>
-      </table>
+    <td><?php echo $val->FBAID; ?></td> 
+    <td><?php echo $val->FirstName; ?></td>
+    <td><?php echo $val->MobileNo; ?></td>
+    <td><?php echo $val->GroupId; ?></td>
+    <td><?php echo $val->Message; ?></td>
+    <td><?php echo $val->MessageTime; ?></td>
+    <td><?php echo $val->MessageId; ?></td>
+    <td><?php echo $val->issent; ?></td>
+    </tr>
+    @endforeach
+    </tbody>
+    </table>
     </div>
-  </div>
-  </div>
- </div>
- </form>
-@endsection
+    </div>
+    </div>
+    </div>
+    </form>
+    @endsection
 
 

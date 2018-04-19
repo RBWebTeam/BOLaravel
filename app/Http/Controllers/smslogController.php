@@ -10,7 +10,7 @@ use Redirect;
 use Session;
 use URL;
 use Mail;
-class smslogController extends Controller
+class SmsLogController extends Controller
 {
 
 	public function getsmslog(){
@@ -34,11 +34,12 @@ class smslogController extends Controller
         return view('dashboard.sms_template');
             }
   
-public function getsendsmslog(){ 
-$query1=DB::select("call usp_load_sms_log()");
+  public function getsendsmslog(){ 
+ $sendsms=DB::select("call usp_load_sms_log()");
 
-return view ('dashboard.send-sms-log',['query1'=>$query1]);
+ return view ('dashboard.send-sms-log',['sendsms'=>$sendsms]);
 }
+
 
 
 
