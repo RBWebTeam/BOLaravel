@@ -59,11 +59,19 @@ Route::get('getloanid/{fbaid}','FbaController@getupdateloanid');
  Route::post('pmesgsend','FbaController@sendpaysms');
  // --------------------------------------
 // vivek start
- Route::get('state_dropdown','bankofferController@droup_state');
+ 
+//******state_dropdown******
+Route::get('state-dropdown','bankofferController@droup_state');
 Route::POST('insert_state','bankofferController@state_demo');
 Route::get('state_demo/{id}',array('as'=>'FSMRegister.ajax','uses'=>'bankofferController@get_state'));
 Route::get('state_dropdown/{cityid}','bankofferController@get_cities');
 Route::get('state_sub_dropdown/{cityid}','bankofferController@get_sub_cities');
+
+
+
+
+
+//city_droupdown
 Route::get('city_dropdown','bankofferController@droup_city');
 Route::get('state_dropdown_id/{cityid}','bankofferController@get_state_id');
 //smstemplate
