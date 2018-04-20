@@ -1,3 +1,4 @@
+
 @extends('include.master')
 @section('content')
 
@@ -17,10 +18,10 @@
   <table id="" class="table table-responsive table-hover" cellspacing="0">
      <div class="col-md-4 col-xs-12">
       <select  class="selectpicker select-opt form-control" id="txtmapstate" name="txtmapstate"  required>
-         <option value="">Select State</option>
+         <option disabled selected value="">Select State</option>
          @foreach ($users as $user)
-     		<option value="{{ $user->state_id}}">{{ $user->state_name}}</option>
-	   	@endforeach 
+        <option value="{{ $user->state_id}}">{{ $user->state_name}}</option>
+      @endforeach 
      </select>
    </div>
 
@@ -116,6 +117,3 @@
 
 
 @endsection
-
-
-

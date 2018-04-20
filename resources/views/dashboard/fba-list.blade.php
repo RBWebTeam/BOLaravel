@@ -91,8 +91,7 @@
                                        <th>SMS</th>
                                        <th>sales code</th>
                                        <th>Customer ID</th>
-
-                                       <th>Created Date1</th>
+                                      <th>Created Date1</th>
                                      </tr>
                                     </thead>
                                    </table>
@@ -659,7 +658,7 @@ $(document).ready(function() {
 }
 
  function pmesgsend(){
-alert("SMS send successfully..");
+alert("Offer Created successfully..");
         $.ajax({ 
         url: "{{URL::to('pmesgsend')}}",
         method:"POST",

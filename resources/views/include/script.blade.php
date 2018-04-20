@@ -165,7 +165,8 @@ $(document).ready(function(){
                     dataType: "json",
                     success:function(data) {
                         $('#txtmapcity').empty();
-                        $('#txtmapcity').append('<option value="0">--Select City--</option>');
+                        $('#txtmapcity').append('<option value="">Select City</option>');
+
                         $.each(data, function(key, value) {
 
                             $('#txtmapcity').append('<option value="'+ key +'">'+ value +'</option>');
@@ -541,7 +542,7 @@ $(document).on('change', '#search_state', function() {
          success: function(msg){
          if (msg.status==0) 
                 {
-                  alert('Updated Successfully');
+                  alert('Sales Code Updated Successfully');
                   $('#p_remark').val('');
                   $('#update_'+id).closest('a').html(sales_update);
                   
@@ -1566,11 +1567,6 @@ $.ajax({
        }  
       });
 }
-
-
-
-
-
 
 
 
