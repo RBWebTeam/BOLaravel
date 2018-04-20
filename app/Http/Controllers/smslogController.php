@@ -10,7 +10,7 @@ use Redirect;
 use Session;
 use URL;
 use Mail;
-class SmsLogController extends Controller
+class smslogController extends Controller
 {
 
 	public function getsmslog(){
