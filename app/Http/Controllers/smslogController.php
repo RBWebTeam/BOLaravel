@@ -56,7 +56,7 @@ class smslogController extends Controller
   
         public function insert_template_demo(Request $req){
 
-            DB::table('smstemplate')->insert([
+            DB::table('SMSTemplate')->insert([
           ['Header' =>$req->hname,
            'Template' => $req->txtmesg,
            'CreatedBy' => session()->get('fbaid')],
@@ -89,7 +89,7 @@ class smslogController extends Controller
          public function table_edit($id)
          {
 
-            $user=DB::table('smstemplate')
+            $user=DB::table('SMSTemplate')
             ->select('SMSTemplateId','Header','Template')
             ->where('SMSTemplateId','=',$id)->first();
              return view('dashboard.edit_table_template',["user"=>$user]);
@@ -136,7 +136,7 @@ class smslogController extends Controller
        public function update_sms_table(Request $req)
        {
           $arra= array('Header'=>$req->smshead,'Template'=>$req->smsbody);
-          $que=DB::table('smstemplate')->where('SMSTemplateId','=',$req->fbaid)->update($arra);
+          $que=DB::table('SMSTemplate')->where('SMSTemplateId','=',$req->fbaid)->update($arra);
            return redirect('view_templete_table');
        }
 
