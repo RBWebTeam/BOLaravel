@@ -14,6 +14,8 @@
                   <tr>
                    <th>FBA Id</th>
                    <th>Name</th>
+                   <th>Phone No </th>
+                   <th>Email Id </th>
                     <th>Payment Link</th>
                   </tr>
                 </thead>
@@ -21,7 +23,10 @@
                 
                 @foreach($plink as $val)   
                 <td><?php echo $val->FBAID; ?></td> 
-                <td><?php echo $val->FullName; ?></td>
+                 <td><?php echo $val->FullName; ?></td>
+                  <td><?php echo $val->MobiNumb1; ?></td>
+                  <td><?php echo $val->EmailID; ?></td> 
+              
                 <td>
              <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal" id="paysub"  onclick="getpaylink('{{ $val->FBAID }}','{{ $val->MobiNumb1}}')">Generate  Payment Link</button>
              </td>
@@ -34,18 +39,7 @@
 				</div>
 			
 			
-			<!-- Pagination Start -->
-		<!-- 	<div>
-			<h5 class="pull-left"><b>Records :</b> <span>1 to 10 </span>Of <span class="badge">186</span><h5>
-			<ul class="pagination pull-right">
-              <li><a href="#">1</a></li>
-              <li><a href="#">2</a></li>
-              <li><a href="#">3</a></li>
-              <li><a href="#">4</a></li>
-              <li><a href="#">5</a></li>
-            </ul>
-			</div> -->
-			<!-- Pagination End -->
+
 			</div>
             </div>
             </div>
@@ -78,8 +72,6 @@
     </form>
   </div>
  </div>
-
-
 <script>
            function getpaylink(FBAID,MobiNumb){
           //alert(MobiNumb);
