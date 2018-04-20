@@ -4,7 +4,7 @@
 
  <div id="content" style="overflow:scroll;">
 			 <div class="container-fluid white-bg">
-			 <div class="col-md-12"><h3 class="mrg-btm">Generate Payment link</h3></div>
+			 <div class="col-md-12"><h3 class="mrg-btm">Generate Payment Link</h3></div>
 			 
 			<div class="col-md-12">
 			 <div class="overflow-scroll">
@@ -14,7 +14,7 @@
                   <tr>
                    <th>FBA Id</th>
                    <th>Name</th>
-                    <th>Payment link</th>
+                    <th>Payment Link</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -23,7 +23,7 @@
                 <td><?php echo $val->FBAID; ?></td> 
                 <td><?php echo $val->FullName; ?></td>
                 <td>
-             <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal" id="paysub"  onclick="getpaylink('{{ $val->FBAID }}','{{ $val->MobiNumb1}}')">Genrate Payment link</button>
+             <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal" id="paysub"  onclick="getpaylink('{{ $val->FBAID }}','{{ $val->MobiNumb1}}')">Generate  Payment Link</button>
              </td>
                 
              </tr>
@@ -60,10 +60,10 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Generate Pay link</h4>
+          <h4 class="modal-title">Generate Payment Link</h4>
        </div>
         <!-- <div id="divlink" class="modal-body"> -->
-<textarea type="text" rows="6"  id="divlink" class="divlink form-control">
+<textarea type="text" rows="6"  id="divlink" class="divlink form-control" class="field left" readonly>
   </textarea>  
   <!--       </div> -->
         <div class="modal-footer">

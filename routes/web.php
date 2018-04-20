@@ -57,6 +57,11 @@ Route::get('getloanid/{fbaid}','FbaController@getupdateloanid');
 // -------------------------------------
  Route::get('getpaylinknew/{fbaid}','FbaController@paylinkget');
  Route::post('pmesgsend','FbaController@sendpaysms');
+ Route::get('crmfbalist','crmfbalistController@crmlist');
+
+
+
+
  // --------------------------------------
 // vivek start
  
