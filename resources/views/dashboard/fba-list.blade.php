@@ -376,7 +376,7 @@
       </div>
 
 <div class="col-md-12"> <br>
-<textarea type="text" rows="6"  id="divpartnertable_payment" class="divpartnertable_payment form-control">
+<textarea type="text" rows="6" id="divpartnertable_payment" class="divpartnertable_payment form-control">
   </textarea>      
    <br>
   </div> 
