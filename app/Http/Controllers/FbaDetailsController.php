@@ -9,6 +9,7 @@ use Log;
 use Mail;
 use App\jobs\MailTest;
 use Carbon\Carbon;
+use Exception;
 class FbaDetailsController extends TestController
 {
        
@@ -34,14 +35,29 @@ class FbaDetailsController extends TestController
              
             try{
           
-             $query=DB::select('call sp_fba_update_data(?)',[$req->fba_id]);
-           return Response::json(['query'=>$query[0],'status' => true]);
+             $query=DB::select('call sp_fba_find_data(?)',[$req->fba_id]);
+
+           return Response::json(['query'=>$query,'status' => true]);
       }catch (Exception $e){
                return Response::json(['status' => false]);
 
        }
 
           
+
+       }
+
+ 
+
+       public function fba_search_update(Request $req){
+          try{
+         DB::select('call sp_fba_update_data(?,?,?,?,?,?,?,?)',[$req->FBAID,$req->UserName,$req->FirsName,$req->MiddName,
+                                                               $req->LastName,$req->FullName,$req->EmailID,$req->MobiNumb1]);
+          return Response::json(['status' => true]);
+          }catch (Exception $e){
+               return Response::json(['status' => false]);
+
+       }
 
        }
 }

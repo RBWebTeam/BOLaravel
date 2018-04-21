@@ -24,30 +24,15 @@
 
 
 <div class="container">
-   <form>
-
-   <div id="fba_appand"></div>
-
+   <form id="fba_details_update_from"  method="post">{{ csrf_field() }}
+   <div id="fba_details_update"></div>
   
-
-<!--   <div class="form-group">
-    <label class="control-label " for="name">Name</label>
-    <input class="form-control" id="name" name="name" value="'++'" type="text"/>
+  <!-- <div class="form-group">
+    <input class="form-control"   name="FBAID" value="'+res.query[0].FBAID+'" type="text"/>
   </div>
-  
-  <div class="form-group">  
-    <label class="control-label requiredField" for="email">Email<span class="asteriskField">*</span></label>
-    <input class="form-control" id="email"  value="'++'" name="email" type="text"/>
-  </div>
-  
-  <div class="form-group">  
-    <label class="control-label " for="subject">Subject</label>
-    <input class="form-control"  value="'++'" id="subject" name="subject" type="text"/>
-  </div>
-  
   
   <div class="form-group">
-    <button class="btn btn-primary " name="submit" type="submit">Submit</button>
+    <button class="btn btn-primary " id="fba_details_update_ID"  type="submit">Submit</button>
   </div> -->
   
 </form>         
@@ -66,18 +51,17 @@ $(document).ready(function(){
  
  $('#search_fba').click(function(event){   event.preventDefault(); 
       var srchterm=$('#srch-term').val();
-    
-
-
-
-
+  
         
          $.post("{{url('fba-search-id')}}",$('#fba-update-from-id').serialize())
              .done(function(res){ 
-               console.log(res.query);
-               if(res.status==true){
+              // console.log(res.query);
+               if(res.status==true && res.query.length>0){  
                  
-                 $('#fba_appand').append('<div class="form-group"> <label class="control-label " for="name">Name</label> <input class="form-control" id="name" name="name" value="'+res.query.FirsName+'" type="text"/> </div><div class="form-group"> <label class="control-label requiredField" for="email">Email<span class="asteriskField">*</span></label> <input class="form-control" id="email" value="'+1+'" name="email" type="text"/> </div><div class="form-group"> <label class="control-label " for="subject">Subject</label> <input class="form-control" value="'+1+'" id="subject" name="subject" type="text"/> </div><div class="form-group"> <button class="btn btn-primary " name="submit" type="submit">Submit</button> </div>');
+                 $('#fba_details_update').empty().append('<div class="form-group"> <input class="form-control" name="FBAID" value="'+res.query[0].FBAID+'" type="hidden"/> </div><div class="form-group"> <label class="control-label " >User Name</label> <input class="form-control" name="UserName" value="'+res.query[0].UserName+'" type="text"/> </div><div class="form-group"> <label class="control-label " >Firs Name</label> <input class="form-control" name="FirsName" value="'+res.query[0].FirsName+'" type="text"/> </div><div class="form-group"> <label class="control-label " >Midd Name</label> <input class="form-control" name="MiddName" value="'+res.query[0].MiddName+'" type="text"/> </div><div class="form-group"> <label class="control-label " >Last Name</label> <input class="form-control" name="LastName" value="'+res.query[0].LastName+'" type="text"/> </div><div class="form-group"> <label class="control-label " >Full Name</label> <input class="form-control" name="FullName" value="'+res.query[0].FullName+'" type="text"/> </div><div class="form-group"> <label class="control-label " >Email ID</label> <input class="form-control" name="EmailID" value="'+res.query[0].EmailID+'" type="text"/> </div><div class="form-group"> <label class="control-label " >MobiNumb1</label> <input class="form-control" name="MobiNumb1" value="'+res.query[0].MobiNumb1+'" type="text"/> </div><div class="form-group"> <button class="btn btn-primary " id="fba_details_update_ID" type="submit">Submit</button> </div>');
+               }else{
+                 $('#fba_details_update').empty();
+                 alert("FBA ID not Match....");
                }
                 
              }).fail(function(xhr, status, error) {
@@ -87,6 +71,28 @@ $(document).ready(function(){
      
  });
 });
+
+
+  
+
+$(document).on('click','#fba_details_update_ID',function(){ event.preventDefault(); 
+
+  $.post("{{url('fba-search-update')}}",$('#fba_details_update_from').serialize())
+             .done(function(res){ 
+                
+                if(res.status==true){
+                 alert("Successfully Update");
+                  $('#fba_details_update').empty();
+              }else{
+                console.log("error");
+              }
+
+               }).fail(function(xhr, status, error) {
+                 console.log(error);
+            });
+
+});
+
 
  </script>
 
