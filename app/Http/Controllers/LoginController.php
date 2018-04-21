@@ -39,7 +39,7 @@ if(!$request->session()->exists('emailid')){
    }else{
           
 
-
+ 
 
            $query=DB::select('call sp_user_login(?,?,?)',array($request->email,$request->password,$request->ip()));
            
