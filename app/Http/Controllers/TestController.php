@@ -10,7 +10,7 @@ class TestController extends Controller
    protected $user;
    public  function __construct(){
 
-              echo "greter";
+              
      } 
 
 }
