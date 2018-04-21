@@ -328,6 +328,8 @@ Route::get('went-wrong','LoginController@went_wrong');
 ******************/
 
 Route::get('fba-details-update','FbaDetailsController@fba_details_update');
+Route::post('fba-search-id','FbaDetailsController@fba_search_id');
+
 
 });
 
