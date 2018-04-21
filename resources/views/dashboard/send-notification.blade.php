@@ -57,9 +57,10 @@
     <div class="col-md-12 col-xs- 12" >
     <div class="form-group" style="height: 250px;  overflow-y: scroll;">
 
-    <th><input type="text"  class="search_id" id="myInput" placeholder="Search for names or Mobile Number" ></th>
     
+
    <table id="myTable">
+   <tr><input type="text"  class="search_id" id="myInput" placeholder="Search for names " ></tr>
   <thead id="tblfbalisthead"></thead>
   <tbody id="tblfbalist"></tbody>
 

@@ -34,11 +34,12 @@ class smslogController extends Controller
         return view('dashboard.sms_template');
             }
   
-public function getsendsmslog(){ 
-$query1=DB::select("call usp_load_sms_log()");
+  public function getsendsmslog(){ 
+ $sendsms=DB::select("call usp_load_sms_log()");
 
-return view ('dashboard.send-sms-log',['query1'=>$query1]);
+ return view ('dashboard.send-sms-log',['sendsms'=>$sendsms]);
 }
+
 
 
 
@@ -55,7 +56,7 @@ return view ('dashboard.send-sms-log',['query1'=>$query1]);
   
         public function insert_template_demo(Request $req){
 
-            DB::table('smstemplate')->insert([
+            DB::table('SMSTemplate')->insert([
           ['Header' =>$req->hname,
            'Template' => $req->txtmesg,
            'CreatedBy' => session()->get('fbaid')],
@@ -88,7 +89,7 @@ return view ('dashboard.send-sms-log',['query1'=>$query1]);
          public function table_edit($id)
          {
 
-            $user=DB::table('smstemplate')
+            $user=DB::table('SMSTemplate')
             ->select('SMSTemplateId','Header','Template')
             ->where('SMSTemplateId','=',$id)->first();
              return view('dashboard.edit_table_template',["user"=>$user]);
@@ -135,7 +136,7 @@ return view ('dashboard.send-sms-log',['query1'=>$query1]);
        public function update_sms_table(Request $req)
        {
           $arra= array('Header'=>$req->smshead,'Template'=>$req->smsbody);
-          $que=DB::table('smstemplate')->where('SMSTemplateId','=',$req->fbaid)->update($arra);
+          $que=DB::table('SMSTemplate')->where('SMSTemplateId','=',$req->fbaid)->update($arra);
            return redirect('view_templete_table');
        }
 

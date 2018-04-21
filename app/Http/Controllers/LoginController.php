@@ -12,11 +12,15 @@ use Mail;
  
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
+
+
 class LoginController extends InitialController
 {
 
 
 public function checklogin(Request $request){
+
+  
 if(!$request->session()->exists('emailid')){
                return view('index');
        }else{

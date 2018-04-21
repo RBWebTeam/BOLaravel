@@ -62,9 +62,10 @@
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h4 class="modal-title">Generate Pay link</h4>
        </div>
-        <div id="divlink" class="modal-body">
-
-        </div>
+        <!-- <div id="divlink" class="modal-body"> -->
+<textarea type="text" rows="6"  id="divlink" class="divlink form-control">
+  </textarea>  
+  <!--       </div> -->
         <div class="modal-footer">
          <input type="hidden" name="txtlink" id="txtlink">
          <input type="hidden" name="txtmono" id="txtmono">
