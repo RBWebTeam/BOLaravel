@@ -61,11 +61,19 @@ Route::get('getloanid/{fbaid}','FbaController@getupdateloanid');
  Route::post('pmesgsend','FbaController@sendpaysms');
  // --------------------------------------
 // vivek start
- Route::get('state_dropdown','bankofferController@droup_state');
+ 
+//******state_dropdown******
+Route::get('state-dropdown','bankofferController@droup_state');
 Route::POST('insert_state','bankofferController@state_demo');
 Route::get('state_demo/{id}',array('as'=>'FSMRegister.ajax','uses'=>'bankofferController@get_state'));
 Route::get('state_dropdown/{cityid}','bankofferController@get_cities');
 Route::get('state_sub_dropdown/{cityid}','bankofferController@get_sub_cities');
+
+
+
+
+
+//city_droupdown
 Route::get('city_dropdown','bankofferController@droup_city');
 Route::get('state_dropdown_id/{cityid}','bankofferController@get_state_id');
 //smstemplate
@@ -158,7 +166,7 @@ Route::post('Fsm-Register','FsmRegisterController@insertfsm');
 
  Route::get('approve-notification','SendNotificationController@notificationApprove');
 
-  Route::get('send-sms-log','smsLogController@getsendsmslog');
+  Route::get('send-sms-log','SmslogController@getsendsmslog');
 
 
 // -------------- avinash
@@ -315,6 +323,16 @@ Route::Post('ticket-request-save','TicketController@ticket_request_save') ;
 Route::get('ticket-request-user-list','TicketController@ticket_request_userlist') ;
 Route::Post('ticket-user-comment','TicketController@ticket_user_comment') ;
 Route::get('went-wrong','LoginController@went_wrong');
+
+
+/************
+// FBA Update
+******************/
+
+Route::get('fba-search','FbaDetailsController@fba_details_update');
+Route::post('fba-search-id','FbaDetailsController@fba_search_id');
+Route::post('fba-search-update','FbaDetailsController@fba_search_update');
+
 });
 
 
@@ -335,3 +353,6 @@ Route::get('marketing-leads','LeaduploadController@marketing_leads');
 
 
 });
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

@@ -8,7 +8,8 @@ use Redirect;
 use Session;
 use URL;
 use Mail;
-class SendSMSController extends Controller{
+ 
+class SendSMSController extends InitialController{
  public function ViewSendSMSDetails(Request $req){           
   try{
        $SMSTemplate=DB::table('SMSTemplate')->get();                    
@@ -63,11 +64,14 @@ class SendSMSController extends Controller{
             //  ->withErrors($validator)
             //  ->withInput();
             // }else{
+
+       
+      $url=$this::$api_url;
     if(isset($req->fba))
     $FBAID=implode(',', $req->fba); 
    $query=DB::select('call usp_insert_smslog(?,?,?,?)',[ $FBAID,$req->sms_text,$uniqid,date('Y-m-d H:i:s')]);
    $data='{"group_id":"'.$uniqid.'"}';
-            $this->call_json('qa.mgfm.in/api/send-sms',$data);
+            $this->call_json($url.'/api/send-sms',$data);
              // foreach ($req->fba as $key => $fba_id) {
              // $query=DB::table('FBAMast')->select('FBAID','FullName','MobiNumb1')->where('FBAID','=',$fba_id)->first();
              // $status=$this->sentsms($query->MobiNumb1,$req->sms_text,$query->FBAID,$req->SMSTemplate);

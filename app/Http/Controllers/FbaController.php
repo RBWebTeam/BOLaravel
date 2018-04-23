@@ -239,7 +239,7 @@ try{
           public function update_fba_table(Request $req)
        {
           $arra= array('FirsName'=>$req->f_name,'LastName'=>$req->l_name,'emailID'=>$req->work_email,'MobiNumb1'=>$req->mobile);
-          $que=DB::table('fbamast')->where('FBAID','=',$req->fba_id)->update($arra);
+          $que=DB::table('FBAMast')->where('FBAID','=',$req->fba_id)->update($arra);
            return redirect('fbamaster-edit');
        }
 }

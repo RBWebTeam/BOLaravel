@@ -91,8 +91,7 @@
                                        <th>SMS</th>
                                        <th>sales code</th>
                                        <th>Customer ID</th>
-
-                                       <th>Created Date1</th>
+                                      <th>Created Date1</th>
                                      </tr>
                                     </thead>
                                    </table>
@@ -377,7 +376,7 @@
       </div>
 
 <div class="col-md-12"> <br>
-<textarea type="text" rows="6"  id="divpartnertable_payment" class="divpartnertable_payment form-control">
+<textarea type="text" rows="6" id="divpartnertable_payment" class="divpartnertable_payment form-control">
   </textarea>      
    <br>
   </div> 
@@ -659,7 +658,7 @@ $(document).ready(function() {
 }
 
  function pmesgsend(){
-alert("SMS send successfully..");
+alert("Offer Created successfully..");
         $.ajax({ 
         url: "{{URL::to('pmesgsend')}}",
         method:"POST",

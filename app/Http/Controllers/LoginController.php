@@ -12,11 +12,15 @@ use Mail;
  
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
+
+
 class LoginController extends InitialController
 {
 
 
 public function checklogin(Request $request){
+
+  
 if(!$request->session()->exists('emailid')){
                return view('index');
        }else{
@@ -39,7 +43,7 @@ if(!$request->session()->exists('emailid')){
    }else{
           
 
-
+ 
 
            $query=DB::select('call sp_user_login(?,?,?)',array($request->email,$request->password,$request->ip()));
            
