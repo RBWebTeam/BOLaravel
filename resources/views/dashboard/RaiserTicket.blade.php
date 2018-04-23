@@ -17,8 +17,8 @@
 </div>		
  <div class="form-group">
            	<label class="control-label" for="message-text">Category:</label>
-           	<select class="form-control" name="ddlCategory" id="ddlCategory">
-           	 <option value="0" selected="selected">--Select Category--</option>
+           	<select class="form-control" name="ddlCategory" id="ddlCategory" required>
+           	 <option value="">--Select Category--</option>
            	 @foreach($cat as $val)
              <option value="{{$val->CateCode}}">{{$val->CateName}}</option>
              @endforeach
@@ -26,7 +26,7 @@
 </div>
 <div class="form-group">
            	<label class="control-label" for="message-text">Sub Category:</label>
-           	<select class="form-control" name="ddlsubcat" id="ddlsubcat">
+           	<select class="form-control" name="ddlsubcat" id="ddlsubcat" required>
            	 
             </select>
 </div>
@@ -44,14 +44,14 @@
            <label class="control-label" for="message-text">Image: </label>
            <input type="file" class="form-control" id="pathimgraiser" name="pathimgraiser">
 </div>
-<div class="form-group">
+<!-- <div class="form-group">
            <label class="control-label" for="message-text">To Email ID: </label>
            <input type="Email" class="form-control" id="txttoemailid" name="txttoemailid" required readonly>
 </div>
 <div class="form-group">
            <label class="control-label" for="message-text">CC Email ID: </label>
            <input type="Email"  class="form-control" id="txtccemailid" name="txtccemailid">
-</div>
+</div> -->
 <div class="form-group">
 <input id="btn_saveticket" type="submit" name="btn_saveticket" class="btn btn-primary">
 <button id="btn_resetticket" class="btn btn-primary" type="button">Reset</button>     
@@ -163,5 +163,7 @@ function gettoccmail(){
        $('#txtccemailid').val('');
    }
 }
+
+
 </script>
 @endsection
