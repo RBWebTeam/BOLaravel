@@ -351,3 +351,6 @@ Route::get('marketing-leads','LeaduploadController@marketing_leads');
 
 
 });
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
