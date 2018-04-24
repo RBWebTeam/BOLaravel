@@ -10,7 +10,7 @@ use Mail;
 use App\jobs\MailTest;
 use Carbon\Carbon;
 use Exception;
-class FbaDetailsController extends TestController
+class FbaDetailsController extends CallApiController
 {
        
        public function fba_details_update(Request $req){
@@ -52,7 +52,7 @@ class FbaDetailsController extends TestController
        public function fba_search_update(Request $req){
           try{
          DB::select('call sp_fba_update_data(?,?,?,?,?,?,?,?)',[$req->FBAID,$req->UserName,$req->FirsName,$req->MiddName,
-                                                               $req->LastName,$req->FullName,$req->EmailID,$req->MobiNumb1]);
+                                                               $req->LastName,$req->FirsName.$req->MiddName,$req->EmailID,$req->MobiNumb1]);
           return Response::json(['status' => true]);
           }catch (Exception $e){
                return Response::json(['status' => false]);

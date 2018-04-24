@@ -20,14 +20,18 @@
                                        <th>Status</th>
                                        <th>StatusChangedBy</th>
                                        <th>Assign</th>
-                                       <th>comment</th>
+                                      
                                          
                                       </tr>
                                     </thead>
                                     <tbody>
-
+ 
                                      @foreach($query as $va)
-                                     <tr>
+                                     <?php  
+
+                                          $class =($va->user_fba_id!=null)? 'background: #00C851': '';
+                                      ?>
+                                     <tr style='{{$class}} '>
                                      <td><a href="#" onclick="TicketRequest_fn('{{$va->TicketRequestId}}','{{$va->toemailid}}','{{$va->ccemailid}}')" >{{$va->TicketRequestId}}</a></td>
                                       <td>{{$va->CateName}}</td>
                                        <td>{{$va->QuerType}}</td>
@@ -37,7 +41,7 @@
                                            <td>{{$va->Status}}</td>
                                             <td>{{$va->StatusChangedBy}}</td>
                                             <td>{{$va->user_fba_id!=null?$va->UserName:''}}</td>
-                                             <td  > <a href="#" onclick="view_comment_fn('{{$va->TicketRequestId}}')">View</a></td>
+                                            <!--  <td  > <a href="#" onclick="view_comment_fn('{{$va->TicketRequestId}}')">View</a></td> -->
                                      </tr>
                                      @endforeach
                                     
@@ -92,16 +96,7 @@
            </div>
  </div> -->
 
-
-<div class="form-group">
-            <label for="example_emailSUI" class="control-label col-xs-2"> CC mail</label>
-            <div class="col-xs-10">
-                     <input type='text' id='example_emailSUI' name='example_emailSUI' class='form-control example_emailSUI'     >
-           </div>
- </div>
-
-
-         
+    
 
 
 
@@ -161,25 +156,18 @@
           $('#pp_scents').empty();
           
    
-       
-           //   $('#example_emailSUI').val('["dp@gmail.com"]');
-      
-         $('#current_emailsSUI').text('["dp@gmail.com"]');
- 
-               
-
-
-            // if( toemailid!=null && ccemailid!=null ){
-                //  $('#pp_scents').append('<div class="form-group"><label for="inputEmail" class="control-label col-xs-2"> TO mail</label><div class="col-xs-10"><input type="text" name="toemailid"  class="form-control" value="'+toemailid+'"  id="toemailid"></div></div>');
+     
+            if( toemailid!=null && ccemailid!=null ){
+                 $('#pp_scents').append('<div class="form-group"><label for="inputEmail" class="control-label col-xs-2"> TO mail</label><div class="col-xs-10"><input type="text" name="toemailid"  class="form-control" value="'+toemailid+'"  id="toemailid"></div></div>');
                 
-                // $('#pp_scents').append('<div class="form-group"><label for="inputEmail" class="control-label col-xs-2"> CC mail</label><div class="col-xs-10"><input type="text" name="ccemailid[]"  value="'+ccemailid+'"  class="form-control"  id="ccemailid"></div></div>');
+                $('#pp_scents').append('<div class="form-group"><label for="inputEmail" class="control-label col-xs-2"> CC mail</label><div class="col-xs-10"><input type="text" name="ccemailid[]"  value="'+ccemailid+'"  class="form-control"  id="ccemailid"></div></div>');
 
 
 
-             // }else{
-             //   $('#pp_scents').append('<div class="form-group"><label for="inputEmail" class="control-label col-xs-2"> TO mail</label><div class="col-xs-10"><input type="text" name="toemailid"  class="form-control" value="'+toemailid+'"  id="toemailid"></div></div>');
+             }else{
+               $('#pp_scents').append('<div class="form-group"><label for="inputEmail" class="control-label col-xs-2"> TO mail</label><div class="col-xs-10"><input type="text" name="toemailid"  class="form-control" value="'+toemailid+'"  id="toemailid"></div></div>');
                 
-             // } 
+             } 
 
 
           
@@ -194,7 +182,7 @@
              console.log(data);
                  if(data==0){
                      
-                 window.location.href = "{{url('ticket-request')}}";
+              //   window.location.href = "{{url('ticket-request')}}";
                  }else{
                   console.log("error");
                  }
