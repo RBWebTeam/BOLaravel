@@ -10,167 +10,153 @@
              <div class="col-md-12">
              <div class="overflow-scroll">
              <div class="table-responsive" >
-       <!-- Modal -->
-<!--   <div class="modal fade" id="btnview" role="dialog">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">CRM Details</h4><br>
-        </div>
-        <div class="modal-body">
-        <textarea type="text" rows="7" id="content class="form-control" ></textarea>
-       </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-    </div>
-  </div> -->
-</div>
+       
+  </div>
 
     <table id="example" class="table table-bordered table-striped tbl" >
-   <thead>
+    <thead>
 
-      <input type="hidden" name="sfbaid" id="sfbaid" value="{{$data[0]->fbaid}}"/>
-
-
-       
+    <input type="hidden" name="sfbaid" id="sfbaid" value="{{$data[0]->fbaid}}"/>
         <div class="form-group col-md-6">
         <div class="col-md-5">
-            <label>Full Name :</label>
+        <label>Full Name :</label>
         </div>
         <div class="col-md-7">
-           {{$data[0]->fullname}}
-            
+        {{$data[0]->fullname}}
         </div>
-    </div>
-          <div class="form-group col-md-6">
+        </div>
+
+
+        <div class="form-group col-md-6">
         <div class="col-md-5">
-            <label>Mobile :</label>
+        <label>Mobile :</label>
         </div>
         <div class="col-md-7">
-            {{$data[0]->mobile}}
-            
+        {{$data[0]->mobile}}
         </div>
-    </div>
-          <div class="form-group col-md-6">
+        </div>
+
+
+        <div class="form-group col-md-6">
         <div class="col-md-5">
-            <label>Email:</label>
+        <label>Email:</label>
         </div>
         <div class="col-md-7">
          {{$data[0]->email}}
-            
         </div>
-    </div>
-          <div class="form-group col-md-6">
+        </div>
+
+
+        <div class="form-group col-md-6">
         <div class="col-md-5">
-            <label>Address:</label>
+        <label>Address:</label>
         </div>
         <div class="col-md-7">
          {{$data[0]->address}}
-            
         </div>
-    </div>
-         <div class="form-group col-md-6">
-        <div class="col-md-5">
-            <label>Pincode:</label>
         </div>
-        <div class="col-md-7">
+
+
+          <div class="form-group col-md-6">
+          <div class="col-md-5">
+          <label>Pincode:</label>
+          </div>
+          <div class="col-md-7">
            {{$data[0]->pincode}}
-            
-        </div>
-    </div>
-         <div class="form-group col-md-6">
-        <div class="col-md-5">
-            <label>City:</label>
-        </div>
-        <div class="col-md-7">
-             {{$data[0]->city}}
-            
-        </div>
-    </div>
-    <div class="form-group col-md-6">
-        <div class="col-md-5">
-            <label>Followup date:</label>
-        </div>
-        <div class="col-md-7">
+          </div>
+          </div>
+
+           <div class="form-group col-md-6">
+          <div class="col-md-5">
+          <label>City:</label>
+          </div>
+          <div class="col-md-7">
+           {{$data[0]->city}}
+          </div>
+          </div>
+
+
+           <div class="form-group col-md-6">
+           <div class="col-md-5">
+           <label>Followup date:</label>
+           </div>
+           <div class="col-md-7">
            <input type="date" class="text-primary form-control" name="fodate" id="fodate">
-     
-        </div>
-    </div> 
-      <div class="form-group col-md-6">
-        <div class="col-md-5">
-            <label>called date:</label>
-        </div>
-        <div class="col-md-7">
+           </div>
+           </div>
+
+
+           <div class="form-group col-md-6">
+           <div class="col-md-5">
+           <label>called date:</label>
+           </div>
+           <div class="col-md-7">
            <input type="date" class="text-primary form-control" name="codate" id="codate">
- 
-        </div>
-    </div> 
+           </div>
+           </div> 
 
    
 
-    <div class="form-group col-md-6">
-      <div class="form-group">
-        <div class="col-md-5">
-            <label>Disposition :</label>
-        </div>
-      <div class="col-md-7">
-        <select name="hddlcity" id="hddlcity" class="selectpicker select-opt form-control" required="">
+           <div class="form-group col-md-6">
+           <div class="form-group">
+           <div class="col-md-5">
+           <label>Disposition :</label>
+           </div>
+           <div class="col-md-7">
+      <select name="hddlcity" id="hddlcity" class="selectpicker select-opt form-control" required="">
           <option value="0">Disposition</option>
            @foreach($crmstatus as $val)
           <option value="{{$val->id}}">{{$val->disposition}}</option>
           @endforeach
-        </select>
-      </div>
-      </div>   
-    </div>
+          </select>
+          </div>
+          </div>   
+          </div>
 
-      <div class="form-group col-md-6">
-      <div class="form-group">
-        <div class="col-md-5">
-            <label>Subdisposition :</label>
-        </div>
-      <div class="col-md-7">
-        <select name="subdispo" id="subdispo" class="selectpicker select-opt form-control" required="">
-          <option value="0">Subdisposition</option>
-          @foreach($crmstatus as $val)
-          <option value="{{$val->id}}">{{$val->disposition}}</option>
-          @endforeach
-        </select>
-      </div>
-      </div>
-    </div>
+         <div class="form-group col-md-6">
+         <div class="form-group">
+         <div class="col-md-5">
+         <label>Subdisposition :</label>
+         </div>
+         <div class="col-md-7">
+     <select name="subdispo" id="subdispo" class="selectpicker select-opt form-control" required="">
+         <option value="0">Subdisposition</option>
+         @foreach($crmstatus as $val)
+         <option value="{{$val->id}}">{{$val->disposition}}</option>
+         @endforeach
+         </select>
+         </div>
+         </div>
+         </div>
 
-      <div class="form-group col-md-6">
-        <div class="col-md-5">
-            <label>Remark:</label>
-        </div>
-        <div class="col-md-7">
-          <textarea type="text" class="text-primary form-control" name="srmrk" id="srmrk"></textarea>
+         <div class="form-group col-md-6">
+         <div class="col-md-5">
+         <label>Remark:</label>
+         </div>
+         <div class="col-md-7">
+         <textarea type="text" class="text-primary form-control" name="srmrk" id="srmrk"></textarea>
          <!-- {{$data[0]->remark}} -->
-        </div>
-    </div> 
+         </div>
+         </div> 
         
     
-    <div class="form-group col-md-12">
-      <div class="col-md-4">
-       <input type="submit" name="statussub" id="statussub" value="submit" class="btn btn-success">
-     </div>
-    </div>
-        </thead>
-        <tbody>
-        <tr>
-        <tbody>
-        </tbody>
-        </tbody>
-        </table>
+        <div class="form-group col-md-12">
+        <div class="col-md-4">
+        <input type="submit" name="statussub" id="statussub" value="submit" class="btn btn-success">
         </div>
         </div>
+                 </thead>
+                    <tbody>
+                   <tr>
+                  <tbody>
+                </tbody>
+              </tbody>
+            </table>
+           </div>
+          </div>
         </div>
-        </div>
-        </div>
+      </div>
+ </div>
 @endsection
 
 

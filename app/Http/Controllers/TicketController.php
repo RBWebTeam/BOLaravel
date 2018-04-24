@@ -112,4 +112,12 @@ exit;
                     }
 
     }
+
+
+
+public function getticketdetails(){ 
+   $ticketdetails=DB::select("call usp_load_ticket_details()");
+   return view ('dashboard.ticket-module',['ticketdetails'=>$ticketdetails]);
+   }
+   
 }

@@ -30,7 +30,7 @@ class crmfbalistController extends CallApiController
 }
 
 
- 					public function crminsert(Request $req){      
+ 					    public function crminsert(Request $req){      
 
          			$demo = DB::select('call usp_crm_insert(?,?,?,?,?,?)',array(
           			$req->sfbaid,
