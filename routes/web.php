@@ -336,7 +336,9 @@ Route::get('went-wrong','LoginController@went_wrong');
 // FBA Update
 ******************/
 
-Route::get('fba-details-update','FbaDetailsController@fba_details_update');
+Route::get('fba-search','FbaDetailsController@fba_details_update');
+Route::post('fba-search-id','FbaDetailsController@fba_search_id');
+Route::post('fba-search-update','FbaDetailsController@fba_search_update');
 
 });
 
@@ -358,3 +360,6 @@ Route::get('marketing-leads','LeaduploadController@marketing_leads');
 
 
 });
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
