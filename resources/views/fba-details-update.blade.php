@@ -1,7 +1,7 @@
 @extends('include.master')
 @section('content')
 <div class="container-fluid white-bg">
-<div class="col-md-12"><h3 class="mrg-btm"> fba-details-update </h3></div>
+<div class="col-md-12"><h3 class="mrg-btm"> FBA Update Details </h3></div>
 
 <!-- <p class="col-md-12 pad mrg-btm"> <a href="#" class="menu_group_id_model btn btn-info"> Add   User Rights </a></p> -->
  
@@ -58,7 +58,7 @@ $(document).ready(function(){
               // console.log(res.query);
                if(res.status==true && res.query.length>0){  
                  
-                 $('#fba_details_update').empty().append('<div class="form-group"> <input class="form-control" name="FBAID" value="'+res.query[0].FBAID+'" type="hidden"/> </div><div class="form-group"> <label class="control-label " >User Name</label> <input class="form-control" name="UserName" value="'+res.query[0].UserName+'" type="text"/> </div><div class="form-group"> <label class="control-label " >Firs Name</label> <input class="form-control" name="FirsName" value="'+res.query[0].FirsName+'" type="text"/> </div><div class="form-group"> <label class="control-label " >Midd Name</label> <input class="form-control" name="MiddName" value="'+res.query[0].MiddName+'" type="text"/> </div><div class="form-group"> <label class="control-label " >Last Name</label> <input class="form-control" name="LastName" value="'+res.query[0].LastName+'" type="text"/> </div><div class="form-group"> <label class="control-label " >Full Name</label> <input class="form-control" name="FullName" value="'+res.query[0].FullName+'" type="text"/> </div><div class="form-group"> <label class="control-label " >Email ID</label> <input class="form-control" name="EmailID" value="'+res.query[0].EmailID+'" type="text"/> </div><div class="form-group"> <label class="control-label " >MobiNumb1</label> <input class="form-control" name="MobiNumb1" value="'+res.query[0].MobiNumb1+'" type="text"/> </div><div class="form-group"> <button class="btn btn-primary " id="fba_details_update_ID" type="submit">Submit</button> </div>');
+                 $('#fba_details_update').empty().append('<div class="form-group"> <input class="form-control" name="FBAID" value="'+res.query[0].FBAID+'" type="hidden"/> </div><div class="form-group"> <label class="control-label " >User Name</label> <input class="form-control" name="UserName" value="'+res.query[0].UserName+'" type="text"/> </div><div class="form-group"> <label class="control-label " >first name</label> <input class="form-control" name="FirsName" value="'+res.query[0].FirsName+'" type="text"/> </div><div class="form-group"> <label class="control-label " >Middle Name</label> <input class="form-control" name="MiddName" value="'+res.query[0].MiddName+'" type="text"/> </div><div class="form-group"> <label class="control-label " >Last Name</label> <input class="form-control" name="LastName" value="'+res.query[0].LastName+'" type="text"/> </div><div class="form-group"> <label class="control-label " >Email ID</label> <input class="form-control" name="EmailID" value="'+res.query[0].EmailID+'" type="text"/> </div><div class="form-group"> <label class="control-label " >MobiNumb1</label> <input class="form-control" name="MobiNumb1" value="'+res.query[0].MobiNumb1+'" type="text"/> </div><div class="form-group"> <button class="btn btn-primary " id="fba_details_update_ID" type="submit">Submit</button> </div>');
                }else{
                  $('#fba_details_update').empty();
                  alert("FBA ID not Match....");
