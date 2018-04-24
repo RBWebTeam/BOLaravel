@@ -57,7 +57,11 @@ Route::get('getloanid/{fbaid}','FbaController@getupdateloanid');
 // -------------------------------------
  Route::get('getpaylinknew/{fbaid}','FbaController@paylinkget');
  Route::post('pmesgsend','FbaController@sendpaysms');
- Route::get('crmfbalist','crmfbalistController@crmlist');
+ Route::get('crmfbalist','crmfbalistController@crmlist');  
+Route::get('crmstatus/{FBAID}','crmfbalistController@statuscrm'); 
+Route::post('crmstatus','crmfbalistController@crminsert');
+//Route::get('crmstatus/{FBAID}','crmfbalistController@showcrmstatus');
+
 
 
 

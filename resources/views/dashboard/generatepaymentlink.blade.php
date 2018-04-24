@@ -2,6 +2,7 @@
 @section('content')
 
 
+
  <div id="content" style="overflow:scroll;">
 			 <div class="container-fluid white-bg">
 			 <div class="col-md-12"><h3 class="mrg-btm">Generate Payment Link</h3></div>
@@ -28,6 +29,8 @@
                   <td><?php echo $val->EmailID; ?></td> 
               
                 <td>
+
+                
              <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal" id="paysub"  onclick="getpaylink('{{ $val->FBAID }}','{{ $val->MobiNumb1}}')">Generate  Payment Link</button>
              </td>
                 

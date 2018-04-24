@@ -1459,7 +1459,7 @@ function getcustomerid(text,fbaid){
 
                     }
                     else{
-                      alert("Customer id does not exit"); 
+                      alert("Customer id does not exists"); 
 
                     }
                     }
