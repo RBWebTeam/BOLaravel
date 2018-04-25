@@ -28,11 +28,18 @@
  
                                      @foreach($query as $va)
                                      <?php  
-
                                           $class =($va->user_fba_id!=null)? 'background: #00C851': '';
                                       ?>
                                      <tr style='{{$class}} '>
-                                     <td><a href="#" onclick="TicketRequest_fn('{{$va->TicketRequestId}}','{{$va->toemailid}}','{{$va->ccemailid}}')" >{{$va->TicketRequestId}}</a></td>
+                                     
+                                     @if($va->user_fba_id!=null)
+                                     <td><a href="#"  >{{$va->TicketRequestId}}</a>
+                                     </td>
+                                     @else
+                                       <td><a href="#" onclick="TicketRequest_fn('{{$va->TicketRequestId}}','{{$va->toemailid}}','{{$va->ccemailid}}')" >{{$va->TicketRequestId}}</a>
+                                     </td>
+                                     @endif
+
                                       <td>{{$va->CateName}}</td>
                                        <td>{{$va->QuerType}}</td>
                                         <td>{{$va->Description}}</td>
@@ -158,14 +165,16 @@
    
      
             if( toemailid!=null && ccemailid!=null ){
-                 $('#pp_scents').append('<div class="form-group"><label for="inputEmail" class="control-label col-xs-2"> TO mail</label><div class="col-xs-10"><input type="text" name="toemailid"  class="form-control" value="'+toemailid+'"  id="toemailid"></div></div>');
+                 $('#pp_scents').append('<div class="form-group"><label for="inputEmail" class="control-label col-xs-2"> TO mail</label><div class="col-xs-10"><input type="text" name="toemailid"  class="form-control" value="'+toemailid+'"  id="toemailid" required ></div></div>');
                 
-                $('#pp_scents').append('<div class="form-group"><label for="inputEmail" class="control-label col-xs-2"> CC mail</label><div class="col-xs-10"><input type="text" name="ccemailid[]"  value="'+ccemailid+'"  class="form-control"  id="ccemailid"></div></div>');
+                $('#pp_scents').append('<div class="form-group"><label for="inputEmail" class="control-label col-xs-2"> CC mail</label><div class="col-xs-10"><input type="text" name="ccemailid[]"  value="'+ccemailid+'"  class="form-control"  id="ccemailid" required></div></div>');
 
 
 
              }else{
-               $('#pp_scents').append('<div class="form-group"><label for="inputEmail" class="control-label col-xs-2"> TO mail</label><div class="col-xs-10"><input type="text" name="toemailid"  class="form-control" value="'+toemailid+'"  id="toemailid"></div></div>');
+                $('#pp_scents').append('<div class="form-group"><label for="inputEmail" class="control-label col-xs-2"> TO mail</label><div class="col-xs-10"><input type="text" name="toemailid"  class="form-control"    id="toemailid" required ></div></div>');
+                
+                $('#pp_scents').append('<div class="form-group"><label for="inputEmail" class="control-label col-xs-2"> CC mail</label><div class="col-xs-10"><input type="text" name="ccemailid[]"     class="form-control"  id="ccemailid" required></div></div>');
                 
              } 
 
@@ -176,6 +185,24 @@
               // $('#ccemailid').val(ccemailid);
       		    $('#Ticket-Request-Id-Modal').modal('show');}
    $(document).on('click','#TicketRequest_Id_save',function(e){  e.preventDefault();
+
+
+   validator=$('#TicketRequest_Id_from').validate();
+     if(! $('#TicketRequest_Id_from').valid()){
+        
+          $.each(validator.errorMap, function (index, value,arg) {
+          $('#'+index).focus();
+         return false;
+       });
+        }else{
+
+
+
+             alert("gdfgdfg");
+        }
+
+ return false;
+
          if($('#FBAUserId').val()!=0){
          $.post("{{url('ticket-request-save')}}",$('#TicketRequest_Id_from').serialize())
              .done(function(data){ 
@@ -225,7 +252,7 @@
         
         $('#addScnt').on('click', function() {   
            if( i<=3) {
-                $('<p><label for="inputEmail" class="control-label col-xs-2"> CC mail</label> <input type="text" name="ccemailid[]"  class="form-control  " style="width: 495px;"  id="ccemailid">  <a href="#" id="remScnt" class="remScnt">Remove</a></p>').appendTo(scntDiv);
+                $('<p><label for="inputEmail" class="control-label col-xs-2"> CC mail</label> <input type="text" name="ccemailid[]"  class="form-control  " style="width: 495px;"  id="ccemailid'+i+'" required>  <a href="#" id="remScnt" class="remScnt">Remove</a></p>').appendTo(scntDiv);
                 i++;
               }
                 return false;
