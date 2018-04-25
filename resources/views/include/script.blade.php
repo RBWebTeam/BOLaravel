@@ -1242,36 +1242,29 @@ $.ajax({
 
 
 
- function updatenotification(msgid,value){
+     function updatenotification(msgid,value){
 
-//alert(value);
- if (confirm("Are you sure to "+(value==1?"approve":"reject")+" this notification")) {}
-  $.ajax({
+    if (confirm("Are you sure to "+(value==1?"approve":"reject")+" this notification")) 
+    {}
+       $.ajax({
             type: "GET",
             url:'approvenotification/'+msgid+'/'+value, 
-                     
-           success: function( msg ) {
-
-            if(value=="1"){
+           success: function (msg) {
+             if(value=="1"){
               alert("Notification Approved Successfully");
-              $("#accept_"+msgid).css( "background",'#0fe10f');
-
+             $("#accept_"+msgid).css( "background",'#0fe10f');
             }
             else if(value=="0"){
+            alert("Notification Rejected Successfully");
+            document.getElementById("reject_"+msgid).disabled = true ;
+           $("#reject_"+msgid).prop('disabled', true);
+            $("#reject_"+msgid).css("background: rgb(15, 225, 15");
+              }
+             }
+            });
+           }
 
-             
-             alert("Notification rejected Successfully");
-              $("#reject_"+ msgid).css("background",'#ffffff');
-                $("#reject_"+ msgid).css("color",'#0c0b0b');
-               }
-                
-            }
-
-        });
-
- return false;
-
-}
+           
   $('#notificsubmitbtn').click(function(){
 // alert('okae');
   if (!$('#sendnotification').valid()) {
@@ -1459,7 +1452,7 @@ function getcustomerid(text,fbaid){
 
                     }
                     else{
-                      alert("Customer id does not exit"); 
+                      alert("Customer id does not exists"); 
 
                     }
                     }
