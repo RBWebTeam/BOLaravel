@@ -62,7 +62,7 @@ class SendSMSController extends InitialController{
             //  if ($validator->fails()) {
             //  return redirect('send-sms')
             //  ->withErrors($validator)
-            //  ->withInput();
+            //  ->withInput(); max_input_vars
             // }else{
 
        
@@ -70,6 +70,8 @@ class SendSMSController extends InitialController{
     if(isset($req->fba))
     $FBAID=implode(',', $req->fba); 
    $query=DB::select('call usp_insert_smslog(?,?,?,?)',[ $FBAID,$req->sms_text,$uniqid,date('Y-m-d H:i:s')]);
+
+
    $data='{"group_id":"'.$uniqid.'"}';
             $this->call_json($url.'/api/send-sms',$data);
              // foreach ($req->fba as $key => $fba_id) {
