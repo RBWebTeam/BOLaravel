@@ -34,20 +34,14 @@ class TicketController extends Controller
            $arr=array();
            $error=''; 
             try{
+                
 
-                 foreach ($req->ccemailid as $key => $value) {
-                  if(isset($value)){
-                 $arr[]=$value;
+
+              if(isset($req->toemailid)){
+                 $mail=$this->mail_fn($req->toemailid,$req->ccemailid);
              }
-            }
-
-
-print_r($req->example_emailSUI);
-
-
-
-exit;
-             $mail=$this->mail_fn($req->toemailid,$arr);
+ 
+             
              if($mail==0){
         	DB::table('TicketRequest')->where('TicketRequestId','=',$req->TicketRequestId)->update(['user_fba_id'=>$req->FBAUserId]);
             
@@ -65,7 +59,8 @@ exit;
 
     public  function ticket_request_userlist(Request $req){   
                  //$query=DB::select('call sp_ticket_request_assign(?)',[Session::get('fbauserid')]);
-                   $query=DB::select('call sp_ticket_request_assign(1)');
+
+                   $query=DB::select('call sp_ticket_request_assign()');
     	
 
                
@@ -94,15 +89,22 @@ exit;
 
     public function mail_fn($email,$arrcc){
 
+ 
+
                 $data ="Please ";
                 $mail = Mail::send('ticket/ricket_mail_view',['data' => $data], function($message) use($email,$arrcc) {
                 $message->from('scriptdp@gmail.com', 'FinMart');
-                $message->to($email)
-                        ->cc($arrcc)
-                ->subject('Ticket Request');
+                $message->to($email);
+                        if(isset($arrcc)){
+                              foreach ($arrcc as $key => $cc) {
+                            $message->cc($cc);
+                        }
+                        }
+                        
+                 $message->subject('Ticket Request');
                 });
                      
-                    //  dd(Mail::failures());
+                   // dd(Mail::failures());
 
                     if(Mail::failures()){
                             return 1;
@@ -111,5 +113,16 @@ exit;
 
                     }
 
+
+ 
+       
     }
+
+
+
+public function getticketdetails(){ 
+   $ticketdetails=DB::select("call usp_load_ticket_details()");
+   return view ('dashboard.ticket-module',['ticketdetails'=>$ticketdetails]);
+   }
+   
 }

@@ -2,9 +2,10 @@
 @section('content')
 
 
+
  <div id="content" style="overflow:scroll;">
 			 <div class="container-fluid white-bg">
-			 <div class="col-md-12"><h3 class="mrg-btm">Generate Payment link</h3></div>
+			 <div class="col-md-12"><h3 class="mrg-btm">Generate Payment Link</h3></div>
 			 
 			<div class="col-md-12">
 			 <div class="overflow-scroll">
@@ -14,16 +15,23 @@
                   <tr>
                    <th>FBA Id</th>
                    <th>Name</th>
-                    <th>Payment link</th>
+                   <th>Phone No </th>
+                   <th>Email Id </th>
+                    <th>Payment Link</th>
                   </tr>
                 </thead>
                 <tbody>
                 
                 @foreach($plink as $val)   
                 <td><?php echo $val->FBAID; ?></td> 
-                <td><?php echo $val->FullName; ?></td>
+                 <td><?php echo $val->FullName; ?></td>
+                  <td><?php echo $val->MobiNumb1; ?></td>
+                  <td><?php echo $val->EmailID; ?></td> 
+              
                 <td>
-             <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal" id="paysub"  onclick="getpaylink('{{ $val->FBAID }}','{{ $val->MobiNumb1}}')">Genrate Payment link</button>
+
+                
+             <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal" id="paysub"  onclick="getpaylink('{{ $val->FBAID }}','{{ $val->MobiNumb1}}')">Generate  Payment Link</button>
              </td>
                 
              </tr>
@@ -34,18 +42,7 @@
 				</div>
 			
 			
-			<!-- Pagination Start -->
-		<!-- 	<div>
-			<h5 class="pull-left"><b>Records :</b> <span>1 to 10 </span>Of <span class="badge">186</span><h5>
-			<ul class="pagination pull-right">
-              <li><a href="#">1</a></li>
-              <li><a href="#">2</a></li>
-              <li><a href="#">3</a></li>
-              <li><a href="#">4</a></li>
-              <li><a href="#">5</a></li>
-            </ul>
-			</div> -->
-			<!-- Pagination End -->
+
 			</div>
             </div>
             </div>
@@ -60,10 +57,10 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Generate Pay link</h4>
+          <h4 class="modal-title">Generate Payment Link</h4>
        </div>
         <!-- <div id="divlink" class="modal-body"> -->
-<textarea type="text" rows="6"  id="divlink" class="divlink form-control">
+<textarea type="text" rows="6"  id="divlink" class="divlink form-control" class="field left" readonly>
   </textarea>  
   <!--       </div> -->
         <div class="modal-footer">
@@ -78,8 +75,6 @@
     </form>
   </div>
  </div>
-
-
 <script>
            function getpaylink(FBAID,MobiNumb){
           //alert(MobiNumb);

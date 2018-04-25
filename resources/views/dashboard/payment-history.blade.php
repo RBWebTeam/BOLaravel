@@ -75,7 +75,7 @@
                    <th>Customer Name</th>
                    <th>Mobile</th>
                    <th>Email</th>
-                    <th>  Payment Date</th>
+                    <th> Payment Date</th>
                      <th>Amount</th>
                       <th>Payment Type</th>
                        <th> Payment Status</th>

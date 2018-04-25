@@ -20,15 +20,26 @@
                                        <th>Status</th>
                                        <th>StatusChangedBy</th>
                                        <th>Assign</th>
-                                       <th>comment</th>
+                                      
                                          
                                       </tr>
                                     </thead>
                                     <tbody>
-
+ 
                                      @foreach($query as $va)
-                                     <tr>
-                                     <td><a href="#" onclick="TicketRequest_fn('{{$va->TicketRequestId}}','{{$va->toemailid}}','{{$va->ccemailid}}')" >{{$va->TicketRequestId}}</a></td>
+                                     <?php  
+                                          $class =($va->user_fba_id!=null)? 'background: #00C851': '';
+                                      ?>
+                                     <tr style='{{$class}} '>
+                                     
+                                     @if($va->user_fba_id!=null)
+                                     <td><a href="#"  >{{$va->TicketRequestId}}</a>
+                                     </td>
+                                     @else
+                                       <td><a href="#" onclick="TicketRequest_fn('{{$va->TicketRequestId}}','{{$va->toemailid}}','{{$va->ccemailid}}')" >{{$va->TicketRequestId}}</a>
+                                     </td>
+                                     @endif
+
                                       <td>{{$va->CateName}}</td>
                                        <td>{{$va->QuerType}}</td>
                                         <td>{{$va->Description}}</td>
@@ -37,7 +48,7 @@
                                            <td>{{$va->Status}}</td>
                                             <td>{{$va->StatusChangedBy}}</td>
                                             <td>{{$va->user_fba_id!=null?$va->UserName:''}}</td>
-                                             <td  > <a href="#" onclick="view_comment_fn('{{$va->TicketRequestId}}')">View</a></td>
+                                            <!--  <td  > <a href="#" onclick="view_comment_fn('{{$va->TicketRequestId}}')">View</a></td> -->
                                      </tr>
                                      @endforeach
                                     
@@ -92,16 +103,7 @@
            </div>
  </div> -->
 
-
-<div class="form-group">
-            <label for="example_emailSUI" class="control-label col-xs-2"> CC mail</label>
-            <div class="col-xs-10">
-                     <input type='text' id='example_emailSUI' name='example_emailSUI' class='form-control example_emailSUI'     >
-           </div>
- </div>
-
-
-         
+    
 
 
 
@@ -161,25 +163,20 @@
           $('#pp_scents').empty();
           
    
-       
-           //   $('#example_emailSUI').val('["dp@gmail.com"]');
-      
-         $('#current_emailsSUI').text('["dp@gmail.com"]');
- 
-               
-
-
-            // if( toemailid!=null && ccemailid!=null ){
-                //  $('#pp_scents').append('<div class="form-group"><label for="inputEmail" class="control-label col-xs-2"> TO mail</label><div class="col-xs-10"><input type="text" name="toemailid"  class="form-control" value="'+toemailid+'"  id="toemailid"></div></div>');
+     
+            if( toemailid!=null && ccemailid!=null ){
+                 $('#pp_scents').append('<div class="form-group"><label for="inputEmail" class="control-label col-xs-2"> TO mail</label><div class="col-xs-10"><input type="text" name="toemailid"  class="form-control" value="'+toemailid+'"  id="toemailid" required ></div></div>');
                 
-                // $('#pp_scents').append('<div class="form-group"><label for="inputEmail" class="control-label col-xs-2"> CC mail</label><div class="col-xs-10"><input type="text" name="ccemailid[]"  value="'+ccemailid+'"  class="form-control"  id="ccemailid"></div></div>');
+                $('#pp_scents').append('<div class="form-group"><label for="inputEmail" class="control-label col-xs-2"> CC mail</label><div class="col-xs-10"><input type="text" name="ccemailid[]"  value="'+ccemailid+'"  class="form-control"  id="ccemailid" required></div></div>');
 
 
 
-             // }else{
-             //   $('#pp_scents').append('<div class="form-group"><label for="inputEmail" class="control-label col-xs-2"> TO mail</label><div class="col-xs-10"><input type="text" name="toemailid"  class="form-control" value="'+toemailid+'"  id="toemailid"></div></div>');
+             }else{
+                $('#pp_scents').append('<div class="form-group"><label for="inputEmail" class="control-label col-xs-2"> TO mail</label><div class="col-xs-10"><input type="text" name="toemailid"  class="form-control"    id="toemailid" required ></div></div>');
                 
-             // } 
+                $('#pp_scents').append('<div class="form-group"><label for="inputEmail" class="control-label col-xs-2"> CC mail</label><div class="col-xs-10"><input type="text" name="ccemailid[]"     class="form-control"  id="ccemailid" required></div></div>');
+                
+             } 
 
 
           
@@ -188,13 +185,31 @@
               // $('#ccemailid').val(ccemailid);
       		    $('#Ticket-Request-Id-Modal').modal('show');}
    $(document).on('click','#TicketRequest_Id_save',function(e){  e.preventDefault();
+
+
+   validator=$('#TicketRequest_Id_from').validate();
+     if(! $('#TicketRequest_Id_from').valid()){
+        
+          $.each(validator.errorMap, function (index, value,arg) {
+          $('#'+index).focus();
+         return false;
+       });
+        }else{
+
+
+
+             alert("gdfgdfg");
+        }
+
+ return false;
+
          if($('#FBAUserId').val()!=0){
          $.post("{{url('ticket-request-save')}}",$('#TicketRequest_Id_from').serialize())
              .done(function(data){ 
              console.log(data);
                  if(data==0){
                      
-                 window.location.href = "{{url('ticket-request')}}";
+              //   window.location.href = "{{url('ticket-request')}}";
                  }else{
                   console.log("error");
                  }
@@ -237,7 +252,7 @@
         
         $('#addScnt').on('click', function() {   
            if( i<=3) {
-                $('<p><label for="inputEmail" class="control-label col-xs-2"> CC mail</label> <input type="text" name="ccemailid[]"  class="form-control  " style="width: 495px;"  id="ccemailid">  <a href="#" id="remScnt" class="remScnt">Remove</a></p>').appendTo(scntDiv);
+                $('<p><label for="inputEmail" class="control-label col-xs-2"> CC mail</label> <input type="text" name="ccemailid[]"  class="form-control  " style="width: 495px;"  id="ccemailid'+i+'" required>  <a href="#" id="remScnt" class="remScnt">Remove</a></p>').appendTo(scntDiv);
                 i++;
               }
                 return false;
