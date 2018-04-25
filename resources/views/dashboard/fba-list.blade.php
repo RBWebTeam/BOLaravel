@@ -307,56 +307,52 @@
 </div>
 <!-- Partner Info End -->
 
-<div id="docviwer" class="modal fade" role="dialog">
-  <div class="modal-dialog">
+   <div id="docviwer" class="modal fade" role="dialog">
+   <div class="modal-dialog">
    <!-- Modal content-->
     <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title" style="text-align:center;">Attachment</h4>
-      </div>
-      <div class="modal-body">
-
-      <div class="table-responsive">
-        <div id="divdocviewer" name="divdocviewer">
-        </div>
-        <div>
-         <img id="imgdoc" style="height:100%; width:100%;">
-         
-
-         </div>
-       </div>
-     </div>
+    <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal">&times;</button>
+    <h4 class="modal-title" style="text-align:center;">Attachment</h4>
     </div>
-  </div>
-</div>
+    <div class="modal-body">
+    <div class="table-responsive">
+    <div id="divdocviewer" name="divdocviewer">
+    </div>
+    <div>
+    <img id="imgdoc" style="height:100%; width:100%;">
+            </div>
+          </div>
+         </div>
+        </div>
+      </div>
+    </div>
 
 
 <!--Filter -->
-<div class="Filter modal fade" id="Filter" role="dialog">   
-  <div class="modal-dialog" role="document">
+    <div class="Filter modal fade" id="Filter" role="dialog">   
+    <div class="modal-dialog" role="document">
     <div class="modal-content">
-      <div class="modal-header">
-        <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-        <h4 class="modal-title">Filter</h4>
-      </div>
-      <div class="modal-body">
-        <form id="posp_from_id">
-          <div class="form-group">
-          </div>
-          <div class="form-group">
-            <select class="recipient-name form-control" > 
-              <option>FBA</option>
-              <option>POSP</option>
-              <option>FBA</option>
-            </select>
-            <input type="text" class="recipient-name form-control" id="" name="" required="yes" />
-             
-          </div>
-        </form>
-        <div class="modal-footer"> 
-          <button class="btn btn-default" type="button" data-dismiss="modal">Close</button>
-          <button id="" class="btn btn-primary" type="button">search</button>
+    <div class="modal-header">
+    <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    <h4 class="modal-title">Filter</h4>
+    </div>
+    <div class="modal-body">
+    <form id="posp_from_id">
+    <div class="form-group">
+    </div>
+    <div class="form-group">
+    <select class="recipient-name form-control" > 
+    <option>FBA</option>
+    <option>POSP</option>
+    <option>FBA</option>
+    </select>
+    <input type="text" class="recipient-name form-control" id="" name="" required="yes" />
+    </div>
+    </form>
+    <div class="modal-footer"> 
+    <button class="btn btn-default" type="button" data-dismiss="modal">Close</button>
+    <button id="" class="btn btn-primary" type="button">search</button>
           
         </div>
       </div>
@@ -366,47 +362,42 @@
 <!-- paymentlink -->
  
 
-<div id="paylink_payment" class="modal fade paylink_payment" role="dialog">
-  <div class="modal-dialog">
+    <div id="paylink_payment" class="modal fade paylink_payment" role="dialog">
+    <div class="modal-dialog">
    <!-- Modal content-->
     <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Payment link</h4>
-      </div>
+    <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal">&times;</button>
+    <h4 class="modal-title">Payment link</h4>
+    </div>
 
-<div class="col-md-12"> <br>
-<textarea type="text" rows="6" id="divpartnertable_payment" class="divpartnertable_payment form-control">
-  </textarea>      
-   <br>
-  </div> 
+    <div class="col-md-12"> <br>
+    <textarea type="text" rows="6" id="divpartnertable_payment" class="divpartnertable_payment form-control" readonly> </textarea> 
+    <br>
+    </div> 
        
-      <div class="col-md-12"> 
+    <div class="col-md-12"> 
     <button type="button" style="margin-left:20px;" class="btn btn-info" name="paysub" id="paysub" onclick="getpaylinknew()" >Genrate Payment link</button> &nbsp;&nbsp;
-     <button type="button" name="smspayment" id="smspayment" class="btn btn-success" data-dismiss="modal" style="padding-left:5px; " onclick="pmesgsend()">Send SMS</button>
+    <button type="button" name="smspayment" id="smspayment" class="btn btn-success" data-dismiss="modal" style="padding-left:5px; " onclick="pmesgsend()">Send SMS</button>
     </div>
 
     
       
-<!-- <form id="modelpaylink" name="modelpaylink"> -->
-  <form method="POST" id="modelpaylink">
-  {{ csrf_field() }}
-         <div id="divlink" class="modal-body">
+      <!-- <form id="modelpaylink" name="modelpaylink"> -->
+     <form method="POST" id="modelpaylink">
+        {{ csrf_field() }}
+     <div id="divlink" class="modal-body"> </div>
+     <div class="modal-footer">
+     <input type="hidden" name="fba" id="fba">
+     <input type="hidden" name="txtmono" id="txtmono">
+     <input type="hidden" name="txtlink" id="txtlink">
+     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+     </div>
+     <div class="modal-body"></div>
 
-        </div>
-        <div class="modal-footer">
-         <input type="hidden" name="fba" id="fba">
-         <input type="hidden" name="txtmono" id="txtmono">
-         <input type="hidden" name="txtlink" id="txtlink">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
-      <div class="modal-body">
-
-
+        </form>
       </div>
-      </form>
     </div>
-  </div>
 </div>
 
 <!-- Customer id start -->
@@ -430,19 +421,18 @@
 
 <!-- password -->
 
-<div id="spassword" class="modal fade spassword" role="dialog">
-  <div class="modal-dialog">
-   
+    <div id="spassword" class="modal fade spassword" role="dialog">
+    <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Password</h4>
-      </div>
-      <div class="modal-body">
-      <div style="color: blue;" id="show_password" class="show_password">
-      </div>
-      </div>
+    <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal">&times;</button>
+    <h4 class="modal-title">Password</h4>
     </div>
+    <div class="modal-body">
+    <div style="color: blue;" id="show_password" class="show_password">
+    </div>
+        </div>
+     </div>
   </div>
 </div>
 
@@ -619,6 +609,7 @@ $(document).ready(function(){
 });
 
  $(document).ready(function(){
+  
     $(".fbsearch").on("keyup change",function(){ 
          table1 = $('#fba-list-table').DataTable();
          //table1.columns(0).search( this.value).draw();
