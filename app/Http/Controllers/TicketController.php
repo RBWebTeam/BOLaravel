@@ -9,6 +9,9 @@ use Session;
 use Validator;
 use Redirect;
 use Mail;
+use App\Jobs\Ticket_mail;
+use Carbon\Carbon;
+use Exception;
 class TicketController extends Controller
 {
      
@@ -33,15 +36,12 @@ class TicketController extends Controller
     public function ticket_request_save(Request $req){
            $arr=array();
            $error=''; 
+ 
             try{
                 
-
-
               if(isset($req->toemailid)){
-                 $mail=$this->mail_fn($req->toemailid,$req->ccemailid);
-             }
+                 $mail=$this->mail_fn($req->toemailid,$req->ccemailid); }
  
-             
              if($mail==0){
         	DB::table('TicketRequest')->where('TicketRequestId','=',$req->TicketRequestId)->update(['user_fba_id'=>$req->FBAUserId]);
             
@@ -91,29 +91,11 @@ class TicketController extends Controller
 
  
 
-                $data ="Please ";
-                $mail = Mail::send('ticket/ricket_mail_view',['data' => $data], function($message) use($email,$arrcc) {
-                $message->from('scriptdp@gmail.com', 'FinMart');
-                $message->to($email);
-                        if(isset($arrcc)){
-                              foreach ($arrcc as $key => $cc) {
-                            $message->cc($cc);
-                        }
-                        }
-                        
-                 $message->subject('Ticket Request');
-                });
-                     
-                   // dd(Mail::failures());
+   return $emailJob = (new Ticket_mail($email,$arrcc))->delay(Carbon::now()->addSeconds(30));
+  
 
-                    if(Mail::failures()){
-                            return 1;
-                    }else{
-                            return 0;
-
-                    }
-
-
+ 
+  
  
        
     }

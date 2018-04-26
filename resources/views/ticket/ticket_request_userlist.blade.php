@@ -1,7 +1,7 @@
 @extends('include.master')
 @section('content')
 <div class="container-fluid white-bg">
-<div class="col-md-12"><h3 class="mrg-btm">Ticket Request</h3></div>
+<div class="col-md-12"><h3 class="mrg-btm">Ticket Request Assigned List</h3></div>
 <div class="col-md-12"><p >  
        <div class="col-md-12">
        <div class="overflow-scroll">
