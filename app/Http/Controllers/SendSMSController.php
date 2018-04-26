@@ -52,30 +52,38 @@ class SendSMSController extends InitialController{
   $query=DB::select('call sp_fba_sentSMS(?,?,?,?)',[$req->smslist,$city,$fdate,$tdate]);
    return json_encode($query);
    }
-     public function send_sms_save(Request $req){  
-     $uniqid=uniqid();
+public function send_sms_save(Request $req){  
+     $parentgroupid=uniqid();
       $error='';
-
-            //   $validator =Validator::make($req->all(), [
-            //   'SMSTemplate' =>'required|not_in:0',
-            //   'sms_text' =>'required ',  ]);
-            //  if ($validator->fails()) {
-            //  return redirect('send-sms')
-            //  ->withErrors($validator)
-            //  ->withInput();
-            // }else{
-
-       
       $url=$this::$api_url;
     if(isset($req->fba))
-    $FBAID=implode(',', $req->fba); 
-   $query=DB::select('call usp_insert_smslog(?,?,?,?)',[ $FBAID,$req->sms_text,$uniqid,date('Y-m-d H:i:s')]);
-   $data='{"group_id":"'.$uniqid.'"}';
-            $this->call_json($url.'/api/send-sms',$data);
-             // foreach ($req->fba as $key => $fba_id) {
-             // $query=DB::table('FBAMast')->select('FBAID','FullName','MobiNumb1')->where('FBAID','=',$fba_id)->first();
-             // $status=$this->sentsms($query->MobiNumb1,$req->sms_text,$query->FBAID,$req->SMSTemplate);
-             // }
+    
+    $fid = "";
+  for ($i=1; $i < count($req->fba)+1; $i++) { 
+    if($i%100==0){
+      $uniqid=uniqid();
+        $fid=$fid.','.$req->fba[$i-1];
+        
+        $fid = ltrim($fid, ',');
+        $query=DB::select('call usp_insert_smslog(?,?,?,?,?)',[$fid,$req->sms_text,$uniqid,date('Y-m-d H:i:s'),$parentgroupid]);
+        $data='{"group_id":"'.$uniqid.'"}';
+        $this->call_json($url.'/api/send-sms',$data);        
+        $fid = "";
+    }
+    else{        
+        $fid=$fid.','.$req->fba[$i-1];
+        
+    }
+  }
+  if($fid!=""){
+    $uniqid=uniqid();
+    $fid = ltrim($fid, ',');
+    $query=DB::select('call usp_insert_smslog(?,?,?,?,?)',[$fid,$req->sms_text,$uniqid,date('Y-m-d H:i:s'),$parentgroupid]);   
+     $data='{"group_id":"'.$uniqid.'"}';
+    $this->call_json($url.'/api/send-sms',$data);
+  }
+ 
+           
            Session::flash('msg', "message  successfully send...");;
            return Redirect::back();
                 
