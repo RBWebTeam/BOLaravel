@@ -12,6 +12,8 @@ use Mail;
 use App\Jobs\Ticket_mail;
 use Carbon\Carbon;
 use Exception;
+
+// use Illuminate\Support\Facades\Validator;
 class TicketController extends Controller
 {
      
@@ -34,23 +36,23 @@ class TicketController extends Controller
 
 
     public function ticket_request_save(Request $req){
-           $arr=array();
-           $error=''; 
+           
  
+ 
+
+           $error=''; 
             try{
                 
               if(isset($req->toemailid)){
-                 $mail=$this->mail_fn($req->toemailid,$req->ccemailid); }
- 
-             if($mail==0){
-        	DB::table('TicketRequest')->where('TicketRequestId','=',$req->TicketRequestId)->update(['user_fba_id'=>$req->FBAUserId]);
-            
-                        $error=0; 
-                 }else{
-                    $error=1; 
-                 }
+                  $this->mail_fn($req->toemailid,explode(',',$req->ccemailid)); 
+                  DB::table('TicketRequest')->where('TicketRequestId','=',$req->TicketRequestId)->update(['user_fba_id'=>$req->FBAUserId]);
+                      
+                       $error=0;
+               }
 
-                }catch (Exception $e){  $error=1;  }
+            }catch (Exception $e){ 
+             $error=1;  
+            }
 
          return $error;
 
@@ -89,15 +91,14 @@ class TicketController extends Controller
 
     public function mail_fn($email,$arrcc){
 
- 
 
-   return $emailJob = (new Ticket_mail($email,$arrcc))->delay(Carbon::now()->addSeconds(30));
-  
+//  $emailJob = (new Ticket_mail($email,$arrcc))->delay(Carbon::now()->addSeconds(5));
+// dispatch($emailJob);
 
- 
-  
- 
-       
+        $this->dispatch((new Ticket_mail($email,$arrcc))->delay(now()->addSeconds(5)));
+
+
+          
     }
 
 

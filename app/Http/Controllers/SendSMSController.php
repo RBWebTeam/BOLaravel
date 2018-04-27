@@ -66,11 +66,37 @@ class SendSMSController extends InitialController{
             // }else{
 
        
-      $url=$this::$api_url;
+    $url=$this::$api_url;
     if(isset($req->fba))
     $FBAID=implode(',', $req->fba); 
-   $query=DB::select('call usp_insert_smslog(?,?,?,?)',[ $FBAID,$req->sms_text,$uniqid,date('Y-m-d H:i:s')]);
+    
+//     $arr0=[];
+//     $arr1=[];
+// foreach ($req->fba as $key => $value) {
+//     if($key<=499){
+//        $arr0[]=$value;
 
+//     }
+//     if($key>=500){
+//        $arr1[]=$value;
+//     }
+// }
+
+//  if(isset($arr0)){
+//  $query=DB::select('call usp_insert_smslog(?,?,?,?)',[ implode(',', $arr0),$req->sms_text,$uniqid."abc",date('Y-m-d H:i:s')]);
+
+//  print_r($query);
+//  }
+
+//  if(isset($arr1)){
+//    $query=DB::select('call usp_insert_smslog(?,?,?,?)',[implode(',', $arr1),$req->sms_text,$uniqid."def",date('Y-m-d H:i:s')]);
+//  }
+ 
+ 
+// exit;
+ 
+
+ $query=DB::select('call usp_insert_smslog(?,?,?,?)',[ $FBAID,$req->sms_text,$uniqid,date('Y-m-d H:i:s')]);
 
    $data='{"group_id":"'.$uniqid.'"}';
             $this->call_json($url.'/api/send-sms',$data);

@@ -144,7 +144,7 @@ $(document).on("keyup",".search_id",function() {
     if(data.length > 0){
      $.each(data,function(index,val){ 
 
-        if(val.FBAID!=null){
+        if(val.FBAID!=null && val.FBAID!='0'){
      arr.push('<tr><td><input type="checkbox" name="fba[]" class="check_list" value="'+val.FBAID+'" >'+val.FullName  +':'+val.MobiNumb1+'</td> </tr>'); 
         }
           
