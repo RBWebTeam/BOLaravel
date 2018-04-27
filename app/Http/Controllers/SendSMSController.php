@@ -52,64 +52,43 @@ class SendSMSController extends InitialController{
   $query=DB::select('call sp_fba_sentSMS(?,?,?,?)',[$req->smslist,$city,$fdate,$tdate]);
    return json_encode($query);
    }
-     public function send_sms_save(Request $req){  
-     $uniqid=uniqid();
+public function send_sms_save(Request $req){  
+     $parentgroupid=uniqid();
       $error='';
-
-            //   $validator =Validator::make($req->all(), [
-            //   'SMSTemplate' =>'required|not_in:0',
-            //   'sms_text' =>'required ',  ]);
-            //  if ($validator->fails()) {
-            //  return redirect('send-sms')
-            //  ->withErrors($validator)
-            //  ->withInput(); max_input_vars
-            // }else{
-
-       
-    $url=$this::$api_url;
+      $url=$this::$api_url;
     if(isset($req->fba))
-    $FBAID=implode(',', $req->fba); 
     
-//     $arr0=[];
-//     $arr1=[];
-// foreach ($req->fba as $key => $value) {
-//     if($key<=499){
-//        $arr0[]=$value;
-
-//     }
-//     if($key>=500){
-//        $arr1[]=$value;
-//     }
-// }
-
-//  if(isset($arr0)){
-//  $query=DB::select('call usp_insert_smslog(?,?,?,?)',[ implode(',', $arr0),$req->sms_text,$uniqid."abc",date('Y-m-d H:i:s')]);
-
-//  print_r($query);
-//  }
-
-//  if(isset($arr1)){
-//    $query=DB::select('call usp_insert_smslog(?,?,?,?)',[implode(',', $arr1),$req->sms_text,$uniqid."def",date('Y-m-d H:i:s')]);
-//  }
+    $fid = "";
+  for ($i=1; $i < count($req->fba)+1; $i++) { 
+    if($i%100==0){
+      $uniqid=uniqid();
+        $fid=$fid.','.$req->fba[$i-1];
+        
+        $fid = ltrim($fid, ',');
+        $query=DB::select('call usp_insert_smslog(?,?,?,?,?)',[$fid,$req->sms_text,$uniqid,date('Y-m-d H:i:s'),$parentgroupid]);
+        $data='{"group_id":"'.$uniqid.'"}';
+        $this->call_json($url.'/api/send-sms',$data);        
+        $fid = "";
+    }
+    else{        
+        $fid=$fid.','.$req->fba[$i-1];
+        
+    }
+  }
+  if($fid!=""){
+    $uniqid=uniqid();
+    $fid = ltrim($fid, ',');
+    $query=DB::select('call usp_insert_smslog(?,?,?,?,?)',[$fid,$req->sms_text,$uniqid,date('Y-m-d H:i:s'),$parentgroupid]);   
+     $data='{"group_id":"'.$uniqid.'"}';
+    $this->call_json($url.'/api/send-sms',$data);
+  }
  
- 
-// exit;
- 
-
- $query=DB::select('call usp_insert_smslog(?,?,?,?)',[ $FBAID,$req->sms_text,$uniqid,date('Y-m-d H:i:s')]);
-
-   $data='{"group_id":"'.$uniqid.'"}';
-            $this->call_json($url.'/api/send-sms',$data);
-             // foreach ($req->fba as $key => $fba_id) {
-             // $query=DB::table('FBAMast')->select('FBAID','FullName','MobiNumb1')->where('FBAID','=',$fba_id)->first();
-             // $status=$this->sentsms($query->MobiNumb1,$req->sms_text,$query->FBAID,$req->SMSTemplate);
-             // }
+           
            Session::flash('msg', "message  successfully send...");;
            return Redirect::back();
                 
 
     }
-
 
 
     public function sentsms($mob,$text,$fba_id,$SMSTemplateId){
