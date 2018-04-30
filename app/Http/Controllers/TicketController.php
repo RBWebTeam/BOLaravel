@@ -9,6 +9,11 @@ use Session;
 use Validator;
 use Redirect;
 use Mail;
+use App\Jobs\Ticket_mail;
+use Carbon\Carbon;
+use Exception;
+
+// use Illuminate\Support\Facades\Validator;
 class TicketController extends Controller
 {
      
@@ -31,32 +36,23 @@ class TicketController extends Controller
 
 
     public function ticket_request_save(Request $req){
-           $arr=array();
+           
+ 
+ 
+
            $error=''; 
             try{
+                
+              if(isset($req->toemailid)){
+                  $this->mail_fn($req->toemailid,explode(',',$req->ccemailid)); 
+                  DB::table('TicketRequest')->where('TicketRequestId','=',$req->TicketRequestId)->update(['user_fba_id'=>$req->FBAUserId]);
+                      
+                       $error=0;
+               }
 
-                 foreach ($req->ccemailid as $key => $value) {
-                  if(isset($value)){
-                 $arr[]=$value;
-             }
+            }catch (Exception $e){ 
+             $error=1;  
             }
-
-
-print_r($req->example_emailSUI);
-
-
-
-exit;
-             $mail=$this->mail_fn($req->toemailid,$arr);
-             if($mail==0){
-        	DB::table('TicketRequest')->where('TicketRequestId','=',$req->TicketRequestId)->update(['user_fba_id'=>$req->FBAUserId]);
-            
-                        $error=0; 
-                 }else{
-                    $error=1; 
-                 }
-
-                }catch (Exception $e){  $error=1;  }
 
          return $error;
 
@@ -65,7 +61,8 @@ exit;
 
     public  function ticket_request_userlist(Request $req){   
                  //$query=DB::select('call sp_ticket_request_assign(?)',[Session::get('fbauserid')]);
-                   $query=DB::select('call sp_ticket_request_assign(1)');
+
+                   $query=DB::select('call sp_ticket_request_assign()');
     	
 
                
@@ -94,22 +91,21 @@ exit;
 
     public function mail_fn($email,$arrcc){
 
-                $data ="Please ";
-                $mail = Mail::send('ticket/ricket_mail_view',['data' => $data], function($message) use($email,$arrcc) {
-                $message->from('scriptdp@gmail.com', 'FinMart');
-                $message->to($email)
-                        ->cc($arrcc)
-                ->subject('Ticket Request');
-                });
-                     
-                    //  dd(Mail::failures());
 
-                    if(Mail::failures()){
-                            return 1;
-                    }else{
-                            return 0;
+//  $emailJob = (new Ticket_mail($email,$arrcc))->delay(Carbon::now()->addSeconds(5));
+// dispatch($emailJob);
 
-                    }
+        $this->dispatch((new Ticket_mail($email,$arrcc))->delay(now()->addSeconds(5)));
 
+
+          
     }
+
+
+
+public function getticketdetails(){ 
+   $ticketdetails=DB::select("call usp_load_ticket_details()");
+   return view ('dashboard.ticket-module',['ticketdetails'=>$ticketdetails]);
+   }
+   
 }

@@ -59,6 +59,15 @@ Route::get('getloanid/{fbaid}','FbaController@getupdateloanid');
 // -------------------------------------
  Route::get('getpaylinknew/{fbaid}','FbaController@paylinkget');
  Route::post('pmesgsend','FbaController@sendpaysms');
+ Route::get('crmfbalist','crmfbalistController@crmlist');  
+ Route::get('crmstatus/{FBAID}','crmfbalistController@statuscrm'); 
+ Route::post('crmstatus','crmfbalistController@crminsert');
+//Route::get('crmstatus/{FBAID}','crmfbalistController@showcrmstatus');
+
+
+
+
+
  // --------------------------------------
 // vivek start
  
@@ -142,6 +151,9 @@ Route::get('RaiseaTicketgettoccmail/{Querid}','RaiserTicketController@gettoccmai
 
 Route::get('View-Raised-Ticket','ViewRaisedTicketController@getraisedticket');
 Route::get('View-Raised-Ticket/{ticketid}','ViewRaisedTicketController@deleteticket');
+// avinash
+ Route::get('ticket-module','TicketController@getticketdetails') ;
+   // avinash
 
 
 ///shubham end ///

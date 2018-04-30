@@ -80,7 +80,7 @@ class smslogController extends Controller
          public function templetedelete($id)
          {
           // print_r($req->SMSTemplateId); exit();
-          DB::delete('delete from smstemplate where SMSTemplateId= ?' ,[$id]);
+          DB::delete('delete from SMSTemplate where SMSTemplateId= ?' ,[$id]);
             return Redirect('view_templete_table');
 
           }
