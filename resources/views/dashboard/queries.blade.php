@@ -5,7 +5,7 @@
        
 
 <div id="myDIV">
-  <a href="{{url('queries')}}?queries=1" class="qry-btn">POSP Transaction</a>
+  <a href="{{url('queries')}}?queries=1" class="qry-btn" id="pospbtn">POSP Transaction</a>
   <a href="{{url('queries')}}?queries=2"  class="qry-btn">Not POSP</a>
   <a href="{{url('queries')}}?queries=3" class="qry-btn">Policy Sold</a>
   <a href="{{url('queries')}}?queries=4" class="qry-btn">FBA Never Logged In</a>
@@ -24,7 +24,7 @@
    <div class="col-md-12">
        <div class="overflow-scroll">
        <div class="table-responsive" >
-
+<div id="divinfo">
   <table style="float: right;">
   <tr>
   <td style="padding:0 15px 0 15px;">
@@ -38,6 +38,7 @@
   </td>
   </tr>
   </table>
+</div>
 <br>
         <table id="example" class="datatable-responsive table table-striped table-bordered dt-responsive nowrap" >
                  <thead >
@@ -144,5 +145,7 @@ for (var i = 0; i < btns.length; i++) {
     this.className += " active";
   });
 }
+
+
 </script>
  @endsection
