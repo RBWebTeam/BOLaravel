@@ -1,6 +1,7 @@
 @extends('include.master')
 @section('content')
 
+
 <style type="text/css">
   
   .hide {
