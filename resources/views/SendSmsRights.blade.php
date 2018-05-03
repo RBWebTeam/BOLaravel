@@ -57,7 +57,11 @@
 </div>
 <script type="text/javascript">
 	function isdirectsend($userid,btn){
-		$.ajax({
+
+		if (confirm('Are You Sure to take this action..!')) 
+		{
+            
+            $.ajax({
                     url: 'send-sms-directsend/'+$userid,
                     type: "GET",
                     dataType: "json",
@@ -68,10 +72,18 @@
 					   $(btn).removeClass('btn-danger');
                        $(btn).addClass('btn-success');
                      }
-               });
+                  });
+            alert('Rights updated successfully..!');
+                           } 
+                          else {
+                                alert('Action cancled..!');
+                              }
+		
 		
 	}
 	function isneedapproval($userid,btn){
+		if (confirm('Are You Sure to take this action..!')) 
+		{
 		
 		$.ajax({
                     url: 'send-sms-needaproval/'+$userid,
@@ -79,12 +91,19 @@
                     dataType: "json",
                     success:function(data) 
                     {
+                    
                        $(btn).closest('td').find('a').addClass('btn-danger');
                        $(btn).closest('td').find('a').removeClass('btn-success');
                        $(btn).removeClass('btn-danger');
                        $(btn).addClass('btn-success');
+
                      }
                });
+		 alert('Rights updated successfully..!');
+		 } 
+           else {
+                  alert('Action cancled..!');
+                 }
 	}
 </script>
 @endsection
