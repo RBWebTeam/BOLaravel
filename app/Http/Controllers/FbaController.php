@@ -28,6 +28,7 @@ class FbaController extends CallApiController
           return view('dashboard.fba-list',['doctype'=>$doctype]);         
         }
         public function get_fba_list(Request $req){
+
           $query=DB::select("call fbaList(0)");
 
           return json_encode(["data"=>$query]);

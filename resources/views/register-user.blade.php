@@ -99,7 +99,7 @@
             <label for="inputEmail" class="control-label col-xs-2">UserType      </label>
             <div class="col-xs-6">
           
-             <select name="menu_group" id="menu_group"  class="form-control"  >
+             <select name="menu_group" id="menu_group"  class="form-control" >
              	<option value="0">-Select-</option>
              	 @foreach($menu_group as $val)
                 <option value="{{$val->id}}">{{$val->name}}</option>

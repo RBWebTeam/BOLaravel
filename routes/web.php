@@ -151,12 +151,17 @@ Route::get('RaiseaTicketgettoccmail/{Querid}','RaiserTicketController@gettoccmai
 
 Route::get('View-Raised-Ticket','ViewRaisedTicketController@getraisedticket');
 Route::get('View-Raised-Ticket/{ticketid}','ViewRaisedTicketController@deleteticket');
+ 
+Route::get('send-sms-rights','SendSmsRightsController@sendsmsview');
+Route::get('send-sms-directsend/{userid}','SendSmsRightsController@isdirectsend');
+Route::get('send-sms-needaproval/{userid}','SendSmsRightsController@isneedapproval');
+///shubham end ///
 // avinash
  Route::get('ticket-module','TicketController@getticketdetails') ;
    // avinash
 
 
-///shubham end ///
+
 
 //////GOVINDF
 Route::get('Fsm-Details/{smid}','FsmDetailsController@fsmfbalist');
