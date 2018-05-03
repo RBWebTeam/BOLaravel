@@ -23,8 +23,10 @@ class Ticket_mail implements ShouldQueue
      protected $arrcc;
     public function __construct($email,$arrcc)
     {
-          $this->email=$email;
-          $this->arrcc=$arrcc;
+            $this->email=$email;
+            $this->arrcc=$arrcc;
+
+             
     }
 
     /**
@@ -40,6 +42,7 @@ class Ticket_mail implements ShouldQueue
                     $email=$this->email;
                     $arrcc=$this->arrcc;
         
+ 
                 $data ="Please ";
                 $mail = Mail::send('ticket/ricket_mail_view',['data' => $data], function($message) use($email,$arrcc) {
                 $message->from('scriptdp@gmail.com', 'FinMart');
@@ -56,9 +59,9 @@ class Ticket_mail implements ShouldQueue
           
 
                     if(Mail::failures()){
-                            return 1;
+                            return "false";
                     }else{
-                            return 0;
+                            return "true";
 
                     }
     }

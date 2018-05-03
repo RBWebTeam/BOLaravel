@@ -89,7 +89,7 @@
             </div>
   </div> 
 
-<!--  <div class="form-group">
+ <div class="form-group">
             <label for="inputEmail" class="control-label col-xs-2"> TO mail</label>
             <div class="col-xs-10">
          <input type="text" name="toemailid"  class="form-control"  id="toemailid">  
@@ -101,21 +101,23 @@
             <div class="col-xs-10">
                     <input type="text" name="ccemailid"  class="form-control"  id="ccemailid">  
            </div>
- </div> -->
+ </div>
 
     
 
 
 
 
- <a href="#" id="addScnt">Add</a>
+<!--  <a href="#" id="addScnt">Add</a>
 
  
 <div class="form-group">
 
 <div id="pp_scents"></div>
 <div id="p_scents"></div>
-</div>
+</div> -->
+
+
         
       </form>
       </div>
@@ -160,29 +162,29 @@
 
 
       	function TicketRequest_fn(ID,toemailid,ccemailid){  
-          $('#pp_scents').empty();
+         // $('#pp_scents').empty();
           
    
      
-            if( toemailid!=null && ccemailid!=null ){
-                 $('#pp_scents').append('<div class="form-group"><label for="inputEmail" class="control-label col-xs-2"> TO mail</label><div class="col-xs-10"><input type="text" name="toemailid"  class="form-control" value="'+toemailid+'"  id="toemailid" required ></div></div>');
+            // if( toemailid!=null && ccemailid!=null ){
+            //      $('#pp_scents').append('<div class="form-group"><label for="inputEmail" class="control-label col-xs-2"> TO mail</label><div class="col-xs-10"><input type="text" name="toemailid"  class="form-control" value="'+toemailid+'"  id="toemailid" required ></div></div>');
                 
-                $('#pp_scents').append('<div class="form-group"><label for="inputEmail" class="control-label col-xs-2"> CC mail</label><div class="col-xs-10"><input type="text" name="ccemailid[]"  value="'+ccemailid+'"  class="form-control"  id="ccemailid" required></div></div>');
+            //     $('#pp_scents').append('<div class="form-group"><label for="inputEmail" class="control-label col-xs-2"> CC mail</label><div class="col-xs-10"><input type="text" name="ccemailid[]"  value="'+ccemailid+'"  class="form-control"  id="ccemailid" required></div></div>');
 
 
 
-             }else{
-                $('#pp_scents').append('<div class="form-group"><label for="inputEmail" class="control-label col-xs-2"> TO mail</label><div class="col-xs-10"><input type="text" name="toemailid"  class="form-control"    id="toemailid" required ></div></div>');
+            //  }else{
+            //     $('#pp_scents').append('<div class="form-group"><label for="inputEmail" class="control-label col-xs-2"> TO mail</label><div class="col-xs-10"><input type="text" name="toemailid"  class="form-control"    id="toemailid" required ></div></div>');
                 
-                $('#pp_scents').append('<div class="form-group"><label for="inputEmail" class="control-label col-xs-2"> CC mail</label><div class="col-xs-10"><input type="text" name="ccemailid[]"     class="form-control"  id="ccemailid" required></div></div>');
+            //     $('#pp_scents').append('<div class="form-group"><label for="inputEmail" class="control-label col-xs-2"> CC mail</label><div class="col-xs-10"><input type="text" name="ccemailid[]"     class="form-control"  id="ccemailid" required></div></div>');
                 
-             } 
+            //  } 
 
 
           
               $('#TicketRequest_Id').val(ID);
-              // $('#toemailid').val(toemailid);
-              // $('#ccemailid').val(ccemailid);
+              $('#toemailid').val(toemailid);
+              $('#ccemailid').val(ccemailid);
       		    $('#Ticket-Request-Id-Modal').modal('show');}
    $(document).on('click','#TicketRequest_Id_save',function(e){  e.preventDefault();
 
@@ -202,14 +204,14 @@
  //        }
 
  // return false;
-
-         if($('#FBAUserId').val()!=0){
+ ceckemail=checkEmails();
+         if($('#FBAUserId').val()!=0 && ceckemail==0){
          $.post("{{url('ticket-request-save')}}",$('#TicketRequest_Id_from').serialize())
              .done(function(data){ 
              console.log(data);
                  if(data==0){
                      
-              //   window.location.href = "{{url('ticket-request')}}";
+                  window.location.href = "{{url('ticket-request')}}";
                  }else{
                   console.log("error");
                  }
@@ -271,7 +273,35 @@
 
 </script>
  
+<script language="javascript">
+function checkEmail(email) {
+//var regExp = /(^[a-z0-9]([a-zA-Z0-9_\.\-]*)@([a-z_\.]*)([.][a-z]{3})$)|(^[a-z]([a-zA-Z0-9\-]*)@([a-z_\.]*)(\.[a-z]{3})(\.[a-z]{2})*$)/i;
 
+ regExp =/[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}/igm;
+return regExp.test(email);
+}
+
+function checkEmails(){
+  var emails = document.getElementById("ccemailid").value;
+  var emailArray = emails.split(",");
+  var invEmails = "";
+  var tru=1;
+  for(i = 0; i <= (emailArray.length - 1); i++){
+    if(checkEmail(emailArray[i])){
+      //Do what ever with the email.
+        tru=0;
+    }else{
+      invEmails += emailArray[i] + "\n";
+      tru=1;
+    }
+  }
+  if(invEmails != ""){
+    alert("Invalid emails:\n" + invEmails);
+  }
+
+  return tru;
+}
+</script>
 @endsection
 
 

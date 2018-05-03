@@ -143,7 +143,12 @@ $(document).on("keyup",".search_id",function() {
     $('#msg_count').text(data.length);
     if(data.length > 0){
      $.each(data,function(index,val){ 
-     arr.push('<tr><td><input type="checkbox" name="fba[]" class="check_list" value="'+val.FBAID+'" >'+val.FullName  +':'+val.MobiNumb1+'</td> </tr>');  });
+
+        if(val.FBAID!=null && val.FBAID!='0'){
+     arr.push('<tr><td><input type="checkbox" name="fba[]" class="check_list" value="'+val.FBAID+'" >'+val.FullName  +':'+val.MobiNumb1+'</td> </tr>'); 
+        }
+          
+      });
        $('#sendsms_id').append(arr);
            }else{
          alert("No data found...");
