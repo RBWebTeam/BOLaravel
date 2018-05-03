@@ -211,7 +211,7 @@
              console.log(data);
                  if(data==0){
                      
-              //   window.location.href = "{{url('ticket-request')}}";
+                  window.location.href = "{{url('ticket-request')}}";
                  }else{
                   console.log("error");
                  }
@@ -275,7 +275,9 @@
  
 <script language="javascript">
 function checkEmail(email) {
-var regExp = /(^[a-z0-9]([a-zA-Z0-9_\.\-]*)@([a-z_\.]*)([.][a-z]{3})$)|(^[a-z]([a-zA-Z0-9\-]*)@([a-z_\.]*)(\.[a-z]{3})(\.[a-z]{2})*$)/i;
+//var regExp = /(^[a-z0-9]([a-zA-Z0-9_\.\-]*)@([a-z_\.]*)([.][a-z]{3})$)|(^[a-z]([a-zA-Z0-9\-]*)@([a-z_\.]*)(\.[a-z]{3})(\.[a-z]{2})*$)/i;
+
+ regExp =/[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}/igm;
 return regExp.test(email);
 }
 

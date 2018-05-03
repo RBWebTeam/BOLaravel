@@ -44,14 +44,14 @@
            <label class="control-label" for="message-text">Image: </label>
            <input type="file" class="form-control" id="pathimgraiser" name="pathimgraiser">
 </div>
-<div class="form-group">
+<!-- <div class="form-group">
            <label class="control-label" for="message-text">To Email ID: </label>
            <input type="Email" class="form-control" id="txttoemailid" name="txttoemailid" required readonly>
 </div>
 <div class="form-group">
            <label class="control-label" for="message-text">CC Email ID: </label>
            <input type="Email"  class="form-control" id="txtccemailid" name="txtccemailid">
-</div>
+</div> -->
 <div class="form-group">
 <input id="btn_saveticket" type="submit" name="btn_saveticket" class="btn btn-primary">
 <button id="btn_resetticket" class="btn btn-primary" type="button">Reset</button>     
