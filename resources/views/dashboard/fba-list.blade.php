@@ -78,7 +78,8 @@
                                        <th>Created Date</th>
                                        <th>Mobile No</th>                                   
                                        <th>Email ID</th>
-                                       <th>Payment Link</th>
+                                      <th>Payment Link</th>
+                                       <th>Password</th>
                                        <th>City</th>
                                        <th>State</th>
                                        <th>Pincode</th>
@@ -91,7 +92,7 @@
                                        <th>FSM Details</th>  
                                        <th>Documents</th> 
                                        <th>Customer ID</th>
-                                       <th>Password</th>
+                                   <!--     <th>Password</th> -->
                                        <th>Created Date1</th>
                                        </tr>
                                        </thead>
@@ -476,6 +477,20 @@
 
              }, 
 
+                     {"data":"pwd" ,
+              "render": function ( data, type, row, meta ) {
+              return '<a id="btnshowpassword" data-toggle="modal" data-target="#spassword" onclick="getpassword('+"'"+ data+"'"+')">*****</a>';
+              }
+
+       },   
+
+
+
+
+
+
+
+
             {"data":"City"},
             {"data":"statename"},
             {"data":"Pincode"},
@@ -534,12 +549,12 @@
              }  
          }, 
 
-              {"data":"pwd" ,
-              "render": function ( data, type, row, meta ) {
-              return '<a id="btnshowpassword" data-toggle="modal" data-target="#spassword" onclick="getpassword('+"'"+ data+"'"+')">*****</a>';
-              }
+       //        {"data":"pwd" ,
+       //        "render": function ( data, type, row, meta ) {
+       //        return '<a id="btnshowpassword" data-toggle="modal" data-target="#spassword" onclick="getpassword('+"'"+ data+"'"+')">*****</a>';
+       //        }
 
-       },   
+       // },   
 
 
          { "data": "createdate1","visible":false }

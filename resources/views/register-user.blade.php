@@ -58,12 +58,12 @@
             <div class="col-xs-6">
            <fieldset>
 
-             <select name="company_id" id="company_id"  class="form-control" required=""  >
+             <select name="company_id" id="company_id" class="form-control"  required=""  >
              	<option value="">-Select-</option>
-             	<option value="1">RupeeBoss</option>
-             	<option value="2">Datacom</option>
-             	<option value="3">PolicyBoss</option>
-             	<option value="4">LandMark</option>
+             	<option value="1" @if (old('company_id') == "1") {{ 'selected' }} @endif>RupeeBoss</option>
+             	<option value="2" @if (old('company_id') == "2") {{ 'selected' }} @endif>Datacom</option>
+             	<option value="3" @if (old('company_id') == "3") {{ 'selected' }} @endif>PolicyBoss</option>
+             	<option value="4" @if (old('company_id') == "4") {{ 'selected' }} @endif>LandMark</option>
              </select>
               </fieldset>
     @if ($errors->has('company_id'))<label class="control-label" for="inputError"> {{ $errors->first('company_id ') }}</label>@endif
@@ -76,10 +76,10 @@
              <fieldset>
              <select name="reporting_id" id="reporting_id"  class="form-control" required="">
              	<option value="">-Select-</option>
-             	<option value="1">RupeeBoss</option>
-             	<option value="2">Datacom</option>
-             	<option value="3">PolicyBoss</option>
-             	<option value="4">LandMark</option>
+             	<option value="1" @if (old('reporting_id') == "1") {{ 'selected' }} @endif>RupeeBoss</option>
+             	<option value="2" @if (old('reporting_id') == "2") {{ 'selected' }} @endif>Datacom</option>
+             	<option value="3" @if (old('reporting_id') == "3") {{ 'selected' }} @endif>PolicyBoss</option>
+             	<option value="4" @if (old('reporting_id') == "4") {{ 'selected' }} @endif>LandMark</option>
              </select>
                </fieldset>
     @if ($errors->has('reporting_id'))<label class="control-label" for="inputError" > {{ $errors->first('reporting_id ') }}</label>@endif
@@ -113,7 +113,7 @@
              <select name="menu_group" id="menu_group"  class="form-control" required="" >
              	<option value="">Select</option>
              	 @foreach($menu_group as $val)
-                <option value="{{$val->id}}">{{$val->name}} </option>
+                <option value="{{$val->id}}" {{(old('menu_group') == $val->id?'selected':'')}}>{{$val->name}} </option>
              	 @endforeach
              </select>
              </fieldset>
