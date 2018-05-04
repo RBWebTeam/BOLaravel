@@ -1452,85 +1452,75 @@ $.ajax({
   function mail(obj,val){
     // console.log(obj);
     if(obj=='weburl' ){
-                   var str =$('#weburl').val();
-                   var emailPattern = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/; 
-                   var res = str.match(emailPattern);
-                   if(res){
-                     // console.log('Pancard is valid one.!!');
-                      $('#email').show();
-
-                  }else{
-                    // console.log('Oops.Please Enter Valid Pan Number.!!');
-                    $('#email').hide();
-
-                    return false;
-                  }
-                  
-  }
-}
+    var str =$('#weburl').val();
+    var emailPattern = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/; 
+    var res = str.match(emailPattern);
+    if(res){
+   // console.log('Pancard is valid one.!!');
+    $('#email').show();
+   }else{
+   $('#email').hide();
+   return false;
+   }
+   }
+   }
 
 
 // $(".nav-list > li").addClass(function(i){return "item" + (i + 1);});
 
 
-function docview(fbaid)
-{
-$('#divdocviewer').html(""); 
-$("#imgdoc").attr("src","");
-$("#imgdoc").css("display","none");
-$.ajax({  
-
+  function docview(fbaid)
+  {
+  $('#divdocviewer').html(""); 
+  $("#imgdoc").attr("src","");
+  $("#imgdoc").css("display","none");
+  $.ajax({  
   type: "GET",  
   url:'fbalist-document/'+fbaid,//"{{URL::to('Fsm-Details')}}",
   success: function(fsmmsg){
-   var data = JSON.parse(fsmmsg);
-   var str = "<table class='table'><tr style='height:30px;margin:18px;'>";
+  var data = JSON.parse(fsmmsg);
+  var str = "<table class='table'><tr style='height:30px;margin:18px;'>";
   if(data.data.length > 0){
   for (var i = 0; i < data.data.length; i++) {
   str = str + '<a><input  class="btn btn-default" style="margin:2px" type="button" onclick=showImage("'+data.url+data.data[i].FileName+'") value="'+data.data[i].DocType+'"/></a>';
-    }
-   str = str + "</tr></table>";
-      }
-    else
-      {
-    str = str + "<td>No documents uploaded.</td></tr></table>";
-     }
-     $('#divdocviewer').html(str);   
-      }  
-      });
-      }
-
+  }
+  str = str + "</tr></table>";
+  }
+  else
+  {
+  str = str + "<td>No documents uploaded.</td></tr></table>";
+  }
+  $('#divdocviewer').html(str);   
+  }  
+  });
+  }
   function showImage(src)
   {
   $("#imgdoc").css("display","block");
   $("#imgdoc").attr("src" ,src);
   }
-
-
-$('#msds-select').change(function () { 
+  $('#msds-select').change(function () { 
   debugger;
- var table = $('#fba-list-table').DataTable(); 
-    $.fn.dataTable.ext.search.push(
-    function( settings, data, dataIndex ) {
-        var msdsSearch = $( "#msds-select option:selected" ).val();
-        var msdsValue = data[10]|| 0;
-        console.log(data);
-        var numbers = /^[0-9]+$/;
-          if(msdsSearch=="2" && msdsValue=="update"){  
-            return true;
-          }
-            if(msdsSearch=="1" && msdsValue!="update"){  
-            return true;
-          }
-          if(msdsSearch=="0"){  
-            return true;
-          }
-        return false;
-    });
-    
-     table.draw();
-    
-});
+   var table = $('#fba-list-table').DataTable(); 
+  $.fn.dataTable.ext.search.push(
+  function( settings, data, dataIndex ) {
+  var msdsSearch = $( "#msds-select option:selected" ).val();
+  var msdsValue = data[10]|| 0;
+  console.log(data);
+  var numbers = /^[0-9]+$/;
+  if(msdsSearch=="2" && msdsValue=="update"){  
+  return true;
+  }
+  if(msdsSearch=="1" && msdsValue!="update"){  
+  return true;
+  }
+  if(msdsSearch=="0"){  
+  return true;
+  }
+  return false;
+  });
+  table.draw();
+  });
 </script>
 
  
@@ -1628,26 +1618,21 @@ $('#btn_resetticket').click(function() {
                      }
                 });
             }else{
-                $('select[name="ddlsubcat"]').empty();
-            }
-        });
- </script>
-
-<script type="text/javascript">
-
-
+    $('select[name="ddlsubcat"]').empty();
+     }
+     });
+   </script>
+  <script type="text/javascript">
  $(document).on('click','#notificsubmitbtn',function(e){
   // e.preventdefault();
-
  if($('#ddlflag').val()==0 ||$('#ddlflag').val()==null ){ 
   $('#required1').text('This field is required');
-   $('#required2').text('This field is required');
-    
+   $('#required2').text('This field is required');   
   return false;
  }else{ $('#required1').text('');}
  if( $('#SMSTemplate_select').val()==0 || $('#SMSTemplate_select').val()==null  ){
        $('#required2').text('This field is required');
-     //alert("Please select from drop down list.");
+  //alert("Please select from drop down list.");
   return false;
  }else{
        $('#required2').text('');

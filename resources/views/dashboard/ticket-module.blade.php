@@ -2,14 +2,14 @@
  @section('content') 
 <form id="approve" name="approve"> 
 <div id="content" style="overflow:scroll;">
- <div class="container-fluid white-bg">
- <div class="col-md-12"><h3 class="mrg-btm">Ticket Details </h3></div>
- <div class="col-md-12">
-  <div class="overflow-scroll">
-  <div class="table-responsive" >
-  <table id="example" class="table table-bordered table-striped tbl" >
-   <thead>
-   <tr>
+<div class="container-fluid white-bg">
+<div class="col-md-12"><h3 class="mrg-btm">Ticket Details </h3></div>
+<div class="col-md-12">
+<div class="overflow-scroll">
+<div class="table-responsive" >
+<table id="example" class="table table-bordered table-striped tbl" >
+<thead>
+<tr>
    <th>TicketRequestId</th>
    <th>SubCategoryId</th>
    <th>ClassificationId</th>
@@ -29,7 +29,7 @@
     @endforeach
     </tbody>
     </table>
-    </div>
+   </div>
     </div>
     </div>
     </div>

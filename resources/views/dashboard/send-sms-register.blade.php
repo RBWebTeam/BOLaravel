@@ -10,7 +10,7 @@
     <div class="panel-heading">
     <h3 class="panel-title">FSM Details</h3>
     <div class="pull-right">
-    <span class="clickable filter" data-toggle="tooltip" data-container="body">
+    <span class="clickable filter" data-toggle="tooltip" data-container="body"><a ">
     <span class="glyphicon glyphicon-plus mrg-tp-forteen"></span></a></span>
     </div>
     </div>

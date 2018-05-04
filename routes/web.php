@@ -74,12 +74,12 @@ Route::get('View-Raised-Ticket/{ticketid}','ViewRaisedTicketController@deletetic
 ///shubham end ///
 
 //////GOVIND
-Route::get('Fsm-Details/{smid}','FsmDetailsController@fsmfbalist');
-Route::get('FsmRegister/{smid}','FsmRegisterController@getfsmdetail');
-Route::get('fba-list/{partnerid}','FbaController@getfbapartner');
-Route::get('assignrm','AssignrmController@loadrm');
-Route::get('assign-rm-load/{flag}/{value}','AssignrmController@loadfba');
-Route::post('assign-rm-update','AssignrmController@updatefba');
+ Route::get('Fsm-Details/{smid}','FsmDetailsController@fsmfbalist');
+ Route::get('FsmRegister/{smid}','FsmRegisterController@getfsmdetail');
+ Route::get('fba-list/{partnerid}','FbaController@getfbapartner');
+ Route::get('assignrm','AssignrmController@loadrm');
+ Route::get('assign-rm-load/{flag}/{value}','AssignrmController@loadfba');
+ Route::post('assign-rm-update','AssignrmController@updatefba');
 ///END
 Route::get('Fsm-Register','FsmRegisterController@getsate');
 Route::get('Fsm-Register/{id}',array('as'=>'FSMRegister.ajax','uses'=>'FsmRegisterController@getcity'));
@@ -125,7 +125,6 @@ Route::get('send-notificationfba/{flag}/{value}',array('as'=>'send-notification.
 Route::post('insertnotification','SendNotificationController@insertntf');
 
 Route::post('send-notification-approve','SendNotificationController@insertntf');
-
 Route::get('approvenotification/{msgid}/{value}','SendNotificationController@approvenotification');
 route::get('sendnotificationnew', 'SendNotificationController@sendnotificationstate');
 Route::get('insert','uploadfileController@imageupload');
