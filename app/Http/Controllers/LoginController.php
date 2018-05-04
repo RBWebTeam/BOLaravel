@@ -78,15 +78,8 @@ if(!$request->session()->exists('emailid')){
                       Session::flash('msg', "Invalid email or password. Please Try again! ");
 
                     
-
-
- 
- 
-       
-
-                 
               return redirect()->intended('dashboard');
-        }
+       }
         {
                       Session::flash('msg', "Invalid esmail or password. Please Try again! ");
 
@@ -185,17 +178,14 @@ if(!$request->session()->exists('emailid')){
             'password' =>$req->password]);
 
        
-Session::flash('message', 'Register successfully...!'); 
+Session::flash('message', 'User Register successfully...!'); 
    }
 
     
-           return redirect ('register-user-list');
+           return redirect ('register-user');
  
 
 }
-
-
-
 
 public function register_update(Request $req){  
 

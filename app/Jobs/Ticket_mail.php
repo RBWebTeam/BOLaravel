@@ -21,10 +21,12 @@ class Ticket_mail implements ShouldQueue
 
      protected $email;
      protected $arrcc;
-    public function __construct($email,$arrcc)
+     protected $reqid;
+    public function __construct($email,$arrcc,$TicketRequestId)
     {
             $this->email=$email;
             $this->arrcc=$arrcc;
+            $this->reqid=$TicketRequestId;
 
              
     }
@@ -49,11 +51,11 @@ class Ticket_mail implements ShouldQueue
                 $message->to($email);
                         if(isset($arrcc)){
                               foreach ($arrcc as $key => $cc) {
-                            $message->cc($cc);
+                                    $message->cc($cc);
                         }
                         }
                         
-                 $message->subject('Ticket Request');
+                 $message->subject('Ticket Request');           
                 });
                      
           

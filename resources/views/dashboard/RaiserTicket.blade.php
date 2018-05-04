@@ -151,7 +151,7 @@ function gettoccmail(){
                          $('#txtccemailid').val('');
                      
                         $.each(data, function(key, value) {
-
+                          console.log(value);
                           $('#txttoemailid').val(value.toemailid);
                           $('#txtccemailid').val(value.ccemailid);
                       

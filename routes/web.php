@@ -68,6 +68,9 @@ Route::get('getloanid/{fbaid}','FbaController@getupdateloanid');
 
 
 
+
+
+
  // --------------------------------------
 // vivek start
  

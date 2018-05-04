@@ -1,6 +1,7 @@
 @extends('include.master')
 @section('content')
 
+
 <style type="text/css">
   
   .hide {
@@ -17,7 +18,7 @@
       <div class="col-md-2">
       <div class="form-group">
 
-    <p>From Date</p>
+         <p>From Date</p>
          <div id="datepicker" class="input-group date" data-date-format="mm-dd-yyyy">
                <input class="form-control date-range-filter" type="text" placeholder="From Date" name="fdate" id="min"/>
               <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
@@ -73,33 +74,33 @@
                                        <thead>
                                        <tr>
                                        <th>FBA ID</th> 
-                                       <th>Full Name</th>                                    
+                                       <th>Full Name</th> 
                                        <th>Created Date</th>
-                                       <th>Mobile No</th>
+                                       <th>Mobile No</th>                                   
                                        <th>Email ID</th>
                                        <th>Payment Link</th>
-                                       <th>Password</th>
                                        <th>City</th>
+                                       <th>State</th>
                                        <th>Pincode</th>
-                                       <th>FSM Details</th>
                                        <th>POSP No</th>
-                                       <th>Loan ID</th>
-                                       <th>Posp Name</th>
-                                       <th>Partner Info</th>
-                                       <th>Documents</th>
+                                       <th>Loan ID</th> 
+                                       <th>Posp Name</th> 
                                        <th>Bank Account</th>
-                                       <th>SMS</th>
-                                       <th>sales code</th>
+                                       <th>Partner Info</th> 
+                                       <th>Sales code</th>
+                                       <th>FSM Details</th>  
+                                       <th>Documents</th> 
                                        <th>Customer ID</th>
-                                      <th>Created Date1</th>
-                                     </tr>
-                                    </thead>
-                                   </table>
-            </div>
-            </div>
-            </div>
-            </div>
-            </div>
+                                       <th>Password</th>
+                                       <th>Created Date1</th>
+                                       </tr>
+                                       </thead>
+                                       </table>
+                           </div>
+                        </div>
+                      </div>
+                    </div>
+                 </div>
 
 <!-- send sms -->
 <div class="sms_sent_id id modal fade" role="dialog">   
@@ -180,18 +181,16 @@
  -->
 
 
- <div class="pageloader modal fade" role="dialog" id="pageloader">   
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-     
-      <div class="modal-body">
+        <div class="pageloader modal fade" role="dialog" id="pageloader">   
+        <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-body">
         <form id="posp_from_id">
-         
         </form>
-      </div>
-    </div>
-  </div>
-</div>
+             </div>
+            </div>
+          </div>
+        </div>
 
 
 
@@ -459,14 +458,17 @@
         "order": [[ 0, "desc" ]],
         "ajax": "get-fba-list",
         "columns": [
-             { "data": "fbaid"},
-            { "data": "FullName"},            
-            { "data": "createdate" },
-            { "data": "MobiNumb1" },
-            { "data": "EMaiID" },
+            { "data": "fbaid"},
+            { "data": "FullName"},
+            { "data": "createdate" },            
+            {"data":"MobiNumb1" ,
+             "render": function ( data, type, row, meta ) {
+                return '<a href="#"><span>'+data+'</span></a> <a href="#" data-toggle="modal" data-target="#sms_sent_id" onclick="SMS_FN(1,'+data+')"><span class="glyphicon glyphicon-envelope"></span></a>';
+              }
+            },
+            // { "data": "createdate" },
+            { "data": "EMaiID" },         
             { "data": "Link",
-
-               
 
          "render": function ( data, type, row, meta ) {
          return row.PayStat == "S"?'':'<a id="btnviewhistory" data-toggle="modal" data-target="#paylink_payment" onclick="getpaymentlink('+row.fbaid+','+row.MobiNumb1+')">Payment link</a>';
@@ -474,62 +476,57 @@
 
              }, 
 
-            {"data":"pwd" ,
-           
-             "render": function ( data, type, row, meta ) {
-              return '<a id="btnshowpassword" data-toggle="modal" data-target="#spassword" onclick="getpassword('+"'"+ data+"'"+')">*****</a>';
-              }
-
-       },         
             {"data":"City"},
+            {"data":"statename"},
             {"data":"Pincode"},
-            {"data":null  ,
-             "render": function ( data, type, row, meta ) {
-                return '<a href="#" style="" data-toggle="modal" data-target=".fsmdetails">Fsm details</a>';
-              }
-            },
-
             {"data":"POSPNo"  ,
              "render": function ( data, type, row, meta ) {
               return data==""?('<a id="posp_'+row.fbaid+'" class="checkPosp" data-toggle="modal" data-target="#updatePosp" onclick="POSP_UPDATE('+row.fbaid+')">update</a>'):data;
               }
-            },  
+            }, 
 
-            {"data":"LoanID"  ,
+    {"data":"LoanID"  ,
              "render": function ( data, type, row, meta ) {
                 // return data==""?('<a id="loan_'+row.fbaid+'" class="checkloan" data-toggle="modal" data-target="#updateLoan" onclick="LoanID_UPDATE('+row.fbaid+')">update</a>'):data;
                  return (data==""||data=="0")?('<a id="btnviewcid" onclick="getloanid(this,'+row.fbaid+')">Update</a>'):data;
               }
          }, 
 
-            {"data":"pospname"},  
-            {"data":null ,
+
+            {"data":"pospname"}, 
+             {"data":"bankaccount"}, 
+             {"data":null ,
              "render": function ( data, type, row, meta ) {
                 return '<a href="" data-toggle="modal" data-target="#partnerInfo" onclick="getpartnerinfo('+row.fbaid+')">partner info</a>';
               } 
 
-            },  
+            }, 
+
+                {"data":"salescode" ,
+             "render": function ( data, type, row, meta ) {
+              return data=="Update"?('<a  id="update_'+row.fbaid+'" onclick="sales_update_fn('+row.fbaid+')" >'+data+'</a>'):data;
+              }
+   
+           },
+
+
+
+             {"data":null  ,
+             "render": function ( data, type, row, meta ) {
+                return '<a href="#" style="" data-toggle="modal" data-target=".fsmdetails">Fsm details</a>';
+              }
+            },
+            
+
+          
 
           {"data":"fdid" ,
              "render": function ( data, type, row, meta ) {
             return data == 1?'<a href="" style="" data-toggle="modal"  data-target="#docviwer" onclick="docview('+row.fbaid+')" >uploaded</a>':'pending';
            }
         },
-    
 
-            {"data":"bankaccount"} ,
-            {"data":"MobiNumb1" ,
-             "render": function ( data, type, row, meta ) {
-                return '<a href="#" data-toggle="modal" data-target="#sms_sent_id" onclick="SMS_FN(1,'+data+')"><span class="glyphicon glyphicon-envelope"></span></a>';
-              }
-            },
-
-            {"data":"salescode" ,
-             "render": function ( data, type, row, meta ) {
-              return data=="Update"?('<a  id="update_'+row.fbaid+'" onclick="sales_update_fn('+row.fbaid+')" >'+data+'</a>'):data;
-              }
-   
-           },
+          
 
             {"data":"CustID" ,
               "render": function ( data, type, row, meta ) {
@@ -537,7 +534,15 @@
              }  
          }, 
 
-            { "data": "createdate1","visible":false }
+              {"data":"pwd" ,
+              "render": function ( data, type, row, meta ) {
+              return '<a id="btnshowpassword" data-toggle="modal" data-target="#spassword" onclick="getpassword('+"'"+ data+"'"+')">*****</a>';
+              }
+
+       },   
+
+
+         { "data": "createdate1","visible":false }
 
             
         ],
