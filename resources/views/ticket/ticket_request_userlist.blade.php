@@ -16,7 +16,8 @@
                                        <th>DocPath</th>
                                        <th>Message</th>
                                        <th>Status</th>
-                                       <th>StatusChangedBy</th>
+                                       <th>Status Date</th>
+                                       <!-- <th>StatusChangedBy</th> -->
                                           <th>Comment</th>
                                       </tr>
                                     </thead>
@@ -24,14 +25,15 @@
 
                                      @foreach($query as $va)
                                      <tr>
-                                     <td><a href="#" onclick="Ticket_comment_fn('{{$va->TicketRequestId}}')" >{{$va->TicketRequestId}}</a></td>
+                                     <td><a href="#" style="color: black;" onclick="Ticket_comment_fn('{{$va->TicketRequestId}}')" >{{$va->TicketRequestId}}</a></td>
                                       <td>{{$va->CateName}}</td>
                                        <td>{{$va->QuerType}}</td>
                                         <td>{{$va->Description}}</td>
                                          <td>{{$va->DocPath}}</td>
                                           <td>{{$va->Message}}</td>
                                            <td>{{$va->Status}}</td>
-                                            <td>{{$va->StatusChangedBy}}</td>
+                                            <td>{{$va->created_date}}</td>
+                                            <!-- <td>{{$va->StatusChangedBy}}</td> -->
                                              <td  > <a href="#" onclick="view_comment_fn_user('{{$va->TicketRequestId}}')">View</a></td>
                                      </tr>
                                      @endforeach

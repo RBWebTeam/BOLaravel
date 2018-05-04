@@ -16,9 +16,10 @@
 				           <th>Document</th>
 				           <th>FBA Name</th>
 				           <th>FBA Mobile No</th>
+                   <th>FBA EmailId</th>
 				           <th>Created Date</th>
                    <th>Ticket Status</th>
-				           <th>Action</th>
+				           <!-- <th>Action</th> -->
                   </tr>
                    </thead>
             
@@ -39,10 +40,11 @@
                 		<?php }?> 
                 	<td>{{$val->FullName}}</td>
                 	<td>{{$val->MobiNumb1}}</td>
+                  <td>{{$val->EmailID}}</td>
                 	<td>{{$val->CreatedDate}}</td>
                   <td>{{$val->StatusName}}</td>
-                	<td><a class="btn btn-primary" onclick="deleteticket({{$val->TicketRequestId}},this)">Delete</a>
-                	</td>
+                	<!-- <td><a class="btn btn-primary" onclick="deleteticket({{$val->TicketRequestId}},this)">Delete</a>
+                	</td> -->
                 	</tr>
                 	 @endforeach
                 </tbody>
