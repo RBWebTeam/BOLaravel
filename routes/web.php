@@ -198,7 +198,9 @@ Route::post('insertnotification','SendNotificationController@insertntf');
 
 Route::post('send-notification-approve','SendNotificationController@insertntf');
 
+Route::get('send-sms-register','SendSmsFilterController@SendSMSFilter');
 
+Route::post('send-sms-filter','SendSmsFilterController@getfbafilter');
 
 Route::get('approvenotification/{msgid}/{value}','SendNotificationController@approvenotification');
 route::get('sendnotificationnew', 'SendNotificationController@sendnotificationstate');
