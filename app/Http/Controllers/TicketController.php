@@ -35,23 +35,20 @@ class TicketController extends Controller
     }
 
 
-    public function ticket_request_save(Request $req){
-           
- 
- 
+    public function ticket_request_save(Request $req){          
 
            $error=''; 
             try{
                 
               if(isset($req->toemailid)){
-                  $this->mail_fn($req->toemailid,explode(',',$req->ccemailid)); 
-                  DB::table('TicketRequest')->where('TicketRequestId','=',$req->TicketRequestId)->update(['user_fba_id'=>$req->FBAUserId]);
+                  $this->mail_fn($req->toemailid,explode(',',$req->ccemailid),1); 
+                  DB::table('TicketRequest')->where('TicketRequestId','=',$req->TicketRequestId)->update(['user_fba_id'=>$req->FBAUserId,'assigned_date'=>  date('Y-m-d H:i:s')]);
                       
                        $error=0;
                }
 
-            }catch (Exception $e){ 
-             $error=1;  
+            }catch (Exception $e){
+               $error=1;  
             }
 
          return $error;
@@ -89,13 +86,13 @@ class TicketController extends Controller
 
 
 
-    public function mail_fn($email,$arrcc){
+    public function mail_fn($email,$arrcc,$TicketRequestId){
 
 
 //  $emailJob = (new Ticket_mail($email,$arrcc))->delay(Carbon::now()->addSeconds(5));
 // dispatch($emailJob);
 
-        $this->dispatch((new Ticket_mail($email,$arrcc))->delay(now()->addSeconds(5)));
+        $this->dispatch((new Ticket_mail($email,$arrcc,$TicketRequestId))->delay(now()->addSeconds(5)));
 
 
           

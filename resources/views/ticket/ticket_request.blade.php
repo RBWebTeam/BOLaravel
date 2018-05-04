@@ -20,6 +20,7 @@
                                        <th>Status</th>
                                        <th>StatusChangedBy</th>
                                        <th>Assign</th>
+                                       <th>Assigned Date</th>
                                       
                                          
                                       </tr>
@@ -48,6 +49,7 @@
                                            <td>{{$va->Status}}</td>
                                             <td>{{$va->StatusChangedBy}}</td>
                                             <td>{{$va->user_fba_id!=null?$va->UserName:''}}</td>
+                                            <td>{{$va->assigned_date}}</td>
                                             <!--  <td  > <a href="#" onclick="view_comment_fn('{{$va->TicketRequestId}}')">View</a></td> -->
                                      </tr>
                                      @endforeach
