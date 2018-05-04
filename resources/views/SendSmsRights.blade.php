@@ -8,6 +8,7 @@
 	<table class="datatable-responsive table table-striped table-bordered dt-responsive nowrap" id="example">
 		 <thead>
                   <tr>
+                  	<th>User Id </th>
                    <th>User Name</th>
                    <th>Login Name</th>
                    <th>Device Name</th>
@@ -21,6 +22,7 @@
                 <tbody>
                       @foreach($query as $val)
                 	<tr>
+                	<td>{{$val->FBAUserId}}</td>
                 	<td>{{$val->UserName}}</td>
                 	<td>{{$val->LogiName}}</td>
                 	<td>{{$val->DeviceName}}</td>
@@ -58,7 +60,7 @@
 <script type="text/javascript">
 	function isdirectsend($userid,btn){
 
-		if (confirm('Are You Sure to take this action..!')) 
+		if (confirm('confirm to take this action..!')) 
 		{
             
             $.ajax({
@@ -76,13 +78,13 @@
             alert('Rights updated successfully..!');
                            } 
                           else {
-                                alert('Action cancled..!');
+                                alert('canceled..!');
                               }
 		
 		
 	}
 	function isneedapproval($userid,btn){
-		if (confirm('Are You Sure to take this action..!')) 
+		if (confirm('confirm to take this action..!')) 
 		{
 		
 		$.ajax({
@@ -97,12 +99,12 @@
                        $(btn).removeClass('btn-danger');
                        $(btn).addClass('btn-success');
 
-                     }
+                    }
                });
 		 alert('Rights updated successfully..!');
 		 } 
            else {
-                  alert('Action cancled..!');
+                  alert('canceled..!');
                  }
 	}
 </script>
