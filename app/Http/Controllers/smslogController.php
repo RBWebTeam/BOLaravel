@@ -21,23 +21,21 @@ class smslogController extends Controller
 
 	 }
 
-
-
   // SMS TEMPLATE CONTROLLE
   public function smstemplate(){
   return view('dashboard.sms_template');
 
 	 }
-	  public function smstemplateinsert (Request $req){
-              
-       DB::statement('call Usp_insertsmstaplate(?,?)',array( $req->hname,$req->txtmesg ));
-        return Redirect('sms_template');
-            }
-  
-public function getsendsmslog(){ 
-$query1=DB::select("call usp_load_sms_log()");
+	 public function smstemplateinsert (Request $req){       
+     DB::statement('call Usp_insertsmsg_checkmstaplate(?,?)',array( $req->hname,$req->txtmesg ));
+     return Redirect('sms_template');
+     }
+ 
+ 
+  public function getsendsmslog(){ 
+ $sendsms=DB::select("call usp_load_sms_log()");
 
-return view ('dashboard.send_sms_log',['query1'=>$query1]);
+ return view ('dashboard.send-sms-log',['sendsms'=>$sendsms]);
 }
 
  }

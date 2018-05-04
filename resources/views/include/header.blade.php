@@ -1,6 +1,6 @@
 <div class="container-fluid hedr">
 <div class="col-md-1 col-xs-1 no-mob-pad">
-<div id="sidebarCollapse" class="menu-btn" onclick="myFunction(this)">
+<div id="sidebarCollapse" class="menu-btn"  >
   <div class="bar1"></div>
   <div class="bar2"></div>
   <div class="bar3"></div>

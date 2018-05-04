@@ -27,18 +27,16 @@ public function getcity($id)
 {
 	$cities = DB::table("city_master")
                     ->where("stateid",$id)
-                    ->pluck("cityname","city_id");
+                     // ->orderBy('cityname', 'asc')
+                      ->pluck("cityname","city_id")
+                    ;
         return json_encode($cities);
-      
-}
- 
- public function getpincode($flag,$value){
- 	
- $pincode = DB::select("call usp_load_pincodes($flag,$value)");
+       }
+     public function getpincode($flag,$value){
+     $pincode = DB::select("call usp_load_pincodes($flag,$value)");
   return json_encode($pincode);
 }
-
-public function insertfsm(Request $req){
+ public function insertfsm(Request $req){
   $validator =Validator::make($req->all(), [
              'FirstName' => 'required',
              'LastName' => 'required',

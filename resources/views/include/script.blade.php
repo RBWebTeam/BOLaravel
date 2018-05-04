@@ -46,11 +46,11 @@ $(document).ready(function(){
   }).datepicker("getDate");
 });
  
-             $(document).ready(function () {
-                 $('#sidebarCollapse').click( function () {
-                     $('#sidebar').slideToggle();
-                 });
-             });
+ $(document).ready(function () {
+ $('#sidebarCollapse').click( function () {
+ $('#sidebar').slideToggle();
+ });
+ });
        
 
   // $(document).ready(function() {
@@ -158,7 +158,9 @@ $(document).ready(function(){
                     type: "GET",
                     dataType: "json",
                     success:function(data) {
+                         $('#msg_count').text(data.length);
                         $('#txtmapcity').empty();
+
                         $('#txtmapcity').append('<option value="0">select city</option>');
                         $.each(data, function(key, value) {
 
@@ -250,15 +252,12 @@ function insertfsm() {
                 // console.log(msg);
             }
         });
-
-
-});
+       });
  
-$('.unblock').click(function(){
-  $(this).toggle();
-  $(this).closest('td').find('.block').toggle();
-
-  var flag=0;
+ $('.unblock').click(function(){
+   $(this).toggle();
+   $(this).closest('td').find('.block').toggle();
+   var flag=0;
   var value=$(this).closest('td').find('input[name="txtfbaid"]').val('return');
  
   $.ajax({
@@ -314,19 +313,19 @@ $('.message_sms_id').click(function(){
     $('.sms_sent_id').modal('hide');
     $('#message-text').val('');
    }
-});
- }
- else{
+  });
+  }
+  else{
 
   alert('sms field can not blank')
   $( "#message-text" ).focus();
- }
-});
+  }
+ });
 // upload docs
-function uploaddoc(id){
-                $('#docfbaid').val(id);
-                $('.fbadoc').modal('show');
-     }
+  function uploaddoc_old(id){
+  $('#docfbaid').val(id);
+   $('.fbadoc').modal('show');
+   }
 
 $('#btnupload').click(function(event){
 event.preventDefault();
@@ -439,12 +438,9 @@ alert(JSON.stringify(data));*/
              
               
             
-            }
-        });
-  });
-
-
-
+              }
+             });
+              });
   $('#reset').click(function(){
    $("#Product").val("");
    $("#image_file").val("");
@@ -460,23 +456,21 @@ alert(JSON.stringify(data));*/
    success: function(msg)  
    {
   
-     var tablerows = new Array();
-        $.each(msg, function( index, value ) {
-            tablerows.push('<tr><td><img class="img-responsive" src="/' + value.image_path + '" width="400" height=""/></td></tr>');
-        }); 
+    var tablerows = new Array();
+  $.each(msg, function( index, value ) {
+   tablerows.push('<tr><td><img class="img-responsive" src="/' + value.image_path + '" width="400" height=""/></td></tr>');
+    }); 
 
-       if(msg){
-          $('#docs').empty().append('<table class="table table-striped table-bordered"><tr class="text-capitalize"><td style="font-family: monospace">Images</td></tr>'+tablerows+'</table>');
-         }else{
-            $('#docs').empty().append('No Result Found');
+  if(msg){
+   $('#docs').empty().append('<table class="table table-striped table-bordered"><tr class="text-capitalize"><td style="font-family: monospace">Images</td></tr>'+tablerows+'</table>');
+     }else{
+     $('#docs').empty().append('No Result Found');
          }
+         },
+         });
+         });
 
-   },
-
- });
-  });
-
-</script>
+         </script>
 
 <script type="text/javascript">
   $('#Product').on('change', function() {
@@ -869,11 +863,6 @@ $('#ddlstate').on('change', function() {
         });
 
 
-
-
-
-
-
 function getfbaassignlist(ddl)
 {  
   if($(ddl).val() > 0)
@@ -1060,17 +1049,21 @@ $('#LeadType').on('change',function(){
        
         $("#weburl").show();
         $("#last_nm").show();
-
+         $("#wetitle").show();
+        $("#first_nm").show();
       }
       else{
         $("#weburl").hide();
         $("#last_nm").hide();
+         $("#wetitle").hide();
+        $("#first_nm").hide();
 
       }
 });
 
 
  $('#txtmapstate').on('change', function() {
+  
             var state_id = $(this).val();
             if(state_id) {
                 $.ajax({
@@ -1078,16 +1071,28 @@ $('#LeadType').on('change',function(){
                     type: "GET",
                     dataType: "json",
                     success:function(data) {
-                        $('#txtmapcity').empty();
+             //  $('#msg_check').text(data.length);
+
+                         $('#txtmapcity').empty();
+    
+
+ 
                         $('#txtmapcity').append('<option value="0">select city</option>');
+                        
                         $.each(data, function(key, value) {
 
+
                             $('#txtmapcity').append('<option value="'+ key +'">'+ value +'</option>');
+
+
                         });
+
                      }
                 });
             }else{
                 $('select[name="city"]').empty();
+
+
             }
         });
 
@@ -1095,14 +1100,15 @@ $('#txtmapcity').on('change', function() {
                   BindFbas(2,$('#txtmapcity').val());
         });
 
-  
+// $('#txtmobile').on('change', function() {
+//                   Bindmobile(4,$('#txtmobile').val());
+//         });
+
+
   $("#upload").on("click", function() {
-
-
     var file_data = $("#sortpicture").prop("files")[0];   
     var form_data = new FormData();
     form_data.append("file", file_data);
-
     $.ajax({
         url: "../../../notificationimages",
         dataType: 'script',
@@ -1113,7 +1119,7 @@ $('#txtmapcity').on('change', function() {
         type: 'post',
         success: function(){
             alert("works"); 
-        }
+      }
     });
 });
 
@@ -1128,28 +1134,24 @@ function BindFbas(flag,value)
         type: "GET",
        dataType:"json",
       success:function(data) {
+
+       // alert(data);
+        $('#msg_count').text(data.length);
       var text = "";
       for (var i = 0; i < data.length; i++) {
-      if(i==0)
-    {
-    text = text +'<tr><th><input  name="fba_list[]" value="0" id="selectAll" onclick="checkall()" type="checkbox" /> FBA List</th></tr>';
-  text = text +'<tr><td><input name="fba_list[]" id="chkfba" type="checkbox" class="chkfba" value="'+data[i].id+'"/><input id="hdnchk" name="hdnchk" type="hidden" value="'+data[i].id+'" />'+data[i].fullname+'</td></tr>';
-}
-else{
-text = text +'<tr><td><input id="chkfba" name="fba_list[]"  type="checkbox" class="chkfba" value="'+data[i].id+'"/><input id="hdnchk" type="hidden" value="'+data[i].id+'" />'+data[i].fullname+'</td></tr>';
-}
 
+text = text +'<tr><td><input id="chkfba" name="fba_list[]"  type="checkbox" class="chkfba" value="'+data[i].id+'"/><input id="hdnchk" type="hidden" value="'+data[i].id+'" />'+data[i].fullname+'</td><td>'+data[i].mobile+'</td><td>'+data[i].City+'</td></tr>';
 }
-          $('#tblfbalist').append(text);
+$('#tblfbalisthead').empty().append('<tr><th><input  name="fba_list[]" value="0" id="selectAll" onclick="checkall()" type="checkbox" /> FBA List</th><th>Mobile Number</th><th>City </th>  </tr> ');
 
+        $('#tblfbalist').empty().append(text);
                      },
-     error:function(error)
-                     {
-                      console.log(error);
-                     }
+              error:function(error)
+             {
+            console.log(error);
+           }
                 });
-}
-
+   }
 
 function checkall(){
 
@@ -1171,8 +1173,6 @@ function loadfbasbyflag()
     $('#tblsalesmanagerlist').css("display","none");
    }
   }
-
-
 $(document).on('change', '#search_state', function() {   
     var fstate_id=$(this).val();  
     var  city_array=Array('<option value="0">Select</option>');  
@@ -1260,14 +1260,12 @@ function getpaymentlink(fbaid){
               {
                 str = str + "<p>"+data[i].Link+"</p>";
          // $('#paylink').html(str);
-       }
-                       
-                     }
-                });
+         }
+        }
+        });
+        }
 
-}
-
-// function getpaymentlink(fbaid){
+   // function getpaymentlink(fbaid){
 //  $('.divpartnertable_payment').html('');
 //   $.ajax({
 //                     url: 'getpaymentlink/'+fbaid,
@@ -1299,9 +1297,6 @@ function n(n){
     return n.length < 8  ? "0" + n :  n;
 }
 // show password end
-
-
-
 function getproductfollowup(fbaid){
 
   $('#txtproductfbaid').val(fbaid);
@@ -1324,22 +1319,19 @@ $('#btn_productsubbmit').click(function() {
 
    }
 });
-
- });
-
+  });
 function viewProducthistory(fbaid){
-
 $.ajax({  
          type: "GET",  
          url:'Rmfollowup/'+fbaid,
          success: function(fsmmsg){
 
-      var data = JSON.parse(fsmmsg);
-      var str = "<table class='table'><tr style='height:30px;margin:5px;'><td>Lead ID</td><td>Name</td><td>User Type</td><td>Status</td><td>Remark</td></tr>";
+    var data = JSON.parse(fsmmsg);
+    var str = "<tablec lass='table'><tr style='height:30px;margin:5px;'><td>Lead ID</td><td>Name</td><td>User Type</td><td>Status</td><td>Remark</td></tr>";
        for (var i = 0; i < data.length; i++) 
        {
 
-         str = str + "<tr style='height:30px;margin:5px;'><td>"+data[i].lead_id+"</td><td>"+data[i].FullName+"</td><td>"+data[i].user_type+"</td><td>"+data[i].status_name+"</td><td>"+data[i].remark+"</td></tr>";
+    str = str + "<tr style='height:30px;margin:5px;'><td>"+data[i].lead_id+"</td><td>"+data[i].FullName+"</td><td>"+data[i].user_type+"</td><td>"+data[i].status_name+"</td><td>"+data[i].remark+"</td></tr>";
        }
          str = str + "</table>";
            $('#divpartnertable').html(str);   
@@ -1348,40 +1340,92 @@ $.ajax({
 }
 
 
- function updatenotification(msgid,value){
+//   function updatenotification(msgid,value,btn){
 
-//alert(value);
- if (confirm("Are you sure to "+(value==1?"approve":"reject")+" this notification")) {}
-  $.ajax({
+// //alert(value);
+//      if (confirm("Are you sure to "+(value==1?"approve":"reject")+" this notification")) {}
+//       $.ajax({
+//             type: "GET",
+//             url:'approvenotification/'+msgid+'/'+value,           
+//             success: function( msg ) {
+//             if(value=="1"){
+//             alert("Notification Approved Successfully");
+//             $("#accept_"+msgid).css( "background",'#0fe10f');
+//                     }
+//              else if (value=="0"){
+//               alert("Notification rejected Successfully");
+//               $("#reject_"+ msgid).css("background",'#ffffff');
+//                 $("#reject_"+ msgid).css("color",'#0c0b0b');
+            
+//                   } 
+//                   $(btn).Open('tr').show();  
+//                   }
+               
+//                  });
+//                  }
+
+
+
+     function updatenotification(msgid,value){
+
+    if (confirm("Are you sure to "+(value==1?"approve":"reject")+" this notification")) 
+    {}
+       $.ajax({
             type: "GET",
             url:'approvenotification/'+msgid+'/'+value, 
-                     
-           success: function( msg ) {
-
-            if(value=="1"){
-              alert("Notification Approved Successfully");
-            }
+           success: function (msg) {
+           if(value=="1"){
+           alert("Notification Approved Successfully");
+           $("#accept_"+msgid).css( "background",'#0fe10f');
+          }
             else if(value=="0"){
-             alert("Notification rejected Successfully");
-               }
-                
-            }
+            alert("Notification Rejected Successfully");
+            document.getElementById("reject_"+msgid).disabled = true ;
+           $("#reject_"+msgid).prop('disabled', true);
+            $("#reject_"+msgid).css("background: rgb(15, 225, 15");
+              }
+             }
+            });
+           }
+  
 
-        });
 
- return false;
 
-}
 
-  $('#notificsubmitbtn').click(function(){
+
+    // function updatenotification(msgid,value){
+
+    // if (confirm("Are you sure to "+(value==1?"approve":"reject")+" this notification")) 
+    // {}
+    //    $.ajax({
+    //         type: "GET",
+    //         url:'approvenotification/'+msgid+'/'+value, 
+    //        success: function (msg) {
+    //         if(value=="0"){
+    //           alert("Notification Reject Successfully");
+            
+    //         $("#accept_"+msgid).css( "background",'#0fe10f');
+    //         // $(".approve").prop('disabled', true);
+    //       document.getElementById("reject_"+msgid).disabled = true;
+    //         }
+    //         else if(value=="0"){
+    //         alert("Notification approved Successfully");
+    //         ("#reject_"+ msgid).css("background",'#ffffff');
+    //            document.getElementById("accept_"+msgid).disabled = true;
+    //           $("#reject_"+msgid).css("color",'#0000FF');
+    //              // $(".disapprove").prop('disabled', true);
+    //            }
+    //             }
+    //           });
+    //          }
+   
+          $('#notificsubmitbtn').click(function(){
 // alert('okae');
-  if (!$('#sendnotification').valid()) {
-     alert('Not Valid');
-
-  } else {
-$.ajax({
-
- url:"{{URL::to('send-notification-submit')}}" ,  
+          if (!$('#sendnotification').valid()) {
+           return false;
+          } else {
+          $.ajax({
+          url:"{{URL::to('send-notification-submit')}}" ,  
           data:new FormData($("#sendnotification")[0]),
           dataType:'json',
           async:false,
@@ -1389,19 +1433,19 @@ $.ajax({
           processData: false,
           contentType: false,
           success: function(msg){
+          console.log(msg.data);
+          if (msg.data==true) 
+          {
+         alert('Submited Successfully');
+         $("#sendnotification").trigger('reset');
+          } else {
+          alert('Oops!! Could not insert successfully');
+         }
+         }
+         });
+         }
+         });
 
-            console.log(msg.data);
-            if (msg.data==true) 
-              {
-                alert('Inserted Successfully');
-              } else {
-                    alert('Oops!! Could not insert successfully');
-              }
-                 }
-        });
-  }
-  
-  });
 
 
 
@@ -1429,66 +1473,39 @@ $.ajax({
 // $(".nav-list > li").addClass(function(i){return "item" + (i + 1);});
 
 
-function uploaddoc(fbaid)
+function docview(fbaid)
 {
 $('#divdocviewer').html(""); 
 $("#imgdoc").attr("src","");
 $("#imgdoc").css("display","none");
 $.ajax({  
 
-         type: "GET",  
-        
-         url:'fbalist-document/'+fbaid,//"{{URL::to('Fsm-Details')}}",
-         success: function(fsmmsg){
-     
-        var data = JSON.parse(fsmmsg);
-        var str = "<table class='table'><tr style='height:30px;margin:18px;'>";
-  if(data.length > 0){
-        
-       for (var i = 0; i < data.length; i++) {
-        
-   
-      str = str + '<a><input  class="btn btn-default" style="margin:2px" type="button" onclick=showImage("'+data[i].FileName+'") value="'+data[i].DocType+'"/></a>';
+  type: "GET",  
+  url:'fbalist-document/'+fbaid,//"{{URL::to('Fsm-Details')}}",
+  success: function(fsmmsg){
+   var data = JSON.parse(fsmmsg);
+   var str = "<table class='table'><tr style='height:30px;margin:18px;'>";
+  if(data.data.length > 0){
+  for (var i = 0; i < data.data.length; i++) {
+  str = str + '<a><input  class="btn btn-default" style="margin:2px" type="button" onclick=showImage("'+data.url+data.data[i].FileName+'") value="'+data.data[i].DocType+'"/></a>';
     }
-
-           str = str + "</tr></table>";
-
+   str = str + "</tr></table>";
       }
-      else
+    else
       {
-        str = str + "<td>No documents uploaded.</td></tr></table>";
-
-
+    str = str + "<td>No documents uploaded.</td></tr></table>";
+     }
+     $('#divdocviewer').html(str);   
+      }  
+      });
       }
 
-           $('#divdocviewer').html(str);   
-             
-  
-        }  
-      });
-}
-
-function showImage(test)
-{
-
+  function showImage(src)
+  {
   $("#imgdoc").css("display","block");
+  $("#imgdoc").attr("src" ,src);
+  }
 
-  $("#imgdoc").attr("src",test);
-
-}
-
-</script> 
-  
-
-<!-- fbalist ImageView Script End Here.
- -->
-
-
-
-
-
-
-<script> 
 
 $('#msds-select').change(function () { 
   debugger;
@@ -1514,9 +1531,178 @@ $('#msds-select').change(function () {
      table.draw();
     
 });
-
-
-
-
 </script>
+
  
+ <!-- <script type="text/javascript">
+  function deleteticket($tktid,btndelete){
+    var del=confirm("Are you sure you want to delete this record?");
+    if (del==true){
+       var ticketid= $tktid;
+            $.ajax({ 
+            type: "GET",
+            url:'View-Raised-Ticket/'+ticketid,
+            success: function( msg ) {
+            console.log(msg);
+             alert("Ticket deleted successfully..!");
+             $(btndelete).closest('tr').remove();
+            }
+        });
+    }else{
+        alert("Ticket Not Deleted")
+    }
+    return del;
+ }
+ </script> -->
+
+<script type="text/javascript">
+   $('#ddlsubcat').on('change', function() {
+        var QuerID = $(this).val();
+         
+            if(QuerID) {
+                $.ajax({
+                    url: 'RaiseaTicketgetcal/'+QuerID,
+                    type: "GET",
+                    dataType: "json",
+                    success:function(data) {
+                        $('#ddlClassification').empty();
+                        $('#ddlClassification').append('<option value="0">--Select Classification--</option>');
+                        
+                        $.each(data, function(key,value) {
+                             
+                            $('#ddlClassification').append('<option value="'+ value.ID +'">'+ value.Description +'</option>');
+                        });
+                     }
+                });
+            }else{
+                $('select[name="ddlClassification"]').empty();
+            }
+        });
+ </script>
+
+ <script type="text/javascript">
+   $('#btn_saveticket').click(function() {
+    
+    data1=new FormData($("#pathimgraiser"));
+  console.log($('#fromraiserticket').serialize());
+   $.ajax({ 
+   url: "{{URL::to('RaiseaTicket')}}",
+   method:"POST",
+   data: $('#fromraiserticket').serialize(),
+   dataType:'json',
+   async:false,
+   type:'POST',
+   processData: false,
+   contentType: false,
+  success: function(msg)  
+   {
+    console.log(msg);
+    alert("Record has been saved successfully");
+    $("#fromraiserticket").trigger('reset');
+   
+   }
+});
+
+ });
+$('#btn_resetticket').click(function() {
+   $("#fromraiserticket").trigger('reset');
+});
+
+ </script>
+
+ <script type="text/javascript">
+   $('#ddlCategory').on('change', function() {
+            var CateCode = $(this).val();
+            if(CateCode) {
+              $.ajax({
+              url: 'RaiseaTicket/'+CateCode,
+                type: "GET",
+                dataType: "json",
+                 success:function(data) {
+                  $('#ddlsubcat').empty();
+                  $('#ddlsubcat').append('<option value="0">-- Select Sub Category--</option>');
+                   $.each(data, function(key, value) {
+                         
+              $('#ddlsubcat').append('<option value="'+ value.QuerID +'">'+ value.QuerType +'</option>');
+                        });
+                     }
+                });
+            }else{
+                $('select[name="ddlsubcat"]').empty();
+            }
+        });
+ </script>
+
+<script type="text/javascript">
+
+
+ $(document).on('click','#notificsubmitbtn',function(e){
+  // e.preventdefault();
+
+ if($('#ddlflag').val()==0 ||$('#ddlflag').val()==null ){ 
+  $('#required1').text('This field is required');
+   $('#required2').text('This field is required');
+    
+  return false;
+ }else{ $('#required1').text('');}
+ if( $('#SMSTemplate_select').val()==0 || $('#SMSTemplate_select').val()==null  ){
+       $('#required2').text('This field is required');
+     //alert("Please select from drop down list.");
+  return false;
+ }else{
+       $('#required2').text('');
+      
+ } 
+
+
+if($('#SMSTemplate').val()==0 || $('#SMSTemplate').val()==null){
+   $('#required3').text('This field is required');
+  //alert("Please fill out this field message.");
+  return false;
+ }else{
+  $('#required3').text('');
+ }
+
+// var fields = $("input[name='fba']").serializeArray(); 
+//   if (fields.length>0) { 
+//     alert("Please select  Recipient");
+//     return false;
+//   } 
+
+if($(".check_list:checkbox:checked").length > 0){
+  }else{
+    $('#required4').text('This field is required');
+    alert("Please select  Recipient");
+    return false;
+  }
+
+
+
+});
+
+
+
+$(document).on('click','.check_list',function(){
+     len=$(".check_list:checkbox:checked").length;
+     $('#msg_check').text(len+"/");
+});
+
+
+
+
+
+
+
+ 
+ $(document).ready(function(){
+ 
+window.setTimeout(function() {
+    $("#message_toggle").fadeTo(500, 0).slideUp(500, function(){
+        $(this).remove(); 
+    });
+  }, 4000);
+ });
+</script>
+
+
+ <!-- End shubham raise a ticket -->

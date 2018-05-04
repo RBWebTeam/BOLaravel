@@ -10,47 +10,28 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 Route::get('/', function () {
     return view('index');
 });
-
-
 Route::get('/test', function () {
     return view('test');
 });
 
-
-Route::post('admin-login','LoginController@login');
-
+ Route::post('admin-login','LoginController@login');
  Route::group(['middleware' => ['CheckMidd']], function (){
-
- 
-
-
  // city  state
 Route::get('search-state','LoginController@search_state');
 Route::get('search-city','LoginController@search_city');
-
 // end city state
-
 Route::get('dashboard','DashboardController@dashboard');
-
 //Fba details
 Route::get('fba-list','FbaController@fba_list');
 Route::get('get-fba-list','FbaController@get_fba_list');
 Route::post('sales-update','FbaController@sales');
 Route::post('loan-update','FbaController@loan');
 Route::post('posp-update','FbaController@posp');
-
 Route::get('getpaymentlink/{fbaid}','FbaController@getpaymentlink');
-
-
 Route::get('fba-list/{salescode}/{fbaid}',array('as'=>'fba-list.ajax','uses'=>'FbaController@salesupdate'));
-
-
-
-
 Route::get('fba-list/{fbaid}/{value}/{flag}',array('as'=>'fba-list.ajax','uses'=>'FbaController@updateposp'));
 Route::post('fba-list','FbaController@sendsms');
 
@@ -58,11 +39,9 @@ Route::get('fba-list/{fbaid}/{value}/{flag}',array('as'=>'fba-list.ajax','uses'=
 Route::post('fba-list','FbaController@sendsms');
 Route::post('fba-listdocument','FbaController@uploaddoc');
 // salescode
-Route::get('fba-list/{salescode}/{fbaid}',array('as'=>'fba-list.ajax','uses'=>'FbaController@updatesalescode'));
-
+Route::get('fba-list/{salescode}/{fbaid}',array('as'=>'fba-list.ajax','uses'=>'FbaController@salesupdate'));
 
 // salescode
-
 //fba documents 
 Route::get('Fba-document','fbadocumentsController@fbadocument');
 
@@ -84,6 +63,14 @@ Route::get('Product-followup','ProductfollowupController@getproductfollowup');
 Route::get('Product-followup/{product_id}','ProductfollowupController@getproductinfo');
 Route::Post('Product-followup','ProductfollowupController@insertproductfollowup');
 
+Route::get('RaiseaTicket','RaiserTicketController@getraiserticket');
+Route::get('RaiseaTicket/{CateCode}','RaiserTicketController@getsubcat');
+Route::get('RaiseaTicketgetcal/{QuerID}','RaiserTicketController@getclassi');
+Route::Post('RaiseaTicket','RaiserTicketController@inserraisertkt');
+
+Route::get('View-Raised-Ticket','ViewRaisedTicketController@getraisedticket');
+Route::get('View-Raised-Ticket/{ticketid}','ViewRaisedTicketController@deleteticket');
+
 ///shubham end ///
 
 //////GOVIND
@@ -99,66 +86,80 @@ Route::get('Fsm-Register/{id}',array('as'=>'FSMRegister.ajax','uses'=>'FsmRegist
 Route::get('Fsm-Register/{flag}/{value}',array('as'=>'FSMRegister.ajax','uses'=>'FsmRegisterController@getpincode'));
 Route::post('Fsm-Register','FsmRegisterController@insertfsm');
 
-
  Route::get('send-notification','SendNotificationController@sendnotification');
 
  Route::get('send-notification-approve','SendNotificationController@SendnotificationApprove');
 
  Route::get('approve-notification','SendNotificationController@notificationApprove');
 
-  Route::get('send_sms_log','smsLogController@getsendsmslog');
+  Route::get('send-sms-log','smsLogController@getsendsmslog');
 
+  Route::get('/validation','ValidationController@showform');
+Route::post('/validation','ValidationController@validateform');
+
+
+Route::get('dropdownlist','SendNotificationController@droup_city');
+
+Route::get('state_dropdown_id/{cityid}','bankofferController@get_state_id');
 
 // -------------- avinash
 Route::get('send-notification','SendNotificationController@getstate');
+
+Route::get('send-notification','SendNotificationController@getmobile');
 Route::post('send-notification/{flag}/{value}','SendNotificationController@getfbalistnotification');
 Route::get('send-notification/{flag}/{value}',array('as'=>'send-notification.ajax','uses'=>'SendNotification@getpincode'));
 
-Route::get('send-notification/{id}',array('as'=>'send-notification.ajax','uses'=>'SendNotificationController@getcity'));
+Route::get('send-notification/{id}',array('as'=>'send-notification.ajax','uses'=>'SendNotificationController@getcity1'));
+
+
+Route::get('send-notification /{id}',array('as'=>'send-notification.ajax','uses'=>'SendNotificationController@getmobileno'));
+
+// Route::get('send-notification/{FBAID}',array('as'=>'send-notification.ajax','uses'=>'SendNotificationController@getmobileno'));
+
+////
+Route::get('send-notification/{id}',array('as'=>'send-notification.ajax','uses'=>'SendNotificationController@getmobile'));
+/////////
+
 
 Route::get('send-notificationfba/{flag}/{value}',array('as'=>'send-notification.ajax','uses'=>'SendNotificationController@getfba'));
 Route::post('insertnotification','SendNotificationController@insertntf');
 
 Route::post('send-notification-approve','SendNotificationController@insertntf');
 
-
-
 Route::get('approvenotification/{msgid}/{value}','SendNotificationController@approvenotification');
 route::get('sendnotificationnew', 'SendNotificationController@sendnotificationstate');
-
-
 Route::get('insert','uploadfileController@imageupload');
 Route::get('Fba-list-Update','FbaController@test');
 Route::get('fbalist-document/{fbaid}','FbaController@getdoclistview');
-
-
 route::post('send-notification-submit', 'SendNotificationController@sendnotificationsubmit');
-
 //route::get('sendnotificationnew', 'SendNotificationController@send-notificationstate');
-
 Route::get('Fsm-Details','FsmDetailsController@FsmDetails');
-
 Route::get('Payment-History','PaymentHistoryController@Payment_History');
 
 
-Route::get('Fsm-Register','FsmRegisterController@bindsate');
+Route::get('Fsm-Register','FsmRegisterController@bindstate');
 
 Route::get('uploadefile','uploadfileController@uplode');
 
  Route::post('file_uplode','uploadfileController@file_uploade');
 Route::post('insertnotificationfile','uploadfileController@insertntfi');
 
- // Route::get('send-sms','SendSMSController@ViewSendSMSDetails');
- 
+  Route::get('send-sms-register','SendSmsFilterController@SendSMSFilter');
 Route::get('notification-save','SendNotificationController@sendsubmitnotification_s');
 
-Route::get('approvenotification/{msgid}/{value}','SendNotificationController@approvenotification');
+//Route::get('approvenotification/{msgid}/{value}','SendNotificationController@approvenotification');
  //send sms
 Route::get('send-notification','SendNotificationController@sendnotification');
 
 //send sms
 Route::get('send-sms','SendSMSController@ViewSendSMSDetails');
- 
+
+Route::post('send-sms-detail','SendSMSController@getfbalist');
+
+Route::post('send-sms-filter','SendSmsFilterController@getfbafilter');
+Route::post('send-sms-save-filter','SendSMSController@send_sms_save_filter');
+//Route::post('send-sms-filter','SendSmsFilterController@getfbalistfilter');
+
 Route::get('send-notification','SendNotificationController@sendnotification');
  //Otp Detail
 Route::get('otp-details','OtpDetailsController@otp_details');
@@ -180,8 +181,6 @@ Route::post('sales-material-upload-submit','BookAppointmentController@sales_mate
 Route::get('sales-material','BookAppointmentController@sales_material');
 Route::post('sales-material-update','BookAppointmentController@sales_material_update');
 
-
- 
   /************
 //  Menu List
 ******************/
@@ -195,7 +194,6 @@ Route::get('menu-test','MenuController@menu_test');
 Route::get('menu-group','MenuController@menu_group');
 Route::post('menu-group-save','MenuController@menu_group_save');
 Route::get('menu-group-select','MenuController@menu_group_select');
-
   /************
 //  Regional manager
 ******************/
@@ -255,10 +253,13 @@ Route::get('ticket-request-user-list','TicketController@ticket_request_userlist'
 Route::Post('ticket-user-comment','TicketController@ticket_user_comment') ;
 
 
+Route::get('ticket-module','TicketController@getticketdetails') ;
+
+
 });
 
-
 Route::group(['namespace' => 'leadController' ], function() {
-Route::get('marketing-leads','LeaduploadController@marketing_leads');  
+Route::get('marketing-leads','LeaduploadController@marketing_leads');
 
+//rmcity master  
 });

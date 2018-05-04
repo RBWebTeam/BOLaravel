@@ -67,15 +67,15 @@
              <div class="overflow-scroll">
              <div class="table-responsive" >
              <table class="datatable-responsive table table-striped table-bordered nowrap" id="fba-list-table">
-                                       <thead>
-                                       <tr>
-                                       <th>FBA ID</th> 
-                                       <th>Full Name</th>
-                                       <th>Created Date</th>
-                                       <th>Mobile No</th>
-                                       <th>Email ID</th>
-                                       <th>Payment Link</th>
-                                       <th>Password</th>
+                  <thead>
+                    <tr>
+                <th>FBA ID</th> 
+                 <th>Full Name</th>
+                  <th>Created Date</th>
+                  <th>Mobile No</th>
+                  <th>Email ID</th>
+                   <th>Payment Link</th>
+                    <th>Password</th>
                                        <th>City</th>
                                        <th>Pincode</th>
                                        <th>FSM Details</th>
@@ -87,7 +87,8 @@
                                        <th>Bank Account</th>
                                        <th>SMS</th>
                                        <th>sales code</th>
-                                    </tr>
+                                        <th>Created Date1</th>
+                                     </tr>
                                     </thead>
             </table>
             </div>
@@ -231,7 +232,7 @@
 <div class="salesupdate modal fade" role="dialog" id="salesupdate_modal_fade">   
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-      <div class="modal-header">
+      <div class="modal-header"  >
         <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
         <h4 class="modal-title">Sales Code</h4>
       </div>
@@ -352,6 +353,8 @@
         </div>
         <div>
          <img id="imgdoc" style="min-height:100%; min-width:100%;">
+         
+
          </div>
        </div>
      </div>
@@ -464,8 +467,7 @@
                 return '<a id="btnshowpassword" data-toggle="modal" data-target="#spassword" onclick="getpassword('+data+')">*****</a>';
               }
 
-
-            },        
+       },         
             {"data":"City"},
             {"data":"Pincode"},
             {"data":null  ,
@@ -493,12 +495,13 @@
 
      {"data":"fdid" ,
              "render": function ( data, type, row, meta ) {
-      return data == 1?'<a href="" style="" data-toggle="modal"  data-target="#docviwer" onclick="uploaddoc('+row.fbaid+')" >uploaded</a>':'pending';
+      return data == 1?'<a href="" style="" data-toggle="modal"  data-target="#docviwer" onclick="docview('+row.fbaid+')" >uploaded</a>':'pending';
        }
         },
+          
 
 
-            {"data":"bankaccount"} ,
+          {"data":"bankaccount"} ,
             {"data":"MobiNumb1" ,
              "render": function ( data, type, row, meta ) {
                 return '<a href="#" data-toggle="modal" data-target="#sms_sent_id" onclick="SMS_FN(1,'+data+')"><span class="glyphicon glyphicon-envelope"></span></a>';
@@ -508,8 +511,9 @@
              "render": function ( data, type, row, meta ) {
                 return data==""?('<a  id="update_'+data+'" onclick="sales_update_fn('+data+')" >'+data+'</a>'):('<a  id="update_'+row.fbaid+'" onclick="sales_update_fn('+row.fbaid+')" >Update</a>');
               }
-            },
-            
+   
+},
+            { "data": "createdate1","visible":false }            
         ],
 
     });//.column('0:visible').order('desc').draw();

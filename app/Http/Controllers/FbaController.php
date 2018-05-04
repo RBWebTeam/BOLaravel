@@ -33,6 +33,8 @@ class FbaController extends CallApiController
           return json_encode(["data"=>$query]);
         }
 
+
+
         public function updateposp($fbaid,$value,$flag) {
           DB::select("call usp_update_posploanid('$fbaid','$value','$flag')");
           return redirect('fba-list');
@@ -124,17 +126,17 @@ class FbaController extends CallApiController
         public function getdoclistview($fbaid)
        {
          $doctype = DB::select("call get_fba_doc($fbaid)");
-        
-          return json_encode($doctype);
+          $url=$this::$api_url;
+          $data = array('data' => $doctype, 'url'=>$url);
+          return json_encode($data);
         }
 
 
+   
+
         public function getpaymentlink($fbaid){
-          
-        
         $paymentlink=DB::select("call Usp_paymentlink($fbaid)");
          
-
        return json_encode($paymentlink);
   
           }

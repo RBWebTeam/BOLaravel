@@ -6,8 +6,8 @@
 @endif
  <!-- Body Content Start -->
 
-			 <div class="container-fluid white-bg">
-			 <div class="col-md-12"><h3 class="mrg-btm">Register Form</h3></div>
+	 <div class="container-fluid white-bg">
+	 <div class="col-md-12"><h3 class="mrg-btm">Register Form</h3></div>
 			 <div class="col-md-12">
 			 <form id="fsmregister" name="fsmregister" method="post">
 			 	 {{ csrf_field() }}
