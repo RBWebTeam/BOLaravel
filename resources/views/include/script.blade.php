@@ -1570,7 +1570,37 @@ $.ajax({
         });
  </script>
 
+
  <script type="text/javascript">
+      $('#notificsubmitbtn').click(function(){
+// alert('okae');
+          if (!$('#sendnotification').valid()) {
+           return false;
+          } else {
+          $.ajax({
+          url:"{{URL::to('send-notification-submit')}}" ,  
+          data:new FormData($("#sendnotification")[0]),
+          dataType:'json',
+          async:false,
+          type:'POST',
+          processData: false,
+          contentType: false,
+          success: function(msg){
+          console.log(msg.data);
+          if (msg.data==true) 
+          {
+         alert('Submited Successfully');
+         $("#sendnotification").trigger('reset');
+          } else {
+          alert('Oops!! Could not insert successfully');
+         }
+         }
+         });
+         }
+         });
+ </script>
+
+  <script type="text/javascript">
    $('#btn_saveticket').click(function() {
     
     data1=new FormData($("#pathimgraiser"));
@@ -1586,7 +1616,9 @@ $.ajax({
    contentType: false,
   success: function(msg)  
    {
-    console.log(msg);
+    console.log(msg.data1);
+      if (msg.data1==true) 
+        {
     alert("Record has been saved successfully");
     $("#fromraiserticket").trigger('reset');
    
@@ -1598,7 +1630,7 @@ $('#btn_resetticket').click(function() {
    $("#fromraiserticket").trigger('reset');
 });
 
- </script>
+ </script> 
 
  <script type="text/javascript">
    $('#ddlCategory').on('change', function() {
