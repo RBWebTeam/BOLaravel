@@ -5,15 +5,17 @@
        
 
 <div id="myDIV">
-  <a href="{{url('queries')}}?queries=1" class="qry-btn">POSP Transaction</a>
+  <a href="{{url('queries')}}?queries=1" class="qry-btn" id="pospbtn">POSP Transaction</a>
   <a href="{{url('queries')}}?queries=2"  class="qry-btn">Not POSP</a>
   <a href="{{url('queries')}}?queries=3" class="qry-btn">Policy Sold</a>
   <a href="{{url('queries')}}?queries=4" class="qry-btn">FBA Never Logged In</a>
   <a href="{{url('queries')}}?queries=5" class="qry-btn">Inactive POSP </a>
   <a href="{{url('queries')}}?queries=6" class="qry-btn">POSP Without POSP No</a>
   <a href="{{url('queries')}}?queries=7" class="qry-btn">POSP Without Payment</a>
-  <a href="{{url('queries')}}?queries=8"  class="qry-btn" >Transaction Today</a>
+  <a href="{{url('queries')}}?queries=8"  class="qry-btn">Transaction Today</a>
+  <a href="{{url('queries')}}?queries=9"  class="qry-btn">Not Posp but sold policy</a>
 </div>
+
 <br>
  <div id="export_id"></div>
 <br>
@@ -22,6 +24,22 @@
    <div class="col-md-12">
        <div class="overflow-scroll">
        <div class="table-responsive" >
+<div id="divinfo">
+  <table style="float: right;">
+  <tr>
+  <td style="padding:0 15px 0 15px;">
+  <p style="color: #3379b7"><strong>Q = Quote</strong></p>
+  </td>
+  <td style="padding:0 15px 0 15px;">
+  <p style="color: #3379b7"><strong>MS = Mail send</strong></p>
+  </td>
+  <td style="padding:0 15px 0 15px;">
+  <p style="color: #3379b7"><strong> PS = Payment successful</strong></p>
+  </td>
+  </tr>
+  </table>
+</div>
+<br>
         <table id="example" class="datatable-responsive table table-striped table-bordered dt-responsive nowrap" >
                  <thead >
                  <tr class="thead_cl">
@@ -33,7 +51,7 @@
                 @foreach($query as $val)
               <tr>
 
-                @if($status==3)
+                @if($status==3 or $status==9 )
                 <td> {{$val->created_date}}</td>
                 <td> {{$val->FBAId}}</td>
                <td> {{$val->FBAName}}</td>
@@ -61,7 +79,7 @@
                <td> {{$val->PL}}</td>
                <td> {{$val->TWO_WHEELER}}</td>
                 
-               @elseif($status==3)
+               @elseif($status==3 or $status==9)
                <td> {{$val->City}}</td>
                <td> {{$val->pcount}}</td>
                <td> {{$val->TName}}</td>
@@ -127,5 +145,7 @@ for (var i = 0; i < btns.length; i++) {
     this.className += " active";
   });
 }
+
+
 </script>
  @endsection

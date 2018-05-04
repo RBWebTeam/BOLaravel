@@ -17,8 +17,8 @@
 </div>		
  <div class="form-group">
            	<label class="control-label" for="message-text">Category:</label>
-           	<select class="form-control" name="ddlCategory" id="ddlCategory">
-           	 <option value="0" selected="selected">--Select Category--</option>
+           	<select class="form-control" name="ddlCategory" id="ddlCategory" required>
+           	 <option value="">--Select Category--</option>
            	 @foreach($cat as $val)
              <option value="{{$val->CateCode}}">{{$val->CateName}}</option>
              @endforeach
@@ -26,7 +26,7 @@
 </div>
 <div class="form-group">
            	<label class="control-label" for="message-text">Sub Category:</label>
-           	<select class="form-control" name="ddlsubcat" id="ddlsubcat">
+           	<select class="form-control" name="ddlsubcat" id="ddlsubcat" required>
            	 
             </select>
 </div>
@@ -163,5 +163,7 @@ function gettoccmail(){
        $('#txtccemailid').val('');
    }
 }
+
+
 </script>
 @endsection

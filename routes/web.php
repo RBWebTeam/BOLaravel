@@ -28,6 +28,8 @@ Route::post('HealthAssureinsert','HealthAssureController@inserthealthtest');
 Route::get('Health-Assure-Partner','HealthAssurePartnerController@getpartnerinfo');
 Route::post('providerlist','HealthAssurePartnerController@providerlist');
 Route::Post('Health-Assure-Partner','HealthAssurePartnerController@getproviderinfo');
+Route::get('Success','HealthAssureController@Success');
+Route::get('Failure','HealthAssureController@failure');
 ///Shubham
 
 Route::get('/','LoginController@checklogin');
@@ -152,12 +154,17 @@ Route::get('RaiseaTicketgettoccmail/{Querid}','RaiserTicketController@gettoccmai
 
 Route::get('View-Raised-Ticket','ViewRaisedTicketController@getraisedticket');
 Route::get('View-Raised-Ticket/{ticketid}','ViewRaisedTicketController@deleteticket');
+ 
+Route::get('send-sms-rights','SendSmsRightsController@sendsmsview');
+Route::get('send-sms-directsend/{userid}','SendSmsRightsController@isdirectsend');
+Route::get('send-sms-needaproval/{userid}','SendSmsRightsController@isneedapproval');
+///shubham end ///
 // avinash
  Route::get('ticket-module','TicketController@getticketdetails') ;
    // avinash
 
 
-///shubham end ///
+
 
 //////GOVINDF
 Route::get('Fsm-Details/{smid}','FsmDetailsController@fsmfbalist');
@@ -194,7 +201,9 @@ Route::post('insertnotification','SendNotificationController@insertntf');
 
 Route::post('send-notification-approve','SendNotificationController@insertntf');
 
+Route::get('send-sms-register','SendSmsFilterController@SendSMSFilter');
 
+Route::post('send-sms-filter','SendSmsFilterController@getfbafilter');
 
 Route::get('approvenotification/{msgid}/{value}','SendNotificationController@approvenotification');
 route::get('sendnotificationnew', 'SendNotificationController@sendnotificationstate');
