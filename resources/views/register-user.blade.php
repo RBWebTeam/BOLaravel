@@ -12,11 +12,11 @@
 
  <!-- <span style="color:red;">* Required field</span> -->
              <div class="container-fluid white-bg">
-				<div class="col-md-12"><h3 class="mrg-btm">REGISTER USER</h3></div>
+        <div class="col-md-12"><h3 class="mrg-btm">REGISTER USER</h3></div>
 
 
    
-<form class="form-horizontal"  method="post" action="{{url('register-user-save')}}" >{{ csrf_field() }}
+<form class="form-horizontal" id="userregi"  method="post" action="{{url('register-user-save')}}" >{{ csrf_field() }}
    
  <div class="form-group">
             <label for="inputEmail" class="control-label col-xs-2" >User Name <span style="color:red;">*</span></label>
@@ -59,11 +59,11 @@
            <fieldset>
 
              <select name="company_id" id="company_id" class="form-control"  required=""  >
-             	<option value="">-Select-</option>
-             	<option value="1" @if (old('company_id') == "1") {{ 'selected' }} @endif>RupeeBoss</option>
-             	<option value="2" @if (old('company_id') == "2") {{ 'selected' }} @endif>Datacom</option>
-             	<option value="3" @if (old('company_id') == "3") {{ 'selected' }} @endif>PolicyBoss</option>
-             	<option value="4" @if (old('company_id') == "4") {{ 'selected' }} @endif>LandMark</option>
+              <option value="">-Select-</option>
+              <option value="1" @if (old('company_id') == "1") {{ 'selected' }} @endif>RupeeBoss</option>
+              <option value="2" @if (old('company_id') == "2") {{ 'selected' }} @endif>Datacom</option>
+              <option value="3" @if (old('company_id') == "3") {{ 'selected' }} @endif>PolicyBoss</option>
+              <option value="4" @if (old('company_id') == "4") {{ 'selected' }} @endif>LandMark</option>
              </select>
               </fieldset>
     @if ($errors->has('company_id'))<label class="control-label" for="inputError"> {{ $errors->first('company_id ') }}</label>@endif
@@ -75,11 +75,11 @@
             <div class="col-xs-6">
              <fieldset>
              <select name="reporting_id" id="reporting_id"  class="form-control" required="">
-             	<option value="">-Select-</option>
-             	<option value="1" @if (old('reporting_id') == "1") {{ 'selected' }} @endif>RupeeBoss</option>
-             	<option value="2" @if (old('reporting_id') == "2") {{ 'selected' }} @endif>Datacom</option>
-             	<option value="3" @if (old('reporting_id') == "3") {{ 'selected' }} @endif>PolicyBoss</option>
-             	<option value="4" @if (old('reporting_id') == "4") {{ 'selected' }} @endif>LandMark</option>
+              <option value="">-Select-</option>
+              <option value="1" @if (old('reporting_id') == "1") {{ 'selected' }} @endif>RupeeBoss</option>
+              <option value="2" @if (old('reporting_id') == "2") {{ 'selected' }} @endif>Datacom</option>
+              <option value="3" @if (old('reporting_id') == "3") {{ 'selected' }} @endif>PolicyBoss</option>
+              <option value="4" @if (old('reporting_id') == "4") {{ 'selected' }} @endif>LandMark</option>
              </select>
                </fieldset>
     @if ($errors->has('reporting_id'))<label class="control-label" for="inputError" > {{ $errors->first('reporting_id ') }}</label>@endif
@@ -111,10 +111,10 @@
             <div class="col-xs-6">
          <fieldset>  
              <select name="menu_group" id="menu_group"  class="form-control" required="" >
-             	<option value="">Select</option>
-             	 @foreach($menu_group as $val)
+              <option value="">Select</option>
+               @foreach($menu_group as $val)
                 <option value="{{$val->id}}" {{(old('menu_group') == $val->id?'selected':'')}}>{{$val->name}} </option>
-             	 @endforeach
+               @endforeach
              </select>
              </fieldset>
     @if ($errors->has('menu_group'))<label class="control-label" for="inputError"> {{ $errors->first('menu_group ') }}</label>@endif
@@ -149,8 +149,7 @@
 
 
 </form>
-
-            </div>
+  </div>
 
 
 
@@ -159,9 +158,7 @@
   
   $(document).on('click','#register_user_id',function(){
 
-
-
-      if($('.search_state_error').val()==0){
+ if($('.search_state_error').val()==0){
           $('#error_state').text('The State field is required');
          return  false;
       }else{
@@ -176,9 +173,18 @@
 
 
   })
+
+     </script>
+
+            <script type="text/javascript">
+              
+              $( "#register_user_id" ).click(function() {
+             $("#userregi").validate();
+});
             </script>
 
-            
-					    
-@endsection		
+
+          
+              
+@endsection   
             

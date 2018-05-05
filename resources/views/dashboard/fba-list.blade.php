@@ -78,7 +78,7 @@
                                        <th>Created Date</th>
                                        <th>Mobile No</th>                                   
                                        <th>Email ID</th>
-                                      <th>Payment Link</th>
+                                       <th>Payment Link</th>
                                        <th>Password</th>
                                        <th>City</th>
                                        <th>State</th>
@@ -92,7 +92,6 @@
                                        <th>FSM Details</th>  
                                        <th>Documents</th> 
                                        <th>Customer ID</th>
-                                   <!--     <th>Password</th> -->
                                        <th>Created Date1</th>
                                        </tr>
                                        </thead>
