@@ -113,8 +113,8 @@ class RaiserTicketController extends Controller
 //                     }
 
 //     }
-		 
-     Session::flash('message', 'Record has been saved successfully'); 
+		 print_r($lastid);
+     Session::flash('message', 'Ticket created successfully. Your ticket no is '.$lastid[0]->TicketRequestId); 
      
       return redirect('RaiseaTicket');
  }
