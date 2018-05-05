@@ -371,7 +371,8 @@
     </div>
 
     <div class="col-md-12"> <br>
-    <textarea type="text" rows="6" id="divpartnertable_payment" class="divpartnertable_payment form-control" readonly> </textarea> 
+    
+   <textarea type="text" style="resize:none" name="name" cols="num" rows="num" id="divpartnertable_payment" class="divpartnertable_payment form-control" readonly> </textarea> 
     <br>
     </div> 
        
@@ -668,7 +669,7 @@ $(document).ready(function() {
 }
 
  function pmesgsend(){
-alert("Offer Created successfully..");
+alert("SMS Send successfully..");
         $.ajax({ 
         url: "{{URL::to('pmesgsend')}}",
         method:"POST",

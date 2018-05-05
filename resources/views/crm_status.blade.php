@@ -122,7 +122,7 @@
      <select name="subdispo" id="subdispo" class="selectpicker select-opt form-control" required="">
          <option value="0">Subdisposition</option>
          @foreach($crmsubdi as $val)
-         <option value="{{$val->id}}">{{$val->disposition}}</option>
+         <option value="{{$val->id}}">{{$val->sub_disposition}}</option>
          @endforeach
          </select>
          </div>

@@ -91,19 +91,19 @@ if(!$request->session()->exists('emailid')){
            // $value=DB::table('emp_login')->where('emailid','=',$request->email)
            // ->where('password','=', $request->password)
           // ->first();
-          // 	if($value!=''){ 
-		        //   	  $request->session()->put('emailid',$value->emailid);
-		        //   	  $request->session()->put('emptype',$value->emptype);
-		        //       $request->session()->put('emp_id',$value->emp_id);
-		        //       $request->session()->put('username',$value->username);
+          //  if($value!=''){ 
+            //      $request->session()->put('emailid',$value->emailid);
+            //      $request->session()->put('emptype',$value->emptype);
+            //       $request->session()->put('emp_id',$value->emp_id);
+            //       $request->session()->put('username',$value->username);
           //         $request->session()->put('last_login',$value->last_login);
-		              
-		             
+                  
+                 
           //        return redirect()->intended('dashboard');
           //       }else{
-          //      	      Session::flash('msg', "Invalid email or password. Please Try again! ");
+          //              Session::flash('msg', "Invalid email or password. Please Try again! ");
           //              return Redirect::back();
-               	  
+                  
           //    }
 
 
@@ -148,9 +148,9 @@ if(!$request->session()->exists('emailid')){
               'mobile' => 'required',
               'company_id' =>'required|not_in:0',
               'reporting_id' =>'required|not_in:0',
-              'state_id' =>'required|not_in:0',
-             'city_id' =>'required|not_in:0',
-              'user_type' =>'required|not_in:0',
+              //'state_id' =>'required|not_in:0',
+             // 'city_id' =>'required|not_in:0',
+              //'user_type' =>'required|not_in:0',
               'menu_group' =>'required|not_in:0',
              'password' =>'required|min:6',
              'cpassword' => 'required|min:6|same:password',

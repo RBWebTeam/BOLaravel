@@ -162,34 +162,34 @@
 
 
 
-            <script type="text/javascript">
-                
-  
-  $(document).on('click','#register_user_id',function(){
+   <script type="text/javascript">
+    $(document).on('click','#register_user_id',function(){
 
- if($('.search_state_error').val()==0){
-          $('#error_state').text('The State field is required');
+    if($('.search_state_error').val()==0){
+     $('#error_state').text('The State field is required');
          return  false;
       }else{
+
        $('#error_state').text(' ');
       }
       if($('#search_district').val()==0){
           $('#error_city').text('The City field is required');
          return  false;
       }else{
+
             ('#error_city').text(' ');
       }
+})
+        </script>
 
 
-  })
 
-     </script>
 
             <script type="text/javascript">
-              
-              $( "#register_user_id" ).click(function() {
+            
+            $( "#register_user_id" ).click(function() {
              $("#userregi").validate();
-});
+        });
             </script>
 
 
