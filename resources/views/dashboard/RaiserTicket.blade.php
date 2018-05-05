@@ -12,8 +12,8 @@
 	<form method="post" id="fromraiserticket" enctype="multipart/form-data" >
 		 {{ csrf_field() }}
  <div class="form-group">
-           <label class="control-label" for="message-text">FABID: </label>
-           <input type="number" class="form-control" id="txtfbaid" name="txtfbaid">
+           <label class="control-label" for="message-text">FBA ID: </label>
+           <input type="number" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="8" class="form-control" id="txtfbaid" name="txtfbaid">
 </div>		
  <div class="form-group">
            	<label class="control-label" for="message-text">Category:</label>

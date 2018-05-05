@@ -1,7 +1,7 @@
 @extends('include.master')
 @section('content')
 <div class="container-fluid white-bg">
- <div class="col-md-12" id="Ticket-app"><h3 class="mrg-btm">Ticket Request</h3></div>
+ <div class="col-md-12" id="Ticket-app"><h3 class="mrg-btm">Assign Ticket</h3></div>
 
 
 <div class="col-md-12"><p >  
@@ -12,14 +12,16 @@
                                     <thead>
                                        <tr>
                                        <th>ID</th>
-                                       <th>CateName</th>
-                                       <th>QuerType</th>
-                                       <th>Description</th>
-                                       <th>DocPath</th>
+                                       <th>Category Name</th>
+                                       <th>Sub Category Name</th>
+                                       <th>Classification Name </th>
+                                       <!-- <th>DocPath</th> -->
                                        <th>Message</th>
                                        <th>Status</th>
-                                       <th>StatusChangedBy</th>
-                                       <th>Assign</th>
+                                       <th>Raised By</th>
+                                       <th>Raised By EmailId</th>
+                                       <!-- <th>StatusChangedBy</th> -->
+                                       <th>Assigned To</th>
                                        <th>Assigned Date</th>
                                       
                                          
@@ -44,10 +46,12 @@
                                       <td>{{$va->CateName}}</td>
                                        <td>{{$va->QuerType}}</td>
                                         <td>{{$va->Description}}</td>
-                                         <td >{{$va->DocPath}}</td>
+                                         <!-- <td >{{$va->DocPath}}</td> -->
                                           <td>{{$va->Message}}</td>
                                            <td>{{$va->Status}}</td>
-                                            <td>{{$va->StatusChangedBy}}</td>
+                                           <td>{{$va->RaisedByName}}</td>
+                                           <td>{{$va->RaisedByEmail}}</td>
+                                           <!--  <td>{{$va->StatusChangedBy}}</td> -->
                                             <td>{{$va->user_fba_id!=null?$va->UserName:''}}</td>
                                             <td>{{$va->assigned_date}}</td>
                                             <!--  <td  > <a href="#" onclick="view_comment_fn('{{$va->TicketRequestId}}')">View</a></td> -->
@@ -207,24 +211,28 @@
 
  // return false;
  ceckemail=checkEmails();
-         if($('#FBAUserId').val()!=0 && ceckemail==0){
+
+ if($('#FBAUserId').val()==0){
+  alert("Please select user");
+ }
+ else if(ceckemail!=0){
+  alert("Please add email");
+ }
+ else{
          $.post("{{url('ticket-request-save')}}",$('#TicketRequest_Id_from').serialize())
              .done(function(data){ 
              console.log(data);
                  if(data==0){
-                     
+                  alert('Ticket successfully assigned to '+$("#FBAUserId").children("option").filter(":selected").text());   
                   window.location.href = "{{url('ticket-request')}}";
                  }else{
                   console.log("error");
                  }
           }).fail(function(xhr, status, error) {
-                 console.log(error);
+                 alert('Something went wrong');  
             });
 
-        }else{
-           alert("Select users");
         }
-
    })
 
  
@@ -298,7 +306,7 @@ function checkEmails(){
     }
   }
   if(invEmails != ""){
-    alert("Invalid emails:\n" + invEmails);
+    //alert("Invalid emails:\n" + invEmails);
   }
 
   return tru;
