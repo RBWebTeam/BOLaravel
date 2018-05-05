@@ -109,12 +109,21 @@
 <div class="form-group">
             <label for="inputEmail" class="control-label col-xs-2">UserType <span style="color:red;">*</span> </label>
             <div class="col-xs-6">
+
          <fieldset>  
              <select name="menu_group" id="menu_group"  class="form-control" required="" >
+
               <option value="">Select</option>
                @foreach($menu_group as $val)
                 <option value="{{$val->id}}" {{(old('menu_group') == $val->id?'selected':'')}}>{{$val->name}} </option>
                @endforeach
+
+             	<option value="">Select</option>
+
+             	 @foreach($menu_group as $val)
+                <option value="{{$val->id}}">{{$val->name}} </option>
+             	 @endforeach
+
              </select>
              </fieldset>
     @if ($errors->has('menu_group'))<label class="control-label" for="inputError"> {{ $errors->first('menu_group ') }}</label>@endif

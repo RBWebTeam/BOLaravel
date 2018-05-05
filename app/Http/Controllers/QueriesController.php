@@ -136,8 +136,24 @@ class QueriesController extends Controller
 
                
                 $status=8;
-               }
+               }else if($req->queries==9 || $req->export==9){
+                     $query=DB::select('call usp_load_notposp_policy_sold() ');
+                               if(isset( $req->export)){
+                               
+                                    $data = json_decode( json_encode($query), true) ;
+                      return Excel::create('laravelcode', function($excel) use ($data) {
+                          $excel->sheet('mySheet', function($sheet) use ($data)
+                          {
+                              $sheet->fromArray($data);
+                          });
+                      })->download('xls');
+                               }
 
+
+               
+                $status=9;
+               }
+               
 
  
                

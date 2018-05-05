@@ -114,7 +114,7 @@
 
 
 <div class="form-group">
-            <label for="inputEmail" class="control-label col-xs-2">UserGroup      </label>
+            <label for="inputEmail" class="control-label col-xs-2">UserGroup</label>
             <div class="col-xs-6">
           
              <select name="menu_group" id="menu_group"  class="form-control">
