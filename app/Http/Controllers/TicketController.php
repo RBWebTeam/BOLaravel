@@ -41,10 +41,17 @@ class TicketController extends Controller
             try{
                 
               if(isset($req->toemailid)){
-                  $this->mail_fn($req->toemailid,explode(',',$req->ccemailid),1); 
+                if($req->ccemailid){
+                   $this->mail_fn($req->toemailid,explode(',',$req->ccemailid),1); 
+                }
+                else
+                {
+                  $this->mail_fn($req->toemailid,[],1); 
+                }
                   DB::table('TicketRequest')->where('TicketRequestId','=',$req->TicketRequestId)->update(['user_fba_id'=>$req->FBAUserId,'assigned_date'=>  date('Y-m-d H:i:s')]);
                       
                        $error=0;
+                
                }
 
             }catch (Exception $e){

@@ -13,7 +13,7 @@
 		 {{ csrf_field() }}
  <div class="form-group">
            <label class="control-label" for="message-text">FBA ID: </label>
-           <input type="number" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="8" class="form-control" id="txtfbaid" name="txtfbaid">
+           <input type="text" class="form-control" id="txtfbaid" name="txtfbaid">
 </div>		
  <div class="form-group">
            	<label class="control-label" for="message-text">Category:</label>
@@ -60,6 +60,40 @@
 </div>
 
 <script type="text/javascript">
+      $(document).ready(function () {
+  //called when key is pressed in textbox
+  $("#txtfbaid").keypress(function (e) {
+    if(this.value.length>7){
+      return false;
+    }
+     //if the letter is not digit then display error and don't type anything
+     if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+        //display error message
+       // $("#errmsg").html("Digits Only").show().fadeOut("slow");
+               return false;
+    }
+   });
+});
+
+
+// $(document).ready(function() {
+//     $("#txtfbaid").keydown(function (e) {
+//         // Allow: backspace, delete, tab, escape, enter and .
+//         if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
+//              // Allow: Ctrl+A, Command+A
+//             (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) || 
+//              // Allow: home, end, left, right, down, up
+//             (e.keyCode >= 35 && e.keyCode <= 40)) {
+//                  // let it happen, don't do anything
+//                  return;
+//         }
+//         // Ensure that it is a number and stop the keypress
+//         if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+//             e.preventDefault();
+//         }
+//     });
+// });
+
    $('#ddlsubcat').on('change', function() {
       gettoccmail();
         var QuerID = $(this).val();
