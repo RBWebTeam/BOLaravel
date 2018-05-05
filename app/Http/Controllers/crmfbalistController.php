@@ -26,8 +26,10 @@ class crmfbalistController extends CallApiController
 
 				public function statuscrm($id){
 					$crmstatus=DB::select("call usp_load_disposition()");
+          $crmsubdi=DB::select("call usp_load_sub_disposition(4,'Do not call again')");
+
 					$data = DB::select("call usp_load_fba_individual(?)",array($id));
-					return view ('crm_status',['crmstatus'=>$crmstatus,'data'=>$data]);
+					return view ('crm_status',['crmstatus'=>$crmstatus,'crmsubdi'=>$crmsubdi,'data'=>$data]);
 }
 
 
