@@ -81,7 +81,11 @@ class RaiserTicketController extends Controller
 //                 //print_r($array);exit();
 
                 
+
+/*if($ccemail!=''){
+
 // if($ccemail!=''){
+
                 
 //                 $mail = Mail::send('mailViews.SendTicketReqMailFormat',['data' => $data,
 //                 	'lastid'=>$lastid],
@@ -112,10 +116,14 @@ class RaiserTicketController extends Controller
 
 //                     }
 
+
+    }*/
+
 //     }
-		 print_r($lastid);
      Session::flash('message', 'Ticket created successfully. Your ticket no is '.$lastid[0]->TicketRequestId); 
-     
+
+
+
       return redirect('RaiseaTicket');
  }
  }
