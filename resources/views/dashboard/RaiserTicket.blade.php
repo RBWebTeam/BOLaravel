@@ -57,7 +57,6 @@
 </div>
 </form>
 </div>
-
 <script type="text/javascript">
   $('#ddlsubcat').on('change', function() {
   gettoccmail();
