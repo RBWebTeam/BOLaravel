@@ -44,9 +44,17 @@ class crmfbalistController extends CallApiController
           			$req->codate,
           			$req->srmrk,
 
-         
+   ));
+      }
 
-  ));
+
+
+      public function test(Request $req)
+      {
+        $data = $req->FBAID;
+        $fbadata = DB::select("call usp_load_fba_individual(?)",array($data));
+      //  print_r($fbadata);exit();
+        return  $fbadata;
       }
 
 
