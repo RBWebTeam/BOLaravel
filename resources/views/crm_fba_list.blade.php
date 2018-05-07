@@ -16,7 +16,9 @@
           <h4 class="modal-title">CRM Details</h4>
         </div>
         <div class="modal-body">
-        <textarea type="text" rows="7" id="content class="form-control" ></textarea>
+        <div id="divcrm" name="divcrm">
+        <textarea type="text" rows="7" id="demo" name="demo" class="form-control demo" ></textarea>
+       <!--  <input type="text" name="getdata" id="getdata" class="getdata"> -->
        </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -52,13 +54,15 @@
        <td><?php echo $val->PinCode; ?></td>
        <td>
 
-   <button id="btnview" class="btn btn-default" data-toggle="modal" data-target="#btnview" onclick="crmdata()">View </button>
-          </td>
+   <button id="btnview" class="btn btn-default demo" data-toggle="modal" data-target="#btnview" onclick="Approve_Course('{{$val->FBAID}}');">View </button>
+<!--    <td><button type="button" class="btn btn-info btn-sm" data-toggle="modal" onClick="Approve_Course('{{$val->FBAID}}');" value="" data-target="#btnview">Approve</button></td> -->
+
+    </td>
       
-       <td><a href="crmstatus/{{$val->FBAID}}" id="btnstatus" value="{{$val->FBAID}}" name="btnstatus" class="btn btn-default">Add Status</a><!-- </td> -->
-      </td>
-      </tr>
-     </tr>
+     <td><a href="crmstatus/{{$val->FBAID}}" id="btnstatus" value="{{$val->FBAID}}" name="btnstatus" class="btn btn-default">Add Status</a><!-- </td> -->
+       </td>
+       </tr>
+       </tr>
 
        @endforeach
       </tbody>
@@ -71,7 +75,7 @@
 @endsection
 
 
-
+<!-- 
 <script type="text/javascript"> function crmdata(myTitle, myBodyHtml) {
 
  $('#myModalTitle').html(myTitle);
@@ -79,7 +83,57 @@
 
    $('#myModal').modal('show');
 }
-</script>
+</script> -->
+
+
+
+
+<script>
+      // function Approve_Course(FBAID) {
+      //   //alert(FBAID);
+
+      //       $.ajax({
+      //           url: "{{url('crmtest')}}",
+
+      //           type: 'GET',
+      //           data: {FBAID:FBAID},
+      //           success: function(data)
+      //           {
+      //             console.log(data);
+      //            $('#demo').text(data[0].fullname);
+      //             //$('.demo').append(data[0].fullname).html();
+      //             // $('textarea#demo').attr('value',data);
+      //           }
+      //       });
+      // }
+
+function Approve_Course(FBAID)
+{
+
+
+$.ajax({  
+         type: "GET",  
+       url: "{{url('crmtest')}}",//"{{URL::to('Fsm-Details')}}",
+        success: function(data){
+
+       
+
+        var str = "<table class='table'><tr style='height:30px;margin:5px;'><td>Full name</td><td>Mobile</td><td>Remark</td><td>Called Date</td><td>Email</td><td>Disposition</td><td>Sub Disposition</td><td>City</td></tr>";
+       // for (var i = 0; i < data.length; i++) {
+       //   str = str + "<tr style='height:30px;margin:5px;'><td>"+data[i].fullname+"</td><td>"+data[i].mobile+"</td><td>"+data[i].pmobile+"</td><td>"+data[i].pemail+"</td><td>"+data[i].email+"</td><td>"+data[i].ppincode+"</td></tr>";
+       //    }
+              // console.log(msg[0].Result);
+            str = str + "</table>";
+           $('#divcrm').html(str);   
+        }  
+      });
+}
+
+
+  </script>
+
+
+
 
 
 

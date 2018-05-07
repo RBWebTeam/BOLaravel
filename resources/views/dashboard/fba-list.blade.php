@@ -79,6 +79,7 @@
                                        <th>Mobile No</th>                                   
                                        <th>Email ID</th>
                                        <th>Payment Link</th>
+                                       <th>Password</th>
                                        <th>City</th>
                                        <th>State</th>
                                        <th>Pincode</th>
@@ -91,7 +92,6 @@
                                        <th>FSM Details</th>  
                                        <th>Documents</th> 
                                        <th>Customer ID</th>
-                                       <th>Password</th>
                                        <th>Created Date1</th>
                                        </tr>
                                        </thead>
@@ -371,7 +371,8 @@
     </div>
 
     <div class="col-md-12"> <br>
-    <textarea type="text" rows="6" id="divpartnertable_payment" class="divpartnertable_payment form-control" readonly> </textarea> 
+    
+   <textarea type="text" style="resize:none" name="name" cols="num" rows="num" id="divpartnertable_payment" class="divpartnertable_payment form-control" readonly> </textarea> 
     <br>
     </div> 
        
@@ -476,6 +477,20 @@
 
              }, 
 
+                     {"data":"pwd" ,
+              "render": function ( data, type, row, meta ) {
+              return '<a id="btnshowpassword" data-toggle="modal" data-target="#spassword" onclick="getpassword('+"'"+ data+"'"+')">*****</a>';
+              }
+
+       },   
+
+
+
+
+
+
+
+
             {"data":"City"},
             {"data":"statename"},
             {"data":"Pincode"},
@@ -534,12 +549,12 @@
              }  
          }, 
 
-              {"data":"pwd" ,
-              "render": function ( data, type, row, meta ) {
-              return '<a id="btnshowpassword" data-toggle="modal" data-target="#spassword" onclick="getpassword('+"'"+ data+"'"+')">*****</a>';
-              }
+       //        {"data":"pwd" ,
+       //        "render": function ( data, type, row, meta ) {
+       //        return '<a id="btnshowpassword" data-toggle="modal" data-target="#spassword" onclick="getpassword('+"'"+ data+"'"+')">*****</a>';
+       //        }
 
-       },   
+       // },   
 
 
          { "data": "createdate1","visible":false }
@@ -654,7 +669,7 @@ $(document).ready(function() {
 }
 
  function pmesgsend(){
-alert("Offer Created successfully..");
+alert("SMS Send successfully..");
         $.ajax({ 
         url: "{{URL::to('pmesgsend')}}",
         method:"POST",

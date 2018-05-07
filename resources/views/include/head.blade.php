@@ -16,7 +16,7 @@
                     console.log("registered")
                 }).catch((e)=>{
 
-                    console.log(e)
+                    console.log (e)
                 })
                 ;
                 }
