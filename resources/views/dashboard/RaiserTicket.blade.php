@@ -7,51 +7,51 @@
 </div>
 @endif
 <div class="container-fluid white-bg">
-<div class="col-md-12"><h3 class="mrg-btm">Raise a Ticket</h3></div>
+<div class="col-md-12"><h3 class="mrg-btm">Raise A Ticket</h3></div>
 <div class="col-md-6">
-	<form method="post" id="fromraiserticket" enctype="multipart/form-data" >
-		 {{ csrf_field() }}
+  <form method="post" id="fromraiserticket"  name="fromraiserticket" enctype="multipart/form-data" >
+     {{ csrf_field() }}
  <div class="form-group">
-           <label class="control-label" for="message-text">FBA ID: </label>
-           <input type="number" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="8" class="form-control" id="txtfbaid" name="txtfbaid">
-</div>		
+           <label class="control-label" for="message-text">FBAID: </label>
+           <input type="number" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="8" class="form-control" id="txtfbaid" name="txtfbaid" required="yes">
+</div>    
  <div class="form-group">
-           	<label class="control-label" for="message-text">Category:</label>
-           	<select class="form-control" name="ddlCategory" id="ddlCategory" required>
-           	 <option value="">--Select Category--</option>
-           	 @foreach($cat as $val)
+            <label class="control-label" for="message-text">Category:</label>
+            <select class="form-control" name="ddlCategory" id="ddlCategory" required="yes" >
+             <option value="">--Select Category--</option>
+             @foreach($cat as $val)
              <option value="{{$val->CateCode}}">{{$val->CateName}}</option>
              @endforeach
             </select>
 </div>
 <div class="form-group">
-           	<label class="control-label" for="message-text">Sub Category:</label>
-           	<select class="form-control" name="ddlsubcat" id="ddlsubcat" required>
-           	 
+            <label class="control-label" for="message-text">Sub Category:</label>
+            <select class="form-control" name="ddlsubcat" id="ddlsubcat" required required="yes">
+             
             </select>
 </div>
 <div class="form-group">
-           	<label class="control-label" for="message-text">Classification:</label>
-           	<select class="form-control" name="ddlClassification" id="ddlClassification">
+            <label class="control-label" for="message-text">Classification:</label>
+            <select class="form-control" name="ddlClassification" id="ddlClassification" >
             </select>
 </div>
-<div class="form-group">
-	    @if ($errors->has('txtraisermessage'))<label class="control-label" for="inputError"> {{ $errors->first('txtraisermessage') }}</label>  @endif
+ <div class="form-group">
+      @if ($errors->has('txtraisermessage'))<label class="control-label" for="inputError"> {{ $errors->first('txtraisermessage') }}</label>  @endif
            <label class="control-label" for="message-text">Message: </label>
-           <textarea class="form-control" required id="txtraisermessage" name="txtraisermessage"></textarea>
+           <textarea class="form-control" id="txtraisermessage"   required="yes" name="txtraisermessage"></textarea>
 </div>
 <div class="form-group">
            <label class="control-label" for="message-text">Image: </label>
-           <input type="file" class="form-control" id="pathimgraiser" name="pathimgraiser">
-</div>
-<!-- <div class="form-group">
-           <label class="control-label" for="message-text">To Email ID: </label>
-           <input type="Email" class="form-control" id="txttoemailid" name="txttoemailid" required readonly>
+           <input type="file" class="form-control" id="pathimgraiser" name="pathimgraiser" required="yes">
 </div>
 <div class="form-group">
-           <label class="control-label" for="message-text">CC Email ID: </label>
+           <label class="control-label" for="message-text">To Email Id: </label>
+           <input type="Email" class="form-control" id="txttoemailid" name="txttoemailid">
+</div>
+<div class="form-group">
+           <label class="control-label" for="message-text">CC Email Id: </label>
            <input type="Email"  class="form-control" id="txtccemailid" name="txtccemailid">
-</div> -->
+</div>
 <div class="form-group">
 <input id="btn_saveticket" type="submit" name="btn_saveticket" class="btn btn-primary">
 <button id="btn_resetticket" class="btn btn-primary" type="button">Reset</button>     

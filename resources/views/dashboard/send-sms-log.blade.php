@@ -13,7 +13,7 @@
    <th>FBAID</th>
    <th>FirstName</th>
    <th>MobileNo</th>
-   <th> GroupId</th>
+   <th>GroupId</th>
    <th>Message</th>
    <th>MessageTime</th> 
    <th>MessageId</th> 
@@ -41,5 +41,4 @@
     </div>
     </form>
     @endsection
-
 
