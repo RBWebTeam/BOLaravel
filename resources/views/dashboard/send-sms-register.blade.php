@@ -1,14 +1,6 @@
-@extends('include.master')
-@section('content')
-
-@if(Session::has('message'))
-<div class="alert alert-success alert-dismissible">
-<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-<p class="alert alert-success">{{ Session::get('message') }}</p>
-</div>
-@endif
-
-  <form  id="sendsms" name="sendsms" action="POST"> 
+   @extends('include.master')
+   @section('content')
+   <form  id="sendsms" name="sendsms" action="POST"> 
    {{ csrf_field() }}
     <div id="content" style="overflow:scroll;">
     <div class="container-fluid white-bg">

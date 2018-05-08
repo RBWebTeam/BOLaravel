@@ -17,7 +17,7 @@
 </div>    
  <div class="form-group">
  <label class="control-label" for="message-text">Category:</label>
- <select class="form-control" name="ddlCategory" id="ddlCategory"  >
+ <select class="form-control" name="ddlCategory" id="ddlCategory"  required="yes" >
  <option value="">--Select Category--</option>
  @foreach($cat as $val)
  <option value="{{$val->CateCode}}">{{$val->CateName}}</option>
