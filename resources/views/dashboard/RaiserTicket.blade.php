@@ -13,11 +13,11 @@
 {{ csrf_field() }}
  <div class="form-group">
  <label class="control-label" for="message-text">FBAID: </label>
- <input type="number" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="8" class="form-control" id="txtfbaid" name="txtfbaid" required="yes">
+ <input type="number" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="8" class="form-control" id="txtfbaid" name="txtfbaid">
 </div>    
  <div class="form-group">
  <label class="control-label" for="message-text">Category:</label>
- <select class="form-control" name="ddlCategory" id="ddlCategory" required="yes" >
+ <select class="form-control" name="ddlCategory" id="ddlCategory"  >
  <option value="">--Select Category--</option>
  @foreach($cat as $val)
  <option value="{{$val->CateCode}}">{{$val->CateName}}</option>
@@ -26,7 +26,7 @@
  </div>
  <div class="form-group">
 <label class="control-label" for="message-text">Sub Category:</label>
- <select class="form-control" name="ddlsubcat" id="ddlsubcat" required required="yes">
+ <select class="form-control" name="ddlsubcat" id="ddlsubcat">
  </select>
  </div>
  <div class="form-group">
@@ -37,20 +37,20 @@
  <div class="form-group">
   @if ($errors->has('txtraisermessage'))<label class="control-label" for="inputError"> {{ $errors->first('txtraisermessage') }}</label>  @endif
  <label class="control-label" for="message-text">Message: </label>
- <textarea class="form-control" id="txtraisermessage"   required="yes" name="txtraisermessage"></textarea>
+ <textarea class="form-control" id="txtraisermessage"    name="txtraisermessage"  required="yes"></textarea>
 </div>
 <div class="form-group">
 <label class="control-label" for="message-text">Image: </label>
-<input type="file" class="form-control" id="pathimgraiser" name="pathimgraiser" required="yes">
+<input type="file" class="form-control" id="pathimgraiser" name="pathimgraiser" >
 </div>
-<div class="form-group">
+<!-- <div class="form-group">
 <label class="control-label" for="message-text">To Email Id: </label>
 <input type="Email" class="form-control" id="txttoemailid" name="txttoemailid">
-</div>
+</div>z
 <div class="form-group">
 <label class="control-label" for="message-text">CC Email Id: </label>
  <input type="Email"  class="form-control" id="txtccemailid" name="txtccemailid">
-</div>
+</div> -->
 <div class="form-group">
 <input id="btn_saveticket" type="submit" name="btn_saveticket" class="btn btn-primary">
 <button id="btn_resetticket" class="btn btn-primary" type="button">Reset</button>     

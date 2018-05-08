@@ -49,8 +49,8 @@
                                          <!-- <td >{{$va->DocPath}}</td> -->
                                           <td>{{$va->Message}}</td>
                                            <td>{{$va->Status}}</td>
-                                           <td>{{$va->RaisedByName}}</td>
-                                           <td>{{$va->RaisedByEmail}}</td>
+<!--                                            <td>{{$va->RaisedByName}}</td>
+ -->                                           <td>{{$va->RaisedByEmail}}</td>
                                            <!--  <td>{{$va->StatusChangedBy}}</td> -->
                                             <td>{{$va->user_fba_id!=null?$va->UserName:''}}</td>
                                             <td>{{$va->assigned_date}}</td>
