@@ -62,7 +62,12 @@ Route::get('getloanid/{fbaid}','FbaController@getupdateloanid');
  Route::get('crmfbalist','crmfbalistController@crmlist');  
  Route::get('crmstatus/{FBAID}','crmfbalistController@statuscrm'); 
  Route::post('crmstatus','crmfbalistController@crminsert');
+
+ Route::get('crmtest','crmfbalistController@test');
 //Route::get('crmstatus/{FBAID}','crmfbalistController@showcrmstatus');
+
+
+
 
 
 

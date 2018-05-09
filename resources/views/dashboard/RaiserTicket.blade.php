@@ -7,106 +7,98 @@
 </div>
 @endif
 <div class="container-fluid white-bg">
-<div class="col-md-12"><h3 class="mrg-btm">Raise a Ticket</h3></div>
+<div class="col-md-12"><h3 class="mrg-btm">Raise A Ticket</h3></div>
 <div class="col-md-6">
-	<form method="post" id="fromraiserticket" enctype="multipart/form-data" >
-		 {{ csrf_field() }}
+<form method="post" id="fromraiserticket"  name="fromraiserticket" enctype="multipart/form-data" >
+{{ csrf_field() }}
  <div class="form-group">
-           <label class="control-label" for="message-text">FABID: </label>
-           <input type="number" class="form-control" id="txtfbaid" name="txtfbaid">
-</div>		
+ <label class="control-label" for="message-text">FBAID: </label>
+ <input type="number" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="8" class="form-control" id="txtfbaid" name="txtfbaid" required="yes">
+</div>    
  <div class="form-group">
-           	<label class="control-label" for="message-text">Category:</label>
-           	<select class="form-control" name="ddlCategory" id="ddlCategory" required>
-           	 <option value="">--Select Category--</option>
-           	 @foreach($cat as $val)
-             <option value="{{$val->CateCode}}">{{$val->CateName}}</option>
-             @endforeach
-            </select>
+ <label class="control-label" for="message-text">Category:</label>
+ <select class="form-control" name="ddlCategory" id="ddlCategory" required="yes" >
+ <option value="">--Select Category--</option>
+ @foreach($cat as $val)
+ <option value="{{$val->CateCode}}">{{$val->CateName}}</option>
+ @endforeach
+ </select>
+ </div>
+ <div class="form-group">
+<label class="control-label" for="message-text">Sub Category:</label>
+ <select class="form-control" name="ddlsubcat" id="ddlsubcat" required required="yes">
+ </select>
+ </div>
+ <div class="form-group">
+ <label class="control-label" for="message-text">Classification:</label>
+ <select class="form-control" name="ddlClassification" id="ddlClassification" >
+</select>
+</div>
+ <div class="form-group">
+  @if ($errors->has('txtraisermessage'))<label class="control-label" for="inputError"> {{ $errors->first('txtraisermessage') }}</label>  @endif
+ <label class="control-label" for="message-text">Message: </label>
+ <textarea class="form-control" id="txtraisermessage"   required="yes" name="txtraisermessage"></textarea>
 </div>
 <div class="form-group">
-           	<label class="control-label" for="message-text">Sub Category:</label>
-           	<select class="form-control" name="ddlsubcat" id="ddlsubcat" required>
-           	 
-            </select>
+<label class="control-label" for="message-text">Image: </label>
+<input type="file" class="form-control" id="pathimgraiser" name="pathimgraiser" required="yes">
 </div>
 <div class="form-group">
-           	<label class="control-label" for="message-text">Classification:</label>
-           	<select class="form-control" name="ddlClassification" id="ddlClassification">
-            </select>
+<label class="control-label" for="message-text">To Email Id: </label>
+<input type="Email" class="form-control" id="txttoemailid" name="txttoemailid">
 </div>
 <div class="form-group">
-	    @if ($errors->has('txtraisermessage'))<label class="control-label" for="inputError"> {{ $errors->first('txtraisermessage') }}</label>  @endif
-           <label class="control-label" for="message-text">Message: </label>
-           <textarea class="form-control" required id="txtraisermessage" name="txtraisermessage"></textarea>
+<label class="control-label" for="message-text">CC Email Id: </label>
+ <input type="Email"  class="form-control" id="txtccemailid" name="txtccemailid">
 </div>
-<div class="form-group">
-           <label class="control-label" for="message-text">Image: </label>
-           <input type="file" class="form-control" id="pathimgraiser" name="pathimgraiser">
-</div>
-<!-- <div class="form-group">
-           <label class="control-label" for="message-text">To Email ID: </label>
-           <input type="Email" class="form-control" id="txttoemailid" name="txttoemailid" required readonly>
-</div>
-<div class="form-group">
-           <label class="control-label" for="message-text">CC Email ID: </label>
-           <input type="Email"  class="form-control" id="txtccemailid" name="txtccemailid">
-</div> -->
 <div class="form-group">
 <input id="btn_saveticket" type="submit" name="btn_saveticket" class="btn btn-primary">
 <button id="btn_resetticket" class="btn btn-primary" type="button">Reset</button>     
 </div>
 </form>
 </div>
-
 <script type="text/javascript">
-   $('#ddlsubcat').on('change', function() {
-      gettoccmail();
-        var QuerID = $(this).val();
-         
-            if(QuerID) {
-                $.ajax({
-                    url: 'RaiseaTicketgetcal/'+QuerID,
-                    type: "GET",
-                    dataType: "json",
-                    success:function(data) {
-                        $('#ddlClassification').empty();
-                        $('#ddlClassification').append('<option value="0">--Select Classification--</option>');
-                        
-                        $.each(data, function(key,value) {
-                      
-                            $('#ddlClassification').append('<option value="'+ value.ID +'">'+ value.Description +'</option>');
-                        });
-                     }
-                });
-            }else{
-                $('select[name="ddlClassification"]').empty();
-            }
-        });
+  $('#ddlsubcat').on('change', function() {
+  gettoccmail();
+  var QuerID = $(this).val();
+  if(QuerID) {
+  $.ajax({
+  url: 'RaiseaTicketgetcal/'+QuerID,
+  type: "GET",
+  dataType: "json",
+  success:function(data) {
+  $('#ddlClassification').empty();
+  $('#ddlClassification').append('<option value="0">--Select Classification--</option>');
+  $.each(data, function(key,value) {
+  $('#ddlClassification').append('<option value="'+ value.ID +'">'+ value.Description +'</option>');
+   });
+   }
+   });
+   }else{
+   $('select[name="ddlClassification"]').empty();
+   }
+   });
 
    $('#ddlCategory').on('change', function() {
-            var CateCode = $(this).val();
-            if(CateCode) {
-                $.ajax({
-                    url: 'RaiseaTicket/'+CateCode,
-                    type: "GET",
-                    dataType: "json",
-                    success:function(data) {
-                        $('#ddlsubcat').empty();
-                        $('#ddlsubcat').append('<option value="0">-- Select Sub Category--</option>');
-                        $.each(data, function(key, value) {
-
-                       
-                         $('#ddlsubcat').append('<option value="'+ value.QuerID +'">'+ value.QuerType +'</option>');
-                        });
-                     }
-                });
-            }else{
-                $('select[name="ddlsubcat"]').empty();
-            }
-        });
-
-$('#btn_saveticket').click(function() {
+   var CateCode = $(this).val();
+   if(CateCode) {
+   $.ajax({
+   url: 'RaiseaTicket/'+CateCode,
+   type: "GET",
+   dataType: "json",
+   success:function(data) {
+   $('#ddlsubcat').empty();
+   $('#ddlsubcat').append('<option value="0">-- Select Sub Category--</option>');
+   $.each(data, function(key, value) {
+   $('#ddlsubcat').append('<option value="'+ value.QuerID +'">'+ value.QuerType +'</option>');
+  });
+  }
+  });
+  }else{
+  $('select[name="ddlsubcat"]').empty();
+  }
+  });
+  $('#btn_saveticket').click(function() {
     if( $('#fromraiserticket').valid())
     {
  
@@ -127,43 +119,34 @@ $('#btn_saveticket').click(function() {
     console.log(msg);
     alert("Record has been saved successfully");
     $("#fromraiserticket").trigger('reset');
-   
-   }
-});
-}
-});
-$('#btn_resetticket').click(function() {
-   $("#fromraiserticket").trigger('reset');
-});
-
-function gettoccmail(){
-
-  var Querid = $('#ddlsubcat').val();
-
+  }
+ });
+ }
+ });
+ $('#btn_resetticket').click(function() {
+  $("#fromraiserticket").trigger('reset');
+  });
+ function gettoccmail(){
+ var Querid = $('#ddlsubcat').val();
   if(Querid) {
   $.ajax({
-                    url: 'RaiseaTicketgettoccmail/'+Querid,
-                    type: "GET",
-                    dataType: "json",
-                    success:function(data) {
-                      
-                        $('#txttoemailid').val('');
-                         $('#txtccemailid').val('');
-                     
-                        $.each(data, function(key, value) {
-
-                          $('#txttoemailid').val(value.toemailid);
-                          $('#txtccemailid').val(value.ccemailid);
-                      
-                        });
-                     }
-                });
-   }else{
-      $('#txttoemailid').val('');
-       $('#txtccemailid').val('');
+  url: 'RaiseaTicketgettoccmail/'+Querid,
+  type: "GET",
+   dataType: "json",
+  success:function(data) {
+  $('#txttoemailid').val('');
+  $('#txtccemailid').val('');
+  $.each(data, function(key, value) {
+  console.log(value);
+   $('#txttoemailid').val(value.toemailid);
+   $('#txtccemailid').val(value.ccemailid);
+   });
    }
-}
-
-
-</script>
+   });
+   }else{
+   $('#txttoemailid').val('');
+   $('#txtccemailid').val('');
+   }
+   }
+  </script>
 @endsection

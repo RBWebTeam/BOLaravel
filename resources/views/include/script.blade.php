@@ -1143,6 +1143,7 @@ function getpaymentlink(fbaid,mobile){
                           //$('#paylink').html(data[0].Link);
                        }     
                        else{
+                        
                         var str = "No Payment Link Available...";
                         // alert(str)
                         $('.divpartnertable_payment').html(str);

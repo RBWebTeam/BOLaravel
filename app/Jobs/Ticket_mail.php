@@ -8,6 +8,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Mail;
+use DB;
 class Ticket_mail implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
@@ -21,10 +22,12 @@ class Ticket_mail implements ShouldQueue
 
      protected $email;
      protected $arrcc;
-    public function __construct($email,$arrcc)
+     protected $reqid;
+    public function __construct($email,$arrcc,$TicketRequestId)
     {
             $this->email=$email;
             $this->arrcc=$arrcc;
+            $this->reqid=$TicketRequestId;
 
              
     }
@@ -42,18 +45,19 @@ class Ticket_mail implements ShouldQueue
                     $email=$this->email;
                     $arrcc=$this->arrcc;
         
- 
-                $data ="Please ";
+                
+                $data=DB::select('call usp_get_ticket_mail_data(10)')[0];
+
                 $mail = Mail::send('ticket/ricket_mail_view',['data' => $data], function($message) use($email,$arrcc) {
                 $message->from('scriptdp@gmail.com', 'FinMart');
                 $message->to($email);
                         if(isset($arrcc)){
                               foreach ($arrcc as $key => $cc) {
-                            $message->cc($cc);
+                                    $message->cc($cc);
                         }
                         }
                         
-                 $message->subject('Ticket Request');
+                 $message->subject('Ticket Request');           
                 });
                      
           
