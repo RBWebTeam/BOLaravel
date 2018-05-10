@@ -62,8 +62,7 @@ Route::get('getloanid/{fbaid}','FbaController@getupdateloanid');
  Route::get('crmfbalist','crmfbalistController@crmlist');  
  Route::get('crmstatus/{FBAID}','crmfbalistController@statuscrm'); 
  Route::post('crmstatus','crmfbalistController@crminsert');
-
- Route::get('crmtest','crmfbalistController@test');
+ Route::get('crmfbalist/{FBAID}','crmfbalistController@test');
 //Route::get('crmstatus/{FBAID}','crmfbalistController@showcrmstatus');
 
 
@@ -206,6 +205,8 @@ Route::post('send-notification-approve','SendNotificationController@insertntf');
 Route::get('send-sms-register','SendSmsFilterController@SendSMSFilter');
 
 Route::post('send-sms-filter','SendSmsFilterController@getfbafilter');
+
+Route::post('send-sms-filter1','SendSmsFilterController@send_sms_save_filter');
 
 Route::get('approvenotification/{msgid}/{value}','SendNotificationController@approvenotification');
 route::get('sendnotificationnew', 'SendNotificationController@sendnotificationstate');
