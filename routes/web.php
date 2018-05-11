@@ -159,6 +159,10 @@ Route::get('View-Raised-Ticket/{ticketid}','ViewRaisedTicketController@deletetic
 Route::get('send-sms-rights','SendSmsRightsController@sendsmsview');
 Route::get('send-sms-directsend/{userid}','SendSmsRightsController@isdirectsend');
 Route::get('send-sms-needaproval/{userid}','SendSmsRightsController@isneedapproval');
+
+Route::get('Approve-send-sms','SendSmsapprovalController@sendsmsview');
+
+Route::get('Fba-profile','FbaprofileController@fbaprofileview');
 ///shubham end ///
 // avinash
  Route::get('ticket-module','TicketController@getticketdetails') ;
