@@ -163,6 +163,8 @@ Route::get('send-sms-needaproval/{userid}','SendSmsRightsController@isneedapprov
 Route::get('Approve-send-sms','SendSmsapprovalController@sendsmsview');
 
 Route::get('Fba-profile','FbaprofileController@fbaprofileview');
+
+Route::post('Fba-profile','FbaprofileController@Insertfbaprofile');
 ///shubham end ///
 // avinash
  Route::get('ticket-module','TicketController@getticketdetails') ;

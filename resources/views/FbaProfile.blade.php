@@ -11,7 +11,8 @@
 <div class="col-md-12"><h3 class="mrg-btm">FBA Profile</h3></div>
    <div class="col-md-12">
       <div class="overflow-scroll">
-      	<form id="fbaprofile" method="post" validate>
+      	<form id="fbaprofile" method="post">
+          {{ csrf_field() }}
        <div class="fbadiv form-group">
        	<table class="table">
        	 <tr>
@@ -117,7 +118,7 @@
         		</tr>
         		<tr>
         			<td><label>Private Life Co's:</label></td>
-        			<td><select multiple class="form-control" id="sel2" name="ddlprivetlifeco" required>
+        			<td><select multiple class="form-control" id="sel2" name="ddlprivetlifeco">
         				 @foreach($lifeins as $val)
                          <option value="{{$val->LifeInsurerCompanyMasterId}}">{{$val->CompanyName}}</option>
                           @endforeach
@@ -139,7 +140,7 @@
        	    </tr>
        	    <tr>
         			<td><label>General Insurance Co's:</label></td>
-        			<td><select id="ddlgenins" name="ddlgenins" multiple class="form-control" id="sel2" required>
+        			<td><select id="ddlgenins" name="ddlgenins" multiple class="form-control" id="sel2">
         				@foreach($Genins as $val)
         				 <option value="{{$val->GeneralInsuranceCompanyMasterId}}">{{$val->CompanyName}}</option>
                           @endforeach
@@ -161,7 +162,7 @@
        	    </tr>
        	        <tr>
         			<td><label>Stand Alone Health Insurance Co's:</label></td>        			
-        			<td><select name="ddlhealth" id="ddlhealth" multiple class="form-control" id="sel2" required>
+        			<td><select name="ddlhealth" id="ddlhealth" multiple class="form-control" id="sel2">
         				  @foreach($healthins as $val)
         				  <option value="{{$val->HealthInsuranceCompanyMasterId}}">{{$val->CompanyName}}</option>
                           @endforeach
@@ -182,7 +183,7 @@
                    <td><label class="radio-inline"><input type="checkbox" name="txtlap" value="1">&nbsp;LAP</label></td>
                    <td><label class="radio-inline"><input type="checkbox" name="txtbl" value="1">&nbsp;Business Loan</label></td>
                    <td><label class="radio-inline"><input id="txtloan" type="radio" name="txtloan" value="1">Others</label></td>
-                     <td id="divloan" style="display: none;" ><input type="text" name="" placeholder="Please Specify" class="form-control" id="txtotherloan" required></td>
+                     <td id="divloan" style="display: none;" ><input type="text" name="txtotherloan" placeholder="Please Specify" class="form-control" id="txtotherloan" required></td>
                </tr>
            </table>
         </div>
@@ -203,7 +204,7 @@
                 	<label class="radio-inline"><input id="txtother" type="radio" name="txtother" value="1">Others</label>
                 </td>
            
-                <td id="divother" style="display: none;" ><input type="text" name="txtotherip" placeholder="please specify" class="form-control" id="txtotherip" required>
+                <td id="divother" style="display: none;" ><input type="text" name="txtotherremark" placeholder="please specify" class="form-control" id="txtotherremark" required>
                 </td>
              
                </tr>
@@ -212,7 +213,7 @@
         <div class="form-group divremark">
          <div>
                <label for="comment">Remark:</label>
-               <textarea class="form-control" rows="4" id="txtremark" style="width:50%" required></textarea>
+               <textarea class="form-control" rows="4" id="txtremark" name="txtremark" style="width:50%" required></textarea>
          </div>      
          </div>
          <div style="text-align:center">
@@ -263,7 +264,8 @@ $(document).ready(function() {
     }
 });
    $('#btnfbaprofile').click(function (){
-    if($('#fbaprofile').valid()){
+     if( $('#fbaprofile').valid())
+    {
       console.log($('#fbaprofile').serialize());
           $.ajax({ 
              url: "{{URL::to('Fba-profile')}}",
@@ -275,12 +277,10 @@ $(document).ready(function() {
                  alert("Record has been saved successfully");
                  $("#fbaprofile").trigger('reset');
                }
+});   
+} 
 });
-    }
-    
 });
-});
- 
 
 </script>
 @endsection
