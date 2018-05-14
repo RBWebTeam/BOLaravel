@@ -119,11 +119,12 @@
          <label>Subdisposition :</label>
          </div>
          <div class="col-md-7">
-     <select name="subdispo" id="subdispo" class="selectpicker select-opt form-control" required="">
-         <option value="0">Subdisposition</option>
-         @foreach($crmsubdi as $val)
-         <option value="{{$val->id}}">{{$val->sub_disposition}}</option>
-         @endforeach
+     <select name="subdispo" id="subdispo" class="selectpicker select-opt form-control">
+     
+        
+        
+         
+        
          </select>
          </div>
          </div>
@@ -157,7 +158,7 @@
         </div>
       </div>
  </div>
-@endsection
+
 
 
    <!-- <script type="text/javascript">
@@ -188,7 +189,37 @@
     </script>
 
  -->
+<script type="text/javascript">
+  $(document).ready(function(){
+  $('#hddlcity').on('change', function() {
+  alert("test1");
+          var hddlcity = $(this).val();
+          if(hddlcity) {
+          $.ajax({
+          url: 'crmstatusdisposub/'+hddlcity,
+          type: "GET",
+          dataType: "json",
+          success:function(data) {
+                      
+           $('#subdispo').empty();
+            //$('#subdispo').append('<option value="">Select City</option>');
 
+            $.each(data, function(key, value) {
+
+             $('#subdispo').append('<option value="'+ key +'">'+ value +'</option>');
+       });
+     }
+ });
+        }else{
+         $('select[name="subdispo"]').empty();
+       }
+
+    });
+
+  });
+
+</script>
+@endsection
 
 
 

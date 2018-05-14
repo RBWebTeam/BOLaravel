@@ -14,21 +14,17 @@ use Mail;
 class FbaController extends CallApiController
 {
       
-        public function fba_list()
-        {
-
-  //$query=DB::select("call usp_load_fbalist_new(0)");
-           
+        public function fba_list(){
+         //$query=DB::select("call usp_load_fbalist_new(0)");
          $doctype = DB::select("call get_document_type()");
-        
-        
          //print_r($doctype); exit();
 
           
           return view('dashboard.fba-list',['doctype'=>$doctype]);         
         }
         public function get_fba_list(Request $req){
-
+          $id=Session::get('FBAUserId');
+        // print_r($id); exit();
           $query=DB::select("call fbaList(0)");
 
           return json_encode(["data"=>$query]);
@@ -49,11 +45,9 @@ class FbaController extends CallApiController
 
 
 
-        public function sendsms(Request $req) {
-
+              public function sendsms(Request $req) {
               $newsms = urlencode($req->sms); //htmlspecialchars();
 
-              
               $post_data="";
               $result=$this->call_json_data_api('http://vas.mobilogi.com/api.php?username=rupeeboss&password=pass1234&route=1&sender=FINMRT&mobile[]='.$req->mobile_no.'&message[]='.$newsms,$post_data);
               $http_result=$result['http_result'];
@@ -109,9 +103,34 @@ class FbaController extends CallApiController
           $query=DB::table('FBARepresentations')
             ->where('FBAID','=',$req->fbaid)
             ->update(['POSPNo' =>$req->posp_remark]);
-           if ( $query) {
-              return response()->json(array('status' =>0,'message'=>"success"));
-            }
+           // if ( $query) {
+           //    return response()->json(array('status' =>0,'message'=>"success"));
+           //  }
+
+             try{
+    
+         $data='{"PospNo":"'.$req->posp_remark.'","ProdId":"","SuppAgentId":"","FBAId":"'.$req->fbaid.'"}';
+
+         //print_r($data);exit();
+        $type= array("cache-control: no-cache","content-type: application/json", "token:1234567890");
+ 
+     $result=$this->call_other_data_api('http://apiservices.magicfinmart.com/api/Client/UpdatePospId',$data,$type);
+ 
+       $http_result=$result['http_result'];
+       $error=$result['error'];
+              $st=str_replace('"{', "{", $http_result);
+              $s=str_replace('}"', "}", $st);
+              $m=str_replace('\\', "", $s);
+              $update_user='';        
+              $custrespon = response()->json(array('status' =>0,'message'=>"success"));
+       }
+           catch (Exception $e){
+
+           return $e->getMessage();    
+    }        
+           return ($custrespon);
+
+
 
         }
 
@@ -166,7 +185,36 @@ try{
  
      $post_data=json_encode($data);
      $type=$token;
-    $result=$this->call_other_data_api($this::$api_url.'/api/updateloanid',$post_data,$type);
+    $result=$this->call_other_data_api('http://apiservices.magicfinmart.com/api/Client/UpdateLoanId',$post_data,$type);
+    $custrespon=$result['http_result']; 
+
+
+    $dataloan= array("fbaid"=>"$fbaid");
+    $token=array("cache-control: no-cache","content-type: application/json", "token: 1234567890");
+ 
+     $post_data1=json_encode($dataloan);
+     $type=$token;
+    $result=$this->call_other_data_api($this::$api_url.'/api/Client/UpdateLoanId',$post_data1,$type);
+    $custrespon=$result['http_result'];               
+    
+}
+  catch (Exception $e){
+
+        return $e->getMessage();    
+     }        
+           return ($custrespon);      
+      }
+
+      // new loan id update
+  public function updateloanidclint ($FBAId){
+try{
+    $data= array("fbaid"=>"$fbaid");
+    $token=array("cache-control: no-cache","content-type: application/json", "token: 1234567890");
+ 
+     $post_data=json_encode($data);
+     $type=$token;
+    $result=$this->call_other_data_api('http://apiservices.magicfinmart.com/api/Client/UpdateLoanId',$post_data,$type);
+      //print_r($result);exit();
     $custrespon=$result['http_result'];              
     
 }
@@ -176,6 +224,9 @@ try{
      }        
            return ($custrespon);      
       }
+
+ // new loan id update
+
 
 
 // Genratepaylink
@@ -198,14 +249,13 @@ try{
              print_r($m);exit();
               $custrespon = json_decode($m);
        }
+           catch (Exception $e){
 
-  catch (Exception $e){
-
-        return $e->getMessage();    
-     }        
+           return $e->getMessage();    
+    }        
            return ($custrespon);  
 
-    }
+ } 
 
     public function sendpaysms(Request $req)
     {

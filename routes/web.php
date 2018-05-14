@@ -53,6 +53,8 @@ Route::get('getpaymentlink/{fbaid}','FbaController@getpaymentlink');
 Route::get('getcustomerid/{fbaid}','FbaController@getcustomerid1');
 Route::get('getloanid/{fbaid}','FbaController@getupdateloanid');
 
+
+
  Route::get('generatepaymentlink','generatepaylinkController@paylinkgenerate');
  Route::get('getpaylink/{fbaid}','generatepaylinkController@getnewpaylink');
  Route::post('generatepaymentlink','generatepaylinkController@sendpsms');
@@ -63,7 +65,9 @@ Route::get('getloanid/{fbaid}','FbaController@getupdateloanid');
  Route::get('crmstatus/{FBAID}','crmfbalistController@statuscrm'); 
  Route::post('crmstatus','crmfbalistController@crminsert');
 
- Route::get('crmtest','crmfbalistController@test');
+ //Route::get('crmfbalist/{FBAID}','crmfbalistController@fbainfo');
+  Route::get('crmfbalist/{FBAID}','crmfbalistController@fba_details');
+ // Route::get('crmstatusdisposub/{hddlcity}','crmfbalistController@crmfbashow');
 //Route::get('crmstatus/{FBAID}','crmfbalistController@showcrmstatus');
 
 

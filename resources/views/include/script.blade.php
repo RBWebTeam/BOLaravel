@@ -293,7 +293,7 @@ $('.loan_from_id').click(function(){
             type: "GET",
             url:'fba-list/'+fbaid+'/'+value+'/'+flag, 
             success: function( msg ) {
-            //console.log(msg);
+            console.log(msg);
              alert("loan id updated successfully..!");
              $('.updateLoan').modal('hide');
             $('#loan_id').val('');
@@ -501,21 +501,21 @@ $(document).on('change', '#search_state', function() {
 
 });
 
- function pan_card(obj,val){  alert(obj);
+    function pan_card(obj,val){  alert(obj);
     if(obj=='pan_no' ){
-                   var str =$('#pan_no').val();
-                   var pancardPattern = /^([a-zA-Z]{5})(\d{4})([a-zA-Z]{1})$/;
-                   var res = str.match(pancardPattern);
-                   if(res){
-                     // console.log('Pancard is valid one.!!');
-                      $('#pan_number').hide();
+    var str =$('#pan_no').val();
+    var pancardPattern = /^([a-zA-Z]{5})(\d{4})([a-zA-Z]{1})$/;
+    var res = str.match(pancardPattern);
+     if(res){
+       // console.log('Pancard is valid one.!!');
+      $('#pan_number').hide();
 
-                  }else{
-                    // console.log('Oops.Please Enter Valid Pan Number.!!');
-                    $('#pan_number').show();
+      }else{
+      // console.log('Oops.Please Enter Valid Pan Number.!!');
+      $('#pan_number').show();
 
-                    return false;
-                  }
+      return false;
+  }
                   
   }
 }
@@ -619,6 +619,7 @@ $(document).on('change', '#search_state', function() {
          url: "{{URL::to('posp-update')}}",
          data : $('#update_posp').serialize(),
          success: function(msg){
+          console.log(msg);
               if (msg.status==0) 
                 {
                   alert('Updated Successfully');
@@ -628,7 +629,7 @@ $(document).on('change', '#search_state', function() {
                   $('.close').click();           
                 } 
                 else {
-                  alert('Could not updated successfully');
+                  alert('Could not update');
                 }
 
         }  
@@ -1135,7 +1136,7 @@ function getpaymentlink(fbaid,mobile){
                       if(data.length>0){
 
                        // alert(data[0].Link);
-                        var str = "<p>"+data[0].Link+"</p>";
+                        var str = ""+data[0].Link+"";
                         // alert(str)
                         $('.divpartnertable_payment').html(str);
                          $('.paylink_payment').modal('show');
@@ -1462,6 +1463,9 @@ function getcustomerid(text,fbaid){
 }
  </script>
 <!-- Get Loan ID Start -->
+
+
+
 <script type="text/javascript">
   function getloanid(text,fbaid){
   //alert(fbaid);
@@ -1487,15 +1491,12 @@ function getcustomerid(text,fbaid){
 }
 
 
-
-
-
-
-
-
 </script>
 
 <!-- Get Loan ID End -->
+
+
+
 
 
 
