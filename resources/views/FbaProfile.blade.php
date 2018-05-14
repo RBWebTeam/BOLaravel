@@ -11,7 +11,7 @@
 <div class="col-md-12"><h3 class="mrg-btm">FBA Profile</h3></div>
    <div class="col-md-12">
       <div class="overflow-scroll">
-      	<form id="fbaprofile" method="post">
+      	<form id="fbaprofile" method="post" validate>
        <div class="fbadiv form-group">
        	<table class="table">
        	 <tr>
@@ -108,16 +108,16 @@
         	<table class="table">
         		<tr>
         			<td width="30%;"><label>Works with Private Life Insurers:</label></td>
-        			<td width="20%;">
+        			 <td width="20%;">
        	              <label><input type="radio" name="isWorksLICins" value="1">&nbsp;YES</label>
        	            </td>
        	             <td width="20%;">
        	             <label><input type="radio" name="isWorksLICins" value="0">&nbsp;NO</label>
-       	            </td>
+       	             </td>
         		</tr>
         		<tr>
-        			<td><label>Drop Down List of Pvt Life Co's:</label></td>
-        			<td><select multiple class="form-control" id="sel2" required>
+        			<td><label>Private Life Co's:</label></td>
+        			<td><select multiple class="form-control" id="sel2" name="ddlprivetlifeco" required>
         				 @foreach($lifeins as $val)
                          <option value="{{$val->LifeInsurerCompanyMasterId}}">{{$val->CompanyName}}</option>
                           @endforeach
@@ -138,8 +138,8 @@
        	        </td>
        	    </tr>
        	    <tr>
-        			<td><label>Drop Down List of GI Co's:</label></td>
-        			<td><select multiple class="form-control" id="sel2" required>
+        			<td><label>General Insurance Co's:</label></td>
+        			<td><select id="ddlgenins" name="ddlgenins" multiple class="form-control" id="sel2" required>
         				@foreach($Genins as $val)
         				 <option value="{{$val->GeneralInsuranceCompanyMasterId}}">{{$val->CompanyName}}</option>
                           @endforeach
@@ -160,8 +160,8 @@
        	        </td>
        	    </tr>
        	        <tr>
-        			<td><label>Drop Down List of Stand Alone Health Ins Co's:</label></td>
-        			<td><select multiple class="form-control" id="sel2" required>
+        			<td><label>Stand Alone Health Insurance Co's:</label></td>        			
+        			<td><select name="ddlhealth" id="ddlhealth" multiple class="form-control" id="sel2" required>
         				  @foreach($healthins as $val)
         				  <option value="{{$val->HealthInsuranceCompanyMasterId}}">{{$val->CompanyName}}</option>
                           @endforeach
@@ -177,12 +177,12 @@
                 </tr>
                 <tr>
         	       <label>LOAN</label>
-        	        <td><label class="radio-inline"><input type="radio" name="txtloan" value="HL">HL</label></td>
-                    <td><label class="radio-inline"><input type="radio" name="txtloan" value="PL">PL</label></td>
-                   <td><label class="radio-inline"><input type="radio" name="txtloan" value="LAP">LAP</label></td>
-                   <td><label class="radio-inline"><input type="radio" name="txtloan" value="Business Loan">Business Loan</label></td>
-                   <td><label class="radio-inline"><input id="txtloan" type="radio" name="txtloan" value="Others">Others</label></td>
-                     <td id="divloan" style="display: none;" ><input type="text" name="" placeholder="please specify" class="form-control" id="txtotherloan" required></td>
+        	        <td><label class="radio-inline"><input type="checkbox" name="txthl" value="1">&nbsp;HL</label></td>
+                    <td><label class="radio-inline"><input type="checkbox" name="txtpl" value="1">&nbsp;PL</label></td>
+                   <td><label class="radio-inline"><input type="checkbox" name="txtlap" value="1">&nbsp;LAP</label></td>
+                   <td><label class="radio-inline"><input type="checkbox" name="txtbl" value="1">&nbsp;Business Loan</label></td>
+                   <td><label class="radio-inline"><input id="txtloan" type="radio" name="txtloan" value="1">Others</label></td>
+                     <td id="divloan" style="display: none;" ><input type="text" name="" placeholder="Please Specify" class="form-control" id="txtotherloan" required></td>
                </tr>
            </table>
         </div>
@@ -191,16 +191,16 @@
                 <tr style="width: 30%;">
         	        <label>Other</label>
         	    <td style="width: 20%;">
-        	    	<label class="radio-inline"><input type="radio" name="txtother" value="Mutual Funds">Mutual Funds</label>
+        	    	<label class="radio-inline"><input type="checkbox" name="txtMutualfund" value="1">&nbsp;Mutual Funds</label>
         	    </td>
                 <td style="width: 20%;">
-                	<label class="radio-inline"><input type="radio" name="txtother" value="Postal Savings">Postal Savings</label>
+                	<label class="radio-inline"><input type="checkbox" name="txtPostal" value="1">&nbsp;Postal Savings</label>
                 </td>
                 <td style="width: 20%;">
-                	<label class="radio-inline"><input type="radio" name="txtother" value="Co Fixed Deposits">Co Fixed Deposits</label>
+                	<label class="radio-inline"><input type="checkbox" name="txtFixed" value="1">&nbsp;Co Fixed Deposits</label>
                 </td>
                 <td style="width: 20%;">
-                	<label class="radio-inline"><input id="txtother" type="radio" name="txtother" value="Others">Others</label>
+                	<label class="radio-inline"><input id="txtother" type="radio" name="txtother" value="1">Others</label>
                 </td>
            
                 <td id="divother" style="display: none;" ><input type="text" name="txtotherip" placeholder="please specify" class="form-control" id="txtotherip" required>
@@ -216,7 +216,7 @@
          </div>      
          </div>
          <div style="text-align:center">
-         	<input type="submit" id="btnfbaprofile" name="btnfbaprofile" class="btn btn-primary">
+         	<button type="button" id="btnfbaprofile" name="btnfbaprofile" class="btn btn-primary">SAVE</button>
          </div>
 
 
@@ -255,15 +255,32 @@ $(document).ready(function() {
         $("#divother").hide();
     }
 });
-       $('input[name=txtloan]').click(function (){
+   $('input[name=txtloan]').click(function (){
     if (this.id == "txtloan"){
         $("#divloan").show();
     } else {
         $("#divloan").hide();
     }
 });
-
-
+   $('#btnfbaprofile').click(function (){
+    if($('#fbaprofile').valid()){
+      console.log($('#fbaprofile').serialize());
+          $.ajax({ 
+             url: "{{URL::to('Fba-profile')}}",
+             method:"POST",
+             data: $('#fbaprofile').serialize(),
+             success: function(msg)  
+               {
+                 console.log(msg);
+                 alert("Record has been saved successfully");
+                 $("#fbaprofile").trigger('reset');
+               }
 });
+    }
+    
+});
+});
+ 
+
 </script>
 @endsection
