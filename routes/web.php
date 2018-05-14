@@ -184,6 +184,10 @@ Route::post('Fsm-Register','FsmRegisterController@insertfsm');
 
  Route::get('send-notification-approve','SendNotificationController@SendnotificationApprove');
 
+
+
+ 
+
  Route::get('approve-notification','SendNotificationController@notificationApprove');
 
   Route::get('send-sms-log','SmslogController@getsendsmslog');
@@ -202,9 +206,8 @@ Route::post('insertnotification','SendNotificationController@insertntf');
 Route::post('send-notification-approve','SendNotificationController@insertntf');
 
 Route::get('send-sms-register','SendSmsFilterController@SendSMSFilter');
-
 Route::post('send-sms-filter','SendSmsFilterController@getfbafilter');
-
+Route::post('send-sms-filter-register','SendSmsFilterController@send_sms_save_filter');
 Route::get('approvenotification/{msgid}/{value}','SendNotificationController@approvenotification');
 route::get('sendnotificationnew', 'SendNotificationController@sendnotificationstate');
 
@@ -220,7 +223,7 @@ route::post('send-notification-submit', 'SendNotificationController@sendnotifica
 
 
 
-//route::get('sendnotificationnew', 'SendNotificationController@send-notificationstate');
+
 
 Route::get('Fsm-Details','FsmDetailsController@FsmDetails');
 
@@ -244,7 +247,7 @@ Route::get('send-notification','SendNotificationController@sendnotification');
 
 //send sms
 Route::get('send-sms','SendSMSController@ViewSendSMSDetails');
-Route::post('send-sms-detail','SendSMSController@getfbalist');
+Route::post('send-sms-detail','SendSMSController@getfbalistnew');
  
 Route::get('send-notification','SendNotificationController@sendnotification');
  //Otp Detail
@@ -345,6 +348,8 @@ Route::Post('ticket-request-save','TicketController@ticket_request_save') ;
 Route::get('ticket-request-user-list','TicketController@ticket_request_userlist') ;
 Route::Post('ticket-user-comment','TicketController@ticket_user_comment') ;
 Route::get('went-wrong','LoginController@went_wrong');
+Route::get('raise-ticket-view','RaiserTicketController@viewticketdetails');
+
 
 
 /************

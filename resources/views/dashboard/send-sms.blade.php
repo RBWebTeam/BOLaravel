@@ -32,10 +32,7 @@
        <input type="text" placeholder="City.." name="city_name" id="search_city" class="form-control" >  
       </div>
    </div> 
-
-         
-
-     <div class="col-md-4">
+   <div class="col-md-4">
       <div class="form-group">
       <p>From Registered Date</p>
          <div id="datepicker" class="input-group date" data-date-format="yyyy-mm-dd">
@@ -47,7 +44,7 @@
     <div class="col-md-4">
     <div class="form-group">
     <p>To Registered  Date</p>
-  <div id="datepicker1" class="input-group date" data-date-format="yyyy-mm-dd">
+  <div id="datepicker1" class="input-group date" data-date-format="yyyy-mm-dd" h>
   <input class="form-control" type="text"  placeholder="To Date"  name="todate"  id="fmax_date"    />
    <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
   </div>

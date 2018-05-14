@@ -14,6 +14,15 @@ class RaiserTicketController extends Controller
  $cat = DB::select("call Usp_getraisertktcat()");
  return view('dashboard.RaiserTicket',['cat'=>$cat]);
  }
+
+
+
+public function viewticketdetails(){ 
+$query=DB::select("call usp_load_raise_ticket()");
+return view ('dashboard.raise-ticket-view',['query'=>$query]);
+}
+
+
  public function getsubcat($CateCode){
  $subcat = DB::select("call Usp_getraisertktsubcat($CateCode)");
  return json_encode($subcat);
@@ -36,8 +45,8 @@ $validator =Validator::make($req->all(), [
   $name ="";
   if($image){
   $name = time().'.'.$image->getClientOriginalName();
-   $destinationPath = public_path('upload/Raiserticket/'); //->save image folder 
-   $image->move($destinationPath, $name);
+  $destinationPath = public_path('upload/Raiserticket/'); //->save image folder 
+  $image->move($destinationPath, $name);
   }
   DB::select('call Usp_inserraisertkt(?,?,?,?,?,?,?,?,?,?)',array(
   $req->ddlCategory,
@@ -49,10 +58,10 @@ $validator =Validator::make($req->all(), [
   $req->txttoemailid,
   $req->txtccemailid,
   "BO",
-   $id
-   ));
-   Session::flash('message', 'Record has been saved successfully'); 
-   return redirect('RaiseaTicket');
-    }
-    }
-    }
+  $id
+  ));
+  Session::flash('message', 'Record has been saved successfully'); 
+  return redirect('RaiseaTicket');
+  }
+  }
+  }

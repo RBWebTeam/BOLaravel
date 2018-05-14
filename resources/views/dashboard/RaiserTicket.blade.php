@@ -43,14 +43,7 @@
 <label class="control-label" for="message-text">Image: </label>
 <input type="file" class="form-control" id="pathimgraiser" name="pathimgraiser" >
 </div>
-<!-- <div class="form-group">
-<label class="control-label" for="message-text">To Email Id: </label>
-<input type="Email" class="form-control" id="txttoemailid" name="txttoemailid">
-</div>z
-<div class="form-group">
-<label class="control-label" for="message-text">CC Email Id: </label>
- <input type="Email"  class="form-control" id="txtccemailid" name="txtccemailid">
-</div> -->
+
 <div class="form-group">
 <input id="btn_saveticket" type="submit" name="btn_saveticket" class="btn btn-primary">
 <button id="btn_resetticket" class="btn btn-primary" type="button">Reset</button>     
@@ -99,11 +92,9 @@
   }
   });
   $('#btn_saveticket').click(function() {
-    if( $('#fromraiserticket').valid())
-    {
- 
-    data1=new FormData($("#pathimgraiser"));
-    
+  if( $('#fromraiserticket').valid())
+  {
+  data1=new FormData($("#pathimgraiser"));
   console.log($('#fromraiserticket').serialize());
    $.ajax({ 
    url: "{{URL::to('RaiseaTicket')}}",
@@ -116,23 +107,23 @@
    contentType: false,
   success: function(msg)  
    {
-    console.log(msg);
-    alert("Record has been saved successfully");
-    $("#fromraiserticket").trigger('reset');
+  console.log(msg);
+  alert("Record has been saved successfully");
+  $("#fromraiserticket").trigger('reset');
   }
- });
- }
- });
- $('#btn_resetticket').click(function() {
+  });
+  }
+  });
+  $('#btn_resetticket').click(function() {
   $("#fromraiserticket").trigger('reset');
   });
- function gettoccmail(){
- var Querid = $('#ddlsubcat').val();
+  function gettoccmail(){
+  var Querid = $('#ddlsubcat').val();
   if(Querid) {
   $.ajax({
   url: 'RaiseaTicketgettoccmail/'+Querid,
   type: "GET",
-   dataType: "json",
+  dataType: "json",
   success:function(data) {
   $('#txttoemailid').val('');
   $('#txtccemailid').val('');
@@ -149,4 +140,4 @@
    }
    }
   </script>
-@endsection
+ @endsection

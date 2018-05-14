@@ -31,8 +31,7 @@
                 	<td>{{$val->email}}</td>
                 	<td>
                 	@if($val->isdirectsend == '1')
-
-                		 <a id="btnissend" class="btn btn-success btnissend" onclick="isdirectsend({{$val->FBAUserId}},this)">Send Direct</a>
+              <a id="btnissend" class="btn btn-success btnissend" onclick="isdirectsend({{$val->FBAUserId}},this)">Send Direct</a>
                 		 &nbsp;  &nbsp;
                 		 <a id="bntneedapproval" class="btn btn-danger bntneedapproval" 
                 		 onclick="isneedapproval({{$val->FBAUserId}},this)">Need Approval</a>
@@ -70,7 +69,7 @@
                     success:function(data)
                      {
                        $(btn).closest('td').find('a').addClass('btn-danger');
-					   $(btn).closest('td').find('a').removeClass('btn-success');
+					      $(btn).closest('td').find('a').removeClass('btn-success');
 					   $(btn).removeClass('btn-danger');
                        $(btn).addClass('btn-success');
                      }
@@ -86,7 +85,6 @@
 	function isneedapproval($userid,btn){
 		if (confirm('confirm to take this action..!')) 
 		{
-		
 		$.ajax({
                     url: 'send-sms-needaproval/'+$userid,
                     type: "GET",

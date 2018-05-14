@@ -8,7 +8,7 @@
     <div class="col-md-12">
     <div class="panel panel-primary">
     <div class="panel-heading">
-    <h3 class="panel-title">FSM Details</h3>
+    <h3 class="panel-title">SEND SMS</h3>
     <div class="pull-right">
     <span class="clickable filter" data-toggle="tooltip" data-container="body"><a ">
     <span class="glyphicon glyphicon-plus mrg-tp-forteen"></span></a></span>
@@ -41,7 +41,7 @@
     <label class="control-label" for="inputError" id="required1"> </label>
     </div>
     <div class="form-group col-md-3">
-    <input type="text" placeholder="City.." name="city_name" id="search_city" class="form-control" style=" display: none;" >  
+    <input type="text" placeholder="City.." name="city_name" id="search_city" class="form-control" style=" display: block;" >  
     </div>
     </div> 
    <div class="col-md-4">
@@ -68,7 +68,9 @@
     <a href="#" class="mrg-top common-btn" id="search_fba_date">SHOW</a></div>
     </div>
     </form>
-    <form method="post" action="{{url('send-sms-save')}}" > {{ csrf_field() }}
+    <form method="post" action="{{url('send-sms-filter-register')}}" >
+
+     {{ csrf_field() }}
     <div class="col-sm-6 col-xs-12 form-padding" id="StatesV" >
     <div style="overflow-y:scroll;height:270px;">
     <table class="table table-responsive table-hover" cellspacing="0" id="myTable">
@@ -123,12 +125,12 @@
       if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
        tr[i].style.display = "";
       } else {
-        tr[i].style.display = "none";
-       }
-       }       
-       }
-       });
-     function SENDSMS_FN(ID){
+     tr[i].style.display = "none";
+      }
+      }       
+      }
+      });
+      function SENDSMS_FN(ID){
       FN_search(ID,0,0,0);
        }
        $(document).ready(function(){   
@@ -158,7 +160,6 @@
      });
      });
      }); 
-
     function FN_search(ID,city,fDate,tDate){
     var search=null;
     if(ID){
