@@ -21,8 +21,8 @@ class FbaprofileController extends Controller
 	     return view('FbaProfile',['Genins'=>$Genins,'lifeins'=>$lifeins,'healthins'=>$healthins]);
 	}
 	
-	public function Insertfbaprofile($require 'file';)
+	/*public function Insertfbaprofile($require 'file';)
 	{
 		DB:: select("call Usp_insert_fbaprofile()");
-	}
+	}*/
 }
