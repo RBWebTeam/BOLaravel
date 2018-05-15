@@ -241,7 +241,7 @@
          <div class="form-group">
             <input type="hidden" name="fbaid" id="fbaid" value=" ">
             <label class="control-label" for="message-text">Enter POSP : </label>
-            <input type="text" class="recipient-name form-control" id="posp_remark" name="posp_remark" required="" />
+            <input type="Number" class="recipient-name form-control" id="posp_remark" name="posp_remark" required="" />
           </div>
         </form>
         <div class="modal-footer"> 
