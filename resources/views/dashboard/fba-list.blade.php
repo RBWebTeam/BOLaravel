@@ -82,6 +82,7 @@
                                        <th>Password</th>
                                        <th>City</th>
                                        <th>State</th>
+                                       <th>Zone</th>
                                        <th>Pincode</th>
                                        <th>POSP No</th>
                                        <th>Loan ID</th> 
@@ -477,22 +478,16 @@
 
              }, 
 
-                     {"data":"pwd" ,
+               {"data":"pwd" ,
               "render": function ( data, type, row, meta ) {
               return '<a id="btnshowpassword" data-toggle="modal" data-target="#spassword" onclick="getpassword('+"'"+ data+"'"+')">*****</a>';
               }
 
        },   
 
-
-
-
-
-
-
-
             {"data":"City"},
             {"data":"statename"},
+            {"data":"Zone"},  
             {"data":"Pincode"},
             {"data":"POSPNo"  ,
              "render": function ( data, type, row, meta ) {
@@ -500,15 +495,13 @@
               }
             }, 
 
-    {"data":"LoanID"  ,
+             {"data":"LoanID"  ,
              "render": function ( data, type, row, meta ) {
                 // return data==""?('<a id="loan_'+row.fbaid+'" class="checkloan" data-toggle="modal" data-target="#updateLoan" onclick="LoanID_UPDATE('+row.fbaid+')">update</a>'):data;
                  return (data==""||data=="0")?('<a id="btnviewcid" onclick="getloanid(this,'+row.fbaid+')">Update</a>'):data;
               }
          }, 
 
-
-    
             {"data":"pospname"}, 
              {"data":"bankaccount"}, 
              {"data":null ,
@@ -550,15 +543,8 @@
              }  
          }, 
 
-       //        {"data":"pwd" ,
-       //        "render": function ( data, type, row, meta ) {
-       //        return '<a id="btnshowpassword" data-toggle="modal" data-target="#spassword" onclick="getpassword('+"'"+ data+"'"+')">*****</a>';
-       //        }
-
-       // },   
-
-
-         { "data": "createdate1","visible":false }
+    
+       { "data": "createdate1","visible":false }
 
             
         ],
@@ -660,6 +646,7 @@ $(document).ready(function() {
   url: 'getpaylinknew/'+$('#fba').val(),
   type: "GET",                  
   success:function(data) {
+    console.log(data);
   var json = JSON.parse(data);
   if(json.StatusNo==0){
         $('#divpartnertable_payment').html(json.MasterData.PaymentURL);
