@@ -109,10 +109,10 @@ class FbaController extends CallApiController
 
              try{
     
-         $data='{"PospNo":"'.$req->posp_remark.'","ProdId":"","SuppAgentId":"","FBAId":"'.$req->fbaid.'"}';
+  $data='{"PospNo":"'.$req->posp_remark.'","ProdId":"","SuppAgentId":"","FBAId":"'.$req->fbaid.'"}';
 
-         //print_r($data);exit();
-        $type= array("cache-control: no-cache","content-type: application/json", "token:1234567890");
+     //print_r($data);exit();
+     $type= array("cache-control: no-cache","content-type: application/json", "token:1234567890");
  
      $result=$this->call_other_data_api('http://apiservices.magicfinmart.com/api/Client/UpdatePospId',$data,$type);
  
@@ -194,7 +194,7 @@ try{
  
      $post_data1=json_encode($dataloan);
      $type=$token;
-    $result=$this->call_other_data_api($this::$api_url.'/api/Client/UpdateLoanId',$post_data1,$type);
+    $result=$this->call_other_data_api('http://apiservices.magicfinmart.com/api/Client/UpdateLoanId',$post_data1,$type);
     $custrespon=$result['http_result'];               
     
 }
@@ -205,29 +205,7 @@ try{
            return ($custrespon);      
       }
 
-      // new loan id update
-  public function updateloanidclint ($FBAId){
-try{
-    $data= array("fbaid"=>"$fbaid");
-    $token=array("cache-control: no-cache","content-type: application/json", "token: 1234567890");
- 
-     $post_data=json_encode($data);
-     $type=$token;
-    $result=$this->call_other_data_api('http://apiservices.magicfinmart.com/api/Client/UpdateLoanId',$post_data,$type);
-      //print_r($result);exit();
-    $custrespon=$result['http_result'];              
-    
-}
-  catch (Exception $e){
-
-        return $e->getMessage();    
-     }        
-           return ($custrespon);      
-      }
-
- // new loan id update
-
-
+     
 
 // Genratepaylink
 
@@ -235,10 +213,22 @@ try{
              // print_r($fbaid);exit();
          try{
     
-         $data='{"FBAID": "'.$fbaid.'"}';
+        $data='{"FBAID": "'.$fbaid.'"}';
         $type= array("cache-control: no-cache","content-type: application/json", "token:1234567890");
+        $result=$this->call_other_data_api($this::$api_url.'/api/get-posp-payment-link',$data,$type);
  
-     $result=$this->call_other_data_api($this::$api_url.'/api/get-posp-payment-link',$data,$type);
+       $http_result=$result['http_result'];
+       $error=$result['error'];
+       $st=str_replace('"{', "{", $http_result);
+       $s=str_replace('}"', "}", $st);
+       $m=str_replace('\\', "", $s);
+       $update_user='';  
+       print_r($m);exit();
+       $custrespon = json_decode($m);
+
+  $data2='{"FBAID":"'.$req->fbaid.'","PayURL":"","PayRefrenceID":"","DWTCustID": "","PCode":"501"}';
+ 
+   $result=$this->call_other_data_api('http://apiservices.magicfinmart.com/api/SaveFBA/AddMPSInfo',$data2,$type);
  
        $http_result=$result['http_result'];
        $error=$result['error'];
@@ -246,9 +236,10 @@ try{
               $s=str_replace('}"', "}", $st);
               $m=str_replace('\\', "", $s);
               $update_user='';
-             print_r($m);exit();
-              $custrespon = json_decode($m);
-       }
+                print_r($custpay);exit();  
+             $custpay = json_decode($m);
+           
+}
            catch (Exception $e){
 
            return $e->getMessage();    

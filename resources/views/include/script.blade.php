@@ -430,10 +430,6 @@ alert(JSON.stringify(data));*/
 <script type="text/javascript">
   
 
-
-
-
-
 $(document).ready(function(){
  var  st_array=Array('<option value="0">Select</option>');
 
@@ -1140,8 +1136,7 @@ function getpaymentlink(fbaid,mobile){
                         // alert(str)
                         $('.divpartnertable_payment').html(str);
                          $('.paylink_payment').modal('show');
-
-                          //$('#paylink').html(data[0].Link);
+                         //$('#paylink').html(data[0].Link);
                        }     
                        else{
                         

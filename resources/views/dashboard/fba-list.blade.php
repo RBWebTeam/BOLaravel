@@ -655,6 +655,7 @@ $(document).ready(function() {
 
 <script type="text/javascript">
     function getpaylinknew(){
+      
   $.ajax({
   url: 'getpaylinknew/'+$('#fba').val(),
   type: "GET",                  

@@ -60,6 +60,7 @@ Route::get('getloanid/{fbaid}','FbaController@getupdateloanid');
  Route::post('generatepaymentlink','generatepaylinkController@sendpsms');
 // -------------------------------------
  Route::get('getpaylinknew/{fbaid}','FbaController@paylinkget');
+
  Route::post('pmesgsend','FbaController@sendpaysms');
  Route::get('crmfbalist','crmfbalistController@crmlist');  
  Route::get('crmstatus/{FBAID}','crmfbalistController@statuscrm'); 
