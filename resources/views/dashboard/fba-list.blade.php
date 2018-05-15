@@ -604,16 +604,13 @@ $('.date-range-filter').datepicker();
 <script>
 $(document).ready(function(){
 
-
-
-
-    $(".psearch").keyup (function(){ 
+$(".psearch").keyup (function(){ 
        table1 = $('#fba-list-table').DataTable();
         if ($(this).val()!= '') {
-        table1.columns(10).search('^'+$(this).val() + '$', true, true).draw(); 
+        table1.columns(11).search('^'+$(this).val() + '$', true, true).draw(); 
       }
       else
-        table1.columns(10).search($(this).val(), true, true).draw(); 
+        table1.columns(11).search($(this).val(), true, true).draw(); 
     });
 });
 
