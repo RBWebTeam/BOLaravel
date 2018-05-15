@@ -212,33 +212,11 @@ try{
        public function paylinkget($fbaid){
              // print_r($fbaid);exit();
          try{
-    
-       $data='{"FBAID": "'.$fbaid.'"}';
-       $type= array("cache-control: no-cache","content-type: application/json", "token:1234567890");
-       $result=$this->call_other_data_api($this::$api_url.'/api/get-posp-payment-link',$data,$type);
- 
-       $http_result=$result['http_result'];
-       $error=$result['error'];
-       $st=str_replace('"{', "{", $http_result);
-       $s=str_replace('}"', "}", $st);
-       $m=str_replace('\\', "", $s);
-       $update_user='';  
-       //print_r($m);exit();
-       $custrespon = json_decode($m);
-       $masterdata =$m->MasterData; 
-      //return ($m); 
-   $data2='{"FBAID":"'.$req->fbaid.'","PayURL":"'.$masterdata->PaymentURL.'","PayRefrenceID":"'.$masterdata->PaymRefeID.'","DWTCustID": "'.$masterdata->PaymRefeID.'","PCode":"501"}';
- 
-   $result=$this->call_other_data_api('http://apiservices.magicfinmart.com/api/SaveFBA/AddMPSInfo',$data2,$type);
- 
-       $http_result=$result['http_result'];
-       $error=$result['error'];
-       $st=str_replace('"{', "{", $http_result);
-       $s=str_replace('}"', "}", $st);
-       $m=str_replace('\\', "", $s);
-       $update_user='';
-       print_r($custpay);exit();  
-       $custpay = json_decode($m);
+          $m=$this::getPaymentLinkFromFinmart($fbaid);
+          $data=json_decode($m);
+          
+          $res=$this::savePaymentInOldFinamrtDB($fbaid,$data->MasterData);
+          $custpay = json_decode($res);
            
   }
        catch (Exception $e){
@@ -284,7 +262,30 @@ try{
           $que=DB::table('FBAMast')->where('FBAID','=',$req->fba_id)->update($arra);
            return redirect('fbamaster-edit');
        }
+
+
+private function getPaymentLinkFromFinmart($fbaid){
+       $data='{"FBAID": "'.$fbaid.'"}';
+       $type= array("cache-control: no-cache","content-type: application/json", "token:1234567890");
+       $result=$this->call_other_data_api($this::$api_url.'/api/get-posp-payment-link',$data,$type);
+       $http_result=$result['http_result'];
+       $error=$result['error'];
+       $st=str_replace('"{', "{", $http_result);
+       $s=str_replace('}"', "}", $st);
+       $m=str_replace('\\', "", $s);
+       return $m;
 }
-
-
-    
+private function savePaymentInOldFinamrtDB($fbaid,$masterdata){
+ // print_r($masterdata);exit();
+  $data2='{"FBAID":"'.$fbaid.'","PayURL":"'.$masterdata->PaymentURL.'","PayRefrenceID":"'.$masterdata->PaymRefeID.'","DWTCustID": "'.$masterdata->PaymRefeID.'","PCode":"501"}';
+  $type= array("cache-control: no-cache","content-type: application/json", "token:1234567890");
+   $result=$this->call_other_data_api('http://apiservices.magicfinmart.com/api/SaveFBA/AddMPSInfo',$data2,$type);
+       $http_result=$result['http_result'];
+       $error=$result['error'];
+       $st=str_replace('"{', "{", $http_result);
+       $s=str_replace('}"', "}", $st);
+       $m=str_replace('\\', "", $s);
+       return $m;
+      
+}
+}

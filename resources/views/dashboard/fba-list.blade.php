@@ -57,8 +57,8 @@
    <option value="POSPNO">POSP Number</option>
 
    </select>
-   <input type="textbox" class="fbsearch hide" id="fbsearch" name="fbsearch" placeholder="Search FBA ID" style="display:none;margin-left: 96px;"/>
-   <input type="textbox" class="psearch hide" id="psearch" name="psearch" placeholder="Search POSP" style="display:none; margin-left: 96px;" />
+   <input type="Number" class="fbsearch hide" id="fbsearch" name="fbsearch" placeholder="Search FBA ID" style="display:none;margin-left: 96px;"/>
+   <input type="Number" class="psearch hide" id="psearch" name="psearch" placeholder="Search POSP" style="display:none; margin-left: 96px;" />
 
   </form>
   </div> 
@@ -604,10 +604,12 @@ $('.date-range-filter').datepicker();
 <script>
 $(document).ready(function(){
 
+
+
+
     $(".psearch").keyup (function(){ 
        table1 = $('#fba-list-table').DataTable();
-      
-           if ($(this).val()!= '') {
+        if ($(this).val()!= '') {
         table1.columns(10).search('^'+$(this).val() + '$', true, true).draw(); 
       }
       else
@@ -646,7 +648,7 @@ $(document).ready(function() {
   url: 'getpaylinknew/'+$('#fba').val(),
   type: "GET",                  
   success:function(data) {
-    console.log(data);
+  console.log(data);
   var json = JSON.parse(data);
   if(json.StatusNo==0){
         $('#divpartnertable_payment').html(json.MasterData.PaymentURL);
@@ -671,14 +673,11 @@ alert("SMS Send successfully..");
 });
       }
 
-
-
-
 </script>
 
 
 
- 
+
 
 
 

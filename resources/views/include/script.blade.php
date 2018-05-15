@@ -1372,11 +1372,9 @@ $.ajax({
 <script> 
 
 $('#msds-select').change(function () {
-    // var $loading = $('#loading').hide();    
- var table = $('#fba-list-table').DataTable(); 
-
- // $loading.show();
-    $.fn.dataTable.ext.search.push(
+  
+  var table = $('#fba-list-table').DataTable(); 
+  $.fn.dataTable.ext.search.push(
     function( settings, data, dataIndex ) {
         var msdsSearch = $( "#msds-select option:selected" ).val();
         var msdsValue = data[10]|| 0;
@@ -1429,10 +1427,7 @@ if ($('select ').val() == '1') {
 <!-- POSP YES OR NO Dropdown end -->
 
 
-
-
-
- <script type="text/javascript">
+<script type="text/javascript">
 function getcustomerid(text,fbaid){
   //alert(fbaid);
   // alert(data);
