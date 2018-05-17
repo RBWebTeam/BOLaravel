@@ -26,13 +26,11 @@
         <div class="form-group">
         <select multiple="multiple" name="ddlstate[]" class="selectpicker select-opt form-control" id="ddlstate" required>
          <option value="1">Select state</option>
-               
-               @foreach($state as $val) 
-               <option value="{{$val->state_id}}">{{$val->state_name}}</option>
-               @endforeach
-                
-        </select>
-        </div>
+     @foreach($state as $val) 
+    <option value="{{$val->state_id}}">{{$val->state_name}}</option>
+     @endforeach
+  </select>
+ </div>
         </div>
         <div class="col-md-4 col-xs-12">
         <div class="form-group">

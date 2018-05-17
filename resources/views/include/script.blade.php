@@ -921,6 +921,9 @@ $.ajax({
 </script>
 
 
+
+
+
 <!-- send Notification Script By Avinash
  -->
    <script type="text/javascript">
@@ -1022,7 +1025,6 @@ $('#txtmapcity').on('change', function() {
 
 
 
-
 function BindFbas(flag,value)
 {
      $('#tblfbalist').empty();
@@ -1036,12 +1038,7 @@ function BindFbas(flag,value)
       var text = "";
       for (var i = 0; i < data.length; i++) {
 
-      
- 
-
-
- 
- 
+    
 text = text +'<tr><td><input id="chkfba" name="fba_list[]"  type="checkbox" class="chkfba" value="'+data[i].id+'"/><input id="hdnchk" type="hidden" value="'+data[i].id+'" />'+data[i].fullname+'</td><td>'+data[i].mobile+'</td><td>'+data[i].City+'</td></tr>';
  
 
@@ -1057,6 +1054,34 @@ $('#tblfbalisthead').empty().append('<tr><th><input  name="fba_list[]" value="0"
            }
                 });
 }
+
+
+ $('#txtstate').on('change', function() {
+            var state_id = $(this).val();
+            if(state_id) {
+                $.ajax({
+                    url: 'send-sms-state/'+state_id,
+                    type: "GET",
+                    dataType: "json",
+                    success:function(data) {
+                        $('#txtcity').empty();
+                        $('#txtcity').append('<option value="0">select city</option>');
+                        $.each(data, function(key, value) {
+
+                            $('#txtcity').append('<option value="'+ key +'">'+ value +'</option>');
+                        });
+                     }
+                });
+            }else{
+         $('select[name="city"]').empty();
+          }
+        });
+     // $('#txtcity').on('change', function() {
+     //              BindFbas(2,$('#txtcity').val());
+     //    });
+
+  
+
 
 
 function checkall(){

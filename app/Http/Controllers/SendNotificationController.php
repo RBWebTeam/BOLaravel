@@ -16,10 +16,7 @@ public function Sendnotification(){
 $state = DB::select("call usp_load_state_list()");
   return view('dashboard.send-notification',['state'=>$state]);
  }
- // public function getstate(){
- //  $state = DB::select("call usp_load_state_list()");
- //  return view('dashboard.send-notification',['state'=>$state]);
- //  }
+
 
 public function SendnotificationApprove(){ 
 $query=DB::select("call usp_load_fba_Notification()");
