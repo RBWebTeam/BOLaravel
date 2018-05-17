@@ -25,14 +25,13 @@ class FbaprofileController extends Controller
 	{
             $id=Session::get('fbauserid');
 		    $validator =Validator::make($req->all(), [
-              'txtbusinesstype' =>'required',
-                                  ]);
+                                            ]);
              if ($validator->fails()) {
              return redirect('Fba-profile')
              ->withErrors($validator)
              ->withInput();
             }else{
-           DB::statement('call Usp_insert_fbaprofile(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',array(
+           $FbaProfileid=DB::statement('call Usp_insert_fbaprofile(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',array(
 		 	$req->iscompany,
 		 	$req->txtbusinesstype,
 		 	$req->txtofficeadd,
@@ -57,9 +56,15 @@ class FbaprofileController extends Controller
 		 	$req->txtotherremark,
 		 	$req->txtremark,
 		 	0, 
-		 	$id, 
-		    ));		  
+		 	$id,
+		 	$req->lifeinsucomp,
+		 	$req->generatlinsucomp,
+		 	$req->healthinuscomp
+		    ));			   
 	   }
+	   // if($req->isWorksLICins==1){
+	   // 	DB::statement('call Usp_insert_PrivateLifeInsurers(?,?,?)',array($FbaProfileid,$req->privetlifeco,$req->isWorksLICins));
+	   // }
               Session::flash('message', 'Record has been saved successfully'); 
 		   // print_r($rea->all()); exit();			
         return redirect('Fba-profile');

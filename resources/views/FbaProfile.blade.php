@@ -110,21 +110,23 @@
         		<tr>
         			<td width="30%;"><label>Works with Private Life Insurers:</label></td>
         			 <td width="20%;">
-       	              <label><input type="radio" name="isWorksLICins" value="1">&nbsp;YES</label>
+       	              <label><input type="radio" id="isWorksLICins" name="isWorksLICins" value="1" checked>&nbsp;YES</label>
        	            </td>
        	             <td width="20%;">
        	             <label><input type="radio" name="isWorksLICins" value="0">&nbsp;NO</label>
        	             </td>
         		</tr>
-        		<tr>
+            <div>
+        		<tr id="divprivate">
         			<td><label>Private Life Co's:</label></td>
-        			<td><select multiple class="form-control" id="sel2" name="ddlprivetlifeco">
+        			<td><select multiple class="form-control ddlprivetlifeco" id="sel2" name="ddlprivetlifeco">
         				 @foreach($lifeins as $val)
                          <option value="{{$val->LifeInsurerCompanyMasterId}}">{{$val->CompanyName}}</option>
                           @endforeach
                         </select>
         			</td>
         		</tr>
+            </div>
         	</table>
             </div>
         <div class="form-group divgenco">
@@ -132,15 +134,15 @@
         	<tr>
         		<td style="width: 30%"><label>Works with General Ins Co's:</label></td>
         		<td style="width: 20%"> 
-       	              <label><input type="radio" name="isWorksGeneralins" value="1">&nbsp;YES</label>
+       	              <label><input id="isWorksGeneralins" type="radio" name="isWorksGeneralins" value="2" checked>&nbsp;YES</label>
        	        </td>
        	        <td style="width: 20%">
        	             <label><input type="radio" name="isWorksGeneralins" value="0">&nbsp;NO</label>
        	        </td>
        	    </tr>
-       	    <tr>
+       	    <tr id="divgenins">
         			<td><label>General Insurance Co's:</label></td>
-        			<td><select id="ddlgenins" name="ddlgenins" multiple class="form-control" id="sel2">
+        			<td><select id="ddlgenins" name="ddlgenins" multiple class="form-control ddlgenins" id="sel2">
         				@foreach($Genins as $val)
         				 <option value="{{$val->GeneralInsuranceCompanyMasterId}}">{{$val->CompanyName}}</option>
                           @endforeach
@@ -154,15 +156,15 @@
         	<tr>
         		<td style="width: 30%"><label>Works with Stand Alone Health Ins Co's:</label></td>
         		<td style="width: 20%">
-       	              <label><input type="radio" name="isWorksStandAlone" value="1">&nbsp;YES</label>
+       	              <label><input type="radio" id="isWorksStandAlone" name="isWorksStandAlone" value="3" checked>&nbsp;YES</label>
        	        </td>
        	        <td style="width: 20%">
        	             <label><input type="radio" name="isWorksStandAlone" value="0">&nbsp;NO</label>
        	        </td>
        	    </tr>
-       	        <tr>
+       	    <tr id="divhealth">
         			<td><label>Stand Alone Health Insurance Co's:</label></td>        			
-        			<td><select name="ddlhealth" id="ddlhealth" multiple class="form-control" id="sel2">
+        			<td><select name="ddlhealth" id="ddlhealth" multiple class="form-control ddlhealth" id="sel2">
         				  @foreach($healthins as $val)
         				  <option value="{{$val->HealthInsuranceCompanyMasterId}}">{{$val->CompanyName}}</option>
                           @endforeach
@@ -219,20 +221,18 @@
          <div style="text-align:center">
          	<button type="button" id="btnfbaprofile" name="btnfbaprofile" class="btn btn-primary">SAVE</button>
          </div>
-
-
-
-
-
-
-
+         <input type="hidden" name="lifeinsucomp" id="lifeinsucomp">
+          <input type="hidden" name="generatlinsucomp" id="generatlinsucomp">
+           <input type="hidden" name="healthinuscomp" id="healthinuscomp">
      </form>
      </div>
     </div>
 </div>
 <script type="text/javascript">
 $(document).ready(function() {
-  
+   $("#divhealth").show();
+   $("#divgenins").show();
+   $("#divprivate").show();
    $("#divcompany").show();
    $("#divprofile").show();
    $('input[name=iscompany]').click(function (){
@@ -241,7 +241,7 @@ $(document).ready(function() {
     } else {
         $("#divcompany").hide();
     }
-});
+  });
     $('input[name=isWorksLIC]').click(function (){
     if (this.id == "isWorksLIC"){
         $("#divprofile").show();
@@ -263,7 +263,47 @@ $(document).ready(function() {
         $("#divloan").hide();
     }
 });
+$('input[name=isWorksLICins]').click(function (){
+    if (this.id == "isWorksLICins"){
+        $("#divprivate").show();
+    } else {  
+        $("#divprivate").hide();
+    }
+});
+$('input[name=isWorksGeneralins]').click(function (){
+    if (this.id == "isWorksGeneralins"){
+        $("#divgenins").show();
+    } else {  
+        $("#divgenins").hide();
+    }
+});
+$('input[name=isWorksStandAlone]').click(function (){
+    if (this.id == "isWorksStandAlone"){
+        $("#divhealth").show();
+    } else {  
+        $("#divhealth").hide();
+    }
+});
+
    $('#btnfbaprofile').click(function (){
+        var privetlifeco = [];
+        $.each($(".ddlprivetlifeco option:selected"), function(){            
+            privetlifeco.push($(this).val());
+        });       
+        $("#lifeinsucomp").val(privetlifeco.join(", "));
+
+        var generatlinsucomp = [];
+        $.each($(".ddlgenins option:selected"), function(){            
+            generatlinsucomp.push($(this).val());
+        });       
+        $("#generatlinsucomp").val(generatlinsucomp.join(", "));
+
+        var healthinuscomp = [];
+        $.each($(".ddlhealth option:selected"), function(){            
+            healthinuscomp.push($(this).val());
+        });        
+        $("#healthinuscomp").val(healthinuscomp.join(", "));
+
      if( $('#fbaprofile').valid())
     {
       console.log($('#fbaprofile').serialize());
