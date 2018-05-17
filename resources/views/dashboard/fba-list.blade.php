@@ -1,6 +1,6 @@
 @extends('include.master')
 @section('content')
-
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
 <style type="text/css">
   
@@ -666,6 +666,23 @@ alert("SMS Send successfully..");
 
 </script>
 
+<script type="text/javascript">
+ $(function(){
+ 
+  $('#posp_remark').keyup(function(){    
+  
+    var yourInput = $(this).val();
+    re = /[A-Za-z]?[A-Za-z `~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi;
+    var isSplChar = re.test(yourInput);
+    if(isSplChar)
+    {
+    var no_spl_char = yourInput.replace(/[A-Za-z]?[A-Za-z `~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi, '');
+    $(this).val(no_spl_char);
+    }
+  });
+ 
+});
+</script>
 
 
 

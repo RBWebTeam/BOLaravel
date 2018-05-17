@@ -1458,26 +1458,24 @@ function getcustomerid(text,fbaid){
   function getloanid(text,fbaid){
   //alert(fbaid);
  $.ajax({
-                    url: 'getloanid/'+fbaid,
-                    type: "GET",                  
-                    success:function(data) {
-                      var json = JSON.parse(data);
-                      console.log(json);
-                      if(json.StatusNo==0){
+             url: 'getloanid/'+fbaid,
+             type: "GET",                  
+             success:function(data) {
+             var json = JSON.parse(data);
+             console.log(json);
+             if(json.StatusNo==0){
  //alert(json.MasterData[0].LoanID);
-                      $(text).closest('td').text(json.MasterData[0].LoanID);
-                       alert("Loan id updated successfully"); 
+              $(text).closest('td').text(json.MasterData[0].LoanID);
+              alert("Loan id updated successfully"); 
+              }
+              else{
+              alert("Loan id does not exit"); 
 
-                    }
-                    else{
-                      alert("Loan id does not exit"); 
-
-                    }
-                    }
-                }); 
+       }
+          }
+             }); 
 
 }
-
 
 </script>
 
