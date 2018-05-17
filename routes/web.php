@@ -12,10 +12,6 @@
 */
 
 
-
-
-
-
 Route::get('health-packages','BookAppointmentController@health_packages');
 
 Route::post('health-insurance-analysis','BookAppointmentController@health_insurance_analysis');
@@ -39,9 +35,7 @@ Route::group(['middleware' => ['CheckMidd']], function (){
 Route::get('search-state','LoginController@search_state');
 Route::get('search-city','LoginController@search_city');
 // end city state
-
 Route::get('dashboard','DashboardController@dashboard');
-
 //Fba details
 Route::get('fba-list','FbaController@fba_list');
 Route::get('get-fba-list','FbaController@get_fba_list');
@@ -184,6 +178,8 @@ Route::post('Fsm-Register','FsmRegisterController@insertfsm');
 
  Route::get('send-notification-approve','SendNotificationController@SendnotificationApprove');
 
+
+
  Route::get('approve-notification','SendNotificationController@notificationApprove');
 
   Route::get('send-sms-log','SmslogController@getsendsmslog');
@@ -201,9 +197,27 @@ Route::post('insertnotification','SendNotificationController@insertntf');
 
 Route::post('send-notification-approve','SendNotificationController@insertntf');
 
+Route::get('send-sms-state','SendSmsFilterController@getsmsstate');
+Route::get('send-sms-register','SendSmsFilterController@sms_Register');
+
 Route::get('send-sms-register','SendSmsFilterController@SendSMSFilter');
 
 Route::post('send-sms-filter','SendSmsFilterController@getfbafilter');
+Route::post('send-sms-filter-register','SendSmsFilterController@send_sms_save_filter');
+
+ Route::get('send-sms-register','SendSmsFilterController@sendsmsre');
+ Route::get('send-sms-register','SendSmsFilterController@sendsmsre');
+ Route::get('send-sms/{id}',array('as'=>'send-sms.ajax','uses'=>'SendSMSController@getsmscity'));
+ Route::get('send-sms','SendSMSController@sendsmsrea');
+ Route::get('send-sms-state','SendSMSController@sendsmsren');
+ Route::post(' send-sms-city','SendSMSController@sendsmscity');
+Route::post('send-sms-save','SendSMSController@send_sms_save');
+Route::post('send-sms-detail','SendSMSController@getfbalist');
+Route::get('send-sms/{id}',array('as'=>'sendsms.ajax','uses'=>'SendSMSController@sendsmscity'));
+Route::get('send-sms','SendSMSController@ViewSendSMSDetails');
+//city_droupdown
+Route::get('city_dropdown','bankofferController@droup_city');
+Route::get('state_dropdown_id/{cityid}','bankofferController@get_state_id');
 
 Route::get('approvenotification/{msgid}/{value}','SendNotificationController@approvenotification');
 route::get('sendnotificationnew', 'SendNotificationController@sendnotificationstate');
@@ -217,16 +231,8 @@ Route::get('fbalist-document/{fbaid}','FbaController@getdoclistview');
 route::post('send-notification-submit', 'SendNotificationController@sendnotificationsubmit');
 
 
-
-
-
-//route::get('sendnotificationnew', 'SendNotificationController@send-notificationstate');
-
 Route::get('Fsm-Details','FsmDetailsController@FsmDetails');
-
 Route::get('Payment-History','PaymentHistoryController@Payment_History');
-
-Route::post('send-sms-detail','SendSMSController@getfbalist');
 
 
 Route::get('uploadefile','uploadfileController@uplode');
@@ -234,7 +240,7 @@ Route::get('uploadefile','uploadfileController@uplode');
  Route::post('file_uplode','uploadfileController@file_uploade');
 Route::post('insertnotificationfile','uploadfileController@insertntfi');
 
- // Route::get('send-sms','SendSMSController@ViewSendSMSDetails');
+
  
 Route::get('notification-save','SendNotificationController@sendsubmitnotification_s');
 
@@ -243,8 +249,8 @@ Route::get('approvenotification/{msgid}/{value}','SendNotificationController@app
 Route::get('send-notification','SendNotificationController@sendnotification');
 
 //send sms
-Route::get('send-sms','SendSMSController@ViewSendSMSDetails');
-Route::post('send-sms-detail','SendSMSController@getfbalist');
+
+
  
 Route::get('send-notification','SendNotificationController@sendnotification');
  //Otp Detail
@@ -322,7 +328,7 @@ Route::get('lead-assgin-list-get','LeadstatusController@lead_assgin_list_get');
 ******************/
 Route::get('product-authorized','ProductController@product_authorized');
 Route::post('product-save','ProductController@product_save');
-Route::post('send-sms-save','SendSMSController@send_sms_save');
+
 
  /************
 // User Registration
@@ -345,6 +351,8 @@ Route::Post('ticket-request-save','TicketController@ticket_request_save') ;
 Route::get('ticket-request-user-list','TicketController@ticket_request_userlist') ;
 Route::Post('ticket-user-comment','TicketController@ticket_user_comment') ;
 Route::get('went-wrong','LoginController@went_wrong');
+Route::get('raise-ticket-view','RaiserTicketController@viewticketdetails');
+
 
 
 /************
