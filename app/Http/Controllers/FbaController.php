@@ -178,7 +178,7 @@ class FbaController extends CallApiController
       }
 
 
-   public function getupdateloanid ($fbaid){
+   public function getupdateloanid ($fbaid,){
 try{
     $data= array("fbaid"=>"$fbaid");
     $token=array("cache-control: no-cache","content-type: application/json", "token: 1234567890");
@@ -187,9 +187,16 @@ try{
      $type=$token;
     $result=$this->call_other_data_api($this::$api_url.'/api/updateloanid',$post_data,$type);
     $custrespon=$result['http_result']; 
+    $datax=json_decode($custrespon);
+    if($datax->Status==0){
+        $loanid=($datax->MasterData[0]->LoanID);
 
+    }else{
 
-    $dataloan= array("fbaid"=>"$fbaid");
+ }
+    
+
+    $dataloan= array("fbaid"=>"$fbaid","LoanId"=>"$LoanID");
     $token=array("cache-control: no-cache","content-type: application/json", "token: 1234567890");
  
      $post_data1=json_encode($dataloan);

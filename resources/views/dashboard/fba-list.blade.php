@@ -87,6 +87,7 @@
                                        <th>POSP No</th>
                                        <th>Loan ID</th> 
                                        <th>Posp Name</th> 
+                                       <th>Pospstatus</th> 
                                        <th>Bank Account</th>
                                        <th>Partner Info</th> 
                                        <th>Sales code</th>
@@ -504,6 +505,7 @@
 
 
              {"data":"pospname"}, 
+               {"data":"pospstatus"}, 
              {"data":"bankaccount"}, 
              {"data":null ,
              "render": function ( data, type, row, meta ) {
@@ -564,7 +566,7 @@ $(document).ready(function() {
     var min = $('#min').val();
     var max = $('#max').val();
    // console.log(max);
-    var createdAt = data[20] || 20; // Our date column in the table
+    var createdAt = data[21] || 21; // Our date column in the table
    
     if (
       (min == "" || max == "") ||
