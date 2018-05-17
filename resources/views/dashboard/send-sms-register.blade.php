@@ -1,6 +1,6 @@
-@extends('include.master')
-@section('content')
-  <form  id="sendsms" name="sendsms" action="POST"> 
+   @extends('include.master')
+   @section('content')
+   <form  id="sendsms" name="sendsms" action="POST"> 
    {{ csrf_field() }}
     <div id="content" style="overflow:scroll;">
     <div class="container-fluid white-bg">
@@ -41,7 +41,7 @@
     <label class="control-label" for="inputError" id="required1"> </label>
     </div>
     <div class="form-group col-md-3">
-    <input type="text" placeholder="City.." name="city_name" id="search_city" class="form-control" style=" display: none;" >  
+    <input type="text" placeholder="City.." name="city_name" id="search_city" class="form-control" style=" display: block;" >  
     </div>
     </div> 
    <div class="col-md-4">

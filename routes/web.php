@@ -62,8 +62,7 @@ Route::get('getloanid/{fbaid}','FbaController@getupdateloanid');
  Route::get('crmfbalist','crmfbalistController@crmlist');  
  Route::get('crmstatus/{FBAID}','crmfbalistController@statuscrm'); 
  Route::post('crmstatus','crmfbalistController@crminsert');
-
- Route::get('crmtest','crmfbalistController@test');
+ Route::get('crmfbalist/{FBAID}','crmfbalistController@test');
 //Route::get('crmstatus/{FBAID}','crmfbalistController@showcrmstatus');
 
 
@@ -160,6 +159,12 @@ Route::get('View-Raised-Ticket/{ticketid}','ViewRaisedTicketController@deletetic
 Route::get('send-sms-rights','SendSmsRightsController@sendsmsview');
 Route::get('send-sms-directsend/{userid}','SendSmsRightsController@isdirectsend');
 Route::get('send-sms-needaproval/{userid}','SendSmsRightsController@isneedapproval');
+
+Route::get('Approve-send-sms','SendSmsapprovalController@sendsmsview');
+
+Route::get('Fba-profile','FbaprofileController@fbaprofileview');
+
+Route::post('Fba-profile','FbaprofileController@Insertfbaprofile');
 ///shubham end ///
 // avinash
  Route::get('ticket-module','TicketController@getticketdetails') ;
@@ -206,6 +211,8 @@ Route::post('send-notification-approve','SendNotificationController@insertntf');
 Route::get('send-sms-register','SendSmsFilterController@SendSMSFilter');
 
 Route::post('send-sms-filter','SendSmsFilterController@getfbafilter');
+
+Route::post('send-sms-filter1','SendSmsFilterController@send_sms_save_filter');
 
 Route::get('approvenotification/{msgid}/{value}','SendNotificationController@approvenotification');
 route::get('sendnotificationnew', 'SendNotificationController@sendnotificationstate');
