@@ -239,9 +239,9 @@
         <form name="update_posp" id="update_posp">
          {{ csrf_field() }}
          <div class="form-group">
-            <input type="hidden" name="fbaid" id="fbaid" value=" ">
-            <label class="control-label" for="message-text">Enter POSP : </label>
-            <input type="Number" class="recipient-name form-control" id="posp_remark" name="posp_remark" required="" />
+          <input type="hidden" name="fbaid" id="fbaid" value=" ">
+          <label class="control-label" for="message-text">Enter POSP : </label>
+          <input type="text" class="recipient-name form-control" id="posp_remark" name="posp_remark"  maxlength="4" required="" />
           </div>
         </form>
         <div class="modal-footer"> 
@@ -465,7 +465,7 @@
             { "data": "createdate" },            
             {"data":"MobiNumb1" ,
              "render": function ( data, type, row, meta ) {
-                return '<a href="#"><span>'+data+'</span></a> <a href="#" data-toggle="modal" data-target="#sms_sent_id" onclick="SMS_FN(1,'+data+')"><span class="glyphicon glyphicon-envelope"></span></a>';
+                return '<span>'+data+'</span></a> <a href="#" data-toggle="modal" data-target="#sms_sent_id" onclick="SMS_FN(1,'+data+')"><span class="glyphicon glyphicon-envelope"></span></a>';
               }
             },
             // { "data": "createdate" },
@@ -498,11 +498,12 @@
              {"data":"LoanID"  ,
              "render": function ( data, type, row, meta ) {
                 // return data==""?('<a id="loan_'+row.fbaid+'" class="checkloan" data-toggle="modal" data-target="#updateLoan" onclick="LoanID_UPDATE('+row.fbaid+')">update</a>'):data;
-                 return (data==""||data=="0")?('<a id="btnviewcid" onclick="getloanid(this,'+row.fbaid+')">Update</a>'):data;
+                 return (data==""||data=="0")?('<a id="btnviewid" onclick="getloanid(this,'+row.fbaid+')">Update</a>'):data;
               }
          }, 
 
-            {"data":"pospname"}, 
+
+             {"data":"pospname"}, 
              {"data":"bankaccount"}, 
              {"data":null ,
              "render": function ( data, type, row, meta ) {
@@ -518,26 +519,19 @@
    
            },
 
-
-
              {"data":null  ,
              "render": function ( data, type, row, meta ) {
                 return '<a href="#" style="" data-toggle="modal" data-target=".fsmdetails">Fsm details</a>';
               }
             },
             
-
-          
-
-          {"data":"fdid" ,
+             {"data":"fdid" ,
              "render": function ( data, type, row, meta ) {
             return data == 1?'<a href="" style="" data-toggle="modal"  data-target="#docviwer" onclick="docview('+row.fbaid+')" >uploaded</a>':'pending';
            }
         },
 
-          
-
-            {"data":"CustID" ,
+          {"data":"CustID" ,
               "render": function ( data, type, row, meta ) {
                return (data==""||data=="0")?('<a id="btnviewcid" onclick="getcustomerid(this,'+row.fbaid+')">Update</a>'):data;
              }  
@@ -570,7 +564,7 @@ $(document).ready(function() {
     var min = $('#min').val();
     var max = $('#max').val();
    // console.log(max);
-    var createdAt = data[19] || 19; // Our date column in the table
+    var createdAt = data[20] || 20; // Our date column in the table
    
     if (
       (min == "" || max == "") ||

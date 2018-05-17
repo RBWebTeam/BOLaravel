@@ -178,14 +178,14 @@ class FbaController extends CallApiController
       }
 
 
-  public function getupdateloanid ($fbaid){
+   public function getupdateloanid ($fbaid){
 try{
     $data= array("fbaid"=>"$fbaid");
     $token=array("cache-control: no-cache","content-type: application/json", "token: 1234567890");
  
      $post_data=json_encode($data);
      $type=$token;
-    $result=$this->call_other_data_api('http://apiservices.magicfinmart.com/api/Client/UpdateLoanId',$post_data,$type);
+    $result=$this->call_other_data_api($this::$api_url.'/api/updateloanid',$post_data,$type);
     $custrespon=$result['http_result']; 
 
 

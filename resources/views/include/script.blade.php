@@ -1432,21 +1432,19 @@ function getcustomerid(text,fbaid){
   //alert(fbaid);
   // alert(data);
   $.ajax({
-                    url: 'getcustomerid/'+fbaid,
-                    type: "GET",                  
-                    success:function(data) {
-                      var json = JSON.parse(data);
-                      console.log(json);
-                      if(json.StatusNo==0){
-   
-                      $(text).closest('td').text(json.MasterData.CreateCustomerResult.CustID);
-                       alert("Customer id updated successfully"); 
+             url: 'getcustomerid/'+fbaid,
+             type: "GET",                  
+             success:function(data) {
+             var json = JSON.parse(data);
+             console.log(json);
+             if(json.StatusNo==0){
+             $(text).closest('td').text(json.MasterData.CreateCustomerResult.CustID);
+             alert("Customer id updated successfully"); 
+       }
+          else{
+                alert("Customer id does not exists"); 
 
-                    }
-                    else{
-                      alert("Customer id does not exists"); 
-
-                    }
+                 }
                     }
                 }); 
 
@@ -1466,7 +1464,7 @@ function getcustomerid(text,fbaid){
                       var json = JSON.parse(data);
                       console.log(json);
                       if(json.StatusNo==0){
-   //alert(json.MasterData[0].LoanID);
+ //alert(json.MasterData[0].LoanID);
                       $(text).closest('td').text(json.MasterData[0].LoanID);
                        alert("Loan id updated successfully"); 
 

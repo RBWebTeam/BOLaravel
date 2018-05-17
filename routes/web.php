@@ -61,6 +61,12 @@ Route::get('getloanid/{fbaid}','FbaController@getupdateloanid');
 // -------------------------------------
  Route::get('getpaylinknew/{fbaid}','FbaController@paylinkget');
 
+ Route::get('getcity','bankofferController@statecity');
+Route::get('citystate/{id}',array('as'=>'getcitystate.ajax','uses'=>'bankofferController@cityget'));
+
+
+
+
  Route::post('pmesgsend','FbaController@sendpaysms');
  Route::get('crmfbalist','crmfbalistController@crmlist');  
  Route::get('crmstatus/{FBAID}','crmfbalistController@statuscrm'); 
