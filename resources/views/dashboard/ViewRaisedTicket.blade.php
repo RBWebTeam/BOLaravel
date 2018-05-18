@@ -1,5 +1,13 @@
 @extends('include.master')
 @section('content')
+<style type="text/css">
+  .txtarea {
+    border: none;
+    background: transparent;
+    width: 100%;
+    min-width: 300px;    
+}
+</style>
 <div class="container-fluid white-bg">
 <div class="col-md-12"><h3 class="mrg-btm">View Raised Ticket</h3></div>
    <div class="col-md-12">
@@ -30,7 +38,7 @@
                 	<td>{{$val->CateName}}</td>
                 	<td>{{$val->QuerType}}</td>
                 	<td>{{$val->Description}}</td>
-                	<td>{{$val->Message}}</td>
+                	<td><textarea class="txtarea" readonly=""> {{$val->Message}}</textarea></td>
                 	<td>
                 		<?php if($val->DocPath == ""){ ?>
                      No Document Found

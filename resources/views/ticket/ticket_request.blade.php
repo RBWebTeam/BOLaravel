@@ -1,5 +1,13 @@
 @extends('include.master')
 @section('content')
+<style type="text/css">
+  .txtarea {
+    border: none;
+    background: transparent;
+    width: 100%;
+    min-width: 300px;    
+}
+</style>
 <div class="container-fluid white-bg">
  <div class="col-md-12" id="Ticket-app"><h3 class="mrg-btm">Assign Ticket</h3></div>
 
@@ -47,7 +55,7 @@
                                        <td>{{$va->QuerType}}</td>
                                         <td>{{$va->Description}}</td>
                                          <!-- <td >{{$va->DocPath}}</td> -->
-                                          <td>{{$va->Message}}</td>
+                                          <td><textarea class="txtarea" readonly=""> {{$va->Message}}</textarea></td>
                                            <td>{{$va->Status}}</td>
                                            <td>{{$va->RaisedByName}}</td>
                                            <td>{{$va->RaisedByEmail}}</td>
@@ -210,20 +218,25 @@
  //        }
 
  // return false;
- ceckemail=checkEmails();
+ //ceckemail=checkEmails("toemailid");
+
+ccemail=checkEmails("ccemailid");
 
  if($('#FBAUserId').val()==0){
   alert("Please select user");
  }
- else if(ceckemail!=0){
-  alert("Please add email");
+ else if(!ValidateEmail($('#toemailid').val())){
+  alert("Please enter valid to email");
+ }
+else if($('#ccemailid').val()!='' && ccemail!=0){
+  alert("Please enter valid cc email");
  }
  else{
          $.post("{{url('ticket-request-save')}}",$('#TicketRequest_Id_from').serialize())
              .done(function(data){ 
              console.log(data);
                  if(data==0){
-                  alert('Ticket successfully assigned to '+$("#FBAUserId").children("option").filter(":selected").text());   
+                  alert('Ticket no '+ $("#TicketRequest_Id").val()+ '  successfully assigned to '+$("#FBAUserId").children("option").filter(":selected").text());   
                   window.location.href = "{{url('ticket-request')}}";
                  }else{
                   console.log("error");
@@ -236,6 +249,15 @@
    })
 
  
+ function ValidateEmail(mail) 
+{
+ if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail))
+  {
+    return (true)
+  }
+   // alert("You have entered an invalid email address!")
+    return (false)
+}
 
  function view_comment_fn(ID){  
    $('#Ticket-comment-Id-Modal').modal('show');
@@ -291,8 +313,8 @@ function checkEmail(email) {
 return regExp.test(email);
 }
 
-function checkEmails(){
-  var emails = document.getElementById("ccemailid").value;
+function checkEmails(useremailid){
+  var emails = document.getElementById(useremailid).value;
   var emailArray = emails.split(",");
   var invEmails = "";
   var tru=1;
