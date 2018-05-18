@@ -15,15 +15,14 @@ class ViewRaisedTicketController extends
 Controller
 {
 	
-	public function getraisedticket(){
+	public function getraisedticket()
+	{
 	 $id=Session::get('fbauserid');
-
-     $query = DB::select("call Usp_viewraisedticket($id)");
-     
-	 return view('dashboard.ViewRaisedTicket',['query'=>$query]);
-	
+     $query = DB::select("call Usp_viewraisedticket($id)");     
+	 return view('dashboard.ViewRaisedTicket',['query'=>$query]);	
 	}
-	public function deleteticket($ticketid){
+	public function deleteticket($ticketid)
+	{
 	DB::select("call Usp_deleteticket($ticketid)");
      return redirect('View-Raised-Ticket');
     }

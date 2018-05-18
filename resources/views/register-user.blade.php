@@ -90,7 +90,7 @@
             <label for="inputEmail" class="control-label col-xs-2">State <span style="color:red;">*</span> </label>
             <div class="col-xs-6" >
  
- <select class="form-control  search_state search_state_error" name="state_id" placeholder="Search State" id="search_state"></select>
+ <select class="form-control  search_state search_state_error" name="state_id"  placeholder="Search State" id="search_state" ></select>
  <label class="control-label" for="inputError" id="error_state"> </label>
            </div>
 </div>
@@ -162,7 +162,9 @@
 
 
 
+
    <script type="text/javascript">
+      
     $(document).on('click','#register_user_id',function(){
 
     if($('.search_state_error').val()==0){
@@ -186,7 +188,6 @@
 
 
             <script type="text/javascript">
-            
             $( "#register_user_id" ).click(function() {
              $("#userregi").validate();
         });
