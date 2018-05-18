@@ -14,21 +14,17 @@ use Mail;
 class FbaController extends CallApiController
 {
       
-        public function fba_list()
-        {
-
-  //$query=DB::select("call usp_load_fbalist_new(0)");
-           
+        public function fba_list(){
+         //$query=DB::select("call usp_load_fbalist_new(0)");
          $doctype = DB::select("call get_document_type()");
-        
-        
          //print_r($doctype); exit();
 
           
           return view('dashboard.fba-list',['doctype'=>$doctype]);         
         }
         public function get_fba_list(Request $req){
-
+          $id=Session::get('FBAUserId');
+        // print_r($id); exit();
           $query=DB::select("call fbaList(0)");
 
           return json_encode(["data"=>$query]);
@@ -49,11 +45,9 @@ class FbaController extends CallApiController
 
 
 
-        public function sendsms(Request $req) {
-
+              public function sendsms(Request $req) {
               $newsms = urlencode($req->sms); //htmlspecialchars();
 
-              
               $post_data="";
               $result=$this->call_json_data_api('http://vas.mobilogi.com/api.php?username=rupeeboss&password=pass1234&route=1&sender=FINMRT&mobile[]='.$req->mobile_no.'&message[]='.$newsms,$post_data);
               $http_result=$result['http_result'];
@@ -109,9 +103,34 @@ class FbaController extends CallApiController
           $query=DB::table('FBARepresentations')
             ->where('FBAID','=',$req->fbaid)
             ->update(['POSPNo' =>$req->posp_remark]);
-           if ( $query) {
-              return response()->json(array('status' =>0,'message'=>"success"));
-            }
+           // if ( $query) {
+           //    return response()->json(array('status' =>0,'message'=>"success"));
+           //  }
+
+             try{
+    
+  $data='{"PospNo":"'.$req->posp_remark.'","ProdId":"","SuppAgentId":"","FBAId":"'.$req->fbaid.'"}';
+
+     //print_r($data);exit();
+     $type= array("cache-control: no-cache","content-type: application/json", "token:1234567890");
+ 
+     $result=$this->call_other_data_api('http://apiservices.magicfinmart.com/api/Client/UpdatePospId',$data,$type);
+ 
+       $http_result=$result['http_result'];
+       $error=$result['error'];
+              $st=str_replace('"{', "{", $http_result);
+              $s=str_replace('}"', "}", $st);
+              $m=str_replace('\\', "", $s);
+              $update_user='';        
+              $custrespon = response()->json(array('status' =>0,'message'=>"success"));
+       }
+           catch (Exception $e){
+
+           return $e->getMessage();    
+    }        
+           return ($custrespon);
+
+
 
         }
 
@@ -144,9 +163,8 @@ class FbaController extends CallApiController
  try{
     $data= array("FBAId"=>"$fbaid");
     $token=array("cache-control: no-cache","content-type: application/json", "token: 1234567890");
- 
-     $post_data=json_encode($data);
-     $type=$token;
+    $post_data=json_encode($data);
+    $type=$token;
     $result=$this->call_other_data_api($this::$api_url.'/api/set-cust-id',$post_data,$type);
     $custrespon=$result['http_result'];
     
@@ -159,71 +177,82 @@ class FbaController extends CallApiController
       }
 
 
-  public function getupdateloanid ($fbaid){
-try{
+   public function getupdateloanid ($fbaid){
+  try{
     $data= array("fbaid"=>"$fbaid");
     $token=array("cache-control: no-cache","content-type: application/json", "token: 1234567890");
  
      $post_data=json_encode($data);
      $type=$token;
-    $result=$this->call_other_data_api($this::$api_url.'/api/updateloanid',$post_data,$type);
-    $custrespon=$result['http_result'];              
+     $result=$this->call_other_data_api($this::$api_url.'/api/updateloanid',$post_data,$type);
+     $custrespon=$result['http_result']; 
+     $custrespon_new= $custrespon;
+     $datax=json_decode($custrespon);
+
+     if($datax->StatusNo==0){ 
+
+      $loanid=($datax->MasterData[0]->LoanID);    
+      $dataloan= array("fbaid"=>"$fbaid","LoanId"=>"$loanid");
+     $token=array("cache-control: no-cache","content-type: application/json", "token: 1234567890");
+     $post_data1=json_encode($dataloan);
+     $type=$token;
+     $result=$this->call_other_data_api('http://apiservices.magicfinmart.com/api/Client/UpdateLoanId',$post_data1,$type);
+      $custrespon=$result['http_result'];   
+      return array("loanid"=>$loanid,"message"=>"Loan Id Updated Successfully");
+      
+    }
+   else{
+     return array("loanid"=>0,"message"=>$datax->Message);
+   } 
+    
+             
     
 }
   catch (Exception $e){
 
         return $e->getMessage();    
-     }        
-           return ($custrespon);      
+   }        
+           return ($custrespon_new);      
       }
 
+     
 
 // Genratepaylink
 
        public function paylinkget($fbaid){
              // print_r($fbaid);exit();
          try{
-    
-         $data='{"FBAID": "'.$fbaid.'"}';
-        $type= array("cache-control: no-cache","content-type: application/json", "token:1234567890");
- 
-     $result=$this->call_other_data_api($this::$api_url.'/api/get-posp-payment-link',$data,$type);
- 
+          $m=$this::getPaymentLinkFromFinmart($fbaid);
+          $data=json_decode($m);
+          
+          $res=$this::savePaymentInOldFinamrtDB($fbaid,$data->MasterData);
+          $custpay = json_decode($res);
+           
+  }
+       catch (Exception $e){
+
+       return $e->getMessage();    
+    }        
+       return ($m);  
+
+ } 
+
+      public function sendpaysms(Request $req){
+   
+      $text="Your payment link is genrated";
+      $newsms = urlencode( $text.":".$req->divpartnertable_payment);//htmlspecialchars();
+       //print_r($newsms); exit();
+      $post_data="";
+      $result=$this->call_json_data_api('http://vas.mobilogi.com/api.php?username=rupeeboss&password=pass1234&route=1&sender=FINMRT&mobile[]='.$req->txtmono.'&message[]='.$newsms,$post_data);
        $http_result=$result['http_result'];
        $error=$result['error'];
-              $st=str_replace('"{', "{", $http_result);
-              $s=str_replace('}"', "}", $st);
-              $m=str_replace('\\', "", $s);
-              $update_user='';
-             print_r($m);exit();
-              $custrespon = json_decode($m);
-       }
-
-  catch (Exception $e){
-
-        return $e->getMessage();    
-     }        
-           return ($custrespon);  
-
+       $st=str_replace('"{', "{", $http_result);
+       $s=str_replace('}"', "}", $st);
+       $m=$s=str_replace('\\', "", $s);
+       $obj = json_decode($m);
+       return $obj;
     }
 
-    public function sendpaysms(Request $req)
-    {
-            $text="Your payment link is genrated";
-              $newsms = urlencode( $text.":".$req->txtlink);//htmlspecialchars();
-                 //print_r($newsms); exit();
-              
-              $post_data="";
-              $result=$this->call_json_data_api('http://vas.mobilogi.com/api.php?username=rupeeboss&password=pass1234&route=1&sender=FINMRT&mobile[]='.$req->txtmono.'&message[]='.$newsms,$post_data);
-              $http_result=$result['http_result'];
-              $error=$result['error'];
-              $st=str_replace('"{', "{", $http_result);
-              $s=str_replace('}"', "}", $st);
-              $m=$s=str_replace('\\', "", $s);
-             
-              $obj = json_decode($m);
-              return $obj;
-    }
  // vivek start
  //fba master*******
 
@@ -243,7 +272,30 @@ try{
           $que=DB::table('FBAMast')->where('FBAID','=',$req->fba_id)->update($arra);
            return redirect('fbamaster-edit');
        }
+
+
+private function getPaymentLinkFromFinmart($fbaid){
+       $data='{"FBAID": "'.$fbaid.'"}';
+       $type= array("cache-control: no-cache","content-type: application/json", "token:1234567890");
+       $result=$this->call_other_data_api($this::$api_url.'/api/get-posp-payment-link',$data,$type);
+       $http_result=$result['http_result'];
+       $error=$result['error'];
+       $st=str_replace('"{', "{", $http_result);
+       $s=str_replace('}"', "}", $st);
+       $m=str_replace('\\', "", $s);
+       return $m;
 }
-
-
-    
+private function savePaymentInOldFinamrtDB($fbaid,$masterdata){
+ // print_r($masterdata);exit();
+  $data2='{"FBAID":"'.$fbaid.'","PayURL":"'.$masterdata->PaymentURL.'","PayRefrenceID":"'.$masterdata->PaymRefeID.'","DWTCustID": "'.$masterdata->PaymRefeID.'","PCode":"501"}';
+  $type= array("cache-control: no-cache","content-type: application/json", "token:1234567890");
+   $result=$this->call_other_data_api('http://apiservices.magicfinmart.com/api/SaveFBA/AddMPSInfo',$data2,$type);
+       $http_result=$result['http_result'];
+       $error=$result['error'];
+       $st=str_replace('"{', "{", $http_result);
+       $s=str_replace('}"', "}", $st);
+       $m=str_replace('\\', "", $s);
+       return $m;
+      
+}
+}

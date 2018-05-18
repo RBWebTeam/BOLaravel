@@ -1125,21 +1125,18 @@ function getpaymentlink(fbaid,mobile){
 
  $('#txtmono').val(mobile);
  $('#fba').val(fbaid);
-
-  $.ajax({
+$.ajax({
                     url: 'getpaymentlink/'+fbaid,
                     type: "GET",
                     dataType: "json",
                     success:function(data) {
-
-                      if(data.length>0){
+                    if(data.length>0){
 
                        // alert(data[0].Link);
-                        var str = "<p>"+data[0].Link+"</p>";
+                        var str = ""+data[0].Link+"";
                         // alert(str)
-                        $('.divpartnertable_payment').html(str);
-                         $('.paylink_payment').modal('show');
-
+                          $('.divpartnertable_payment').html(str);
+                          $('.paylink_payment').modal('show');
                           //$('#paylink').html(data[0].Link);
                        }     
                        else{
@@ -1463,26 +1460,32 @@ function getcustomerid(text,fbaid){
  </script>
 <!-- Get Loan ID Start -->
 <script type="text/javascript">
-  function getloanid(text,fbaid){
+    function getloanid(text,fbaid){
   //alert(fbaid);
  $.ajax({
-                    url: 'getloanid/'+fbaid,
-                    type: "GET",                  
-                    success:function(data) {
-                      var json = JSON.parse(data);
-                      console.log(json);
-                      if(json.StatusNo==0){
-   //alert(json.MasterData[0].LoanID);
-                      $(text).closest('td').text(json.MasterData[0].LoanID);
-                       alert("Loan id updated successfully"); 
+             url: 'getloanid/'+fbaid,
+             type: "GET",                  
+             success:function(data) {
+              if(data.loanid==0){
+                  alert(data.message);
+              }
+              else{
+                 $(text).closest('td').text(data.loanid);
+                 alert(data.message);
+              }
+ //             var json = JSON.parse(data);
+ //             console.log(json);
+ //             if(json.StatusNo==0){
+ // //alert(json.MasterData[0].LoanID);
+ //              $(text).closest('td').text(json.MasterData[0].LoanID);
+ //              alert("Loan id updated successfully"); 
+ //              }
+ //              else{
+ //              alert("Loan id does not exit"); 
 
-                    }
-                    else{
-                      alert("Loan id does not exit"); 
-
-                    }
-                    }
-                }); 
+ //       }
+          }
+             }); 
 
 }
 
