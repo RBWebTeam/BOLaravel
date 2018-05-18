@@ -64,9 +64,9 @@ class TicketController extends Controller
 
 
     public  function ticket_request_userlist(Request $req){   
-                 //$query=DB::select('call sp_ticket_request_assign(?)',[Session::get('fbauserid')]);
+                 $query=DB::select('call sp_ticket_request_assign(?)',[Session::get('fbauserid')]);
 
-                   $query=DB::select('call sp_ticket_request_assign()');
+                   // $query=DB::select('call sp_ticket_request_assign()');
     	
 
                
