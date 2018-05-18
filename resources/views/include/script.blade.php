@@ -293,7 +293,7 @@ $('.loan_from_id').click(function(){
             type: "GET",
             url:'fba-list/'+fbaid+'/'+value+'/'+flag, 
             success: function( msg ) {
-            console.log(msg);
+            //console.log(msg);
              alert("loan id updated successfully..!");
              $('.updateLoan').modal('hide');
             $('#loan_id').val('');
@@ -430,6 +430,10 @@ alert(JSON.stringify(data));*/
 <script type="text/javascript">
   
 
+
+
+
+
 $(document).ready(function(){
  var  st_array=Array('<option value="0">Select</option>');
 
@@ -497,21 +501,21 @@ $(document).on('change', '#search_state', function() {
 
 });
 
-    function pan_card(obj,val){  alert(obj);
+ function pan_card(obj,val){  alert(obj);
     if(obj=='pan_no' ){
-    var str =$('#pan_no').val();
-    var pancardPattern = /^([a-zA-Z]{5})(\d{4})([a-zA-Z]{1})$/;
-    var res = str.match(pancardPattern);
-     if(res){
-       // console.log('Pancard is valid one.!!');
-      $('#pan_number').hide();
+                   var str =$('#pan_no').val();
+                   var pancardPattern = /^([a-zA-Z]{5})(\d{4})([a-zA-Z]{1})$/;
+                   var res = str.match(pancardPattern);
+                   if(res){
+                     // console.log('Pancard is valid one.!!');
+                      $('#pan_number').hide();
 
-      }else{
-      // console.log('Oops.Please Enter Valid Pan Number.!!');
-      $('#pan_number').show();
+                  }else{
+                    // console.log('Oops.Please Enter Valid Pan Number.!!');
+                    $('#pan_number').show();
 
-      return false;
-  }
+                    return false;
+                  }
                   
   }
 }
@@ -615,7 +619,6 @@ $(document).on('change', '#search_state', function() {
          url: "{{URL::to('posp-update')}}",
          data : $('#update_posp').serialize(),
          success: function(msg){
-          console.log(msg);
               if (msg.status==0) 
                 {
                   alert('Updated Successfully');
@@ -625,7 +628,7 @@ $(document).on('change', '#search_state', function() {
                   $('.close').click();           
                 } 
                 else {
-                  alert('Could not update');
+                  alert('Could not updated successfully');
                 }
 
         }  
@@ -1122,21 +1125,19 @@ function getpaymentlink(fbaid,mobile){
 
  $('#txtmono').val(mobile);
  $('#fba').val(fbaid);
-
-  $.ajax({
+$.ajax({
                     url: 'getpaymentlink/'+fbaid,
                     type: "GET",
                     dataType: "json",
                     success:function(data) {
-
-                      if(data.length>0){
+                    if(data.length>0){
 
                        // alert(data[0].Link);
                         var str = ""+data[0].Link+"";
                         // alert(str)
-                        $('.divpartnertable_payment').html(str);
-                         $('.paylink_payment').modal('show');
-                         //$('#paylink').html(data[0].Link);
+                          $('.divpartnertable_payment').html(str);
+                          $('.paylink_payment').modal('show');
+                          //$('#paylink').html(data[0].Link);
                        }     
                        else{
                         
@@ -1372,9 +1373,11 @@ $.ajax({
 <script> 
 
 $('#msds-select').change(function () {
-  
-  var table = $('#fba-list-table').DataTable(); 
-  $.fn.dataTable.ext.search.push(
+    // var $loading = $('#loading').hide();    
+ var table = $('#fba-list-table').DataTable(); 
+
+ // $loading.show();
+    $.fn.dataTable.ext.search.push(
     function( settings, data, dataIndex ) {
         var msdsSearch = $( "#msds-select option:selected" ).val();
         var msdsValue = data[10]|| 0;
@@ -1427,32 +1430,37 @@ if ($('select ').val() == '1') {
 <!-- POSP YES OR NO Dropdown end -->
 
 
-<script type="text/javascript">
+
+
+
+ <script type="text/javascript">
 function getcustomerid(text,fbaid){
   //alert(fbaid);
   // alert(data);
   $.ajax({
-             url: 'getcustomerid/'+fbaid,
-             type: "GET",                  
-             success:function(data) {
-             var json = JSON.parse(data);
-             console.log(json);
-             if(json.StatusNo==0){
-             $(text).closest('td').text(json.MasterData.CreateCustomerResult.CustID);
-             alert("Customer id updated successfully"); 
-       }
-          else{
-                alert("Customer id does not exists"); 
+                    url: 'getcustomerid/'+fbaid,
+                    type: "GET",                  
+                    success:function(data) {
+                      var json = JSON.parse(data);
+                      console.log(json);
+                      if(json.StatusNo==0){
+   
+                      $(text).closest('td').text(json.MasterData.CreateCustomerResult.CustID);
+                       alert("Customer id updated successfully"); 
 
-                 }
+                    }
+                    else{
+                      alert("Customer id does not exists"); 
+
+                    }
                     }
                 }); 
 
 }
  </script>
 <!-- Get Loan ID Start -->
- <script type="text/javascript">
-  function getloanid(text,fbaid){
+<script type="text/javascript">
+    function getloanid(text,fbaid){
   //alert(fbaid);
  $.ajax({
              url: 'getloanid/'+fbaid,
@@ -1463,6 +1471,7 @@ function getcustomerid(text,fbaid){
               }
               else{
                  $(text).closest('td').text(data.loanid);
+                 alert(data.message);
               }
  //             var json = JSON.parse(data);
  //             console.log(json);
@@ -1480,11 +1489,20 @@ function getcustomerid(text,fbaid){
 
 }
 
+
+
+
+
+
+
+
 </script>
 
 <!-- Get Loan ID End -->
 
-<!-- End shubham raise a ticket -->
+
+
+ <!-- End shubham raise a ticket -->
  <!-- Loader Script -->
 <script>
      var $loading = $('#loading').hide();

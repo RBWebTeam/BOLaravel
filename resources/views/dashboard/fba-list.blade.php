@@ -87,7 +87,7 @@
                                        <th>POSP No</th>
                                        <th>Loan ID</th> 
                                        <th>Posp Name</th> 
-                                       <th>Pospstatus</th> 
+                                      <th>Posp Status</th> 
                                        <th>Bank Account</th>
                                        <th>Partner Info</th> 
                                        <th>Sales code</th>
@@ -373,8 +373,10 @@
     </div>
 
     <div class="col-md-12"> <br>
-    
-   <textarea type="text" style="resize:none" name="name" cols="num" rows="num" id="divpartnertable_payment" class="divpartnertable_payment form-control" readonly> </textarea> 
+    <form method="POST" id="modelpaylink">
+        {{ csrf_field() }}
+
+   <textarea type="text" style="resize:none" name="divpartnertable_payment" cols="num" rows="num" id="divpartnertable_payment" class="divpartnertable_payment form-control" readonly> </textarea> 
     <br>
     </div> 
        
@@ -386,8 +388,8 @@
     
       
       <!-- <form id="modelpaylink" name="modelpaylink"> -->
-     <form method="POST" id="modelpaylink">
-        {{ csrf_field() }}
+    <!--  <form method="POST" id="modelpaylink">
+        {{ csrf_field() }} -->
      <div id="divlink" class="modal-body"> </div>
      <div class="modal-footer">
      <input type="hidden" name="fba" id="fba">
@@ -504,8 +506,8 @@
          }, 
 
 
-             {"data":"pospname"}, 
-               {"data":"pospstatus"}, 
+             {"data":"pospname"},
+              {"data":"pospstatus"},  
              {"data":"bankaccount"}, 
              {"data":null ,
              "render": function ( data, type, row, meta ) {
@@ -636,20 +638,25 @@ $(document).ready(function() {
 
 <script type="text/javascript">
     function getpaylinknew(){
-      
+    
   $.ajax({
   url: 'getpaylinknew/'+$('#fba').val(),
   type: "GET",                  
   success:function(data) {
-  console.log(data);
+console.log(data);
   var json = JSON.parse(data);
   if(json.StatusNo==0){
         $('#divpartnertable_payment').html(json.MasterData.PaymentURL);
-        $('#txtlink').val(json.MasterData.PaymentURL);
+        $('#divpartnertable_payment').val(json.MasterData.PaymentURL);
+
+
       }
-          }
+
+ }
+
 
         });
+     alert("Payment Link Genrate successfully..");
 }
 
  function pmesgsend(){
@@ -668,14 +675,12 @@ alert("SMS Send successfully..");
 
 </script>
 
-<script type="text/javascript">
- $(function(){
- 
-  $('#posp_remark').keyup(function(){    
-  
-    var yourInput = $(this).val();
-    re = /[A-Za-z]?[A-Za-z `~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi;
-    var isSplChar = re.test(yourInput);
+  <script type="text/javascript">
+   $(function(){
+   $('#posp_remark').keyup(function(){    
+   var yourInput = $(this).val();
+   re = /[A-Za-z]?[A-Za-z `~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi;
+   var isSplChar = re.test(yourInput);
     if(isSplChar)
     {
     var no_spl_char = yourInput.replace(/[A-Za-z]?[A-Za-z `~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi, '');

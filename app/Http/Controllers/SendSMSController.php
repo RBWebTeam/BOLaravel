@@ -52,23 +52,30 @@ class SendSMSController extends InitialController{
   $query=DB::select('call sp_fba_sentSMS(?,?,?,?)',[$req->smslist,$city,$fdate,$tdate]);
    return json_encode($query);
    }
+
 public function send_sms_save(Request $req){  
      $parentgroupid=uniqid();
       $error='';
       $url=$this::$api_url;
+      $fbauserid=Session::get('fbauserid');
     if(isset($req->fba))
     
     $fid = "";
+  $isdirectsend=DB::select('call get_isdirectsned(?)',[$fbauserid]);
+
   for ($i=1; $i < count($req->fba)+1; $i++) { 
     if($i%100==0){
       $uniqid=uniqid();
         $fid=$fid.','.$req->fba[$i-1];
         
         $fid = ltrim($fid, ',');
-        $query=DB::select('call usp_insert_smslog(?,?,?,?,?)',[$fid,$req->sms_text,$uniqid,date('Y-m-d H:i:s'),$parentgroupid]);
+        $query=DB::select('call usp_insert_smslog(?,?,?,?,?,?)',[$fid,$req->sms_text,$uniqid,date('Y-m-d H:i:s'),$parentgroupid,$fbauserid]);
         $data='{"group_id":"'.$uniqid.'"}';
+ if($isdirectsend==1){
         $this->call_json($url.'/api/send-sms',$data);        
         $fid = "";
+    }
+
     }
     else{        
         $fid=$fid.','.$req->fba[$i-1];
@@ -78,9 +85,11 @@ public function send_sms_save(Request $req){
   if($fid!=""){
     $uniqid=uniqid();
     $fid = ltrim($fid, ',');
-    $query=DB::select('call usp_insert_smslog(?,?,?,?,?)',[$fid,$req->sms_text,$uniqid,date('Y-m-d H:i:s'),$parentgroupid]);   
+    $query=DB::select('call usp_insert_smslog(?,?,?,?,?,?)',[$fid,$req->sms_text,$uniqid,date('Y-m-d H:i:s'),$parentgroupid,$fbauserid]);  
      $data='{"group_id":"'.$uniqid.'"}';
+ if($isdirectsend==1){
     $this->call_json($url.'/api/send-sms',$data);
+  }
   }
  
            
@@ -91,7 +100,8 @@ public function send_sms_save(Request $req){
     }
 
 
-    public function sentsms($mob,$text,$fba_id,$SMSTemplateId){
+    public function sentsms($mob,$text,$fba_id,$SMSTemplateId)
+    {
       $arr=array('fbaid'=>$fba_id,'mobileno'=>$mob,'message'=>$text,'create_date'=>date('Y-m-d H:i:s') );
        DB::table('SMSLog')->insert($arr);
        

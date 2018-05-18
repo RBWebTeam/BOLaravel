@@ -92,23 +92,6 @@ class bankofferController extends InitialController
     
        }
 
-
-
-        public function statecity (){
-    $state = DB::select("call usp_load_state_list()");
-
-       return view('dashboard.citystate',['state'=>$state]);
-}
-
-
-
-public function cityget($id)  
-{
-    $cities = DB::select("call usp_load_cities()");
-       
-        return json_encode($cities);
-       }
-
  }
 
 

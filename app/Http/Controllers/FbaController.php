@@ -188,10 +188,11 @@ class FbaController extends CallApiController
      $custrespon=$result['http_result']; 
      $custrespon_new= $custrespon;
      $datax=json_decode($custrespon);
- 
-     if($datax->StatusNo==0){      
+
+     if($datax->StatusNo==0){ 
+
       $loanid=($datax->MasterData[0]->LoanID);    
-      $dataloan= array("fbaid"=>"$fbaid","LoanId"=>"$LoanID");
+      $dataloan= array("fbaid"=>"$fbaid","LoanId"=>"$loanid");
      $token=array("cache-control: no-cache","content-type: application/json", "token: 1234567890");
      $post_data1=json_encode($dataloan);
      $type=$token;
@@ -239,7 +240,7 @@ class FbaController extends CallApiController
       public function sendpaysms(Request $req){
    
       $text="Your payment link is genrated";
-      $newsms = urlencode( $text.":".$req->txtlink);//htmlspecialchars();
+      $newsms = urlencode( $text.":".$req->divpartnertable_payment);//htmlspecialchars();
        //print_r($newsms); exit();
       $post_data="";
       $result=$this->call_json_data_api('http://vas.mobilogi.com/api.php?username=rupeeboss&password=pass1234&route=1&sender=FINMRT&mobile[]='.$req->txtmono.'&message[]='.$newsms,$post_data);
