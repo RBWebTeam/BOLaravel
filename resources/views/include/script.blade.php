@@ -1,12 +1,10 @@
 <script type="text/javascript">
-
 function Numeric(event) {     // for numeric value function
       if ((event.keyCode < 48 || event.keyCode > 57) && event.keyCode != 8) {
           event.keyCode = 0;
           return false;
       }
-    }
-
+      }
 $(document).ready(function(){
     $(".fltr-tog").click(function(){
         $(".filter-bdy").toggle();
@@ -428,12 +426,6 @@ alert(JSON.stringify(data));*/
  -->
 
 <script type="text/javascript">
-  
-
-
-
-
-
 $(document).ready(function(){
  var  st_array=Array('<option value="0">Select</option>');
 
@@ -451,11 +443,9 @@ $(document).ready(function(){
  
     $('.riskstateid').empty();
     $('.riskstateid').append(st_array);  
-
   }
-});
-
- //  update state
+  });
+  // update state
  var  st_array1=Array();
   $.ajax({
   url: "{{ url('search-state')}}",
@@ -473,26 +463,21 @@ $(document).ready(function(){
     $('.riskstateid').append(st_array1);  
 
   }
-});
-
-
-});
-
-
-
-$(document).on('change', '#search_state', function() {   
+  });
+  });
+ $(document).on('change', '#search_state', function() {   
  var fstate_id=$(this).val();  
  var  city_array=Array('<option value="0">Select</option>');  
  $.ajax({
-  url: "{{url('search-city')}}",
-  dataType: "json",
-  data: {
-    fstate_id : fstate_id,
-  },
-  success: function(data) { 
-    $.each(data, function( key, val ) {
-      city_array.push('<option value="'+val.datavalue+'">'+val.value+'</option>');
-    });
+ url: "{{url('search-city')}}",
+ dataType: "json",
+ data: {
+ fstate_id : fstate_id,
+ },
+ success: function(data) { 
+ $.each(data, function( key, val ) {
+ city_array.push('<option value="'+val.datavalue+'">'+val.value+'</option>');
+});
     $('.search_district').empty();
     $('.search_district').append(city_array);
 
@@ -614,52 +599,41 @@ $(document).on('change', '#search_state', function() {
     } 
     else 
     {
-      $.ajax({  
-         type: "POST",  
-         url: "{{URL::to('posp-update')}}",
-         data : $('#update_posp').serialize(),
-         success: function(msg){
-              if (msg.status==0) 
-                {
-                  alert('Updated Successfully');
-
-                  $('#posp_'+id).closest('td').html(posp_update);
-                  $('#posp_remark').val('');
-                  $('.close').click();           
-                } 
-                else {
-                  alert('Could not updated successfully');
-                }
-
-        }  
-      });
+    $.ajax({  
+    type: "POST",  
+    url: "{{URL::to('posp-update')}}",
+    data : $('#update_posp').serialize(),
+    success: function(msg){
+    if (msg.status==0) 
+    {
+    alert('Updated Successfully');
+    $('#posp_'+id).closest('td').html(posp_update);
+    $('#posp_remark').val('');
+    $('.close').click();           
+    } 
+    else {
+    alert('Could not updated successfully');
     }
-  });
-
-
-    $(document).ready(function() {
-       var exampleInstance = $('#fsm-details-table').DataTable({
-          paging: true,
-          responsive: false,
-
-        });
-
-       exampleInstance.column( '0:visible' ).order('desc').draw();
- // Bootstrap datepicker
-$('.input-group date input').each(function() {
-  $(this).datepicker('clearDates');
-});
-
-// Set up your table
-table1 = $('#example').DataTable({
+    }  
+    });
+    }
+    });
+   $(document).ready(function() {
+    var exampleInstance = $('#fsm-details-table').DataTable({
+    paging: true,
+    responsive: false,
+    });
+   exampleInstance.column( '0:visible' ).order('desc').draw();
+   // Bootstrap datepicker
+   $('.input-group date input').each(function() {
+   $(this).datepicker('clearDates');
+   });
+  // Set up your table
+  table1 = $('#example').DataTable({
   paging: true,
   info: false,
   responsive: false,
-}).column('0:visible').order('desc').draw();
-
-
-
-
+  }).column('0:visible').order('desc').draw();
 // Re-draw the table when the a date range filter changes
 // $('.date-range-filter1').change(function() {
 
@@ -698,156 +672,119 @@ function getfsmfbalist(smid)
 {
 
 $('#fsmid').val(smid);
-
-
-
 $.ajax({  
-         type: "GET",  
-         url:'Fsm-Details/'+smid,//"{{URL::to('Fsm-Details')}}",
-         success: function(fsmmsg){
-        
-        var data = JSON.parse(fsmmsg);
-       var str = "<table class='table'><tr style='height:30px;margin:5px;'><th>Name</th><th>Email</th><th>Mobile</th></tr>";
+ type: "GET",  
+ url:'Fsm-Details/'+smid,//"{{URL::to('Fsm-Details')}}",
+success: function(fsmmsg){
+ var data = JSON.parse(fsmmsg);
+ var str = "<table class='table'><tr style='height:30px;margin:5px;'><th>Name</th><th>Email</th><th>Mobile</th></tr>";
        for (var i = 0; i < data.length; i++) {
-
-         str = str + "<tr style='height:30px;margin:5px;'><td>"+data[i].Name+"</td><td>"+data[i].Email+"</td><td>"+data[i].Mobile+"</td></tr>";
-      
-       }
-              // console.log(msg[0].Result);
-         str = str + "</table>";
-           $('#popupfbalist').html(str);   
-              
-        }  
-      });
-
-}
-
-
-function getpartnerinfo(fbaid)
-{
-
-
-$.ajax({  
-         type: "GET",  
-         url:'fba-list/'+fbaid,//"{{URL::to('Fsm-Details')}}",
-         success: function(fsmmsg){
-
-        var data = JSON.parse(fsmmsg);
-
-        var str = "<table class='table'><tr style='height:30px;margin:5px;'><td>Partner ID</td><td>Name</td><td>Mobile No</td><td>Email</td><td>City</td><td>Pincode</td></tr>";
-       for (var i = 0; i < data.length; i++) {
-         str = str + "<tr style='height:30px;margin:5px;'><td>"+data[i].PartnerID+"</td><td>"+data[i].pname+"</td><td>"+data[i].pmobile+"</td><td>"+data[i].pemail+"</td><td>"+data[i].pcity+"</td><td>"+data[i].ppincode+"</td></tr>";
+  str = str + "<tr style='height:30px;margin:5px;'><td>"+data[i].Name+"</td><td>"+data[i].Email+"</td><td>"+data[i].Mobile+"</td></tr>";
+    }
+    // console.log(msg[0].Result);
+  str = str + "</table>";
+  $('#popupfbalist').html(str);   
+  }  
+  });
+  }
+ function getpartnerinfo(fbaid)
+ {
+ $.ajax({  
+ type: "GET",  
+ url:'fba-list/'+fbaid,//"{{URL::to('Fsm-Details')}}",
+ success: function(fsmmsg){
+ var data = JSON.parse(fsmmsg);
+ var str = "<table class='table'><tr style='height:30px;margin:5px;'><td>Partner ID</td><td>Name</td><td>Mobile No</td><td>Email</td><td>City</td><td>Pincode</td></tr>";
+ for (var i = 0; i < data.length; i++) {
+ str = str + "<tr style='height:30px;margin:5px;'><td>"+data[i].PartnerID+"</td><td>"+data[i].pname+"</td><td>"+data[i].pmobile+"</td><td>"+data[i].pemail+"</td><td>"+data[i].pcity+"</td><td>"+data[i].ppincode+"</td></tr>";
           }
               // console.log(msg[0].Result);
-            str = str + "</table>";
-           $('#divpartnertable').html(str);   
-        }  
-      });
-}
+   str = str + "</table>";
+    $('#divpartnertable').html(str);   
+    }  
+   });
+   }
+  $('#ddlstate').on('change', function() {
+  var state_id = $(this).val();
+   if(state_id) {
+   $.ajax({
+    url: 'rm_city_master/'+state_id,
+     type: "GET",
+     dataType: "json",
+     success:function(data) {
+     $('#ddlcity').empty();
+     $('#ddlcity').append('<option value="0">select city</option>');
+      $.each(data, function(key, value) {
+    $('#ddlcity').append('<option value ="'+ key +'">'+ value +'</option>');
+    });
+    }
+    });
+    }else{
+    $('select[name="city"]').empty();
+    }
+    });
 
-
-$('#ddlstate').on('change', function() {
-            var state_id = $(this).val();
-            if(state_id) {
-                $.ajax({
-                    url: 'rm_city_master/'+state_id,
-                    type: "GET",
-                    dataType: "json",
-                    success:function(data) {
-                        $('#ddlcity').empty();
-                        $('#ddlcity').append('<option value="0">select city</option>');
-                        $.each(data, function(key, value) {
-
-                            $('#ddlcity').append('<option value ="'+ key +'">'+ value +'</option>');
-                        });
-                     }
-                });
-            }else{
-                $('select[name="city"]').empty();
-            }
-        });
-
-
-
-
-
-
-
-function getfbaassignlist(ddl)
-{  
+   function getfbaassignlist(ddl)
+  {  
   if($(ddl).val() > 0)
   getfbalist(1,$(ddl).val());
-}
-
-function showfbaassignlist()
-{
+  }
+  function showfbaassignlist()
+  {
   getfbalist(2,$('#txtpincode').val()); 
-}
-
-function getfbalist(flag,val)
-{
-
-$.ajax({  
-         type: "GET",  
-         url:'assign-rm-load/'+flag+'/'+val,//"{{URL::to('Fsm-Details')}}",
-         success: function(msg){
-         var data = JSON.parse(msg);
-
-     $('#ddlfba').empty();   
-       var str = "";
-       for (var i = 0; i < data.length; i++)
-        {
-
-         str = str + "<option value='"+data[i].FBAId+"'>"+data[i].Name+"</option>";
-        }
-      // console.log(msg[0].Result);
-           $('#ddlfba').append(str);   
-              
-        }  
-      });
-}
-
-function fbarmassignlist(){
+  }
+  function getfbalist(flag,val)
+  {
+  $.ajax({  
+  type: "GET",  
+  url:'assign-rm-load/'+flag+'/'+val,//"{{URL::to('Fsm-Details')}}",
+  success: function(msg){
+  var data = JSON.parse(msg);
+  $('#ddlfba').empty();   
+  var str = "";
+  for (var i = 0; i < data.length; i++)
+  {
+ str = str + "<option value='"+data[i].FBAId+"'>"+data[i].Name+"</option>";
+    }
+    // console.log(msg[0].Result);
+  $('#ddlfba').append(str);   
+  }  
+  });
+  }
+  function fbarmassignlist(){
 
 // alert('hhdhd');
 // $('#ddlfba option:selected').each(function(){ 
-//     //alert($(this).text()+' - '+$(this).val());
-
-   //  var responsedata = '{"fbaid":'+$(this).val()+',"rm_id":'+$('#ddlrmlist').val()+'}';
-     $.ajax({  
-         type: "POST",  
-         url: "assign-rm-update",
-         data : $('#assignrm').serialize(),
-         success: function(msg){                        
-              if (msg.status==0) 
-                {
-                  alert('Updated Successfully');
-                } 
-                else {
-                  alert('Could not updated successfully');
-                }
-          }  
-
-      }); 
-
+//alert($(this).text()+' - '+$(this).val());
+//  var responsedata = '{"fbaid":'+$(this).val()+',"rm_id":'+$('#ddlrmlist').val()+'}';
+ $.ajax({  
+ type: "POST",  
+ url: "assign-rm-update",
+ data : $('#assignrm').serialize(),
+ success: function(msg){                        
+ if (msg.status==0) 
+ {
+ alert('Updated Successfully');
+ } 
+ else {
+ alert('Could not updated successfully');
+ }
+ }  
+ }); 
 // });
-
-
-
- /*$.ajax({  
-         type: "POST",  
-         url: "{{URL::to('assign-rm-update')}}",
-         data : $('#assignrm').serialize(),
-         success: function(msg){
-                        
-alert(msg);
-              if (msg.status==0) 
+/*$.ajax({  
+ type: "POST",  
+ url: "{{URL::to('assign-rm-update')}}",
+ data : $('#assignrm').serialize(),
+ success: function(msg){
+ alert(msg);
+if (msg.status==0) 
                 {
-                  alert('Updated Successfully');
-                } 
-                else {
-                  alert('Could not updated successfully');
-                }
+     alert('Updated Successfully');
+   } 
+   else {
+  alert('Could not updated successfully');
+  }
 
               
               
@@ -921,6 +858,9 @@ $.ajax({
 </script>
 
 
+
+
+
 <!-- send Notification Script By Avinash
  -->
    <script type="text/javascript">
@@ -930,67 +870,56 @@ $.ajax({
    var value=$('#txtval').val();
    $.ajax({
     url: 'send-notification/'+flag+'/'+value,
-                    type: "GET",
-                    dataType: "json",
-                    success:function(data) {
+     type: "GET",
+      dataType: "json",
+     success:function(data) {
 
-                      
-                      $('#tblpincode tr:not(:first)').remove();
-
-                      var rows = "";
-                      for(var i =0; i < data.length;i++)
-                      {
-                        rows = rows +"<tr align='left'><td>";
-                        rows = rows +"<input id='pincode' type='checkbox' class='used chk' value =''>";
-                        rows = rows +"<span>"+data[i].pincode+"</span></td></tr>";
-                      }
-
-                      $('#tblpincode > tbody:last-child').append(rows);
-                    }
-                });
-
-
-});
-
-        // $("#first_nm").hide();
-        // $("#last_nm").hide();
-
+       $('#tblpincode tr:not(:first)').remove();
+          var rows = "";
+         for(var i =0; i < data.length;i++)
+        {
+      rows = rows +"<tr align='left'><td>";
+     rows = rows +"<input id='pincode' type='checkbox' class='used chk' value =''>";
+     rows = rows +"<span>"+data[i].pincode+"</span></td></tr>";
+    }
+    $('#tblpincode > tbody:last-child').append(rows);
+    }
+    });
+    });
 
 $('#LeadType').on('change',function(){
   var LeadType=$('#LeadType').find(":selected").val();
   if ( LeadType == 'WB')
-      {
-        $("#weburl").show();
-        $("#last_nm").show();
-         $("#wetitle").show();
-        $("#first_nm").show();
-      }
-      else{
-        $("#weburl").hide();
-        $("#last_nm").hide();
-         $("#wetitle").hide();
-        $("#first_nm").hide();
-     }
-    });
-
+  {
+  $("#weburl").show();
+  $("#last_nm").show();
+  $("#wetitle").show();
+  $("#first_nm").show();
+  }
+  else{
+ $("#weburl").hide();
+ $("#last_nm").hide();
+  $("#wetitle").hide();
+  $("#first_nm").hide();
+  }
+  });
  $('#txtmapstate').on('change', function() {
-            var state_id = $(this).val();
-            if(state_id) {
-                $.ajax({
-                    url: 'send-notificationstate/'+state_id,
-                    type: "GET",
-                    dataType: "json",
-                    success:function(data) {
-                        $('#txtmapcity').empty();
-                        $('#txtmapcity').append('<option value="0">select city</option>');
-                        $.each(data, function(key, value) {
-
-                            $('#txtmapcity').append('<option value="'+ key +'">'+ value +'</option>');
-                        });
-                     }
-                });
-            }else{
-                $('select[name="city"]').empty();
+   var state_id = $(this).val();
+    if(state_id) {
+     $.ajax({
+    url: 'send-notificationstate/'+state_id,
+    type: "GET",
+    dataType: "json",
+    success:function(data) {
+     $('#txtmapcity').empty();
+      $('#txtmapcity').append('<option value="0">select city</option>');
+      $.each(data, function(key, value) {
+      $('#txtmapcity').append('<option value="'+ key +'">'+ value +'</option>');
+        });
+         }
+          });
+        }else{
+          $('select[name="city"]').empty();
             }
         });
 
@@ -1022,7 +951,6 @@ $('#txtmapcity').on('change', function() {
 
 
 
-
 function BindFbas(flag,value)
 {
      $('#tblfbalist').empty();
@@ -1036,12 +964,7 @@ function BindFbas(flag,value)
       var text = "";
       for (var i = 0; i < data.length; i++) {
 
-      
- 
-
-
- 
- 
+    
 text = text +'<tr><td><input id="chkfba" name="fba_list[]"  type="checkbox" class="chkfba" value="'+data[i].id+'"/><input id="hdnchk" type="hidden" value="'+data[i].id+'" />'+data[i].fullname+'</td><td>'+data[i].mobile+'</td><td>'+data[i].City+'</td></tr>';
  
 
@@ -1057,6 +980,34 @@ $('#tblfbalisthead').empty().append('<tr><th><input  name="fba_list[]" value="0"
            }
                 });
 }
+
+
+ $('#txtstate').on('change', function() {
+            var state_id = $(this).val();
+            if(state_id) {
+                $.ajax({
+                    url: 'send-sms-state/'+state_id,
+                    type: "GET",
+                    dataType: "json",
+                    success:function(data) {
+                        $('#txtcity').empty();
+                        $('#txtcity').append('<option value="0">select city</option>');
+                        $.each(data, function(key, value) {
+
+                            $('#txtcity').append('<option value="'+ key +'">'+ value +'</option>');
+                        });
+                     }
+                });
+            }else{
+         $('select[name="city"]').empty();
+          }
+        });
+     // $('#txtcity').on('change', function() {
+     //              BindFbas(2,$('#txtcity').val());
+     //    });
+
+  
+
 
 
 function checkall(){

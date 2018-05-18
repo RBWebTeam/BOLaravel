@@ -40,7 +40,7 @@
                 		<?php }?> 
                 	<td>{{$val->FullName}}</td>
                 	<td>{{$val->MobiNumb1}}</td>
-                  <td>{{$val->EmailID}}</td>
+<!--                   <td>{{$val->EmailID}}</td> -->
                 	<td>{{$val->CreatedDate}}</td>
                   <td>{{$val->StatusName}}</td>
                 	<!-- <td><a class="btn btn-primary" onclick="deleteticket({{$val->TicketRequestId}},this)">Delete</a>
