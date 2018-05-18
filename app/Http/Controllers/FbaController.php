@@ -163,9 +163,8 @@ class FbaController extends CallApiController
  try{
     $data= array("FBAId"=>"$fbaid");
     $token=array("cache-control: no-cache","content-type: application/json", "token: 1234567890");
- 
-     $post_data=json_encode($data);
-     $type=$token;
+    $post_data=json_encode($data);
+    $type=$token;
     $result=$this->call_other_data_api($this::$api_url.'/api/set-cust-id',$post_data,$type);
     $custrespon=$result['http_result'];
     
@@ -178,38 +177,41 @@ class FbaController extends CallApiController
       }
 
 
-   public function getupdateloanid ($fbaid,){
-try{
+   public function getupdateloanid ($fbaid){
+  try{
     $data= array("fbaid"=>"$fbaid");
     $token=array("cache-control: no-cache","content-type: application/json", "token: 1234567890");
  
      $post_data=json_encode($data);
      $type=$token;
-    $result=$this->call_other_data_api($this::$api_url.'/api/updateloanid',$post_data,$type);
-    $custrespon=$result['http_result']; 
-    $datax=json_decode($custrespon);
-    if($datax->Status==0){
-        $loanid=($datax->MasterData[0]->LoanID);
-
-    }else{
-
- }
-    
-
-    $dataloan= array("fbaid"=>"$fbaid","LoanId"=>"$LoanID");
-    $token=array("cache-control: no-cache","content-type: application/json", "token: 1234567890");
+     $result=$this->call_other_data_api($this::$api_url.'/api/updateloanid',$post_data,$type);
+     $custrespon=$result['http_result']; 
+     $custrespon_new= $custrespon;
+     $datax=json_decode($custrespon);
  
+     if($datax->StatusNo==0){      
+      $loanid=($datax->MasterData[0]->LoanID);    
+      $dataloan= array("fbaid"=>"$fbaid","LoanId"=>"$LoanID");
+     $token=array("cache-control: no-cache","content-type: application/json", "token: 1234567890");
      $post_data1=json_encode($dataloan);
      $type=$token;
-    $result=$this->call_other_data_api('http://apiservices.magicfinmart.com/api/Client/UpdateLoanId',$post_data1,$type);
-    $custrespon=$result['http_result'];               
+     $result=$this->call_other_data_api('http://apiservices.magicfinmart.com/api/Client/UpdateLoanId',$post_data1,$type);
+      $custrespon=$result['http_result'];   
+      return array("loanid"=>$loanid,"message"=>"Loan Id Updated Successfully");
+      
+    }
+   else{
+     return array("loanid"=>0,"message"=>$datax->Message);
+   } 
+    
+             
     
 }
   catch (Exception $e){
 
         return $e->getMessage();    
-     }        
-           return ($custrespon);      
+   }        
+           return ($custrespon_new);      
       }
 
      

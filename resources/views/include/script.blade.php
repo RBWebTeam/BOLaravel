@@ -1451,27 +1451,30 @@ function getcustomerid(text,fbaid){
 }
  </script>
 <!-- Get Loan ID Start -->
-
-
-
-<script type="text/javascript">
+ <script type="text/javascript">
   function getloanid(text,fbaid){
   //alert(fbaid);
  $.ajax({
              url: 'getloanid/'+fbaid,
              type: "GET",                  
              success:function(data) {
-             var json = JSON.parse(data);
-             console.log(json);
-             if(json.StatusNo==0){
- //alert(json.MasterData[0].LoanID);
-              $(text).closest('td').text(json.MasterData[0].LoanID);
-              alert("Loan id updated successfully"); 
+              if(data.loanid==0){
+                  alert(data.message);
               }
               else{
-              alert("Loan id does not exit"); 
+                 $(text).closest('td').text(data.loanid);
+              }
+ //             var json = JSON.parse(data);
+ //             console.log(json);
+ //             if(json.StatusNo==0){
+ // //alert(json.MasterData[0].LoanID);
+ //              $(text).closest('td').text(json.MasterData[0].LoanID);
+ //              alert("Loan id updated successfully"); 
+ //              }
+ //              else{
+ //              alert("Loan id does not exit"); 
 
-       }
+ //       }
           }
              }); 
 
@@ -1481,12 +1484,7 @@ function getcustomerid(text,fbaid){
 
 <!-- Get Loan ID End -->
 
-
-
-
-
-
- <!-- End shubham raise a ticket -->
+<!-- End shubham raise a ticket -->
  <!-- Loader Script -->
 <script>
      var $loading = $('#loading').hide();
