@@ -265,6 +265,7 @@ Route::get('genrate-lead','genrateleadController@getlead');
 Route::get('bankoffer','bankofferController@bank_offer');
 Route::get('payment-history','PaymentHistoryController@payment_history');
 Route::get('queries','QueriesController@queries');
+Route::get('queries-details/{id}','QueriesController@query_details');
 /*Book Appointment*/
 Route::get('book-appointment','BookAppointmentController@book_appointment');
 Route::get('backoffice-city-master','BookAppointmentController@backoffice_city_master');

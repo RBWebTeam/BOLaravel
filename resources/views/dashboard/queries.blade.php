@@ -66,7 +66,14 @@
 
                 @if($status==1)
                <td> {{$val->City}}</td>
-               <td> {{$val->HEALTH}}</td>
+    
+                @if($val->HEALTH[2]!=0)
+                <td>  <a href="queries-details/{{$val->FBAId}}"> {{$val->HEALTH}}</a></td>
+                @else
+                <td> {{$val->HEALTH}} </td>
+                @endif
+
+
                <td> {{$val->MOTOR}}</td>
                <td> {{$val->HOME_LOAN}}</td>
                <td> {{$val->PL}}</td>

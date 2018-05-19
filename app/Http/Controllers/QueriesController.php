@@ -160,4 +160,21 @@ class QueriesController extends Controller
 
         	     return view('dashboard/queries',['query'=>$query,'status'=>$status]);
         }
+
+
+
+        public function query_details(Request $req){
+
+                 
+                 $fba_details=DB::select('call sp_fba_details(?)',[$req->id]);
+                 $health=DB::select('call sp_health_query(?)',[$req->id]);
+
+
+                 
+
+                return view('dashboard/queries_details',['fba_details'=>$fba_details[0],'health'=>$health]);
+
+
+
+        }
 }
