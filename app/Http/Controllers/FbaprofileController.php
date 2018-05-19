@@ -19,18 +19,16 @@ class FbaprofileController extends Controller
 		$lifeins=DB::select("call Usp_load_lifeinsurence()");
 		$healthins=DB::select("call Usp_load_healthins()");
 		$fbadetails=DB::select("call GET_fbadetails_in_fbaprofile($fbaid)");
-	     return view('FbaProfile',['Genins'=>$Genins,'lifeins'=>$lifeins,'healthins'=>$healthins,'fbadetails'=>$fbadetails]);
+		$fbaupdate=DB::select("call Usp_get_fbaupdatedhistory($fbaid)");
+	     return view('FbaProfile',['Genins'=>$Genins,'lifeins'=>$lifeins,'healthins'=>$healthins,'fbadetails'=>$fbadetails,'fbaupdate'=>$fbaupdate]);
 	}
 	
 	public function Insertfbaprofile(Request $req)
 	{
-            $id=Session::get('fbauserid');
-		    $validator =Validator::make($req->all(), [
-                                            ]);
-             if ($validator->fails()) {
-           
-            }else{
-           $FbaProfileid=DB::statement('call Usp_insert_fbaprofile(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',array(
+            $id=Session::get('fbauserid');	           
+           // $data = DB::statement('call inserttemptest(?)',array('daniyal'));
+           // print_r($data);exit();
+           DB::statement('call Usp_insert_fbaprofile(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',array(
 		 	$req->iscompany,
 		 	$req->txtbusinesstype,
 		 	$req->txtofficeadd,
@@ -59,21 +57,31 @@ class FbaprofileController extends Controller
 		 	$req->lifeinsucomp,
 		 	$req->generatlinsucomp,
 		 	$req->healthinuscomp
-		    ));			   
-	   }
-	   // if($req->isWorksLICins==1){
-	   // 	DB::statement('call Usp_insert_PrivateLifeInsurers(?,?,?)',array($FbaProfileid,$req->privetlifeco,$req->isWorksLICins));
-	   // }
-              Session::flash('message', 'Record has been saved successfully'); 
-		   // print_r($rea->all()); exit();			
+		    ));	   
+	     return "successfully";		
         
 	}
 
 	public function getfbaprofile($fbaid)
 	{
-       $FbaProfile=DB::select("call Usp_get_fabprofiledata($fbaid)");
-       //print_r($FbaProfile);exit();
-       return json_encode($FbaProfile);
+		try {
+			$FbaProfile=DB::select("call Usp_get_fabprofiledata($fbaid)");
+       		return json_encode($FbaProfile);
+		} catch (Exception $e) {
+			print_r($e);	
+		}
+       
+	}
+
+	public function getfbaprofilecompanymapping($profileid)
+	{
+		try {
+			//print_r($profileid);exit();
+			$FbaProfile=DB::select("call usp_get_profilecompanymapping($profileid)");
+       		return json_encode($FbaProfile);
+		} catch (Exception $e) {
+			print_r($e);	
+		}
        
 	}
 }

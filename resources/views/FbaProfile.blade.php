@@ -27,11 +27,13 @@
        	  <td><label>Field Manger:</label></td>
        	</tr>
        	</table>
+         @endforeach
        	<hr>
        </div>
        <div class="divupdate form-group">
        	<label>Update History</label>
-       	<table class="table">
+        @foreach ($fbaupdate as $val)
+        <table class="table">
        		<tr>
        			<td><label>Last Updated By:</label>{{$val->LogiName}}</td>
        			<td><label>Last Update Date:</label>{{$val->updateddate}}</td>
@@ -39,7 +41,7 @@
        			<td><label>Remarks:</label>{{$val->remark}}</td>
        		</tr>
        	</table>
-        @endforeach
+       @endforeach
        	<hr>
        </div>
        <div class="isdivcompany form-group">
@@ -167,7 +169,7 @@
        	    </tr>
        	    <tr id="divhealth">
         			<td><label>Stand Alone Health Insurance Co's:</label></td>        			
-        			<td><select name="ddlhealth" id="ddlhealth" multiple class="form-control ddlhealth" id="sel2">
+        			<td><select name="ddlhealth" id="ddlhealth" multiple class="form-control ddlhealth">
         				  @foreach($healthins as $val)
         				  <option value="{{$val->HealthInsuranceCompanyMasterId}}">{{$val->CompanyName}}</option>
                           @endforeach
@@ -331,13 +333,47 @@ $('input[name=isWorksStandAlone]').click(function (){
 });
 
 function getfbaprofile(){
- var fbaid=$("#txtfbaid").val(); 
+
+ var fbaid=$("#txtfbaid").val();  
  $.ajax({ 
          type: "GET",  
          url:'../Fba-profile-fbaprofile/'+fbaid,
          success: function(fbaprofile){
+
+           var data = JSON.parse(fbaprofile); 
+           if (data.length>0){      
+
+
+ $.ajax({ 
+         type: "GET",  
+         url:'../fba-profile-company-mapping/1',
+         success: function(fbaprofilecompdata){
+           //alert(fbaprofilecompdata);
+           var compdata = JSON.parse(fbaprofilecompdata);  
+           //alert(compdata);
+           var type1 = [];
+           if (compdata.length>0){
+
+                for (var i = 0; i < compdata.length; i++) {
+                  if(compdata[i].companytype==1){
+                    type1.push(compdata[i].companyid);
+                  }
+                   if(compdata[i].companytype==2){
+                    
+                  }
+                   if(compdata[i].companytype==3){
+                    
+                  }
+            }
+                $('#ddlhealth').val(type1);
+               
+
+            }
+          }
+          }); 
+
+
           
-      var data = JSON.parse(fbaprofile);
       if((data[0].iscompany==1)){         
           $("#iscompany").prop("checked", true);
         }else{
@@ -407,9 +443,9 @@ function getfbaprofile(){
         }
         $('#txtotherremark').val(data[0].otherremark);
         $('#txtremark').val(data[0].remark);
-         }
+       }
+       }
       });  
-
 }
 
 </script>
