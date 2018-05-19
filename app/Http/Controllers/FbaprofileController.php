@@ -13,12 +13,13 @@ use URL;
 use Mail;
 class FbaprofileController extends Controller
 {
-	public function fbaprofileview()
+	public function fbaprofileview($fbaid)
 	{
 		$Genins=DB::select("call Usp_load_Generalins()");
 		$lifeins=DB::select("call Usp_load_lifeinsurence()");
 		$healthins=DB::select("call Usp_load_healthins()");
-	     return view('FbaProfile',['Genins'=>$Genins,'lifeins'=>$lifeins,'healthins'=>$healthins]);
+		$fbadetails=DB::select("call GET_fbadetails_in_fbaprofile($fbaid)");
+	     return view('FbaProfile',['Genins'=>$Genins,'lifeins'=>$lifeins,'healthins'=>$healthins,'fbadetails'=>$fbadetails]);
 	}
 	
 	public function Insertfbaprofile(Request $req)
@@ -27,9 +28,7 @@ class FbaprofileController extends Controller
 		    $validator =Validator::make($req->all(), [
                                             ]);
              if ($validator->fails()) {
-             return redirect('Fba-profile')
-             ->withErrors($validator)
-             ->withInput();
+           
             }else{
            $FbaProfileid=DB::statement('call Usp_insert_fbaprofile(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',array(
 		 	$req->iscompany,
@@ -55,7 +54,7 @@ class FbaprofileController extends Controller
 		 	$req->txtother,
 		 	$req->txtotherremark,
 		 	$req->txtremark,
-		 	0, 
+		 	$req->txtfbaid, 
 		 	$id,
 		 	$req->lifeinsucomp,
 		 	$req->generatlinsucomp,
@@ -67,7 +66,15 @@ class FbaprofileController extends Controller
 	   // }
               Session::flash('message', 'Record has been saved successfully'); 
 		   // print_r($rea->all()); exit();			
-        return redirect('Fba-profile');
+        
+	}
+
+	public function getfbaprofile($fbaid)
+	{
+       $FbaProfile=DB::select("call Usp_get_fabprofiledata($fbaid)");
+       //print_r($FbaProfile);exit();
+       return json_encode($FbaProfile);
+       
 	}
 }
 

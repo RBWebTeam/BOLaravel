@@ -14,16 +14,18 @@
       	<form id="fbaprofile" method="post">
           {{ csrf_field() }}
        <div class="fbadiv form-group">
-       	<table class="table">
-       	 <tr>
-       	  <td><label>FBA ID:</label></td>
-       	  <td><label>FBA Name:</label></td>
-       	  <td><label>Date of Registration:</label></td>
-       	  <td><label>City:</label></td>
-       	  <td><label>State:</label></td>
+        @foreach ($fbadetails as $val)
+       	<table class="table">          
+       	 <tr> 
+          <input type="hidden" name="txtfbaid" id="txtfbaid" value="{{$val->FBAID}}">
+          <td><label>FBA ID: </label>{{$val->FBAID}}</td>         
+       	  <td><label>FBA Name:</label>{{$val->FullName}}</td>          
+       	  <td><label>Date of Registration:</label>{{$val->JoinDate}}</td>          
+       	  <td><label>City:</label>{{$val->City}}</td>          
+       	  <td><label>State:</label>{{$val->State}}</td>          
        	  <td><label>RRM:</label></td>
        	  <td><label>Field Manger:</label></td>
-       	 </tr>
+       	</tr>
        	</table>
        	<hr>
        </div>
@@ -31,12 +33,13 @@
        	<label>Update History</label>
        	<table class="table">
        		<tr>
-       			<td><label>Last Updated By:</label></td>
-       			<td><label>Last Update Date:</label></td>
-       			<td><label>Last Update Time:</label></td>
-       			<td><label>Remarks:</label></td>
+       			<td><label>Last Updated By:</label>{{$val->LogiName}}</td>
+       			<td><label>Last Update Date:</label>{{$val->updateddate}}</td>
+       			<td><label>Last Update Time:</label>{{$val->updateddate}}</td>
+       			<td><label>Remarks:</label>{{$val->remark}}</td>
        		</tr>
        	</table>
+        @endforeach
        	<hr>
        </div>
        <div class="isdivcompany form-group">
@@ -60,11 +63,11 @@
        	<table class="table">
        		<tr>
        			<td><label>Business Name:</label></td>
-       			<td><input type="text" name="txtbusinesstype" class="form-control" required></td>
+       			<td><input type="text" id="txtbusinesstype" name="txtbusinesstype" class="form-control" required></td>
        			<td><label>Office Address:</label></td>
-       			<td><input type="text" name="txtofficeadd" class="form-control" required></td>
+       			<td><input type="text" id="txtofficeadd" name="txtofficeadd" class="form-control" required></td>
        			<td><label>Staff Strength:</label></td>
-       			<td><input type="number" name="txtstaff" class="form-control" required></td>
+       			<td><input type="number" id="txtstaff" name="txtstaff" class="form-control" required></td>
        		</tr>
        	</table>
        	<hr>
@@ -90,17 +93,17 @@
         	<table class="table">
         		<tr>
         			<td><label>No of Policies Sold per month:</label></td>
-        			<td><input type="number" name="txtnoofpolicy" class="form-control" required></td>
+        			<td><input type="number" id="txtnoofpolicy" name="txtnoofpolicy" class="form-control" required></td>
         			<td><label>Premium collected per month:</label></td>
-        			<td><input type="number" name="txtpremium" class="form-control" required></td>
+        			<td><input type="number" id="txtpremium" name="txtpremium" class="form-control" required></td>
         			<td><label>Base of LIC Customers:</label></td>
-        			<td><input type="number" name="txtliccustomer" class="form-control" required></td>
+        			<td><input type="number" id="txtliccustomer" name="txtliccustomer" class="form-control" required></td>
         		</tr>
         		<tr>
         			<td><label>Preferred LIC products:</label></td>
-        			<td><input type="text" name="txtlicproduct" class="form-control" required></td>
+        			<td><input type="text" id="txtlicproduct" name="txtlicproduct" class="form-control" required></td>
         			<td><label>LIC Club Memberships:</label></td>
-        			<td><input type="text" name="txtlicclub" class="form-control" required></td>
+        			<td><input type="text" id="txtlicclub" name="txtlicclub" class="form-control" required></td>
         		</tr>
         	</table>
         </div>
@@ -180,10 +183,10 @@
                 </tr>
                 <tr>
         	       <label>LOAN</label>
-        	        <td><label class="radio-inline"><input type="checkbox" name="txthl" value="1">&nbsp;HL</label></td>
-                    <td><label class="radio-inline"><input type="checkbox" name="txtpl" value="1">&nbsp;PL</label></td>
-                   <td><label class="radio-inline"><input type="checkbox" name="txtlap" value="1">&nbsp;LAP</label></td>
-                   <td><label class="radio-inline"><input type="checkbox" name="txtbl" value="1">&nbsp;Business Loan</label></td>
+        	        <td><label class="radio-inline"><input type="checkbox"  id="txthl" name="txthl" value="1">&nbsp;HL</label></td>
+                    <td><label class="radio-inline"><input type="checkbox" id="txtpl" name="txtpl" value="1">&nbsp;PL</label></td>
+                   <td><label class="radio-inline"><input type="checkbox" id="txtlap" name="txtlap" value="1">&nbsp;LAP</label></td>
+                   <td><label class="radio-inline"><input type="checkbox" id="txtbl" name="txtbl" value="1">&nbsp;Business Loan</label></td>
                    <td><label class="radio-inline"><input id="txtloan" type="radio" name="txtloan" value="1">Others</label></td>
                      <td id="divloan" style="display: none;" ><input type="text" name="txtotherloan" placeholder="Please Specify" class="form-control" id="txtotherloan" required></td>
                </tr>
@@ -194,13 +197,13 @@
                 <tr style="width: 30%;">
         	        <label>Other</label>
         	    <td style="width: 20%;">
-        	    	<label class="radio-inline"><input type="checkbox" name="txtMutualfund" value="1">&nbsp;Mutual Funds</label>
+        	    	<label class="radio-inline"><input type="checkbox" id="txtMutualfund" name="txtMutualfund" value="1">&nbsp;Mutual Funds</label>
         	    </td>
                 <td style="width: 20%;">
-                	<label class="radio-inline"><input type="checkbox" name="txtPostal" value="1">&nbsp;Postal Savings</label>
+                	<label class="radio-inline"><input type="checkbox" id="txtPostal" name="txtPostal" value="1">&nbsp;Postal Savings</label>
                 </td>
                 <td style="width: 20%;">
-                	<label class="radio-inline"><input type="checkbox" name="txtFixed" value="1">&nbsp;Co Fixed Deposits</label>
+                	<label class="radio-inline"><input type="checkbox" id="txtFixed" name="txtFixed" value="1">&nbsp;Co Fixed Deposits</label>
                 </td>
                 <td style="width: 20%;">
                 	<label class="radio-inline"><input id="txtother" type="radio" name="txtother" value="1">Others</label>
@@ -230,6 +233,7 @@
 </div>
 <script type="text/javascript">
 $(document).ready(function() {
+   getfbaprofile();
    $("#divhealth").show();
    $("#divgenins").show();
    $("#divprivate").show();
@@ -286,6 +290,7 @@ $('input[name=isWorksStandAlone]').click(function (){
 });
 
    $('#btnfbaprofile').click(function (){
+    
         var privetlifeco = [];
         $.each($(".ddlprivetlifeco option:selected"), function(){            
             privetlifeco.push($(this).val());
@@ -308,19 +313,104 @@ $('input[name=isWorksStandAlone]').click(function (){
     {
       console.log($('#fbaprofile').serialize());
           $.ajax({ 
-             url: "{{URL::to('Fba-profile')}}",
+             url: "{{URL::to('Fba-profile-insert')}}",
              method:"POST",
              data: $('#fbaprofile').serialize(),
              success: function(msg)  
                {
                  console.log(msg);
                  alert("Record has been saved successfully");
-                 $("#fbaprofile").trigger('reset');
+                 $("#fbaprofile").trigger('reset');                   
                }
-});   
-} 
+             });  
+    } 
 });
+
+
+
 });
+
+function getfbaprofile(){
+ var fbaid=$("#txtfbaid").val(); 
+ $.ajax({ 
+         type: "GET",  
+         url:'../Fba-profile-fbaprofile/'+fbaid,
+         success: function(fbaprofile){
+          
+      var data = JSON.parse(fbaprofile);
+      if((data[0].iscompany==1)){         
+          $("#iscompany").prop("checked", true);
+        }else{
+          $("#iscompany").prop("checked", false);
+        }
+        $('#txtbusinesstype').val(data[0].businessname);
+        $('#txtofficeadd').val(data[0].officeaddress);
+        $('#txtstaff').val(data[0].staffstrength);
+        if((data[0].workwithlic==1)){
+         $("#isWorksLIC").prop("checked", true);
+        }else{
+           $("#isWorksLIC").prop("checked", false);
+        }
+        $('#txtnoofpolicy').val(data[0].noofpolicysoldpermonth);
+        $('#txtpremium').val(data[0].premiumcollectedpermonth);
+        $('#txtliccustomer').val(data[0].baseofliccustomers);
+        $('#txtlicproduct').val(data[0].preferredlicproduct);
+        $('#txtlicclub').val(data[0].licclubmembership);
+        if((data[0].ishl ==1)){         
+          $("#txthl").prop("checked", true);
+        }
+        else{
+          $("#txthl").prop("checked", false);
+        }
+        if((data[0].ispl ==1)){        
+        $("#txtpl").prop("checked", true);
+        }
+        else{
+           $("#txtpl").prop("checked", false);
+        }
+        if((data[0].islap ==1)){
+          $("#txtlap").prop("checked", true);
+        }
+        else{
+          $("#txtlap").prop("checked", true);
+        }
+        if((data[0].isbl ==1)){
+          $("#txtbl").prop("checked", true);
+        }else{
+          $("#txtbl").prop("checked", false);
+        }
+        if((data[0].isotherloan ==1)){
+          $("#txtloan").prop("checked", true);
+        }else{
+          $("#txtloan").prop("checked", false);
+        }       
+        $('#txtotherloan').val(data[0].isotherloan);
+
+        if((data[0].ismutualfund ==1)){
+          $("#txtMutualfund").prop("checked", true);
+        }else{
+          $("#txtMutualfund").prop("checked", false);
+        }
+        if((data[0].ispostalsaving==1)){
+           $("#txtPostal").prop("checked", true);
+        }else{
+          $("#txtPostal").prop("checked", false);
+        }
+        if((data[0].iscofixeddeposit==1)){
+          $("#txtFixed").prop("checked", true);
+        }else{
+          $("#txtFixed").prop("checked", false);
+        }if((data[0].isother==1)){
+          $("#txtother").prop("checked", true);
+        }else{
+           $("#txtother").prop("checked", false);
+        }
+        $('#txtotherremark').val(data[0].otherremark);
+        $('#txtremark').val(data[0].remark);
+         }
+      });  
+
+}
 
 </script>
 @endsection

@@ -549,6 +549,7 @@
              }  
          }, 
 
+         
        //        {"data":"pwd" ,
        //        "render": function ( data, type, row, meta ) {
        //        return '<a id="btnshowpassword" data-toggle="modal" data-target="#spassword" onclick="getpassword('+"'"+ data+"'"+')">*****</a>';
