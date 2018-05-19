@@ -68,7 +68,7 @@
                <td> {{$val->City}}</td>
     
                 @if($val->HEALTH[2]!=0)
-                <td>  <a href="queries-details/{{$val->FBAId}}"> {{$val->HEALTH}}</a></td>
+                <td>  <a href="queries-details/{{$val->FBAId}}" target="_blank" > {{$val->HEALTH}}</a></td>
                 @else
                 <td> {{$val->HEALTH}} </td>
                 @endif
