@@ -1380,7 +1380,7 @@ $('#msds-select').change(function () {
     $.fn.dataTable.ext.search.push(
     function( settings, data, dataIndex ) {
         var msdsSearch = $( "#msds-select option:selected" ).val();
-        var msdsValue = data[10]|| 0;
+        var msdsValue = data[11]|| 0;
        //console.log(data);
         var numbers = /^[0-9]+$/;
           if(msdsSearch=="2" && msdsValue=="update"){  

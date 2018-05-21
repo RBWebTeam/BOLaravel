@@ -252,8 +252,17 @@ Route::get('approvenotification/{msgid}/{value}','SendNotificationController@app
 Route::get('send-notification','SendNotificationController@sendnotification');
 
 //send sms
-Route::get('send-sms','SendSMSController@ViewSendSMSDetails');
+
+ Route::get('send-sms','SendSMSController@sendsmsrea');
+ Route::get('send-sms-state','SendSMSController@sendsmsren');
+ Route::post(' send-sms-city','SendSMSController@sendsmscity');
+Route::post('send-sms-save','SendSMSController@send_sms_save');
 Route::post('send-sms-detail','SendSMSController@getfbalist');
+Route::get('send-sms/{id}',array('as'=>'sendsms.ajax','uses'=>'SendSMSController@sendsmscity'));
+Route::get('send-sms','SendSMSController@ViewSendSMSDetails');
+
+// Route::get('send-sms','SendSMSController@ViewSendSMSDetails');
+// Route::post('send-sms-detail','SendSMSController@getfbalist');
  
 Route::get('send-notification','SendNotificationController@sendnotification');
  //Otp Detail
