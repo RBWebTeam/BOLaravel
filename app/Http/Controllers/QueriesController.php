@@ -160,4 +160,62 @@ class QueriesController extends Controller
 
         	     return view('dashboard/queries',['query'=>$query,'status'=>$status]);
         }
+
+
+
+        public function query_details(Request $req){
+
+                  $health='';
+                  $fba_details=DB::select('call sp_fba_details(?)',[$req->id]);
+               //   $health=DB::select('call sp_health_query(?)',[$req->id]);
+                 
+
+                  if(isset($req->Q)){
+                  
+                     $health=DB::select('call getHealthDrillDownForPOSPtransaction(?,?)',[$req->id,'Q']);
+                  }
+
+                  if(isset($req->MS)){
+                     
+                     $health=DB::select('call getHealthDrillDownForPOSPtransaction(?,?)',[$req->id,'MS']);
+                  }
+
+                  if(isset($req->PS)){
+                     
+                     $health=DB::select('call getHealthDrillDownForPOSPtransaction(?,?)',[$req->id,'PS']);
+                  }
+
+ 
+
+                return view('dashboard/queries_details',['fba_details'=>$fba_details[0],'health'=>$health]);
+
+
+
+        }
+
+
+        public function query_motor(Request $req){
+
+
+                  $motor='';
+                  $fba_details=DB::select('call sp_fba_details(?)',[$req->id]);
+
+                  if(isset($req->Q)){
+                  
+                     $health=DB::select('call getMotorDrillDownForPOSPtransaction(?,?)',[$req->id,'Q']);
+                  }
+
+                  if(isset($req->MS)){
+                     
+                     $health=DB::select('call getMotorDrillDownForPOSPtransaction(?,?)',[$req->id,'MS']);
+                  }
+
+                  if(isset($req->PS)){
+                     
+                     $health=DB::select('call getMotorDrillDownForPOSPtransaction(?,?)',[$req->id,'PS']);
+                  }
+
+
+                  return view('dashboard/queries_motor',['fba_details'=>$fba_details[0],'health'=>$health]);
+        }
 }

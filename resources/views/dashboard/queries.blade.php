@@ -66,8 +66,25 @@
 
                 @if($status==1)
                <td> {{$val->City}}</td>
-               <td> {{$val->HEALTH}}</td>
-               <td> {{$val->MOTOR}}</td>
+    
+                @if($val->HEALTH[2]!=0)
+                <td>    
+                <a href="queries-health/{{$val->FBAId}}?{{explode(' ',$val->HEALTH)[0]}}" target="_blank" > {{explode(' ',$val->HEALTH)[0]}}</a>
+                <a href="queries-health/{{$val->FBAId}}?{{explode(' ',$val->HEALTH)[1]}}" target="_blank" > {{explode(' ',$val->HEALTH)[1]}}</a>
+                <a href="queries-health/{{$val->FBAId}}?{{explode(' ',$val->HEALTH)[2]}}" target="_blank" > {{explode(' ',$val->HEALTH)[2]}}</a>
+                 </td>
+                @else
+                <td> {{$val->HEALTH}} </td>
+                @endif
+
+
+               <td>  
+
+                <a href="queries-motor/{{$val->FBAId}}?{{explode(' ',$val->MOTOR)[0]}}" target="_blank" > {{explode(' ',$val->MOTOR)[0]}}</a>
+                <a href="queries-motor/{{$val->FBAId}}?{{explode(' ',$val->MOTOR)[1]}}" target="_blank" > {{explode(' ',$val->MOTOR)[1]}}</a>
+                <a href="queries-motor/{{$val->FBAId}}?{{explode(' ',$val->MOTOR)[2]}}" target="_blank" > {{explode(' ',$val->MOTOR)[2]}}</a>
+
+               </td>
                <td> {{$val->HOME_LOAN}}</td>
                <td> {{$val->PL}}</td>
                <td> {{$val->TWO_WHEELER}}</td>
