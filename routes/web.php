@@ -16,6 +16,21 @@
 
 
 
+Route::get('health-packages','BookAppointmentController@health_packages');
+
+Route::post('health-insurance-analysis','BookAppointmentController@health_insurance_analysis');
+Route::get('order-summary','BookAppointmentController@order_summary');
+Route::post('health-insurance-packages','BookAppointmentController@health_insurance_packages');
+ 
+ //Shubham
+Route::get('HealthAssure','HealthAssureController@gethealthassure');
+Route::post('HealthAssureinsert','HealthAssureController@inserthealthtest');
+Route::get('Health-Assure-Partner','HealthAssurePartnerController@getpartnerinfo');
+Route::post('providerlist','HealthAssurePartnerController@providerlist');
+Route::Post('Health-Assure-Partner','HealthAssurePartnerController@getproviderinfo');
+Route::get('Success','HealthAssureController@Success');
+Route::get('Failure','HealthAssureController@failure');
+///Shubham
 
 Route::get('/','LoginController@checklogin');
 Route::post('admin-login','LoginController@login');
@@ -35,8 +50,62 @@ Route::post('loan-update','FbaController@loan');
 Route::post('posp-update','FbaController@posp');
 
 Route::get('getpaymentlink/{fbaid}','FbaController@getpaymentlink');
-
 Route::get('getcustomerid/{fbaid}','FbaController@getcustomerid1');
+Route::get('getloanid/{fbaid}','FbaController@getupdateloanid');
+
+ Route::get('generatepaymentlink','generatepaylinkController@paylinkgenerate');
+ Route::get('getpaylink/{fbaid}','generatepaylinkController@getnewpaylink');
+ Route::post('generatepaymentlink','generatepaylinkController@sendpsms');
+// -------------------------------------
+ Route::get('getpaylinknew/{fbaid}','FbaController@paylinkget');
+ Route::post('pmesgsend','FbaController@sendpaysms');
+ Route::get('crmfbalist','crmfbalistController@crmlist');  
+ Route::get('crmstatus/{FBAID}','crmfbalistController@statuscrm'); 
+ Route::post('crmstatus','crmfbalistController@crminsert');
+ Route::get('crmfbalist/{FBAID}','crmfbalistController@test');
+//Route::get('crmstatus/{FBAID}','crmfbalistController@showcrmstatus');
+
+
+
+
+
+
+
+
+ // --------------------------------------
+// vivek start
+ 
+//******state_dropdown******
+Route::get('state-dropdown','bankofferController@droup_state');
+Route::POST('insert_state','bankofferController@state_demo');
+Route::get('state_demo/{id}',array('as'=>'FSMRegister.ajax','uses'=>'bankofferController@get_state'));
+Route::get('state_dropdown/{cityid}','bankofferController@get_cities');
+Route::get('state_sub_dropdown/{cityid}','bankofferController@get_sub_cities');
+
+
+
+
+
+//city_droupdown
+Route::get('city_dropdown','bankofferController@droup_city');
+Route::get('state_dropdown_id/{cityid}','bankofferController@get_state_id');
+//smstemplate
+Route::get('sms_template','smslogController@smstemplate');
+Route::post('insert_template','smslogController@insert_template_demo');
+Route::get('view_templete_table','smslogController@template_demo');
+Route::get('template_table_delete/{SMSTemplateId}','smslogController@templetedelete');
+Route::get('edit_view_templete/{SMSTemplateId}','smslogController@table_edit');
+Route::post('update_view_templete','smslogController@update_sms_table');
+//Rm city
+Route::get('rm_city_view','rmcitymappingController@rmcityview');
+Route::get('rm_city_view','rmcitymappingController@getrmdataview');
+Route::post('rm_city_view_edit','rmcitymappingController@table_view');
+//fba
+Route::get('fbamaster-edit','FbaController@fbamaster');
+Route::get('fbaid-view','FbaController@getfbaid');
+Route::post('update_fbamaster','FbaController@update_fba_table');
+
+
 
 // Route::get('fba-list/{salescode}/{fbaid}',array('as'=>'fba-list.ajax','uses'=>'FbaController@salesupdate'));
 
@@ -76,21 +145,36 @@ Route::get('Rmfollowup/{fbaid}','RMfollowupController@gethistory');
 Route::get('Product-followup','ProductfollowupController@getproductfollowup');
 Route::get('Product-followup/{product_id}','ProductfollowupController@getproductinfo');
 Route::Post('Product-followup','ProductfollowupController@insertproductfollowup');
+Route::get('view-history-Product-followup/{Lead_id}','ProductfollowupController@getproducthistory');
 
 Route::get('RaiseaTicket','RaiserTicketController@getraiserticket');
 Route::get('RaiseaTicket/{CateCode}','RaiserTicketController@getsubcat');
 Route::get('RaiseaTicketgetcal/{QuerID}','RaiserTicketController@getclassi');
 Route::Post('RaiseaTicket','RaiserTicketController@inserraisertkt');
+Route::get('RaiseaTicketgettoccmail/{Querid}','RaiserTicketController@gettoccmail');
 
 Route::get('View-Raised-Ticket','ViewRaisedTicketController@getraisedticket');
 Route::get('View-Raised-Ticket/{ticketid}','ViewRaisedTicketController@deleteticket');
+ 
+Route::get('send-sms-rights','SendSmsRightsController@sendsmsview');
+Route::get('send-sms-directsend/{userid}','SendSmsRightsController@isdirectsend');
+Route::get('send-sms-needaproval/{userid}','SendSmsRightsController@isneedapproval');
 
-Route::get('HealthAssure','HealthAssureController@gethealthassure');
-Route::post('HealthAssureinsert','HealthAssureController@inserthealthtest');
-Route::get('Health-Assure-Partner','HealthAssurePartnerController@getpartnerinfo');
-Route::post('providerlist','HealthAssurePartnerController@providerlist');
-Route::Post('Health-Assure-Partner','HealthAssurePartnerController@getproviderinfo');
+Route::get('Approve-send-sms','SendSmsapprovalController@sendsmsview');
+
+Route::get('Fba-profile/{fbaid}','FbaprofileController@fbaprofileview');
+
+Route::post('Fba-profile-insert','FbaprofileController@Insertfbaprofile');
+Route::get('Fba-profile-fbaprofile/{fbaid}','FbaprofileController@getfbaprofile');
+Route::get('fba-profile-company-mapping/{profileid}','FbaprofileController@getfbaprofilecompanymapping');
+
 ///shubham end ///
+// avinash
+ Route::get('ticket-module','TicketController@getticketdetails') ;
+   // avinash
+
+
+
 
 //////GOVINDF
 Route::get('Fsm-Details/{smid}','FsmDetailsController@fsmfbalist');
@@ -112,7 +196,7 @@ Route::post('Fsm-Register','FsmRegisterController@insertfsm');
 
  Route::get('approve-notification','SendNotificationController@notificationApprove');
 
-  Route::get('send_sms_log','smsLogController@getsendsmslog');
+  Route::get('send-sms-log','SmslogController@getsendsmslog');
 
 
 // -------------- avinash
@@ -127,7 +211,11 @@ Route::post('insertnotification','SendNotificationController@insertntf');
 
 Route::post('send-notification-approve','SendNotificationController@insertntf');
 
+Route::get('send-sms-register','SendSmsFilterController@SendSMSFilter');
 
+Route::post('send-sms-filter','SendSmsFilterController@getfbafilter');
+
+Route::post('send-sms-filter1','SendSmsFilterController@send_sms_save_filter');
 
 Route::get('approvenotification/{msgid}/{value}','SendNotificationController@approvenotification');
 route::get('sendnotificationnew', 'SendNotificationController@sendnotificationstate');
@@ -150,7 +238,7 @@ Route::get('Fsm-Details','FsmDetailsController@FsmDetails');
 
 Route::get('Payment-History','PaymentHistoryController@Payment_History');
 
-
+Route::post('send-sms-detail','SendSMSController@getfbalist');
 
 
 Route::get('uploadefile','uploadfileController@uplode');
@@ -168,6 +256,7 @@ Route::get('send-notification','SendNotificationController@sendnotification');
 
 //send sms
 Route::get('send-sms','SendSMSController@ViewSendSMSDetails');
+Route::post('send-sms-detail','SendSMSController@getfbalist');
  
 Route::get('send-notification','SendNotificationController@sendnotification');
  //Otp Detail
@@ -191,11 +280,8 @@ Route::post('sales-material-update','BookAppointmentController@sales_material_up
 Route::post('sales-material-delete','BookAppointmentController@sales_material_delete');
 
 /*Heath Assure*/
-Route::get('health-packages','BookAppointmentController@health_packages');
-Route::post('health-insurance-packages','BookAppointmentController@health_insurance_packages');
-Route::post('health-insurance-analysis','BookAppointmentController@health_insurance_analysis');
-Route::get('order-summary','BookAppointmentController@order_summary');
- 
+
+
 
   /************
 //  Menu List
@@ -235,7 +321,7 @@ Route::get('followup-history','LeadstatusController@followup_history');
 Route::get('lead-test','LeaduploadController@lead_test');  
 Route::get('assign-task','LeadstatusController@assign_task');
 Route::post('assign-task-save','LeadstatusController@assign_task_save');
-Route::get('lead-assgin-list','LeadstatusController@lead_assgin_list');
+Route::get('lead-assign-list','LeadstatusController@lead_assgin_list');
 Route::get('lead-assgin-list-get','LeadstatusController@lead_assgin_list_get');
  
 });
@@ -270,10 +356,16 @@ Route::get('ticket-request','TicketController@ticket_request') ;
 Route::Post('ticket-request-save','TicketController@ticket_request_save') ;
 Route::get('ticket-request-user-list','TicketController@ticket_request_userlist') ;
 Route::Post('ticket-user-comment','TicketController@ticket_user_comment') ;
-
-
 Route::get('went-wrong','LoginController@went_wrong');
 
+
+/************
+// FBA Update
+******************/
+
+Route::get('fba-search','FbaDetailsController@fba_details_update');
+Route::post('fba-search-id','FbaDetailsController@fba_search_id');
+Route::post('fba-search-update','FbaDetailsController@fba_search_update');
 
 });
 
@@ -281,4 +373,20 @@ Route::get('went-wrong','LoginController@went_wrong');
 Route::group(['namespace' => 'leadController' ], function() {
 Route::get('marketing-leads','LeaduploadController@marketing_leads');  
 
+
+
+// Vivek start
+
+//******state_dropdown******
+// Route::get('state_dropdown','bankofferController@droup_state');
+// Route::POST('insert_state','bankofferController@state_demo');
+// Route::get('state_demo/{id}',array('as'=>'FSMRegister.ajax','uses'=>'bankofferController@get_state'));
+// Route::get('state_dropdown/{cityid}','bankofferController@get_cities');
+// Route::get('state_sub_dropdown/{cityid}','bankofferController@get_sub_cities');
+
+
+
 });
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

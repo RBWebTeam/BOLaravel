@@ -30,13 +30,16 @@
         <td><?php echo $val->NotificationTitle; ?></td>
         <td><?php echo $val->MessageType; ?></td> 
         <td><?php echo $val->WebUrl; ?></td>
-        <td><?php echo $val->Message; ?></td>
+        <td><?php echo $val->Message; ?></td>    
         <td><?php echo $val->WebTitle; ?></td>
         <td><?php echo $val->DateTimeToSend; ?></td>
         <td><?php echo $val->CreatedDate; ?></td>
           <td>
-       <button id="btnblock" class="btn btn-default btnupdatenot" onclick="updatenotification(<?php echo $val->MessageId; ?>,1);return false;">Approve </button>
-         <button id="btnunblock" class="btn btn-danger btnupdatenot" onclick="updatenotification(<?php echo $val->MessageId; ?>,0);return false;">reject</button>
+       <button id="accept_{{$val->MessageId}}" class="btn btn-success  btnupdate approve" onclick="updatenotification({{$val->MessageId}},1);return false;">Approve</button>
+
+     <button  id="reject_{{$val->MessageId}}" class="btn btn-danger btnupdate reject" 
+      <?php if($val->isapproved==0){echo "disabled";} ?> onclick="updatenotification   ({{$val->MessageId}},0);return false; ">reject</button>
+
         </td> 
      </tr>
       @endforeach
@@ -48,5 +51,3 @@
  </div>
  </form>
 @endsection
-
-

@@ -1,5 +1,4 @@
-@extends('include.master')
- @section('content')
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,6 +14,8 @@
 
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
 
 <style>
 body {font-size:13px;}
@@ -157,7 +158,7 @@ text = text +"</body>";
 <body>
 <div class="container">
  <div class="col-md-12">
- <br>
+ <br/>
  <img src="http://backoffice.magicfinmart.com/HealthPackages/HealthInsurance/images/health-assure-logo.jpg" class="logo-center" />
 <h5 class="text-center pad">Health Check Up Plans selected by you</h5>
  </div>
@@ -221,13 +222,13 @@ foreach ($val->ParamDetails as $key => $value) {
 <input type="hidden" name="txtprovidervisitype" id="txtprovidervisitype">
 <input type="hidden" name="txtproviderdccode" id="txtproviderdccode">
 <input type="hidden" name="txtID" id="txtID" value="{{$_GET["ID"]}}">
-
+<div class="col-md-12"><br/></div>
 <div id="btndiv" class="text-center col-md-12" style="display: none;">
  <input type="submit" name="btnbook" value="BOOK THIS TEST" onclick="" id="btnbook" class="btn btn-submit btn-primary" style="width: auto;">
 </div>
+<div class="col-md-12"><br/></div>
 </div>
 </form>
-
 </div>
 </body>
 </html>
@@ -239,10 +240,10 @@ foreach ($val->ParamDetails as $key => $value) {
                             <h5 id="testHead" class="modal-title"></h5>
                         </div>
                         <div id="testCheckupBody" class="modal-body" style='background: #eaeff7;'>
-                          <table id="tbltestlist" style="width:100%">
-                          </table>
+                          <table id="tbltestlist" style="width:100%"></table>
 
                         </div>
-                    </div>
+                   </div>
+               </div>
+</div>
 
-@endsection

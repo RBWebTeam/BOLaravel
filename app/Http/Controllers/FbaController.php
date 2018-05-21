@@ -28,6 +28,7 @@ class FbaController extends CallApiController
           return view('dashboard.fba-list',['doctype'=>$doctype]);         
         }
         public function get_fba_list(Request $req){
+
           $query=DB::select("call fbaList(0)");
 
           return json_encode(["data"=>$query]);
@@ -50,7 +51,7 @@ class FbaController extends CallApiController
 
         public function sendsms(Request $req) {
 
-              $newsms = urlencode($req->sms);//htmlspecialchars();
+              $newsms = urlencode($req->sms); //htmlspecialchars();
 
               
               $post_data="";
@@ -140,9 +141,7 @@ class FbaController extends CallApiController
 
 
          public function getcustomerid1 ($fbaid){
-
-
-try{
+ try{
     $data= array("FBAId"=>"$fbaid");
     $token=array("cache-control: no-cache","content-type: application/json", "token: 1234567890");
  
@@ -159,7 +158,91 @@ try{
            return ($custrespon);      
       }
 
+
+  public function getupdateloanid ($fbaid){
+try{
+    $data= array("fbaid"=>"$fbaid");
+    $token=array("cache-control: no-cache","content-type: application/json", "token: 1234567890");
  
+     $post_data=json_encode($data);
+     $type=$token;
+    $result=$this->call_other_data_api($this::$api_url.'/api/updateloanid',$post_data,$type);
+    $custrespon=$result['http_result'];              
+    
+}
+  catch (Exception $e){
+
+        return $e->getMessage();    
+     }        
+           return ($custrespon);      
+      }
+
+
+// Genratepaylink
+
+       public function paylinkget($fbaid){
+             // print_r($fbaid);exit();
+         try{
+    
+         $data='{"FBAID": "'.$fbaid.'"}';
+        $type= array("cache-control: no-cache","content-type: application/json", "token:1234567890");
+ 
+     $result=$this->call_other_data_api($this::$api_url.'/api/get-posp-payment-link',$data,$type);
+ 
+       $http_result=$result['http_result'];
+       $error=$result['error'];
+              $st=str_replace('"{', "{", $http_result);
+              $s=str_replace('}"', "}", $st);
+              $m=str_replace('\\', "", $s);
+              $update_user='';
+             print_r($m);exit();
+              $custrespon = json_decode($m);
+       }
+
+  catch (Exception $e){
+
+        return $e->getMessage();    
+     }        
+           return ($custrespon);  
+
+    }
+
+    public function sendpaysms(Request $req)
+    {
+            $text="Your payment link is genrated";
+              $newsms = urlencode( $text.":".$req->txtlink);//htmlspecialchars();
+                 //print_r($newsms); exit();
+              
+              $post_data="";
+              $result=$this->call_json_data_api('http://vas.mobilogi.com/api.php?username=rupeeboss&password=pass1234&route=1&sender=FINMRT&mobile[]='.$req->txtmono.'&message[]='.$newsms,$post_data);
+              $http_result=$result['http_result'];
+              $error=$result['error'];
+              $st=str_replace('"{', "{", $http_result);
+              $s=str_replace('}"', "}", $st);
+              $m=$s=str_replace('\\', "", $s);
+             
+              $obj = json_decode($m);
+              return $obj;
+    }
+ // vivek start
+ //fba master*******
+
+        
+           public function fbamaster(){
+           return view('fbamaster_data');
+        }
+
+           public function getfbaid(Request $req){ 
+          $data = DB::select("call get_fbamast_data(?)",array($req->id));
+          return response()->json($data);
+   }
+
+          public function update_fba_table(Request $req)
+       {
+          $arra= array('FirsName'=>$req->f_name,'LastName'=>$req->l_name,'emailID'=>$req->work_email,'MobiNumb1'=>$req->mobile);
+          $que=DB::table('FBAMast')->where('FBAID','=',$req->fba_id)->update($arra);
+           return redirect('fbamaster-edit');
+       }
 }
 
 

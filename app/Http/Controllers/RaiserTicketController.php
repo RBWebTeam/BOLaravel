@@ -30,6 +30,12 @@ class RaiserTicketController extends Controller
 		   return json_encode($classi);
 	}
 
+  public function gettoccmail($Querid){
+    
+     $toccmail = DB::select("call Usp_gettoccmailraisetkt($Querid)");
+       return json_encode($toccmail);
+  }
+
 	public function inserraisertkt(Request $req){
 
 		$id=Session::get('fbauserid');
@@ -57,49 +63,58 @@ class RaiserTicketController extends Controller
 		 	$name,
 		 	$req->txtraisermessage,
 		 	$req->txtfbaid,
-		 	$req->txttoemailid,
-		 	$req->txtccemailid,
+		 	"",
+		 	"",
 		 	"BO",
             $id
 		 ));
              
-          $data ="You have been assigned a ticket from";
+//           $data ="You have been assigned a ticket from";
               
-                $email = $req->txttoemailid;
-                $ccemail=$req->txtccemailid;
-if($ccemail!=''){
+//                 $email = $req->txttoemailid;
+//                 $ccemail=$req->txtccemailid;
+
+//                 $string = $ccemail;
+
+//                 $cc  = explode(",", $string);
+
+//                 //print_r($array);exit();
+
                 
-                $mail = Mail::send('mailViews.SendTicketReqMailFormat',['data' => $data,
-                	'lastid'=>$lastid], function($message)use($email,$ccemail){
-                $message->from('wecare@rupeeboss.com', 'RupeeBoss');
-                $message->to($email)->cc($ccemail)->subject('Ticket Request');
-                });
+// if($ccemail!=''){
+                
+//                 $mail = Mail::send('mailViews.SendTicketReqMailFormat',['data' => $data,
+//                 	'lastid'=>$lastid],
+//                    function($message)use($email,$cc){
+//                 $message->from('wecare@rupeeboss.com', 'Finmart ');
+//                 $message->to($email)->cc($cc)->subject('Ticket Request');
+//                 });
              
-                    if(Mail::failures()){
-                            $error=3;
-                            echo $error;
-                    }else{
+//                     if(Mail::failures()){
+//                             $error=3;
+//                             echo $error;
+//                     }else{
 
                     
-                    }
-                }
-else{
-	$mail = Mail::send('mailViews.SendTicketReqMailFormat',['data' => $data,
-                	'lastid'=>$lastid], function($message)use($email){
-                $message->from('wecare@rupeeboss.com', 'RupeeBoss');
-                $message->to($email)->subject('Ticket Request');
-                });
+//                     }
+//                 }
+// else{
+// 	$mail = Mail::send('mailViews.SendTicketReqMailFormat',['data' => $data,
+//                 	'lastid'=>$lastid], function($message)use($email){
+//                 $message->from('wecare@rupeeboss.com', 'RupeeBoss');
+//                 $message->to($email)->subject('Ticket Request');
+//                 });
               
-                    if(Mail::failures()){
-                            $error=3;
-                            echo $error;
-                    }else{
+//                     if(Mail::failures()){
+//                             $error=3;
+//                             echo $error;
+//                     }else{
 
-                    }
+//                     }
 
-    }
-		 
-     Session::flash('message', 'Record has been saved successfully'); 
+//     }
+		 //print_r($lastid);
+     Session::flash('message', 'Ticket created successfully. Your ticket no is '.$lastid[0]->TicketRequestId); 
      
       return redirect('RaiseaTicket');
  }

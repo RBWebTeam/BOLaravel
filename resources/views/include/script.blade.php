@@ -165,7 +165,8 @@ $(document).ready(function(){
                     dataType: "json",
                     success:function(data) {
                         $('#txtmapcity').empty();
-                        $('#txtmapcity').append('<option value="0">--Select City--</option>');
+                        $('#txtmapcity').append('<option value="">Select City</option>');
+
                         $.each(data, function(key, value) {
 
                             $('#txtmapcity').append('<option value="'+ key +'">'+ value +'</option>');
@@ -319,7 +320,7 @@ $('.message_sms_id').click(function(){
    success: function(msg)  
    {
     console.log(msg);
-   // alert('SMS send successfully..')
+   alert('SMS send successfully..')
     $('.sms_sent_id').modal('hide');
     $('#message-text').val('');
    }
@@ -541,9 +542,9 @@ $(document).on('change', '#search_state', function() {
          success: function(msg){
          if (msg.status==0) 
                 {
-                  alert('Updated Successfully');
+                  alert('Sales Code Updated Successfully');
                   $('#p_remark').val('');
-                  $('#update_'+id).closest('td').html(sales_update);
+                  $('#update_'+id).closest('a').html(sales_update);
                   
                   $('.close').click();           
                 } 
@@ -954,23 +955,23 @@ $.ajax({
         // $("#first_nm").hide();
         // $("#last_nm").hide();
 
+
 $('#LeadType').on('change',function(){
   var LeadType=$('#LeadType').find(":selected").val();
-
   if ( LeadType == 'WB')
       {
-       
         $("#weburl").show();
         $("#last_nm").show();
-
+         $("#wetitle").show();
+        $("#first_nm").show();
       }
       else{
         $("#weburl").hide();
         $("#last_nm").hide();
-
-      }
-});
-
+         $("#wetitle").hide();
+        $("#first_nm").hide();
+     }
+    });
 
  $('#txtmapstate').on('change', function() {
             var state_id = $(this).val();
@@ -1035,22 +1036,20 @@ function BindFbas(flag,value)
       var text = "";
       for (var i = 0; i < data.length; i++) {
 
-     if(i==0)
-
-    {
-    text = text +'<tr><th><input  name="fba_list[]" value="0" id="selectAll" onclick="checkall()" type="checkbox" /> FBA List</th><th>Mobile Number</th><th>City </th></tr>';
+      
+ 
 
 
-   text = text +'<tr><td><input name="fba_list[]" id="chkfba" type="checkbox" class="chkfba" value="'+data[i].id+'"/><input id="hdnchk" name="hdnchk" type="hidden" value="'+data[i].id+'" />'+data[i].fullname+'</td><td>'+data[i].mobile+'</td> <td>'+data[i].City+'</td></tr>';
-}
-
-  else{
+ 
+ 
 text = text +'<tr><td><input id="chkfba" name="fba_list[]"  type="checkbox" class="chkfba" value="'+data[i].id+'"/><input id="hdnchk" type="hidden" value="'+data[i].id+'" />'+data[i].fullname+'</td><td>'+data[i].mobile+'</td><td>'+data[i].City+'</td></tr>';
-}
+ 
 
 }
-$('#tblfbalist').empty().append(text);
-        
+
+$('#tblfbalisthead').empty().append('<tr><th><input  name="fba_list[]" value="0" id="selectAll" onclick="checkall()" type="checkbox" /> FBA List</th><th>Mobile Number</th><th>City </th>    </tr> ');
+
+        $('#tblfbalist').empty().append(text);
                      },
               error:function(error)
              {
@@ -1092,7 +1091,7 @@ $(document).on('change', '#search_state', function() {
                     fstate_id : fstate_id,
                   },
             success: function(data) { 
-                $.each(data, function( key, val )
+                $.each(data, function(key, val)
                 {
                   city_array.push('<option value="'+val.datavalue+'">'+val.value+'</option>');
                 });
@@ -1103,24 +1102,6 @@ $(document).on('change', '#search_state', function() {
     $('.search_district').append(city_array);
   
 });
-function getprodcutdtls(product_id){
-$.ajax({  
-         type: "GET",  
-         url:'Product-followup/'+product_id,
-         success: function(fsmmsg){
-
-      var data = JSON.parse(fsmmsg);
-      var str = "<table class='table' id='example'><thead><tr style='height:30px;margin:5px;'><th>Lead ID</th><th>Name</th><th>Mobile No</th><th>Email Id</th><th>Created Date</th><th>View History</th></tr></thead>";
-       for (var i = 0; i < data.length; i++) 
-       {
-
-         str = str + "<tbody><tr style='height:30px;margin:5px;'><td><a href='#'  data-toggle='modal' onclick='getproductfollowup("+data[i].FBAID+")' data-target='productfollowup'>"+data[i].FBAID+"</a></td><td>"+data[i].FullName+"</td><td>"+data[i].MobiNumb1+"</td><td>"+data[i].EmailID+"</td><td>"+data[i].CreaOn+"</td><td><a class='btn btn-primary'>View History</a></td></tr></tbody>";
-       }
-         str = str + "</table>";
-           $('#divpartnertable').html(str);   
-       }  
-      });
-}
 
 //vikas smstemplate
 $('#btnsave').click(function() {
@@ -1140,10 +1121,11 @@ console.log($('#frmsmstemplate').serialize());
 });
 
 
-function getpaymentlink(fbaid){
-  //alert(fbaid);
-  // alert(data);
-  //$('.paylink').modal('show');
+function getpaymentlink(fbaid,mobile){
+
+ $('#txtmono').val(mobile);
+ $('#fba').val(fbaid);
+
   $.ajax({
                     url: 'getpaymentlink/'+fbaid,
                     type: "GET",
@@ -1157,10 +1139,12 @@ function getpaymentlink(fbaid){
                         // alert(str)
                         $('.divpartnertable_payment').html(str);
                          $('.paylink_payment').modal('show');
+
                           //$('#paylink').html(data[0].Link);
                        }     
                        else{
-                        var str = "<p>No Payment Link Available</p>";
+                        
+                        var str = "No Payment Link Available...";
                         // alert(str)
                         $('.divpartnertable_payment').html(str);
                          $('.paylink_payment').modal('show');
@@ -1258,37 +1242,30 @@ $.ajax({
 }
 
 
-  function updatenotification(msgid,value){
 
-//alert(value);
- if (confirm("Are you sure to "+(value==1?"approve":"reject")+" this notification")) {}
-  $.ajax({
+     function updatenotification(msgid,value){
+
+    if (confirm("Are you sure to "+(value==1?"approve":"reject")+" this notification")) 
+    {}
+       $.ajax({
             type: "GET",
             url:'approvenotification/'+msgid+'/'+value, 
-                     
-           success: function( msg ) {
-
-            if(value=="1"){
+           success: function (msg) {
+             if(value=="1"){
               alert("Notification Approved Successfully");
-              $("#accept_"+msgid).css( "background",'#0fe10f');
-
+             $("#accept_"+msgid).css( "background",'#0fe10f');
             }
             else if(value=="0"){
+            alert("Notification Rejected Successfully");
+            document.getElementById("reject_"+msgid).disabled = true ;
+           $("#reject_"+msgid).prop('disabled', true);
+            $("#reject_"+msgid).css("background: rgb(15, 225, 15");
+              }
+             }
+            });
+           }
 
-             
-             alert("Notification rejected Successfully");
-              $("#reject_"+ msgid).css("background",'#ffffff');
-                $("#reject_"+ msgid).css("color",'#0c0b0b');
-               }
-                
-            }
-
-        });
-
- return false;
-
-}
-
+           
   $('#notificsubmitbtn').click(function(){
 // alert('okae');
   if (!$('#sendnotification').valid()) {
@@ -1376,28 +1353,18 @@ $.ajax({
       else
       {
         str = str + "<td>No documents uploaded.</td></tr></table>";
+   }
 
-
-      }
-
-           $('#divdocviewer').html(str);   
-             
-  
-        }  
-      });
+        $('#divdocviewer').html(str);   
+       }  
+   });
 }
 
-function showImage(src)
-
-{
+    function showImage(src){
 
   $("#imgdoc").css("display","block");
   $("#imgdoc").attr("src" ,src);
- 
-
 }
-
-
 
 </script> 
   
@@ -1408,131 +1375,77 @@ function showImage(src)
 
 <script> 
 
-$('#msds-select').change(function () { 
-  debugger;
+$('#msds-select').change(function () {
+    // var $loading = $('#loading').hide();    
  var table = $('#fba-list-table').DataTable(); 
+
+ // $loading.show();
     $.fn.dataTable.ext.search.push(
     function( settings, data, dataIndex ) {
         var msdsSearch = $( "#msds-select option:selected" ).val();
         var msdsValue = data[10]|| 0;
-       // console.log(data);
+       //console.log(data);
         var numbers = /^[0-9]+$/;
           if(msdsSearch=="2" && msdsValue=="update"){  
             return true;
           }
-            if(msdsSearch=="1" && msdsValue!="update"){  
+           if(msdsSearch=="1" && msdsValue!="update"){  
             return true;
           }
           if(msdsSearch=="0" && msdsValue){  
             return true;
           }
           if(msdsSearch=="FBAID" && msdsValue!="draw"){
-            return true;
-          }
+           return true;
+         }
           if(msdsSearch=="POSPNO" && msdsValue!="draw"){
-            return true;
-          }
-         
-        return false;
-    });
-    
-     table.draw();
-    
+           return true;
+        }
+          return false;
+    }); 
+      
+    table.draw();
+     
 });
-</script>
+ // $loading.hide();
+
+
+// posp yes fba id posp no search bar Hide and Show
+ 
+    $("select").on("change",function(){
+if ($('select ').val() == '1') {
+    $(".fbsearch").addClass("hide");
+    $(".psearch").addClass("hide");
+  }else{
+    $(".fbsearch").removeClass("hide");
+    if ($('select').val() == 'POSPNO')
+    {
+      $(".psearch").removeClass("hide");
+    }
+    else{
+      $(".psearch").addClass("hide");
+    }
+  }
+
+});
+
+  </script>
 <!-- POSP YES OR NO Dropdown end -->
 
 
-<script type="text/javascript">
-   $('#ddlsubcat').on('change', function() {
-        var QuerID = $(this).val();
-         
-            if(QuerID) {
-                $.ajax({
-                    url: 'RaiseaTicketgetcal/'+QuerID,
-                    type: "GET",
-                    dataType: "json",
-                    success:function(data) {
-                        $('#ddlClassification').empty();
-                        $('#ddlClassification').append('<option value="0">--Select Classification--</option>');
-                        
-                        $.each(data, function(key,value) {
-                             
-                            $('#ddlClassification').append('<option value="'+ value.ID +'">'+ value.Description +'</option>');
-                        });
-                     }
-                });
-            }else{
-                $('select[name="ddlClassification"]').empty();
-            }
-        });
- </script>
+
+
 
  <script type="text/javascript">
-   $('#btn_saveticket').click(function() {
-    if( $('#fromraiserticket').valid())
-    {
- 
-    data1=new FormData($("#pathimgraiser"));
-    
-  console.log($('#fromraiserticket').serialize());
-   $.ajax({ 
-   url: "{{URL::to('RaiseaTicket')}}",
-   method:"POST",
-   data: $('#fromraiserticket').serialize(),
-   dataType:'json',
-   async:false,
-   type:'POST',
-   processData: false,
-   contentType: false,
-  success: function(msg)  
-   {
-    console.log(msg);
-    alert("Record has been saved successfully");
-    $("#fromraiserticket").trigger('reset');
-   
-   }
-});
-}
-});
-$('#btn_resetticket').click(function() {
-   $("#fromraiserticket").trigger('reset');
-});
-
- </script>
-
- <script type="text/javascript">
-   $('#ddlCategory').on('change', function() {
-            var CateCode = $(this).val();
-            if(CateCode) {
-                $.ajax({
-                    url: 'RaiseaTicket/'+CateCode,
-                    type: "GET",
-                    dataType: "json",
-                    success:function(data) {
-                        $('#ddlsubcat').empty();
-                        $('#ddlsubcat').append('<option value="0">-- Select Sub Category--</option>');
-                        $.each(data, function(key, value) {
-                         
-                            $('#ddlsubcat').append('<option value="'+ value.QuerID +'">'+ value.QuerType +'</option>');
-                        });
-                     }
-                });
-            }else{
-                $('select[name="ddlsubcat"]').empty();
-            }
-        });
-
 function getcustomerid(text,fbaid){
   //alert(fbaid);
   // alert(data);
-  //$('.paylink').modal('show');
   $.ajax({
                     url: 'getcustomerid/'+fbaid,
                     type: "GET",                  
                     success:function(data) {
                       var json = JSON.parse(data);
-                      //console.log(json);
+                      console.log(json);
                       if(json.StatusNo==0){
    
                       $(text).closest('td').text(json.MasterData.CreateCustomerResult.CustID);
@@ -1540,7 +1453,32 @@ function getcustomerid(text,fbaid){
 
                     }
                     else{
-                      alert("Customer id does not exit"); 
+                      alert("Customer id does not exists"); 
+
+                    }
+                    }
+                }); 
+
+}
+ </script>
+<!-- Get Loan ID Start -->
+<script type="text/javascript">
+  function getloanid(text,fbaid){
+  //alert(fbaid);
+ $.ajax({
+                    url: 'getloanid/'+fbaid,
+                    type: "GET",                  
+                    success:function(data) {
+                      var json = JSON.parse(data);
+                      console.log(json);
+                      if(json.StatusNo==0){
+   //alert(json.MasterData[0].LoanID);
+                      $(text).closest('td').text(json.MasterData[0].LoanID);
+                       alert("Loan id updated successfully"); 
+
+                    }
+                    else{
+                      alert("Loan id does not exit"); 
 
                     }
                     }
@@ -1549,7 +1487,18 @@ function getcustomerid(text,fbaid){
 }
 
 
- </script>
+
+
+
+
+
+
+</script>
+
+<!-- Get Loan ID End -->
+
+
+
  <!-- End shubham raise a ticket -->
  <!-- Loader Script -->
 <script>
@@ -1567,4 +1516,53 @@ function getcustomerid(text,fbaid){
            //         <div id="loading">
            //      <img src="loading.gif" />  
            // </div>
+
+
+</script>
+<script type="text/javascript">
+
+  function getprodcutdtls(product_id){
+$.ajax({  
+         type: "GET",  
+         url:'Product-followup/'+product_id,
+         success: function(fsmmsg){
+
+      var data = JSON.parse(fsmmsg);
+      var str = "<table class='table' id='example'><thead><tr style='height:30px;margin:5px;'><th>Lead ID</th><th>Name</th><th>Mobile No</th><th>Email Id</th><th>Created Date</th><th>View History</th></tr></thead>";
+       for (var i = 0; i < data.length; i++) 
+       {
+
+         str = str + "<tbody><tr style='height:30px;margin:5px;'><td><a href='#'  data-toggle='modal' onclick='getproductfollowup("+data[i].FBAID+")' data-target='productfollowup'>"+data[i].FBAID+"</a></td><td>"+data[i].FullName+"</td><td>"+data[i].MobiNumb1+"</td><td>"+data[i].EmailID+"</td><td>"+data[i].CreaOn+"</td><td><a class='btn btn-primary' id='bntviewproduthistory' data-toggle='modal' data-target='producthistory' onclick='showproducthistory("+data[i].FBAID+")'>View History</a></td></tr></tbody>";
+       }
+         str = str + "</table>";
+           $('#divpartnertable').html(str);   
+       }  
+      });
+}
+
+function showproducthistory(Lead_id){
+
+$('.producthistory').modal('show');
+$.ajax({  
+         type: "GET",  
+         url:'view-history-Product-followup/'+Lead_id,
+         success: function(fsmmsg){
+
+      var data = JSON.parse(fsmmsg);
+
+      var str = "<table class='table' id='example'><tr style='height:30px;margin:5px;'><th>Lead ID</th><th>Status</th><th>Remark</th></tr>";
+       for (var i = 0; i < data.length; i++) 
+       {
+
+         str = str + "<tr style='height:30px;margin:5px;'><td>"+data[i].lead_id+"</td><td>"+data[i].status_name+"</td><td>"+data[i].remark+"</td></tr>";
+       }
+         str = str + "</table>";
+           $('#divproducthistory').html(str);   
+       }  
+      });
+}
+
+
+
+
 </script>

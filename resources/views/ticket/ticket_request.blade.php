@@ -1,7 +1,9 @@
 @extends('include.master')
 @section('content')
 <div class="container-fluid white-bg">
-<div class="col-md-12"><h3 class="mrg-btm">Ticket Request</h3></div>
+ <div class="col-md-12" id="Ticket-app"><h3 class="mrg-btm">Assign Ticket</h3></div>
+
+
 <div class="col-md-12"><p >  
        <div class="col-md-12">
        <div class="overflow-scroll">
@@ -10,32 +12,49 @@
                                     <thead>
                                        <tr>
                                        <th>ID</th>
-                                       <th>CateName</th>
-                                       <th>QuerType</th>
-                                       <th>Description</th>
-                                       <th>DocPath</th>
+                                       <th>Category Name</th>
+                                       <th>Sub Category Name</th>
+                                       <th>Classification Name </th>
+                                       <!-- <th>DocPath</th> -->
                                        <th>Message</th>
                                        <th>Status</th>
-                                       <th>StatusChangedBy</th>
-                                       <th>Assign</th>
-                                       <th>comment</th>
+                                       <th>Raised By</th>
+                                       <th>Raised By EmailId</th>
+                                       <!-- <th>StatusChangedBy</th> -->
+                                       <th>Assigned To</th>
+                                       <th>Assigned Date</th>
+                                      
                                          
                                       </tr>
                                     </thead>
                                     <tbody>
-
+ 
                                      @foreach($query as $va)
-                                     <tr>
-                                     <td><a href="#" onclick="TicketRequest_fn('{{$va->TicketRequestId}}')" >{{$va->TicketRequestId}}</a></td>
+                                     <?php  
+                                          $class =($va->user_fba_id!=null)? 'background: #00C851': '';
+                                      ?>
+                                     <tr style='{{$class}} '>
+                                     
+                                     @if($va->user_fba_id!=null)
+                                     <td><a href="#"  >{{$va->TicketRequestId}}</a>
+                                     </td>
+                                     @else
+                                       <td><a href="#" onclick="TicketRequest_fn('{{$va->TicketRequestId}}','{{$va->toemailid}}','{{$va->ccemailid}}')" >{{$va->TicketRequestId}}</a>
+                                     </td>
+                                     @endif
+
                                       <td>{{$va->CateName}}</td>
                                        <td>{{$va->QuerType}}</td>
                                         <td>{{$va->Description}}</td>
-                                         <td >{{$va->DocPath}}</td>
+                                         <!-- <td >{{$va->DocPath}}</td> -->
                                           <td>{{$va->Message}}</td>
                                            <td>{{$va->Status}}</td>
-                                            <td>{{$va->StatusChangedBy}}</td>
+                                           <td>{{$va->RaisedByName}}</td>
+                                           <td>{{$va->RaisedByEmail}}</td>
+                                           <!--  <td>{{$va->StatusChangedBy}}</td> -->
                                             <td>{{$va->user_fba_id!=null?$va->UserName:''}}</td>
-                                             <td  > <a href="#" onclick="view_comment_fn('{{$va->TicketRequestId}}')">View</a></td>
+                                            <td>{{$va->assigned_date}}</td>
+                                            <!--  <td  > <a href="#" onclick="view_comment_fn('{{$va->TicketRequestId}}')">View</a></td> -->
                                      </tr>
                                      @endforeach
                                     
@@ -76,8 +95,35 @@
             </div>
   </div> 
 
+ <div class="form-group">
+            <label for="inputEmail" class="control-label col-xs-2"> TO mail</label>
+            <div class="col-xs-10">
+         <input type="text" name="toemailid"  class="form-control"  id="toemailid">  
+           </div>
+ </div>
+
+  <div class="form-group">
+            <label for="inputEmail" class="control-label col-xs-2"> CC mail</label>
+            <div class="col-xs-10">
+                    <input type="text" name="ccemailid"  class="form-control"  id="ccemailid">  
+           </div>
+ </div>
+
+    
+
+
+
+
+<!--  <a href="#" id="addScnt">Add</a>
 
  
+<div class="form-group">
+
+<div id="pp_scents"></div>
+<div id="p_scents"></div>
+</div> -->
+
+
         
       </form>
       </div>
@@ -115,30 +161,78 @@
 </div>
 
 
-
+<link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.12.2/semantic.min.css" />
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.12.2/semantic.min.js"></script>
       <script type="text/javascript">
-      	function TicketRequest_fn(ID){
-             $('#TicketRequest_Id').val(ID);
-      		   $('#Ticket-Request-Id-Modal').modal('show');}
+
+
+
+      	function TicketRequest_fn(ID,toemailid,ccemailid){  
+         // $('#pp_scents').empty();
+          
+   
+     
+            // if( toemailid!=null && ccemailid!=null ){
+            //      $('#pp_scents').append('<div class="form-group"><label for="inputEmail" class="control-label col-xs-2"> TO mail</label><div class="col-xs-10"><input type="text" name="toemailid"  class="form-control" value="'+toemailid+'"  id="toemailid" required ></div></div>');
+                
+            //     $('#pp_scents').append('<div class="form-group"><label for="inputEmail" class="control-label col-xs-2"> CC mail</label><div class="col-xs-10"><input type="text" name="ccemailid[]"  value="'+ccemailid+'"  class="form-control"  id="ccemailid" required></div></div>');
+
+
+
+            //  }else{
+            //     $('#pp_scents').append('<div class="form-group"><label for="inputEmail" class="control-label col-xs-2"> TO mail</label><div class="col-xs-10"><input type="text" name="toemailid"  class="form-control"    id="toemailid" required ></div></div>');
+                
+            //     $('#pp_scents').append('<div class="form-group"><label for="inputEmail" class="control-label col-xs-2"> CC mail</label><div class="col-xs-10"><input type="text" name="ccemailid[]"     class="form-control"  id="ccemailid" required></div></div>');
+                
+            //  } 
+
+
+          
+              $('#TicketRequest_Id').val(ID);
+              $('#toemailid').val(toemailid);
+              $('#ccemailid').val(ccemailid);
+      		    $('#Ticket-Request-Id-Modal').modal('show');}
    $(document).on('click','#TicketRequest_Id_save',function(e){  e.preventDefault();
-         if($('#FBAUserId').val()!=0){
+
+
+ //   validator=$('#TicketRequest_Id_from').validate();
+ //     if(! $('#TicketRequest_Id_from').valid()){
+        
+ //          $.each(validator.errorMap, function (index, value,arg) {
+ //          $('#'+index).focus();
+ //         return false;
+ //       });
+ //        }else{
+
+
+
+ //             alert("gdfgdfg");
+ //        }
+
+ // return false;
+ ceckemail=checkEmails();
+
+ if($('#FBAUserId').val()==0){
+  alert("Please select user");
+ }
+ else if(ceckemail!=0){
+  alert("Please add email");
+ }
+ else{
          $.post("{{url('ticket-request-save')}}",$('#TicketRequest_Id_from').serialize())
              .done(function(data){ 
              console.log(data);
                  if(data==0){
-                     
-                 window.location.href = "{{url('ticket-request')}}";
+                  alert('Ticket successfully assigned to '+$("#FBAUserId").children("option").filter(":selected").text());   
+                  window.location.href = "{{url('ticket-request')}}";
                  }else{
                   console.log("error");
                  }
           }).fail(function(xhr, status, error) {
-                 console.log(error);
+                 alert('Something went wrong');  
             });
 
-        }else{
-           alert("Select users");
         }
-
    })
 
  
@@ -161,7 +255,63 @@
 
  }
 
-      </script>
+
+ 
+
+ $(function() {
+        var scntDiv = $('#p_scents');
+        var i =  1;
+        
+        $('#addScnt').on('click', function() {   
+           if( i<=3) {
+                $('<p><label for="inputEmail" class="control-label col-xs-2"> CC mail</label> <input type="text" name="ccemailid[]"  class="form-control  " style="width: 495px;"  id="ccemailid'+i+'" required>  <a href="#" id="remScnt" class="remScnt">Remove</a></p>').appendTo(scntDiv);
+                i++;
+              }
+                return false;
+        });
+        
+        $(document).on('click','.remScnt', function() {  
+                if( i > 1 ) {
+                        $(this).parents('p').remove();
+                        i--;
+                }
+                return false;
+        });
+});
+
+
+
+</script>
+ 
+<script language="javascript">
+function checkEmail(email) {
+//var regExp = /(^[a-z0-9]([a-zA-Z0-9_\.\-]*)@([a-z_\.]*)([.][a-z]{3})$)|(^[a-z]([a-zA-Z0-9\-]*)@([a-z_\.]*)(\.[a-z]{3})(\.[a-z]{2})*$)/i;
+
+ regExp =/[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}/igm;
+return regExp.test(email);
+}
+
+function checkEmails(){
+  var emails = document.getElementById("ccemailid").value;
+  var emailArray = emails.split(",");
+  var invEmails = "";
+  var tru=1;
+  for(i = 0; i <= (emailArray.length - 1); i++){
+    if(checkEmail(emailArray[i])){
+      //Do what ever with the email.
+        tru=0;
+    }else{
+      invEmails += emailArray[i] + "\n";
+      tru=1;
+    }
+  }
+  if(invEmails != ""){
+    //alert("Invalid emails:\n" + invEmails);
+  }
+
+  return tru;
+}
+</script>
 @endsection
 
 

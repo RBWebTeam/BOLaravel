@@ -12,11 +12,15 @@ use Mail;
  
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
+
+
 class LoginController extends InitialController
 {
 
 
 public function checklogin(Request $request){
+
+  
 if(!$request->session()->exists('emailid')){
                return view('index');
        }else{
@@ -39,7 +43,7 @@ if(!$request->session()->exists('emailid')){
    }else{
           
 
-
+ 
 
            $query=DB::select('call sp_user_login(?,?,?)',array($request->email,$request->password,$request->ip()));
            
@@ -74,15 +78,8 @@ if(!$request->session()->exists('emailid')){
                       Session::flash('msg', "Invalid email or password. Please Try again! ");
 
                     
-
-
- 
- 
-       
-
-                 
               return redirect()->intended('dashboard');
-        }
+       }
         {
                       Session::flash('msg', "Invalid esmail or password. Please Try again! ");
 
@@ -94,19 +91,19 @@ if(!$request->session()->exists('emailid')){
            // $value=DB::table('emp_login')->where('emailid','=',$request->email)
            // ->where('password','=', $request->password)
           // ->first();
-          // 	if($value!=''){ 
-		        //   	  $request->session()->put('emailid',$value->emailid);
-		        //   	  $request->session()->put('emptype',$value->emptype);
-		        //       $request->session()->put('emp_id',$value->emp_id);
-		        //       $request->session()->put('username',$value->username);
+          //  if($value!=''){ 
+            //      $request->session()->put('emailid',$value->emailid);
+            //      $request->session()->put('emptype',$value->emptype);
+            //       $request->session()->put('emp_id',$value->emp_id);
+            //       $request->session()->put('username',$value->username);
           //         $request->session()->put('last_login',$value->last_login);
-		              
-		             
+                  
+                 
           //        return redirect()->intended('dashboard');
           //       }else{
-          //      	      Session::flash('msg', "Invalid email or password. Please Try again! ");
+          //              Session::flash('msg', "Invalid email or password. Please Try again! ");
           //              return Redirect::back();
-               	  
+                  
           //    }
 
 
@@ -181,17 +178,14 @@ if(!$request->session()->exists('emailid')){
             'password' =>$req->password]);
 
        
-Session::flash('message', 'Register successfully...!'); 
+Session::flash('message', 'User Register successfully...!'); 
    }
 
     
-           return redirect ('register-user-list');
+           return redirect ('register-user');
  
 
 }
-
-
-
 
 public function register_update(Request $req){  
 

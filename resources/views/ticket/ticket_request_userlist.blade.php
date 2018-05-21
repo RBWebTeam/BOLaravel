@@ -1,7 +1,7 @@
 @extends('include.master')
 @section('content')
 <div class="container-fluid white-bg">
-<div class="col-md-12"><h3 class="mrg-btm">Ticket Request</h3></div>
+<div class="col-md-12"><h3 class="mrg-btm">View Assigned Ticket</h3></div>
 <div class="col-md-12"><p >  
        <div class="col-md-12">
        <div class="overflow-scroll">
@@ -10,13 +10,15 @@
                                     <thead>
                                        <tr>
                                        <th>ID</th>
-                                       <th>CateName</th>
-                                       <th>QuerType</th>
-                                       <th>Description</th>
-                                       <th>DocPath</th>
+                                      <th>Category Name</th>
+                                       <th>Sub Category Name</th>
+                                       <th>Classification Name </th>
+                                       <!-- <th>DocPath</th> -->
                                        <th>Message</th>
                                        <th>Status</th>
-                                       <th>StatusChangedBy</th>
+                                       <th>Status Date</th>
+                                       <th>Assigned Date</th>
+                                       <!-- <th>StatusChangedBy</th> -->
                                           <th>Comment</th>
                                       </tr>
                                     </thead>
@@ -24,14 +26,16 @@
 
                                      @foreach($query as $va)
                                      <tr>
-                                     <td><a href="#" onclick="Ticket_comment_fn('{{$va->TicketRequestId}}')" >{{$va->TicketRequestId}}</a></td>
+                                     <td><a href="#" style="color: black;" onclick="Ticket_comment_fn('{{$va->TicketRequestId}}')" >{{$va->TicketRequestId}}</a></td>
                                       <td>{{$va->CateName}}</td>
                                        <td>{{$va->QuerType}}</td>
                                         <td>{{$va->Description}}</td>
-                                         <td>{{$va->DocPath}}</td>
+                                         <!-- <td>{{$va->DocPath}}</td> -->
                                           <td>{{$va->Message}}</td>
                                            <td>{{$va->Status}}</td>
-                                            <td>{{$va->StatusChangedBy}}</td>
+                                            <td>{{$va->created_date}}</td>
+                                            <td>{{$va->assigned_date}}</td>
+                                            <!-- <td>{{$va->StatusChangedBy}}</td> -->
                                              <td  > <a href="#" onclick="view_comment_fn_user('{{$va->TicketRequestId}}')">View</a></td>
                                      </tr>
                                      @endforeach
@@ -77,6 +81,7 @@
             <div class="col-xs-10">
                  <textarea name="comment" id="comment_id"  class="form-control"></textarea>
             </div>
+
   </div> 
 
 
@@ -98,14 +103,14 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Comment</h5>
+        <h5 class="modal-title" id="exampleModalLabel">History</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
        <table class="datatable-responsive table table-striped table-bordered dt-responsive nowrap" id="example">
-      <thead><tr><th>Comment</th></tr></thead>
+      <thead><tr><th>Comment</th><th>Status</th><th>Date</th></tr></thead>
       <tbody id="get_comment_id"></tbody>
       </table>
       </div>
@@ -158,7 +163,7 @@
                arr=Array();
                $('#get_comment_id').empty();
               $.each(data, function(key, value) {
-                     arr.push('<tr><td>'+value.comment+'</td></tr>');
+                     arr.push('<tr><td>'+value.comment+'</td><td>'+value.StatusName+'</td><td>'+value.created_date+'</td></tr>');
               }); 
               console.log(arr);
               $('#get_comment_id').append(arr);

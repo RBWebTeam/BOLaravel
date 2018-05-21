@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -13,25 +12,22 @@ use URL;
 use Mail;
 class FbaprofileController extends Controller
 {
-	public function fbaprofileview()
+	public function fbaprofileview($fbaid)
 	{
 		$Genins=DB::select("call Usp_load_Generalins()");
 		$lifeins=DB::select("call Usp_load_lifeinsurence()");
 		$healthins=DB::select("call Usp_load_healthins()");
-	     return view('FbaProfile',['Genins'=>$Genins,'lifeins'=>$lifeins,'healthins'=>$healthins]);
+		$fbadetails=DB::select("call GET_fbadetails_in_fbaprofile($fbaid)");
+		$fbaupdate=DB::select("call Usp_get_fbaupdatedhistory($fbaid)");
+	     return view('FbaProfile',['Genins'=>$Genins,'lifeins'=>$lifeins,'healthins'=>$healthins,'fbadetails'=>$fbadetails,'fbaupdate'=>$fbaupdate]);
 	}
 	
 	public function Insertfbaprofile(Request $req)
 	{
-            $id=Session::get('fbauserid');
-		    $validator =Validator::make($req->all(), [
-                                            ]);
-             if ($validator->fails()) {
-             return redirect('Fba-profile')
-             ->withErrors($validator)
-             ->withInput();
-            }else{
-           $FbaProfileid=DB::statement('call Usp_insert_fbaprofile(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',array(
+            $id=Session::get('fbauserid');	           
+           // $data = DB::statement('call inserttemptest(?)',array('daniyal'));
+           // print_r($data);exit();
+           DB::statement('call Usp_insert_fbaprofile(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',array(
 		 	$req->iscompany,
 		 	$req->txtbusinesstype,
 		 	$req->txtofficeadd,
@@ -55,42 +51,36 @@ class FbaprofileController extends Controller
 		 	$req->txtother,
 		 	$req->txtotherremark,
 		 	$req->txtremark,
-		 	0, 
+		 	$req->txtfbaid, 
 		 	$id,
 		 	$req->lifeinsucomp,
 		 	$req->generatlinsucomp,
 		 	$req->healthinuscomp
-		    ));			   
-	   }
-	   // if($req->isWorksLICins==1){
-	   // 	DB::statement('call Usp_insert_PrivateLifeInsurers(?,?,?)',array($FbaProfileid,$req->privetlifeco,$req->isWorksLICins));
-	   // }
-              Session::flash('message', 'Record has been saved successfully'); 
-		   // print_r($rea->all()); exit();			
-        return redirect('Fba-profile');
+		    ));	   
+	     return "successfully";		
+        
+	}
+
+	public function getfbaprofile($fbaid)
+	{
+		try {
+			$FbaProfile=DB::select("call Usp_get_fabprofiledata($fbaid)");
+       		return json_encode($FbaProfile);
+		} catch (Exception $e) {
+			print_r($e);	
+		}
+       
+	}
+
+	public function getfbaprofilecompanymapping($profileid)
+	{
+		try {
+			//print_r($profileid);exit();
+			$FbaProfile=DB::select("call usp_get_profilecompanymapping($profileid)");
+       		return json_encode($FbaProfile);
+		} catch (Exception $e) {
+			print_r($e);	
+		}
+       
 	}
 }
-
-
-
-  
-
-  
-  
-   
- 
-
- 
-  
- 
- 
-  
-   
-    
-     
-      
-       
- 
- 
-  
-  

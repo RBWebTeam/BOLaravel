@@ -34,11 +34,111 @@ class smslogController extends Controller
         return view('dashboard.sms_template');
             }
   
-public function getsendsmslog(){ 
-$query1=DB::select("call usp_load_sms_log()");
+  public function getsendsmslog(){ 
+ $sendsms=DB::select("call usp_load_sms_log()");
 
-return view ('dashboard.send_sms_log',['query1'=>$query1]);
+ return view ('dashboard.send-sms-log',['sendsms'=>$sendsms]);
 }
+
+
+
+
+
+
+
+
+
+ // SMS TEMPLATE CONTROLLE
+  public function smstemplate(){
+  return view('dashboard.sms_template');
+
+   }
+  
+        public function insert_template_demo(Request $req){
+
+            DB::table('SMSTemplate')->insert([
+          ['Header' =>$req->hname,
+           'Template' => $req->txtmesg,
+           'CreatedBy' => session()->get('fbaid')],
+
+          ]);
+
+            return Redirect ('sms_template');
+        }
+
+         public function template_demo()
+
+        { 
+
+           $smsdata=DB::select("call usp_getsmsdata()");
+
+          return view('dashboard.table_template',['smsdata'=>$smsdata]);
+        }
+
+
+
+         public function templetedelete($id)
+         {
+          // print_r($req->SMSTemplateId); exit();
+          DB::delete('delete from SMSTemplate where SMSTemplateId= ?' ,[$id]);
+            return Redirect('view_templete_table');
+
+          }
+
+
+         public function table_edit($id)
+         {
+
+            $user=DB::table('SMSTemplate')
+            ->select('SMSTemplateId','Header','Template')
+            ->where('SMSTemplateId','=',$id)->first();
+             return view('dashboard.edit_table_template',["user"=>$user]);
+
+
+             }
+
+
+
+          //   $users = DB::table('smstemplate')
+          //   ->select('SMSTemplateId','Header','Template')
+          //   ->where('SMSTemplateId',$id)
+          //   ->get();
+          // // view('edit_table_template')->with($users);
+          //  return View::make('dashboard.edit_table_template')->with('users',$users);
+         
+
+
+
+
+       // public function edit_value_update($id){
+
+       //    $arra= array('Header'=>$req->smshead,'Template'=>$req->smsbody);
+
+      //          $que=DB::table('smstemplate')->where('SMSTemplateId',$req->SMSTemplateId)->update($arra);
+             
+      //         return view('edit_table_template');
+
+      //      }
+
+          // public function edit_value_update($id){
+
+
+          //   $Header =$req->input('smshead');
+          //   $Template =$req->input('smsbody');
+
+          //   $data = array('Header'=>$smshead,"Template"=>$smsbody);
+
+          //   DB::table('smstemplate')->edit_value_update($data);
+          
+          // }
+
+
+       public function update_sms_table(Request $req)
+       {
+          $arra= array('Header'=>$req->smshead,'Template'=>$req->smsbody);
+          $que=DB::table('SMSTemplate')->where('SMSTemplateId','=',$req->fbaid)->update($arra);
+           return redirect('view_templete_table');
+       }
 
  }
 

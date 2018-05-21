@@ -25,12 +25,13 @@ public function getsate()
 }
 public function getcity($id)
 {
-	$cities = DB::table("city_master")
+        $cities = DB::table("city_master")
                     ->where("stateid",$id)
-                    ->pluck("cityname","city_id");
+                      ->orderBy('cityname', 'asc')
+                      ->pluck("cityname","cityname")
+                    ;
         return json_encode($cities);
-      
-}
+       }
  
  public function getpincode($flag,$value){
  	

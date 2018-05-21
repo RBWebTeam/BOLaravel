@@ -1,5 +1,22 @@
-@extends('include.master')
-@section('content')
+<!DOCTYPE html>
+<html>
+<head>
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+        <title>Finmart Home page</title>
+        <link rel="icon" href="favicon.png" type="image/x-icon" />
+        <link type="text/css" rel="stylesheet" href="{{url('stylesheets/sidebar.css')}}">
+        <link type="text/css" rel="stylesheet" href="{{url('stylesheets/bootstrap.min.css')}}"> 
+        <link type="text/css" rel="stylesheet" href="{{url('stylesheets/style.css')}}">
+        <link href="{{url('stylesheets/datepicker.css')}}" rel="stylesheet" type="text/css" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+
 <style>
 body {font-size:13px;}
 p {color:#333;}
@@ -40,8 +57,8 @@ ul li {    float: left;display: inherit;width:48%;}
 .list1 .glyphicon {margin-top: 1px;float: left; margin-right: 10px;}
 .list1 {float: left;width: 100%;background: #e2e2e2;}
 </style>
-
-
+</head>
+<body>
 
 <form id="health-insurance" method="POST">
    {{ csrf_field() }}
@@ -88,6 +105,24 @@ ul li {    float: left;display: inherit;width:48%;}
 
 </div>
 </form>
+
+<div id="health_insurance" class="modal fade dignostic-modal testCheckup">
+                <div class="modal-dialog modal-sm">
+                    <div class="modal-content">
+                        <div class="modal-header" style='background: #5b9bd5; color: #fff;'>
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style='font-size: 22px; color: #fff; opacity: 0.9;'>&times;</button>
+                            <h5 id="testHead" class="modal-title"></h5>
+                        </div>
+                        <div id="testCheckupBody" class="modal-body" style='background: #eaeff7;'>
+                          <table id="tbltestlist" style="width:100%">
+                          </table>
+
+                        </div>
+                    </div>
+                </div>
+  </div>
+
+
 <script type="text/javascript">
 $(document).ready(function(){
     gethealthpackage();
@@ -95,6 +130,8 @@ $(document).ready(function(){
 
 function gethealthpackage()
 {
+
+
         var v_token = "{{csrf_token()}}";
         
      $.ajax({  
@@ -105,11 +142,11 @@ function gethealthpackage()
 
 
 
-        var respon = JSON.parse(msg);
+        //var respon = JSON.parse(msg);
 
           var tablerows = new Array();
           
-          $.each(respon.d.lstPackageDetails, function( index, value ) {   
+          $.each(msg.d.lstPackageDetails, function( index, value ) {   
       
             tablerows.push('<tbody><td><p><b>' + value.PackName + '</b></p><h5 class="text-danger">' + value.cnt + '&nbsp;Tests</h5> </td><td colspan="2"><p class="text-center">ACTUAL COST</p> <a href="javascript:void(0)" class="amount amunt1"><strike>' + value.MRP + '</strike></a></td><td colspan="2"><p class="text-center">OFFER COST</p> <a href="javascript:void(0)" onclick="offer_price(\'' + value.PackName + '\',' + value.PackCode + ',' + value.OfferPrice + ',' + value.MRP + ',' + value.cnt + ',\'' + value.Fasting + '\',\'' + value.VisitType + '\')" class="amount">' + value.OfferPrice + '</a></td><td><a onclick="img_delete(' + value.PackCode + ')" href="javascript:void(0)" class="down-arrow"><span  class="glyphicon glyphicon-chevron-down"></span></a></td></tr><tr><td  class="no-padding bg-gray' + value.PackCode + '" colspan="6" style="display:none;"><ul class="list1" id="Depreciation' + value.PackCode + '" ></ul></td></tr></tbody>');
           }); 
@@ -124,9 +161,7 @@ function gethealthpackage()
      });
 
 }
-</script> 
 
-<script type="text/javascript">
 var x;
  function img_delete(PackCode){
   var PackCode=PackCode;
@@ -189,25 +224,11 @@ $('#testHead').append(name.replace(/_/g,' ')+" Test");
       window.location.href ="{{URL::to('HealthAssure')}}?PackName="+PackName+"&Packcode="+PackCode+"&OfferPrice="+OfferPrice+"&MRP="+MRP+"&tcount="+cnt+"&fasting="+Fasting+"&homevisit="+VisitType+"&fbaid=1976&fbaname=LIVE%20FBA&mob=9292929292#";
   };
 </script>    
-			    
-@endsection	
+  
 
 
-<div id="health_insurance" class="modal fade dignostic-modal testCheckup">
-                <div class="modal-dialog modal-sm">
-                    <div class="modal-content">
-                        <div class="modal-header" style='background: #5b9bd5; color: #fff;'>
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style='font-size: 22px; color: #fff; opacity: 0.9;'>&times;</button>
-                            <h5 id="testHead" class="modal-title"></h5>
-                        </div>
-                        <div id="testCheckupBody" class="modal-body" style='background: #eaeff7;'>
-                          <table id="tbltestlist" style="width:100%">
-                          </table>
-
-                        </div>
-                    </div>
-                </div>
-  </div>
+</body>
+</html>
 
 
 	

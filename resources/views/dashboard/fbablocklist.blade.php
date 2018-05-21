@@ -44,7 +44,6 @@
       
       <input type="hidden" name="txtfbaid" id="blocksame" value="<?php echo $val->fbaid; ?>"></td>
       </tr>
-
      </tr>
 
        @endforeach

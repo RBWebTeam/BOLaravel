@@ -68,5 +68,12 @@ try{
 
         return $ID;
       }
+
+      public function Success(){
+        return view('dashboard.Success_Page_Healthassure');
+      }
+      public function failure(){
+        return view('dashboard.Failure_Healthassure');
+      }
 }
  
