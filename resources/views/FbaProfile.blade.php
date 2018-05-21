@@ -56,7 +56,7 @@
        	      <input id="iscompany" type="radio" name="iscompany" value="1" checked>&nbsp;YES</label>
        	     </td>
        	     <td width="20%;">
-       	      <label><input id="" type="radio" name="iscompany" value="0">&nbsp;NO</label>
+       	      <label><input id="" type="radio" name="iscompany" class="iscompanyNo" value="0">&nbsp;NO</label>
        	     </td>     	     
        	    </tr>
        	</table>
@@ -86,7 +86,7 @@
        	              <label><input type="radio" name="isWorksLIC" id="isWorksLIC" value="1" checked>&nbsp;YES</label>
        	            </td>
        	            <td width="20%;">
-       	             <label><input type="radio" name="isWorksLIC" value="0">&nbsp;NO</label>
+       	             <label><input type="radio" name="isWorksLIC" class="isWorksLICNo" value="0">&nbsp;NO</label>
        	            </td>  
         		</tr>
         	</table>
@@ -118,7 +118,7 @@
        	              <label><input type="radio" id="isWorksLICins" name="isWorksLICins" value="1" checked>&nbsp;YES</label>
        	            </td>
        	             <td width="20%;">
-       	             <label><input type="radio" name="isWorksLICins" value="0">&nbsp;NO</label>
+       	             <label><input type="radio" name="isWorksLICins" class="isWorksLICinsNo" value="0">&nbsp;NO</label>
        	             </td>
         		</tr>
             <div>
@@ -142,7 +142,7 @@
        	              <label><input id="isWorksGeneralins" type="radio" name="isWorksGeneralins" value="2" checked>&nbsp;YES</label>
        	        </td>
        	        <td style="width: 20%">
-       	             <label><input type="radio" name="isWorksGeneralins" value="0">&nbsp;NO</label>
+       	             <label><input type="radio" name="isWorksGeneralins" class="isWorksGeneralinsNo" value="0">&nbsp;NO</label>
        	        </td>
        	    </tr>
        	    <tr id="divgenins">
@@ -164,7 +164,7 @@
        	              <label><input type="radio" id="isWorksStandAlone" name="isWorksStandAlone" value="3" checked>&nbsp;YES</label>
        	        </td>
        	        <td style="width: 20%">
-       	             <label><input type="radio" name="isWorksStandAlone" value="0">&nbsp;NO</label>
+       	             <label><input type="radio" name="isWorksStandAlone" class="isWorksStandAloneNo" value="0">&nbsp;NO</label>
        	        </td>
        	    </tr>
        	    <tr id="divhealth">
@@ -189,7 +189,7 @@
                     <td><label class="radio-inline"><input type="checkbox" id="txtpl" name="txtpl" value="1">&nbsp;PL</label></td>
                    <td><label class="radio-inline"><input type="checkbox" id="txtlap" name="txtlap" value="1">&nbsp;LAP</label></td>
                    <td><label class="radio-inline"><input type="checkbox" id="txtbl" name="txtbl" value="1">&nbsp;Business Loan</label></td>
-                   <td><label class="radio-inline"><input id="txtloan" type="radio" name="txtloan" value="1">Others</label></td>
+                   <td><label class="radio-inline"><input id="txtloan" type="checkbox" name="txtloan" value="1">Others</label></td>
                      <td id="divloan" style="display: none;" ><input type="text" name="txtotherloan" placeholder="Please Specify" class="form-control" id="txtotherloan" required></td>
                </tr>
            </table>
@@ -208,7 +208,7 @@
                 	<label class="radio-inline"><input type="checkbox" id="txtFixed" name="txtFixed" value="1">&nbsp;Co Fixed Deposits</label>
                 </td>
                 <td style="width: 20%;">
-                	<label class="radio-inline"><input id="txtother" type="radio" name="txtother" value="1">Others</label>
+                	<label class="radio-inline"><input id="txtother" type="checkbox" name="txtother" value="1">Others</label>
                 </td>
            
                 <td id="divother" style="display: none;" ><input type="text" name="txtotherremark" placeholder="please specify" class="form-control" id="txtotherremark" required>
@@ -246,6 +246,9 @@ $(document).ready(function() {
         $("#divcompany").show();
     } else {
         $("#divcompany").hide();
+         $('#txtbusinesstype').val("");
+          $('#txtofficeadd').val("");
+          $('#txtstaff').val("");
     }
   });
     $('input[name=isWorksLIC]').click(function (){
@@ -253,22 +256,41 @@ $(document).ready(function() {
         $("#divprofile").show();
     } else {
         $("#divprofile").hide();
+        $('#txtnoofpolicy').val("");
+        $('#txtpremium').val("");
+        $('#txtliccustomer').val("");
+        $('#txtlicproduct').val("");
+        $('#txtlicclub').val("");
     }
 });
-     $('input[name=txtother]').click(function (){
-    if (this.id == "txtother"){
-        $("#divother").show();
-    } else {
-        $("#divother").hide();
-    }
+
+     $('input[name=txtother').change(function() {
+  if($(this).is(":checked")) {
+    $("#divother").show();
+  }
+  else{
+     $("#divother").hide();
+  }
 });
-   $('input[name=txtloan]').click(function (){
-    if (this.id == "txtloan"){
-        $("#divloan").show();
-    } else {
-        $("#divloan").hide();
-    }
+
+
+ $('input[name=txtloan').change(function() {
+  if($(this).is(":checked")) {
+    $("#divloan").show();
+  }
+  else{
+     $("#divloan").hide();
+  }       
 });
+
+
+//    $('input[name=txtloan]').click(function (){
+//     if (this.id == "txtloan"){
+//         $("#divloan").show();
+//     } else {
+//         $("#divloan").hide();
+//     }
+// });
 $('input[name=isWorksLICins]').click(function (){
     if (this.id == "isWorksLICins"){
         $("#divprivate").show();
@@ -294,21 +316,38 @@ $('input[name=isWorksStandAlone]').click(function (){
    $('#btnfbaprofile').click(function (){
     
         var privetlifeco = [];
-        $.each($(".ddlprivetlifeco option:selected"), function(){            
-            privetlifeco.push($(this).val());
-        });       
+
+
+      if($("input[name='isWorksLICins']:checked").val()==1){
+            $.each($(".ddlprivetlifeco option:selected"), function(){            
+                  privetlifeco.push($(this).val());
+              });       
+      }
+        
+
+       
         $("#lifeinsucomp").val(privetlifeco.join(", "));
 
         var generatlinsucomp = [];
-        $.each($(".ddlgenins option:selected"), function(){            
+
+if($("input[name='isWorksGeneralins']:checked").val()==2){
+              $.each($(".ddlgenins option:selected"), function(){            
             generatlinsucomp.push($(this).val());
-        });       
+        });              
+      }
+
+    
         $("#generatlinsucomp").val(generatlinsucomp.join(", "));
 
         var healthinuscomp = [];
-        $.each($(".ddlhealth option:selected"), function(){            
+
+        if($("input[name='isWorksStandAlone']:checked").val()==3){
+         $.each($(".ddlhealth option:selected"), function(){            
             healthinuscomp.push($(this).val());
-        });        
+        });                 
+      }
+
+           
         $("#healthinuscomp").val(healthinuscomp.join(", "));
 
      if( $('#fbaprofile').valid())
@@ -322,7 +361,7 @@ $('input[name=isWorksStandAlone]').click(function (){
                {
                  console.log(msg);
                  alert("Record has been saved successfully");
-                 $("#fbaprofile").trigger('reset');                   
+                 location.reload();
                }
              });  
     } 
@@ -346,27 +385,76 @@ function getfbaprofile(){
 
  $.ajax({ 
          type: "GET",  
-         url:'../fba-profile-company-mapping/1',
+         url:'../fba-profile-company-mapping/'+data[0].fbaprofileid,
          success: function(fbaprofilecompdata){
            //alert(fbaprofilecompdata);
            var compdata = JSON.parse(fbaprofilecompdata);  
            //alert(compdata);
-           var type1 = [];
+           var type1 = "";
+           var type2 = "";
+           var type3 = "";
            if (compdata.length>0){
 
                 for (var i = 0; i < compdata.length; i++) {
                   if(compdata[i].companytype==1){
-                    type1.push(compdata[i].companyid);
+                    type1 =  type1 +","+$.trim(compdata[i].companyid);
+                    //type1.push(compdata[i].companyid);
                   }
                    if(compdata[i].companytype==2){
-                    
+                     console.log(compdata[i].companyid);
+                    type2 =  type2 +","+ $.trim(compdata[i].companyid);
+                     //type2.push(compdata[i].companyid);
                   }
-                   if(compdata[i].companytype==3){
-                    
+                    if(compdata[i].companytype==3){
+                    type3 =  type3 +","+ $.trim(compdata[i].companyid);
+                     //type3.push(compdata[i].companyid);
                   }
             }
-                $('#ddlhealth').val(type1);
+
+            if(type1!=""){
+                $.each(type1.split(","), function(i,e){
+                  $("#sel2 option[value='" + e + "']").prop("selected", true);
+                });
+            }
+            else{
+              $(".isWorksLICinsNo").prop("checked", true);
+              //$("input[name='isWorksLICins']:checked").val(0);
                
+              $('#divprivate').hide();
+            }
+          
+          if(type2!=""){
+            $.each(type2.split(","), function(i,e){
+                $("#ddlgenins option[value='" + e + "']").prop("selected", true);
+            });
+          }
+           else{
+             $(".isWorksGeneralinsNo").prop("checked", true);
+            $("input[name='isWorksGeneralins']:checked").val(0);
+            // $("#isWorksGeneralins").val(0);
+              $('#divgenins').hide();
+            }
+
+            if(type3!=""){
+
+            $.each(type3.split(","), function(i,e){
+                $("#ddlhealth option[value='" + e + "']").prop("selected", true);
+            });
+          }
+            else{
+              $(".isWorksStandAloneNo").prop("checked", true);
+               //$("input[name='isWorksStandAlone']:checked").val(0);
+              // $("isWorksStandAlone#").val(0);
+              $('#divhealth').hide();
+            }
+            // $("#sel2").val( [2, 4] );
+            //     //$('#sel2').val(type1);
+            //     //$('#ddlgenins').val(array(type2));
+            //     $('#ddlhealth').val(type3);
+               
+
+            }
+            else{
 
             }
           }
@@ -374,24 +462,36 @@ function getfbaprofile(){
 
 
           
-      if((data[0].iscompany==1)){         
+      if((data[0].iscompany==1)){
           $("#iscompany").prop("checked", true);
-        }else{
-          $("#iscompany").prop("checked", false);
-        }
-        $('#txtbusinesstype').val(data[0].businessname);
+           $('#txtbusinesstype').val(data[0].businessname);
         $('#txtofficeadd').val(data[0].officeaddress);
         $('#txtstaff').val(data[0].staffstrength);
+        }else{
+          $(".iscompanyNo").prop("checked", true);
+          $('#divcompany').hide();
+           $('#txtbusinesstype').val("");
+          $('#txtofficeadd').val("");
+          $('#txtstaff').val("");
+        }
+       
         if((data[0].workwithlic==1)){
          $("#isWorksLIC").prop("checked", true);
-        }else{
-           $("#isWorksLIC").prop("checked", false);
-        }
-        $('#txtnoofpolicy').val(data[0].noofpolicysoldpermonth);
+          $('#txtnoofpolicy').val(data[0].noofpolicysoldpermonth);
         $('#txtpremium').val(data[0].premiumcollectedpermonth);
         $('#txtliccustomer').val(data[0].baseofliccustomers);
         $('#txtlicproduct').val(data[0].preferredlicproduct);
         $('#txtlicclub').val(data[0].licclubmembership);
+        }else{
+           $(".isWorksLICNo").prop("checked", true);
+           $('#divprofile').hide();
+            $('#txtnoofpolicy').val("");
+        $('#txtpremium').val("");
+        $('#txtliccustomer').val("");
+        $('#txtlicproduct').val("");
+        $('#txtlicclub').val("");
+        }
+       
         if((data[0].ishl ==1)){         
           $("#txthl").prop("checked", true);
         }
@@ -417,10 +517,12 @@ function getfbaprofile(){
         }
         if((data[0].isotherloan ==1)){
           $("#txtloan").prop("checked", true);
+           $("#divloan").show();
+          $('#txtotherloan').val(data[0].otherloanremark);
         }else{
           $("#txtloan").prop("checked", false);
         }       
-        $('#txtotherloan').val(data[0].isotherloan);
+        
 
         if((data[0].ismutualfund ==1)){
           $("#txtMutualfund").prop("checked", true);
@@ -438,6 +540,7 @@ function getfbaprofile(){
           $("#txtFixed").prop("checked", false);
         }if((data[0].isother==1)){
           $("#txtother").prop("checked", true);
+          $('#divother').show();
         }else{
            $("#txtother").prop("checked", false);
         }
