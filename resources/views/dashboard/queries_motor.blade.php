@@ -31,15 +31,12 @@
          <table   class="datatable-responsive table table-striped table-bordered dt-responsive nowrap" >
          	<thead><tr>
          <!-- 	<th> FBA ID</th> -->
-         <th>  PB Status</th>
+            <th>  PB Status</th>
          	<th> CRN</th>
          	<th>  Contact Name</th>
          	<th>  Sum Insured</th>
          	<th>    Date</th>
-         	<th>  Pincode</th>
-            
-
-            
+         	 
          	</tr></thead>
          	<tbody>
             @foreach($health as $val)
@@ -47,10 +44,10 @@
              <!--  <td>{{$val->fba_id}}</td> -->
               <td>{{$val->PBStatus}}</td>
                <td>{{$val->crn}}</td>
-               <td>{{$val->ContactName}}</td>
-                <td>{{$val->SumInsured}}</td>
+               <td>{{$val->first_name}}</td>
+                <td>{{$val->prev_insurer_id}}</td>
                  <td>{{$val->ApplDate}}</td>
-                  <td>{{$val->pincode}}</td>
+                  
 
          	  </tr>
               @endforeach
