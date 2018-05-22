@@ -94,7 +94,7 @@
                                        <th>FSM Details</th>  
                                        <th>Documents</th> 
                                        <th>Customer ID</th>
-                                       <th>Created Date1</th>
+                                       <th>Created Date1</th>                                    
                                        </tr>
                                        </thead>
                                        </table>
@@ -463,7 +463,11 @@
         "order": [[ 0, "desc" ]],
         "ajax": "get-fba-list",
         "columns": [
-            { "data": "fbaid"},
+            { "data": "fbaid",
+            "render": function ( data, type, row, meta ) {
+              return data+' <a target="_blank" href="Fba-profile/'+row.fbaid+' "><span class="glyphicon glyphicon-user" ></span></a>';
+              }
+          },
             { "data": "FullName"},
             { "data": "createdate" },            
             {"data":"MobiNumb1" ,
@@ -544,6 +548,12 @@
 
     
        { "data": "createdate1","visible":false }
+       // {"data":"" ,
+       //        "render": function ( data, type, row, meta ) {
+       //         return '<a id="btnviewcid" target="_blank" href="Fba-profile/'+row.fbaid+ '">Update</a>';
+       //       }  
+       //   }
+
             
         ],
 
