@@ -463,12 +463,13 @@
         "order": [[ 0, "desc" ]],
         "ajax": "get-fba-list",
         "columns": [
-            { "data": "fbaid",
-            "render": function ( data, type, row, meta ) {
-              return data+' <a target="_blank" href="Fba-profile/'+row.fbaid+' "><span class="glyphicon glyphicon-user" ></span></a>';
+            { "data": "fbaid"},
+            
+            { "data": "FullName",
+              "render": function ( data, type, row, meta ) {
+              return (data)+' <a target="_blank" href="Fba-profile/'+row.fbaid+' "><span class="glyphicon glyphicon-user" ></span></a>';
               }
           },
-            { "data": "FullName"},
             { "data": "createdate" },            
             {"data":"MobiNumb1" ,
              "render": function ( data, type, row, meta ) {
