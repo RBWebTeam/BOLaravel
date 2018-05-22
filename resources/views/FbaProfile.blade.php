@@ -6,6 +6,9 @@
     padding: 10px;
     margin: 10px;
 }
+label{
+  display: block;
+}
 </style>
 <div class="container-fluid white-bg">
 <div class="col-md-12"><h3 class="mrg-btm">FBA Profile</h3></div>
@@ -36,7 +39,7 @@
         <table class="table">
           <tr>
             <td><label>Last Updated By:</label>{{$val->LogiName}}</td>
-            <td><label>Last Update Date:</label>{{$val->updateddate}}</td>
+            <td><label>Last Update Date:</label>{{$val->createddate}}</td>
             <td><label>Last Update Time:</label>{{$val->updateddate}}</td>
             <td><label>Remarks:</label>{{$val->remark}}</td>
           </tr>
