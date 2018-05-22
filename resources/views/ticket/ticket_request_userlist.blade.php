@@ -1,13 +1,5 @@
 @extends('include.master')
 @section('content')
-<style type="text/css">
-  .txtarea {
-    border: none;
-    background: transparent;
-    width: 100%;
-    min-width: 300px;    
-}
-</style>
 <div class="container-fluid white-bg">
 <div class="col-md-12"><h3 class="mrg-btm">View Assigned Ticket</h3></div>
 <div class="col-md-12"><p >  
@@ -34,12 +26,12 @@
 
                                      @foreach($query as $va)
                                      <tr>
-                                     <td><a href="#" onclick="Ticket_comment_fn('{{$va->TicketRequestId}}')" >{{$va->TicketRequestId}}</a></td>
+                                     <td><a href="#" style="color: black;" onclick="Ticket_comment_fn('{{$va->TicketRequestId}}')" >{{$va->TicketRequestId}}</a></td>
                                       <td>{{$va->CateName}}</td>
                                        <td>{{$va->QuerType}}</td>
                                         <td>{{$va->Description}}</td>
                                          <!-- <td>{{$va->DocPath}}</td> -->
-                                          <td><textarea readonly class="txtarea">{{$va->Message}}</textarea></td>
+                                          <td>{{$va->Message}}</td>
                                            <td>{{$va->Status}}</td>
                                             <td>{{$va->created_date}}</td>
                                             <td>{{$va->assigned_date}}</td>
@@ -63,7 +55,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">User Comment</h5>
+        <h5 class="modal-title" id="exampleModalLabel">User</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -73,7 +65,7 @@
     
    <input type="hidden" name="TicketRequestId" id="TicketRequest_Id" >
   <div class="form-group">
-            <label for="inputEmail" class="control-label col-xs-2"> Status</label>
+            <label for="inputEmail" class="control-label col-xs-2"> Select</label>
             <div class="col-xs-10">
              <select name="status"  id="commentstatus_id" class="form-control" >
                <option value="0">select</option>
@@ -124,7 +116,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <!-- <button type="button" class="btn btn-primary" id="TicketRequest_Id_save">Save changes</button> -->
+        <button type="button" class="btn btn-primary" id="TicketRequest_Id_save">Save changes</button>
       </div>
     </div>
   </div>
@@ -138,21 +130,13 @@
       	function Ticket_comment_fn(ID){
             
              $('#TicketRequest_Id').val(ID);
-             $('#commentstatus_id').val(0);
-             $('#comment_id').val("");
       		   $('#Ticket-comment-Id-Modal').modal('show');
       	}
 
 
    $(document).on('click','#Ticket_comment_Id_save',function(e){  e.preventDefault();
-
-    if($('#commentstatus_id').val()==0){
-      alert("Please select status");
-    }
-    else if($('#comment_id').val()==''){
-      alert("Please enter comment");
-    }else{
-        $.post("{{url('ticket-user-comment')}}",$('#Ticket_comment_Id_form').serialize())
+       if($('#commentstatus_id').val()!=0 && $('#comment_id').val()!=''){
+         $.post("{{url('ticket-user-comment')}}",$('#Ticket_comment_Id_form').serialize())
              .done(function(data){ 
                  if(data==0){
                  window.location.href = "{{url('ticket-request-user-list')}}";
@@ -163,8 +147,12 @@
                  console.log(error);
             });
 
-    }    
-})
+        }else{
+
+           alert("please file  input...");
+        }
+
+   })
 
 
 
@@ -175,7 +163,7 @@
                arr=Array();
                $('#get_comment_id').empty();
               $.each(data, function(key, value) {
-                     arr.push('<tr><td><textarea readonly class="txtarea">'+value.comment+'</textarea></td><td>'+value.StatusName+'</td><td>'+value.created_date+'</td></tr>');
+                     arr.push('<tr><td>'+value.comment+'</td><td>'+value.StatusName+'</td><td>'+value.created_date+'</td></tr>');
               }); 
               console.log(arr);
               $('#get_comment_id').append(arr);

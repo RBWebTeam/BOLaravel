@@ -162,9 +162,12 @@ Route::get('send-sms-needaproval/{userid}','SendSmsRightsController@isneedapprov
 
 Route::get('Approve-send-sms','SendSmsapprovalController@sendsmsview');
 
-Route::get('Fba-profile','FbaprofileController@fbaprofileview');
+Route::get('Fba-profile/{fbaid}','FbaprofileController@fbaprofileview');
 
-Route::post('Fba-profile','FbaprofileController@Insertfbaprofile');
+Route::post('Fba-profile-insert','FbaprofileController@Insertfbaprofile');
+Route::get('Fba-profile-fbaprofile/{fbaid}','FbaprofileController@getfbaprofile');
+Route::get('fba-profile-company-mapping/{profileid}','FbaprofileController@getfbaprofilecompanymapping');
+
 ///shubham end ///
 // avinash
  Route::get('ticket-module','TicketController@getticketdetails') ;
@@ -252,8 +255,17 @@ Route::get('approvenotification/{msgid}/{value}','SendNotificationController@app
 Route::get('send-notification','SendNotificationController@sendnotification');
 
 //send sms
-Route::get('send-sms','SendSMSController@ViewSendSMSDetails');
+
+ Route::get('send-sms','SendSMSController@sendsmsrea');
+ Route::get('send-sms-state','SendSMSController@sendsmsren');
+ Route::post(' send-sms-city','SendSMSController@sendsmscity');
+Route::post('send-sms-save','SendSMSController@send_sms_save');
 Route::post('send-sms-detail','SendSMSController@getfbalist');
+Route::get('send-sms/{id}',array('as'=>'sendsms.ajax','uses'=>'SendSMSController@sendsmscity'));
+Route::get('send-sms','SendSMSController@ViewSendSMSDetails');
+
+// Route::get('send-sms','SendSMSController@ViewSendSMSDetails');
+// Route::post('send-sms-detail','SendSMSController@getfbalist');
  
 Route::get('send-notification','SendNotificationController@sendnotification');
  //Otp Detail
