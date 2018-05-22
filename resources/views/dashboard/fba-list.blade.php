@@ -54,7 +54,7 @@
    <option value="1">POSP Yes</option>
    <option value="2">POSP No</option>
    <option value="FBAID">FBA ID</option>
-   <option value="POSPNO">POSP Number</option>
+   <option value="POSPNO">POSP Number(SSID)</option>
 
    </select>
    <input type="Number" class="fbsearch hide" id="fbsearch" name="fbsearch" placeholder="Search FBA ID" style="display:none;margin-left: 96px;"/>
@@ -84,7 +84,7 @@
                                        <th>State</th>
                                        <th>Zone</th>
                                        <th>Pincode</th>
-                                       <th>POSP No</th>
+                                       <th>POSP No(SSID)</th>
                                        <th>Loan ID</th> 
                                        <th>Posp Name</th> 
                                       <th>Posp Status</th> 
@@ -464,7 +464,7 @@
         "ajax": "get-fba-list",
         "columns": [
             { "data": "fbaid"},
-            
+
             { "data": "FullName",
               "render": function ( data, type, row, meta ) {
               return (data)+' <a target="_blank" href="Fba-profile/'+row.fbaid+' "><span class="glyphicon glyphicon-user" ></span></a>';
