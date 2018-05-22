@@ -267,6 +267,7 @@ Route::get('payment-history','PaymentHistoryController@payment_history');
 Route::get('queries','QueriesController@queries');
 Route::get('queries-health/{id}','QueriesController@query_details');
 Route::get('queries-motor/{id}','QueriesController@query_motor');
+Route::get('queries-two-wheeler/{id}','QueriesController@two_wheeler');
 /*Book Appointment*/
 Route::get('book-appointment','BookAppointmentController@book_appointment');
 Route::get('backoffice-city-master','BookAppointmentController@backoffice_city_master');

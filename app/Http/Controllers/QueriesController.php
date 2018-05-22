@@ -218,4 +218,30 @@ class QueriesController extends Controller
 
                   return view('dashboard/queries_motor',['fba_details'=>$fba_details[0],'health'=>$health]);
         }
+
+
+
+        public function two_wheeler(Request $req){
+
+                  $motor='';
+                  $fba_details=DB::select('call sp_fba_details(?)',[$req->id]);
+
+                  if(isset($req->Q)){
+                  
+                     $health=DB::select('call gettwo_wheelerDrillDownForPOSPtransaction(?,?)',[$req->id,'Q']);
+                  }
+
+                  if(isset($req->MS)){
+                     
+                     $health=DB::select('call gettwo_wheelerDrillDownForPOSPtransaction(?,?)',[$req->id,'MS']);
+                  }
+
+                  if(isset($req->PS)){
+                     
+                     $health=DB::select('call gettwo_wheelerDrillDownForPOSPtransaction(?,?)',[$req->id,'PS']);
+                  }
+
+
+                  return view('dashboard/two_wheeler',['fba_details'=>$fba_details[0],'health'=>$health]);
+        }
 }
