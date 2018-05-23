@@ -10,6 +10,8 @@
 </style>
 
 
+
+
              <div class="container-fluid white-bg">
              <div class="col-md-12"><h3 class="mrg-btm">FBA List</h3>
            <hr>
@@ -468,7 +470,7 @@
 
             { "data": "FullName",
               "render": function ( data, type, row, meta ) {
-              return (data)+' <a target="_blank" href="Fba-profile/'+row.fbaid+' "><span class="glyphicon glyphicon-user" ></span></a>';
+              return (data)+' <a target="_blank" href="Fba-profile/'+row.fbaid+' "><span class="glyphicon glyphicon-user"  title="FBA Profile"></span></a>';
               }
           },
 

@@ -35,9 +35,7 @@ label{
         <hr>
        </div>
        <div class="divupdate form-group">
-
-       	<label>Update History</label>
-      
+       	<label>Update History</label>      
         <table class="table">
        @foreach ($fbaupdate as $val)
        		<tr>
@@ -50,6 +48,7 @@ label{
        	</table>
      
        	<hr>
+
        </div>
        <div class="isdivcompany form-group">
        <div>
@@ -69,7 +68,6 @@ label{
         </table>
        </div>
        <div  id="divcompany" style="display:none">
-
        	<table class="table">
        		<tr>
        			<td><label>Business Name:</label></td>
@@ -100,7 +98,6 @@ label{
           </table>
         </div>
         <div  id="divprofile" style="display: none;">
-
         	<table class="table">
         		<tr>
         			<td><label>No of Policies Sold per month:</label></td>
