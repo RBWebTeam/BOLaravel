@@ -41,7 +41,7 @@ label{
         <table class="table">
        @foreach ($fbaupdate as $val)
           <tr>
-            <td><label>Last Updated By:</label>{{$val->UserName}}</td>
+            <td><label>Last Updated By:</label>{{$val->LogiName}}</td>
             <td><label>Last Update Date:</label>{{$val->createddate}}</td>
             <td><label>Last Update Time:</label>{{$val->updateddate}}</td>
             <td><label>Remarks:</label><textarea readonly class="form-control">{{$val->remark}}</textarea></td>
@@ -547,7 +547,7 @@ $("#isCOT").prop("checked", true);
           $("#txtlap").prop("checked", true);
         }
         else{
-          $("#txtlap").prop("checked", true);
+          $("#txtlap").prop("checked", false);
         }
         if((data[0].isbl ==1)){
           $("#txtbl").prop("checked", true);
