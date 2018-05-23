@@ -10,6 +10,8 @@
 </style>
 
 
+
+
              <div class="container-fluid white-bg">
              <div class="col-md-12"><h3 class="mrg-btm">FBA List</h3>
            <hr>
@@ -61,6 +63,9 @@
    <option value="fbaname">FBA NAME</option>
    <option value="fbacity">FBA City</option>
    <option value="pospname">POSP Name</option>
+
+
+
    </select>
 
    <input type="text" class="fbsearch hide" id="fbsearch" name="fbsearch" placeholder="Search FBA ID" style="display:none;margin-left: 96px;"/>
@@ -95,7 +100,7 @@
                                        <th>State</th>
                                        <th>Zone</th>
                                        <th>Pincode</th>
-                                       <th>POSP No</th>
+                                       <th>POSP No(SSID)</th>
                                        <th>Loan ID</th> 
                                        <th>Posp Name</th> 
                                        <th>Posp Status</th> 
@@ -106,6 +111,9 @@
                                        <th>Documents</th> 
                                        <th>Customer ID</th> 
                                        <th>Created Date1</th>
+
+                                                                         
+
                                        </tr>
                                        </thead>
                                        </table>
@@ -471,7 +479,12 @@
         "ajax": "get-fba-list",
         "columns": [
             { "data": "fbaid"},
-            { "data": "FullName"},
+
+            { "data": "FullName",
+              "render": function ( data, type, row, meta ) {
+              return (data)+' <a target="_blank" href="Fba-profile/'+row.fbaid+' "><span class="glyphicon glyphicon-user"  title="FBA Profile"></span></a>';
+              }
+          },
             { "data": "createdate" },            
             {"data":"MobiNumb1" ,
 
@@ -549,7 +562,18 @@
              }  
          }, 
 
+
          { "data": "createdate1","visible":false }
+
+
+    
+      
+       // {"data":"" ,
+       //        "render": function ( data, type, row, meta ) {
+       //         return '<a id="btnviewcid" target="_blank" href="Fba-profile/'+row.fbaid+ '">Update</a>';
+       //       }  
+       //   }
+
 
         ],
 
