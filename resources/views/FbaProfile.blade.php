@@ -35,7 +35,7 @@ label{
         <hr>
        </div>
        <div class="divupdate form-group">
-<<<<<<< HEAD
+
        	<label>Update History</label>
       
         <table class="table">
@@ -69,7 +69,7 @@ label{
         </table>
        </div>
        <div  id="divcompany" style="display:none">
-<<<<<<< HEAD
+
        	<table class="table">
        		<tr>
        			<td><label>Business Name:</label></td>
