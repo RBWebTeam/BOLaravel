@@ -36,16 +36,18 @@ label{
        </div>
        <div class="divupdate form-group">
        	<label>Update History</label>
-        @foreach ($fbaupdate as $val)
+      
         <table class="table">
+       @foreach ($fbaupdate as $val)
        		<tr>
        			<td><label>Last Updated By:</label>{{$val->LogiName}}</td>
        			<td><label>Last Update Date:</label>{{$val->createddate}}</td>
        			<td><label>Last Update Time:</label>{{$val->updateddate}}</td>
-       			<td><label>Remarks:</label>{{$val->remark}}</td>
+       			<td><label>Remarks:</label><textarea readonly class="form-control">{{$val->remark}}</textarea></td>
        		</tr>
-       	</table>
        @endforeach
+       	</table>
+     
        	<hr>
        </div>
        <div class="isdivcompany form-group">
@@ -71,7 +73,7 @@ label{
        			<td><label>Business Name:</label></td>
        			<td><input type="text" id="txtbusinesstype" name="txtbusinesstype" class="form-control" required></td>
        			<td><label>Office Address:</label></td>
-       			<td><input type="text" id="txtofficeadd" name="txtofficeadd" class="form-control" required></td>
+       			<td><textarea  id="txtofficeadd" name="txtofficeadd" class="form-control" required></textarea></td>
        			<td><label>Staff Strength:</label></td>
        			<td><input type="number" id="txtstaff" name="txtstaff" class="form-control" required></td>
        		</tr>
@@ -214,7 +216,7 @@ label{
                    <td><label class="radio-inline"><input type="checkbox" id="txtlap" name="txtlap" value="1">&nbsp;LAP</label></td>
                    <td><label class="radio-inline"><input type="checkbox" id="txtbl" name="txtbl" value="1">&nbsp;Business Loan</label></td>
                    <td><label class="radio-inline"><input id="txtloan" type="checkbox" name="txtloan" value="1">Others</label></td>
-                     <td id="divloan" style="display: none;" ><input type="text" name="txtotherloan" placeholder="Please Specify" class="form-control" id="txtotherloan" required></td>
+                     <td id="divloan" style="display: none;" ><textarea type="text" name="txtotherloan" placeholder="Please Specify" class="form-control" id="txtotherloan" required></textarea></td>
                </tr>
            </table>
         </div>
@@ -235,7 +237,7 @@ label{
                 	<label class="radio-inline"><input id="txtother" type="checkbox" name="txtother" value="1">Others</label>
                 </td>
            
-                <td id="divother" style="display: none;" ><input type="text" name="txtotherremark" placeholder="please specify" class="form-control" id="txtotherremark" required>
+                <td id="divother" style="display: none;"><textarea type="text" name="txtotherremark" placeholder="please specify" class="form-control" id="txtotherremark" required></textarea>
                 </td>
              
                </tr>
