@@ -6,6 +6,10 @@
     padding: 10px;
     margin: 10px;
 }
+
+label{
+  display: block;
+}
 </style>
 <div class="container-fluid white-bg">
 <div class="col-md-12"><h3 class="mrg-btm">FBA Profile</h3></div>
@@ -36,7 +40,7 @@
         <table class="table">
        		<tr>
        			<td><label>Last Updated By:</label>{{$val->LogiName}}</td>
-       			<td><label>Last Update Date:</label>{{$val->updateddate}}</td>
+       			<td><label>Last Update Date:</label>{{$val->createddate}}</td>
        			<td><label>Last Update Time:</label>{{$val->updateddate}}</td>
        			<td><label>Remarks:</label>{{$val->remark}}</td>
        		</tr>
@@ -105,7 +109,27 @@
         			<td><label>Preferred LIC products:</label></td>
         			<td><input type="text" id="txtlicproduct" name="txtlicproduct" class="form-control" required></td>
         			<td><label>LIC Club Memberships:</label></td>
-        			<td><input type="text" id="txtlicclub" name="txtlicclub" class="form-control" required></td>
+        			<!-- <td><input type="text" id="txtlicclub" name="txtlicclub" class="form-control" required></td> -->
+              <td><select  id="txtlicclub" name="txtlicclub" class="form-control" required>
+                  <option value="">--Select--</option>
+                  <option value="Corporate Club">Corporate Club</option>
+                  <option value="Chairman Club">Chairman Club</option>
+                  <option value="Zonal Manager Club">Zonal Manager Club</option>
+                  <option value="Divisional Manager Club">Divisional Manager Club</option>
+                  <option value="Branch Manager Club">Branch Manager Club</option>
+                  <option value="Distinguished Club">Distinguished Club</option>
+                  <option value="No Club">No Club</option>
+
+                </select></td>
+                <td>
+                      <label><input type="radio" id="isMRDT" name="club" value="5" checked>MRDT</label>
+                </td>
+                <td>
+                      <label><input type="radio" id="isCOT" name="club" value="6" >COT</label>
+                </td>
+                <td>
+                      <label><input type="radio" id="isTOT" name="club" value="7">TOT</label>
+                </td>
         		</tr>
         	</table>
         </div>
@@ -461,6 +485,15 @@ function getfbaprofile(){
           }); 
 
 
+ if(data[0].clubmembershiptype==5){
+$("#isMRDT").prop("checked", true);
+ }
+else if(data[0].clubmembershiptype==6){
+$("#isCOT").prop("checked", true);
+}
+ else if(data[0].clubmembershiptype==7){
+  $("#isTOT").prop("checked", true);
+ }
           
       if((data[0].iscompany==1)){
           $("#iscompany").prop("checked", true);

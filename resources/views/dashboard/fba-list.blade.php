@@ -459,7 +459,11 @@
         "order": [[ 0, "desc" ]],
         "ajax": "get-fba-list",
         "columns": [
-            { "data": "fbaid"},
+            { "data": "fbaid",
+            "render": function ( data, type, row, meta ) {
+              return data+' <span class="glyphicon glyphicon-user"><a href="Fba-profile/'+row.fbaid+'"></a></span>';
+              }
+          },
             { "data": "FullName"},
             { "data": "createdate" },            
             {"data":"MobiNumb1" ,
