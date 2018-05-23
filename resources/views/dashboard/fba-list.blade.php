@@ -1,6 +1,6 @@
 @extends('include.master')
 @section('content')
-
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
 <style type="text/css">
   
@@ -54,11 +54,11 @@
    <option value="1">POSP Yes</option>
    <option value="2">POSP No</option>
    <option value="FBAID">FBA ID</option>
-   <option value="POSPNO">POSP Number</option>
+   <option value="POSPNO">POSP Number(SSID)</option>
 
    </select>
-   <input type="textbox" class="fbsearch hide" id="fbsearch" name="fbsearch" placeholder="Search FBA ID" style="display:none;margin-left: 96px;"/>
-   <input type="textbox" class="psearch hide" id="psearch" name="psearch" placeholder="Search POSP" style="display:none; margin-left: 96px;" />
+   <input type="Number" class="fbsearch hide" id="fbsearch" name="fbsearch" placeholder="Search FBA ID" style="display:none;margin-left: 96px;"/>
+   <input type="Number" class="psearch hide" id="psearch" name="psearch" placeholder="Search POSP" style="display:none; margin-left: 96px;" />
 
   </form>
   </div> 
@@ -82,17 +82,19 @@
                                        <th>Password</th>
                                        <th>City</th>
                                        <th>State</th>
+                                       <th>Zone</th>
                                        <th>Pincode</th>
-                                       <th>POSP No</th>
+                                       <th>POSP No(SSID)</th>
                                        <th>Loan ID</th> 
                                        <th>Posp Name</th> 
+                                      <th>Posp Status</th> 
                                        <th>Bank Account</th>
                                        <th>Partner Info</th> 
                                        <th>Sales code</th>
                                        <th>FSM Details</th>  
                                        <th>Documents</th> 
                                        <th>Customer ID</th>
-                                       <th>Created Date1</th>
+                                       <th>Created Date1</th>                                    
                                        </tr>
                                        </thead>
                                        </table>
@@ -238,9 +240,9 @@
         <form name="update_posp" id="update_posp">
          {{ csrf_field() }}
          <div class="form-group">
-            <input type="hidden" name="fbaid" id="fbaid" value=" ">
-            <label class="control-label" for="message-text">Enter POSP : </label>
-            <input type="text" class="recipient-name form-control" id="posp_remark" name="posp_remark" required="" />
+          <input type="hidden" name="fbaid" id="fbaid" value=" ">
+          <label class="control-label" for="message-text">Enter POSP : </label>
+          <input type="text" class="recipient-name form-control" id="posp_remark" name="posp_remark"  maxlength="4" required="" />
           </div>
         </form>
         <div class="modal-footer"> 
@@ -371,8 +373,10 @@
     </div>
 
     <div class="col-md-12"> <br>
-    
-   <textarea type="text" style="resize:none" name="name" cols="num" rows="num" id="divpartnertable_payment" class="divpartnertable_payment form-control" readonly> </textarea> 
+    <form method="POST" id="modelpaylink">
+        {{ csrf_field() }}
+
+   <textarea type="text" style="resize:none" name="divpartnertable_payment" cols="num" rows="num" id="divpartnertable_payment" class="divpartnertable_payment form-control" readonly> </textarea> 
     <br>
     </div> 
        
@@ -384,8 +388,8 @@
     
       
       <!-- <form id="modelpaylink" name="modelpaylink"> -->
-     <form method="POST" id="modelpaylink">
-        {{ csrf_field() }}
+    <!--  <form method="POST" id="modelpaylink">
+        {{ csrf_field() }} -->
      <div id="divlink" class="modal-body"> </div>
      <div class="modal-footer">
      <input type="hidden" name="fba" id="fba">
@@ -459,16 +463,19 @@
         "order": [[ 0, "desc" ]],
         "ajax": "get-fba-list",
         "columns": [
-            { "data": "fbaid",
-            "render": function ( data, type, row, meta ) {
-              return data+' <span class="glyphicon glyphicon-user"><a href="Fba-profile/'+row.fbaid+'"></a></span>';
+
+            { "data": "fbaid"},
+
+            { "data": "FullName",
+              "render": function ( data, type, row, meta ) {
+              return (data)+' <a target="_blank" href="Fba-profile/'+row.fbaid+' "><span class="glyphicon glyphicon-user" ></span></a>';
               }
           },
-            { "data": "FullName"},
+
             { "data": "createdate" },            
             {"data":"MobiNumb1" ,
              "render": function ( data, type, row, meta ) {
-                return '<a href="#"><span>'+data+'</span></a> <a href="#" data-toggle="modal" data-target="#sms_sent_id" onclick="SMS_FN(1,'+data+')"><span class="glyphicon glyphicon-envelope"></span></a>';
+                return '<span>'+data+'</span></a> <a href="#" data-toggle="modal" data-target="#sms_sent_id" onclick="SMS_FN(1,'+data+')"><span class="glyphicon glyphicon-envelope"></span></a>';
               }
             },
             // { "data": "createdate" },
@@ -481,22 +488,16 @@
 
              }, 
 
-                     {"data":"pwd" ,
+               {"data":"pwd" ,
               "render": function ( data, type, row, meta ) {
               return '<a id="btnshowpassword" data-toggle="modal" data-target="#spassword" onclick="getpassword('+"'"+ data+"'"+')">*****</a>';
               }
 
        },   
 
-
-
-
-
-
-
-
             {"data":"City"},
             {"data":"statename"},
+            {"data":"Zone"},  
             {"data":"Pincode"},
             {"data":"POSPNo"  ,
              "render": function ( data, type, row, meta ) {
@@ -504,15 +505,16 @@
               }
             }, 
 
-    {"data":"LoanID"  ,
+             {"data":"LoanID"  ,
              "render": function ( data, type, row, meta ) {
                 // return data==""?('<a id="loan_'+row.fbaid+'" class="checkloan" data-toggle="modal" data-target="#updateLoan" onclick="LoanID_UPDATE('+row.fbaid+')">update</a>'):data;
-                 return (data==""||data=="0")?('<a id="btnviewcid" onclick="getloanid(this,'+row.fbaid+')">Update</a>'):data;
+                 return (data==""||data=="0")?('<a id="btnviewid" onclick="getloanid(this,'+row.fbaid+')">Update</a>'):data;
               }
          }, 
 
 
-            {"data":"pospname"}, 
+             {"data":"pospname"},
+              {"data":"pospstatus"},  
              {"data":"bankaccount"}, 
              {"data":null ,
              "render": function ( data, type, row, meta ) {
@@ -528,41 +530,32 @@
    
            },
 
-
-
              {"data":null  ,
              "render": function ( data, type, row, meta ) {
                 return '<a href="#" style="" data-toggle="modal" data-target=".fsmdetails">Fsm details</a>';
               }
             },
             
-
-          
-
-          {"data":"fdid" ,
+             {"data":"fdid" ,
              "render": function ( data, type, row, meta ) {
             return data == 1?'<a href="" style="" data-toggle="modal"  data-target="#docviwer" onclick="docview('+row.fbaid+')" >uploaded</a>':'pending';
            }
         },
 
-          
-
-            {"data":"CustID" ,
+          {"data":"CustID" ,
               "render": function ( data, type, row, meta ) {
                return (data==""||data=="0")?('<a id="btnviewcid" onclick="getcustomerid(this,'+row.fbaid+')">Update</a>'):data;
              }  
          }, 
 
-         
-       //        {"data":"pwd" ,
+
+    
+       { "data": "createdate1","visible":false }
+       // {"data":"" ,
        //        "render": function ( data, type, row, meta ) {
-       //        return '<a id="btnshowpassword" data-toggle="modal" data-target="#spassword" onclick="getpassword('+"'"+ data+"'"+')">*****</a>';
-       //        }
-
-       // },   
-
-
-         { "data": "createdate1","visible":false }
+       //         return '<a id="btnviewcid" target="_blank" href="Fba-profile/'+row.fbaid+ '">Update</a>';
+       //       }  
+       //   }
 
             
         ],
@@ -588,7 +581,7 @@ $(document).ready(function() {
     var min = $('#min').val();
     var max = $('#max').val();
    // console.log(max);
-    var createdAt = data[19] || 19; // Our date column in the table
+    var createdAt = data[21] || 21; // Our date column in the table
    
     if (
       (min == "" || max == "") ||
@@ -622,14 +615,13 @@ $('.date-range-filter').datepicker();
 <script>
 $(document).ready(function(){
 
-    $(".psearch").keyup (function(){ 
+$(".psearch").keyup (function(){ 
        table1 = $('#fba-list-table').DataTable();
-      
-           if ($(this).val()!= '') {
-        table1.columns(10).search('^'+$(this).val() + '$', true, true).draw(); 
+        if ($(this).val()!= '') {
+        table1.columns(11).search('^'+$(this).val() + '$', true, true).draw(); 
       }
       else
-        table1.columns(10).search($(this).val(), true, true).draw(); 
+        table1.columns(11).search($(this).val(), true, true).draw(); 
     });
 });
 
@@ -659,18 +651,25 @@ $(document).ready(function() {
 
 <script type="text/javascript">
     function getpaylinknew(){
+    
   $.ajax({
   url: 'getpaylinknew/'+$('#fba').val(),
   type: "GET",                  
   success:function(data) {
+console.log(data);
   var json = JSON.parse(data);
   if(json.StatusNo==0){
         $('#divpartnertable_payment').html(json.MasterData.PaymentURL);
-        $('#txtlink').val(json.MasterData.PaymentURL);
+        $('#divpartnertable_payment').val(json.MasterData.PaymentURL);
+
+
       }
-          }
+
+ }
+
 
         });
+     alert("Payment Link Genrate successfully..");
 }
 
  function pmesgsend(){
@@ -687,14 +686,26 @@ alert("SMS Send successfully..");
 });
       }
 
+</script>
 
-
-
+  <script type="text/javascript">
+   $(function(){
+   $('#posp_remark').keyup(function(){    
+   var yourInput = $(this).val();
+   re = /[A-Za-z]?[A-Za-z `~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi;
+   var isSplChar = re.test(yourInput);
+    if(isSplChar)
+    {
+    var no_spl_char = yourInput.replace(/[A-Za-z]?[A-Za-z `~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi, '');
+    $(this).val(no_spl_char);
+    }
+  });
+ 
+});
 </script>
 
 
 
- 
 
 
 

@@ -1,7 +1,7 @@
 @extends('include.master')
 @section('content')
 <style type="text/css">
-	.fbadiv,.divupdate,.isdivcompany,.divworklic,.divlicins,.divgenco,.divstandalone,.divotherfinpro,.divothloan,.divremark{
+  .fbadiv,.divupdate,.isdivcompany,.divworklic,.divlicins,.divgenco,.divstandalone,.divotherfinpro,.divothloan,.divremark{
     border: 1px solid gray;
     padding: 10px;
     margin: 10px;
@@ -15,26 +15,27 @@ label{
 <div class="col-md-12"><h3 class="mrg-btm">FBA Profile</h3></div>
    <div class="col-md-12">
       <div class="overflow-scroll">
-      	<form id="fbaprofile" method="post">
+        <form id="fbaprofile" method="post">
           {{ csrf_field() }}
        <div class="fbadiv form-group">
         @foreach ($fbadetails as $val)
-       	<table class="table">          
-       	 <tr> 
+        <table class="table">          
+         <tr> 
           <input type="hidden" name="txtfbaid" id="txtfbaid" value="{{$val->FBAID}}">
           <td><label>FBA ID: </label>{{$val->FBAID}}</td>         
-       	  <td><label>FBA Name:</label>{{$val->FullName}}</td>          
-       	  <td><label>Date of Registration:</label>{{$val->JoinDate}}</td>          
-       	  <td><label>City:</label>{{$val->City}}</td>          
-       	  <td><label>State:</label>{{$val->State}}</td>          
-       	  <td><label>RRM:</label></td>
-       	  <td><label>Field Manger:</label></td>
-       	</tr>
-       	</table>
+          <td><label>FBA Name:</label>{{$val->FullName}}</td>          
+          <td><label>Date of Registration:</label>{{$val->JoinDate}}</td>          
+          <td><label>City:</label>{{$val->City}}</td>          
+          <td><label>State:</label>{{$val->State}}</td>          
+          <td><label>RRM:</label></td>
+          <td><label>Field Manger:</label></td>
+        </tr>
+        </table>
          @endforeach
-       	<hr>
+        <hr>
        </div>
        <div class="divupdate form-group">
+<<<<<<< HEAD
        	<label>Update History</label>
       
         <table class="table">
@@ -52,22 +53,23 @@ label{
        </div>
        <div class="isdivcompany form-group">
        <div>
-       	<table>
-       		<tr>
-       		 <td width="30%;">
-       	      <label>If a company</label>
-       	     </td>
-       	     <td width="20%;">
-       	      <label>
-       	      <input id="iscompany" type="radio" name="iscompany" value="1" checked>&nbsp;YES</label>
-       	     </td>
-       	     <td width="20%;">
-       	      <label><input id="" type="radio" name="iscompany" class="iscompanyNo" value="0">&nbsp;NO</label>
-       	     </td>     	     
-       	    </tr>
-       	</table>
+        <table>
+          <tr>
+           <td width="30%;">
+              <label>If a company</label>
+             </td>
+             <td width="20%;">
+              <label>
+              <input id="iscompany" type="radio" name="iscompany" value="1" checked>&nbsp;YES</label>
+             </td>
+             <td width="20%;">
+              <label><input id="" type="radio" name="iscompany" class="iscompanyNo" value="0">&nbsp;NO</label>
+             </td>           
+            </tr>
+        </table>
        </div>
        <div  id="divcompany" style="display:none">
+<<<<<<< HEAD
        	<table class="table">
        		<tr>
        			<td><label>Business Name:</label></td>
@@ -83,21 +85,22 @@ label{
         </div>
         <div class="form-group divworklic">
         <div>
-        	<label>Profile</label>
-        	<hr>
-        	<table>
-        		<tr>
-        			<td width="30%;"><label>Works with LIC</label></td>
-        			<td width="20%;">
-       	              <label><input type="radio" name="isWorksLIC" id="isWorksLIC" value="1" checked>&nbsp;YES</label>
-       	            </td>
-       	            <td width="20%;">
-       	             <label><input type="radio" name="isWorksLIC" class="isWorksLICNo" value="0">&nbsp;NO</label>
-       	            </td>  
-        		</tr>
-        	</table>
+          <label>Profile</label>
+          <hr>
+          <table>
+            <tr>
+              <td width="30%;"><label>Works with LIC</label></td>
+              <td width="20%;">
+                      <label><input type="radio" name="isWorksLIC" id="isWorksLIC" value="1" checked>&nbsp;YES</label>
+                    </td>
+                    <td width="20%;">
+                     <label><input type="radio" name="isWorksLIC" class="isWorksLICNo" value="0">&nbsp;NO</label>
+                    </td>  
+            </tr>
+          </table>
         </div>
         <div  id="divprofile" style="display: none;">
+
         	<table class="table">
         		<tr>
         			<td><label>No of Policies Sold per month:</label></td>
@@ -124,6 +127,7 @@ label{
 
                 </select></td>
                 <td>
+
                       <label><input type="radio" id="isMRDT" name="club" value="5" checked>MRDT</label>
                 </td>
                 <td>
@@ -137,81 +141,81 @@ label{
         </div>
         </div>
         <div class="form-group divlicins">
-        	<table class="table">
-        		<tr>
-        			<td width="30%;"><label>Works with Private Life Insurers:</label></td>
-        			 <td width="20%;">
-       	              <label><input type="radio" id="isWorksLICins" name="isWorksLICins" value="1" checked>&nbsp;YES</label>
-       	            </td>
-       	             <td width="20%;">
-       	             <label><input type="radio" name="isWorksLICins" class="isWorksLICinsNo" value="0">&nbsp;NO</label>
-       	             </td>
-        		</tr>
+          <table class="table">
+            <tr>
+              <td width="30%;"><label>Works with Private Life Insurers:</label></td>
+               <td width="20%;">
+                      <label><input type="radio" id="isWorksLICins" name="isWorksLICins" value="1" checked>&nbsp;YES</label>
+                    </td>
+                     <td width="20%;">
+                     <label><input type="radio" name="isWorksLICins" class="isWorksLICinsNo" value="0">&nbsp;NO</label>
+                     </td>
+            </tr>
             <div>
-        		<tr id="divprivate">
-        			<td><label>Private Life Co's:</label></td>
-        			<td><select multiple class="form-control ddlprivetlifeco" id="sel2" name="ddlprivetlifeco">
-        				 @foreach($lifeins as $val)
+            <tr id="divprivate">
+              <td><label>Private Life Co's:</label></td>
+              <td><select multiple class="form-control ddlprivetlifeco" id="sel2" name="ddlprivetlifeco">
+                 @foreach($lifeins as $val)
                          <option value="{{$val->LifeInsurerCompanyMasterId}}">{{$val->CompanyName}}</option>
                           @endforeach
                         </select>
-        			</td>
-        		</tr>
+              </td>
+            </tr>
             </div>
-        	</table>
+          </table>
             </div>
         <div class="form-group divgenco">
         <table class="table">
-        	<tr>
-        		<td style="width: 30%"><label>Works with General Ins Co's:</label></td>
-        		<td style="width: 20%"> 
-       	              <label><input id="isWorksGeneralins" type="radio" name="isWorksGeneralins" value="2" checked>&nbsp;YES</label>
-       	        </td>
-       	        <td style="width: 20%">
-       	             <label><input type="radio" name="isWorksGeneralins" class="isWorksGeneralinsNo" value="0">&nbsp;NO</label>
-       	        </td>
-       	    </tr>
-       	    <tr id="divgenins">
-        			<td><label>General Insurance Co's:</label></td>
-        			<td><select id="ddlgenins" name="ddlgenins" multiple class="form-control ddlgenins" id="sel2">
-        				@foreach($Genins as $val)
-        				 <option value="{{$val->GeneralInsuranceCompanyMasterId}}">{{$val->CompanyName}}</option>
+          <tr>
+            <td style="width: 30%"><label>Works with General Ins Co's:</label></td>
+            <td style="width: 20%"> 
+                      <label><input id="isWorksGeneralins" type="radio" name="isWorksGeneralins" value="2" checked>&nbsp;YES</label>
+                </td>
+                <td style="width: 20%">
+                     <label><input type="radio" name="isWorksGeneralins" class="isWorksGeneralinsNo" value="0">&nbsp;NO</label>
+                </td>
+            </tr>
+            <tr id="divgenins">
+              <td><label>General Insurance Co's:</label></td>
+              <td><select id="ddlgenins" name="ddlgenins" multiple class="form-control ddlgenins" id="sel2">
+                @foreach($Genins as $val)
+                 <option value="{{$val->GeneralInsuranceCompanyMasterId}}">{{$val->CompanyName}}</option>
                           @endforeach
                         </select>
-        			</td>
-        	</tr>
+              </td>
+          </tr>
         </table>
         </div>
         <div class="form-group divstandalone">
         <table class="table">
-        	<tr>
-        		<td style="width: 30%"><label>Works with Stand Alone Health Ins Co's:</label></td>
-        		<td style="width: 20%">
-       	              <label><input type="radio" id="isWorksStandAlone" name="isWorksStandAlone" value="3" checked>&nbsp;YES</label>
-       	        </td>
-       	        <td style="width: 20%">
-       	             <label><input type="radio" name="isWorksStandAlone" class="isWorksStandAloneNo" value="0">&nbsp;NO</label>
-       	        </td>
-       	    </tr>
-       	    <tr id="divhealth">
-        			<td><label>Stand Alone Health Insurance Co's:</label></td>        			
-        			<td><select name="ddlhealth" id="ddlhealth" multiple class="form-control ddlhealth">
-        				  @foreach($healthins as $val)
-        				  <option value="{{$val->HealthInsuranceCompanyMasterId}}">{{$val->CompanyName}}</option>
+          <tr>
+            <td style="width: 30%"><label>Works with Stand Alone Health Ins Co's:</label></td>
+            <td style="width: 20%">
+                      <label><input type="radio" id="isWorksStandAlone" name="isWorksStandAlone" value="3" checked>&nbsp;YES</label>
+                </td>
+                <td style="width: 20%">
+                     <label><input type="radio" name="isWorksStandAlone" class="isWorksStandAloneNo" value="0">&nbsp;NO</label>
+                </td>
+            </tr>
+            <tr id="divhealth">
+              <td><label>Stand Alone Health Insurance Co's:</label></td>              
+              <td><select name="ddlhealth" id="ddlhealth" multiple class="form-control ddlhealth">
+                  @foreach($healthins as $val)
+                  <option value="{{$val->HealthInsuranceCompanyMasterId}}">{{$val->CompanyName}}</option>
                           @endforeach
                         </select>
-        			</td>
-        		</tr>
+              </td>
+            </tr>
         </table>
         </div>
         <div class="form-inline form-group divotherfinpro">
-        	<table class="table">
-        		<tr>
-        			<label>Other Financial Products Distributed:</label>
+          <table class="table">
+            <tr>
+              <label>Other Financial Products Distributed:</label>
                 </tr>
                 <tr>
-        	       <label>LOAN</label>
-        	        <td><label class="radio-inline"><input type="checkbox"  id="txthl" name="txthl" value="1">&nbsp;HL</label></td>
+                 <label>LOAN</label>
+                  <td><label class="radio-inline"><input type="checkbox"  id="txthl" name="txthl" value="1">&nbsp;HL</label></td>
                     <td><label class="radio-inline"><input type="checkbox" id="txtpl" name="txtpl" value="1">&nbsp;PL</label></td>
                    <td><label class="radio-inline"><input type="checkbox" id="txtlap" name="txtlap" value="1">&nbsp;LAP</label></td>
                    <td><label class="radio-inline"><input type="checkbox" id="txtbl" name="txtbl" value="1">&nbsp;Business Loan</label></td>
@@ -221,20 +225,20 @@ label{
            </table>
         </div>
         <div class="form-inline form-group divothloan">
-        	<table class="table">
+          <table class="table">
                 <tr style="width: 30%;">
-        	        <label>Other</label>
-        	    <td style="width: 20%;">
-        	    	<label class="radio-inline"><input type="checkbox" id="txtMutualfund" name="txtMutualfund" value="1">&nbsp;Mutual Funds</label>
-        	    </td>
+                  <label>Other</label>
+              <td style="width: 20%;">
+                <label class="radio-inline"><input type="checkbox" id="txtMutualfund" name="txtMutualfund" value="1">&nbsp;Mutual Funds</label>
+              </td>
                 <td style="width: 20%;">
-                	<label class="radio-inline"><input type="checkbox" id="txtPostal" name="txtPostal" value="1">&nbsp;Postal Savings</label>
+                  <label class="radio-inline"><input type="checkbox" id="txtPostal" name="txtPostal" value="1">&nbsp;Postal Savings</label>
                 </td>
                 <td style="width: 20%;">
-                	<label class="radio-inline"><input type="checkbox" id="txtFixed" name="txtFixed" value="1">&nbsp;Co Fixed Deposits</label>
+                  <label class="radio-inline"><input type="checkbox" id="txtFixed" name="txtFixed" value="1">&nbsp;Co Fixed Deposits</label>
                 </td>
                 <td style="width: 20%;">
-                	<label class="radio-inline"><input id="txtother" type="checkbox" name="txtother" value="1">Others</label>
+                  <label class="radio-inline"><input id="txtother" type="checkbox" name="txtother" value="1">Others</label>
                 </td>
            
                 <td id="divother" style="display: none;"><textarea type="text" name="txtotherremark" placeholder="please specify" class="form-control" id="txtotherremark" required></textarea>
@@ -250,7 +254,7 @@ label{
          </div>      
          </div>
          <div style="text-align:center">
-         	<button type="button" id="btnfbaprofile" name="btnfbaprofile" class="btn btn-primary">SAVE</button>
+          <button type="button" id="btnfbaprofile" name="btnfbaprofile" class="btn btn-primary">SAVE</button>
          </div>
          <input type="hidden" name="lifeinsucomp" id="lifeinsucomp">
           <input type="hidden" name="generatlinsucomp" id="generatlinsucomp">

@@ -1,57 +1,80 @@
 @extends('include.master')
  @section('content')
 <!-- Body Content Start -->
-     <div id="content" style="overflow:scroll;">
-      <div class="container-fluid white-bg">
-      <div class="col-md-12"><h3 class="mrg-btm">SEND SMS</h3></div>
-       <!-- Date Start --> 
-      <form  id="sendsms" name="sendsms" action="POST"> 
-        {{ csrf_field() }}
-       <div id="message_toggle">
-        @if($message = Session::get('msg'))
-         <div class="alert alert-info alert-dismissible fade in" role="alert">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">×</span>
-        </button>
-        <strong>{{ $message }}</strong> 
-      </div>
-       @endif
-       </div>
+  <div id="content" style="overflow:scroll;">
+  <div class="container-fluid white-bg">
+  <div class="col-md-12"><h3 class="mrg-btm">SEND SMS</h3></div>
+  <!-- Date Start --> 
+  <form  id="sendsms" name="sendsms" action="POST"> 
+    {{ csrf_field() }}
+   <div id="message_toggle">
+    @if($message = Session::get('msg'))
+  <div class="alert alert-info alert-dismissible fade in" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+  <span aria-hidden="true">×</span>
+  </button>
+  <strong>{{ $message }}</strong> 
+  </div>
+    @endif
+  </div>
+  <div class="col-md-12 col-xs-12">
+  <div class="form-group col-md-3">
+  <select id="smslist" name="smslist" class="selectpicker select-opt form-control" required="yes">
+  
+  <option value="0">-- Select Recipient --</option>
+  <option value="1">Registration Date</option>
+   <option value="2">Payment Date</option>
+  <option value="3">Quote Create Date</option>
+  <option value="4">FBA BirthDate</option>
+  </select>
+    
+ 
+  </div>
+  </div>
+  </div> 
 
-       <div class="col-md-12 col-xs-12">
-        <div class="form-group col-md-3">
-        <select id="smslist" name="smslist" class="selectpicker select-opt form-control" required="">
-      <option value="0">-- Select Recipient --</option>
-      <option value="1">FBA</option>
-      <option value="2">FSM</option>
-      <option value="3">FBA POSP</option>
-      </select>
-      <label class="control-label" for="inputError" id="required1"> </label>
-      </div>
-      <div class="form-group col-md-3">
-       <input type="text" placeholder="City.." name="city_name" id="search_city" class="form-control" >  
-      </div>
-   </div> 
 
-         
 
-     <div class="col-md-4">
-      <div class="form-group">
-      <p>From Registered Date</p>
-         <div id="datepicker" class="input-group date" data-date-format="yyyy-mm-dd">
-      <input class="form-control" type="text" placeholder="From Date" name="fdate" id="fmin_date"   />
+  <div class="col-md-6 col-sm-12 col-xs-12">
+  <h4 style="margin-left: 45%;">State</h4>
+  <div class="form-group">
+  <select multiple="multiple" class="form-control select-sty" name="state[]" id="state" style="height:120px; margin-top:10px;"  >    
+  </select>
+ 
+  </div>
+  </div>
+
+
+ <h4 style="text-align: center;">City</h4>
+ <div class="col-md-6 col-sm-12 col-xs-12">
+ <div class="form-group">
+<select  multiple="multiple" class="form-control select-sty" name="city[]" id="city" style="height:120px; margin-top:10px;">
+</select>
+
+</div>
+</div>
+ 
+   <div class="col-md-4 col-sm-12 col-xs-12">
+    <div class="form-group">
+    <p>From Registered Date</p>
+    <div id="datepicker" class="input-group date" data-date-format="yyyy-mm-dd">
+    <input class="form-control" type="text" placeholder="From Date" name="fdate" id="fmin_date"  />
       <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
       </div>
+       
     </div>
+    <label class="control-label" for="inputError" id="required1"> </label>
+       
     </div>
-    <div class="col-md-4">
+    <div class="col-md-4 col-sm-12 col-xs-12">
     <div class="form-group">
     <p>To Registered  Date</p>
-  <div id="datepicker1" class="input-group date" data-date-format="yyyy-mm-dd">
+  <div id="datepicker1" class="input-group date" data-date-format="yyyy-mm-dd" h>
   <input class="form-control" type="text"  placeholder="To Date"  name="todate"  id="fmax_date"    />
    <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
   </div>
   </div>
+ <label class="control-label" for="inputError" id="required3"> </label>
   </div>
     <div class="col-md-4">
     <br>
@@ -127,128 +150,192 @@ $(document).on("keyup",".search_id",function() {
     FN_search(ID,0,0,0);
 
     }
-   $(document).ready(function(){   
-    $("#search_fba_date").click(function () {
-         $.ajax({ 
+   $(document).ready(function(){ 
+   $("#search_fba_date").click(function () {
+   console.log($('#sendsms').serialize());
+   $.ajax({ 
    url: "{{URL::to('send-sms-detail')}}",
    method:"POST",
    data: $('#sendsms').serialize(),
-
-    success: function(msg)  
-    {
-
-    var data = JSON.parse(msg);
+   success: function(msg)  
+   {
+   var data = JSON.parse(msg);
    $('#sendsms_id').empty();
-    var arr=Array();
-    $('#msg_count').text(data.length);
-    if(data.length > 0){
-     $.each(data,function(index,val){ 
-
-        if(val.FBAID!=null && val.FBAID!='0'){
-     arr.push('<tr><td><input type="checkbox" name="fba[]" class="check_list" value="'+val.FBAID+'" >'+val.FullName  +':'+val.MobiNumb1+'</td> </tr>'); 
-        }
-          
-      });
-       $('#sendsms_id').append(arr);
-           }else{
-         alert("No data found...");
-          }
-
-       }
-
-    });
-       });
-     }); 
+   var arr=Array();
+   $('#msg_count').text(data.length);
+   if(data.length > 0){
+   $.each(data,function(index,val){ 
+   if(val.FBAID!=null && val.FBAID!='0'){
+   arr.push('<tr><td><input type="checkbox" name="fba[]" class="check_list" value="'+val.FBAID+'" >'+val.FullName  +':'+val.MobiNumb1+'</td> </tr>'); 
+   }
+   });
+   $('#sendsms_id').append(arr);
+   }else{
+   alert("No data found...");
+   }
+   }
+   });
+   });
+   }); 
 
   function FN_search(ID,city,fDate,tDate){
-   var search=null;
-         if(ID){
-          search={'ID':ID};
-         }
-         if(city){
-          search={'city':city};
-         }
+  var search=null;
+  if(ID){
+  search={'ID':ID};
+  }
+  if(city){
+  search={'city':city};
+  }
+  if((fDate!=0) && (tDate!=0)){
+  search={'fDate':fDate,'tDate':tDate};
+  }
+  if(search!=null){
+  $.get("{{url('send-sms')}}",search).done(function(data){   var arr=Array();   $('#sendsms_id').empty();$('#msg_count').empty();
+  console.log(data.sms_data);
+  if(data.sms_data.length > 0){
+  $('#msg_count').text(data.sms_data.length);
+  $.each(data.sms_data,function(index,val){ 
+  arr.push('<tr><td><input type="checkbox" name="fba[]" class="check_list" value="'+val.FBAID+'" >'+val.FullName  +':'+val.MobiNumb1+'</td> </tr>');  });
+  $('#sendsms_id').append(arr);
+  }else{
+  alert("No data found...");
+  }
+  }).fail(function(xhr, status, error) {
+  console.log(error);
+  });
+  }
+  }
+  function SMSTemplate_fn(ID){
+  $('#SMSTemplate').empty();
+  $.get("{{url('send-sms')}}",{'smstemplate_id':ID}).done(function(data){ $('#SMSTemplate').val(data);
+     }).fail(function(xhr, status, error) {
+      console.log(error);
+      });
+      }
 
-         
-         if((fDate!=0) && (tDate!=0)){
-           search={'fDate':fDate,'tDate':tDate};
-         }
-    if(search!=null){
-    $.get("{{url('send-sms')}}",search).done(function(data){   var arr=Array();   $('#sendsms_id').empty();$('#msg_count').empty();
-        console.log(data.sms_data);
-             if(data.sms_data.length > 0){
 
-              $('#msg_count').text(data.sms_data.length);
-              $.each(data.sms_data,function(index,val){ 
-              arr.push('<tr><td><input type="checkbox" name="fba[]" class="check_list" value="'+val.FBAID+'" >'+val.FullName  +':'+val.MobiNumb1+'</td> </tr>');  });
-              $('#sendsms_id').append(arr);
-                }else{
-                 alert("No data found...");
-                 }
-               }).fail(function(xhr, status, error) {
-               console.log(error);
-                });
-              }
 
-                }
- 
-      function SMSTemplate_fn(ID){
-     $('#SMSTemplate').empty();
-     $.get("{{url('send-sms')}}",{'smstemplate_id':ID}).done(function(data){ 
-        $('#SMSTemplate').val(data);
-        }).fail(function(xhr, status, error) {
-       console.log(error);
-       });
-        }
+ $('#smslist').on('change', function() {
+  $("#fmin_date").empty().append('');
+   // alert('okae');
+  var smslist=$('#smslist').find(":selected").val();
+  var array = "";
+  var i=0;
+   $('#smslist  option:selected').each(function() {
+    array+= $(this).val()+",";
+    });
+   console.log(array);
 
-   $(document).on('click','#send_message_id',function(e){
-  // e.preventdefault();
 
- if($('#smslist').val()==0 ||$('#smslist').val()==null ){ 
+
+      //$(document).on('change','#search_fba_date',function(e){
+
+ if($('#fmin_date').val()==0 ||$('#fmin_date').val()==null ){ 
   $('#required1').text('This field is required');
    $('#required2').text('This field is required');
+      $('#required3').text('This field is required');
+
   return false;
  }else{ $('#required1').text('');}
  if( $('#SMSTemplate_select').val()==0 || $('#SMSTemplate_select').val()==null  ){
-       $('#required2').text('This field is required');
-     //alert("Please select from drop down list.");
-  return false;
- }else{
-       $('#required2').text('');      
- } 
+ $('#required2').text('This field is required');
+ //alert("Please select from drop down list.");
+return false;
+}else{
+$('#required2').text('');      
+} 
 if($('#SMSTemplate').val()==0 || $('#SMSTemplate').val()==null){
-   $('#required3').text('This field is required');
-  //alert("Please fill out this field message.");
-  return false;
- }else{
-   $('#required3').text('');
- }
+$('#required3').text('This field is required');
+//alert("Please fill out this field message.");
+return false;
+
+
+
+ if( $('#SMSTemplate_select').val()==0 || $('#SMSTemplate_select').val()==null  ){
+ $('#required2').text('This field is required');
+ //alert("Please select from drop down list.");
+return false;
+}
+}else{
+$('#required3').text('');
+}
+
+ if( $('#fmax_date').val()==0 || $('#fmax_date').val()==null  ){
+ $('#required3').text('This field is required');
+ //alert("Please select from drop down list.");
+return false;
+}
 
 // var fields = $("input[name='fba']").serializeArray(); 
-//   if (fields.length>0) { 
-//     alert("Please select  Recipient");
-//     return false;
-//   } 
+// if (fields.length>0) { 
+// alert("Please select  Recipient");
+// return false;
+// } 
 
 if($(".check_list:checkbox:checked").length > 0){
-  }else{
-    $('#required4').text('This field is required');
-    alert("Please select  Recipient");
-    return false;
-  }
- });
+}else{
+$('#required4').text('This field is required');
+alert("Please select  Recipient");
+return false;
+}
+});
 $(document).on('click','.check_list',function(){
-     len=$(".check_list:checkbox:checked").length;
-     $('#msg_check').text(len+"/");
-  });
- $(document).ready(function(){
+len=$(".check_list:checkbox:checked").length;
+$('#msg_check').text(len+"/");
+});
+$(document).ready(function(){
  window.setTimeout(function() {
-  $("#message_toggle").fadeTo(500, 0).slideUp(500, function(){
-  $(this).remove(); 
+ $("#message_toggle").fadeTo(500, 0).slideUp(500, function(){
+ $(this).remove(); 
  });
-  }, 4000);
+ }, 4000);
+ });
+ $.ajax({ 
+ url: "{{URL::to('send-sms-state')}}",
+ method:"GET",
+ success: function(datas)  
+ {
+ var data=$.parseJSON(datas);
+ // console.log(data);
+ if(data)
+ { $.each(data, function( index, value ) {
+ $('#state').append('<option value="'+value.state_id+'">'+value.state_name+'</option>');
+ }); 
+ }else{
+  $('#state').empty().append('No Result Found');
+  }
+  },
   });
-
-  </script>
-  @endsection
+  $('#state').on('change', function() {
+  $("#city").empty().append('');
+   // alert('okae');
+  var state=$('#state').find(":selected").val();
+  var array = "";
+  var i=0;
+   $('#state  option:selected').each(function() {
+    array+= $(this).val()+",";
+    });
+   console.log(array);
+    var v_token ="{{csrf_token()}}";
+   $.ajax({  
+    type: "POST",  
+    url: "{{URL::to('send-sms-city')}}",
+    data : {'_token': v_token,'state':array},
+    success: function(msg){
+    console.log(msg);
+    if(msg)
+    {  $.each(msg, function( index, value ) {
+   $('#city').append('<option value="'+value.cityname+'">'+value.cityname+'</option>');   
+    }); 
+     }else{
+      $('#city').empty().append('No Result Found');
+      }
+      }  
+      });
+      });
+</script>
+@endsection
  
+
+
+
