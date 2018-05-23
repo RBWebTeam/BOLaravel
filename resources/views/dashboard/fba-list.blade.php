@@ -43,22 +43,33 @@
 <!--    <select  id="msds-select" class="pull-left mrg-top mrg-left">
    <option value="0">Posp Type</option>
   <option value="1">POSP Yes</option>
-  <option value="2">POSP No</option>
+  <option value="2">POSP No</option>  fnamesearch
 
   </select> -->
    &nbsp;&nbsp;&nbsp;
   <form name="myform">
-  <select id="msds-select" class="form-control" style="width:55%;margin:10px;margin-top:4px;display: -webkit-inline-box;"  name="one" onchange="if (this.selectedIndex==4){this.form['fbsearch'].style.display='block',this.form['psearch'].style.display='none'}else {this.form['psearch'].style.display='block',this.form['fbsearch'].style.display='none'};">
-   <option id="msds-select"  value="0" selected="selected">Search By</option>
+  <select id="msds-select" class="form-control" style="width:55%;margin:10px;margin-top:4px;display: -webkit-inline-box;"  name="one" onchange="if (this.selectedIndex==4){this.form['fbsearch'].style.display='block',this.form['psearch'].style.display='none';this.form['statesearch'].style.display='none';this.form['zonesearch'].style.display='none'}else if( this.selectedIndex==6){this.form['fbsearch'].style.display='none',this.form['psearch'].style.display='none';this.form['statesearch'].style.display='block';this.form['zonesearch'].style.display='none'} else if( this.selectedIndex==7){this.form['fbsearch'].style.display='none',this.form['psearch'].style.display='none';this.form['statesearch'].style.display='none';this.form['zonesearch'].style.display='block'} else if( this.selectedIndex==8){this.form['fbsearch'].style.display='none',this.form['psearch'].style.display='none';this.form['fnamesearch'].style.display='block';this.form['zonesearch'].style.display='none';} else if( this.selectedIndex==9){this.form['fbsearch'].style.display='none',this.form['psearch'].style.display='none';this.form['fnamesearch'].style.display='none';this.form['zonesearch'].style.display='none';this.form['fcitysearch'].style.display='block';} else if( this.selectedIndex==10){this.form['fbsearch'].style.display='none',this.form['psearch'].style.display='none';this.form['fnamesearch'].style.display='none';this.form['zonesearch'].style.display='none';this.form['fcitysearch'].style.display='none';this.form['ponamesearch'].style.display='block';}  else {this.form['psearch'].style.display='block',this.form['fbsearch'].style.display='none'};">
+
+   <option id="msds-select" value="0" selected="selected">Search By</option>
    <option value="0">All</option>
    <option value="1">POSP Yes</option>
    <option value="2">POSP No</option>
    <option value="FBAID">FBA ID</option>
    <option value="POSPNO">POSP Number</option>
-
+   <option value="state">FBA STATE</option>
+   <option value="zone">FBA ZONE</option>
+   <option value="fbaname">FBA NAME</option>
+   <option value="fbacity">FBA City</option>
+   <option value="pospname">POSP Name</option>
    </select>
-   <input type="Number" class="fbsearch hide" id="fbsearch" name="fbsearch" placeholder="Search FBA ID" style="display:none;margin-left: 96px;"/>
-   <input type="Number" class="psearch hide" id="psearch" name="psearch" placeholder="Search POSP" style="display:none; margin-left: 96px;" />
+
+   <input type="text" class="fbsearch hide" id="fbsearch" name="fbsearch" placeholder="Search FBA ID" style="display:none;margin-left: 96px;"/>
+   <input type="text" class="psearch hide" id="psearch" name="psearch" placeholder="Search POSP" style="display:none; margin-left: 96px;" />
+   <input type="text" class="statesearch hide" id="statesearch" name="statesearch" placeholder="Search State" style="display:none; margin-left: 96px;" />
+   <input type="text" class="zonesearch hide" id="zonesearch" name="zonesearch" placeholder="Search ZONE" style="display:none; margin-left: 96px;" />
+   <input type="text" class="fnamesearch hide" id="fnamesearch" name="fnamesearch" placeholder="Search FBA Full NAME" style="display:none; margin-left: 96px;" />
+   <input type="text" class="fcitysearch hide" id="fcitysearch" name="fcitysearch" placeholder="Search FBA City" style="display:none; margin-left: 96px;" />
+   <input type="text" class="ponamesearch hide" id="ponamesearch" name="ponamesearch" placeholder="Search Posp Name" style="display:none; margin-left: 96px;" />
 
   </form>
   </div> 
@@ -87,13 +98,13 @@
                                        <th>POSP No</th>
                                        <th>Loan ID</th> 
                                        <th>Posp Name</th> 
-                                      <th>Posp Status</th> 
+                                       <th>Posp Status</th> 
                                        <th>Bank Account</th>
                                        <th>Partner Info</th> 
                                        <th>Sales code</th>
                                        <th>FSM Details</th>  
                                        <th>Documents</th> 
-                                       <th>Customer ID</th>
+                                       <th>Customer ID</th> 
                                        <th>Created Date1</th>
                                        </tr>
                                        </thead>
@@ -451,14 +462,10 @@
 
     $('#fba-list-table').DataTable({
 
-  //     language: {
-  //   processing: "<img src='img/loading.gif'> Loading...",
-  // },
-
-      "createdRow": function(row, data, dataIndex ) {
-      if ( data.PayStat=="S" ) {
-        $(row).css({backgroundColor: 'LightGreen'});
-      }
+   "createdRow": function(row, data, dataIndex ) {
+    if ( data.PayStat=="S" ) {
+    $(row).css({backgroundColor: 'LightGreen'});
+ }
     },
         "order": [[ 0, "desc" ]],
         "ajax": "get-fba-list",
@@ -467,8 +474,9 @@
             { "data": "FullName"},
             { "data": "createdate" },            
             {"data":"MobiNumb1" ,
+
              "render": function ( data, type, row, meta ) {
-                return '<span>'+data+'</span></a> <a href="#" data-toggle="modal" data-target="#sms_sent_id" onclick="SMS_FN(1,'+data+')"><span class="glyphicon glyphicon-envelope"></span></a>';
+              return '<span>'+data+'</span></a> <a href="#" data-toggle="modal" data-target="#sms_sent_id" onclick="SMS_FN(1,'+data+')"><span class="glyphicon glyphicon-envelope"></span></a>';
               }
             },
             // { "data": "createdate" },
@@ -507,7 +515,7 @@
 
 
              {"data":"pospname"},
-              {"data":"pospstatus"},  
+             {"data":"pospstatus"},  
              {"data":"bankaccount"}, 
              {"data":null ,
              "render": function ( data, type, row, meta ) {
@@ -516,7 +524,7 @@
 
             }, 
 
-                {"data":"salescode" ,
+              {"data":"salescode" ,
              "render": function ( data, type, row, meta ) {
               return data=="Update"?('<a  id="update_'+row.fbaid+'" onclick="sales_update_fn('+row.fbaid+')" >'+data+'</a>'):data;
               }
@@ -541,10 +549,8 @@
              }  
          }, 
 
-    
-       { "data": "createdate1","visible":false }
+         { "data": "createdate1","visible":false }
 
-            
         ],
 
     });//.column('0:visible').order('desc').draw();
@@ -591,44 +597,104 @@ $(document).ready(function() {
 
 $('.date-range-filter').datepicker();
 });
-
-
-
 </script>
 <!-- from date to date end -->  
 
 
-<!-- Search Pospno and Fbaid start -->
+<!-- Search Pospno and Fbaid start,STATE,CITY etc -->
 <script>
 $(document).ready(function(){
 
-$(".psearch").keyup (function(){ 
-       table1 = $('#fba-list-table').DataTable();
-        if ($(this).val()!= '') {
-        table1.columns(11).search('^'+$(this).val() + '$', true, true).draw(); 
-      }
+      $(".psearch").keyup (function(){ 
+      table1 = $('#fba-list-table').DataTable();
+      if ($(this).val()!= '') {
+      table1.columns(11).search('^'+$(this).val() + '$', true, true).draw(); 
+  }
       else
-        table1.columns(11).search($(this).val(), true, true).draw(); 
+      table1.columns(11).search($(this).val(), true, true).draw(); 
     });
 });
 
- $(document).ready(function(){
-  
+    $(document).ready(function(){
     $(".fbsearch").on("keyup change",function(){ 
-         table1 = $('#fba-list-table').DataTable();
+    table1 = $('#fba-list-table').DataTable();
          //table1.columns(0).search( this.value).draw();
-         if ($(this).val()!= '') {
-        table1.columns(0).search('^'+$(this).val() + '$', true, true).draw(); 
-      }
-      else
-        table1.columns(0).search($(this).val(), true, true).draw(); 
+    if ($(this).val()!= '') {
+    table1.columns(0).search('^'+$(this).val() + '$', true, true).draw(); 
+ }
+    else
+    table1.columns(0).search($(this).val(), true, true).draw(); 
     });
 });
+
+     $(document).ready(function(){
+    $(".statesearch").on("keyup change",function(){ 
+    table1 = $('#fba-list-table').DataTable();
+         //table1.columns(0).search( this.value).draw();
+    if ($(this).val()!= '') {
+    table1.columns(8).search('^'+$(this).val() + '$', true, true).draw(); 
+ }
+    else
+    table1.columns(8).search($(this).val(), true, true).draw(); 
+    });
+});
+
+    $(document).ready(function(){
+    $(".zonesearch").on("keyup change",function(){ 
+    table1 = $('#fba-list-table').DataTable();
+         //table1.columns(0).search( this.value).draw();
+    if ($(this).val()!= '') {
+    table1.columns(9).search('^'+$(this).val() + '$', true, true).draw(); 
+ }
+    else
+    table1.columns(9).search($(this).val(), true, true).draw(); 
+    });
+});
+
+
+    $(document).ready(function(){
+    $(".fnamesearch").on("keyup change",function(){ 
+    table1 = $('#fba-list-table').DataTable();
+         //table1.columns(0).search( this.value).draw();
+    if ($(this).val()!= '') {
+    table1.columns(1).search('^'+$(this).val() + '$', true, true).draw(); 
+ }
+    else
+    table1.columns(1).search($(this).val(), true, true).draw(); 
+    });
+});
+
+        $(document).ready(function(){
+    $(".fcitysearch").on("keyup change",function(){ 
+    table1 = $('#fba-list-table').DataTable();
+         //table1.columns(0).search( this.value).draw();
+    if ($(this).val()!= '') {
+    table1.columns(7).search('^'+$(this).val() + '$', true, true).draw(); 
+ }
+    else
+    table1.columns(7).search($(this).val(), true, true).draw(); 
+    });
+});
+
+              $(document).ready(function(){
+    $(".ponamesearch").on("keyup change",function(){ 
+    table1 = $('#fba-list-table').DataTable();
+         //table1.columns(0).search( this.value).draw();
+    if ($(this).val()!= '') {
+    table1.columns(13).search('^'+$(this).val() + '$', true, true).draw(); 
+ }
+    else
+    table1.columns(13).search($(this).val(), true, true).draw(); 
+    });
+});
+
+
+
 
 
      
-$(document).ready(function() {
-  $('#paysub').on("onclick", function(){
+    $(document).ready(function() {
+    $('#paysub').on("onclick", function(){
     alert("test");
   });
 });
@@ -643,35 +709,32 @@ $(document).ready(function() {
   url: 'getpaylinknew/'+$('#fba').val(),
   type: "GET",                  
   success:function(data) {
-console.log(data);
+  console.log(data);
   var json = JSON.parse(data);
   if(json.StatusNo==0){
-        $('#divpartnertable_payment').html(json.MasterData.PaymentURL);
-        $('#divpartnertable_payment').val(json.MasterData.PaymentURL);
-
+  $('#divpartnertable_payment').html(json.MasterData.PaymentURL);
+  $('#divpartnertable_payment').val(json.MasterData.PaymentURL);
 
       }
 
- }
-
-
-        });
+    }
+});
      alert("Payment Link Genrate successfully..");
 }
 
- function pmesgsend(){
-alert("SMS Send successfully..");
-        $.ajax({ 
-        url: "{{URL::to('pmesgsend')}}",
-        method:"POST",
-        data: $('#modelpaylink').serialize(),
-        success: function(msg)  
-         {
-          console.log(msg);
+     function pmesgsend(){
+     alert("SMS Send successfully..");
+     $.ajax({ 
+     url: "{{URL::to('pmesgsend')}}",
+     method:"POST",
+     data: $('#modelpaylink').serialize(),
+     success: function(msg)  
+      {
+     console.log(msg);
 
-         }
-});
       }
+    });
+  }
 
 </script>
 
@@ -690,13 +753,3 @@ alert("SMS Send successfully..");
  
 });
 </script>
-
-
-
-
-
-
-
-
-
-
