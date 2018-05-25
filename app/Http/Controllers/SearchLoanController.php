@@ -19,12 +19,11 @@ class SearchLoanController extends CallApiController
 	}
 	public function SearchLoancallapi(Request $req)
 	{
-		//print_r($req->all());exit();
+		//print_r($req[1]['value']);exit();		
 		try{
-   	$data=array("searchText"=>$req->txtsearch,"empCode"=>"RB40000068","pgNo"=>"1");
- 
+   	$data=array("searchText"=>$req[1]['value'],"empCode"=>"RB40000068","pgNo"=>"1"); 
    	 $post_data=json_encode($data);
-   	// print_r($post_data); 
+   	 //print_r($post_data); exit();
 	      	    $result=$this->call_json_data_api('http://services.rupeeboss.com/LoginDtls.svc/xmlservice/dsplySearchResult',$post_data);
 	            $http_result=$result['http_result'];
 	            $error=$result['error'];
@@ -33,26 +32,18 @@ class SearchLoanController extends CallApiController
 	            $m=$s=str_replace('\\', "", $s);
 	            $update_user='';
 	            $obj = json_decode($m);
-	           print_r($m); exit();
-                
-              
-               
-
-                   if($obj->status='Success'){
-
-                    	 $respon=($obj->result);
+	            //print_r($m); exit();            
+               if($obj->status='Success'){
+                    	return json_encode(["data"=>$obj->result]);
                     }else{
-                     	 $respon=0;
+                     	return [];
                     }
-                    //print_r($respon); exit();
+	            //print_r($obj); exit();
+                    
 	}
 	catch (Exception $e){
         return $e;    
-     }
-        //print_r($respon);exit();
-	  return view('SearchLoan',['respon'=>$respon]);
-	  //return json_encode($respon);
-
+     } 
 	}
 
 }

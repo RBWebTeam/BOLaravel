@@ -1,6 +1,6 @@
 @extends('include.master')
 @section('content')
-
+<meta name="csrf-token" content="{{ csrf_token() }}">
   <div class="container-fluid white-bg">
     <div class="col-md-12"><h3 class="mrg-btm">Search Loan</h3></div>
        <div class="col-md-12">
@@ -8,8 +8,8 @@
        <div class="table-responsive" >
        	<div class="col-md-6">
        	<div class="form-group">
-       	<form id="frmsearchloan" method="post">
-                  {{csrf_field()}}
+       	<form id="frmsearchloan" >
+        {{csrf_field()}}
        	<label >Search:<input class="form-control" type="text" name="txtsearch" id="txtsearch" required placeholder="Employee Name,Employee Code"></label>
        	</form>  
        	<br>
@@ -17,7 +17,7 @@
        	</div>       	
        	</div>
        	 <div id="divsearch" class="col-md-12" style="display:none;">
-      <table class="datatable-responsive table table-striped table-bordered dt-responsive nowrap" id="example">
+          <table class="datatable-responsive table table-striped table-bordered nowrap" id="search-loan">
       	<thead>
       		<tr>
       			<th>Lead Id</th>
@@ -29,10 +29,7 @@
       			<th>Bank Name</th>
       			<th>Employee Name</th>      			
       		</tr>
-      	</thead>
-      	<tbody>                 
-              
-      	</tbody>
+      	</thead>      	
       </table>
       </div>
       </div>
@@ -40,33 +37,34 @@
       </div>
       </div>
 <script type="text/javascript">
-	$(document).ready(function() {
-            
-      });
 
-$('#btnsearch').click(function (){
-
-      if( $('#frmsearchloan').valid())
-    {
+ $('#btnsearch').click(function (){     
+    $('#divsearch').show();    
+    $('#search-loan').DataTable({ 
         
-      console.log($('#frmsearchloan').serialize());
-          $.ajax({ 
-             url: "{{URL::to('search-loan-apicall')}}",
-             method:"POST",
-             data: $('#frmsearchloan').serialize(),
-             success: function(searchdata)  
-               {
-                  $('#divsearch').show();
-                  $("#example tbody").empty();
-                 var searchresult=JSON.parse(searchdata);
-                 console.log(searchresult.result);
-                 for (var i = 0 ; i < searchresult.result.length; i++) 
-                 {
-                  $("#example tbody").append('<tr><td>'+searchresult.result[i].leadId+'</td><td>'+searchresult.result[i].CustName+'</td><td>'+searchresult.result[i].Product+'</td><td>'+searchresult.result[i].Amount+'</td><td>'+searchresult.result[i].Status+'</td><td>'+searchresult.result[i].statusDate+'</td><td>'+searchresult.result[i].BankName+'</td><td>'+searchresult.result[i].EmployeeName+'</td></tr>');
-                 } 
-               }
-             });  
-    }
-    }); 
+    "ajax": {
+    "url": 'search-loan-apicall',
+    "type": 'POST',
+    "data": $('#frmsearchloan').serializeArray()
+     },
+     
+        "columns": [
+            { "data": "leadId"},
+            { "data": "CustName"},
+            { "data": "Product"},
+            { "data": "Amount"},
+            { "data": "Status"},
+            { "data": "statusDate"},
+            { "data": "BankName"},
+            { "data": "EmployeeName"}           
+            ]
+    
+        });
+    });
+$.ajaxSetup({
+  headers: {
+    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+  }
+});
 </script>
 @endsection
