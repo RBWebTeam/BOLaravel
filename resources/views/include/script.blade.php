@@ -1,5 +1,10 @@
 <script type="text/javascript">
 
+
+$(".numericOnly").keypress(function (e) {
+    if (String.fromCharCode(e.keyCode).match(/[^0-9]/g)) return false;
+});
+
 function Numeric(event) {     // for numeric value function
       if ((event.keyCode < 48 || event.keyCode > 57) && event.keyCode != 8) {
           event.keyCode = 0;
