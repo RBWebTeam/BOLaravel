@@ -675,18 +675,30 @@ $(document).ready(function(){
     });
 });
 
-
     $(document).ready(function(){
-    $(".fnamesearch").on("keyup change",function(){ 
-    table1 = $('#fba-list-table').DataTable();
-         //table1.columns(0).search( this.value).draw();
-    if ($(this).val()!= '') {
-    table1.columns(1).search('^'+$(this).val() + '$', true, true).draw(); 
- }
-    else
-    table1.columns(1).search($(this).val(), true, true).draw(); 
+      $(".fnamesearch").on("keyup change",function(){ 
+      table1 = $('#fba-list-table').DataTable();
+      if ($(this).val()!= '') {
+      table1.columns(1).search( this.value ).draw(); 
+ }else
+      table1.columns(1).search( this.value ).draw(); 
     });
 });
+
+    
+
+
+//     $(document).ready(function(){
+//     $(".fnamesearch").on("keyup change",function(){ 
+//     table1 = $('#fba-list-table').DataTable();
+//          //table1.columns(0).search( this.value).draw();
+//     if ($(this).val()!= '') {
+//     table1.columns(1).search('^'+$(this).val() + '$', true, true).draw(); 
+//  }
+//     else
+//     table1.columns(1).search($(this).val(), true, true).draw(); 
+//     });
+// });
 
         $(document).ready(function(){
     $(".fcitysearch").on("keyup change",function(){ 
