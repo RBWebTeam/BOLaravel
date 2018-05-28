@@ -35,13 +35,11 @@ label{
         <hr>
        </div>
        <div class="divupdate form-group">
-
-        <label>Update History</label>
-      
+        <label>Update History</label>      
         <table class="table">
        @foreach ($fbaupdate as $val)
           <tr>
-            <td><label>Last Updated By:</label>{{$val->LogiName}}</td>
+            <td><label>Last Updated By:</label>{{$val->UserName}}</td>
             <td><label>Last Update Date:</label>{{$val->createddate}}</td>
             <td><label>Last Update Time:</label>{{$val->updateddate}}</td>
             <td><label>Remarks:</label><textarea readonly class="form-control">{{$val->remark}}</textarea></td>
@@ -50,6 +48,7 @@ label{
         </table>
      
         <hr>
+
        </div>
        <div class="isdivcompany form-group">
        <div>
@@ -69,7 +68,6 @@ label{
         </table>
        </div>
        <div  id="divcompany" style="display:none">
-
         <table class="table">
           <tr>
             <td><label>Business Name:</label></td>
@@ -77,7 +75,7 @@ label{
             <td><label>Office Address:</label></td>
             <td><textarea  id="txtofficeadd" name="txtofficeadd" class="form-control" required></textarea></td>
             <td><label>Staff Strength:</label></td>
-            <td><input type="number" id="txtstaff" name="txtstaff" class="form-control" required></td>
+            <td><input type="number" id="txtstaff" name="txtstaff" class="form-control numericOnly" required></td>
           </tr>
         </table>
         <hr>
@@ -100,15 +98,14 @@ label{
           </table>
         </div>
         <div  id="divprofile" style="display: none;">
-
           <table class="table">
             <tr>
               <td><label>No of Policies Sold per month:</label></td>
-              <td><input type="number" id="txtnoofpolicy" name="txtnoofpolicy" class="form-control" required></td>
+              <td><input type="number" id="txtnoofpolicy" name="txtnoofpolicy" class="form-control numericOnly" required></td>
               <td><label>Premium collected per month:</label></td>
-              <td><input type="number" id="txtpremium" name="txtpremium" class="form-control" required></td>
+              <td><input type="number" id="txtpremium" name="txtpremium" class="form-control numericOnly" required></td>
               <td><label>Base of LIC Customers:</label></td>
-              <td><input type="number" id="txtliccustomer" name="txtliccustomer" class="form-control" required></td>
+              <td><input type="number" id="txtliccustomer" name="txtliccustomer" class="form-control numericOnly" required></td>
             </tr>
             <tr>
               <td><label>Preferred LIC products:</label></td>
@@ -515,8 +512,8 @@ $("#isCOT").prop("checked", true);
         }
        
         if((data[0].workwithlic==1)){
-         $("#isWorksLIC").prop("checked", true);
-          $('#txtnoofpolicy').val(data[0].noofpolicysoldpermonth);
+        $("#isWorksLIC").prop("checked", true);
+        $('#txtnoofpolicy').val(data[0].noofpolicysoldpermonth);
         $('#txtpremium').val(data[0].premiumcollectedpermonth);
         $('#txtliccustomer').val(data[0].baseofliccustomers);
         $('#txtlicproduct').val(data[0].preferredlicproduct);
@@ -524,13 +521,38 @@ $("#isCOT").prop("checked", true);
         }else{
            $(".isWorksLICNo").prop("checked", true);
            $('#divprofile').hide();
-            $('#txtnoofpolicy').val("");
+           $('#txtnoofpolicy').val("");
         $('#txtpremium').val("");
         $('#txtliccustomer').val("");
         $('#txtlicproduct').val("");
         $('#txtlicclub').val("");
+        }  
+         if((data[0].workwithprivateinsurer ==1)){ 
+                 
+          $("#isWorksLICins").prop("checked", true);
+        }else{
+          $("#isWorksLICins").prop("checked", false);
+          $(".isWorksLICinsNo").prop("checked",true);
+            $("#divprivate").hide();
+          
         }
-       
+        if((data[0].isWorksGeneralIns ==2)){ 
+               
+          $("#isWorksGeneralins").prop("checked", true);
+        }else{
+          $("#isWorksGeneralins").prop("checked", false);
+          $(".isWorksGeneralinsNo").prop("checked",true);
+            $("#divgenins").hide();
+          
+        }
+        if((data[0].isWorksHealthIns ==3)){      
+
+          $("#isWorksStandAlone").prop("checked", true);
+        }else{
+          $("#isWorksStandAlone").prop("checked", false);
+          $(".isWorksStandAloneNo").prop("checked", true);
+          $("#divhealth").hide();
+        }        
         if((data[0].ishl ==1)){         
           $("#txthl").prop("checked", true);
         }

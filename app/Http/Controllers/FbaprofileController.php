@@ -27,7 +27,7 @@ class FbaprofileController extends Controller
 	{
             $id=Session::get('fbauserid');	           
       
-           DB::statement('call Usp_insert_fbaprofile(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',array(
+           DB::statement('call Usp_insert_fbaprofile(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',array(
 		 	$req->iscompany,
 		 	$req->txtbusinesstype,
 		 	$req->txtofficeadd,
@@ -56,7 +56,9 @@ class FbaprofileController extends Controller
 		 	$req->lifeinsucomp,
 		 	$req->generatlinsucomp,
 		 	$req->healthinuscomp,
-		 	$req->club
+		 	$req->club,
+		 	$req->isWorksGeneralins,
+		 	$req->isWorksStandAlone
 		    ));	   
 	     return "successfully";		
         
