@@ -35,6 +35,7 @@ label{
         <hr>
        </div>
        <div class="divupdate form-group">
+
         <label>Update History</label>      
         <table class="table">
        @foreach ($fbaupdate as $val)
@@ -44,10 +45,11 @@ label{
             <td><label>Last Update Time:</label>{{$val->updateddate}}</td>
             <td><label>Remarks:</label><textarea readonly class="form-control">{{$val->remark}}</textarea></td>
           </tr>
+
        @endforeach
-        </table>
-     
-        <hr>
+       	</table>
+             <hr>
+
 
        </div>
        <div class="isdivcompany form-group">
@@ -68,6 +70,7 @@ label{
         </table>
        </div>
        <div  id="divcompany" style="display:none">
+<<<<<<< HEAD
         <table class="table">
           <tr>
             <td><label>Business Name:</label></td>
@@ -79,6 +82,19 @@ label{
           </tr>
         </table>
         <hr>
+=======
+       	<table class="table">
+       		<tr>
+       			<td><label>Business Name:</label></td>
+       			<td><input type="text" id="txtbusinesstype" name="txtbusinesstype" class="form-control" required></td>
+       			<td><label>Office Address:</label></td>
+       			<td><textarea  id="txtofficeadd" name="txtofficeadd" class="form-control" required></textarea></td>
+       			<td><label>Staff Strength:</label></td>
+       			<td><input type="number" id="txtstaff" name="txtstaff" class="form-control numericOnly" required></td>
+       		</tr>
+       	</table>
+       	<hr>
+>>>>>>> 107dac765682ed5d9dd966d98a5bf1ce342bc9c2
         </div>
         </div>
         <div class="form-group divworklic">
@@ -89,7 +105,7 @@ label{
             <tr>
               <td width="30%;"><label>Works with LIC</label></td>
               <td width="20%;">
-                      <label><input type="radio" name="isWorksLIC" id="isWorksLIC" value="1" checked>&nbsp;YES</label>
+                      <label><input type="radio" name="isWorksLIC" id="isWorksLIC" value="1">&nbsp;YES</label>
                     </td>
                     <td width="20%;">
                      <label><input type="radio" name="isWorksLIC" class="isWorksLICNo" value="0">&nbsp;NO</label>
@@ -98,6 +114,7 @@ label{
           </table>
         </div>
         <div  id="divprofile" style="display: none;">
+<<<<<<< HEAD
           <table class="table">
             <tr>
               <td><label>No of Policies Sold per month:</label></td>
@@ -112,6 +129,22 @@ label{
               <td><input type="text" id="txtlicproduct" name="txtlicproduct" class="form-control" required></td>
               <td><label>LIC Club Memberships:</label></td>
               <!-- <td><input type="text" id="txtlicclub" name="txtlicclub" class="form-control" required></td> -->
+=======
+        	<table class="table">
+        		<tr>
+        			<td><label>No of Policies Sold per month:</label></td>
+        			<td><input type="number" id="txtnoofpolicy" name="txtnoofpolicy" class="form-control numericOnly" required></td>
+        			<td><label>Premium collected per month:</label></td>
+        			<td><input type="number" id="txtpremium" name="txtpremium" class="form-control numericOnly" required></td>
+        			<td><label>Base of LIC Customers:</label></td>
+        			<td><input type="number" id="txtliccustomer" name="txtliccustomer" class="form-control numericOnly" required></td>
+        		</tr>
+        		<tr>
+        			<td><label>Preferred LIC products:</label></td>
+        			<td><input type="text" id="txtlicproduct" name="txtlicproduct" class="form-control" required></td>
+        			<td><label>LIC Club Memberships:</label></td>
+        			<!-- <td><input type="text" id="txtlicclub" name="txtlicclub" class="form-control" required></td> -->
+>>>>>>> 107dac765682ed5d9dd966d98a5bf1ce342bc9c2
               <td><select  id="txtlicclub" name="txtlicclub" class="form-control" required>
                   <option value="">--Select--</option>
                   <option value="Corporate Club">Corporate Club</option>
@@ -133,8 +166,8 @@ label{
                 <td>
                       <label><input type="radio" id="isTOT" name="club" value="7">TOT</label>
                 </td>
-            </tr>
-          </table>
+        		</tr>
+        	</table>
         </div>
         </div>
         <div class="form-group divlicins">
@@ -142,7 +175,7 @@ label{
             <tr>
               <td width="30%;"><label>Works with Private Life Insurers:</label></td>
                <td width="20%;">
-                      <label><input type="radio" id="isWorksLICins" name="isWorksLICins" value="1" checked>&nbsp;YES</label>
+                      <label><input type="radio" id="isWorksLICins" name="isWorksLICins" value="1" >&nbsp;YES</label>
                     </td>
                      <td width="20%;">
                      <label><input type="radio" name="isWorksLICins" class="isWorksLICinsNo" value="0">&nbsp;NO</label>
@@ -166,7 +199,7 @@ label{
           <tr>
             <td style="width: 30%"><label>Works with General Ins Co's:</label></td>
             <td style="width: 20%"> 
-                      <label><input id="isWorksGeneralins" type="radio" name="isWorksGeneralins" value="2" checked>&nbsp;YES</label>
+                      <label><input id="isWorksGeneralins" type="radio" name="isWorksGeneralins" value="2">&nbsp;YES</label>
                 </td>
                 <td style="width: 20%">
                      <label><input type="radio" name="isWorksGeneralins" class="isWorksGeneralinsNo" value="0">&nbsp;NO</label>
@@ -188,7 +221,7 @@ label{
           <tr>
             <td style="width: 30%"><label>Works with Stand Alone Health Ins Co's:</label></td>
             <td style="width: 20%">
-                      <label><input type="radio" id="isWorksStandAlone" name="isWorksStandAlone" value="3" checked>&nbsp;YES</label>
+                      <label><input type="radio" id="isWorksStandAlone" name="isWorksStandAlone" value="3">&nbsp;YES</label>
                 </td>
                 <td style="width: 20%">
                      <label><input type="radio" name="isWorksStandAlone" class="isWorksStandAloneNo" value="0">&nbsp;NO</label>
