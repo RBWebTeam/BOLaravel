@@ -21,7 +21,8 @@ class SearchLoanController extends CallApiController
 	{
 		//print_r($req[1]['value']);exit();		
 		try{
-   	$data=array("searchText"=>$req[1]['value'],"empCode"=>"RB40000068","pgNo"=>"1"); 
+			//print_r($req->txtsearch);
+   	$data=array("searchText"=>$req->txtsearch,"empCode"=>"RB40000068","pgNo"=>"1"); 
    	 $post_data=json_encode($data);
    	 //print_r($post_data); exit();
 	      	    $result=$this->call_json_data_api('http://services.rupeeboss.com/LoginDtls.svc/xmlservice/dsplySearchResult',$post_data);
@@ -32,11 +33,13 @@ class SearchLoanController extends CallApiController
 	            $m=$s=str_replace('\\', "", $s);
 	            $update_user='';
 	            $obj = json_decode($m);
-	            //print_r($m); exit();            
-               if($obj->status='Success'){
+	            //print_r($m); exit();      
+	            //print_r($obj);      
+               if($obj->status =='success'){
                     	return json_encode(["data"=>$obj->result]);
                     }else{
-                     	return [];
+                    	//$arr = new array();
+                     	return json_encode(["data"=>[]]);
                     }
 	            //print_r($obj); exit();
                     

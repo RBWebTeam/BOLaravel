@@ -39,12 +39,13 @@
 <script type="text/javascript">
 
  $('#btnsearch').click(function (){     
-    $('#divsearch').show();    
-    $('#search-loan').DataTable({ 
+    $('#divsearch').show();  
+    getLoanData();
+   /* $('#search-loan').DataTable({ 
         
     "ajax": {
     "url": 'search-loan-apicall',
-    "type": 'POST',
+    "type": 'POST',    
     "data": $('#frmsearchloan').serializeArray()
      },
      
@@ -59,12 +60,50 @@
             { "data": "EmployeeName"}           
             ]
     
-        });
+        });*/
     });
 $.ajaxSetup({
   headers: {
     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
   }
 });
+
+function getLoanData(){
+  $.ajax({
+  url: 'search-loan-apicall',
+  type: "POST",           
+  data:  $('#frmsearchloan').serializeArray(),
+  success:function(data) {
+  $('#divsearch').show();
+    var json = JSON.parse(data);
+    console.log(json);
+    if(json.data.length>0){
+    table = $('#search-loan').DataTable({         
+    "data":json.data,
+    "deferRender": true,
+    "destroy": true,
+    "searching": true,
+     
+        "columns": [
+            { "data": "leadId"},
+            { "data": "CustName"},
+            { "data": "Product"},
+            { "data": "Amount"},
+            { "data": "Status"},
+            { "data": "statusDate"},
+            { "data": "BankName"},
+            { "data": "EmployeeName"}           
+            ]
+    
+        });
+  }
+  else{
+    $('#divsearch').hide();
+    alert('No data available');
+  }
+  }
+});     
+}
+
 </script>
 @endsection
