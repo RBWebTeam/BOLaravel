@@ -465,6 +465,7 @@
         "order": [[ 0, "desc" ]],
         "ajax": "get-fba-list",
         "columns": [
+
             { "data": "fbaid"},
 
             { "data": "FullName",
@@ -472,6 +473,7 @@
               return (data)+' <a target="_blank" href="Fba-profile/'+row.fbaid+' "><span class="glyphicon glyphicon-user"  title="FBA Profile"></span></a>';
               }
           },
+
             { "data": "createdate" },            
             {"data":"MobiNumb1" ,
              "render": function ( data, type, row, meta ) {
