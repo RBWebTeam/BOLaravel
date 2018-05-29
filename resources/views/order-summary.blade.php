@@ -213,7 +213,7 @@ foreach ($val->ParamDetails as $key => $value) {
 
  <tr>
     <td class="bg-info">Appointment Date / Time</td>
-  <td>{{$val->PickUptime}}</td>
+  <td>{{$val->PickUpDate}} / {{$val->PickUptime}}</td>
  </tr>
  <tr>
     <td class="bg-info">Fasting condition</td>
