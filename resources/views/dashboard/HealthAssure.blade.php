@@ -184,7 +184,7 @@ foreach ($val->ParamDetails as $key => $value) {
  <label>Mobile No</label>
  <input type="number" id="txtmono" name="txtmono" class="input-1" required />
 </div>
-
+ 
 <div class="col-md-4">
  <label>Email ID</label>
  <input type="email" id="txtemail" name="txtemail" class="input-1" required/>

@@ -91,18 +91,17 @@ return json_encode($query);
 // return json_encode($query);
 // }
  public function send_sms_save(Request $req){  
-     $parentgroupid=uniqid();
+      $parentgroupid=uniqid();
       $error='';
       $url=$this::$api_url;
       $fbauserid=Session::get('fbauserid');
-    if(isset($req->fba))
-    
+    if(isset($req->fba))    
     $fid = "";
-  $isdirectsend=DB::select('call get_isdirectsned(?)',[$fbauserid]);
+    $isdirectsend=DB::select('call get_isdirectsned(?)',[$fbauserid]);
 
   for ($i=1; $i < count($req->fba)+1; $i++) { 
     if($i%100==0){
-      $uniqid=uniqid();
+        $uniqid=uniqid();
         $fid=$fid.','.$req->fba[$i-1];
         
         $fid = ltrim($fid, ',');
