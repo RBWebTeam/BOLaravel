@@ -169,6 +169,8 @@ Route::get('Fba-profile-fbaprofile/{fbaid}','FbaprofileController@getfbaprofile'
 Route::get('fba-profile-company-mapping/{profileid}','FbaprofileController@getfbaprofilecompanymapping');
 Route::get('search-loan','SearchLoanController@SearchLoan');
 Route::post('search-loan-apicall','SearchLoanController@SearchLoancallapi');
+
+Route::get('quick-lead','QuickLeadController@quicklead');
 ///shubham end ///
 // avinash
  Route::get('ticket-module','TicketController@getticketdetails') ;
