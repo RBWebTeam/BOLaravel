@@ -184,7 +184,7 @@ foreach ($val->ParamDetails as $key => $value) {
  <label>Mobile No</label>
  <input type="number" id="txtmono" name="txtmono" class="input-1" required />
 </div>
-
+ 
 <div class="col-md-4">
  <label>Email ID</label>
  <input type="email" id="txtemail" name="txtemail" class="input-1" required/>
@@ -295,165 +295,122 @@ foreach ($val->ParamDetails as $key => $value) {
                         </div>
                         <div class="modal-body" style='background: #eaeff7;'>
                             <p>
-                                HealthAssure Pvt. Ltd is the issuer of the HealthAssure Plan on behalf of the Corporate/
-Customer
+                                HealthAssure Pvt. Ltd is the issuer of the HealthAssure Plan on behalf of the Corporate/Customer
                             </p>
                             <p>This represents the details of Health Services available as a part of the HealthAssure Plan</p>
                             <p>
-                                The Program Partners shall only honour bookings made via the employee booking engine
-and walk-ins will not be permitted
+                                The Program Partners shall only honour bookings made via the employee booking engine and walk-ins will not be permitted
                             </p>
                             <p>
-                                To avail Health services as part this HealthAssure plan, post appointment scheduling,
-customer would need to provide a valid photo ID Proof to our Program Partners
+                                To avail Health services as part this HealthAssure plan, post appointment scheduling,customer would need to provide a valid photo ID Proof to our Program Partners
                             </p>
                             <p>
-                                The usage of the services is optional and each service shall be valid only for a one time use
-unless specified otherwise
+                                The usage of the services is optional and each service shall be valid only for a one time use unless specified otherwise
                             </p>
                             <p>All benefits represented in the plan are valid for a twelve months from the date of purchase</p>
                             <p>
-                                HealthAssure Pvt. Ltd. may not entertain any request for changing the benefits as offered
-under this plan under any circumstances whatsoever.
+                                HealthAssure Pvt. Ltd. may not entertain any request for changing the benefits as offered under this plan under any circumstances whatsoever.
                             </p>
                             <p>
-                                This plan cannot be combined with any other scheme of the Program Partners and shall be
-used exclusively for the Health Services Vouchers under the HealthAssure Plan.
+                                This plan cannot be combined with any other scheme of the Program Partners and shall be used exclusively for the Health Services Vouchers under the HealthAssure Plan.
                             </p>
                             <p>This plan is not encashable.</p>
                             <p>This plan shall be valid only at the selected Partners of our HealthAssure Plan</p>
                             <p>
-                                By agreeing to this agreement, I authorize the medical centres/partners in HealthAssure
-network to use and disclose the protected health information described below to
-HealthAssure and this medical information may be used by the person I authorize to receive
-this information for medical treatment, analysis, consultation, billing or claims payment, or
-other related purposes.
+                                By agreeing to this agreement, I authorize the medical centres/partners in HealthAssure network to use and disclose the protected health information described below to HealthAssure and this medical information may be used by the person I authorize to receive this information for medical treatment, analysis, sultation, billing or claims payment, or other related purposes.
                             </p>
                             <p>
-                                HealthAssure Pvt. Ltd. reserves the right to alter any or all of the terms & conditions
-stipulated for the services at any time and at its sole discretion without assigning any
-reasons whatsoever
+                                HealthAssure Pvt. Ltd. reserves the right to alter any or all of the terms & conditions stipulated for the services at any time and at its sole discretion without assigning any reasons whatsoever
                             </p>
                             <p>
-                                HealthAssure Pvt. Ltd. shall not be liable for any losses or liability due to such alteration of
-services.
+                                HealthAssure Pvt. Ltd. shall not be liable for any losses or liability due to such alteration of services.
                             </p>
                             <p>
-                                HealthAssure Pvt. Ltd. holds no warranty or makes no representation about the quality,
-delivery or otherwise of the services offered by the Program Partners.
+                                HealthAssure Pvt. Ltd. holds no warranty or makes no representation about the quality, delivery or otherwise of the services offered by the Program Partners.
                             </p>
                             <p>
-                                Any dispute, regulatory non-compliance or claim regarding the services shall be resolved
-with the Program Partners directly without any reference or liability to HealthAssure Pvt.
-Ltd.
+                                Any dispute, regulatory non-compliance or claim regarding the services shall be resolved with the Program Partners directly without any reference or liability to HealthAssure Pvt. Ltd.
                             </p>
                             <p>
-                                This HealthAssure Plan offers optional Health Services and does not entail any civil/ criminal
-liability on HealthAssure Pvt. Ltd
+                                This HealthAssure Plan offers optional Health Services and does not entail any civil/ criminal liability on HealthAssure Pvt. Ltd
                             </p>
                             <p>
-                                Any dispute arising of this offer will be subject to the exclusive jurisdiction of competent
-courts in Mumbai
+                                Any dispute arising of this offer will be subject to the exclusive jurisdiction of competent courts in Mumbai
                             </p>
                             Diagnostic Test
-                    <p>The services are provided by Diagnostic Lab partners of HealthAssure Pvt. Ltd.</p>
+                           <p>The services are provided by Diagnostic Lab partners of HealthAssure Pvt. Ltd.</p>
                             <p>
-                                The services will be available from 8:00 AM to 04:00 PM on all days except national holidays
-and Sundays
+                                The services will be available from 8:00 AM to 04:00 PM on all days except national holidays and Sundays
                             </p>
                             <p>
-                                The booking will have to be done on the Employees’ service booking engine and will be
-confirmed basis availability at the chosen Diagnostic Lab partner
+                                The booking will have to be done on the Employees’ service booking engine and will be confirmed basis availability at the chosen Diagnostic Lab partner
                             </p>
                             <p>Fasting of 10-12 hours would be required, wherever applicable</p>
                             <p>
-                                The diagnostic lab partners have a certified quality protocol in place. Factors such as
-physiological disturbances, fever, dehydration, haemolysis, etc. can cause variation in
-reported results
+                                The diagnostic lab partners have a certified quality protocol in place. Factors such as physiological disturbances, fever, dehydration, haemolysis, etc. can cause variation in reported results
                             </p>
                             <p>
-                                In case blood sample gets lysed, Our Diagnostic Lab partner will approach for a fresh sample
-collection, the same day or another mutually decided date
+                                In case blood sample gets lysed, Our Diagnostic Lab partner will approach for a fresh sample collection, the same day or another mutually decided date
                             </p>
                             <p>
-                                As part of the operational procedure, copy of reports for Tests completed would be shared
-with HealthAssure for the purpose of billing and pay-out to Diagnostic Lab partner
+                                As part of the operational procedure, copy of reports for Tests completed would be shared with HealthAssure for the purpose of billing and pay-out to Diagnostic Lab partner
                             </p>
                             <p>
-                                For further queries, please write to : support@healthassure.in or call us at 0124-4851155
-Doctor Consultation
+                                For further queries, please write to : support@healthassure.in or call us at 0124-4851155 Doctor Consultation
                             </p>
                             <p>The services will be provided by Partners of HealthAssure Pvt. Ltd</p>
                             <p>
-                                The doctor consultation will have to be booked on the Employees’ booking engine and will
-be confirmed basis availability at the chosen partner
+                                The doctor consultation will have to be booked on the Employees’ booking engine and will be confirmed basis availability at the chosen partner
                             </p>
                             <p>
-                                The services under Doctor Consultation would cover Consulting Charges with Doctor only. All
-other charges with regards to treatment, procedure, dressing, medicines etc. would not be
-part and not covered under this service
+                                The services under Doctor Consultation would cover Consulting Charges with Doctor only. All other charges with regards to treatment, procedure, dressing, medicines etc. would not be part and not covered under this service
                             </p>
                             <p>
-                                HealthAssure will not be responsible for any cross references, treatments, procedures, tests
-or any complications arising from these treatments, procedures, tests suggested by partner
+                                HealthAssure will not be responsible for any cross references, treatments, procedures, tests or any complications arising from these treatments, procedures, tests suggested by partner
                             </p>
                             <p>
-                                As part of the operational procedure, proof of consultation completed would be shared with
-HealthAssure for the purpose of billing and pay-out to partner
+                                As part of the operational procedure, proof of consultation completed would be shared with HealthAssure for the purpose of billing and pay-out to partner
                             </p>
                             <p>
-                                For further queries, please write to: support@healthassure.in or call us at 0124-4851155
-Specialist Consultation
+                                For further queries, please write to: support@healthassure.in or call us at 0124-4851155 Specialist Consultation
                             </p>
                             <p>The services will be provided by Partners of HealthAssure Pvt. Ltd</p>
                             <p>
-                                The specialist consultation will have to be booked on the Employees’ booking engine and will
-be confirmed basis availability at the chosen partner
+                                The specialist consultation will have to be booked on the Employees’ booking engine and will be confirmed basis availability at the chosen partner
                             </p>
                             <p>The services under specialist consultation would cover Consulting Charges with Doctor only.</p>
                             <p>
-                                All other charges with regards to treatment, procedure, dressing, medicines etc. would not
-be part and not covered under this service
+                                All other charges with regards to treatment, procedure, dressing, medicines etc. would not be part and not covered under this service
                             </p>
                             <p>
-                                HealthAssure will not be responsible for any cross references ,treatments, procedures, tests
-or any complications arising from these treatments, procedures, tests suggested by partner
+                                HealthAssure will not be responsible for any cross references ,treatments, procedures, tests or any complications arising from these treatments, procedures, tests suggested by partner
                             </p>
                             <p>
-                                As part of the operational procedure, proof of consultation completed would be shared with
-HealthAssure for the purpose of billing and pay-out to partner
+                                As part of the operational procedure, proof of consultation completed would be shared with HealthAssure for the purpose of billing and pay-out to partner
                             </p>
                             <p>
-                                For further queries, please write to: support@healthassure.in or call us at 0124-4851155
-Tele-Doctor
+                                For further queries, please write to: support@healthassure.in or call us at 0124-4851155 Tele-Doctor
                             </p>
                             <p>The services are provided M/s eVaidya Pvt. Ltd.</p>
                             <p>
-                                The services will be available from 8:00 AM to 10:00 PM on all days except national holidays
-and Sundays
+                                The services will be available from 8:00 AM to 10:00 PM on all days except national holidays and Sundays
                             </p>
                             <p>The booking will have to be done on the Employees’ service booking engine</p>
                             <p>For detailed T&C’s, please visit www.healthassure.in</p>
                             <p>
-                                For further queries, please write to: support@healthassure.in or call us at 0124-4851155
-Nutritionist Consultation
+                                For further queries, please write to: support@healthassure.in or call us at 0124-4851155 Nutritionist Consultation
                             </p>
                             <p>The services are provided M/s Manna Healthcare Pvt. Ltd. (Obino)</p>
                             <p>
-                                The services will be available from 10:00 AM to 6:00 PM on all days except national holidays
-and Sundays
+                                The services will be available from 10:00 AM to 6:00 PM on all days except national holidays and Sundays
                             </p>
                             <p>The booking will have to be done on the Employees’ service booking engine</p>
                             <p>For detailed T&C’s, please visit www.healthassure.in</p>
                             <p>
-                                For further queries, please write to : support@healthassure.in or call us at 0124-4851155
-Emergency Assistance
+                                For further queries, please write to : support@healthassure.in or call us at 0124-4851155 Emergency Assistance
                             </p>
                             <p>
-                                AAMES arranges for services when a Participant is traveling 150 kilometers or more from
-their primary legal residence or in another country that is not their country of residence and
-has not been away from such residence for more than 90 days. A Participant meeting such
-requirements is hereinafter referred to as an “Eligible Participant.”
+                                AAMES arranges for services when a Participant is traveling 150 kilometers or more from their primary legal residence or in another country that is not their country of residence and has not been away from such residence for more than 90 days. A Participant meeting such requirements is hereinafter referred to as an “Eligible Participant.”
                             </p>
                             <p>All services must be arranged by AAMES.</p>
                             <p>No claims for reimbursement are accepted.</p>

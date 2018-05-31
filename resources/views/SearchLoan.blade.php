@@ -6,18 +6,18 @@
        <div class="col-md-12">
        <div class="overflow-scroll">
        <div class="table-responsive" >
-       	<div class="col-md-6">
+       	<div class="">
        	<div class="form-group">
        	<form id="frmsearchloan" >
         {{csrf_field()}}
-       	<label >Search:<input class="form-control" type="text" name="txtsearch" id="txtsearch" required placeholder="Employee Name,Employee Code"></label>
+       	<label >Search:<input class="form-control" type="text" name="txtsearch" id="txtsearch" required placeholder="Employee Name,Employee Code,Employee phone No." style="width: 50%;"></label>
        	</form>  
        	<br>
        	<button class="btn btn-primary form-group" id="btnsearch">Search</button>	
        	</div>       	
        	</div>
        	 <div id="divsearch" class="col-md-12" style="display:none;">
-          <table class="datatable-responsive table table-striped table-bordered nowrap" id="search-loan">
+         <table class="datatable-responsive table table-striped table-bordered nowrap" id="search-loan">
       	<thead>
       		<tr>
       			<th>Lead Id</th>
@@ -25,7 +25,7 @@
       			<th>Product</th>
       			<th>Amount</th>
       			<th>Status</th>
-      			<th>status Date</th>
+      			<th>Status Date</th>
       			<th>Bank Name</th>
       			<th>Employee Name</th>      			
       		</tr>
@@ -38,8 +38,8 @@
       </div>
 <script type="text/javascript">
 
- $('#btnsearch').click(function (){     
-    $('#divsearch').show();  
+ $('#btnsearch').click(function (){  
+    if($('#frmsearchloan').valid()){   
     getLoanData();
    /* $('#search-loan').DataTable({ 
         
@@ -61,12 +61,8 @@
             ]
     
         });*/
+      }
     });
-$.ajaxSetup({
-  headers: {
-    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-  }
-});
 
 function getLoanData(){
   $.ajax({
@@ -74,10 +70,10 @@ function getLoanData(){
   type: "POST",           
   data:  $('#frmsearchloan').serializeArray(),
   success:function(data) {
-  $('#divsearch').show();
     var json = JSON.parse(data);
     console.log(json);
     if(json.data.length>0){
+     $('#divsearch').show();
     table = $('#search-loan').DataTable({         
     "data":json.data,
     "deferRender": true,
@@ -104,6 +100,5 @@ function getLoanData(){
   }
 });     
 }
-
 </script>
 @endsection

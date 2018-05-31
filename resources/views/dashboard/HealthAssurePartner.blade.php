@@ -241,7 +241,6 @@ foreach ($val->ParamDetails as $key => $value) {
                         </div>
                         <div id="testCheckupBody" class="modal-body" style='background: #eaeff7;'>
                           <table id="tbltestlist" style="width:100%"></table>
-
                         </div>
                    </div>
                </div>
