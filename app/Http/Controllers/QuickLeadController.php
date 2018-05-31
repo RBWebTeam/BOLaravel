@@ -16,8 +16,21 @@ class QuickLeadController extends Controller
 	public function quicklead()
 	{
 	 $id=Session::get('fbauserid');
-     $query = DB::select("call Usp_get_quicklead($id)");    
-  	 return view('QuickLead',['query'=>$query]);	
+     $query = DB::select("call Usp_get_quicklead($id)");
+     $status=DB::select("call Usp_get_quick_lead_status()");  
+  	 return view('QuickLead',['query'=>$query,'status'=>$status]);	
 	}
 	
+	public function insertquickleadstatus(Request $req)
+	{
+	$id=Session::get('fbauserid');
+	DB::statement('call Usp_insert_update_quickleadstatus(?,?,?,?)',array(
+		  $req->txtleadid,
+          $req->ddlstatus,
+          $req->txtremark,
+          $id
+         )
+       );
+
+	}
 }

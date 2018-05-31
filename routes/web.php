@@ -171,6 +171,7 @@ Route::get('search-loan','SearchLoanController@SearchLoan');
 Route::post('search-loan-apicall','SearchLoanController@SearchLoancallapi');
 
 Route::get('quick-lead','QuickLeadController@quicklead');
+Route::Post('quick-lead','QuickLeadController@insertquickleadstatus');
 ///shubham end ///
 // avinash
  Route::get('ticket-module','TicketController@getticketdetails') ;
