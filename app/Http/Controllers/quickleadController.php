@@ -76,7 +76,7 @@ class quickleadController extends CallApiController
   }
 
 
-public function quicklead()
+public function quicklead_ql()
   {
    $id=Session::get('fbauserid');
      $query = DB::select("call Usp_get_quicklead($id)");
