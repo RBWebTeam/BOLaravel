@@ -40,6 +40,7 @@
     <!-- <th><input type="checkbox" name="chekfba" id="chekfba" class="select-checkall-header"></th> 
     <input name="select_all" id="checkAll" type="checkbox" />-->
       <form method="post" id="fbdatail-table-from">
+        {{ csrf_field() }}
       <input type="hidden" name="txtfid" id="txtfid">
       <div class="form-group">
                  <label class="control-label">Users:</label>
