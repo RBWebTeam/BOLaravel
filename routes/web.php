@@ -192,7 +192,7 @@ Route::get('fba-profile-company-mapping/{profileid}','FbaprofileController@getfb
 Route::get('search-loan','SearchLoanController@SearchLoan');
 Route::post('search-loan-apicall','SearchLoanController@SearchLoancallapi');
 
-Route::get('quick-lead','quickleadController@quicklead');
+Route::get('quick-lead','quickleadController@quicklead_ql');
 Route::Post('quick-lead','quickleadController@insertquickleadstatus');
 Route::get('quick-lead/{leadid}','quickleadController@gethistory');
 ///shubham end ///
