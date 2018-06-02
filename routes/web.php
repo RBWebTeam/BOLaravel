@@ -195,6 +195,9 @@ Route::post('search-loan-apicall','SearchLoanController@SearchLoancallapi');
 Route::get('quick-lead','quickleadController@quicklead_ql');
 Route::Post('quick-lead','quickleadController@insertquickleadstatus');
 Route::get('quick-lead/{leadid}','quickleadController@gethistory');
+Route::get('quick-lead-assigned-fba','quickleadController@getAssignedFBAToUserQuickLead');
+
+Route::get('assigned-fba-lead','quickleadController@assignedfbalead');
 ///shubham end ///
 // avinash
  Route::get('ticket-module','TicketController@getticketdetails') ;

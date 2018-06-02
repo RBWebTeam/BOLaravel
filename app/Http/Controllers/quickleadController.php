@@ -107,6 +107,16 @@ public function quicklead_ql()
        
   }
 
+public function getAssignedFBAToUserQuickLead()
+  {
+    
+     $query = DB::select("call getAssignedFBAToUserQuickLead(null)"); 
+     return json_encode($query); 
+  }
 
+public function assignedfbalead()
+  {    
+    return view('assignedfbalead');
+  }
 
  }
