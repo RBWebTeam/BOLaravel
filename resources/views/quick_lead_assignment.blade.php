@@ -8,7 +8,7 @@
      <hr>
      </div>
      <!-- <table class="table table-responsive table-hover" cellspacing="0" id="example"> -->
-<input type="hidden" name="txtfid" id="txtfid">
+
      <div class="col-md-4 col-sm-4 col-xs-12">
      <h4 style="margin-left: 45%;">State</h4>
      <div class="form-group">
@@ -40,6 +40,7 @@
     <!-- <th><input type="checkbox" name="chekfba" id="chekfba" class="select-checkall-header"></th> 
     <input name="select_all" id="checkAll" type="checkbox" />-->
       <form method="post" id="fbdatail-table-from">
+      <input type="hidden" name="txtfid" id="txtfid">
       <div class="form-group">
                  <label class="control-label">Users:</label>
                 <select name="ddlstatus" id="ddlstatus" class="form-control" style="width:30%" required >
@@ -315,7 +316,7 @@ if(chkval==""){
    $.ajax({ 
    url: "{{URL::to('fbaquickleadcitysave')}}",
    method:"POST",
-   data: $('#leadquick').serialize(),
+   data: $('#fbdatail-table-from').serialize(),
    success: function(msg)  
    {
     console.log(msg);

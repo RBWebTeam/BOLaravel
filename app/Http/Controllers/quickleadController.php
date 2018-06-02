@@ -47,10 +47,12 @@ class quickleadController extends CallApiController
                $id=Session::get('fbauserid');
                $fbatotal = explode(",",  $req->txtfid);
                 $fid = "";
-               for ($i=0; $i < count($fbatotal); $i++) { 
+               for ($i=1; $i < count($fbatotal)+1; $i++) { 
                     if($i%50==0){              
-                         $fid=$fid.','.$fbatotal[$i];
+                         $fid=$fid.','.$fbatotal[$i-1];
                          $fid = ltrim($fid, ',');
+                         // print_r("8**************");
+                         // print_r($fid);
                            DB::statement('call sp_quickleaduserfbamapping(?,?,?)',array(
                                $fid,
                                $req->ddlstatus,              
@@ -59,12 +61,13 @@ class quickleadController extends CallApiController
                          $fid = "";
                     }
                     else{        
-                         $fid=$fid.','.$fbatotal[$i];
+                         $fid=$fid.','.$fbatotal[$i-1];
                     }
                }
 
                if($fid!=""){    
                     $fid = ltrim($fid, ',');
+                    //print_r("----".$fid);
                      DB::statement('call sp_quickleaduserfbamapping(?,?,?)',array(
                                $fid,
                                $req->ddlstatus,              
