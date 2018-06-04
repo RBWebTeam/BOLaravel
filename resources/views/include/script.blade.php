@@ -1642,18 +1642,33 @@ $.ajax({
 }
 
 
+function updateposp(id)
+{
+  
+  $.ajax({  
+         type: "GET",  
+         url:'Fba-list-Update-posp/'+id,
+         success: function(posp){        
+             var text = JSON.parse(posp);
+              if(text.StatusNo==1){
+                POSP_UPDATE(id);
+              }
+             else{
+                  alert('Updated Successfully');
+                  $('#posp_'+id).closest('td').html(text.);
+                  $('#posp_remark').val('');
+                  $('.close').click(); 
+             }        
+        }  
+      });
+
+}
 
 
-// function updatepospapi(fbaid){
-//         $.ajax({
-//                     url: 'fba-list-posp-update/'+fbaid,
-//                     type: "GET",
-//                     dataType: "json",
-//                     success:function(data) {
-                       
-//                      }
-//                 });
-// }
+
+
+
+  
 
 </script>
 

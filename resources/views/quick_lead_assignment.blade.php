@@ -27,14 +27,10 @@
 
       <div class="form-group"> <input type="Submit" name="qlead" id="qlead"  class="mrg-top common-btn pull-left" value="SHOW"> 
       </div>
-      
-   
-   
-</form>
-<br>
+  </form>
+  <br>
      
       <div class="col-md-12 hidden" id="tablediv">
-  
       <div class="overflow-scroll">
       <div class="table-responsive" >
     <!-- <th><input type="checkbox" name="chekfba" id="chekfba" class="select-checkall-header"></th> 
@@ -66,9 +62,8 @@
            </tr>
            </thead>
            </table>
-           
-            <div>
-            <a id="fbdatail" name="fbdatail" class="btn btn-success">Submit</a>
+           <div>
+           <a id="fbdatail" name="fbdatail" class="btn btn-success">Submit</a>
            </div>
 
        </form> 
@@ -146,14 +141,14 @@ function getLoanData(){
            {"data":"FBAID" ,
 
              "render": function ( data, type, row, meta ) {
-              return '<input type="checkbox" name="id[]" value="' 
-                + $('<div/>').text(data).html() + '">';              }
+            return '<input type="checkbox" name="id[]" value="'+ $('<div/>').text(data).html() + '">';              }
             },
             { "data": "FBAID"},
             { "data": "FullName"},
             { "data": "EmailID"},
             { "data": "MobiNumb1"},
             { "data": "City"} ,
+            
              
             ]
     

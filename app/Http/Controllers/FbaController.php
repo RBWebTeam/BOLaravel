@@ -299,36 +299,34 @@ private function savePaymentInOldFinamrtDB($fbaid,$masterdata){
       
 }
 
+public function UpdatePospno($id)
+{
+   try{
+    $data= array("FBAID"=>"$id");
+    $token=array("cache-control: no-cache","content-type: application/json", "token: 1234567890");
 
-//  public function updatepospthroapi ($fbaid){
-// try{
-//       //print_r($req->txtsearch);
-//     $data= array("FBAId"=>"$fbaid"); 
-//      $type=array("cache-control: no-cache","content-type: application/json", "token: 1234567890");
-//      $post_data=json_encode($data);
-//      //print_r($post_data); exit();
-//               $result=$this->call_other_data_api($this::$api_url.'/api/backoffice-posp-registration',$post_data,$type);
-//               $http_result=$result['http_result'];
-//               $error=$result['error'];
-//               $st=str_replace('"{', "{", $http_result);
-//               $s=str_replace('}"', "}", $st);
-//               $m=$s=str_replace('\\', "", $s);
-//               $update_user='';
-//               $obj = json_decode($m);
-//               print_r($m); exit();      
-//               //print_r($obj);      
-//                if($obj->status =='success'){
-//                       return json_encode(["data"=>$obj->result]);
-//                     }else{
-//                       //$arr = new array();
-//                       return json_encode(["data"=>[]]);
-//                     }
-//               //print_r($obj); exit();
-                    
-//   }
-//   catch (Exception $e){
-//         return $e;    
-//      }   
-//       }
+     $post_data=json_encode($data);
+     
+     $type=$token;
+     $result=$this->call_other_data_api($this::$api_url.'/api/backoffice-posp-registration',$post_data,$type);
+     $pospno=$result['http_result']; 
+     $pospno_new= $pospno;
+     
+
+     return $pospno;
+  
+             
+    
+}
+  catch (Exception $e){
+
+       
+   }        
+         
+
+
+}
+
+
 
 }

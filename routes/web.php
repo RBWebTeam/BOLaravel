@@ -101,6 +101,9 @@ Route::get('state_demo/{id}',array('as'=>'FSMRegister.ajax','uses'=>'bankofferCo
 Route::get('state_dropdown/{cityid}','bankofferController@get_cities');
 Route::get('state_sub_dropdown/{cityid}','bankofferController@get_sub_cities');
 
+/////////////shubham podp
+Route::get('Fba-list-Update-posp/{id}','FbaController@UpdatePospno');
+
 
 
 
