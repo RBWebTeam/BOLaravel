@@ -66,6 +66,25 @@ Route::get('getloanid/{fbaid}','FbaController@getupdateloanid');
 //Route::get('crmstatus/{FBAID}','crmfbalistController@showcrmstatus');
 
 
+//QuicK Lead start  
+Route::get('quickleadassignmentshow','quickleadController@showlead');
+  Route::get('quickleadassignment','quickleadController@quicklead');
+  Route::post('quickleadcity','quickleadController@quickleadcity');
+  Route::get('quickleadcity/{id}',array('as'=>'leadquick.ajax','uses'=>'quickleadController@quickleadcity'));
+
+  Route::post('fbaquickleadcity','quickleadController@statecityfba'); 
+  Route::post('fbaquickleadcitysave','quickleadController@Insertquicklead');  
+
+  // Route::get('fba-list-posp-update/{fbaid}','FbaController@updatepospthroapi');
+
+
+
+
+
+  
+
+
+
 
 
 
@@ -164,15 +183,27 @@ Route::get('Approve-send-sms','SendSmsapprovalController@sendsmsview');
 
 Route::get('Fba-profile/{fbaid}','FbaprofileController@fbaprofileview');
 
+
+
+
 Route::post('Fba-profile-insert','FbaprofileController@Insertfbaprofile');
 Route::get('Fba-profile-fbaprofile/{fbaid}','FbaprofileController@getfbaprofile');
 Route::get('fba-profile-company-mapping/{profileid}','FbaprofileController@getfbaprofilecompanymapping');
 Route::get('search-loan','SearchLoanController@SearchLoan');
 Route::post('search-loan-apicall','SearchLoanController@SearchLoancallapi');
 
+
 Route::get('quick-lead','QuickLeadController@quicklead');
 Route::Post('quick-lead','QuickLeadController@insertquickleadstatus');
 Route::get('quick-lead/{leadid}','QuickLeadController@gethistory');
+
+Route::get('quick-lead','quickleadController@quicklead_ql');
+Route::Post('quick-lead','quickleadController@insertquickleadstatus');
+Route::get('quick-lead/{leadid}','quickleadController@gethistory');
+Route::get('quick-lead-assigned-fba','quickleadController@getAssignedFBAToUserQuickLead');
+
+Route::get('assigned-fba-lead','quickleadController@assignedfbalead');
+
 ///shubham end ///
 // avinash
  Route::get('ticket-module','TicketController@getticketdetails') ;
@@ -263,12 +294,14 @@ Route::get('send-notification','SendNotificationController@sendnotification');
 
  Route::get('send-sms','SendSMSController@sendsmsrea');
  Route::get('send-sms-state','SendSMSController@sendsmsren');
- Route::post(' send-sms-city','SendSMSController@sendsmscity');
+ Route::post('send-sms-city','SendSMSController@sendsmscity');
 Route::post('send-sms-save','SendSMSController@send_sms_save');
 Route::post('send-sms-detail','SendSMSController@getfbalist');
 Route::get('send-sms/{id}',array('as'=>'sendsms.ajax','uses'=>'SendSMSController@sendsmscity'));
 Route::get('send-sms','SendSMSController@ViewSendSMSDetails');
-
+ Route::get('send-sms-zone','SendSMSController@getsmszone');
+// Route::get('send-sms','SendSMSController@sendsmsrea');
+  Route::post(' send-sms-zonechange','SendSMSController@sendsmszoneid');
 // Route::get('send-sms','SendSMSController@ViewSendSMSDetails');
 // Route::post('send-sms-detail','SendSMSController@getfbalist');
  

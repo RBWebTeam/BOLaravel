@@ -10,17 +10,32 @@ use URL;
 use Mail;
 use api_url;
 class SendSMSController extends InitialController{
+
+  public function getsmszone(){
+ $zone = DB::select("call usp_load_zone_list()");
+  echo json_encode($zone);
+ }
+
+ public function sendsmszoneid(Request $req){
+
+$zone = DB::select('call usp_zone_master("'.$req["zone"].'")');
+ //print_r($req->all());exit();
+  return $zone;
+
+ }  
+
 public function sendsmsren(){
 $state = DB::select("call usp_load_state_list()");
   echo json_encode($state);
+
  }
 public function sendsmscity(Request $req){
-   //print_r($req->all());exit();
-$city = DB::select('call usp_city_master("'.$req["state"].'")');
-  return $city;
 
+$city = DB::select('call usp_city_master(?)',array($req->state));
   
+  return $city;
  }  
+
 public function ViewSendSMSDetails(Request $req){           
   try{
   $SMSTemplate=DB::table('SMSTemplate')->get();                    
@@ -36,6 +51,13 @@ public function ViewSendSMSDetails(Request $req){
   $query=DB::select('call sp_fba_sentSMS(?,?,?,?)',[1,$req->city,0,0]);
    return response()->json(array('sms_data' =>$query));
   } 
+
+  if(isset($req->zone)){ 
+  $query=DB::select('call sp_fba_sentSMS(?,?,?,?)',[3,$req->zone,0,0]);
+ // print_r($query);exit();
+   return response()->json(array('sms_data' =>$query));
+  } 
+
 
   if(isset($req->state)){ 
   $query=DB::select('call sp_fba_sentSMS(?,?,?,?)',[3,$req->state,0,0]);
@@ -61,7 +83,7 @@ return 0;
 }  
 }
  public function getfbalist(Request $req){
-//print_r(count($req->city));
+
 if(isset($req->city) && count($req->city)>0){
 $city = implode($req->city,',');
 }
@@ -74,8 +96,16 @@ $state = implode($req->state,',');
 else{ 
 $state = '';
 }
-//print_r($city);exit();
-if(isset($req->state)){ $state = implode($req->state,',');}else{ $state = null;}
+
+if(isset($req->zone) && count($req->zone)>0){
+$zone = implode($req->zone,',');
+}
+else{ 
+$zone = '';
+
+}
+if(isset($req->zone)){ $zone = implode($req->zone,',');}else{ $zone = null;}
+
 if(isset($req->fdate)){$fdate = $req->fdate;}else{$fdate='';}
 if(isset($req->todate)){$tdate = $req->todate;}else{$tdate = '';}
 $query=DB::select('call smsdata(?,?,?,?,?)',[$req->smslist,$city,$state,$fdate,$tdate]);
@@ -91,6 +121,7 @@ return json_encode($query);
 // return json_encode($query);
 // }
  public function send_sms_save(Request $req){  
+
       $parentgroupid=uniqid();
       $error='';
       $url=$this::$api_url;
@@ -135,6 +166,31 @@ return json_encode($query);
 
     }
  
+
+ $parentgroupid=uniqid();
+ $error='';
+ $url=$this::$api_url;
+ if(isset($req->fba))
+$fid = "";
+ for ($i=1; $i < count($req->fba)+1; $i++) { 
+ if($i%100==0){
+ $uniqid=uniqid();
+  $fid=$fid.','.$req->fba[$i-1];
+  $fid = ltrim($fid, ',');
+  $userid=Session::get('fbauserid');
+  $query=DB::select('call usp_insert_smslog(?,?,?,?,,?,userid)',[$fid,$req->sms_text,$uniqid,date('Y-m-d H:i:s'),$parentgroupid,$fbauserid]);
+ $data='{"group_id":"'.$uniqid.'"}';
+ $this->call_json($url.'/api/send-sms',$data);        
+ $fid = "";
+ }
+ else{        
+ $fid=$fid.','.$req->fba[$i-1];      
+ }
+ }
+ Session::flash('msg', "message  successfully send...");;
+ return Redirect::back();
+ }
+
  public function sentsms($mob,$text,$fba_id,$SMSTemplateId){
  $arr=array('fbaid'=>$fba_id,'mobileno'=>$mob,'message'=>$text,'
  create_date'=>date('Y-m-d H:i:s') );
@@ -148,10 +204,7 @@ return json_encode($query);
   //->pluck("cityname","cityname")
   //return json_encode($cities);
   //}
-   public function sendsmsrea (){
-  $state = DB::select("call usp_load_state_list()");
-  return view('dashboard.send-sms',['state'=>$state]);
-  }
+  
   public function call_json($url,$data){
   $ch = curl_init();
   curl_setopt($ch, CURLOPT_VERBOSE, 1);
@@ -169,4 +222,3 @@ return json_encode($query);
   return $result;
   }
   }
-
