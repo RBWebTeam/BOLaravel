@@ -6,10 +6,10 @@
          	<thead><tr>
          	<th>FBA ID</th>
          	<th>Full Name</th>
-         	<th>  Phone Number</th>
-         	<th>  Email ID</th>
-         	<th>  state</th>
-         	<th>  City</th>
+         	<th>Phone Number</th>
+         	<th>Email ID</th>
+         	<th>state</th>
+         	<th>City</th>
          	</tr></thead>
          	<tbody><tr>
          	<td>{{$fba_details->FBAID}}</td>
@@ -31,12 +31,12 @@
          <table   class="datatable-responsive table table-striped table-bordered dt-responsive nowrap" >
          	<thead><tr>
          <!-- 	<th> FBA ID</th> -->
-         <th>  PB Status</th>
-         	<th> CRN</th>
-         	<th>  Contact Name</th>
-         	<th>  Sum Insured</th>
-         	<th>    Date</th>
-         	<th>  Pincode</th>
+           <th>PB Status</th>
+         	<th>CRN</th>
+         	<th>Contact Name</th>
+         	<th>Sum Insured</th>
+         	<th>Date</th>
+         	<th>Pincode</th>
             
 
             

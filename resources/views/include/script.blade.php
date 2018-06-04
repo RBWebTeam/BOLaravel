@@ -97,6 +97,7 @@ $(document).ready(function(){
              }
 
              function POSP_UPDATE(id){
+              // updatepospapi(id);
                       $('#fbaid').val(id);
                       $('.updatePosp').modal('show');
                     
@@ -1639,6 +1640,20 @@ $.ajax({
        }  
       });
 }
+
+
+
+
+// function updatepospapi(fbaid){
+//         $.ajax({
+//                     url: 'fba-list-posp-update/'+fbaid,
+//                     type: "GET",
+//                     dataType: "json",
+//                     success:function(data) {
+                       
+//                      }
+//                 });
+// }
 
 </script>
 
