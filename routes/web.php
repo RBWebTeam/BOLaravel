@@ -293,7 +293,9 @@ Route::post('send-sms-save','SendSMSController@send_sms_save');
 Route::post('send-sms-detail','SendSMSController@getfbalist');
 Route::get('send-sms/{id}',array('as'=>'sendsms.ajax','uses'=>'SendSMSController@sendsmscity'));
 Route::get('send-sms','SendSMSController@ViewSendSMSDetails');
-
+ Route::get('send-sms-zone','SendSMSController@getsmszone');
+// Route::get('send-sms','SendSMSController@sendsmsrea');
+  Route::post(' send-sms-zonechange','SendSMSController@sendsmszoneid');
 // Route::get('send-sms','SendSMSController@ViewSendSMSDetails');
 // Route::post('send-sms-detail','SendSMSController@getfbalist');
  
