@@ -133,7 +133,7 @@ function getLoanData(){
      $('#tablediv').removeClass('hidden');
     table = $('#example').DataTable({         
     "data":json,
-    
+    "order": [[ 1, "desc" ]],
     "destroy": true,
     "searching": true,
      
