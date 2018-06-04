@@ -15,8 +15,10 @@
 	        <table class="datatable-responsive table table-striped table-bordered dt-responsive nowrap" id="example">
 	        	<thead>
 	        		<tr>
+             <th>FBA ID</th>
+              <th>FBA Name</th>
 	        			<th>Lead ID</th>
-	        			<th>Name</th>
+                <th>Name</th>
 	        			<th>Email ID</th>
 	        			<th>Mobile NO</th>
 	        			<th>Status</th>
@@ -29,9 +31,11 @@
 	        	</thead>
 	        	<tbody>
 	        		@foreach($query as $val)
-	        		<tr>	        			
+	        		<tr>	
+            <td>{{$val->fbaid}}</td> 
+            <td>{{$val->FullName}}</td>       			
 	        			<td>{{$val->Req_Id}}</td>
-	        			<td>{{$val->Name}}</td>
+                <td>{{$val->Name}}</td>
 	        			<td>{{$val->Email}}</td>
 	        			<td>{{$val->Mobile}}</td>
 	        			@if ($val->Lead_Status =='')
