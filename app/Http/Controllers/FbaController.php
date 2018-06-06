@@ -314,9 +314,7 @@ public function UpdatePospno($id)
      
 
      return $pospno;
-  
-             
-    
+     
 }
   catch (Exception $e){
 

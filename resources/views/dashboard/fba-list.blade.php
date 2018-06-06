@@ -111,10 +111,7 @@
                                        <th>Documents</th> 
                                        <th>Customer ID</th> 
                                        <th>Created Date1</th>
-
-                                                                         
-
-                                       </tr>
+                                      </tr>
                                        </thead>
                                        </table>
                            </div>

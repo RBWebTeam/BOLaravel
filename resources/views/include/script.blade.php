@@ -1655,9 +1655,9 @@ function updateposp(id)
               }
              else{
                   alert('Updated Successfully');
-                  $('#posp_'+id).closest('td').html(text.);
+                      /* $('#posp_'+id).closest('td').html(text.);
                   $('#posp_remark').val('');
-                  $('.close').click(); 
+                  $('.close').click(); */
              }        
         }  
       });

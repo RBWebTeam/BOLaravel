@@ -257,11 +257,13 @@ route::get('sendnotificationnew', 'SendNotificationController@sendnotificationst
 Route::get('insert','uploadfileController@imageupload');
 Route::get('Fba-list-Update','FbaController@test');
 Route::get('fbalist-document/{fbaid}','FbaController@getdoclistview');
-
-
 route::post('send-notification-submit', 'SendNotificationController@sendnotificationsubmit');
 
+// image test start
+Route::get('viewimage','imagetestController@imageview');
+Route::get('viewimage/{id}',array('as'=>'viewimage.ajax','uses'=>'imagetestController@geticity'));
 
+// image test end
 
 
 
@@ -419,6 +421,8 @@ Route::post('fba-search-update','FbaDetailsController@fba_search_update');
 
 Route::group(['namespace' => 'leadController' ], function() {
 Route::get('marketing-leads','LeaduploadController@marketing_leads');  
+
+
 
 
 
