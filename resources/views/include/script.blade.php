@@ -1389,13 +1389,26 @@ $('#msds-select').change(function () {
         var msdsValue = data[11]|| 0;
        //console.log(data);
         var numbers = /^[0-9]+$/;
-          if(msdsSearch=="2" && msdsValue=="update"){  
+        return fncalc(msdsSearch,msdsValue);
+
+    }); 
+      
+    table.draw();
+     
+});
+
+function fncalc(msdsSearch,msdsValue)
+{
+            if(msdsSearch=="2" && msdsValue=="update"){  
             return true;
           }
            if(msdsSearch=="1" && msdsValue!="update"){  
             return true;
           }
           if(msdsSearch=="0" && msdsValue){  
+            return true;
+          }
+          if(msdsSearch=="-1" && msdsValue){  
             return true;
           }
           if(msdsSearch=="FBAID" && msdsValue!="draw"){
@@ -1416,94 +1429,13 @@ $('#msds-select').change(function () {
            if(msdsSearch=="fbacity" && msdsValue!="draw"){
            return true;
         }
-             if(msdsSearch=="pospname" && msdsValue!="draw"){
+        if(msdsSearch=="pospname" && msdsValue!="draw"){
            return true;
         }
-       
-       
+            
           return false;
-    }); 
-      
-    table.draw();
-     
-});
-
-
-// posp yes fba id posp no search bar Hide and Show
- 
-    $("select").on("change",function(){
-if ($('select ').val() == '1') {
-    $(".fbsearch").addClass("hide");
-    $(".psearch").addClass("hide"); 
-    $(".statesearch").addClass("hide");
-    $(".zonesearch").addClass("hide"); 
-    $(".fnamesearch").addClass("hide");
-    $(".fcitysearch").addClass("hide");
-    $(".ponamesearch").addClass("hide");       
-
-  }
-
-  else if ($('select ').val()== 'pospname'){    
-  
-     $(".ponamesearch").removeClass("hide");
-    $(".fcitysearch").addClass("hide");
-   $(".fnamesearch").addClass("hide");
-   $(".zonesearch").addClass("hide");
-   $(".statesearch").addClass("hide");  
-   $(".fbsearch").addClass("hide");
-   $(".psearch").addClass("hide"); 
-
 }
 
-else if ($('select ').val()== 'fbacity'){  
-   
-    $(".fcitysearch").removeClass("hide");
-   $(".fnamesearch").addClass("hide");
-   $(".zonesearch").addClass("hide");
-   $(".statesearch").addClass("hide");  
-   $(".fbsearch").addClass("hide");
-   $(".psearch").addClass("hide"); 
-
-}
-
- else if ($('select ').val()== 'fbaname'){
-  
-   $(".fnamesearch").removeClass("hide");
-   $(".zonesearch").addClass("hide");
-   $(".statesearch").addClass("hide");  
-   $(".fbsearch").addClass("hide");
-   $(".psearch").addClass("hide"); 
-
-}
-
-
-else if ($('select ').val()== 'zone'){
- $(".zonesearch").removeClass("hide");
- $(".statesearch").addClass("hide");  
-   $(".fbsearch").addClass("hide");
-    $(".psearch").addClass("hide"); 
-
-}
-
-
-else if ($('select ').val()== 'state'){
- $(".statesearch").removeClass("hide"); 
-   $(".fbsearch").addClass("hide");
-    $(".psearch").addClass("hide"); 
-$(".zonesearch").addClass("hide");
-}
-  else{
-    $(".fbsearch").removeClass("hide");
-    if ($('select').val() == 'POSPNO')
-{
-      $(".psearch").removeClass("hide");
-    }
-    else{
-      $(".psearch").addClass("hide");
-    }
-  }
-
-});
 
   </script>
 <!-- POSP YES OR NO Dropdown end -->
