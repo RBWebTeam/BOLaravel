@@ -19,7 +19,7 @@
   </div>
   <div class="col-md-12 col-xs-12">
   <div class="form-group col-md-3">
-  <select id="smslist" name="smslist" class="selectpicker select-opt form-control" required="">
+  <select id="smslist" name="smslist" class="selectpicker select-opt form-control" required>
   <option value="0">-- Select Recipient --</option>
   <option value="1">Registration Date</option>
    <option value="2">Payment Date</option>
@@ -105,13 +105,19 @@
   <h3 class="pull-left"><b>COUNT:</b><span id="msg_check" ></span><span id="msg_count">0</span><h3>    
   </div>
   <div class="col-sm-6 col-xs-12 form-padding">  
-  <select  name="SMSTemplate" class="form-control"  id="SMSTemplate_select" onchange="SMSTemplate_fn(this.value)" >
-  <option value="10" >select</option>
+  <select  name="SMSTemplate" class="form-control col-md-3"  id="SMSTemplate_select" onchange="SMSTemplate_fn(this.value)"  style="width: 40% ;margin-right: 20px;">
+  <option value="10" >--Select--</option>
      @foreach($SMSTemplate as $sms)
   <option value="{{$sms->SMSTemplateId}}">{{$sms->Header}}</option>
     @endforeach
   </select>
 
+  <select  name="smslink" class="form-control col-md-3"  id="smslink" onchange="" style="width: 40%">
+  <option value="" >--Select--</option>     
+  <option value="bo.mgfm.in/{fbaid}/smscampin">bo.mgfm.in/{fbaid}/smscampin</option>    
+  </select>
+  <button class="btn btn-primary pull-right" id="btnadd">Add</button>
+<br>
 <br>
 <textarea style="padding:10px; height:200px;"  id="SMSTemplate"  name="sms_text" class="form-control"> </textarea>
 <label class="control-label" for="inputError" id="required3"> </label>
@@ -154,6 +160,12 @@ $(document).on("keyup",".search_id",function() {
 
     }
    $(document).ready(function(){ 
+
+$("#smslink").change(function(){
+  //alert("test");
+   $("#SMSTemplate").val($("#SMSTemplate").val()+' '+$(this).val());
+ });
+
    $("#search_fba_date").click(function () {
 
   if($('#fmin_date').val()==0 ||$('#fmin_date').val()==null ){ 
@@ -401,5 +413,7 @@ $.ajax({
       }  
       });
       });
+
+
       </script>
-      @endsection
+@endsection
