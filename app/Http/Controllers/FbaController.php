@@ -298,4 +298,31 @@ private function savePaymentInOldFinamrtDB($fbaid,$masterdata){
        return $m;
       
 }
+public function UpdatePospno($id)
+{
+   try{
+    $data= array("FBAID"=>"$id");
+    $token=array("cache-control: no-cache","content-type: application/json", "token: 1234567890");
+
+     $post_data=json_encode($data);
+     
+     $type=$token;
+     $result=$this->call_other_data_api($this::$api_url.'/api/backoffice-posp-registration',$post_data,$type);
+     $pospno=$result['http_result']; 
+     $pospno_new= $pospno;
+     
+
+     return $pospno;
+  
+             
+    
+}
+  catch (Exception $e){
+
+       
+   }        
+         
+
+
+}
 }

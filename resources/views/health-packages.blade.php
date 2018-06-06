@@ -82,9 +82,6 @@ ul li {    float: left;display: inherit;width:48%;}
   <table id="docs" class="table table-bordered tbl2 box-shadow">
   </table>
 </div>
-
-
-
 <div class="col-md-12">
   <h5 class="text-center">OUR LAB PARTNERS</h5>
   
@@ -167,7 +164,7 @@ var x;
   var PackCode=PackCode;
    var v_token = "{{csrf_token()}}";
   $(".bg-gray"+PackCode).toggle();
-$('#Depreciation'+PackCode).empty();
+  $('#Depreciation'+PackCode).empty();
 
   $.ajax({  
          type: "POST",  

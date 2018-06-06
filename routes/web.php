@@ -203,7 +203,6 @@ Route::get('quick-lead/{leadid}','quickleadController@gethistory');
 Route::get('quick-lead-assigned-fba','quickleadController@getAssignedFBAToUserQuickLead');
 
 Route::get('assigned-fba-lead','quickleadController@assignedfbalead');
-
 ///shubham end ///
 // avinash
  Route::get('ticket-module','TicketController@getticketdetails') ;
@@ -260,6 +259,10 @@ route::get('sendnotificationnew', 'SendNotificationController@sendnotificationst
 Route::get('insert','uploadfileController@imageupload');
 Route::get('Fba-list-Update','FbaController@test');
 Route::get('fbalist-document/{fbaid}','FbaController@getdoclistview');
+
+Route::get('Fba-list-Update-posp/{id}','FbaController@UpdatePospno');
+
+
 
 
 route::post('send-notification-submit', 'SendNotificationController@sendnotificationsubmit');

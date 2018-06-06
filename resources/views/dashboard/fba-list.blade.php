@@ -517,7 +517,7 @@
             {"data":"Pincode"},
             {"data":"POSPNo"  ,
              "render": function ( data, type, row, meta ) {
-              return data==""?('<a id="posp_'+row.fbaid+'" class="checkPosp" data-toggle="modal" data-target="#updatePosp" onclick="POSP_UPDATE('+row.fbaid+')">update</a>'):data;
+              return data==""?('<a id="posp_'+row.fbaid+'" class="checkPosp" data-toggle="modal" data-target="#updatePosp" onclick="updateposp('+row.fbaid+')">update</a>'):data;
               }
             }, 
 
@@ -790,4 +790,18 @@ $(document).ready(function(){
   });
  
 });
+
+function updateposp(id)
+{
+  
+  $.ajax({  
+         type: "GET",  
+         url:'fba-list/'+id,
+         success: function(posp){        
+        
+              
+        }  
+      });
+
+}
 </script>

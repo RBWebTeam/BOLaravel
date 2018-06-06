@@ -96,7 +96,7 @@ $(document).ready(function(){
                   $('.sms_sent_id').modal('show');
              }
 
-             function POSP_UPDATE(id){
+             function POSP_UPDATE(id){                     
                       $('#fbaid').val(id);
                       $('.updatePosp').modal('show');
                     
@@ -627,7 +627,6 @@ $(document).on('change', '#search_state', function() {
               if (msg.status==0) 
                 {
                   alert('Updated Successfully');
-
                   $('#posp_'+id).closest('td').html(posp_update);
                   $('#posp_remark').val('');
                   $('.close').click();           
@@ -1639,7 +1638,27 @@ $.ajax({
        }  
       });
 }
+ function updateposp(id)
+{
+  
+  $.ajax({  
+         type: "GET",  
+         url:'Fba-list-Update-posp/'+id,
+         success: function(posp){        
+             var text = JSON.parse(posp);
+              if(text.StatusNo==1){
+                POSP_UPDATE(id);
+              }
+             else{
+                  alert('Updated Successfully');
+                /*  $('#posp_'+id).closest('td').html(text.Pospno);
+                  $('#posp_remark').val('');*/
+                  $('.close').click(); 
+             }        
+        }  
+      });
 
+}
 </script>
 
 

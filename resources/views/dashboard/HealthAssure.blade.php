@@ -45,6 +45,12 @@ ul li {margin:2px; padding:4px !important;}
 .input-1 {padding:10px;width:100%;border:none; border:1px solid #ddd;border-radius:3px; margin-bottom:15px;}
 .button1 {border:2px solid #f95f67; padding:10px;background:#fff; margin-bottom:20px; width:100%;}
 label {font-size: 11px;color: #666;}
+@media only screen and (max-width: 768px) {
+    .col-md-12 {
+        width:100%;
+        float:left;
+    }
+}
 </style>
 <script>
 $(document).ready(function(){
