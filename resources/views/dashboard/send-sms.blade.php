@@ -7,6 +7,7 @@
   <!-- Date Start --> 
   <form  id="sendsms" name="sendsms" action="POST"> 
     {{ csrf_field() }}
+    
    <div id="message_toggle">
     @if($message = Session::get('msg'))
   <div class="alert alert-info alert-dismissible fade in" role="alert">
@@ -40,22 +41,16 @@
   <h4 style="margin-left: 45%;">State</h4>
   <div class="form-group">
   <select multiple="multiple" class="form-control select-sty" name="state[]" id="state" >    
-  </select>
- 
+  </select> 
   </div>
   </div>
-
-
-
  <div class="col-md-4 col-sm-4 col-xs-12">
    <h4 style="text-align: center;">City</h4>
  <div class="form-group">
 <select  multiple="multiple" class="form-control select-sty" name="city[]" id="city">
 </select>
-
 </div>
-</div>
- 
+</div> 
  <div class="col-md-4 col-sm-12 col-xs-12">
  <div class="form-group">
   <p>From Date</p>
@@ -66,9 +61,6 @@
   <label class="control-label" for="inputError" id="required1"> </label>
   </div>
   </div>
-  
-
-
   <div class="col-md-4 col-sm-12 col-xs-12">
   <div class="form-group">
   <p>To Date</p>
@@ -80,13 +72,13 @@
  </div>
  <br> 
 <div class="col-md-4">
-
 <div class="form-group"> 
   <a href="#" class="mrg-top common-btn" id="search_fba_date" name="search_fba_date">SHOW</a>   </div>
 </div>
 </form>
 <form method="POST" id="send_message_id" action="{{url('send-sms-save')}}" >
 {{ csrf_field() }}
+<input type="hidden" name="txtlinkvalue" id="txtlinkvalue">
 <div class="col-sm-6 col-xs-12 form-padding" id="StatesV" >
 <div style="overflow-y:scroll;height:270px;">
 <table class="table table-responsive table-hover" cellspacing="0" id="myTable">
@@ -114,9 +106,9 @@
 
   <select  name="smslink" class="form-control col-md-3"  id="smslink" onchange="" style="width: 40%">
   <option value="" >--Select--</option>     
-  <option value="bo.mgfm.in/{fbaid}/smscampin">bo.mgfm.in/{fbaid}/smscampin</option>    
+  <option value="bo.mgfm.in/{fbaid}/smscampaign">bo.mgfm.in/{fbaid}/smscampaign</option>    
   </select>
-  <button class="btn btn-primary pull-right" id="btnadd">Add</button>
+  <a class="btn btn-primary pull-right" id="btnadd" onclick="insertlink('SMSTemplate',$('#smslink').val())">Add</a>
 <br>
 <br>
 <textarea style="padding:10px; height:200px;"  id="SMSTemplate"  name="sms_text" class="form-control"> </textarea>
@@ -160,12 +152,6 @@ $(document).on("keyup",".search_id",function() {
 
     }
    $(document).ready(function(){ 
-
-$("#smslink").change(function(){
-  //alert("test");
-   $("#SMSTemplate").val($("#SMSTemplate").val()+' '+$(this).val());
- });
-
    $("#search_fba_date").click(function () {
 
   if($('#fmin_date').val()==0 ||$('#fmin_date').val()==null ){ 
@@ -414,6 +400,56 @@ $.ajax({
       });
       });
 
+  
+
+function insertlink(areaId, text) {
+  var txtarea = document.getElementById(areaId);
+  if (!txtarea) {
+    return;
+  }
+
+  var scrollPos = txtarea.scrollTop;
+  var strPos = 0;
+  var br = ((txtarea.selectionStart || txtarea.selectionStart == '0') ?
+    "ff" : (document.selection ? "ie" : false));
+  if (br == "ie") {
+    txtarea.focus();
+    var range = document.selection.createRange();
+    range.moveStart('character', -txtarea.value.length);
+    strPos = range.text.length;
+  } else if (br == "ff") {
+    strPos = txtarea.selectionStart;
+  }
+
+  var front = (txtarea.value).substring(0, strPos);
+  var back = (txtarea.value).substring(strPos, txtarea.value.length);
+  txtarea.value = front + text + back;
+  strPos = strPos + text.length;
+  if (br == "ie") {
+    txtarea.focus();
+    var ieRange = document.selection.createRange();
+    ieRange.moveStart('character', -txtarea.value.length);
+    ieRange.moveStart('character', strPos);
+    ieRange.moveEnd('character', 0);
+    ieRange.select();
+  } else if (br == "ff") {
+    txtarea.selectionStart = strPos;
+    txtarea.selectionEnd = strPos;
+    txtarea.focus();
+  }
+
+  txtarea.scrollTop = scrollPos;
+}
+
+
+$("#smslink").change(function(){
+    if ($(this).val()!=''){      
+      $("#txtlinkvalue").val('1');     
+    }
+    else{
+      $("#txtlinkvalue").val('0');      
+    }
+  });
 
       </script>
 @endsection

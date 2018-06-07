@@ -132,7 +132,7 @@ $fid = "";
   $fid=$fid.','.$req->fba[$i-1];
   $fid = ltrim($fid, ',');
   $userid=Session::get('fbauserid');
-  $query=DB::select('call usp_insert_smslog(?,?,?,?,,?,userid)',[$fid,$req->sms_text,$uniqid,date('Y-m-d H:i:s'),$parentgroupid,$fbauserid]);
+  $query=DB::select('call usp_insert_smslog(?,?,?,?,,?,userid,?)',[$fid,$req->sms_text,$uniqid,date('Y-m-d H:i:s'),$parentgroupid,$fbauserid,$req->txtlinkvalue]);
  $data='{"group_id":"'.$uniqid.'"}';
  $this->call_json($url.'/api/send-sms',$data);        
  $fid = "";
