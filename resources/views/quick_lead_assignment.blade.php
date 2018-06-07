@@ -1,12 +1,18 @@
 @extends('include.master')
 @section('content')
-   <div class="col-md-12"><h3 class="mrg-btm">FBA Assignment for quicklead</h3>
+
+
+     <div class="container-fluid white-bg">
+             <div class="col-md-12"><h3 class="mrg-btm">FBA Assignment For Quick Lead</h3>
+           <hr>
+           </div>
+ <!--   <div class="col-md-12"><h3 class="mrg-btm">FBA Assignment for quicklead</h3> -->
 
 
     <form  id="leadquick" name="leadquick" action="{{url('fbaquickleadcity')}}" method="post"> 
     {{ csrf_field() }}
      <hr>
-     </div>
+     
      <!-- <table class="table table-responsive table-hover" cellspacing="0" id="example"> -->
 
      <div class="col-md-4 col-sm-4 col-xs-12">
@@ -33,27 +39,23 @@
       <div class="col-md-12 hidden" id="tablediv">
       <div class="overflow-scroll">
       <div class="table-responsive" >
-    <!-- <th><input type="checkbox" name="chekfba" id="chekfba" class="select-checkall-header"></th> 
-    <input name="select_all" id="checkAll" type="checkbox" />-->
+   
       <form method="post" id="fbdatail-table-from">
         {{ csrf_field() }}
       <input type="hidden" name="txtfid" id="txtfid">
       <div class="form-group">
-                 <label class="control-label">Users:</label>
-                <select name="ddlstatus" id="ddlstatus" class="form-control" style="width:30%" required >
-                        <option value="">--Select --</option>
-                        @foreach($userfb as $val)           
-                        <option value="{{$val->fbauserid}}">{{$val->fbauserid}} {{$val->username}}</option>
-                        @endforeach
-                      </select>
+      <label class="control-label">Users:</label>
+      <select name="ddlstatus" id="ddlstatus" class="form-control" style="width:30%" required >
+              <option value="">--Select --</option>
+              @foreach($userfb as $val)           
+              <option value="{{$val->fbauserid}}">{{$val->fbauserid}} {{$val->username}}</option>
+              @endforeach
+              </select>
       </div>
-
-
-       <table class="datatable-responsive table table-striped table-bordered nowrap" id="example">
-
-           <thead>
-           <tr>
-           <th><input name="select_all" value="1" id="example-select-all" type="checkbox" /></th>       
+      <table class="datatable-responsive table table-striped table-bordered nowrap" id="example">
+      <thead>
+      <tr>
+      <th><input name="select_all" value="1" id="example-select-all" type="checkbox" /></th>       
            <th>FBA ID</th> 
            <th>FBA Name</th> 
            <th>Email id</th>
@@ -62,14 +64,22 @@
            </tr>
            </thead>
            </table>
-           <div>
+           <div class="col-md-12">
+           <h3 class="pull-left"><b>COUNT :</b>  <span id="fbacount">0</span><h3>
+           </div>
+           <br><br>
+           <div class="col-md-12">
+           <div style="text-align: center;">
            <a id="fbdatail" name="fbdatail" class="btn btn-success">Submit</a>
            </div>
+           </div>
+           <br><br>
 
-       </form> 
+            </form> 
+         </div>
+      </div>
     </div>
-   </div>
- </div>
+</div>
 
   <script type="text/javascript">
 
@@ -121,13 +131,17 @@ $('#qlead').on('click', function(e){
 
 
 function getLoanData(){
+
   $.ajax({
   url: 'fbaquickleadcity',
   type: "POST",           
   data:  $('#leadquick').serializeArray(),
   success:function(data) {
+
     var json = JSON.parse(data);
-    console.log(json);
+    $("#fbacount").text(json.length);
+    alert(json.length);
+   // console.log(json);
     if(json.length>0){
 
      $('#tablediv').removeClass('hidden');
@@ -172,6 +186,7 @@ function getLoanData(){
  method:"GET",
  success: function(datas)  
  {
+
  var data=$.parseJSON(datas);
  // console.log(data);
  if(data)
@@ -280,6 +295,7 @@ $(document).ready(function (){
 
 
   $('#fbdatail').click(function(){
+
 
     if($('#ddlstatus').val()==""){
       alert('Please Select User');
