@@ -25,6 +25,7 @@
 	        			<th>Monthly Income</th>
 	        			<th>Loan Ammount</th>
 	        			<th>History</th>
+                <th>Edit</th>
 	        		</tr>
 	        	</thead>
 	        	<tbody>
@@ -43,7 +44,8 @@
 	        			<td>{{$val->Product_Name}}</td>
 	        			<td>{{$val->monthly_Income}}</td>
 	        			<td>{{$val->Loan_Id}}</td>
-	        			<td><a onclick="gethistory({{$val->Req_Id}},this)" id="btnHistory" class="btn btn-primary" data-toggle="modal" data-target="#historymodal">View History</a></td>	        			
+	        			<td><a onclick="gethistory({{$val->Req_Id}},this)" id="btnHistory" class="btn btn-primary" data-toggle="modal" data-target="#historymodal">View History</a></td>	 
+                <td><a class="btn btn-primary" onclick="eidtlead({{$val->Req_Id}},this)" data-toggle="modal" data-target="#EditLead">Edit Lead</a></td>       			
 	        		</tr>
 	        		@endforeach
 	        	</tbody>
@@ -89,7 +91,7 @@
   <div class="modal fade" id="historymodal" role="dialog">
     <div class="modal-dialog">    
       <!-- Modal content-->
-      <div class="modal-content" style="width: 730px;">
+      <div class="modal-content" style="width: 830px;">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h4 class="modal-title">Quick Lead History</h4>
@@ -101,6 +103,53 @@
         </div>
       <div class="modal-footer">
       <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> </div>
+      </div>      
+    </div>
+  </div>
+
+  <!-- for lead Edit Modal -->
+  <div class="modal fade" id="EditLead" role="dialog">
+    <div class="modal-dialog">    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Edit Lead</h4>
+        </div>
+        <div class="modal-body form-Group">
+        <form id="frmleadeidt" method="post">
+          {{ csrf_field() }}
+          <label class="control-label">Name:</label>
+          <input type="text" name="txtleadname" id="txtleadname" class="form-control">
+          <label class="control-label">Email:</label>
+          <input type="text" name="txtemail" id="txtemail" class="form-control">
+          <label class="control-label">Mobile No:</label>
+          <input type="number" name="txtmobileno" id="txtmobileno" class="form-control">
+          <label class="control-label">Monthly Income:</label>
+          <input type="number" name="txtMonthlyIncome" id="txtMonthlyIncome" class="form-control">
+          <label class="control-label">Status:</label>
+          <select name="txtstatus" id="txtstatus" class="form-control" style="width: 50%" required>
+            <option value="">--Select Status--</option>
+           @foreach($status as $val)            
+            <option value="{{$val->Lead_Status_Id}}">{{$val->Lead_Status}}</option>
+            @endforeach           
+          </select> 
+           <label class="control-label">Product:</label>
+          <select name="txtproduct" id="txtproduct" class="form-control" style="width: 50%" required>
+            <option value="">--Select Product--</option>
+             @foreach($product as $val)       
+              <option value="{{$val->Product_Id}}">{{$val->Product_Name}}</option>
+              @endforeach          
+          </select>         
+          <label class="control-label">Remark:</label>   
+          <textarea id="txtRemark" name="txtRemark" class="form-control" style="width: 80%"></textarea> 
+          <input type="hidden" name="txtLeadid" id="txtLeadid">          
+        </form> 
+       </div>
+        <div class="modal-footer">
+       <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+       <button type="button" id="btneidt" class="btn btn-primary">Save</button>
+        </div>
       </div>      
     </div>
   </div>
@@ -142,6 +191,43 @@ $("#btnsave").click(function(){
   }
  }); 
  } 
+ });
+function eidtlead(Leadid){  
+  $.ajax({  
+         type: "GET",  
+         url:'eidt_lead/'+Leadid,
+         success: function(leaddata)
+         {   
+           var data = JSON.parse(leaddata);   
+            if(data.length>0){          
+            $('#txtleadname').val(data[0].Name);
+            $('#txtemail').val(data[0].Email);
+            $('#txtmobileno').val(data[0].Mobile);
+            $('#txtMonthlyIncome').val(data[0].monthly_Income);
+            $('#txtRemark').val(data[0].Remark);
+            $("#txtstatus").val(data[0].Status);
+            $("#txtproduct").val(data[0].Product_Id);
+            $("#txtLeadid").val(data[0].Lead_ID);   
+            }        
+
+         }  
+      });
+}
+$("#btneidt").click(function(){ 
+ if ($('#frmleadeidt').valid()){
+  $.ajax({ 
+   url: "{{URL::to('quick-lead-edit')}}",
+   method:"POST",
+   data: $('#frmleadeidt').serialize(),  
+   success: function(msg)  
+   {
+    location.reload();
+    alert("Record has been Updated successfully");
+    $("#frmleadeidt").trigger('reset');
+    $('#EditLead').modal('hide');
+  }
+ }); 
+ }
  });
   </script>
 @endsection

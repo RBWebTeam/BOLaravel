@@ -198,6 +198,10 @@ Route::get('quick-lead/{leadid}','quickleadController@gethistory');
 Route::get('quick-lead-assigned-fba','quickleadController@getAssignedFBAToUserQuickLead');
 
 Route::get('assigned-fba-lead','quickleadController@assignedfbalead');
+
+Route::get('Quick-lead-dashboard','quickleaddashboardController@getquicklead');
+Route::get('eidt_lead/{Leadid}','quickleadController@editlead');
+Route::Post('quick-lead-edit','quickleadController@updatelead');
 ///shubham end ///
 // avinash
  Route::get('ticket-module','TicketController@getticketdetails') ;

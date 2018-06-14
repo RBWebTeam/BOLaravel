@@ -1,5 +1,7 @@
 <html>
 <head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
 <!-- jQuery library -->
@@ -31,7 +33,7 @@ ul li {margin:2px; padding:4px !important;}
 .down-arrow:hover {colo:#999;text-decoration:none; opacity:0.7;}
 .amunt1 {background:#999;}
 .bg-gray li {list-style-type:none; padding-left:15px !important;float:left;width: 48%;}
-.bg-gray li .glyphicon-ok {float: left;margin-top: 1px;left: -16px;vertical-align: middle;font-size:13px;}
+.bg-gray li .glyphicon-ok {float: left;margin-top: 1px;left: -16px;vertical-align: middle;font-size:13px;height:19px;}
 .list1 {margin:0px; padding:10px;}
 .head1 {padding:10px;background:#eee;border:1px solid #ddd; font-size:15px;}
 .input-1 {padding:10px;width:100%;border:none; border:1px solid #ddd;border-radius:3px; margin-bottom:15px;}
@@ -43,6 +45,14 @@ label {font-size: 11px;color: #666;}
 .input-group-addon {padding: 4px 12px}
 .bg-primary1 {color: #3c84a9;background-color: #9bd8f7; text-transform:uppercase;}
 .tbl1 tr td {color:#666;}
+.table {font-size:13px;}
+#btndiv {float:left;width:100%;position:relative;z-index: 10000;bottom: 0px;padding:20px;background: #ffffff;}
+
+@media only screen and (max-width: 768px) {
+    .container {
+        padding:0px;
+    }
+}
 </style>
 <script>
 $(document).ready(function(){
@@ -79,12 +89,16 @@ text = text +"</body>";
 <!-- <header class="main-header"> -->
         <div class="header-middle text-center" style="width:100%;">HEALTH CHECK-UP PLAN</div>
 <!-- </header> -->
-<div class="container padd-top">
- <div class="col-md-12">
- <br>
+
+ <div class="col-md-12" style="top:0px; padding-top:20px;position:fixed;z-index:1000; background:#fff; display:block; height:150px; width:100%;">
+ <div>
+
  <img src="images/health-assure-logo.jpg" class="logo-center" />
 <h5 class="text-center pad">Health Check Up Plans selected by you</h5>
+</div>
  </div>
+ 
+ <div class="container padd-top" style="margin-top:160px;">
  
 <?php if(isset($_GET['product'])){?>
                 <input type="hidden" name="product_id" id="product_ids" value="<?php echo $_GET['product'];?>">
@@ -156,7 +170,7 @@ foreach ($val->ParamDetails as $key => $value) {
 <div class="col-md-12"><p class="text-center head1">Summary of your Booking</p></div>
 
 <div class="col-md-12">
-<div class="table-responsive">
+<div>
  <table class="table table-bordered tbl1">
  <tr>
     <td  colspan="2" class="text-center bg-primary1">Personal Particulars</td>
@@ -213,7 +227,7 @@ foreach ($val->ParamDetails as $key => $value) {
 
  <tr>
     <td class="bg-info">Appointment Date / Time</td>
-  <td>{{$val->PickUptime}}</td>
+  <td>{{$val->PickUpDate}} {{$val->PickUptime}}</td>
  </tr>
  <tr>
     <td class="bg-info">Fasting condition</td>
@@ -228,7 +242,7 @@ foreach ($val->ParamDetails as $key => $value) {
 </div>
 </div>
 
-<div class="col-md-12 text-center">
+<div id="btndiv" class="col-md-12 text-center">
 <a type="button" class="button1 col-md-12" href="{{$url}}">CONFIRM & PAY</a>
 </div>
 

@@ -82,9 +82,10 @@ class quickleadController extends CallApiController
 public function quicklead_ql()
   {
    $id=Session::get('fbauserid');
-     $query = DB::select("call Usp_get_quicklead($id)");
+     $query = DB::select("call Usp_get_quicklead(12821)");
      $status=DB::select("call Usp_get_quick_lead_status()");
-     return view('QuickLead',['query'=>$query,'status'=>$status]);  
+     $product=DB::select("call GET_Quick_lead_product()");
+     return view('QuickLead',['query'=>$query,'status'=>$status,'product'=>$product]);  
   }
   
   public function insertquickleadstatus(Request $req)
@@ -117,6 +118,26 @@ public function getAssignedFBAToUserQuickLead()
 public function assignedfbalead()
   {    
     return view('assignedfbalead');
+  }
+
+  public function editlead($Leadid)
+  {
+    $getlead=DB::select("call GET_lead_data_to_edit($Leadid)");
+    return json_encode($getlead);
+  }
+  public function updatelead(Request $req)
+  {
+    DB::statement('call Usp_update_qucik_lead(?,?,?,?,?,?,?,?)',array(
+          $req->txtleadname,
+          $req->txtemail,
+          $req->txtmobileno,
+          $req->txtstatus,
+          $req->txtproduct,
+          $req->txtMonthlyIncome,
+          $req->txtRemark,
+          $req->txtLeadid                    
+         )
+       );
   }
 
  }
