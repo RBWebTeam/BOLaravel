@@ -127,15 +127,17 @@ public function assignedfbalead()
   }
   public function updatelead(Request $req)
   {
-    DB::statement('call Usp_update_qucik_lead(?,?,?,?,?,?,?,?)',array(
+    DB::statement('call Usp_update_qucik_lead(?,?,?,?,?,?,?,?,?)',array(
           $req->txtleadname,
           $req->txtemail,
           $req->txtmobileno,
           $req->txtstatus,
           $req->txtproduct,
           $req->txtMonthlyIncome,
-          $req->txtRemark,
-          $req->txtLeadid                    
+          $req->txtRemark,        
+          $req->txtLeadid,
+          $req->txtloanamt
+                              
          )
        );
   }

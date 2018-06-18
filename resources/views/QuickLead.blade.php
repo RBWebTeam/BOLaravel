@@ -127,6 +127,8 @@
           <input type="number" name="txtmobileno" id="txtmobileno" class="form-control">
           <label class="control-label">Monthly Income:</label>
           <input type="number" name="txtMonthlyIncome" id="txtMonthlyIncome" class="form-control">
+          <label class="control-label">Loan Ammount:</label>
+          <input type="number" name="txtloanamt" id="txtloanamt" class="form-control">
           <label class="control-label">Status:</label>
           <select name="txtstatus" id="txtstatus" class="form-control" style="width: 50%" required>
             <option value="">--Select Status--</option>
@@ -195,7 +197,7 @@ $("#btnsave").click(function(){
 function eidtlead(Leadid){  
   $.ajax({  
          type: "GET",  
-         url:'eidt_lead/'+Leadid,
+         url:'edit_lead/'+Leadid,
          success: function(leaddata)
          {   
            var data = JSON.parse(leaddata);   
@@ -205,6 +207,7 @@ function eidtlead(Leadid){
             $('#txtmobileno').val(data[0].Mobile);
             $('#txtMonthlyIncome').val(data[0].monthly_Income);
             $('#txtRemark').val(data[0].Remark);
+            $('#txtloanamt').val(data[0].Loan_Id);
             $("#txtstatus").val(data[0].Status);
             $("#txtproduct").val(data[0].Product_Id);
             $("#txtLeadid").val(data[0].Lead_ID);   
@@ -218,7 +221,8 @@ $("#btneidt").click(function(){
   $.ajax({ 
    url: "{{URL::to('quick-lead-edit')}}",
    method:"POST",
-   data: $('#frmleadeidt').serialize(),  
+   data: $('#frmleadeidt').serialize(), 
+
    success: function(msg)  
    {
     location.reload();

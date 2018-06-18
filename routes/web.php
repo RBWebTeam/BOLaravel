@@ -200,7 +200,7 @@ Route::get('quick-lead-assigned-fba','quickleadController@getAssignedFBAToUserQu
 Route::get('assigned-fba-lead','quickleadController@assignedfbalead');
 
 Route::get('Quick-lead-dashboard','quickleaddashboardController@getquicklead');
-Route::get('eidt_lead/{Leadid}','quickleadController@editlead');
+Route::get('edit_lead/{Leadid}','quickleadController@editlead');
 Route::Post('quick-lead-edit','quickleadController@updatelead');
 ///shubham end ///
 // avinash
