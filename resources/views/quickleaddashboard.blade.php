@@ -1,7 +1,7 @@
 @extends('include.master')
 @section('content')
 <div class="container-fluid white-bg">
-<div class="col-md-12"><h3 class="mrg-btm">Quick Lead</h3></div>
+<div class="col-md-12"><h3 class="mrg-btm">All Quick Lead</h3></div>
    <div class="col-md-12">
       <div class="overflow-scroll">
          <div class="table-responsive" >
