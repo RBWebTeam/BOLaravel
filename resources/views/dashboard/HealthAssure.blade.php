@@ -18,6 +18,7 @@
 
 
 <style>
+.modal-dialog {margin-top:70px !important;}
 body {font-size:13px;}
 p {color:#333;}
 .blu-heading {padding:10px;border:1px solid #4d62b5;color:#4d62b5;font-size: 16px;}
@@ -38,18 +39,175 @@ ul li {margin:2px; padding:4px !important;}
 .down-arrow {padding:10px 20px;}
 .down-arrow:hover {colo:#999;text-decoration:none; opacity:0.7;}
 .amunt1 {background:#999;}
-.bg-gray li {list-style-type:none; padding-left:15px !important;float:left;width: 48%;}
-.bg-gray li .glyphicon-ok {float: left;margin-top: 1px;left: -16px;vertical-align: middle;font-size:13px;}
-.list1 {margin:0px; padding:10px;}
-.head1 {padding:10px;background:#eee;border:1px solid #ddd; font-size:15px;}
-.input-1 {padding:10px;width:100%;border:none; border:1px solid #ddd;border-radius:3px; margin-bottom:15px;}
+.bg-gray li {list-style-type:none; padding-left:15px !important;float:left;width: 48%;font-size:11px;color: #747474;}
+.bg-gray li .glyphicon-ok {float: left;height:19px;margin-top: 1px;left: -10px;vertical-align: middle;font-size:9px;color: #747474;}
+.list1 {margin:0px; padding:2px;}
+.head1 {padding:10px;background:#eee;border:1px solid #ddd; font-size:15px;margin-bottom:20px;}
+.input-1 {padding:5px;width:100%;border:none; border-bottom:1px solid #999 !important; margin-bottom:20px;font-size: 18px;}
+
 .button1 {border:2px solid #f95f67; padding:10px;background:#fff; margin-bottom:20px; width:100%;}
-label {font-size: 11px;color: #666;}
+input:focus{border:0px;}
+/* label {font-size: 11px;color: #666;} */
+@media only screen and (max-width: 768px) {
+    .col-md-12 {
+        width:100%;
+		float:left;
+    }
+}
+
+
+
+
+
+
+
+ .register input[type="text"],.register input[type="email"],.register input[type="password"],.register input[type="tel"],.register select{
+    font-size: 1em;
+    color: #8c8c8c;
+    padding: 0.5em 1em;
+    border: 0;
+    width:100%;
+    border-bottom: 1px solid #dcdcdc;
+    background: none;
+    -webkit-appearance: none;
+	outline: none;
+}
+input[type="checkbox"] {
+    cursor: pointer;
+}
+.register textarea { 
+	min-height: 150px;
+    resize: none;
+}
+/*-- input-effect --*/
+.styled-input.agile-styled-input-top {
+    margin-top: 0;
+} 
+.styled-input input:focus ~ label, .styled-input input:valid ~ label,.styled-input textarea:focus ~ label ,.styled-input textarea:valid ~ label{
+    font-size: .9em;
+    color: #009ee3;
+    top: -1.3em;
+	
+	text-transform:uppercase;
+    -webkit-transition: all 0.125s;
+	-moz-transition: all 0.125s; 
+	-o-transition: all 0.125s;
+	-ms-transition: all 0.125s;
+    transition: all 0.125s;
+}
+/*.styled-input {
+	width: 100%;
+    position: relative;
+    margin: 0 0 1.2em;
+	text-transform:uppercase;
+}*/
+.styled-input:nth-child(1),.styled-input:nth-child(3){
+	margin-left:0;
+}
+.textarea-grid{
+	float:none !important;
+	width:100% !important;
+	margin-left:0 !important;
+}
+.styled-input label {
+	color: #8c8c8c;
+    padding: 0.5em 25px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    transition: all 0.3s;
+    pointer-events: none;
+    font-weight: 400;
+    font-size: .9em;
+    display: block;
+    line-height: 1em;
+}
+.styled-input input ~ span,.styled-input textarea ~ span, .styled-input .date ~ span {
+	display: block;
+    width: 0;
+    height: 2px;
+    background: #333;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    -webkit-transition: all 0.125s;
+    -moz-transition: all 0.125s;
+    transition: all 0.125s;
+}
+.styled-input textarea ~ span { 
+    bottom: 5px; 
+}
+.styled-input input:focus.styled-input textarea:focus { 
+	outline: 0; 
+} 
+.styled-input input:focus ~ span,.styled-input textarea:focus ~ span {
+	width: 100%;
+	-webkit-transition: all 0.075s;
+	-moz-transition: all 0.075s;  
+	transition: all 0.075s; 
+} 
+/*-- //input-effect --*/
+.register-form input[type="submit"] {
+    outline: none;
+    color: #FFFFFF;
+    padding: .3em 1em;
+    font-size: 1.4em;
+    margin: 1em 0 0 0;
+    -webkit-appearance: none;
+    background: #009688;
+    border: 2px solid #009688;
+    cursor: pointer;
+    -webkit-transition: 0.5s all;
+    -moz-transition: 0.5s all;
+    -o-transition: 0.5s all;
+    -ms-transition: 0.5s all;
+    transition: 0.5s all;
+	font-family: 'Yanone Kaffeesatz', sans-serif;
+}
+.register-form input[type="submit"]:hover {
+    background: #FFFFFF;
+	color:#009688;
+	border: 2px solid #009688;
+}
+
+input{outline:none;}
+ 
+.btn-default.active {  
+     background: #fff;
+    color: #009ee3;
+    border: 2px solid #009ee3;
+    text-shadow: none;
+    box-shadow: none;
+}
+.btn-default {background:#fff !important; outline:none;}
+input, select {background:#fff;}
+
+.text-danger-clr {
+    color: #ff5c61;
+}
+.main-header {
+    position: fixed;
+    height: 48px;
+	line-height:29px;
+    z-index: 9999;
+    background: #009ee3;
+    left: 0;
+    right: 0;
+	margin-top:0px;
+}
+.header-middle {
+    float: left;
+    color: #fff;
+    text-align: center;
+    font-size: 18px;
+}
 </style>
 <script>
 $(document).ready(function(){
     $(".down-arrow").click(function(){
-        $(".bg-gray").toggle();
+        $(".bg-gray").toggle("slow");
     });
 $('#btnsubmithealth').click(function() {
 if($('#healthchekup').valid())
@@ -103,22 +261,24 @@ text = text +"</body>";
 
 <body>
 <div class="container">
+<h5 class="text-center pad main-header header-middle" style="width:100%;">Health Check Up Plans selected by you</h5>
  <div class="col-md-12">
  <br>
+ <br>
+ <br>
  <img src="http://backoffice.magicfinmart.com/HealthPackages/HealthInsurance/images/health-assure-logo.jpg" class="logo-center" />
-<h5 class="text-center pad">Health Check Up Plans selected by you</h5>
  </div>
  
 
 
 <div class="col-md-12">
-  <table class="table table-bordered tbl2">
+  <table class="table table-bordered tbl2 box-shadow">
 	  <tbody>
 	    
-	      <td><p><b>{{$_GET["PackName"]}}</b></p><h5 class="text-danger">{{$_GET["tcount"] }} Tests</h5> </td>
+	      <td><p><b>{{$_GET["PackName"]}}</b></p><h5 class="text-danger-clr">{{$_GET["tcount"] }} Tests</h5> </td>
 	      <td colspan="2"><p class="text-center">ACTUAL COST</p> <a href="#" class="amount amunt1"><strike>{{$_GET["MRP"]}}</strike></a></td>
 	      <td colspan="2"><p class="text-center">OFFER COST</p> <a href="#" class="amount">{{$_GET["OfferPrice"]}}</a></td>
-		  <td><a href="#" class="down-arrow"><span class="glyphicon glyphicon-chevron-down"></span></a> </td>
+		  <td><a href="#" class="down-arrow"><span class="glyphicon glyphicon-triangle-bottom"></span></a> </td>
         </tr>
 		
    <tr>
@@ -152,6 +312,8 @@ foreach ($val->ParamDetails as $key => $value) {
 </div>
 
 <div class="col-md-12"><p class="text-center head1">Please enter your details</p></div>
+<div class="register-in">
+<div class="register-form">
 <form id="healthchekup" method="post">
      {{ csrf_field() }}
 
@@ -176,93 +338,108 @@ foreach ($val->ParamDetails as $key => $value) {
     value="{{$_GET["tcount"]}}">
 
 
+ 
+</div>
+<div class="clearfix"></div>
+<div class="col-md-4 col-sx-6 styled-input">
+ <input type="text" id="txtname" name="txtname" border="0" class="input-1" required />
  <label>Name</label>
- <input type="text" id="txtname" name="txtname" class="input-1" required />
 </div>
+<div class="col-md-4 col-sx-6 styled-input">
 
-<div class="col-md-4">
+ <input type="number" id="txtmono" name="txtmono" class="input-1" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+    type = "number" maxlength = "10" required />
  <label>Mobile No</label>
- <input type="number" id="txtmono" name="txtmono" class="input-1" required />
 </div>
 
-<div class="col-md-4">
- <label>Email ID</label>
+<div class="col-md-4 col-sx-12 styled-input">
+ 
  <input type="email" id="txtemail" name="txtemail" class="input-1" required/>
+ <label>Email ID</label>
 </div>
 
-<div class="col-md-4">
+<div class="col-md-4 col-sx-12">
 <label>Gender</label>
  <div class="form-group">
         <div data-toggle="buttons">
-          <label class="btn btn-default btn-circle btn-md"><input type="radio" name="btngender" id="btngender" checked="checked" value="Male">Male</label>
-          <label class="btn btn-default btn-circle btn-md"><input type="radio" name="btngender" id="btngender" value="Female">Female</label>
+          <label class="btn btn-default btn-circle btn-md active"><input type="radio" name="btngender" id="btngender" checked="checked" value="M">Male</label>
+          <label class="btn btn-default btn-circle btn-md"><input type="radio" name="btngender" id="btngender" value="F">Female</label>
         </div>
       </div>
+	  <br>
   </div>
   
- <div class="col-md-4">
- <label>Age</label>
- <input type="number" id="txtage" name="txtage" class="input-1" required/>
+ <div class="col-md-4 col-sx-12 styled-input">
+
+ <input type="number" id="txtage" name="txtage" class="input-1" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+    type = "number" maxlength = "2" required/>
+  <label>Age</label>
 </div>
 
- <div class="col-md-4">
- <label>Flat No, Building</label>
+ <div class="col-md-4 col-sx-12 styled-input">
+
  <input type="text" id="txtflatno" name="txtflatno" class="input-1" required/>
+  <label>Flat No, Building</label>
 </div>
 
- <div class="col-md-4">
- <label>Street Address</label>
+ <div class="col-md-4 col-sx-12 styled-input">
+
  <input type="text" id="txtstreetadd" name="txtstreetadd" class="input-1" required/>
+  <label>Street Address</label>
 </div>
 
- <div class="col-md-4">
- <label>Landmark</label>
+ <div class="col-md-4 col-sx-12 styled-input">
+ 
  <input type="text" id="txtlandmark" name="txtlandmark" class="input-1" required/>
+ <label>Landmark</label>
 </div>
 
- <div class="col-md-4">
+ <div class="col-md-4 col-sx-12 styled-input">
+ 
+ <input type="number" id="txtpincode" name="txtpincode" class="input-1" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+    type = "number" maxlength = "6" required/>
  <label>Pincode</label>
- <input type="number" id="txtpincode" name="txtpincode" class="input-1" required/>
 </div>
 
-<div class="col-md-4">
- <label>City</label>
+<div class="col-md-4 col-sx-12 styled-input">
+ 
  <input type="text" id="txtcity" name="txtcity" class="input-1" required/>
+ <label>City</label>
 </div>
 
-<div class="col-md-4">
+<div class="col-md-4 col-sx-12 styled-input">
+ 
+ <input type="date" id="txtdate" name="txtdate" class="input-1 date" required/>
  <label>Appt. Date</label>
- <input type="date" id="txtdate" name="txtdate" class="input-1" required/>
 </div>
 
-<div class="col-md-4">
- <label>Appt Time Slot</label>
+<div class="col-md-4 col-sx-12 styled-input">
+ 
  <select  class="input-1" name="ddlappttime" id="ddlappttime" required>
-    <option value="0" selected="selected">APPT. TIME SLOT</option>
+    <option value="0" selected="selected">Appt. Time Slot</option>
     @foreach($appttime as $val)
 	<option value="{{$val->appointment_time}}">{{$val->appointment_time}}</option>
     @endforeach
-	<!-- <option value="3">08.30 TO 09.00 AM</option>
-	<option value="4">09.00 TO 09.30 AM</option>
-	<option value="5">09.30 TO 10.00 AM</option>
-	<option value="2">10.30 TO 11.00 PM</option>
-	<option value="3">11.30 TO 12.00 PM</option> -->
+
  </select>
+ 
  </div>
 <div class="col-xs-12 pad-1" style="padding:0 0 12px 0;">
- <div class="col-xs-12 pad-1">
- <span cssstyle="display:block;width:auto;"><input id="chkAgree " type="checkbox" name="chkAgree" class="used" required></span>
-   </div>    
-   <div class="col-xs-11 pad pad-1">
-     I Agree to the <a onclick="showtermcon()" style="color: #5b9bd5; cursor: pointer;" data-toggle="modal" data-target="myModal">Terms &amp; Conditions</a>
+
+ 
+     
+   <div class="col-md-12 col-xs-12 pad pad-1">
+    <span cssstyle="display:block;width:auto;">&nbsp;<input id="chkAgree " type="checkbox" name="chkAgree" class="used" required></span> I Agree to the <a onclick="showtermcon()" style="color: #5b9bd5; cursor: pointer;" data-toggle="modal" data-target="myModal">Terms &amp; Conditions</a>
                                 </div>
                             </div>
  <div class="col-md-12">
  <input type="button" id="btnsubmithealth" name="btnsubmithealth" class="button1 col-md-12" value="NEXT: SELECT YOUR LAB"/>
  </div>
+ 
+ 
  </form>
-
-
+</div>
+</div>
  </div>
 </body>
 
@@ -287,7 +464,7 @@ foreach ($val->ParamDetails as $key => $value) {
 
 <!-- modal popup -->
             <div id="myModal" class="modal fade dignostic-modal">
-                <div class="modal-dialog modal-sm">
+                <div class="modal-dialog modal-md">
                     <div class="modal-content">
                         <div class="modal-header" style='background: #5b9bd5; color: #fff;'>
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style='font-size: 22px; color: #fff; opacity: 0.9;'>&times;</button>
@@ -460,6 +637,8 @@ requirements is hereinafter referred to as an “Eligible Participant.”
                             <p>For detailed T&C’s, please visit  <a style="color: #5b9bd5; cursor: pointer;" target="_blank" href="https://www.healthassure.in/">www.healthassure.in</a>  </p>
                             <p>For further queries, please write to : support@healthassure.in or call us at 022-61676622</p>
                             <br />
+							
+							<button class="btn btn-primary" data-dismiss="modal" style="margin:0 auto;display:block;">OK</button>
 
                             <div class="clearfix"></div>
                         </div>
