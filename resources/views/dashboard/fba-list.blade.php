@@ -220,7 +220,7 @@
          <div class="form-group">
             <input type="hidden" name="p_fbaid" id="p_fbaid" value="">
             <label class="control-label" for="message-text">Enter Sales Code : </label>
-            <input type="Number" class="recipient-name form-control" id="p_remark" name="p_remark" required="" />
+            <input type="text" class="recipient-name form-control" id="p_remark" name="p_remark" required="" />
           </div>
         </form>
         <div class="modal-footer"> 
@@ -232,8 +232,6 @@
     </div>
   </div>
 </div>
-
-
 
 
 <!-- update posp -->
@@ -704,6 +702,23 @@ function selectIndex(dd) {
   <script type="text/javascript">
    $(function(){
    $('#posp_remark').keyup(function(){    
+   var yourInput = $(this).val();
+   re = /[A-Za-z]?[A-Za-z `~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi;
+   var isSplChar = re.test(yourInput);
+    if(isSplChar)
+    {
+    var no_spl_char = yourInput.replace(/[A-Za-z]?[A-Za-z `~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi, '');
+    $(this).val(no_spl_char);
+    }
+  });
+ 
+});
+</script>
+
+
+  <script type="text/javascript">
+   $(function(){
+   $('#p_remark').keyup(function(){    
    var yourInput = $(this).val();
    re = /[A-Za-z]?[A-Za-z `~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi;
    var isSplChar = re.test(yourInput);

@@ -557,7 +557,7 @@ $(document).on('change', '#search_state', function() {
          success: function(msg){
          if (msg.status==0) 
                 {
-                  // alert('Sales Code Updated Successfully');
+                  alert('Sales Code Updated Successfully');
                   $('#p_remark').val('');
                   var anchor = "<a id=update_"+id+" onclick=sales_update_fn("+id+",'"+sales_update+"')>"+sales_update+"</a>";
                   $('#update_'+id).closest('td').html(anchor);
