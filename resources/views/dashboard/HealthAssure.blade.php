@@ -31,7 +31,7 @@ p {color:#333;}
 .brd-left {border-right:1px solid #eee !important;}
 .bg-gray {background:#f1f1f1;}
 .glyphicon {    font-weight: normal;font-size: 10px; color:#666;margin-right:4px;}
-ul li {margin:2px; padding:4px !important;}
+ul li {margin:2px; padding:1px !important;}
 .table>tbody>tr>td {padding:6px;}
 .logo-center {margin:0 auto;display:block;}
 .pad {padding:10px; font-weight:normal; font-size:16px;}
@@ -40,7 +40,7 @@ ul li {margin:2px; padding:4px !important;}
 .down-arrow:hover {colo:#999;text-decoration:none; opacity:0.7;}
 .amunt1 {background:#999;}
 .bg-gray li {list-style-type:none; padding-left:15px !important;float:left;width: 48%;font-size:11px;color: #747474;}
-.bg-gray li .glyphicon-ok {float: left;height:19px;margin-top: 1px;left: -10px;vertical-align: middle;font-size:9px;color: #747474;}
+.bg-gray li .glyphicon-ok {float: left;height:15px;margin-top: 1px;left: -10px;vertical-align: middle;font-size:9px;color: #747474;}
 .list1 {margin:0px; padding:2px;}
 .head1 {padding:10px;background:#eee;border:1px solid #ddd; font-size:15px;margin-bottom:20px;}
 .input-1 {padding:5px;width:100%;border:none; border-bottom:1px solid #999 !important; margin-bottom:20px;font-size: 18px;}
@@ -57,7 +57,7 @@ input:focus{border:0px;}
 
 
 
-
+label.error{top:34px !important; color:#ff0000 !important;font-size:10px !important;}
 
 
 
@@ -87,8 +87,6 @@ input[type="checkbox"] {
     font-size: .9em;
     color: #009ee3;
     top: -1.3em;
-	
-	text-transform:uppercase;
     -webkit-transition: all 0.125s;
 	-moz-transition: all 0.125s; 
 	-o-transition: all 0.125s;
@@ -123,7 +121,7 @@ input[type="checkbox"] {
     font-size: .9em;
     display: block;
     line-height: 1em;
-}
+} 
 .styled-input input ~ span,.styled-input textarea ~ span, .styled-input .date ~ span {
 	display: block;
     width: 0;
@@ -203,6 +201,7 @@ input, select {background:#fff;}
     text-align: center;
     font-size: 18px;
 }
+.bl-txt {color: #002d62;text-transform:uppercase;}
 </style>
 <script>
 $(document).ready(function(){
@@ -261,12 +260,13 @@ text = text +"</body>";
 
 <body>
 <div class="container">
-<h5 class="text-center pad main-header header-middle" style="width:100%;">Health Check Up Plans selected by you</h5>
+<h5 class="text-center pad main-header header-middle" style="width:100%;">BOOK A LAB APPOINTMENT</h5>
  <div class="col-md-12">
  <br>
  <br>
  <br>
  <img src="http://backoffice.magicfinmart.com/HealthPackages/HealthInsurance/images/health-assure-logo.jpg" class="logo-center" />
+ <p class="text-center bl-txt">Health Check Up Plans selected by you</p>
  </div>
  
 
@@ -276,8 +276,8 @@ text = text +"</body>";
 	  <tbody>
 	    
 	      <td><p><b>{{$_GET["PackName"]}}</b></p><h5 class="text-danger-clr">{{$_GET["tcount"] }} Tests</h5> </td>
-	      <td colspan="2"><p class="text-center">ACTUAL COST</p> <a href="#" class="amount amunt1"><strike>{{$_GET["MRP"]}}</strike></a></td>
-	      <td colspan="2"><p class="text-center">OFFER COST</p> <a href="#" class="amount">{{$_GET["OfferPrice"]}}</a></td>
+	      <td colspan="2"><p class="text-center"><b>ACTUAL COST</b></p> <a href="#" class="amount amunt1">₹ <strike>{{$_GET["MRP"]}}</strike></a></td>
+	      <td colspan="2"><p class="text-center"><b>OFFER COST</b></p> <a href="#" class="amount">₹ {{$_GET["OfferPrice"]}}</a></td>
 		  <td><a href="#" class="down-arrow"><span class="glyphicon glyphicon-triangle-bottom"></span></a> </td>
         </tr>
 		

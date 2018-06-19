@@ -10,12 +10,6 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-
-
-
-
-
 Route::get('health-packages','BookAppointmentController@health_packages');
 
 Route::post('health-insurance-analysis','BookAppointmentController@health_insurance_analysis');

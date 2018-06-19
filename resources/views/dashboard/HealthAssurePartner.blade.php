@@ -18,6 +18,7 @@
 
 
 <style>
+.modal-dialog {margin-top:70px !important;}
 body {font-size:13px;}
 p {color:#333;}
 .blu-heading {padding:10px;border:1px solid #4d62b5;color:#4d62b5;font-size: 16px;}
@@ -30,7 +31,7 @@ p {color:#333;}
 .brd-left {border-right:1px solid #eee !important;}
 .bg-gray {background:#f1f1f1;}
 .glyphicon {    font-weight: normal;font-size: 10px; color:#666;margin-right:4px;}
-ul li {margin:2px; padding:4px !important;}
+ul li {margin:2px; padding:1px !important;}
 .table>tbody>tr>td {padding:6px;}
 .logo-center {margin:0 auto;display:block;}
 .pad {padding:10px; font-weight:normal; font-size:16px;}
@@ -39,7 +40,7 @@ ul li {margin:2px; padding:4px !important;}
 .down-arrow:hover {colo:#999;text-decoration:none; opacity:0.7;}
 .amunt1 {background:#999;}
 .bg-gray li {list-style-type:none; padding-left:15px !important;float:left;width: 48%;}
-.bg-gray li .glyphicon-ok {float: left;margin-top: 1px;left: -16px;vertical-align: middle;font-size:13px;}
+.bg-gray li .glyphicon-ok {float: left;margin-top: 1px;left: -16px;vertical-align: middle;font-size:11px;height:19px;}
 .list1 {margin:0px; padding:10px;}
 .head1 {padding:10px;background:#eee;border:1px solid #ddd; font-size:15px;}
 .input-1 {padding:10px;width:100%;border:none; border:1px solid #ddd;border-radius:3px; margin-bottom:15px;}
@@ -61,6 +62,48 @@ label {font-size: 11px;color: #666;}
     position: relative;
     overflow: hidden;
     -webkit-transform: translate3d(0, 0, 0);
+}
+.text-danger-clr {
+    color: #ff5c61;
+}
+
+.main-header {
+    position: fixed;
+    height: 48px;
+	line-height:29px;
+    z-index: 9999;
+    background: #009ee3;
+    left: 0;
+    right: 0;
+	margin-top:0px;
+}
+.header-middle {
+    float: left;
+    color: #fff;
+    text-align: center;
+    font-size: 18px;
+}
+
+
+.height4 {height:210px; padding:10px; border:1px solid #f5f5f5;}
+.divpartnerselect {padding:0px;}
+.height4 h4 {margin-top:60px;}
+.btndiv {margin:20px 0px;}
+#tbltestlist tr {border-bottom: solid 1px #d7dadc !important;}
+.bl-txt {color: #002d62; text-transform:uppercase;}
+
+@media only screen and (max-width: 768px) {
+    .container {
+        padding:0px;
+    }
+	.col-md-8 {border:1px solid #eee;}
+	.col-md-4 {border:1px solid #eee;border-right:0px; padding-left:0px;}
+	.height4 {height:120px; padding:10px;}
+	.height4 p {font-size:11px;}
+	.height4 h4 {font-size:16px; margin-top:0px;}
+	.divpartnerselect {padding:0px; float: left; cursor:pointer;}
+	#btndiv {float:left;width:100%;bottom: 0px;padding: 5px;background: #ffffff;margin:10px 0px;}
+	
 }
 </style>
 <script>
@@ -86,17 +129,17 @@ var arr = obj.d.service_provider_listdata;
 var text = "";
 for(var i = 0; i< arr.length;i++){
 
-text+="<div class='col-md-12 divpartnerselect' style='border:solid 1px lightgray; padding:1px;margin:2px; cursor:pointer;'  onclick=showDivw('"+arr[i].provider_id+"',this,'"+ arr[i].provider_name.replace(/ /g,'_')+"','"+arr[i].address.replace(/ /g,'_')+"','"+arr[i].visittype+"','"+arr[i].DCCode+"')>";
+text+="<div class='col-md-12 divpartnerselect'   onclick=showDivw('"+arr[i].provider_id+"',this,'"+ arr[i].provider_name.replace(/ /g,'_')+"','"+arr[i].address.replace(/ /g,'_')+"','"+arr[i].visittype+"','"+arr[i].DCCode+"')>";
 
   if(arr[i].DCCode == "")
   {
-    text += "<div class='col-md-4'><img src='images/Logos/blank.png' class='img-responsive'/></div>";
+    text += "<div class='col-md-4 col-xs-4 height4'><img src='images/Logos/blank.png' class='img-responsive' style=' margin:0 auto; display:block'/></div>";
   }
   else{
-    text +="<div class='col-md-4'><img src='images/Logos/"+arr[i].DCCode+".png' class='img-responsive'/></div>";
+    text +="<div class='col-md-4 col-xs-4 height4'><img src='images/Logos/"+arr[i].DCCode+".png' style='margin:0 auto; display:block' class='img-responsive'/></div>";
   }
-text +="<div class='col-md-8'><h4>"+ arr[i].provider_name+"</h4><br/><p>"+
-  arr[i].address+"</p></div></div></div>";
+text +="<div class='col-md-8 col-xs-8 height4'><h4>"+ arr[i].provider_name+"</h4><p>"+
+  arr[i].address+"</p></div></div>";
 }
 
 $('#tblproviderlist').append(text);
@@ -108,7 +151,7 @@ $('#tblproviderlist').append(text);
 function showDivw(id,row,name,address,visittype,dccode)
 {
   $('.divpartnerselect').css("background-color","");
-  $(row).css("background-color", "lightgray");
+  $(row).css("background-color", "#f5f5f5");
   $('#txtprovider').val(id);
   $('#txtprovidername').val(name.replace(/_/g,' '));
   $('#txtprovideraddress').val(address.replace(/_/g,' '));
@@ -157,22 +200,26 @@ text = text +"</body>";
 </head>
 <body>
 <div class="container">
+<h5 class="text-center pad main-header header-middle" style="width:100%;">BOOK A LAB APPOINTMENT</h5>
  <div class="col-md-12">
  <br/>
+  <br/>
+   <br/>
  <img src="http://backoffice.magicfinmart.com/HealthPackages/HealthInsurance/images/health-assure-logo.jpg" class="logo-center" />
-<h5 class="text-center pad">Health Check Up Plans selected by you</h5>
+ <p class="text-center bl-txt">Health Check Up Plans selected by you</p>
+
  </div>
  
 <form id="formprovidelist" method="POST">
  {{ csrf_field() }}
 <div class="col-md-12">
-  <table class="table table-bordered tbl2">
+  <table class="table table-bordered tbl2 box-shadow">
     <tbody>
       <tr>
-        <td><p><b>Basic Profile</b></p><h5 class="text-danger">{{$_GET["tcount"]}}Tests</h5> </td>
-        <td colspan="2"><p class="text-center">ACTUAL COST</p> <span class="amount amunt1"><strike>{{$_GET["MRP"]}}</strike></span></td>
-        <td colspan="2"><p class="text-center">OFFER COST</p> <span class="amount">{{$_GET["OfferPrice"]}}</span></td>
-        <td><span class="down-arrow"><span class="glyphicon glyphicon-chevron-down"></span></span> </td>
+        <td><p><b>Basic Profile</b></p><h5 class="text-danger-clr">{{$_GET["tcount"]}}Tests</h5> </td>
+        <td colspan="2"><p class="text-center"><b>ACTUAL COST</b></p> <span class="amount amunt1">₹ <strike>{{$_GET["MRP"]}}</strike></span></td>
+        <td colspan="2"><p class="text-center"><b>OFFER COST</b></p> <span class="amount">₹ {{$_GET["OfferPrice"]}}</span></td>
+        <td><span class="down-arrow"><span class="glyphicon glyphicon-triangle-bottom"></span></span> </td>
      </tr>
      <tr>
    <td class="no-padding bg-gray" colspan="6" style="display:none;">
@@ -223,10 +270,12 @@ foreach ($val->ParamDetails as $key => $value) {
 <input type="hidden" name="txtproviderdccode" id="txtproviderdccode">
 <input type="hidden" name="txtID" id="txtID" value="{{$_GET["ID"]}}">
 <div class="col-md-12"><br/></div>
-<div id="btndiv" class="text-center col-md-12" style="display: none;">
- <input type="submit" name="btnbook" value="BOOK THIS TEST" onclick="" id="btnbook" class="btn btn-submit btn-primary" style="width: auto;">
-</div>
+
 <div class="col-md-12"><br/></div>
+</div>
+<div id="btndiv" class="text-center col-md-12">
+ <input type="submit" name="btnbook" value="BOOK THIS TEST" onclick="" id="btnbook" class="btn btn-submit btn-primary" style="width: auto;">
+ <br>
 </div>
 </form>
 </div>

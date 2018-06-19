@@ -82,7 +82,7 @@ class quickleadController extends CallApiController
 public function quicklead_ql()
   {
    $id=Session::get('fbauserid');
-     $query = DB::select("call Usp_get_quicklead(12821)");
+     $query = DB::select("call Usp_get_quicklead($id)");
      $status=DB::select("call Usp_get_quick_lead_status()");
      $product=DB::select("call GET_Quick_lead_product()");
      return view('QuickLead',['query'=>$query,'status'=>$status,'product'=>$product]);  
