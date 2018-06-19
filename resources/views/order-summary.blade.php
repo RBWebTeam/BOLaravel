@@ -38,21 +38,42 @@ ul li {margin:2px; padding:1px !important;}
 .head1 {padding:10px;background:#eee;border:1px solid #ddd; font-size:15px;}
 .input-1 {padding:10px;width:100%;border:none; border:1px solid #ddd;border-radius:3px; margin-bottom:15px;}
 /*.button1 {border:2px solid #f95f67; padding:10px;background:#fff; margin-bottom:20px; width:100%;} */
-.button1 {border: 2px solid #f95f67; padding: 10px;background: #fff; margin-bottom: 20px;width: 35%;margin: 0 auto; display: block;}
+.button1 {border: 1px solid #f95f67; color:#f95f67; padding: 10px;background: #fff; margin-bottom: 20px;width: 100%;margin: 0 auto; display: block;}
+.button1:hover {text-decoration: none;color:#fff; background:#009ee3;border:1px solid #009ee3;}
 label {font-size: 11px;color: #666;}
 .main-header {position: fixed;height: 48px;z-index: 9999;background: #009ee3;left: 0;right: 0;margin-bottom:15px;}
 .header-middle {float: left;width: 80%;color: #fff;margin-top: 4px;padding: 8px 0 0 0;text-align: center;font-size: 18px;}
 .padd-top {padding-top:40px;}
 .input-group-addon {padding: 4px 12px}
-.bg-primary1 {color: #3c84a9;background-color: #9bd8f7; text-transform:uppercase;}
+.bg-primary1 {color: #3c84a9;background-color: #d4e5f4; text-transform:uppercase;}
 .tbl1 tr td {color:#666;}
 .table {font-size:13px;}
 .btndiv1 {float:left;width:100%;position:relative;z-index: 10000;bottom: 0px;padding:20px;background: #ffffff;}
+.bg-info {background:#eaeff7 !important;}
+.main-header {
+    position: fixed;
+    height: 48px;
+  line-height:29px;
+    z-index: 9999;
+    background: #009ee3;
+    left: 0;
+    right: 0;
+  margin-top:0px;
+}
+.header-middle {
+    float: left;
+    top:0px;
+    color: #fff;
+    text-align: center;
+    font-size: 18px;
+}
+.modal-dialog {margin-top: 60px !important;}
 
 @media only screen and (max-width: 768px) {
     .container {
         padding:0px;
     }
+    .mob-mrg-tp{margin-top:45px !important;}
 }
 </style>
 <script>
@@ -88,18 +109,19 @@ text = text +"</body>";
 </head>
 <body>
 <!-- <header class="main-header"> -->
-        <div class="header-middle text-center" style="width:100%;">HEALTH CHECK-UP PLAN</div>
+      
+<h5 class="text-center pad main-header header-middle" style="width:100%;">BOOK A LAB APPOINTMENT </h5>
 <!-- </header> -->
 
- <div class="col-md-12" style="top:0px; padding-top:20px;position:fixed;z-index:1000; background:#fff; display:block; height:150px; width:100%;">
- <div>
+ <div class="col-md-12" style="padding-top:50px;background:#fff; display:block; height:180px; width:100%;">
+ <div class="">
 
  <img src="images/health-assure-logo.jpg" class="logo-center" />
 <h5 class="text-center pad">Health Check Up Plans selected by you</h5>
 </div>
  </div>
  
- <div class="container padd-top" style="margin-top:160px;">
+ <div class="container padd-top">
  
 <?php if(isset($_GET['product'])){?>
                 <input type="hidden" name="product_id" id="product_ids" value="<?php echo $_GET['product'];?>">
@@ -129,7 +151,7 @@ text = text +"</body>";
 
 
 <div class="col-md-12">
-  <table class="table table-bordered tbl2">
+  <table class="table table-bordered tbl2 box-shadow">
     <tbody>
       
         <td><p><b>Basic Profile</b></p><h5 class="text-danger">{{$_GET["tcount"]}} Tests</h5> </td>
@@ -183,7 +205,7 @@ foreach ($val->ParamDetails as $key => $value) {
  </tr>
  <tr>
     <td class="bg-info">Address</td>
-  <td>{{$val->FlatDetails}} {{$val->StreeDetails}} {{$val->Landmark}}</td>
+  <td>{{$val->FlatDetails}} {{$val->StreeDetails}} {{$val->Landmark}} {{$val->City}}</td>
  </tr>
  <tr>
     <td class="bg-info">Mobile No.</td>

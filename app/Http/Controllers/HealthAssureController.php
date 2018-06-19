@@ -75,5 +75,11 @@ try{
       public function failure(){
         return view('dashboard.Failure_Healthassure');
       }
+
+      public function getcity($pincode)
+      {
+         $city = DB::select("call get_city_on_pincode($pincode)");
+         return json_encode($city);
+      }
 }
  

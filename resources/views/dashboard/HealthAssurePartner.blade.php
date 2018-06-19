@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>BOOK A LAB APPOINTMENT</title>
+<title>BOOK A LAB APPOINTMENT </title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <!-- Latest compiled and minified CSS -->
@@ -44,7 +44,8 @@ ul li {margin:2px; padding:1px !important;}
 .list1 {margin:0px; padding:10px;}
 .head1 {padding:10px;background:#eee;border:1px solid #ddd; font-size:15px;}
 .input-1 {padding:10px;width:100%;border:none; border:1px solid #ddd;border-radius:3px; margin-bottom:15px;}
-.button1 {border:2px solid #f95f67; padding:10px;background:#fff; margin-bottom:20px; width:100%;}
+.button1 {border: 1px solid #f95f67; color:#f95f67; padding: 10px;background: #fff; margin-bottom: 20px;width: 100%;margin: 0 auto; display: block; margin-bottom: 20px;}
+.button1:hover {text-decoration: none;color:#fff; background:#009ee3;border:1px solid #009ee3;}
 label {font-size: 11px;color: #666;}
 .btn-submit {
     background-color: #fff;
@@ -85,12 +86,14 @@ label {font-size: 11px;color: #666;}
 }
 
 
-.height4 {height:210px; padding:10px; border:1px solid #f5f5f5;}
+.height4 {height:210px; padding:10px; border:1px solid #dddddd;}
 .divpartnerselect {padding:0px;}
 .height4 h4 {margin-top:60px;}
 .btndiv {margin:20px 0px;}
 #tbltestlist tr {border-bottom: solid 1px #d7dadc !important;}
 .bl-txt {color: #002d62; text-transform:uppercase;}
+.divpartnerselect:hover {background:#f5f5f5;}
+
 
 @media only screen and (max-width: 768px) {
     .container {
@@ -138,7 +141,7 @@ text+="<div class='col-md-12 divpartnerselect'   onclick=showDivw('"+arr[i].prov
   else{
     text +="<div class='col-md-4 col-xs-4 height4'><img src='images/Logos/"+arr[i].DCCode+".png' style='margin:0 auto; display:block' class='img-responsive'/></div>";
   }
-text +="<div class='col-md-8 col-xs-8 height4'><h4>"+ arr[i].provider_name+"</h4><p>"+
+text +="<div class='col-md-8 col-xs-8 height4 height5'><h4>"+ arr[i].provider_name+"</h4><p>"+
   arr[i].address+"</p></div></div>";
 }
 
@@ -250,7 +253,7 @@ foreach ($val->ParamDetails as $key => $value) {
 </div>
 <div class="col-md-12"><p class="text-center head1">Select your preferred lab from the list below</p></div>
 <div class="col-md-12">
-<div id="tblproviderlist" style="border: 1px #ccc; margin-bottom: 5px;">                     </div>
+<div id="tblproviderlist" style="border: 1px #ccc; margin-bottom: 5px;">                     
 <input type="hidden" name="txtPackName" id="txtPackName" value="{{$_GET["PackName"]}}">
 <input type="hidden" name="txtfbaname" id="txtfbaname" value="{{$_GET["fbaname"]}}">
 
@@ -273,8 +276,9 @@ foreach ($val->ParamDetails as $key => $value) {
 
 <div class="col-md-12"><br/></div>
 </div>
+</div>
 <div id="btndiv" class="text-center col-md-12">
- <input type="submit" name="btnbook" value="BOOK THIS TEST" onclick="" id="btnbook" class="btn btn-submit btn-primary" style="width: auto;">
+ <input type="submit" name="btnbook" value="BOOK THIS TEST" onclick="" id="btnbook" class="button1">
  <br>
 </div>
 </form>

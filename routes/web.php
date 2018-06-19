@@ -24,6 +24,7 @@ Route::post('providerlist','HealthAssurePartnerController@providerlist');
 Route::Post('Health-Assure-Partner','HealthAssurePartnerController@getproviderinfo');
 Route::get('Success','HealthAssureController@Success');
 Route::get('Failure','HealthAssureController@failure');
+Route::get('getcitybypincode/{pincode}','HealthAssureController@getcity');
 ///Shubham
 
 Route::get('/','LoginController@checklogin');

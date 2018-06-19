@@ -44,8 +44,10 @@ ul li {margin:2px; padding:1px !important;}
 .list1 {margin:0px; padding:2px;}
 .head1 {padding:10px;background:#eee;border:1px solid #ddd; font-size:15px;margin-bottom:20px;}
 .input-1 {padding:5px;width:100%;border:none; border-bottom:1px solid #999 !important; margin-bottom:20px;font-size: 18px;}
+.button1 {border: 1px solid #f95f67; color:#f95f67; padding: 10px;background: #fff; margin-bottom: 20px;width: 100%;margin: 0 auto; display: block; margin-bottom: 20px;}
+.button1:hover {text-decoration: none;color:#fff; background:#009ee3;border:1px solid #009ee3;}
 
-.button1 {border:2px solid #f95f67; padding:10px;background:#fff; margin-bottom:20px; width:100%;}
+label {font-size: 11px;color: #666;}
 input:focus{border:0px;}
 /* label {font-size: 11px;color: #666;} */
 @media only screen and (max-width: 768px) {
@@ -201,7 +203,9 @@ input, select {background:#fff;}
     text-align: center;
     font-size: 18px;
 }
+
 .bl-txt {color: #002d62;text-transform:uppercase;}
+
 </style>
 <script>
 $(document).ready(function(){
@@ -252,13 +256,40 @@ text = text +"</body>";
 	
 	$('#tbltestlist').html(text);
 	$('.testCheckup').modal('show');
-}    
+} 
+
+  function getcity(){
+    var pincode=$("#txtpincode").val(); 
+  $.ajax({ 
+            type: "GET",
+            url:'getcitybypincode/'+pincode,
+            success: function(city) 
+            {
+              
+              var data = JSON.parse(city);
+              if(data.length>0)
+              { 
+                $('#txtcity').val(data[0].districtname);   
+              }          
+            }
+        });
+   } 
+function checkDate() {
+   var selectedText = document.getElementById('txtdate').value;
+   var selectedDate = new Date(selectedText);
+   var now = new Date();
+   if (selectedDate < now) {
+    alert("Date must be in the future");
+    $('#txtdate').val('');
+   }
+ }
 
 </script>
 
 </head>
 
 <body>
+
 <div class="container">
 <h5 class="text-center pad main-header header-middle" style="width:100%;">BOOK A LAB APPOINTMENT</h5>
  <div class="col-md-12">
@@ -397,7 +428,7 @@ foreach ($val->ParamDetails as $key => $value) {
  <div class="col-md-4 col-sx-12 styled-input">
  
  <input type="number" id="txtpincode" name="txtpincode" class="input-1" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-    type = "number" maxlength = "6" required/>
+    type = "number" maxlength = "6" required onblur="getcity()" />
  <label>Pincode</label>
 </div>
 
@@ -409,7 +440,7 @@ foreach ($val->ParamDetails as $key => $value) {
 
 <div class="col-md-4 col-sx-12 styled-input">
  
- <input type="date" id="txtdate" name="txtdate" class="input-1 date" required/>
+ <input type="date" id="txtdate" onchange="checkDate()" name="txtdate" class="input-1 date" required/>
  <label>Appt. Date</label>
 </div>
 
