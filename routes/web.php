@@ -77,14 +77,13 @@ Route::get('quickleadassignmentshow','quickleadController@showlead');
 
   // Route::get('fba-list-posp-update/{fbaid}','FbaController@updatepospthroapi');
 
+//User_mapping vikas Start   fbauserview
+  	//Route::get('user_mapping','usermappingController@fbauserview');
+
+	Route::get('user_mapping','usermappingController@fbauser');
 
 
-
-
-  
-
-
-
+//User_mapping vikas End
 
 
 
@@ -100,6 +99,9 @@ Route::POST('insert_state','bankofferController@state_demo');
 Route::get('state_demo/{id}',array('as'=>'FSMRegister.ajax','uses'=>'bankofferController@get_state'));
 Route::get('state_dropdown/{cityid}','bankofferController@get_cities');
 Route::get('state_sub_dropdown/{cityid}','bankofferController@get_sub_cities');
+
+/////////////shubham podp
+Route::get('Fba-list-Update-posp/{id}','FbaController@UpdatePospno');
 
 
 
@@ -258,11 +260,13 @@ route::get('sendnotificationnew', 'SendNotificationController@sendnotificationst
 Route::get('insert','uploadfileController@imageupload');
 Route::get('Fba-list-Update','FbaController@test');
 Route::get('fbalist-document/{fbaid}','FbaController@getdoclistview');
-
-
 route::post('send-notification-submit', 'SendNotificationController@sendnotificationsubmit');
 
+// image test start
+Route::get('viewimage','imagetestController@imageview');
+Route::get('viewimage/{id}',array('as'=>'viewimage.ajax','uses'=>'imagetestController@geticity'));
 
+// image test end
 
 
 
@@ -420,6 +424,8 @@ Route::post('fba-search-update','FbaDetailsController@fba_search_update');
 
 Route::group(['namespace' => 'leadController' ], function() {
 Route::get('marketing-leads','LeaduploadController@marketing_leads');  
+
+
 
 
 

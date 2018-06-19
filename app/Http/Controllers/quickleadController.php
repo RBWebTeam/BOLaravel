@@ -93,7 +93,7 @@ public function quicklead_ql()
   $id=Session::get('fbauserid');
   DB::statement('call Usp_insert_update_quickleadstatus(?,?,?,?)',array(
       $req->txtleadid,
-          $req->ddlstatus,
+           $req->ddlstatus,  
           $req->txtremark,
           $id
          )
@@ -110,8 +110,8 @@ public function quicklead_ql()
 
 public function getAssignedFBAToUserQuickLead()
   {
-    
-     $query = DB::select("call getAssignedFBAToUserQuickLead(null)"); 
+    $id=Session::get('fbauserid');
+     $query = DB::select("call getAssignedFBAToUserQuickLead($id)"); 
      return json_encode($query); 
   }
 

@@ -13,7 +13,15 @@ class SendSmsapprovalController extends Controller
 	public function sendsmsview()
 	{
 		 $query = DB::select("call Usp_get_unsendedsms()");
-         return view('SendSmsApproval',['query'=>$query]);
+
+	return view('SendSmsApproval',['query'=>$query]);
 	}
 
-}
+	 
+ }
+
+
+
+
+
+
