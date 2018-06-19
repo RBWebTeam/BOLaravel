@@ -29,6 +29,7 @@
 	        			<th>Product</th>
 	        			<th>Monthly Income</th>
 	        			<th>Loan Amount</th>
+                <th>Created Date</th>
 	        			<th>History</th>
                 <th>Edit</th>
 	        		</tr>
@@ -55,6 +56,7 @@
 	        			<td>{{$val->Product_Name}}</td>
 	        			<td>{{$val->monthly_Income}}</td>
 	        			<td>{{$val->Loan_Id}}</td>
+                <td>{{$val->Created_Date}}</td>
 	        			<td><a onclick="gethistory({{$val->Req_Id}},this)" id="btnHistory" class="btn btn-primary" data-toggle="modal" data-target="#historymodal">View History</a></td>	 
                 <td><a class="btn btn-primary" onclick="eidtlead({{$val->Req_Id}},this)" data-toggle="modal" data-target="#EditLead">Edit Lead</a></td>       			
 	        		</tr>

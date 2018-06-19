@@ -18,6 +18,7 @@
 
 
 <style>
+.modal-header {background-color: #00476f !important;}
 .modal-dialog {margin-top:70px !important;}
 body {font-size:13px;}
 p {color:#333;}
@@ -55,6 +56,12 @@ input:focus{border:0px;}
         width:100%;
 		float:left;
     }
+    .modal-body {
+    position: relative;
+    padding: 15px;
+    height: 450px !important;
+    overflow: scroll !important;
+}
 }
 
 

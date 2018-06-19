@@ -11,6 +11,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 <style>
+.modal-header {background-color: #00476f !important;}
 body {font-size:13px;}
 p {color:#333;}
 .blu-heading {padding:10px;border:1px solid #4d62b5;color:#4d62b5;font-size: 16px;}
@@ -74,6 +75,12 @@ label {font-size: 11px;color: #666;}
         padding:0px;
     }
     .mob-mrg-tp{margin-top:45px !important;}
+    .modal-body {
+    position: relative;
+    padding: 15px;
+    height: 450px !important;
+    overflow: scroll !important;
+}
 }
 </style>
 <script>
@@ -243,14 +250,12 @@ foreach ($val->ParamDetails as $key => $value) {
  <tr> 
   <td class="bg-info">Blood / Urine Sample</td>
    
-  <td><?php if($homevisit!="CV"){
-    echo "Will visit lab to give the sample ";
-  } ?></td>
+  <td>Will visit lab to give the sample</td>
  </tr> 
 
  <tr>
     <td class="bg-info">Appointment Date / Time</td>
-  <td>{{$val->PickUptime}}</td>
+  <td>{{$val->PickUpDate}} {{$val->PickUptime}}</td>
  </tr>
  <tr>
     <td class="bg-info">Fasting condition</td>

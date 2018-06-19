@@ -18,6 +18,7 @@
 
 
 <style>
+.modal-header {background-color: #00476f !important;}
 .modal-dialog {margin-top:70px !important;}
 body {font-size:13px;}
 p {color:#333;}
@@ -106,7 +107,12 @@ label {font-size: 11px;color: #666;}
 	.height4 h4 {font-size:16px; margin-top:0px;}
 	.divpartnerselect {padding:0px; float: left; cursor:pointer;}
 	#btndiv {float:left;width:100%;bottom: 0px;padding: 5px;background: #ffffff;margin:10px 0px;}
-	
+	.modal-body {
+    position: relative;
+    padding: 15px;
+    height: 450px !important;
+    overflow: scroll !important;
+}
 }
 </style>
 <script>

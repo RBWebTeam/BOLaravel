@@ -18,6 +18,7 @@
 
 
 <style>
+.modal-header {background-color: #00476f !important;}
 .modal-dialog {margin-top:70px !important;}
 body {font-size:13px;}
 p {color:#333;}
@@ -76,6 +77,15 @@ img {margin:0 auto; display:block;}
 
 .bl-txt {color: #002d62;}
 .text-danger-clr {color:#ff5c61;}
+
+@media only screen and (max-width: 768px) {
+.modal-body {
+    position: relative;
+    padding: 15px;
+    height: 450px !important;
+    overflow: scroll !important;
+}
+}
 </style>
 
 

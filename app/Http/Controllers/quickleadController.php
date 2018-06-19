@@ -82,7 +82,7 @@ class quickleadController extends CallApiController
 public function quicklead_ql()
   {
    $id=Session::get('fbauserid');
-     $query = DB::select("call Usp_get_quicklead($id)");
+     $query = DB::select("call Usp_get_quicklead(12821)");
      $status=DB::select("call Usp_get_quick_lead_status()");
      $product=DB::select("call GET_Quick_lead_product()");
      return view('QuickLead',['query'=>$query,'status'=>$status,'product'=>$product]);  
@@ -108,17 +108,17 @@ public function quicklead_ql()
        
   }
 
-public function getAssignedFBAToUserQuickLead()
+/*public function getAssignedFBAToUserQuickLead()
   {
     $id=Session::get('fbauserid');
-     $query = DB::select("call getAssignedFBAToUserQuickLead($id)"); 
+     $query = DB::select("call getAssignedFBAToUserQuickLead(12821)"); 
      return json_encode($query); 
   }
 
 public function assignedfbalead()
   {    
     return view('assignedfbalead');
-  }
+  }*/
 
   public function editlead($Leadid)
   {
@@ -140,6 +140,33 @@ public function assignedfbalead()
                               
          )
        );
+  }
+
+  public function assignedfbaleadnew()
+  {
+    $id=Session::get('fbauserid');
+    $query = DB::select("call getAssignedFBAToUserQuickLead($id)"); 
+    //print_r($query);exit();
+    return view('assignedfbaleadnew',['query'=>$query]);
+  }
+
+  public function insertstatus(Request $req)
+  {
+    $id=Session::get('fbauserid');
+    DB::statement('call insert_fba_assigment_lead_status(?,?,?,?)',array(
+           $req->txtfbaid,
+           $req->ddlstatus,  
+           $req->txtremark,
+           $id
+         )
+       );
+  }
+
+  public function gethistoryfba($fbaid)
+  {
+     $fbahistory = DB::select("call get_fba_assignment_history($fbaid)");
+    // print_r($fbahistory);exit(); 
+     return json_encode($fbahistory);
   }
 
  }

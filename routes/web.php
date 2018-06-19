@@ -192,9 +192,14 @@ Route::post('search-loan-apicall','SearchLoanController@SearchLoancallapi');
 Route::get('quick-lead','quickleadController@quicklead_ql');
 Route::Post('quick-lead','quickleadController@insertquickleadstatus');
 Route::get('quick-lead/{leadid}','quickleadController@gethistory');
-Route::get('quick-lead-assigned-fba','quickleadController@getAssignedFBAToUserQuickLead');
 
-Route::get('assigned-fba-lead','quickleadController@assignedfbalead');
+/*Route::get('quick-lead-assigned-fba','quickleadController@getAssignedFBAToUserQuickLead');
+
+Route::get('assigned-fba-lead','quickleadController@assignedfbalead');*/
+
+Route::get('assigned-fba-lead','quickleadController@assignedfbaleadnew');
+Route::post('assigned-fba-lead-new','quickleadController@insertstatus');
+Route::get('assigned-fba-lead-history/{fbaid}','quickleadController@gethistoryfba');
 
 Route::get('Quick-lead-dashboard','quickleaddashboardController@getquicklead');
 Route::get('edit_lead/{Leadid}','quickleadController@editlead');
