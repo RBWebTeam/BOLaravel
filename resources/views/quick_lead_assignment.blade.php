@@ -55,7 +55,7 @@
       <table class="datatable-responsive table table-striped table-bordered nowrap" id="example">
       <thead>
       <tr>
-      <th><input name="select_all" value="1" id="example-select-all" type="checkbox" /></th>       
+      <th><input name="select_all" value="1" id="example-select-all" class="countceckbox" type="checkbox" /></th>       
            <th>FBA ID</th> 
            <th>FBA Name</th> 
            <th>Email id</th>
@@ -65,7 +65,7 @@
            </thead>
            </table>
            <div class="col-md-12">
-           <h3 class="pull-left"><b>COUNT :</b>  <span id="fbacount">0</span><h3>
+           <h3 class="pull-left"><b>COUNT :</b> <span id="checkboxcount">0</span> <span id="fbacount">0</span> <h3>
            </div>
            <br><br>
            <div class="col-md-12">
@@ -84,6 +84,7 @@
   <script type="text/javascript">
 
 $(document).ready(function(){
+  checkboxcount();
 
 $('#qlead').on('click', function(e){
   e.preventDefault(); 
@@ -155,7 +156,7 @@ function getLoanData(){
            {"data":"FBAID" ,
 
              "render": function ( data, type, row, meta ) {
-            return '<input type="checkbox" name="id[]" value="'+ $('<div/>').text(data).html() + '">';              }
+            return '<input type="checkbox" class="countceckbox" name="id[]" value="'+ $('<div/>').text(data).html() + '">';              }
             },
             { "data": "FBAID"},
             { "data": "FullName"},
@@ -240,58 +241,34 @@ $(document).ready(function (){
       $('input[type="checkbox"]', rows).prop('checked', this.checked);
    });
 
+
+
+
+
+
   $('#example tbody').on('change', 'input[type="checkbox"]', function(){
       // If checkbox is not checked
-      if(!this.checked){
-         var el = $('#example-select-all').get(0);
-         // If "Select all" control is checked and has 'indeterminate' property
-         if(el && el.checked && ('indeterminate' in el)){
-            // Set visual state of "Select all" control 
-            // as 'indeterminate'
-            el.indeterminate = true;
+           if(!this.checked){
+           var el = $('#example-select-all').get(0);
+           if(el && el.checked && ('indeterminate' in el)){
+          el.indeterminate = true;
          }
       }
    });
+
+      $('#example').on( 'click', 'tr', function () {
+      var table = $('#example').DataTable();
+      var rows = table.rows({ 'search': 'applied' }).nodes();
+      var counter = 0;
+      for (var i = 0; i < rows.count(); i++) {
+        if($('input[type="checkbox"]', rows[i])[0].checked){
+            counter++;
+        }
+      }
+       $("#checkboxcount").text(counter + "/");
+ });
 });
 
-
-// $('.select-checkall-header').change(function() {
-//         if($(this).is(":checked")) {
-//             var all= $('.select-checkall:checked').map(function() {return this.value;}).get().join(',');
-//             $('#txtfid').val(all);
-//         }
-//         else{
-//           $('#txtfid').val("");
-//         }
-        
-//     });
-
-
-
-
-// $('.select-checkall').click(function(){
-// var all= $('.select-checkall:checked').map(function() {return this.value;}).get().join(',');
-//    if(!$('.select-checkall').is(':checked'))
-//    {
-//       alert('checked');
-//       $('#txtfid').val(all);
-//      $('#chekfba').prop('checked', false);
-//    }
-//     else{
-//       alert('unchecked');
-//   $('#txtfid').val(all);
-//     }
-//  });
-
-
-   // $("#select_all").click(function(){
-   //  if($('#select_all').is(':checked')){
-   //          $('.select-checkall').prop('checked', true);                       
-   //  }
-   //  else{
-   //    $('.select-checkall').prop('checked', false);
-   //  }
-   //   });
 
 
   $('#fbdatail').click(function(){
@@ -301,9 +278,7 @@ $(document).ready(function (){
       alert('Please Select User');
       return false;
     }
-    // if(! $("#fbdatail-table-from").valid()){
-    //   return false;
-    // }
+
   $('#txtfid').val("");
   var table = $('#example').DataTable();
   var rows = table.rows({ 'search': 'applied' }).nodes();
@@ -345,15 +320,17 @@ if(chkval==""){
 
 
 
-//   $(document).ready(function(){   
-//    $("#checkAll").click(function () {
-//      $('input:checkbox').not(this).prop('checked', this.checked);
-//       len=$(".check_list:checkbox:checked").length;
-//         //  $('#msg_check').text(len+"/");   
-//  });
-// });
 
+function checkboxcount(){
 
+    var $checkboxes = $('.countceckbox');
+    // alert($checkboxes)    
+    $checkboxes.change(function(){
+    var countCheckedCheckboxes = $checkboxes.filter(':checked').length;
+    $("#checkboxcount").text(countCheckedCheckboxes);
+        
+    });
+}
 
 
 

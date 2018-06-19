@@ -527,9 +527,19 @@
 
             }, 
 
+
+     // {"data":"salescode" ,
+     //         "render": function ( data, type, row, meta ) {
+     //      return '<a href="#"id="update_'+row.fbaid+'" onclick="sales_update_fn('+row.fbaid+','+data+')" >'+data+'</a>';
+     //          }
+   
+     //       },
+
+
+
               {"data":"salescode" ,
              "render": function ( data, type, row, meta ) {
-              return data=="Update"?('<a  id="update_'+row.fbaid+'" onclick="sales_update_fn('+row.fbaid+')" >'+data+'</a>'):data;
+            return ("<a id=update_"+row.fbaid+" onclick=sales_update_fn("+row.fbaid+",'"+data+"')>"+data+"</a>");
               }
    
            },

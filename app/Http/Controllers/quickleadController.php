@@ -109,8 +109,8 @@ public function quicklead_ql()
 
 public function getAssignedFBAToUserQuickLead()
   {
-    
-     $query = DB::select("call getAssignedFBAToUserQuickLead(null)"); 
+    $id=Session::get('fbauserid');
+     $query = DB::select("call getAssignedFBAToUserQuickLead($id)"); 
      return json_encode($query); 
   }
 

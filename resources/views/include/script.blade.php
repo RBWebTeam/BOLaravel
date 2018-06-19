@@ -110,11 +110,20 @@ $(document).ready(function(){
 
              }
 
-           function sales_update_fn(id){
-
+           function sales_update_fn(id,Sales_Code){
+            $('#p_remark').val('');
+   if(Sales_Code!='Update'){
+                $('#p_fbaid').empty();
+                $('#p_fbaid').val(id);
+                $('#p_remark').val(Sales_Code);  
+                $('#salesupdate_modal_fade').modal('show');
+          }
+              else
+          {
                 $('#p_fbaid').empty();
                 $('#p_fbaid').val(id);
                 $('#salesupdate_modal_fade').modal('show');
+              }
            }
              //        function updatecustomerupdate(id){
              //          $('#fbaid').val(id);
@@ -548,9 +557,10 @@ $(document).on('change', '#search_state', function() {
          success: function(msg){
          if (msg.status==0) 
                 {
-                  alert('Sales Code Updated Successfully');
+                  // alert('Sales Code Updated Successfully');
                   $('#p_remark').val('');
-                  $('#update_'+id).closest('a').html(sales_update);
+                  var anchor = "<a id=update_"+id+" onclick=sales_update_fn("+id+",'"+sales_update+"')>"+sales_update+"</a>";
+                  $('#update_'+id).closest('td').html(anchor);
                   
                   $('.close').click();           
                 } 

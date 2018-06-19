@@ -77,14 +77,13 @@ Route::get('quickleadassignmentshow','quickleadController@showlead');
 
   // Route::get('fba-list-posp-update/{fbaid}','FbaController@updatepospthroapi');
 
+//User_mapping vikas Start   fbauserview
+  	//Route::get('user_mapping','usermappingController@fbauserview');
+
+	Route::get('user_mapping','usermappingController@fbauser');
 
 
-
-
-  
-
-
-
+//User_mapping vikas End
 
 
 
