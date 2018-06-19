@@ -15,26 +15,42 @@
 	        <table class="datatable-responsive table table-striped table-bordered dt-responsive nowrap" id="example">
 	        	<thead>
 	        		<tr>
+             
 	        			<th>Lead ID</th>
-	        			<th>Name</th>
+                <th>Name</th>
 	        			<th>Email ID</th>
-	        			<th>Mobile NO</th>
-	        			<th>Status</th>
+	        			<th>Mobile No</th>
+                <th>FBA ID</th>
+                <th>FBA Name</th>
+                <th>FBA Mobile No</th>
+                <th>FBA City</th>
+                <th>Status</th>
 	        			<th>Remark</th>
 	        			<th>Product</th>
 	        			<th>Monthly Income</th>
-	        			<th>Loan Ammount</th>
+	        			<th>Loan Amount</th>
 	        			<th>History</th>
+<<<<<<< HEAD
+	        	  	</tr>
+	        	    </thead>
+	             	<tbody>
+=======
                 <th>Edit</th>
 	        		</tr>
 	        	</thead>
 	        	<tbody>
+>>>>>>> master
 	        		@foreach($query as $val)
-	        		<tr>	        			
+	        		<tr>	
+             		
 	        			<td>{{$val->Req_Id}}</td>
-	        			<td>{{$val->Name}}</td>
+                <td>{{$val->Name}}</td>
 	        			<td>{{$val->Email}}</td>
 	        			<td>{{$val->Mobile}}</td>
+                <td>{{$val->fbaid}}</td> 
+                <td>{{$val->FullName}}</td> 
+                <td>{{$val->MobiNumb1}}</td>
+                <td>{{$val->City}}</td> 
 	        			@if ($val->Lead_Status =='')
 	        			<td><a onclick="getleadid({{$val->Req_Id}},this)" type="button" class="" data-toggle="modal" data-target="#myModal">--</a></td>
 	        			@else
@@ -78,7 +94,7 @@
           <textarea id="txtremark" name="txtremark" class="form-control" style="width: 80%"></textarea> 
           <input type="hidden" name="txtleadid" id="txtleadid">          
         </form>    
-        
+          
         </div>
         <div class="modal-footer">
        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

@@ -50,9 +50,9 @@
   </select> -->
    &nbsp;&nbsp;&nbsp;
   <form name="myform">
-  <select id="msds-select" class="form-control" style="width:55%;margin:10px;margin-top:4px;display: -webkit-inline-box;"  name="one" onchange="if (this.selectedIndex==4){this.form['fbsearch'].style.display='block',this.form['psearch'].style.display='none';this.form['statesearch'].style.display='none';this.form['zonesearch'].style.display='none'}else if( this.selectedIndex==6){this.form['fbsearch'].style.display='none',this.form['psearch'].style.display='none';this.form['statesearch'].style.display='block';this.form['zonesearch'].style.display='none'} else if( this.selectedIndex==7){this.form['fbsearch'].style.display='none',this.form['psearch'].style.display='none';this.form['statesearch'].style.display='none';this.form['zonesearch'].style.display='block'} else if( this.selectedIndex==8){this.form['fbsearch'].style.display='none',this.form['psearch'].style.display='none';this.form['fnamesearch'].style.display='block';this.form['zonesearch'].style.display='none';} else if( this.selectedIndex==9){this.form['fbsearch'].style.display='none',this.form['psearch'].style.display='none';this.form['fnamesearch'].style.display='none';this.form['zonesearch'].style.display='none';this.form['fcitysearch'].style.display='block';} else if( this.selectedIndex==10){this.form['fbsearch'].style.display='none',this.form['psearch'].style.display='none';this.form['fnamesearch'].style.display='none';this.form['zonesearch'].style.display='none';this.form['fcitysearch'].style.display='none';this.form['ponamesearch'].style.display='block';}  else {this.form['psearch'].style.display='block',this.form['fbsearch'].style.display='none'};">
+  <select id="msds-select" class="form-control" style="width:55%;margin:10px;margin-top:4px;display: -webkit-inline-box;"  name="one" onchange="selectIndex(this)">
 
-   <option id="msds-select" value="0" selected="selected">Search By</option>
+   <option value="-1" selected="selected">Search By</option>
    <option value="0">All</option>
    <option value="1">POSP Yes</option>
    <option value="2">POSP No</option>
@@ -63,18 +63,10 @@
    <option value="fbaname">FBA NAME</option>
    <option value="fbacity">FBA City</option>
    <option value="pospname">POSP Name</option>
-
-
-
    </select>
 
-   <input type="text" class="fbsearch hide" id="fbsearch" name="fbsearch" placeholder="Search FBA ID" style="display:none;margin-left: 96px;"/>
-   <input type="text" class="psearch hide" id="psearch" name="psearch" placeholder="Search POSP" style="display:none; margin-left: 96px;" />
-   <input type="text" class="statesearch hide" id="statesearch" name="statesearch" placeholder="Search State" style="display:none; margin-left: 96px;" />
-   <input type="text" class="zonesearch hide" id="zonesearch" name="zonesearch" placeholder="Search ZONE" style="display:none; margin-left: 96px;" />
-   <input type="text" class="fnamesearch hide" id="fnamesearch" name="fnamesearch" placeholder="Search FBA Full NAME" style="display:none; margin-left: 96px;" />
-   <input type="text" class="fcitysearch hide" id="fcitysearch" name="fcitysearch" placeholder="Search FBA City" style="display:none; margin-left: 96px;" />
-   <input type="text" class="ponamesearch hide" id="ponamesearch" name="ponamesearch" placeholder="Search Posp Name" style="display:none; margin-left: 96px;" />
+   <input type="text" id="txtfbasearch" name="txtfbasearch" placeholder="Search" onkeyup="searchdata()"  style="display: none; margin-left: 96px;"/>
+ 
 
   </form>
   </div> 
@@ -111,9 +103,6 @@
                                        <th>Documents</th> 
                                        <th>Customer ID</th> 
                                        <th>Created Date1</th>
-
-                                                                         
-
                                        </tr>
                                        </thead>
                                        </table>
@@ -231,7 +220,7 @@
          <div class="form-group">
             <input type="hidden" name="p_fbaid" id="p_fbaid" value="">
             <label class="control-label" for="message-text">Enter Sales Code : </label>
-            <input type="text" class="recipient-name form-control" id="p_remark" name="p_remark" required="" />
+            <input type="Number" class="recipient-name form-control" id="p_remark" name="p_remark" required="" />
           </div>
         </form>
         <div class="modal-footer"> 
@@ -480,7 +469,6 @@
         "columns": [
 
             { "data": "fbaid"},
-
             { "data": "FullName",
               "render": function ( data, type, row, meta ) {
               return (data)+' <a target="_blank" href="Fba-profile/'+row.fbaid+' "><span class="glyphicon glyphicon-user"  title="FBA Profile"></span></a>';
@@ -517,7 +505,7 @@
             {"data":"Pincode"},
             {"data":"POSPNo"  ,
              "render": function ( data, type, row, meta ) {
-              return data==""?('<a id="posp_'+row.fbaid+'" class="checkPosp" data-toggle="modal" data-target="#updatePosp" onclick="POSP_UPDATE('+row.fbaid+')">update</a>'):data;
+              return data==""?('<a id="posp_'+row.fbaid+'" class="checkPosp" data-toggle="modal" data-target="#updatePosp" onclick="updateposp('+row.fbaid+')">update</a>'):data;
               }
             }, 
 
@@ -539,9 +527,19 @@
 
             }, 
 
+
+     // {"data":"salescode" ,
+     //         "render": function ( data, type, row, meta ) {
+     //      return '<a href="#"id="update_'+row.fbaid+'" onclick="sales_update_fn('+row.fbaid+','+data+')" >'+data+'</a>';
+     //          }
+   
+     //       },
+
+
+
               {"data":"salescode" ,
              "render": function ( data, type, row, meta ) {
-              return data=="Update"?('<a  id="update_'+row.fbaid+'" onclick="sales_update_fn('+row.fbaid+')" >'+data+'</a>'):data;
+            return ("<a id=update_"+row.fbaid+" onclick=sales_update_fn("+row.fbaid+",'"+data+"')>"+data+"</a>");
               }
    
            },
@@ -566,16 +564,6 @@
 
 
          { "data": "createdate1","visible":false }
-
-
-    
-      
-       // {"data":"" ,
-       //        "render": function ( data, type, row, meta ) {
-       //         return '<a id="btnviewcid" target="_blank" href="Fba-profile/'+row.fbaid+ '">Update</a>';
-       //       }  
-       //   }
-
 
         ],
 
@@ -629,113 +617,50 @@ $('.date-range-filter').datepicker();
 
 <!-- Search Pospno and Fbaid start,STATE,CITY etc -->
 <script>
-$(document).ready(function(){
 
-      $(".psearch").keyup (function(){ 
-      table1 = $('#fba-list-table').DataTable();
-      if ($(this).val()!= '') {
-      table1.columns(11).search('^'+$(this).val() + '$', true, true).draw(); 
+
+/// code for search
+function searchdata()
+{
+  var index = $('#msds-select').val();
+  if(index=='fbacity')
+  {
+    colsearch(7);
   }
-      else
-      table1.columns(11).search($(this).val(), true, true).draw(); 
-    });
-});
+  else if(index == 'FBAID')
+  {
+    colsearch(0);
+  }
+  else if(index == 'POSPNO')
+  {
+    colsearch(11);
+  }else if(index=='state'){colsearch(8);}
+  else if(index == 'zone'){colsearch(9);}
+  else if(index == 'fbaname'){colsearch(1);}
+  else if(index == 'pospname'){colsearch(13);}
+}
 
-    $(document).ready(function(){
-    $(".fbsearch").on("keyup change",function(){ 
-    table1 = $('#fba-list-table').DataTable();
-         //table1.columns(0).search( this.value).draw();
-    if ($(this).val()!= '') {
-    table1.columns(0).search('^'+$(this).val() + '$', true, true).draw(); 
+function colsearch(index)
+{
+  table1 = $('#fba-list-table').DataTable();
+    if ($('#txtfbasearch').val()!= '') {
+    table1.columns(index).search('^'+ $('#txtfbasearch').val() + '$', true, true).draw(); 
  }
     else
-    table1.columns(0).search($(this).val(), true, true).draw(); 
-    });
-});
+    table1.columns(index).search($('#txtfbasearch').val(), true, true).draw(); 
+}
 
-     $(document).ready(function(){
-    $(".statesearch").on("keyup change",function(){ 
-    table1 = $('#fba-list-table').DataTable();
-         //table1.columns(0).search( this.value).draw();
-    if ($(this).val()!= '') {
-    table1.columns(8).search('^'+$(this).val() + '$', true, true).draw(); 
- }
-    else
-    table1.columns(8).search($(this).val(), true, true).draw(); 
-    });
-});
-
-    $(document).ready(function(){
-    $(".zonesearch").on("keyup change",function(){ 
-    table1 = $('#fba-list-table').DataTable();
-         //table1.columns(0).search( this.value).draw();
-    if ($(this).val()!= '') {
-    table1.columns(9).search('^'+$(this).val() + '$', true, true).draw(); 
- }
-    else
-    table1.columns(9).search($(this).val(), true, true).draw(); 
-    });
-});
-
-    $(document).ready(function(){
-      $(".fnamesearch").on("keyup change",function(){ 
-      table1 = $('#fba-list-table').DataTable();
-      if ($(this).val()!= '') {
-      table1.columns(1).search( this.value ).draw(); 
- }else
-      table1.columns(1).search( this.value ).draw(); 
-    });
-});
-
-    
-
-
-//     $(document).ready(function(){
-//     $(".fnamesearch").on("keyup change",function(){ 
-//     table1 = $('#fba-list-table').DataTable();
-//          //table1.columns(0).search( this.value).draw();
-//     if ($(this).val()!= '') {
-//     table1.columns(1).search('^'+$(this).val() + '$', true, true).draw(); 
-//  }
-//     else
-//     table1.columns(1).search($(this).val(), true, true).draw(); 
-//     });
-// });
-
-        $(document).ready(function(){
-    $(".fcitysearch").on("keyup change",function(){ 
-    table1 = $('#fba-list-table').DataTable();
-         //table1.columns(0).search( this.value).draw();
-    if ($(this).val()!= '') {
-    table1.columns(7).search('^'+$(this).val() + '$', true, true).draw(); 
- }
-    else
-    table1.columns(7).search($(this).val(), true, true).draw(); 
-    });
-});
-
-              $(document).ready(function(){
-    $(".ponamesearch").on("keyup change",function(){ 
-    table1 = $('#fba-list-table').DataTable();
-         //table1.columns(0).search( this.value).draw();
-    if ($(this).val()!= '') {
-    table1.columns(13).search('^'+$(this).val() + '$', true, true).draw(); 
- }
-    else
-    table1.columns(13).search($(this).val(), true, true).draw(); 
-    });
-});
-
-
-
+function selectIndex(dd) {
+  if (dd.selectedIndex>=4){
+     dd.form['txtfbasearch'].style.display='block';
+  }else{
+    dd.form['txtfbasearch'].style.display='none';
+  }  
+}
 
 
      
-    $(document).ready(function() {
-    $('#paysub').on("onclick", function(){
-    alert("test");
-  });
-});
+
 
 </script>
 

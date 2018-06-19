@@ -27,13 +27,11 @@
                  <td><?php echo $val->FullName; ?></td>
                   <td><?php echo $val->MobiNumb1; ?></td>
                   <td><?php echo $val->EmailID; ?></td> 
-              
-                <td>
+                 <td>
 
                 
              <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal" id="paysub"  onclick="getpaylink('{{ $val->FBAID }}','{{ $val->MobiNumb1}}')">Generate  Payment Link</button>
              </td>
-                
              </tr>
                 @endforeach
 				</tbody>
