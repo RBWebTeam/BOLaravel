@@ -25,5 +25,5 @@ Controller
 	{
 	DB::select("call Usp_deleteticket($ticketid)");
      return redirect('View-Raised-Ticket');
-    }
+ }
 }
