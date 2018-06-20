@@ -29,7 +29,7 @@
 			 <h2 class="text-center">SIGN IN</h2>
 			 <br>
 			<form action="{{url('admin-login')}}" method="post" >
-							{{ csrf_field() }}
+				{{ csrf_field() }}
 			   <div class="form-group">
 			  <input type="text" name="email" class="form-control input-cs" placeholder="email"  />
 			  @if ($errors->has('email'))<label class="control-label" for="inputError"> {{ $errors->first('email') }}</label>  @endif

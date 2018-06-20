@@ -770,20 +770,12 @@ $('#ddlstate').on('change', function() {
             }else{
                 $('select[name="city"]').empty();
             }
-        });
-
-
-
-
-
-
-
-function getfbaassignlist(ddl)
-{  
+});
+ function getfbaassignlist(ddl)
+  {  
   if($(ddl).val() > 0)
   getfbalist(1,$(ddl).val());
-}
-
+  }
 function showfbaassignlist()
 {
   getfbalist(2,$('#txtpincode').val()); 

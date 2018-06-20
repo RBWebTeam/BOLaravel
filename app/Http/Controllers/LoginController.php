@@ -9,58 +9,38 @@ use Redirect;
 use Session;
 use URL;
 use Mail;
- 
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 
 
 class LoginController extends InitialController
 {
-
-
 public function checklogin(Request $request){
-
-  
 if(!$request->session()->exists('emailid')){
-               return view('index');
-       }else{
-                return redirect('/dashboard');
+return view('index');
+}else{
+return redirect('/dashboard');
 }
-
 }
-
-      public function login(Request $request){
-         
-     $validator = Validator::make($request->all(), [
-    'email' => 'required|max:100',
-    'password' => 'required|max:100',
-    ]);
-
-   if ($validator->fails()) {
-    return redirect('/')
-    ->withErrors($validator)
-    ->withInput();
+public function login(Request $request){
+$validator = Validator::make($request->all(), [
+'email' => 'required|max:100',
+'password' => 'required|max:100',
+ ]);
+ if ($validator->fails()) {
+  return redirect('/')
+  ->withErrors($validator)
+ ->withInput();
    }else{
           
-
- 
-
-           $query=DB::select('call sp_user_login(?,?,?)',array($request->email,$request->password,$request->ip()));
-           
- 
-
-           if($query){
-            // if($val->SuccessStatus==1){
-            $val=$query[0];
-
-             $request->session()->flush();
-
-             $request->session()->put('emailid',$val->email);
-
-                    $request->session()->put('emailid',$val->email);
-
-                    $request->session()->put('fbauserid',$val->fbauserid);
-                    $request->session()->put('fbaid',$val->fbaid);
+$query=DB::select('call sp_user_login(?,?,?)',array($request->email,$request->password,$request->ip()));
+  if($query){
+  $val=$query[0];
+  $request->session()->flush();
+  $request->session()->put('emailid',$val->email);
+ $request->session()->put('emailid',$val->email);
+ $request->session()->put('fbauserid',$val->fbauserid);
+ $request->session()->put('fbaid',$val->fbaid);
                     $request->session()->put('username',$val->username);
                     $request->session()->put('loginame',$val->loginame);
                     $request->session()->put('uid',$val->uid);
@@ -81,46 +61,13 @@ if(!$request->session()->exists('emailid')){
               return redirect()->intended('dashboard');
        }
         {
-                      Session::flash('msg', "Invalid esmail or password. Please Try again! ");
-
-                       return Redirect::back();
-               
+ Session::flash('msg', "Invalid esmail or password. Please Try again! ");
+  return Redirect::back();              
  }
-
-
-           // $value=DB::table('emp_login')->where('emailid','=',$request->email)
-           // ->where('password','=', $request->password)
-          // ->first();
-          //  if($value!=''){ 
-            //      $request->session()->put('emailid',$value->emailid);
-            //      $request->session()->put('emptype',$value->emptype);
-            //       $request->session()->put('emp_id',$value->emp_id);
-            //       $request->session()->put('username',$value->username);
-          //         $request->session()->put('last_login',$value->last_login);
-                  
-                 
-          //        return redirect()->intended('dashboard');
-          //       }else{
-          //              Session::flash('msg', "Invalid email or password. Please Try again! ");
-          //              return Redirect::back();
-                  
-          //    }
-
-
-
-           }
-
-       }
-
-        //         public function register_user() {
-
-        //         return view('register-user');
-        // }
-
-             // start insert
+ }
+ }
+ // start insert
         public function registerinsert (Request $req){ 
-          // DB::statement("call usp_insert_emp_login_new(?,?,?,?)",array($req->username,$req->Emailid,$req->password,$req->employetype));
-           // DB::statement("call usp_insloginstatemapping(?,?)",array($req->username,$req->txtstate));
          
 
            return redirect ('register-user');
@@ -225,11 +172,11 @@ public function register_user_update(Request $req){
              ->withInput();
             }else{
  
-       DB::table('FBAUsers')->where('FBAUserId','=',$req->FBAUserId)->update(
-       [ 'UserName' =>$req->UserName,
-       'email' =>$req->email,
-      'mobile' =>$req->mobile,
-       'companyid' =>$req->company_id,
+        DB::table('FBAUsers')->where('FBAUserId','=',$req->FBAUserId)->update(
+        [ 'UserName' =>$req->UserName,
+        'email' =>$req->email,
+       'mobile' =>$req->mobile,
+        'companyid' =>$req->company_id,
         'reportingid' =>$req->reporting_id,
          'stateid' =>$req->state_id,
           'cityid' =>$req->city_id,
@@ -238,126 +185,24 @@ public function register_user_update(Request $req){
             'usergroup' =>$req->menu_group,
              'uid' =>$req->uid,
              'password' =>$req->password]);
-
-    Session::flash('message', 'Register successfully Update...!'); 
-   }
-
- return redirect ('register-user-list');
-}
+          Session::flash('message', 'Register successfully Update...!'); 
+          }
+        return redirect ('register-user-list');
+        }
 
 
 public function register_user_list(){
 
   $query = DB::select("call sp_register_user_list()");
 
-    //$query=DB::table('FBAUsers')->select('UserName','email','mobile','')->where('user_type_id','=',1)->get();
+//$query=DB::table('FBAUsers')->select('UserName','email','mobile','')->where('user_type_id','=',1)->get();
   return view('register-user-list',['query'=>$query]);
-
-}
-
-public function logout(Request $req) {
+  }
+  public function logout(Request $req) {
   $req->session()->flush();
    return redirect('/');
-}
-
-
-
-
- //                public function register_form(Request $req){
- //                 $val =Validator::make($req->all(), [
- //                'name' => 'required|min:5',
- //                'contact' => 'required|regex:/^[0-9]{10}+$/',
- //                'email' => 'required|email|unique:user_registration',
- //                'password' =>'required|min:6',
- //                'confirm_password' => 'required|min:6|same:password',
- //                            ]);
-
- //           if ($val->fails()){
-
- //              return response()->json($val->messages(), 200);
- //           }else{
-
-
- //             $query=new registrationModel();
- //                  $query->username=$req->name;
- //                  $query->email=$req->email;
- //                  $query->contact=$req->contact;
- //                  $query->password=md5($req->password);
- //                  $query->provider_user_id=0;
- //                  $query->provider=0;
- //                  $query->created_at=date('Y-m-d H:i:s');
-
- //               if($query->save()) {
- //                  $req->session()->put('email',$query->email);
- //                  $req->session()->put('contact',$query->contact);
- //                  $req->session()->put('user_id',$query->id);
- //                  $req->session()->put('name',$query->username);
- //                  $req->session()->put('is_login',1);
- //                  DB::table('customer_details')->insert(['user_id' =>$query->id]);
-
- //                  $error="1";
- //                  echo $error;
- //        }
- //     }
- // }
- //      //added by manish to logout
- //        public function logout(Request $req){
- //          $req->session()->flush();
-
- //   // google logout function 
-    
- //          return redirect('/');
- //        }
-
-
-
- //        public function forgot_password(Request $req){
- //             $query=new registrationModel();
- //              $val =Validator::make($req->all(), [
- //                'email' => 'required|email',
- //                            ]);
- //           if ($val->fails()){
- //              return response()->json($val->messages(), 200);
- //           }else{
- //              $value=$query->where('email','=',$req->email)
- //              ->first();
- //              if($value!=''){
-                           
- //                    $password = mt_rand(100000, 999999);
- //                $data ="Please use ".$password." as password to login for ur email ".$req->email."";
- //                $email = $req->email;
- //                $mail = Mail::send('email_view',['data' => $data], function($message) use($email) {
- //                $message->from('wecare@rupeeboss.com', 'RupeeBoss');
- //                $message->to($email)
- //                ->subject('Your New Password');
- //                });
- //                    print_r($mail);
- //                    if(Mail::failures()){
- //                            $error=3;
- //                            echo $error;
- //                    }else{
-
- //                    $query=DB::table('user_registration')
- //                              ->where('email', $req->email)
- //                              ->update(['password' => md5($password)]);
- //                            $error=2;
- //                            echo $error;
- //                    }
-                       
- //                       // $error=2;
- //                       //       echo $error;
- //                 }else{
-                  
- //                    $error=1;
- //                    echo $error;
- //                 }
-
- //                }
- //        }
-
- 
-
- public function search_state(){
+    }
+   public function search_state(){
 
  // $term = Input::get('term');
  // $products=DB::table('state_master')->select('state','state_id')
