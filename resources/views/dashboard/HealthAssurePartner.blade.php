@@ -45,7 +45,7 @@ ul li {margin:2px; padding:1px !important;}
 .list1 {margin:0px; padding:10px;}
 .head1 {padding:10px;background:#eee;border:1px solid #ddd; font-size:15px;}
 .input-1 {padding:10px;width:100%;border:none; border:1px solid #ddd;border-radius:3px; margin-bottom:15px;}
-.button1 {border: 1px solid #f95f67; color:#f95f67; padding: 10px;background: #fff; margin-bottom: 20px;width: 100%;margin: 0 auto; display: block; margin-bottom: 20px;}
+.button1 {border: 1px solid #f95f67; color:#f95f67; padding: 10px;background: #fff;width: 100%;margin: 0 auto; display: block; margin-bottom: 20px; margin-top: 20px;}
 .button1:hover {text-decoration: none;color:#fff; background:#009ee3;border:1px solid #009ee3;}
 label {font-size: 11px;color: #666;}
 .btn-submit {
@@ -93,7 +93,7 @@ label {font-size: 11px;color: #666;}
 .btndiv {margin:20px 0px;}
 #tbltestlist tr {border-bottom: solid 1px #d7dadc !important;}
 .bl-txt {color: #002d62; text-transform:uppercase;}
-.divpartnerselect:hover {background:#f5f5f5;}
+.divpartnerselect:hover {background:#f5f5f5;cursor: pointer;}
 
 
 @media only screen and (max-width: 768px) {
@@ -105,7 +105,8 @@ label {font-size: 11px;color: #666;}
 	.height4 {height:120px; padding:10px;}
 	.height4 p {font-size:11px;}
 	.height4 h4 {font-size:16px; margin-top:0px;}
-	.divpartnerselect {padding:0px; float: left; cursor:pointer;}
+	.divpartnerselect {padding:0px; float: left;}
+  
 	#btndiv {float:left;width:100%;bottom: 0px;padding: 5px;background: #ffffff;margin:10px 0px;}
 	.modal-body {
     position: relative;
@@ -278,15 +279,15 @@ foreach ($val->ParamDetails as $key => $value) {
 <input type="hidden" name="txtprovidervisitype" id="txtprovidervisitype">
 <input type="hidden" name="txtproviderdccode" id="txtproviderdccode">
 <input type="hidden" name="txtID" id="txtID" value="{{$_GET["ID"]}}">
-<div class="col-md-12"><br/></div>
+<div class="col-md-12"></div>
 
-<div class="col-md-12"><br/></div>
+<div class="col-md-12"></div>
 </div>
 </div>
+
 <div id="btndiv" class="text-center col-md-12">
  <input type="submit" name="btnbook" value="BOOK THIS TEST" onclick="" id="btnbook" class="button1">
- <br>
-</div>
+
 </form>
 </div>
 </body>
