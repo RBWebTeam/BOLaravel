@@ -5,102 +5,74 @@
 
 
 <div class="col-md-12"><p >  
-       <div class="col-md-12">
-       <div class="overflow-scroll">
-       <div class="table-responsive" >
+<div class="col-md-12">
+<div class="overflow-scroll">
+<div class="table-responsive" >
       <table class="datatable-responsive table table-striped table-bordered dt-responsive nowrap" id="example">
-                                    <thead>
-                                       <tr>
-                                       <th>ID</th>
-                                       <th>Category Name</th>
-                                       <th>Sub Category Name</th>
-                                       <th>Classification Name </th>
-                                       <!-- <th>DocPath</th> -->
-                                       <th>Message</th>
-                                       <th>Status</th>
-                                       <th>Raised By</th>
-                                       <th>Raised By EmailId</th>
-                                       <!-- <th>StatusChangedBy</th> -->
-                                       <th>Assigned To</th>
-                                       <th>Assigned Date</th>
-                                      
-                                         
-                                      </tr>
-                                    </thead>
-                                    <tbody>
- 
-                                     @foreach($query as $va)
-                                     <?php  
-                                          $class =($va->user_fba_id!=null)? 'background: #00C851': '';
-                                      ?>
-                                     <tr style='{{$class}} '>
-                                     
-                                     @if($va->user_fba_id!=null)
-                                     <td><a href="#"  >{{$va->TicketRequestId}}</a>
-                                     </td>
-                                     @else
-                                       <td><a href="#" onclick="TicketRequest_fn('{{$va->TicketRequestId}}','{{$va->toemailid}}','{{$va->ccemailid}}')" >{{$va->TicketRequestId}}</a>
-                                     </td>
-                                     @endif
-
-                                      <td>{{$va->CateName}}</td>
-                                       <td>{{$va->QuerType}}</td>
-                                        <td>{{$va->Description}}</td>
-                                         <!-- <td >{{$va->DocPath}}</td> -->
-                                          <td>{{$va->Message}}</td>
-                                           <td>{{$va->Status}}</td>
-                                           <td>{{$va->RaisedByName}}</td>
-                                           <td>{{$va->RaisedByEmail}}</td>
-                                           <!--  <td>{{$va->StatusChangedBy}}</td> -->
-                                            <td>{{$va->user_fba_id!=null?$va->UserName:''}}</td>
-                                            <td>{{$va->assigned_date}}</td>
-                                            <!--  <td  > <a href="#" onclick="view_comment_fn('{{$va->TicketRequestId}}')">View</a></td> -->
-                                     </tr>
-                                     @endforeach
-                                    
-                                  </tbody>
-           
-            </table>
-      </div>
-      </div>
-      </div>
-      </div>
-
-
-
-
- <div class="modal fade" id="Ticket-Request-Id-Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">User</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-      <form class="form-horizontal" method="post"  id="TicketRequest_Id_from" > {{ csrf_field() }}
+       <thead>
+        <tr>
+    <th>ID</th>
+    <th>Category Name</th>
+    <th>Sub Category Name</th>
+    <th>Classification Name </th>
+    <th>Message</th>
+    <th>Status</th>
+    <th>Raised By</th>
+    <th>Raised By EmailId</th>
     
-        <input type="hidden" name="TicketRequestId" id="TicketRequest_Id" >
-   <div class="form-group">
-            <label for="inputEmail" class="control-label col-xs-2"> Select</label>
-            <div class="col-xs-10">
-           
-             <select name="FBAUserId"  class="form-control"  id="FBAUserId">
-               <option value="0">select</option>
+  </tr>
+  </thead>
+  <tbody>
+ @foreach($query as $va)
+    <?php  
+     $class =($va->user_fba_id!=null)? 'background: #00C851': '';
+    ?>
+     <tr style='{{$class}} '>
+     @if($va->user_fba_id!=null)
+     <td><a href="#"  >{{$va->TicketRequestId}}</a>
+      </td>
+     @else
+    <td><a href="#" onclick="TicketRequest_fn('{{$va->TicketRequestId}}','{{$va->toemailid}}','{{$va->ccemailid}}')" >{{$va->TicketRequestId}}</a>
+       </td>
+       @endif
+  <td>{{$va->CateName}}</td>
+  <td>{{$va->QuerType}}</td>
+  <td>{{$va->Description}}</td>
+  <td>{{$va->Message}}</td>
+  <td>{{$va->Status}}</td>
+  <td>{{$va->user_fba_id!=null?$va->UserName:''}}</td>
+<td>email</td>
+  </tr>
+  @endforeach
+  </tbody> 
+  </table>
+  </div>
+  </div>
+  </div>
+  </div>
+<div class="modal fade" id="Ticket-Request-Id-Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal-dialog" role="document">
+<div class="modal-content">
+<div class="modal-header">
+<h5 class="modal-title" id="exampleModalLabel">User</h5>
+<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+<span aria-hidden="true">&times;</span>
+</button>
+</div>
+<div class="modal-body">
+ <form class="form-horizontal" method="post"  id="TicketRequest_Id_from" > {{ csrf_field() }}
+<input type="hidden" name="TicketRequestId" id="TicketRequest_Id" >
+<div class="form-group">
+<label for="inputEmail" class="control-label col-xs-2"> Select</label>
+<div class="col-xs-10">
+  <select name="FBAUserId"  class="form-control"  id="FBAUserId">
+ <option value="0">select</option>
                @foreach($users as $v)
                 <option value="{{$v->FBAUserId}}">{{$v->UserName}}</option>
                @endforeach
              </select>
             </div>
   </div> 
-
- <div class="form-group">
-            <label for="inputEmail" class="control-label col-xs-2"> TO mail</label>
-            <div class="col-xs-10">
-         <input type="text" name="toemailid"  class="form-control"  id="toemailid">  
-           </div>
- </div>
 
   <div class="form-group">
             <label for="inputEmail" class="control-label col-xs-2"> CC mail</label>
@@ -237,46 +209,38 @@
 
  
 
- function view_comment_fn(ID){  
-   $('#Ticket-comment-Id-Modal').modal('show');
-   $.get("{{url('ticket-request')}}",{'TicketRequestId':ID})
-             .done(function(data){
-               arr=Array();
-               $('#get_comment_id').empty();
-              $.each(data, function(key, value) {
-                   
-                     arr.push('<tr><td>'+value.comment+'</td></tr>');
-              }); 
-              
-              $('#get_comment_id').append(arr);
-          }).fail(function(xhr, status, error) {
-                 console.log(error);
-            });
-
+  function view_comment_fn(ID){  
+ $('#Ticket-comment-Id-Modal').modal('show');
+  $.get("{{url('ticket-request')}}",{'TicketRequestId':ID})
+  .done(function(data){
+    arr=Array();
+   $('#get_comment_id').empty();
+  $.each(data, function(key, value) {                  
+ arr.push('<tr><td>'+value.comment+'</td></tr>');
+  });             
+ $('#get_comment_id').append(arr);
+ }).fail(function(xhr, status, error) {
+console.log(error);
+ });
  }
-
-
- 
-
  $(function() {
-        var scntDiv = $('#p_scents');
-        var i =  1;
+  var scntDiv = $('#p_scents');
+  var i =  1;     
+    $('#addScnt').on('click', function() {   
+     if( i<=3) {
+    $('<p><label for="inputEmail" class="control-label col-xs-2"> CC mail</label> <input type="text" name="ccemailid[]"  class="form-control  " style="width: 495px;"  id="ccemailid'+i+'" required>  <a href="#" id="remScnt" class="remScnt">Remove</a></p>').appendTo(scntDiv);
+  i++;
+  }
+   return false;
+  });
         
-        $('#addScnt').on('click', function() {   
-           if( i<=3) {
-                $('<p><label for="inputEmail" class="control-label col-xs-2"> CC mail</label> <input type="text" name="ccemailid[]"  class="form-control  " style="width: 495px;"  id="ccemailid'+i+'" required>  <a href="#" id="remScnt" class="remScnt">Remove</a></p>').appendTo(scntDiv);
-                i++;
-              }
-                return false;
-        });
-        
-        $(document).on('click','.remScnt', function() {  
-                if( i > 1 ) {
-                        $(this).parents('p').remove();
-                        i--;
-                }
-                return false;
-        });
+  $(document).on('click','.remScnt', function() {  
+   if( i > 1 ) {
+   $(this).parents('p').remove();
+  i--;
+   }
+ return false;
+});
 });
 
 
