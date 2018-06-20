@@ -35,7 +35,7 @@
 <div class="col-md-4  col-xs-12">
  <div class="form-group">
 <label class="control-label" for="message-text">Sub Category:</label>
-<select class="form-control" name="ddlsubcat" id="ddlsubcat" required required="yes">
+<select class="form-control" name="ddlsubcat" id="ddlsubcat"  required="yes">
  </select>
  </div>
  </div>
@@ -55,12 +55,7 @@
 </div>
 </div>
 
-<div class="col-md-4  col-xs-12">
-<div class="form-group">
-<label class="control-label" for="message-text">To Email Id: </label>
-<input type="Email" class="form-control" id="txttoemailid" name="txttoemailid">
-</div>
-</div>
+
 <div class="col-md-4  col-xs-12">
  <div class="form-group">
  @if ($errors->has('txtraisermessage'))<label class="control-label" for="inputError"> {{ $errors->first('txtraisermessage') }}</label>  @endif

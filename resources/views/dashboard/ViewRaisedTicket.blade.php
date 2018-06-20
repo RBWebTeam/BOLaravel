@@ -32,6 +32,7 @@
   <?php if($val->DocPath == ""){ ?>
   No Document Found
    </td>
+   <td>
   <?php } else { ?>
     <a href="{{url('upload/Raiserticket')}}/{{$val->DocPath}}" download class="btn btn-primary">View</a></td>
   <?php }?> 
