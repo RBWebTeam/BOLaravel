@@ -30,16 +30,16 @@
 	        			<th>Monthly Income</th>
 	        			<th>Loan Amount</th>
 	        			<th>History</th>
-<<<<<<< HEAD
+
 	        	  	</tr>
 	        	    </thead>
 	             	<tbody>
-=======
+
                 <th>Edit</th>
 	        		</tr>
 	        	</thead>
 	        	<tbody>
->>>>>>> master
+
 	        		@foreach($query as $val)
 	        		<tr>	
              		

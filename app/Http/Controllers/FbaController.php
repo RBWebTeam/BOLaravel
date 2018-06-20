@@ -11,17 +11,35 @@ use Redirect;
 use Session;
 use URL;
 use Mail;
+use Excel;
 class FbaController extends CallApiController
 {
       
         public function fba_list(){
          //$query=DB::select("call usp_load_fbalist_new(0)");
-         $doctype = DB::select("call get_document_type()");
+         $doctype = DB::select("call get_document_type()");   
          //print_r($doctype); exit();
 
           
           return view('dashboard.fba-list',['doctype'=>$doctype]);         
         }
+
+        public function exportexcel(){
+          $query=[];
+           $query=DB::select('call fbaList_export(0)');
+                            
+               $data = json_decode( json_encode($query), true) ;
+              return Excel::create('Fbalist', function($excel) use ($data) {
+               $excel->sheet('mySheet', function($sheet) use ($data)
+            {
+              $sheet->fromArray($data);
+          });
+      })->download('xls');
+
+}
+
+
+
         public function get_fba_list(Request $req){
           $id=Session::get('FBAUserId');
         // print_r($id); exit();
