@@ -77,8 +77,8 @@
 
              <div class="col-md-12">
              <div class="overflow-scroll">
-             <div class="table-responsive" >
-             <table class="datatable-responsive table table-striped table-bordered nowrap" id="fba-list-table">
+             <div id="divtable" class="table-responsive" >
+          <table class="datatable-responsive table table-striped table-bordered nowrap" id="fba-list-table">
                                        <thead>
                                        <tr>
                                        <th>FBA ID</th> 
@@ -106,10 +106,16 @@
                                        </tr>
                                        </thead>
                                        </table>
-                           </div>
-                        </div>
-                      </div>
-                    </div>
+
+  <div id="myDIV" >
+  <a href="{{url('export')}}" class="qry-btn" id="pospbtn">Export</a>
+
+</div>
+</div>
+     </div>
+          </div>
+            </div>
+              </div>
                  </div>
 
 <!-- send sms -->
@@ -220,7 +226,7 @@
          <div class="form-group">
             <input type="hidden" name="p_fbaid" id="p_fbaid" value="">
             <label class="control-label" for="message-text">Enter Sales Code : </label>
-            <input type="Number" class="recipient-name form-control" id="p_remark" name="p_remark" required="" />
+            <input type="text" class="recipient-name form-control" id="p_remark" name="p_remark" required="" />
           </div>
         </form>
         <div class="modal-footer"> 
@@ -232,8 +238,6 @@
     </div>
   </div>
 </div>
-
-
 
 
 <!-- update posp -->
@@ -716,3 +720,141 @@ function selectIndex(dd) {
  
 });
 </script>
+
+
+  <script type="text/javascript">
+   $(function(){
+   $('#p_remark').keyup(function(){    
+   var yourInput = $(this).val();
+   re = /[A-Za-z]?[A-Za-z `~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi;
+   var isSplChar = re.test(yourInput);
+    if(isSplChar)
+    {
+    var no_spl_char = yourInput.replace(/[A-Za-z]?[A-Za-z `~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi, '');
+    $(this).val(no_spl_char);
+    }
+  });
+ 
+});
+</script>
+
+
+<script type="text/javascript">
+  
+
+// Add active class to the current button (highlight it)
+var header = document.getElementById("myDIV");
+var btns = header.getElementsByClassName("qry-btn");
+for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener("click", function() {
+    var current = document.getElementsByClassName("active");
+    current[0].className = current[0].className.replace(" active", "");
+    this.className += " active";
+  });
+}
+
+</script>
+
+
+
+
+<!-- <script type="text/javascript">
+
+    $(document).ready(function () {
+    $("#btnExport").click(function() {
+alert("test");
+           var data_type = 'data:application/vnd.ms-excel';
+       //var table_div = $('#divtable');
+       var table_html = $('#fba-list-table').html().replace(/ /g, '%20');//table_div.outerHTML.replace(/ /g, '%20');
+       var a = document.createElement('a');
+       a.href = data_type + ', ' + table_html;
+       a.download = 'EquityReport.xls';
+       a.click();
+  window.open('data:application/vnd.ms-excel,' + encodeURIComponent($('#fba-list-table').html()));
+         
+        })
+
+        $.datepicker.regional[""].dateFormat = 'dd/mm/yy';
+         $.datepicker.setDefaults($.datepicker.regional['']);
+
+        var tab=  $('#fba-list-table').dataTable({
+           
+            "bProcessing": true,
+            "bServerSide": true,
+            "sAjaxSource": "Company/DataProvider",
+            "bJQueryUI": true,
+            "aoColumns":  [
+                         { "sName": "FBAID"},
+                         { "sName": "FirsName" },
+                         { "sName": "MiddName" },
+                         { "sName": "LastName" }
+                    ]
+
+                });
+
+       tab.makeEditable({
+            "aoColumns": [
+                null,
+                null,
+                null,
+                {
+                indicator: 'Saving...',
+                tooltip: 'Click to select town',
+                loadtext: 'loading...',
+                type: 'select',
+                onblur: 'submit',
+                loadurl: 'AjaxDataProvider1'
+            
+            }]
+        });
+
+    });
+
+    </script>
+ -->
+
+<!--  <script type="text/javascript">
+   function fnExcelReport()
+{
+    var tab_text="<table border='2px'><tr bgcolor='#87AFC6'>";
+    var textRange; var j=0;
+
+    tab = document.getElementById('fba-list-table'); // id of table
+
+    for(j = 0 ; j < tab.rows.length ; j++) 
+    {     
+        tab_text=tab_text+tab.rows[j].innerHTML+"</tr>";
+        //tab_text=tab_text+"</tr>";
+    }
+
+    tab_text=tab_text+"</table>";
+    tab_text= tab_text.replace(/<A[^>]*>|<\/A>/g, "");//remove if u want links in your table
+    tab_text= tab_text.replace(/<img[^>]*>/gi,""); // remove if u want images in your table
+    tab_text= tab_text.replace(/<input[^>]*>|<\/input>/gi, ""); // reomves input params
+
+    var ua = window.navigator.userAgent;
+    var msie = ua.indexOf("MSIE "); 
+
+    if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./))  // If Internet Explorer
+    {
+        txtArea1.document.open("txt/html","replace");
+        txtArea1.document.write(tab_text);
+        txtArea1.document.close();
+        txtArea1.focus(); 
+        sa=txtArea1.document.execCommand("SaveAs",true,"Say Thanks to Sumit.xls");
+    }  
+    else                 //other browser not tested on IE 11
+        sa = window.open('data:application/vnd.ms-excel,' + encodeURIComponent(tab_text));
+
+                 
+
+    return (sa);
+}
+
+ </script> -->
+ 
+
+
+
+
+ 

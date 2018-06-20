@@ -99,6 +99,9 @@ Route::get('state_sub_dropdown/{cityid}','bankofferController@get_sub_cities');
 Route::get('Fba-list-Update-posp/{id}','FbaController@UpdatePospno');
 
 
+// export excel  
+Route::get('export','FbaController@exportexcel');
+
 
 
 

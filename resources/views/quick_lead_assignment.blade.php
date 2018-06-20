@@ -318,9 +318,6 @@ if(chkval==""){
 });
 
 
-
-
-
 function checkboxcount(){
 
     var $checkboxes = $('.countceckbox');
