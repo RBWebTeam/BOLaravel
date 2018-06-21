@@ -391,6 +391,7 @@ $.ajax({
   { $.each(msg, function( index, value ) {
    $('#city').append('<option value="'+value.cityname+'">'+value.cityname+'</option>');   
 
+
     }); 
      }else{
       $('#city').empty().append('No Result Found');
@@ -413,10 +414,7 @@ echo i;
 </script>
 
 
-      @endsection
-
- 
-   </script>
+  </script>
   <style type="text/css">
   element.style {
    margin: 0px 10px 10px 233px;
