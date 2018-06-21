@@ -102,7 +102,7 @@
 </tbody>                  
 </table>
 </div> 
-  <h3 class="pull-left"><b>COUNT:</b><span id="msg_check" ></span><span id="msg_count">0</span><h3>    
+  <h3 class="pull-left"><b>COUNT:</b><span id="msg_check"></span><span id="msg_count">0</span><h3>    
   </div>
   <div class="col-sm-6 col-xs-12 form-padding">  
   <select  name="SMSTemplate" class="form-control"  id="SMSTemplate_select" onchange="SMSTemplate_fn(this.value)" >
@@ -390,14 +390,31 @@ $.ajax({
   if(msg)
   { $.each(msg, function( index, value ) {
    $('#city').append('<option value="'+value.cityname+'">'+value.cityname+'</option>');   
-   }); 
-   }else{
-   $('#city').empty().append('No Result Found');
-   }
-   }  
-   });
-   });
-   </script>
+
+
+    }); 
+     }else{
+      $('#city').empty().append('No Result Found');
+      }
+      }  
+      });
+      });
+      </script>
+
+
+
+<script type="text/javascript">
+  
+if($("#SMSTemplate").val()>=160){
+i=1;
+i++;
+}
+echo i;
+  
+</script>
+
+
+  </script>
   <style type="text/css">
   element.style {
    margin: 0px 10px 10px 233px;
@@ -405,3 +422,4 @@ $.ajax({
   } 
   </style>
   @endsection
+

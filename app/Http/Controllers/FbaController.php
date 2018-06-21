@@ -24,23 +24,20 @@ class FbaController extends CallApiController
           return view('dashboard.fba-list',['doctype'=>$doctype]);         
         }
 
-        public function exportexcel(){
-          $query=[];
-           $query=DB::select('call fbaList_export(0)');
-                            
-               $data = json_decode( json_encode($query), true) ;
+              public function exportexcel(){
+              $query=[];
+              $query=DB::select('call fbaList_export(0)');
+              $data = json_decode( json_encode($query), true) ;
               return Excel::create('Fbalist', function($excel) use ($data) {
-               $excel->sheet('mySheet', function($sheet) use ($data)
-            {
+              $excel->sheet('mySheet', function($sheet) use ($data)
+          {
               $sheet->fromArray($data);
           });
-      })->download('xls');
+              })->download('xls');
 
 }
 
-
-
-        public function get_fba_list(Request $req){
+          public function get_fba_list(Request $req){
           $id=Session::get('FBAUserId');
         // print_r($id); exit();
           $query=DB::select("call fbaList(0)");
