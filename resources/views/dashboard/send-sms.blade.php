@@ -102,7 +102,7 @@
 </tbody>                  
 </table>
 </div> 
-  <h3 class="pull-left"><b>COUNT:</b><span id="msg_check" ></span><span id="msg_count">0</span><h3>    
+  <h3 class="pull-left"><b>COUNT:</b><span id="msg_check"></span><span id="msg_count">0</span><h3>    
   </div>
   <div class="col-sm-6 col-xs-12 form-padding">  
   <select  name="SMSTemplate" class="form-control"  id="SMSTemplate_select" onchange="SMSTemplate_fn(this.value)" >
@@ -391,6 +391,7 @@ $.ajax({
   if(msg)
   { $.each(msg, function( index, value ) {
    $('#city').append('<option value="'+value.cityname+'">'+value.cityname+'</option>');   
+
    }); 
    }else{
    $('#city').empty().append('No Result Found');
@@ -398,8 +399,16 @@ $.ajax({
    }  
    });
    });
-
-function getlen()
+</script>
+<style type="text/css">
+  element.style {
+   margin: 0px 10px 10px 233px;
+  overflow: hidden;
+  } 
+  </style>
+  
+  <script type="text/javascript">
+  function getlen()
 {
      var txt = $("#SMSTemplate").val().length; 
       $("#smschar").text(txt);
@@ -421,10 +430,6 @@ function getlen()
     
 }
    </script>
-  <style type="text/css">
-  element.style {
-   margin: 0px 10px 10px 233px;
-  overflow: hidden;
-  } 
-  </style>
+
   @endsection
+
