@@ -113,11 +113,12 @@
   </select>
 
 <br>
-<textarea style="padding:10px; height:200px;"  id="SMSTemplate"  name="sms_text" class="form-control"> </textarea>
+<textarea style="padding:10px; height:200px;"  id="SMSTemplate"  name="sms_text" class="form-control" onkeyup="getlen()"> </textarea>
 <label class="control-label" for="inputError" id="required3"> </label>
 <div class="center-obj pull-left">
 <button class="common-btn" id="send_message_id">SEND</button>
 </div>
+<div style="margin-top: 10px;padding-right: 100px;"><h4 class="pull-right"><b> SMS CHARACTER :</b><span id="smschar"></span>&nbsp;&nbsp;<b>SMS COUNT:<span id="divcout"></b></h4></div>
 </div>
 </form>
 </div>
@@ -397,6 +398,28 @@ $.ajax({
    }  
    });
    });
+
+function getlen()
+{
+     var txt = $("#SMSTemplate").val().length; 
+      $("#smschar").text(txt);
+     var minlen = 160;   
+      if(txt>minlen){
+      var x= txt%minlen;     
+        if(x==0){
+          var len = parseInt(txt/minlen);
+        $("#divcout").text(len);
+        }else{
+          var len = parseInt(txt/minlen);
+          $("#divcout").text(len+1);          
+        }     
+        
+      }else{
+        $("#divcout").text("1");
+      }
+     
+    
+}
    </script>
   <style type="text/css">
   element.style {

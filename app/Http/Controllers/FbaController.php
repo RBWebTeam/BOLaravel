@@ -30,7 +30,7 @@ class FbaController extends CallApiController
                             
                $data = json_decode( json_encode($query), true) ;
               return Excel::create('Fbalist', function($excel) use ($data) {
-               $excel->sheet('mySheet', function($sheet) use ($data)
+               $excel->sheet('FBADATA', function($sheet) use ($data)
             {
               $sheet->fromArray($data);
           });
