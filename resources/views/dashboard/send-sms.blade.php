@@ -139,9 +139,8 @@ $(document).on("keyup",".search_id",function() {
   tr = table.getElementsByTagName("tr");
   for (i = 0; i < tr.length; i++) {
     td = tr[i].getElementsByTagName("td")[0];
-     
     if (td) {
-      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+   if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
         tr[i].style.display = "";
       } else {
      tr[i].style.display = "none";
@@ -156,17 +155,21 @@ $(document).on("keyup",".search_id",function() {
    $(document).ready(function(){ 
    $("#search_fba_date").click(function () {
 
+
+if($('#smslist').val()==1 || $('#smslist').val()==2 || $('#smslist').val()==3 || $('#smslist').val()==4){
   if($('#fmin_date').val()==0 ||$('#fmin_date').val()==null ){ 
   $('#required1').text('This field is required');
   //$('#required2').text('This field is required');
   return false;
   }else{ $('#required1').text('');}
+
+
  if($('#fmax_date').val()==0 ||$('#fmax_date').val()==null ){ 
   $('#required2').text('This field is required');
   return false;
  }else{ $('#required2').text('');}
 
-
+}
    console.log($('#sendsms').serialize());
    $.ajax({ 
    url: "{{URL::to('send-sms-detail')}}",
@@ -220,29 +223,26 @@ $(document).on("keyup",".search_id",function() {
   });
   }
   }
-  function SMSTemplate_fn(ID){
-  $('#SMSTemplate').empty();
-  $.get("{{url('send-sms')}}",{'smstemplate_id':ID}).done(function(data){ $('#SMSTemplate').val(data);
-  }).fail(function(xhr, status, error) {
- console.log(error);
-  });
-  }
-  //$(document).on('change','#search_fba_dte',function(e){
- $('#smslist').on('change', function() {
-  $("#fmin_date").empty().append('');
-    //alert('okae');
-  var smslist=$('#smslist').find(":selected").val();
-  var array = "";
-  var i=0;
-   $('#smslist  option:selected').each(function() {
-    array+= $(this).val()+",";
-    });
-   console.log(array);
-
-
-
- if( $('#SMSTemplate_select').val()==0 || $('#SMSTemplate_select').val()==null  ){
- $('#required2').text('This field is required');
+function SMSTemplate_fn(ID){
+$('#SMSTemplate').empty();
+$.get("{{url('send-sms')}}",{'smstemplate_id':ID}).done(function(data){ $('#SMSTemplate').val(data);
+}).fail(function(xhr, status, error) {
+console.log(error);
+});
+}
+//$(document).on('change','#search_fba_dte',function(e){
+$('#smslist').on('change', function() {
+$("#fmin_date").empty().append('');
+//alert('okae');
+var smslist=$('#smslist').find(":selected").val();
+var array = "";
+var i=0;
+$('#smslist  option:selected').each(function() {
+array+= $(this).val()+",";
+});
+console.log(array);
+if( $('#SMSTemplate_select').val()==0 || $('#SMSTemplate_select').val()==null  ){
+$('#required2').text('This field is required');
  //alert("Please select from drop down list.");
 return false;
 }else{
@@ -252,8 +252,6 @@ if($('#SMSTemplate').val()==0 || $('#SMSTemplate').val()==null){
 $('#required4').text('This field is required');
 //alert("Please fill out this field message.");
 return false;
-
-
 
  if( $('#SMSTemplate_select').val()==0 || $('#SMSTemplate_select').val()==null  ){
  $('#required2').text('This field is required');
@@ -294,7 +292,6 @@ $(document).ready(function(){
  });
  }, 4000);
  });
-
 
 $.ajax({ 
  url: "{{URL::to('send-sms-zone')}}",
@@ -345,55 +342,55 @@ $.ajax({
   },
   });
 
-
- $('#zone').on('change', function() {
+  $('#zone').on('change', function() {
   $("#state").empty().append('');
    // alert('okae');
   var state=$('#zone').find(":selected").val();
   // console.log(state);
   var array = "";
   var i=0;
-   $('#zone  option:selected').each(function() {
-      array+= $(this).val()+"";
-    });
-   console.log(array);
-    var v_token ="{{csrf_token()}}";
-   $.ajax({  
-    type: "POST",  
-    url: "{{URL::to('send-sms-zonechange')}}",
-    data : {'_token': v_token,'zone':array},
-    success: function(msg){
-     console.log(msg);
-    if(msg)
-    { $.each(msg, function( index, value ) {
-   $('#state').append('<option value="'+value.state_id+'">'+value.state_name+'</option>');   
-    }); 
-     }else{
-    $('#state').empty().append('No Result Found');
-    }
-    }  
-    });
-    });
+  $('#zone  option:selected').each(function() {
+  array+= $(this).val()+"";
+  });
+  console.log(array);
+  var v_token ="{{csrf_token()}}";
+  $.ajax({  
+  type: "POST",  
+  url: "{{URL::to('send-sms-zonechange')}}",
+  data : {'_token': v_token,'zone':array},
+  success: function(msg){
+  console.log(msg);
+  if(msg)
+  { $.each(msg, function( index, value ) {
+  $('#state').append('<option value="'+value.state_id+'">'+value.state_name+'</option>');   
+  }); 
+  }else{
+  $('#state').empty().append('No Result Found');
+  }
+  }  
+  });
+  });
   $('#state').on('change', function() {
   $("#city").empty().append('');
    // alert('okae');
   var state=$('#state').find(":selected").val();
   var array = "";
   var i=0;
-   $('#state  option:selected').each(function() {
-    array+= $(this).val()+",";
-    });
-   console.log(array);
-    var v_token ="{{csrf_token()}}";
-   $.ajax({  
-    type: "POST",  
-    url: "{{URL::to('send-sms-city')}}",
-    data : {'_token': v_token,'state':array},
-    success: function(msg){
-    console.log(msg);
-    if(msg)
-    {  $.each(msg, function( index, value ) {
+  $('#state  option:selected').each(function() {
+  array+= $(this).val()+",";
+  });
+  console.log(array);
+  var v_token ="{{csrf_token()}}";
+  $.ajax({  
+  type: "POST",  
+  url: "{{URL::to('send-sms-city')}}",
+  data : {'_token': v_token,'state':array},
+  success: function(msg){
+  console.log(msg);
+  if(msg)
+  { $.each(msg, function( index, value ) {
    $('#city').append('<option value="'+value.cityname+'">'+value.cityname+'</option>');   
+
     }); 
      }else{
       $('#city').empty().append('No Result Found');
@@ -417,3 +414,14 @@ echo i;
 
 
       @endsection
+
+ 
+   </script>
+  <style type="text/css">
+  element.style {
+   margin: 0px 10px 10px 233px;
+  overflow: hidden;
+  } 
+  </style>
+  @endsection
+

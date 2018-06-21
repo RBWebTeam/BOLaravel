@@ -7,42 +7,36 @@
        <div class="overflow-scroll">
        <div class="table-responsive" >
       <table class="datatable-responsive table table-striped table-bordered dt-responsive nowrap" id="example">
-                                    <thead>
-                                       <tr>
-                                       <th>ID</th>
-                                      <th>Category Name</th>
-                                       <th>Sub Category Name</th>
-                                       <th>Classification Name </th>
-                                       <!-- <th>DocPath</th> -->
-                                       <th>Message</th>
-                                       <th>Status</th>
-                                       <th>Status Date</th>
-                                       <th>Assigned Date</th>
-                                       <!-- <th>StatusChangedBy</th> -->
-                                          <th>Comment</th>
-                                      </tr>
-                                    </thead>
-                                    <tbody>
+        <thead>
+        <tr>
+        <th>ID</th>
+       <th>Category Name</th>
+        <th>Sub Category Name</th>
+      <th>Classification Name </th>
+      <th>Message</th>
+        <th>Status</th>
+        <th>Status Date</th>
+      <th>Assigned Date</th>
+        <!-- <th>StatusChangedBy</th> -->
+      <th>Comment</th>
+     </tr>
+    </thead>
+     <tbody>
 
-                                     @foreach($query as $va)
-                                     <tr>
-                                     <td><a href="#" style="color: black;" onclick="Ticket_comment_fn('{{$va->TicketRequestId}}')" >{{$va->TicketRequestId}}</a></td>
-                                      <td>{{$va->CateName}}</td>
-                                       <td>{{$va->QuerType}}</td>
-                                        <td>{{$va->Description}}</td>
-                                         <!-- <td>{{$va->DocPath}}</td> -->
-                                          <td>{{$va->Message}}</td>
-                                           <td>{{$va->Status}}</td>
-                                            <td>{{$va->created_date}}</td>
-                                            <td>{{$va->assigned_date}}</td>
-                                            <!-- <td>{{$va->StatusChangedBy}}</td> -->
-                                             <td  > <a href="#" onclick="view_comment_fn_user('{{$va->TicketRequestId}}')">View</a></td>
-                                     </tr>
-                                     @endforeach
-                                    
-                                  </tbody>
-           
-            </table>
+   @foreach($query as $va)
+   <tr>
+   <td><a href="#" style="color: black;" onclick="Ticket_comment_fn('{{$va->TicketRequestId}}')" >{{$va->TicketRequestId}}</a></td>
+       <td>{{$va->CateName}}</td>
+        <td>{{$va->QuerType}}</td>
+        <td>{{$va->Description}}</td>
+       <td>{{$va->Message}}</td>
+        <td>{{$va->Status}}</td>
+       <td>{{$va->CreatedDate}}</td>
+
+      <td><a href="#" onclick="view_comment_fn_user('{{$va->TicketRequestId}}')">View</a></td>
+       @endforeach                           
+       </tbody>
+     </table>
       </div>
       </div>
       </div>
@@ -156,14 +150,14 @@
 
 
 
- function view_comment_fn_user(ID){  
-   $('#Ticket-comment-user-Modal').modal('show');
-   $.get("{{url('ticket-request')}}",{'TicketRequestId':ID})
-             .done(function(data){
-               arr=Array();
-               $('#get_comment_id').empty();
+    function view_comment_fn_user(ID){  
+     $('#Ticket-comment-user-Modal').modal('show');
+     $.get("{{url('ticket-request')}}",{'TicketRequestId':ID})
+    .done(function(data){
+     arr=Array();
+     $('#get_comment_id').empty();
               $.each(data, function(key, value) {
-                     arr.push('<tr><td>'+value.comment+'</td><td>'+value.StatusName+'</td><td>'+value.created_date+'</td></tr>');
+                     arr.push('<tr><td>'+value.comment+'</td><td>'+value.StatusName+'</td><td>'+value.CreatedDate+'</td></tr>');
               }); 
               console.log(arr);
               $('#get_comment_id').append(arr);
