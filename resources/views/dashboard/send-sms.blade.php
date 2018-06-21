@@ -102,7 +102,7 @@
 </tbody>                  
 </table>
 </div> 
-  <h3 class="pull-left"><b>COUNT:</b><span id="msg_check" ></span><span id="msg_count">0</span><h3>    
+  <h3 class="pull-left"><b>COUNT:</b><span id="msg_check"></span><span id="msg_count">0</span><h3>    
   </div>
   <div class="col-sm-6 col-xs-12 form-padding">  
   <select  name="SMSTemplate" class="form-control"  id="SMSTemplate_select" onchange="SMSTemplate_fn(this.value)" >
@@ -402,4 +402,18 @@ $.ajax({
       });
       });
       </script>
+
+
+
+<script type="text/javascript">
+  
+if($("#SMSTemplate").val()>=160){
+i=1;
+i++;
+}
+echo i;
+  
+</script>
+
+
       @endsection

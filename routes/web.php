@@ -108,6 +108,14 @@ Route::get('Fba-list-Update-posp/{id}','FbaController@UpdatePospno');
 Route::get('export','FbaController@exportexcel');
 
 
+// non fba start  
+Route::get('load-non-fba-list','nonfbaController@nonfbalist');
+
+Route::get('non-fba-list','nonfbaController@getnonfba');
+
+// non fba End
+
+
 
 
 //city_droupdown
