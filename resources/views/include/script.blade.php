@@ -1584,13 +1584,14 @@ function updateposp(id)
          url:'Fba-list-Update-posp/'+id,
          success: function(posp){        
              var text = JSON.parse(posp);
+console.log(text);
+
               if(text.StatusNo==1){
                 POSP_UPDATE(id);
               }
              else{
                   alert('Updated Successfully');
-                  $('#posp_'+id).closest('td').html(text.PospNo);
-                  alert(text.PospNo);
+                  $('#posp_'+id).closest('td').html(text.MasterData.PospNo);
                   $('#posp_remark').val('');
                   $('.close').click(); 
              }        

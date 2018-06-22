@@ -108,9 +108,8 @@
                                        </table>
 
   <div id="myDIV" >
-  <a href="{{url('export')}}" class="qry-btn" id="pospbtn">Export</a>
-  <!-- <a href="{{url('fba-list')}}" class="qry-btn" id="nonfb">FBA LIST</a> -->
-
+  <a href="{{url('export-excel')}}" class="qry-btn" id="pospbtn">Export</a>
+  
 </div>
 </div>
      </div>
