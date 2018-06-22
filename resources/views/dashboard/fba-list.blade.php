@@ -9,10 +9,7 @@
 }
 </style>
 
-
-
-
-             <div class="container-fluid white-bg">
+<div class="container-fluid white-bg">
              <div class="col-md-12"><h3 class="mrg-btm">FBA List</h3>
            <hr>
            </div>

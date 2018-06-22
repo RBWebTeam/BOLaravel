@@ -454,7 +454,7 @@ foreach ($val->ParamDetails as $key => $value) {
 <div class="col-md-4 col-sx-12 styled-input">
  
  <select  class="input-1" name="ddlappttime" id="ddlappttime" required>
-    <option value="0" selected="selected">Appt. Time Slot</option>
+    <option>Appt. Time Slot</option>
     @foreach($appttime as $val)
 	<option value="{{$val->appointment_time}}">{{$val->appointment_time}}</option>
     @endforeach
@@ -463,10 +463,7 @@ foreach ($val->ParamDetails as $key => $value) {
  
  </div>
 <div class="col-xs-12 pad-1" style="padding:0 0 12px 0;">
-
- 
-     
-   <div class="col-md-12 col-xs-12 pad pad-1">
+  <div class="col-md-12 col-xs-12 pad pad-1">
     <span cssstyle="display:block;width:auto;">&nbsp;<input id="chkAgree " type="checkbox" name="chkAgree" class="used" required></span> I Agree to the <a onclick="showtermcon()" style="color: #5b9bd5; cursor: pointer;" data-toggle="modal" data-target="myModal">Terms &amp; Conditions</a>
                                 </div>
                             </div>

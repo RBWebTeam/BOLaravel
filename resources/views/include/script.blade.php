@@ -97,7 +97,7 @@ $(document).ready(function(){
              }
 
              function POSP_UPDATE(id){
-              // updatepospapi(id);
+              //updatepospapi(id);
                       $('#fbaid').val(id);
                       $('.updatePosp').modal('show');
                     
@@ -1589,9 +1589,10 @@ function updateposp(id)
               }
              else{
                   alert('Updated Successfully');
-                      /* $('#posp_'+id).closest('td').html(text.);
+                  $('#posp_'+id).closest('td').html(text.PospNo);
+                  alert(text.PospNo);
                   $('#posp_remark').val('');
-                  $('.close').click(); */
+                  $('.close').click(); 
              }        
         }  
       });

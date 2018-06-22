@@ -197,13 +197,13 @@ foreach ($val->ParamDetails as $key => $value) {
 
 </div>
 
-<div class="col-md-12"><p class="text-center head1">Summary of your Booking</p></div>
+<div class="col-md-12"><p class="text-center head1"><b>Summary of your Booking</b></p></div>
 
 <div class="col-md-12">
 <div>
  <table class="table table-bordered tbl1">
  <tr>
-    <td  colspan="2" class="text-center bg-primary1">Personal Particulars</td>
+    <td  colspan="2" class="text-center bg-primary1"><b>Personal Particulars</b></td>
  </tr>
  @foreach($query as $val)
  <tr>
@@ -224,7 +224,7 @@ foreach ($val->ParamDetails as $key => $value) {
  </tr>
 
  <tr>
-    <td  colspan="2" class="text-center bg-primary1">Health Check Up Details</td>
+    <td  colspan="2" class="text-center bg-primary1"><b>Health Check Up Details</b></td>
  </tr>
 
  <tr>
