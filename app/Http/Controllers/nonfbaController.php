@@ -26,6 +26,25 @@ class nonfbaController extends CallApiController
   // page load
           return view('dashboard.non_fba_list');
         }
+
+              public function nonfbaexportexcel(){
+              $query=[];
+              $query=DB::select('call non_fba_export_fbaList(0)');
+              $data = json_decode( json_encode($query), true) ;
+              return Excel::create('Non Fbalist', function($excel) use ($data) {
+              $excel->sheet('mySheet', function($sheet) use ($data)
+          {
+              $sheet->fromArray($data);
+          });
+              })->download('xls');
+
+}
+
+
+
+
+
+
 }
 
 

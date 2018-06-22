@@ -112,6 +112,7 @@ Route::get('export','FbaController@exportexcel');
 Route::get('load-non-fba-list','nonfbaController@nonfbalist');
 
 Route::get('non-fba-list','nonfbaController@getnonfba');
+Route::get('export-excel','nonfbaController@nonfbaexportexcel');
 
 // non fba End
 
