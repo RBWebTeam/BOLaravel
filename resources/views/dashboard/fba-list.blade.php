@@ -109,7 +109,7 @@
 
   <div id="myDIV" >
   <a href="{{url('export')}}" class="qry-btn" id="pospbtn">Export</a>
-<!--   <a href="{{url('non-fba-list')}}" class="qry-btn" id="nonfb">Non Fba</a> -->
+
 
     
 
@@ -514,6 +514,8 @@
              "render": function ( data, type, row, meta ) {
               return data==""?('<a id="posp_'+row.fbaid+'" class="checkPosp" data-toggle="modal" data-target="#updatePosp" onclick="updateposp('+row.fbaid+')">update</a>'):data;
               }
+ 
+
             }, 
 
              {"data":"LoanID"  ,
