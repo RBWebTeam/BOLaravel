@@ -1591,8 +1591,6 @@ console.log(text);
               }
              else{
                   alert('Updated Successfully');
-                   
-                     
                   $('#posp_'+id).closest('td').html(text.MasterData.PospNo);
                   $('#posp_remark').val('');
                   $('.close').click(); 
@@ -1602,11 +1600,6 @@ console.log(text);
 
 }
 
-
-
-
-
-  
 
 </script>
 
