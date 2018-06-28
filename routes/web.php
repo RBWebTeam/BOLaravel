@@ -14,8 +14,7 @@ Route::get('health-packages','BookAppointmentController@health_packages');
 
 Route::post('health-insurance-analysis','BookAppointmentController@health_insurance_analysis');
 Route::get('order-summary','BookAppointmentController@order_summary');
-Route::post('health-insurance-packages','BookAppointmentController@health_insurance_packages');
- 
+Route::post('health-insurance-packages','BookAppointmentController@health_insurance_packages'); 
  //Shubham
 Route::get('HealthAssure','HealthAssureController@gethealthassure');
 Route::post('HealthAssureinsert','HealthAssureController@inserthealthtest');
@@ -216,6 +215,9 @@ Route::get('assigned-fba-lead-history/{fbaid}','quickleadController@gethistoryfb
 Route::get('Quick-lead-dashboard','quickleaddashboardController@getquicklead');
 Route::get('edit_lead/{Leadid}','quickleadController@editlead');
 Route::Post('quick-lead-edit','quickleadController@updatelead');
+
+route::get('offlinecs','offlinecsController@getofflinecs');
+
 ///shubham end ///
 // avinash
  Route::get('ticket-module','TicketController@getticketdetails') ;
