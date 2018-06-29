@@ -16,7 +16,7 @@
 	        	<thead>
 	        		<tr>
              
-	        						   <th>FBA ID</th> 
+	        						                 <th>FBA ID</th> 
                                        <th>Full Name</th> 
                                        <th>Created Date</th>
                                        <th>Mobile No</th>                                   

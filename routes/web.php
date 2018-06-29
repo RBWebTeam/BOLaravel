@@ -108,13 +108,13 @@ Route::get('Fba-list-Update-posp/{id}','FbaController@UpdatePospno');
 Route::get('export','FbaController@exportexcel');
 
 
-// non fba start  
-Route::get('load-non-fba-list','nonfbaController@nonfbalist');
+// non fba-list start  
 
+Route::get('load-non-fba-list','nonfbaController@nonfbalist');
 Route::get('non-fba-list','nonfbaController@getnonfba');
 Route::get('export-excel','nonfbaController@nonfbaexportexcel');
 
-// non fba End
+// non fba-list End
 
 
 
@@ -141,7 +141,6 @@ Route::post('update_fbamaster','FbaController@update_fba_table');
 
 
 // Route::get('fba-list/{salescode}/{fbaid}',array('as'=>'fba-list.ajax','uses'=>'FbaController@salesupdate'));
-
 
 
 
