@@ -100,10 +100,12 @@
                                        <th>Bank Account</th>
                                        <th>Partner Info</th> 
                                        <th>Erp id</th>
+                                       <th>Referer Code</th> 
+                                       <th>Referedby_Code</th>   
                                        <th>Sales code</th>
                                        <th>FSM Details</th>  
                                        <th>Documents</th> 
-                                       <th>Customer ID</th> 
+                                       <th>Customer ID</th>   
                                        <th>Created Date1</th>
                                        </tr>
                                        </thead>
@@ -391,7 +393,7 @@
 
     <div class="col-md-12"> <br>
     <form method="POST" id="modelpaylink">
-        {{ csrf_field() }}
+    {{ csrf_field() }}
 
    <textarea type="text" style="resize:none" name="divpartnertable_payment" cols="num" rows="num" id="divpartnertable_payment" class="divpartnertable_payment form-control" readonly> </textarea> 
     <br>
@@ -484,7 +486,7 @@
               }
           },
 
-            { "data": "createdate" },            
+            { "data": "createdate"},            
             {"data":"MobiNumb1" ,
 
              "render": function ( data, type, row, meta ) {
@@ -534,7 +536,7 @@
              {"data":null ,
              "render": function ( data, type, row, meta ) {
                 return '<a href="" data-toggle="modal" data-target="#partnerInfo" onclick="getpartnerinfo('+row.fbaid+')">partner info</a>';
-              } 
+            } 
 
             }, 
 
@@ -547,9 +549,11 @@
      //       },
 
 
-              {"data":"erpid"}, 
-              {"data":"salescode" ,
-             "render": function ( data, type, row, meta ) {
+              {"data":"erpid"},
+              {"data":"Refcode"},
+              {"data":"Refbycode"},    
+              {"data":"salescode",
+            "render": function ( data, type, row, meta ) {
             return ("<a id=update_"+row.fbaid+" onclick=sales_update_fn("+row.fbaid+",'"+data+"')>"+data+"</a>");
               }
    
@@ -566,7 +570,7 @@
             return data == 1?'<a href="" style="" data-toggle="modal"  data-target="#docviwer" onclick="docview('+row.fbaid+')" >uploaded</a>':'pending';
            }
         },
-
+          
           {"data":"CustID" ,
               "render": function ( data, type, row, meta ) {
                return (data==""||data=="0")?('<a id="btnviewcid" onclick="getcustomerid(this,'+row.fbaid+')">Update</a>'):data;
