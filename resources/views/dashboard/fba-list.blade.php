@@ -92,12 +92,14 @@
                                        <th>State</th>
                                        <th>Zone</th>
                                        <th>Pincode</th>
+                                  <!-- <th>Erpid</th> -->
                                        <th>POSP No(SSID)</th>
                                        <th>Loan ID</th> 
                                        <th>Posp Name</th> 
                                        <th>Posp Status</th> 
                                        <th>Bank Account</th>
                                        <th>Partner Info</th> 
+                                       <th>Erp id</th>
                                        <th>Sales code</th>
                                        <th>FSM Details</th>  
                                        <th>Documents</th> 
@@ -114,7 +116,7 @@
     
 
 </div>
-</div>
+  </div>
      </div>
           </div>
             </div>
@@ -510,7 +512,7 @@
             {"data":"statename"},
             {"data":"Zone"},  
             {"data":"Pincode"},
-            {"data":"POSPNo"  ,
+             {"data":"POSPNo"  ,
              "render": function ( data, type, row, meta ) {
               return data==""?('<a id="posp_'+row.fbaid+'" class="checkPosp" data-toggle="modal" data-target="#updatePosp" onclick="updateposp('+row.fbaid+')">update</a>'):data;
               }
@@ -545,7 +547,7 @@
      //       },
 
 
-
+              {"data":"erpid"}, 
               {"data":"salescode" ,
              "render": function ( data, type, row, meta ) {
             return ("<a id=update_"+row.fbaid+" onclick=sales_update_fn("+row.fbaid+",'"+data+"')>"+data+"</a>");

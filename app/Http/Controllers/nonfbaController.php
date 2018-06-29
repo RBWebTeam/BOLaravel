@@ -23,7 +23,7 @@ class nonfbaController extends CallApiController
         }
 
       public function getnonfba(){
-  // page load
+    // page load
           return view('dashboard.non_fba_list');
         }
 
@@ -39,11 +39,6 @@ class nonfbaController extends CallApiController
               })->download('xls');
 
 }
-
-
-
-
-
 
 }
 
