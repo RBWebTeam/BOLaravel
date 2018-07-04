@@ -5,7 +5,7 @@
       <div class="col-md-12">
          <div class="overflow-scroll">
          	<div class="container">
-         	<form id="frmofflinecs" method="post" enctype="multipart/form-data">
+         	<form id="frmofflinecs" method="post">
             {{ csrf_field() }}
          		<label>Product:</label>
                  <select class="form-control" id="ddproduct" name="ddproduct" style="width: 30%">
@@ -49,8 +49,8 @@
                 </div>
                 <div class="col-md-4">
                 	<label>Region:</label>
-                	<select class="form-control" id="ddlregion" name="ddlregion">
-                		<option>--select--</option>
+                	<select class="form-control" id="ddlregion" name="ddlregion" >
+                		<option value="1">--select--</option>
                 	</select>
                 </div>
               </div>
@@ -71,7 +71,7 @@
               <div class="row">
               	<div class="col-md-4">
               		<label>FBA Name:</label>
-              		<select class="form-control" id="ddlfbaname">
+              		<select class="form-control" id="ddlfbaname" name="ddlfbaname">
                     <option>--Select--</option>
                     @foreach($fba as $val)
               			<option value="{{$val->FBAID}}">{{$val->FullName}}-{{$val->FBAID}}</option>
@@ -80,8 +80,8 @@
               	</div>
                 <div class="col-md-4">
                   <label>Posp Status:</label>
-                  <label class="checkbox-inline">YES  <input type="radio" name="txtposp" id="txtposp"></label>
-                  <label class="checkbox-inline">No  <input type="radio" name="txtposp" id="txtposp"></label>                               
+                  <label class="checkbox-inline">YES  <input type="radio" name="txtposp" id="txtposp" value="1"></label>
+                  <label class="checkbox-inline">No  <input type="radio" name="txtposp" id="txtposp" value="0"></label>                               
                 </div>
                 <div class="col-md-4">
                   <label>Premium Amount:</label>
@@ -110,8 +110,8 @@
               	</div>
               	<div class="col-md-2">
               		<label>Break In:</label>
-              		<label class="checkbox-inline">YES  <input type="radio" name="txtbreakin" id="txtbreakin"></label>
-              		<label class="checkbox-inline">No  <input type="radio" name="txtbreakin" id="txtbreakin"></label>              		           		
+              		<label class="checkbox-inline">YES  <input type="radio" name="txtbreakin" id="txtbreakin" value="1"></label>
+              		<label class="checkbox-inline">No  <input type="radio" name="txtbreakin" id="txtbreakin" value="0"></label>              		           		
               	</div>
               </div>
               <div class="row">
@@ -134,11 +134,11 @@
               	</div>
               	<div class="col-md-4">
               		<label>UTR No / Cheque No:</label>
-              		<input type="text" name="txtutrno" class="form-control" id="txtutrno">
+              		<input type="text" name="txtutrnomotor" class="form-control" id="txtutrnomotor">
               	</div> 
               	<div class="col-md-4">
               		<label>Bank:</label>
-              		<input type="text" name="txtbank" id="txtbank" class="form-control">
+              		<input type="text" name="txtbankmotor" id="txtbankmotor" class="form-control">
               	</div>      	
               </div>
               </div>           
@@ -163,26 +163,26 @@
               	</div>
               	<div class="col-md-4">
               		<label>UTR No / Cheque No:</label>
-              		<input type="text" name="txtutrno" class="form-control" id="txtutrno">
+              		<input type="text" name="txtutrnohealth" class="form-control" id="txtutrnohealth">
               	</div>
               	<div class="col-md-4">
               		<label>Bank:</label>
-              		<input type="text" name="txtbank" id="txtbank" class="form-control">
+              		<input type="text" name="txtbankhealth" id="txtbankhealth" class="form-control">
               	</div>
               	<div class="col-md-4">
               		<label>Preexisting:</label>
-              		<label class="checkbox-inline">YES  <input type="radio" name="txtPreexisting" id="txtPreexisting"></label>
-              		<label class="checkbox-inline">No  <input type="radio" name="txtPreexisting" id="txtPreexisting"></label>             		           		
+              		<label class="checkbox-inline">YES  <input type="radio" name="txtPreexisting" id="txtPreexisting" value="1"></label>
+              		<label class="checkbox-inline">No  <input type="radio" name="txtPreexisting" id="txtPreexisting" value="1"></label>             		           		
               	</div>   
               	<div class="col-md-4">
               		<label>Medical Report:</label>
-              		<label class="checkbox-inline">YES  <input type="radio" name="txtmedicalrp" id="txtmedicalrp"></label>
-              		<label class="checkbox-inline">No  <input type="radio" name="txtmedicalrp" id="txtmedicalrp"></label>             		           		
+              		<label class="checkbox-inline">YES  <input type="radio" name="txtmedicalrp" id="txtmedicalrp" value="1"></label>
+              		<label class="checkbox-inline">No  <input type="radio" name="txtmedicalrp" id="txtmedicalrp" value="0"></label>             		           		
               	</div> 
               	</div> 
               	<div class="row">  
               	<div class="col-md-4">
-              		<label>Premium for 1 / 2 / 3 Year/s:</label>
+              		<label>Premium Year/s:</label>
               		<select id="dllpremium" name="dllpremium" class="form-control">
               			<option>--select--</option>
               			<option value="1">1 year</option>
@@ -208,8 +208,8 @@
              	</div>
              	<div class="col-md-4">
               		<label>Medical case:</label>
-              		<label class="checkbox-inline">YES  <input type="radio" name="txtmedicalcase" id="txtmedicalcase"></label>
-              		<label class="checkbox-inline">No  <input type="radio" name="txtmedicalcase" id="txtmedicalcase"></label>              		           		
+              		<label class="checkbox-inline">YES  <input type="radio" name="txtmedicalcase" id="txtmedicalcase" value="1"></label>
+              		<label class="checkbox-inline">No  <input type="radio" name="txtmedicalcase" id="txtmedicalcase" value="0"></label>              		           		
               	</div> 
               </div>
               <div class="row">
@@ -242,20 +242,41 @@
               </div>
               <div class="row">
               	<div class="col-md-4">
-              		<label>Executive Name:</label>
-              		<input type="text" name="txtexecutivename" id="txtexecutivename" class="form-control">
+              		<label>Executive Name:</label>             
+                  <select id="txtexecutivename" name="txtexecutivename" class="form-control">
+                    <option>--select--</option>
+                    @foreach($Executive as $val)
+                    <option value="{{$val->employeeid}}">{{$val->EmployeeName}}</option>
+                   @endforeach
+                  </select>
               	</div>
               	<div class="col-md-4">
-              		<label>Executive 1 Name:</label>
-              		<input type="text" name="txtexecutivename1" id="txtexecutivename1" class="form-control">
+              		<label>Executive 1 Name:</label>              		
+                  <select id="txtexecutivename1" name="txtexecutivename1" class="form-control">
+                    <option>--select--</option>
+                    @foreach($Executive1 as $val)
+                    <option value="{{$val->employeeid}}">{{$val->EmployeeName}}</option>
+                   @endforeach
+                  </select>
               	</div>
               	<div class="col-md-4">
               		<label>Product Executive:</label>
-              		<input type="text" name="txtexeProductname" id="txtexeProductname" class="form-control">
+              		
+                  <select id="txtexeProductname" name="txtexeProductname" class="form-control">
+                    <option>--select--</option>
+                    @foreach($productexe as $val)
+                    <option value="{{$val->employeeid}}">{{$val->EmployeeName}}</option>
+                   @endforeach
+                  </select>
               	</div>
               	<div class="col-md-4">
-              		<label>Product Manager:</label>
-              		<input type="text" name="txtmgrProductname" id="txtmgrProductname" class="form-control">
+              		<label>Product Manager:</label>              		
+                  <select id="txtmgrProductname" name="txtmgrProductname" class="form-control">
+                    <option>--select--</option>
+                    @foreach($productmgr as $val)
+                    <option value="{{$val->employeeid}}">{{$val->EmployeeName}}</option>
+                   @endforeach
+                  </select>
               	</div>              	
               </div>
               <br>
@@ -274,10 +295,13 @@
               	</div>              	
               </div>  -->
                  
-             <div class="row Motor" id="divMotor">          
+             <div class="row Motor" id="divMotor">  
+             <form id="Motordoc" method="post" enctype="multipart/form-data">  
+             {{ csrf_field() }}      
              	<div class="col-md-4">
              		<label>RC Copy:</label>
-             		<input type="file" name="filerc" id="filerc" class="form-control">             		
+             		<input type="file" name="filerc" id="filerc" class="form-control"> 
+                <button class="btn btn-primary" id="rcupload">upload</button>            		
              	</div>
              	<div class="col-md-4">
              		<label>Fitness:</label>
@@ -293,55 +317,64 @@
              	</div>
              	<div class="col-md-4">
              		<label>Cheque Copy:</label>
-             		<input type="file" name="fileCheque" id="fileCheque" class="form-control">            
+             		<input type="file" name="motorfileCheque" id="motorfileCheque" class="form-control">            
              	</div>
              	<div class="col-md-4">
              		<label>Other:</label>
-             		<input type="file" name="fileother" id="fileother" class="form-control"> 
+             		<input type="file" name="motorfileother" id="motorfileother" class="form-control"> 
              	</div>
+              </form>
              </div> 
              <br>
-             <div class="row" id="Health">            	              
+             <div class="row" id="Health">  
+             <form id="healthdoc" method="post" enctype="multipart/form-data">    
+                  	{{ csrf_field() }}              
              	<div class="col-md-4">
              		<label>Proposal Form:</label>
              		<input type="file" name="fileProposalForm" id="fileProposalForm" class="form-control">
              	</div>
              	<div class="col-md-4">
              		<label>KYC:</label>
-             		<input type="file" name="fileKYC" id="fileKYC" class="form-control">             		
+             		<input type="file" name="healthfileKYC" id="healthfileKYC" class="form-control">             		
              	</div>
              	<div class="col-md-4">
              		<label>Cheque Copy:</label>
-             		<input type="file" name="fileCheque" id="fileCheque" class="form-control">             	
+             		<input type="file" name="healthfileCheque" id="healthfileCheque" class="form-control">             	
              	</div>
              	<div class="col-md-4">
              		<label>Other:</label>
-             		<input type="file" name="fileother" id="fileother" class="form-control">             	
-             	</div>            	
+             		<input type="file" name="healthfileother" id="healthfileother" class="form-control">             	
+             	</div> 
+              </form>            	
              </div> 
              <br>
-             <div class="row" id="life">     	
+             <div class="row" id="life">
+             <form id="lifedoc" method="post" enctype="multipart/form-data">  
+             {{ csrf_field() }}   	
              	<div class="col-md-4">
              		<label>Proposal Form:</label>
              		<input type="file" name="fileProposalForm" id="fileProposalForm" class="form-control">
              	</div>
              	<div class="col-md-4">
              		<label>KYC Documents:</label>
-             		<input type="file" name="fileKYC" id="fileKYC" class="form-control">             		
+             		<input type="file" name="lifefileKYC" id="lifefileKYC" class="form-control">             		
              	</div>
              	<div class="col-md-4">
              		<label>Cheque Copy:</label>
-             		<input type="file" name="fileCheque" id="fileCheque" class="form-control">             		
+             		<input type="file" name="lifefileCheque" id="lifefileCheque" class="form-control">             		
              	</div>
              	<div class="col-md-4">
              		<label>Other:</label>
-             		<input type="file" name="fileother" id="fileother" class="form-control">         		
-             	</div>             	
+             		<input type="file" name="lifefileother" id="lifefileother" class="form-control">         		
+             	</div> 
+              </form>            	
              </div>           
              </div>
             </form>
             <dir class="col-md-12" style="text-align: center;">
-            	<button id="btnsaveofflinecs" class="btn btn-primary" >SAVE</button>
+            	<button id="btnmotor" class="btn btn-primary Motor" >SAVE</button>
+              <button id="btnhealth" class="btn btn-primary health">SAVE</button>
+              <button id="btnlife" class="btn btn-primary life">SAVE</button>
             	<button class="btn btn-primary" >RESET</button>
             </dir>
         </div>
@@ -351,7 +384,9 @@
  <script type="text/javascript">
 $( document ).ready(function() {
       $("#life").hide();
-     	$("#Health").hide();
+     	$(".health").hide();
+      $(".life").hide();
+      $("#Health").hide();
      	$("#divlife").hide();
      	$("#divhealth").hide();
      	$(".Motor").show();
@@ -363,6 +398,8 @@ $( document ).ready(function() {
      	$("#Health").hide();
      	$("#divlife").hide();
      	$("#divhealth").hide();
+      $(".health").hide();
+      $(".life").hide();
      }
      else if($("#ddproduct").val()==2){
      	$("#life").hide();
@@ -370,13 +407,17 @@ $( document ).ready(function() {
      	$("#divlife").hide();
      	$("#divhealth").show();
      	$(".Motor").hide();
+      $(".health").show();
+      $(".life").hide();
      }
      else if($("#ddproduct").val()==3){   	
-        $("#life").show();
+      $("#life").show();
      	$("#Health").hide();
      	$("#divlife").show();
      	$("#divhealth").hide();
      	$(".Motor").hide();
+      $(".health").hide();
+      $(".life").show();
 
      }
      else{
@@ -405,34 +446,74 @@ $("#ddlcity").change(function(){
              }
          });
 });
-$('#btnsaveofflinecs').click(function() {
-
-       data1=new FormData($("#filerc"));
-       data1=new FormData($("#fileFitness"));
-       data1=new FormData($("#filePUC"));
-       data1=new FormData($("#filebreakrp"));
-       data1=new FormData($("#fileCheque"));
-       data1=new FormData($("#fileother"));
-       data1=new FormData($("#fileProposalForm"));
-       data1=new FormData($("#fileKYC"));      
+$('#btnmotor').click(function() {     
        console.log($('#frmofflinecs').serialize());
-       $.ajax({ 
-       url: "{{URL::to('offlinecs')}}",
-       method:"POST",
-       data: $('#frmofflinecs').serialize(),
-       dataType:'json',
-       async:false,
-       type:'POST',
-       processData: false,
-       contentType: false,
+       $.ajax({      
+        url: "{{URL::to('offlinecs-insert-motor')}}",
+        method:"POST",
+        data: $('#frmofflinecs').serialize(),      
        success: function(msg)  
         {
         console.log(msg);
         alert("Record has been saved successfully");
-        $("#frmofflinecs").trigger('reset');
+         $("#frmofflinecs").trigger('reset');
         }
  });
 
  });
- </script>
+$('#btnhealth').click(function() {          
+       console.log($('#frmofflinecs').serialize());
+       $.ajax({      
+        url: "{{URL::to('offlinecs-insert-health')}}",
+        method:"POST",
+        data: $('#frmofflinecs').serialize(),      
+       success: function(msg)  
+        {
+        console.log(msg);
+        alert("Record has been saved successfully");
+         $("#frmofflinecs").trigger('reset');
+        }
+ });
+
+ });
+$('#btnlife').click(function() {          
+       console.log($('#frmofflinecs').serialize());
+       $.ajax({      
+        url: "{{URL::to('offlinecs-insert-life')}}",
+        method:"POST",
+        data: $('#frmofflinecs').serialize(),      
+       success: function(msg)  
+        {
+        console.log(msg);
+        alert("Record has been saved successfully");
+          $("#frmofflinecs").trigger('reset');
+        }
+ });
+ });
+$('#rcupload').click(function(){
+
+  alert($("#filerc").val());
+   data1=new FormData($("#filerc")); 
+   $.ajax({ 
+        url: "{{URL::to('offlinecs-insert-motordoc')}}",
+        method:"POST",
+        data: $('#Motordoc').serialize(),
+        dataType:'json',
+        async:false,
+        type:'POST',
+        processData: false,
+        contentType: false,
+      success: function(msg)  
+       {
+         console.log(msg);
+         alert("Record has been saved successfully");
+          
+       }
+    });
+
+ 
+});
+
+
+</script>
 @endsection

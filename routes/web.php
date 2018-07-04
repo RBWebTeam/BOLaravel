@@ -78,7 +78,7 @@ Route::get('quickleadassignmentshow','quickleadController@showlead');
 
 Route::get('sales-code-update','salescodeController@updatesalescode');
 Route::get('sales-code-update-get-fbaid/{salsecode}','salescodeController@selfcodefbaid');
-Route::POST('sales-code-update-inseret','salescodeController@insertsalescode');
+Route::POST('sales-code-update-insert','salescodeController@insertsalescode');
 //User_mapping vikas End
 
 
@@ -220,7 +220,11 @@ Route::Post('quick-lead-edit','quickleadController@updatelead');
 
 route::get('offlinecs','offlinecsController@getofflinecs');
 route::get('get_state_offlinecs/{cityid}','offlinecsController@getstate');
-Route::Post('offlinecs','offlinecsController@insertofflinecs');
+Route::Post('offlinecs-insert-motor','offlinecsController@insertofflinecs');
+Route::Post('offlinecs-insert-health','offlinecsController@inserthealthofflinecs');
+Route::Post('offlinecs-insert-life','offlinecsController@insertlifeofflinecs');
+Route::Post('offlinecs-insert-motordoc','offlinecsController@uploadmotordoc');
+
 
 ///shubham end ///
 // avinash

@@ -26,6 +26,7 @@
   <input type="text" class="text-primary form-control" name="sfbaid" id="sfbaid" required>
   </div>
   </div> 
+  <input type="hidden" name="txtfbaid" id="txtfbaid">
   <div class="col-md-4">
        <a name="btnsave" id="btnsave"  class="mrg-top common-btn pull-left"> Save</a>      
   </div>
@@ -47,7 +48,9 @@
            var data = JSON.parse(fbadata);   
             if(data.length>0)
             {          
-             $("#fbaid").text(data[0].FBAID);            
+             $("#fbaid").text(data[0].FBAID);
+             $("#txtfbaid").val(data[0].FBAID);  
+
             }        
 
          }  
@@ -55,7 +58,7 @@
   }
 
 $("#btnsave").click(function(){
-  alert ($("#sfbaid").val());
+  alert ($("#txtfbaid").val());
   if ($('#salesform').valid()){
 $.ajax({ 
    url: "{{URL::to('sales-code-update-insert')}}",

@@ -27,9 +27,11 @@ class salescodeController extends CallApiController {
 public function insertsalescode(Request $req)
 {
 DB::statement('call sp_update_self_code(?,?)',array(
-	$req->Scode,              
+	$req->txtfbaid,              
     $req->sfbaid
     ));
+
+return "test";
 }
 
 }
