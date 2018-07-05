@@ -113,9 +113,15 @@ Route::get('export','FbaController@exportexcel');
 Route::get('load-non-fba-list','nonfbaController@nonfbalist');
 Route::get('non-fba-list','nonfbaController@getnonfba');
 Route::get('export-excel','nonfbaController@nonfbaexportexcel');
-
 // non fba-list End
 
+// Sales code update start
+  
+
+// Sales code update End
+Route::get('sales-code-update','salescodeController@updatesalescode');
+Route::get('sales-code-update-get-fbaid/{salsecode}','salescodeController@selfcodefbaid');
+Route::POST('sales-code-update-insert','salescodeController@insertsalescode');
 
 
 
