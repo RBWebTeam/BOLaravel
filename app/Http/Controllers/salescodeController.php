@@ -28,10 +28,11 @@ public function insertsalescode(Request $req)
 {
 DB::statement('call sp_update_self_code(?,?)',array(
 	$req->txtfbaid,              
-    $req->sfbaid
+    $req->sfbaid 
+      
     ));
 
-return "test";
+// return "test";
 }
 
 }

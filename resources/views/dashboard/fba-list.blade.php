@@ -17,12 +17,12 @@
            <hr>
            </div>
 
-      <div class="col-md-2">
+   <div class="col-md-2">
       <div class="form-group">
 
          <p>From Date</p>
          <div id="datepicker" class="input-group date" data-date-format="mm-dd-yyyy">
-               <input class="form-control date-range-filter" type="text" placeholder="From Date" name="fdate" id="min"/>
+               <input class="form-control date-range-filter" type="text" placeholder="From Date" name="fdate" id="min"/ value="<?php echo date('m-d-Y',strtotime("-7 days")); ?>">
               <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
             </div>
             </div>
@@ -31,7 +31,7 @@
        <div class="form-group">
        <p>To Date</p>
        <div id="datepicker1" class="input-group date" data-date-format="mm-dd-yyyy">
-               <input class="form-control date-range-filter" type="text" placeholder="To Date"  name="todate"  id="max"/>
+               <input class="form-control date-range-filter" type="text" placeholder="To Date"  name="todate"  id="max"/ value="<?php echo date('m-d-Y'); ?>">
               <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
               </div>
               </div>
@@ -92,7 +92,6 @@
                                        <th>State</th>
                                        <th>Zone</th>
                                        <th>Pincode</th>
-                                  <!-- <th>Erpid</th> -->
                                        <th>POSP No(SSID)</th>
                                        <th>Loan ID</th> 
                                        <th>Posp Name</th> 
@@ -603,7 +602,7 @@ $(document).ready(function() {
     var min = $('#min').val();
     var max = $('#max').val();
    // console.log(max);
-    var createdAt = data[21] || 21; // Our date column in the table
+    var createdAt = data[24] || 24; // Our date column in the table
    
     if (
       (min == "" || max == "") ||
