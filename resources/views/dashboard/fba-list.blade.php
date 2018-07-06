@@ -113,9 +113,6 @@
   <div id="myDIV" >
   <a href="{{url('export')}}" class="qry-btn" id="pospbtn">Export</a>
 
-
-    
-
 </div>
   </div>
      </div>
