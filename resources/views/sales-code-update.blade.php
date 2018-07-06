@@ -2,7 +2,9 @@
 @section('content') 
 
 <div class="container-fluid white-bg">
+
 <div class="col-md-12"><h3 class="mrg-btm">Salef sales code update</h3></div>
+
    <div class="col-md-12">
       <div class="overflow-scroll">
 
@@ -12,7 +14,11 @@
   <div class="col-md-3">
   <label>Sales Code:</label>
   </div>
+
   <div class="col-md-5">
+
+  <div class="col-md-4">
+
   <input type="text" class="text-primary form-control" name="Scode" id="Scode" onkeyup="getfbaid()" required>
   </div>
   <label><span id="fbaid"></span></label>
@@ -35,28 +41,37 @@
 </div>
 </div>
 <script type="text/javascript">
+
   function getfbaid(){
   
-    $("#fbaid").text('');
+$("#fbaid").text('');
     var salsecode=$("#Scode").val();    
      $.ajax({  
          type: "GET",  
          url:'sales-code-update-get-fbaid/'+salsecode,
          success: function(fbadata)
          {  
+
 			var data = JSON.parse(fbadata);   
-            if(data.length>0)
+  if(data.length>0)
             {          
              $("#fbaid").text(data[0].FBAID);
              $("#txtfbaid").val(data[0].FBAID);  
 
+
        }        
 	}  
+
+     }        
+
+          
+
       });
-  }
+  
 
 $("#btnsave").click(function(){
   //alert ($("#txtfbaid").val());
+
   if ($('#salesform').valid()){
 $.ajax({ 
    url: "{{URL::to('sales-code-update-insert')}}",
