@@ -1,21 +1,33 @@
 @extends('include.master')
 @section('content')
+
 <div class="container-fluid white-bg">
   <div class="col-md-12"><h3 class="mrg-btm">Offline Cs</h3></div>
       <div class="col-md-12">
          <div class="overflow-scroll">
          	<div class="container">
-         	<form id="frmofflinecs" method="post">
-            {{ csrf_field() }}
-         		<label>Product:</label>
-                 <select class="form-control" id="ddproduct" name="ddproduct" style="width: 30%">
+         	<form   method="post" enctype="multipart/form-data" action="{{url('offlinecs')}}">
+              {{ csrf_field() }}
+              <div class="row col-md-12" style="padding-left: 0px;">
+                <div class="col-md-4">
+                   <label>Why Offline:</label>
+                  <select class="form-control" id="ddlwhyoffline" name="ddlwhyoffline">
+                  <option >--select--</option>
+                 
+                 </select>  
+                </div>
+                <div class="col-md-4">
+         		      <label>Product:</label>
+                  <select class="form-control" id="ddproduct" name="ddproduct">
                  	<option value="1">Motor</option>
                   <option value="1">Two Wheeler</option> 
                   <option value="1">Commercial Vehicle</option>                 	
                  	<option value="2">Health</option>
                   <option value="2">Top UP</option>                 	
                  	<option value="3">Life</option>
-                 </select>             
+                 </select>  
+                 </div>
+              </div>           
               <br>
               <div class="row">
                  <div class="col-md-4">
@@ -279,104 +291,57 @@
                   </select>
               	</div>              	
               </div>
-              <br>
-             <!--  <div class="row">
-              	<div class="col-md-3">
-              		<label>Accepted by</label>
-              	</div>
-              	<div class="col-md-3">
-              		<label>Accepted Date</label>
-              	</div>
-              	<div class="col-md-3">
-              		<label>Accepted Time</label>
-              	</div>
-              	<div class="col-md-3">
-              		<label>Mobile No</label>
-              	</div>              	
-              </div>  -->
-                 
-             <div class="row Motor" id="divMotor">  
-             <form id="Motordoc" method="post" enctype="multipart/form-data">  
-             {{ csrf_field() }}      
+              <br>                       
+             <div class="row Motor" id="divMotor">   
+               
              	<div class="col-md-4">
              		<label>RC Copy:</label>
-             		<input type="file" name="filerc" id="filerc" class="form-control"> 
-                <button class="btn btn-primary" id="rcupload">upload</button>            		
+             		<input type="file" name="filerc" id="filerc" class="form-control" accept=".png, .jpg, .jpeg .pdf"> 
+                            		
              	</div>
              	<div class="col-md-4">
              		<label>Fitness:</label>
-             		<input type="file" name="fileFitness" id="fileFitness" class="form-control">             		
+             		<input type="file" name="fileFitness" id="fileFitness" class="form-control" accept=".png, .jpg, .jpeg .pdf">             		
              	</div>
              	<div class="col-md-4">
              		<label>PUC:</label>
-             		<input type="file" name="filePUC" id="filePUC" class="form-control">             		
+             		<input type="file" name="filePUC" id="filePUC" class="form-control" accept=".png, .jpg, .jpeg .pdf">             		
              	</div>
              	<div class="col-md-4">
              		<label>Break in Report:</label>
-             		<input type="file" name="filebreakrp" id="filebreakrp" class="form-control">            
+             		<input type="file" name="filebreakrp" id="filebreakrp" class="form-control" accept=".png, .jpg, .jpeg .pdf">            
              	</div>
+              </div> 
+               <div class="row"> 
              	<div class="col-md-4">
              		<label>Cheque Copy:</label>
-             		<input type="file" name="motorfileCheque" id="motorfileCheque" class="form-control">            
+             		<input type="file" name="fileCheque" id="fileCheque" class="form-control" accept=".png, .jpg, .jpeg .pdf">            
              	</div>
              	<div class="col-md-4">
              		<label>Other:</label>
-             		<input type="file" name="motorfileother" id="motorfileother" class="form-control"> 
-             	</div>
-              </form>
-             </div> 
+             		<input type="file" name="fileother" id="fileother" class="form-control" accept=".png, .jpg, .jpeg .pdf"> 
+             	</div>  
+              </div>                  
              <br>
-             <div class="row" id="Health">  
-             <form id="healthdoc" method="post" enctype="multipart/form-data">    
-                  	{{ csrf_field() }}              
+             <div class="Proposal row" id="Health">                               
              	<div class="col-md-4">
              		<label>Proposal Form:</label>
-             		<input type="file" name="fileProposalForm" id="fileProposalForm" class="form-control">
-             	</div>
-             	<div class="col-md-4">
-             		<label>KYC:</label>
-             		<input type="file" name="healthfileKYC" id="healthfileKYC" class="form-control">             		
-             	</div>
-             	<div class="col-md-4">
-             		<label>Cheque Copy:</label>
-             		<input type="file" name="healthfileCheque" id="healthfileCheque" class="form-control">             	
-             	</div>
-             	<div class="col-md-4">
-             		<label>Other:</label>
-             		<input type="file" name="healthfileother" id="healthfileother" class="form-control">             	
-             	</div> 
-              </form>            	
+             		<input type="file" name="fileProposalForm" id="fileProposalForm" class="form-control" accept=".png, .jpg, .jpeg .pdf">
+             	</div>  
+              <div class="col-md-4">
+                <label>KYC:</label>
+                <input type="file" name="fileKYC" id="fileKYC" class="form-control" accept=".png, .jpg, .jpeg .pdf">                
+              </div>     	
              </div> 
-             <br>
-             <div class="row" id="life">
-             <form id="lifedoc" method="post" enctype="multipart/form-data">  
-             {{ csrf_field() }}   	
-             	<div class="col-md-4">
-             		<label>Proposal Form:</label>
-             		<input type="file" name="fileProposalForm" id="fileProposalForm" class="form-control">
-             	</div>
-             	<div class="col-md-4">
-             		<label>KYC Documents:</label>
-             		<input type="file" name="lifefileKYC" id="lifefileKYC" class="form-control">             		
-             	</div>
-             	<div class="col-md-4">
-             		<label>Cheque Copy:</label>
-             		<input type="file" name="lifefileCheque" id="lifefileCheque" class="form-control">             		
-             	</div>
-             	<div class="col-md-4">
-             		<label>Other:</label>
-             		<input type="file" name="lifefileother" id="lifefileother" class="form-control">         		
-             	</div> 
-              </form>            	
-             </div>           
+             <br>                      
              </div>
-            </form>
-            <dir class="col-md-12" style="text-align: center;">
-            	<button id="btnmotor" class="btn btn-primary Motor" >SAVE</button>
-              <button id="btnhealth" class="btn btn-primary health">SAVE</button>
-              <button id="btnlife" class="btn btn-primary life">SAVE</button>
-            	<button class="btn btn-primary" >RESET</button>
-            </dir>
+             <br>
+             <br>
+             <div class="col-md-12" style="text-align: center;">
+               <input type="submit" name="save" class="btn btn-primary">
+               <button class="btn btn-primary" >RESET</button>
+             </div>            
+            </form>            
         </div>
          </div>
       </div>
@@ -406,6 +371,7 @@ $( document ).ready(function() {
      	$("#Health").show();
      	$("#divlife").hide();
      	$("#divhealth").show();
+      $(".Proposal").show();
      	$(".Motor").hide();
       $(".health").show();
       $(".life").hide();
@@ -414,6 +380,7 @@ $( document ).ready(function() {
       $("#life").show();
      	$("#Health").hide();
      	$("#divlife").show();
+      $(".Proposal").show();
      	$("#divhealth").hide();
      	$(".Motor").hide();
       $(".health").hide();
@@ -446,74 +413,5 @@ $("#ddlcity").change(function(){
              }
          });
 });
-$('#btnmotor').click(function() {     
-       console.log($('#frmofflinecs').serialize());
-       $.ajax({      
-        url: "{{URL::to('offlinecs-insert-motor')}}",
-        method:"POST",
-        data: $('#frmofflinecs').serialize(),      
-       success: function(msg)  
-        {
-        console.log(msg);
-        alert("Record has been saved successfully");
-         $("#frmofflinecs").trigger('reset');
-        }
- });
-
- });
-$('#btnhealth').click(function() {          
-       console.log($('#frmofflinecs').serialize());
-       $.ajax({      
-        url: "{{URL::to('offlinecs-insert-health')}}",
-        method:"POST",
-        data: $('#frmofflinecs').serialize(),      
-       success: function(msg)  
-        {
-        console.log(msg);
-        alert("Record has been saved successfully");
-         $("#frmofflinecs").trigger('reset');
-        }
- });
-
- });
-$('#btnlife').click(function() {          
-       console.log($('#frmofflinecs').serialize());
-       $.ajax({      
-        url: "{{URL::to('offlinecs-insert-life')}}",
-        method:"POST",
-        data: $('#frmofflinecs').serialize(),      
-       success: function(msg)  
-        {
-        console.log(msg);
-        alert("Record has been saved successfully");
-          $("#frmofflinecs").trigger('reset');
-        }
- });
- });
-$('#rcupload').click(function(){
-
-  alert($("#filerc").val());
-   data1=new FormData($("#filerc")); 
-   $.ajax({ 
-        url: "{{URL::to('offlinecs-insert-motordoc')}}",
-        method:"POST",
-        data: $('#Motordoc').serialize(),
-        dataType:'json',
-        async:false,
-        type:'POST',
-        processData: false,
-        contentType: false,
-      success: function(msg)  
-       {
-         console.log(msg);
-         alert("Record has been saved successfully");
-          
-       }
-    });
-
- 
-});
-
-
 </script>
 @endsection

@@ -220,12 +220,7 @@ Route::Post('quick-lead-edit','quickleadController@updatelead');
 
 route::get('offlinecs','offlinecsController@getofflinecs');
 route::get('get_state_offlinecs/{cityid}','offlinecsController@getstate');
-Route::Post('offlinecs-insert-motor','offlinecsController@insertofflinecs');
-Route::Post('offlinecs-insert-health','offlinecsController@inserthealthofflinecs');
-Route::Post('offlinecs-insert-life','offlinecsController@insertlifeofflinecs');
-Route::Post('offlinecs-insert-motordoc','offlinecsController@uploadmotordoc');
-
-
+Route::Post('offlinecs','offlinecsController@insertofflinecs');
 ///shubham end ///
 // avinash
  Route::get('ticket-module','TicketController@getticketdetails') ;
