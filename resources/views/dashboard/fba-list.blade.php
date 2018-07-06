@@ -9,20 +9,40 @@
 }
 </style>
 
-
-
-
-             <div class="container-fluid white-bg">
-             <div class="col-md-12"><h3 class="mrg-btm">FBA List</h3>
+           <div class="container-fluid white-bg">
+           <div class="col-md-12"><h3 class="mrg-btm">FBA List</h3>
            <hr>
            </div>
+
+          
+          <?php 
+
+           $fromdate='';
+           $todate='';
+            if(isset($_GET['fdate']) && isset($_GET['todate'])){
+                 $fromdate=$_GET['fdate'];
+                 $todate=$_GET['todate'];
+           }else{
+                 
+                 $fromdate= Date('m-d-Y', strtotime('-7 days'));
+                 $todate=Date('m-d-Y');
+           }
+
+
+           ?>
+
+
+
+
+
+
 
    <div class="col-md-2">
       <div class="form-group">
 
          <p>From Date</p>
          <div id="datepicker" class="input-group date" data-date-format="mm-dd-yyyy">
-               <input class="form-control date-range-filter" type="text" placeholder="From Date" name="fdate" id="min"/ value="<?php echo date('m-d-Y',strtotime("-7 days")); ?>">
+               <input class="form-control date-range-filter" type="text" value="{{$fromdate}}" placeholder="From Date" name="fdate" id="min"/>
               <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
             </div>
             </div>
@@ -31,7 +51,7 @@
        <div class="form-group">
        <p>To Date</p>
        <div id="datepicker1" class="input-group date" data-date-format="mm-dd-yyyy">
-               <input class="form-control date-range-filter" type="text" placeholder="To Date"  name="todate"  id="max"/ value="<?php echo date('m-d-Y'); ?>">
+               <input class="form-control date-range-filter" type="text" " value="{{$todate}}"  placeholder="To Date"  name="todate"  id="max"/>
               <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
               </div>
               </div>
