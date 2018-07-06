@@ -15,7 +15,7 @@
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
-
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
 
 <style>
 .modal-header {background-color: #00476f !important;}
@@ -267,6 +267,7 @@ text = text +"</body>";
 
   function getcity(){
     var pincode=$("#txtpincode").val(); 
+    GetLocation(pincode);
   $.ajax({ 
             type: "GET",
             url:'getcitybypincode/'+pincode,
@@ -290,6 +291,17 @@ function checkDate() {
     $('#txtdate').val('');
    }
  }
+ function GetLocation(address) {
+  alert(address);
+$.ajax({ 
+            type: "GET",
+            url:"https://maps.googleapis.com/maps/api/geocode/xml?address=" + address + "&sensor=true_or_false&key=AIzaSyA3t6Az0YB8lyTGCguYHwrscSzGjohnAx4",
+            success: function(response) 
+            {
+              console.log(response);   
+            }
+        });
+        };
 
 </script>
 

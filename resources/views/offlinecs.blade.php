@@ -6,7 +6,7 @@
       <div class="col-md-12">
          <div class="overflow-scroll">
          	<div class="container">
-         	<form   method="post" enctype="multipart/form-data" action="{{url('offlinecs')}}">
+         	<form  id="frmofflinecs" method="post" enctype="multipart/form-data" action="{{url('offlinecs')}}" onsubmit="validate()">
               {{ csrf_field() }}
               <div class="row col-md-12" style="padding-left: 0px;">
                 <div class="col-md-4">
@@ -86,18 +86,20 @@
               		<select class="form-control" id="ddlfbaname" name="ddlfbaname">
                     <option>--Select--</option>
                     @foreach($fba as $val)
-              			<option value="{{$val->FBAID}}">{{$val->FullName}}-{{$val->FBAID}}</option>
+              			<option value="{{$val->FBAID}}">{{$val->POSPName}} ({{$val->FBAID}})</option>
                     @endforeach
               		</select>           		
               	</div>
                 <div class="col-md-4">
                   <label>Posp Status:</label>
-                  <label class="checkbox-inline">YES  <input type="radio" name="txtposp" id="txtposp" value="1"></label>
-                  <label class="checkbox-inline">No  <input type="radio" name="txtposp" id="txtposp" value="0"></label>                               
+                  <label class="checkbox-inline">YES:</label>
+                  <input type="checkbox" name="txtposp" id="txtposp" value="1" checked="checked">
+                  <label class="checkbox-inline">No:</label>
+                  <input type="checkbox" name="txtposp" id="txtposp" value="0">                               
                 </div>
                 <div class="col-md-4">
                   <label>Premium Amount:</label>
-                  <input type="number " class="form-control" name="txtpremiumamt" id="txtpremiumamt">         
+                <input type="number" class="form-control" name="txtpremiumamt" id="txtpremiumamt">        
                 </div>
               	<div class="col-md-4">
               		<label>ERP ID:</label>
@@ -258,7 +260,7 @@
                   <select id="txtexecutivename" name="txtexecutivename" class="form-control">
                     <option>--select--</option>
                     @foreach($Executive as $val)
-                    <option value="{{$val->employeeid}}">{{$val->EmployeeName}}</option>
+                    <option value="{{$val->UId}}">{{$val->EmployeeName}}</option>
                    @endforeach
                   </select>
               	</div>
@@ -267,7 +269,7 @@
                   <select id="txtexecutivename1" name="txtexecutivename1" class="form-control">
                     <option>--select--</option>
                     @foreach($Executive1 as $val)
-                    <option value="{{$val->employeeid}}">{{$val->EmployeeName}}</option>
+                    <option value="{{$val->UId}}">{{$val->EmployeeName}}</option>
                    @endforeach
                   </select>
               	</div>
@@ -277,7 +279,7 @@
                   <select id="txtexeProductname" name="txtexeProductname" class="form-control">
                     <option>--select--</option>
                     @foreach($productexe as $val)
-                    <option value="{{$val->employeeid}}">{{$val->EmployeeName}}</option>
+                    <option value="{{$val->UId}}">{{$val->EmployeeName}}</option>
                    @endforeach
                   </select>
               	</div>
@@ -286,7 +288,7 @@
                   <select id="txtmgrProductname" name="txtmgrProductname" class="form-control">
                     <option>--select--</option>
                     @foreach($productmgr as $val)
-                    <option value="{{$val->employeeid}}">{{$val->EmployeeName}}</option>
+                    <option value="{{$val->UId}}">{{$val->EmployeeName}}</option>
                    @endforeach
                   </select>
               	</div>              	
@@ -413,5 +415,9 @@ $("#ddlcity").change(function(){
              }
          });
 });
+
+function validate(){
+  $('#frmofflinecs').valid();
+}
 </script>
 @endsection
