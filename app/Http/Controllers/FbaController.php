@@ -29,8 +29,9 @@ class FbaController extends CallApiController
               $query=DB::select('call fbaList_export(0)');
               $data = json_decode( json_encode($query), true) ;
               return Excel::create('Fbalist', function($excel) use ($data) {
-              $excel->sheet('mySheet', function($sheet) use ($data)
-          {
+            $excel->sheet('FBADATA', function($sheet) use ($data)
+            {
+
               $sheet->fromArray($data);
           });
               })->download('xls');

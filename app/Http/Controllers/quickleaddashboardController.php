@@ -15,7 +15,6 @@ class quickleaddashboardController extends Controller
 	public function getquicklead()
 	{
 		$query = DB::select("call Get_all_Quick_lead()"); 
-
 		return view('quickleaddashboard',['query'=>$query]);
 
 	}

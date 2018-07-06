@@ -15,9 +15,10 @@
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
-
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
 
 <style>
+.modal-header {background-color: #00476f !important;}
 .modal-dialog {margin-top:70px !important;}
 body {font-size:13px;}
 p {color:#333;}
@@ -31,7 +32,7 @@ p {color:#333;}
 .brd-left {border-right:1px solid #eee !important;}
 .bg-gray {background:#f1f1f1;}
 .glyphicon {    font-weight: normal;font-size: 10px; color:#666;margin-right:4px;}
-ul li {margin:2px; padding:4px !important;}
+ul li {margin:2px; padding:1px !important;}
 .table>tbody>tr>td {padding:6px;}
 .logo-center {margin:0 auto;display:block;}
 .pad {padding:10px; font-weight:normal; font-size:16px;}
@@ -40,12 +41,14 @@ ul li {margin:2px; padding:4px !important;}
 .down-arrow:hover {colo:#999;text-decoration:none; opacity:0.7;}
 .amunt1 {background:#999;}
 .bg-gray li {list-style-type:none; padding-left:15px !important;float:left;width: 48%;font-size:11px;color: #747474;}
-.bg-gray li .glyphicon-ok {float: left;height:19px;margin-top: 1px;left: -10px;vertical-align: middle;font-size:9px;color: #747474;}
+.bg-gray li .glyphicon-ok {float: left;height:15px;margin-top: 1px;left: -10px;vertical-align: middle;font-size:9px;color: #747474;}
 .list1 {margin:0px; padding:2px;}
 .head1 {padding:10px;background:#eee;border:1px solid #ddd; font-size:15px;margin-bottom:20px;}
 .input-1 {padding:5px;width:100%;border:none; border-bottom:1px solid #999 !important; margin-bottom:20px;font-size: 18px;}
+.button1 {border: 1px solid #f95f67; color:#f95f67; padding: 10px;background: #fff; margin-bottom: 20px;width: 100%;margin: 0 auto; display: block; margin-bottom: 20px;}
+.button1:hover {text-decoration: none;color:#fff; background:#009ee3;border:1px solid #009ee3;}
 
-.button1 {border:2px solid #f95f67; padding:10px;background:#fff; margin-bottom:20px; width:100%;}
+label {font-size: 11px;color: #666;}
 input:focus{border:0px;}
 /* label {font-size: 11px;color: #666;} */
 @media only screen and (max-width: 768px) {
@@ -53,11 +56,17 @@ input:focus{border:0px;}
         width:100%;
 		float:left;
     }
+    .modal-body {
+    position: relative;
+    padding: 15px;
+    height: 450px !important;
+    overflow: scroll !important;
+}
 }
 
 
 
-
+label.error{top:34px !important; color:#ff0000 !important;font-size:10px !important;}
 
 
 
@@ -87,8 +96,6 @@ input[type="checkbox"] {
     font-size: .9em;
     color: #009ee3;
     top: -1.3em;
-	
-	text-transform:uppercase;
     -webkit-transition: all 0.125s;
 	-moz-transition: all 0.125s; 
 	-o-transition: all 0.125s;
@@ -123,7 +130,7 @@ input[type="checkbox"] {
     font-size: .9em;
     display: block;
     line-height: 1em;
-}
+} 
 .styled-input input ~ span,.styled-input textarea ~ span, .styled-input .date ~ span {
 	display: block;
     width: 0;
@@ -203,6 +210,9 @@ input, select {background:#fff;}
     text-align: center;
     font-size: 18px;
 }
+
+.bl-txt {color: #002d62;text-transform:uppercase;}
+
 </style>
 <script>
 $(document).ready(function(){
@@ -253,20 +263,60 @@ text = text +"</body>";
 	
 	$('#tbltestlist').html(text);
 	$('.testCheckup').modal('show');
-}    
+} 
+
+  function getcity(){
+    var pincode=$("#txtpincode").val(); 
+    GetLocation(pincode);
+  $.ajax({ 
+            type: "GET",
+            url:'getcitybypincode/'+pincode,
+            success: function(city) 
+            {
+              
+              var data = JSON.parse(city);
+              if(data.length>0)
+              { 
+                $('#txtcity').val(data[0].districtname);   
+              }          
+            }
+        });
+   } 
+function checkDate() {
+   var selectedText = document.getElementById('txtdate').value;
+   var selectedDate = new Date(selectedText);
+   var now = new Date();
+   if (selectedDate < now) {
+    alert("Date must be in the future");
+    $('#txtdate').val('');
+   }
+ }
+ function GetLocation(address) {
+  alert(address);
+$.ajax({ 
+            type: "GET",
+            url:"https://maps.googleapis.com/maps/api/geocode/xml?address=" + address + "&sensor=true_or_false&key=AIzaSyA3t6Az0YB8lyTGCguYHwrscSzGjohnAx4",
+            success: function(response) 
+            {
+              console.log(response);   
+            }
+        });
+        };
 
 </script>
 
 </head>
 
 <body>
+
 <div class="container">
-<h5 class="text-center pad main-header header-middle" style="width:100%;">Health Check Up Plans selected by you</h5>
+<h5 class="text-center pad main-header header-middle" style="width:100%;">BOOK A LAB APPOINTMENT</h5>
  <div class="col-md-12">
  <br>
  <br>
  <br>
  <img src="http://backoffice.magicfinmart.com/HealthPackages/HealthInsurance/images/health-assure-logo.jpg" class="logo-center" />
+ <p class="text-center bl-txt">Health Check Up Plans selected by you</p>
  </div>
  
 
@@ -276,8 +326,8 @@ text = text +"</body>";
 	  <tbody>
 	    
 	      <td><p><b>{{$_GET["PackName"]}}</b></p><h5 class="text-danger-clr">{{$_GET["tcount"] }} Tests</h5> </td>
-	      <td colspan="2"><p class="text-center">ACTUAL COST</p> <a href="#" class="amount amunt1"><strike>{{$_GET["MRP"]}}</strike></a></td>
-	      <td colspan="2"><p class="text-center">OFFER COST</p> <a href="#" class="amount">{{$_GET["OfferPrice"]}}</a></td>
+	      <td colspan="2"><p class="text-center"><b>ACTUAL COST</b></p> <a href="#" class="amount amunt1">₹ <strike>{{$_GET["MRP"]}}</strike></a></td>
+	      <td colspan="2"><p class="text-center"><b>OFFER COST</b></p> <a href="#" class="amount">₹ {{$_GET["OfferPrice"]}}</a></td>
 		  <td><a href="#" class="down-arrow"><span class="glyphicon glyphicon-triangle-bottom"></span></a> </td>
         </tr>
 		
@@ -397,7 +447,7 @@ foreach ($val->ParamDetails as $key => $value) {
  <div class="col-md-4 col-sx-12 styled-input">
  
  <input type="number" id="txtpincode" name="txtpincode" class="input-1" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-    type = "number" maxlength = "6" required/>
+    type = "number" maxlength = "6" required onblur="getcity()" />
  <label>Pincode</label>
 </div>
 
@@ -409,14 +459,14 @@ foreach ($val->ParamDetails as $key => $value) {
 
 <div class="col-md-4 col-sx-12 styled-input">
  
- <input type="date" id="txtdate" name="txtdate" class="input-1 date" required/>
+ <input type="date" id="txtdate" onchange="checkDate()" name="txtdate" class="input-1 date" required/>
  <label>Appt. Date</label>
 </div>
 
 <div class="col-md-4 col-sx-12 styled-input">
  
  <select  class="input-1" name="ddlappttime" id="ddlappttime" required>
-    <option value="0" selected="selected">Appt. Time Slot</option>
+    <option>Appt. Time Slot</option>
     @foreach($appttime as $val)
 	<option value="{{$val->appointment_time}}">{{$val->appointment_time}}</option>
     @endforeach
@@ -425,10 +475,7 @@ foreach ($val->ParamDetails as $key => $value) {
  
  </div>
 <div class="col-xs-12 pad-1" style="padding:0 0 12px 0;">
-
- 
-     
-   <div class="col-md-12 col-xs-12 pad pad-1">
+  <div class="col-md-12 col-xs-12 pad pad-1">
     <span cssstyle="display:block;width:auto;">&nbsp;<input id="chkAgree " type="checkbox" name="chkAgree" class="used" required></span> I Agree to the <a onclick="showtermcon()" style="color: #5b9bd5; cursor: pointer;" data-toggle="modal" data-target="myModal">Terms &amp; Conditions</a>
                                 </div>
                             </div>

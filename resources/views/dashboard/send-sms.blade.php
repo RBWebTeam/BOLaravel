@@ -1,5 +1,8 @@
 @extends('include.master')
  @section('content')
+ <style type="text/css">
+  element.style {   margin: 0px 10px 10px 233px;  overflow: hidden;  } 
+</style>
 <!-- Body Content Start -->
   <div id="content" style="overflow:scroll;">
   <div class="container-fluid white-bg">
@@ -398,9 +401,10 @@ $.ajax({
    }  
    });
    });
-
-function getlen()
-{
+</script>
+ <script type="text/javascript">
+  function getlen()
+ {
      var txt = $("#SMSTemplate").val().length; 
       $("#smschar").text(txt);
      var minlen = 160;   
@@ -417,14 +421,6 @@ function getlen()
       }else{
         $("#divcout").text("1");
       }
-     
-    
 }
-   </script>
-  <style type="text/css">
-  element.style {
-   margin: 0px 10px 10px 233px;
-  overflow: hidden;
-  } 
-  </style>
-  @endsection
+</script>
+@endsection

@@ -70,19 +70,7 @@ label{
         </table>
        </div>
        <div  id="divcompany" style="display:none">
-<<<<<<< HEAD
-        <table class="table">
-          <tr>
-            <td><label>Business Name:</label></td>
-            <td><input type="text" id="txtbusinesstype" name="txtbusinesstype" class="form-control" required></td>
-            <td><label>Office Address:</label></td>
-            <td><textarea  id="txtofficeadd" name="txtofficeadd" class="form-control" required></textarea></td>
-            <td><label>Staff Strength:</label></td>
-            <td><input type="number" id="txtstaff" name="txtstaff" class="form-control numericOnly" required></td>
-          </tr>
-        </table>
-        <hr>
-=======
+
        	<table class="table">
        		<tr>
        			<td><label>Business Name:</label></td>
@@ -94,7 +82,6 @@ label{
        		</tr>
        	</table>
        	<hr>
->>>>>>> 107dac765682ed5d9dd966d98a5bf1ce342bc9c2
         </div>
         </div>
         <div class="form-group divworklic">
@@ -114,22 +101,7 @@ label{
           </table>
         </div>
         <div  id="divprofile" style="display: none;">
-<<<<<<< HEAD
-          <table class="table">
-            <tr>
-              <td><label>No of Policies Sold per month:</label></td>
-              <td><input type="number" id="txtnoofpolicy" name="txtnoofpolicy" class="form-control numericOnly" required></td>
-              <td><label>Premium collected per month:</label></td>
-              <td><input type="number" id="txtpremium" name="txtpremium" class="form-control numericOnly" required></td>
-              <td><label>Base of LIC Customers:</label></td>
-              <td><input type="number" id="txtliccustomer" name="txtliccustomer" class="form-control numericOnly" required></td>
-            </tr>
-            <tr>
-              <td><label>Preferred LIC products:</label></td>
-              <td><input type="text" id="txtlicproduct" name="txtlicproduct" class="form-control" required></td>
-              <td><label>LIC Club Memberships:</label></td>
-              <!-- <td><input type="text" id="txtlicclub" name="txtlicclub" class="form-control" required></td> -->
-=======
+
         	<table class="table">
         		<tr>
         			<td><label>No of Policies Sold per month:</label></td>
@@ -144,7 +116,7 @@ label{
         			<td><input type="text" id="txtlicproduct" name="txtlicproduct" class="form-control" required></td>
         			<td><label>LIC Club Memberships:</label></td>
         			<!-- <td><input type="text" id="txtlicclub" name="txtlicclub" class="form-control" required></td> -->
->>>>>>> 107dac765682ed5d9dd966d98a5bf1ce342bc9c2
+
               <td><select  id="txtlicclub" name="txtlicclub" class="form-control" required>
                   <option value="">--Select--</option>
                   <option value="Corporate Club">Corporate Club</option>
