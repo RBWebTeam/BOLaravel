@@ -4,8 +4,7 @@
 <div class="container-fluid white-bg">
 
 <div class="col-md-12"><h3 class="mrg-btm">Salef sales code update</h3></div>
-
-   <div class="col-md-12">
+ <div class="col-md-12">
       <div class="overflow-scroll">
 
 <form name="salesform" id="salesform" method="POST">
@@ -15,10 +14,7 @@
   <label>Sales Code:</label>
   </div>
 
-  <div class="col-md-5">
-
   <div class="col-md-4">
-
   <input type="text" class="text-primary form-control" name="Scode" id="Scode" onkeyup="getfbaid()" required>
   </div>
   <label><span id="fbaid"></span></label>
@@ -57,23 +53,17 @@ $("#fbaid").text('');
             {          
              $("#fbaid").text(data[0].FBAID);
              $("#txtfbaid").val(data[0].FBAID);  
-
-
-       }        
+ }        
 	}  
-
+});
      }        
 
-          
-
-      });
-  
 
 $("#btnsave").click(function(){
   //alert ($("#txtfbaid").val());
 
   if ($('#salesform').valid()){
-$.ajax({ 
+  $.ajax({ 
    url: "{{URL::to('sales-code-update-insert')}}",
    method:"POST",
    data: $('#salesform').serialize(),  
@@ -87,6 +77,7 @@ $.ajax({
  }); 
  }
 });
+
 </script>
 
 

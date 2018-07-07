@@ -12,35 +12,32 @@
 
            <div class="container-fluid white-bg">
            <div class="col-md-12"><h3 class="mrg-btm">FBA List</h3>
-
-           
-             <hr>
+           <hr>
            </div>
 
 
      
-   <div class="col-md-2">
-      <div class="form-group">
+       <div class="col-md-2">
+       <div class="form-group">
+       <p>From Date</p>
+       <div id="datepicker" class="input-group date" data-date-format="mm-dd-yyyy">
+       <input class="form-control date-range-filter" type="text" placeholder="From Date" name="fdate" id="min"/ value="<?php echo date('m-d-Y',strtotime("-7 days")); ?>">
+       <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+       </div>
+       </div>
+       </div>
 
-         <p>From Date</p>
-         <div id="datepicker" class="input-group date" data-date-format="mm-dd-yyyy">
-               <input class="form-control date-range-filter" type="text" placeholder="From Date" name="fdate" id="min"/ value="<?php echo date('m-d-Y',strtotime("-7 days")); ?>">
-              <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-            </div>
-            </div>
-           </div>
        <div class="col-md-2">
        <div class="form-group">
        <p>To Date</p>
        <div id="datepicker1" class="input-group date" data-date-format="mm-dd-yyyy">
-               <input class="form-control date-range-filter" type="text" placeholder="To Date" name="todate"  id="max"/ value="<?php echo date('m-d-Y'); ?>">
-              <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-              </div>
-              </div>
-            </div>
+       <input class="form-control date-range-filter" type="text" placeholder="To Date" name="todate"  id="max"/ value="<?php echo date('m-d-Y'); ?>">
+       <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+       </div>
+       </div>
+       </div>
            
        <div class="col-md-4">
-
        <div class="form-group"> <input type="submit" name="btndate" id="btndate"  class="mrg-top common-btn pull-left" value="SHOW">  
      &nbsp;&nbsp;
 

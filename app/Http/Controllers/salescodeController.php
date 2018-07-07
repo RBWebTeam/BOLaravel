@@ -32,9 +32,6 @@ DB::statement('call sp_update_self_code(?,?)',array(
       
     ));
 
- 
-  
-
 
 }
 
