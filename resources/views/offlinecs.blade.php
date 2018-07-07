@@ -6,14 +6,16 @@
       <div class="col-md-12">
          <div class="overflow-scroll">
          	<div class="container">
-         	<form  id="frmofflinecs" method="post" enctype="multipart/form-data" action="{{url('offlinecs')}}" onsubmit="validate()">
+         	<form  id="frmofflinecs" method="post" enctype="multipart/form-data" action="{{url('offlinecs')}}">
               {{ csrf_field() }}
               <div class="row col-md-12" style="padding-left: 0px;">
                 <div class="col-md-4">
                    <label>Why Offline:</label>
-                  <select class="form-control" id="ddlwhyoffline" name="ddlwhyoffline">
-                  <option >--select--</option>
-                 
+                  <select class="form-control" id="ddlwhyoffline" name="ddlwhyoffline" >
+                    <option >--select--</option>
+                    @foreach($reason as $val)
+                     <option value="{{$val->id}}">{{$val->Reason}}</option>
+                    @endforeach                 
                  </select>  
                 </div>
                 <div class="col-md-4">
@@ -31,31 +33,37 @@
               <br>
               <div class="row">
                  <div class="col-md-4">
-                 	<label>Name of Customer:</label><input id="txtcstname" name="txtcstname" type="text" class="form-control" placeholder="Name of Customer">                    
+                 	<label>Name of Customer:</label><input id="txtcstname" name="txtcstname" type="text" class="form-control" placeholder="Name of Customer" >                    
                  </div>
                  <div class="col-md-4">
-                 	<label>Address of Customer :</label><textarea id="txtadd" name="txtadd" class="form-control" placeholder="Address of Customer"></textarea>            
+                 	<label>Address of Customer :</label><textarea id="txtadd" name="txtadd" class="form-control" placeholder="Address of Customer" ></textarea>            
                 </div>
                 <div class="col-md-4">
                 	<label>City:</label>
-                	<select class="form-control" id="ddlcity" name="ddlcity">
+                	<select class="form-control" id="ddlcity" name="ddlcity" >
                 		<option>--select--</option>
                     @foreach($city as $val)
                     <option value="{{$val->city_id}}">{{$val->cityname}}</option>
                     @endforeach
                 	</select>
-                </div>
+                </div>              
               </div>
               <div class="row">
+                  <div class="col-md-4">
+                  <label>Map City:</label>
+                  <select class="form-control" id="ddlmapcity" name="ddlmapcity" >
+                    <option>--select--</option>                    
+                  </select>
+                </div>
                  <div class="col-md-4">
                  	<label>State</label>
-                 	<select id="ddlstate" name="ddlstate" class="form-control">
+                 	<select id="ddlstate" name="ddlstate" class="form-control" >
                  		<option>--select--</option>
                  	</select>                  
                  </div>
                  <div class="col-md-4">
                  	<label>Zone</label>
-                 	<select id="ddlzone" name="ddlzone" class="form-control">
+                 	<select id="ddlzone" name="ddlzone" class="form-control" >
                  		<option>--select--</option>
                  	</select>
                 </div>
@@ -65,25 +73,21 @@
                 		<option value="1">--select--</option>
                 	</select>
                 </div>
-              </div>
-              <div class="row">
-              	<div class="col-md-4">
-              		<label>Mobile no:</label>
-              		<input type="number" class="form-control" name="txtmobno" id="txtmobno">           		
-              	</div>
-              	<div class="col-md-4">
-              		<label>Telephone No:</label>
-              		<input type="number" class="form-control" name="txttelno" id="txttelno">           		
-              	</div>
+                <div class="col-md-4">
+                  <label>Mobile no:</label>                   
+                   <input type="number" id="txtmobno" name="txtmobno" class="form-control" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type = "number" maxlength = "10"  />             
+                </div>
+                <div class="col-md-4">
+                  <label>Telephone No:</label>
+                  <input type="number" class="form-control" name="txttelno" id="txttelno">              
+                </div>             	
               	<div class="col-md-4">
               		<label>Email Id:</label>
               		<input type="Email" class="form-control" name="txtemail" id="txtemail">           		
               	</div>
-              </div>
-              <div class="row">
-              	<div class="col-md-4">
-              		<label>FBA Name:</label>
-              		<select class="form-control" id="ddlfbaname" name="ddlfbaname">
+               	<div class="col-md-4">
+              		<label>Posp Name:</label>
+              		<select class="form-control" id="ddlfbaname" name="ddlfbaname" >
                     <option>--Select--</option>
                     @foreach($fba as $val)
               			<option value="{{$val->FBAID}}">{{$val->POSPName}} ({{$val->FBAID}})</option>
@@ -91,25 +95,38 @@
               		</select>           		
               	</div>
                 <div class="col-md-4">
-                  <label>Posp Status:</label>
-                  <label class="checkbox-inline">YES:</label>
-                  <input type="checkbox" name="txtposp" id="txtposp" value="1" checked="checked">
-                  <label class="checkbox-inline">No:</label>
-                  <input type="checkbox" name="txtposp" id="txtposp" value="0">                               
-                </div>
-                <div class="col-md-4">
                   <label>Premium Amount:</label>
-                <input type="number" class="form-control" name="txtpremiumamt" id="txtpremiumamt">        
+                <input type="number" class="form-control" name="txtpremiumamt" id="txtpremiumamt" >        
                 </div>
               	<div class="col-md-4">
               		<label>ERP ID:</label>
-              		<input type="text" class="form-control" name="txterpid" id="txterpid">           		
+              		<input type="text" class="form-control" name="txterpid" id="txterpid" readonly >           		
               	</div>
 
               	<div class="col-md-4">
               		<label>QT No:</label>
-              		<input type="text" class="form-control" name="txtqtno" id="txtqtno">           		
+              		<input type="text" class="form-control" name="txtqtno" id="txtqtno" >           		
               	</div>
+                <div class="col-md-4">
+                  <label>Date of Expiry:</label>
+                  <input type="Date" class="form-control" name="txtexpdate" id="txtexpdate" >            
+                </div>
+                <div class="col-md-4">
+                  <label>Payment Mode:</label>
+                  <select id="ddlpayment" name="ddlpayment" class="form-control">
+                    <option>--select--</option>
+                    <option value="Online">Online</option>
+                    <option value="Offline">Offline</option>
+                  </select>
+                </div>
+                <div class="col-md-4">
+                  <label>UTR No / Cheque No:</label>
+                  <input type="text" name="txtutrnomotor" class="form-control" id="txtutrnomotor" >
+                </div> 
+                <div class="col-md-4">
+                  <label>Bank:</label>
+                  <input type="text" name="txtbankmotor" id="txtbankmotor" class="form-control" >
+                </div>  
               </div>            
             <br>
             <div class="Motor" id="Motor">
@@ -117,75 +134,37 @@
               	<div class="col-md-4">
               		<label>Vehicle No:</label>
               		<input type="text" name="txtvehicalno" id="txtvehicalno" class="form-control">     		
-              	</div>
+              	</div>              	
               	<div class="col-md-4">
-              		<label>Date of Expiry:</label>
-              		<input type="Date" class="form-control" name="txtexpdate" id="txtexpdate">        		
-              	</div>
-              	<div class="col-md-2">
               		<label>Break In:</label>
               		<label class="checkbox-inline">YES  <input type="radio" name="txtbreakin" id="txtbreakin" value="1"></label>
               		<label class="checkbox-inline">No  <input type="radio" name="txtbreakin" id="txtbreakin" value="0"></label>              		           		
-              	</div>
-              </div>
-              <div class="row">
+              	</div>              
               	<div class="col-md-4">
               		<label>Insurer:</label>
-              		<select id="ddlInsurer" class="form-control">
+              		<select id="ddlInsurermotor" name="ddlInsurermotor" class="form-control" >
               			<option>--select---</option>
               			@foreach ($Genins as $val)
               			<option value="{{$val->GeneralInsuranceCompanyMasterId}}">{{$val->CompanyName}}</option>
               			@endforeach
               		</select>             		
-              	</div>   
-              	<div class="col-md-4">
-              		<label>Payment Mode:</label>
-              		<select id="ddlpayment" name="ddlpayment" class="form-control">
-              			<option>--select--</option>
-              			<option value="Online">Online</option>
-              			<option value="Offline">Offline</option>
-              		</select>
-              	</div>
-              	<div class="col-md-4">
-              		<label>UTR No / Cheque No:</label>
-              		<input type="text" name="txtutrnomotor" class="form-control" id="txtutrnomotor">
               	</div> 
-              	<div class="col-md-4">
-              		<label>Bank:</label>
-              		<input type="text" name="txtbankmotor" id="txtbankmotor" class="form-control">
-              	</div>      	
-              </div>
+               </div>
               </div>           
              <div id="divhealth">           
              <div class="row">
              	<div class="col-md-4">
               		<label>Insurer:</label>
-              		<select id="ddlInsurer" class="form-control">
-                    <option>--select---</option>
+              		<select id="ddlInsurerhealth" name="ddlInsurerhealth" class="form-control" >
+                    <option value="0">--select---</option>
                     @foreach($health as $val)
               			<option value="{{$val->id}}">{{$val->companyname}}</option>
                     @endforeach
               		</select>              		
-              	</div> 
-              	<div class="col-md-4">
-              		<label>Payment Mode:</label>
-              		<select id="ddlpayment" class="form-control">
-              			<option>--select--</option>
-              			<option value="Online">Online</option>
-              			<option value="Offline">Offline</option>
-              		</select>
-              	</div>
-              	<div class="col-md-4">
-              		<label>UTR No / Cheque No:</label>
-              		<input type="text" name="txtutrnohealth" class="form-control" id="txtutrnohealth">
-              	</div>
-              	<div class="col-md-4">
-              		<label>Bank:</label>
-              		<input type="text" name="txtbankhealth" id="txtbankhealth" class="form-control">
-              	</div>
+              	</div>         	
               	<div class="col-md-4">
               		<label>Preexisting:</label>
-              		<label class="checkbox-inline">YES  <input type="radio" name="txtPreexisting" id="txtPreexisting" value="1"></label>
+              		<label class="checkbox-inline">YES  <input type="radio" name="txtPreexisting" id="txtPreexisting" value="1" ></label>
               		<label class="checkbox-inline">No  <input type="radio" name="txtPreexisting" id="txtPreexisting" value="1"></label>             		           		
               	</div>   
               	<div class="col-md-4">
@@ -197,7 +176,7 @@
               	<div class="row">  
               	<div class="col-md-4">
               		<label>Premium Year/s:</label>
-              		<select id="dllpremium" name="dllpremium" class="form-control">
+              		<select id="dllpremium" name="dllpremium" class="form-control" >
               			<option>--select--</option>
               			<option value="1">1 year</option>
               			<option value="2">2 year</option>
@@ -210,55 +189,33 @@
              <div class="row">
              	<div class="col-md-4">
              		<label>Type of Policy:</label>
-             		<select id="ddlnoofpolicy" name="ddlnoofpolicy" class="form-control">
+             		<select id="ddlnoofpolicy" name="ddlnoofpolicy" class="form-control" >
              			<option>--select--</option>
              			<option value="Term">Term</option>
              			<option value="Other">Other</option>
              		</select>
-             	</div>
-             	<div class="col-md-4">
-             		<label>Date of Expiry:</label>
-             		<input type="Date" name="txtexpdate" id="txtexpdate" class="form-control">
-             	</div>
+             	</div>             
              	<div class="col-md-4">
               		<label>Medical case:</label>
               		<label class="checkbox-inline">YES  <input type="radio" name="txtmedicalcase" id="txtmedicalcase" value="1"></label>
               		<label class="checkbox-inline">No  <input type="radio" name="txtmedicalcase" id="txtmedicalcase" value="0"></label>              		           		
-              	</div> 
-              </div>
-              <div class="row">
+              	</div>             
               	<div class="col-md-4">
               		<label>Insurer:</label>
-              		<select id="ddlInsurer" class="form-control">
-                    <option>--select---</option>
+              		<select id="ddlInsurerlife" name="ddlInsurerlife" class="form-control" >
+                    <option value="0">--select---</option>
                     @foreach($lifeins as $val)
               			<option value="{{$val->LifeInsurerCompanyMasterId}}">{{$val->CompanyName}}</option>
                     @endforeach
               		</select>              		
-              	</div>   
-              	<div class="col-md-4">
-              		<label>Payment Mode:</label>
-              		<select id="ddlpayment" class="form-control">
-              			<option>--select--</option>
-              			<option value="Online">Online</option>
-              			<option value="Offline">Offline</option>
-              		</select>
-              	</div>
-              	<div class="col-md-4">
-              		<label>UTR No / Cheque No</label>
-              		<input type="text" name="txtutrno" class="form-control" id="txtutrno">
-              	</div>  
-              	<div class="col-md-4">
-              		<label>Bank:</label>
-              		<input type="text" name="txtbank" id="txtbank" class="form-control">
-              	</div>      	
+              	</div>             	    	
               </div>
               </div>
               <div class="row">
               	<div class="col-md-4">
               		<label>Executive Name:</label>             
-                  <select id="txtexecutivename" name="txtexecutivename" class="form-control">
-                    <option>--select--</option>
+                  <select id="txtexecutivename" name="txtexecutivename" class="form-control" >
+                    <option>--select--</option >
                     @foreach($Executive as $val)
                     <option value="{{$val->UId}}">{{$val->EmployeeName}}</option>
                    @endforeach
@@ -274,8 +231,7 @@
                   </select>
               	</div>
               	<div class="col-md-4">
-              		<label>Product Executive:</label>
-              		
+              		<label>Product Executive:</label>              		
                   <select id="txtexeProductname" name="txtexeProductname" class="form-control">
                     <option>--select--</option>
                     @foreach($productexe as $val)
@@ -294,12 +250,10 @@
               	</div>              	
               </div>
               <br>                       
-             <div class="row Motor" id="divMotor">   
-               
+             <div class="row Motor" id="divMotor">              
              	<div class="col-md-4">
              		<label>RC Copy:</label>
-             		<input type="file" name="filerc" id="filerc" class="form-control" accept=".png, .jpg, .jpeg .pdf"> 
-                            		
+             		<input type="file" name="filerc" id="filerc" class="form-control" accept=".png, .jpg, .jpeg .pdf">                           		
              	</div>
              	<div class="col-md-4">
              		<label>Fitness:</label>
@@ -416,8 +370,20 @@ $("#ddlcity").change(function(){
          });
 });
 
-function validate(){
-  $('#frmofflinecs').valid();
-}
+$("#ddlfbaname").change(function(){
+  var fbaid=$("#ddlfbaname").val();
+  //alert(fbaid)
+   $.ajax({
+             url: 'get_ERPID_offlinecs/'+fbaid,
+             type: "GET",             
+             success:function(data) 
+             {      
+              var erpid=  JSON.parse(data);              
+               $("#txterpid").val(erpid[0].ERPID);
+               $("#txtexecutivename").val(erpid[0].fieldmanageruid);
+               $("#txtexecutivename1").val(erpid[0].rrmuid);
+             }
+         });
+});
 </script>
 @endsection

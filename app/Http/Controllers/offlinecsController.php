@@ -22,7 +22,9 @@ class offlinecsController extends CallApiController
        $productexe=DB::select("call Usp_get_product_executive();");
        $Executive=DB::select("call Usp_get_Executive();");
        $Executive1=DB::select("call Usp_get_Executive1();");
-       return view('offlinecs',['Genins'=>$Genins,'lifeins'=>$lifeins,'health'=>$health,'city'=>$city,'fba'=>$fba,'productmgr'=>$productmgr,'productexe'=>$productexe,'Executive'=>$Executive,'Executive1'=>$Executive1]);
+       $reason=DB::select("call Usp_get_reason_offlinecs();");
+       
+       return view('offlinecs',['Genins'=>$Genins,'lifeins'=>$lifeins,'health'=>$health,'city'=>$city,'fba'=>$fba,'productmgr'=>$productmgr,'productexe'=>$productexe,'Executive'=>$Executive,'Executive1'=>$Executive1,'reason'=>$reason]);
 	}
 	public function getstate($cityid)
   { 
@@ -34,7 +36,8 @@ class offlinecsController extends CallApiController
 
 	 public function insertofflinecs(Request $req)
     {
-          
+           $fbauser=Session::get('fbauserid');
+          //print_r($req->all());exit();
            $filerc=$this->fileupload_fn($req->file('filerc'));
            $fileFitness=$this->fileupload_fn($req->file('fileFitness'));
            $filePUC=$this->fileupload_fn($req->file('filePUC'));
@@ -43,8 +46,9 @@ class offlinecsController extends CallApiController
            $fileother=$this->fileupload_fn($req->file('fileother'));
            $fileProposalForm=$this->fileupload_fn($req->file('fileProposalForm'));
            $fileKYC=$this->fileupload_fn($req->file('fileKYC'));
+           
             
-             $id= DB::select('call Usp_insert_motor_offlinecs(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',array(
+             $id= DB::select('call Usp_insert_motor_offlinecs(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',array(
               $req->ddproduct,
               $req->txtcstname,
               $req->txtadd,             
@@ -83,7 +87,10 @@ class offlinecsController extends CallApiController
               $fileProposalForm,
               $fileKYC,
               $req->ddlnoofpolicy,
-              $req->txtmedicalcase));              
+              $req->txtmedicalcase,
+              $req->ddlInsurerhealth,
+              $req->ddlInsurerlife,
+              $fbauser));              
             
             foreach ($id as $val) 
             {
@@ -255,14 +262,19 @@ if ($fileKYC!=0)
             $image->move($destinationPath, $name);
             $declva=$name;
            }else{
-              $declva='o';
+              $declva='0';
 
            } 
              
              return $declva;
   }
 
-   
+   public function geterpid($fbaid)
+   {
+      $ERPID=DB::select("call Usp_get_ERPID_RRM_EXE($fbaid)");
+       return json_encode($ERPID);
+
+   }
 
 
 }

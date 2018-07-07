@@ -26,10 +26,10 @@ class BookAppointmentController extends CallApiController
         $res['status']=0;
         $res['msg']="success";
         $Product=$req['Product'];
-         $Company=$req['Company'];
-         $Language=$req['Language'];
+        $Company=$req['Company'];
+        $Language=$req['Language'];
         $document_name="image";
-         $user_id=Session::get('fbauserid');
+        $user_id=Session::get('fbauserid');
         $file=$req->file('file');
 
         try {
@@ -105,8 +105,7 @@ class BookAppointmentController extends CallApiController
 
             $post_data='{"apptrebook_input":null,"status_input":null,"apptdetail":null,"pack_details":{"username":"Datacomp","pass":"Health@1234","fromamt":0,"toamt":0,"fromage":0,"toage":0,"gender":"B"},"slot_inputdata":null,"provider_data":null,"pack_param":null}';
 
-
-        $result=$this->call_json_data_api('http://www.healthassure.in/Products/HAMobileProductService.asmx/PackDetails',$post_data);
+            $result=$this->call_json_data_api('http://www.healthassure.in/Products/HAMobileProductService.asmx/PackDetails',$post_data);
 
         
                $http_result=$result['http_result'];
