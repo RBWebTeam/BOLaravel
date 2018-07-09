@@ -10,11 +10,18 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+
+
+
+
+
 Route::get('health-packages','BookAppointmentController@health_packages');
 
 Route::post('health-insurance-analysis','BookAppointmentController@health_insurance_analysis');
 Route::get('order-summary','BookAppointmentController@order_summary');
-Route::post('health-insurance-packages','BookAppointmentController@health_insurance_packages'); 
+Route::post('health-insurance-packages','BookAppointmentController@health_insurance_packages');
+ 
  //Shubham
 Route::get('HealthAssure','HealthAssureController@gethealthassure');
 Route::post('HealthAssureinsert','HealthAssureController@inserthealthtest');
@@ -23,7 +30,6 @@ Route::post('providerlist','HealthAssurePartnerController@providerlist');
 Route::Post('Health-Assure-Partner','HealthAssurePartnerController@getproviderinfo');
 Route::get('Success','HealthAssureController@Success');
 Route::get('Failure','HealthAssureController@failure');
-Route::get('getcitybypincode/{pincode}','HealthAssureController@getcity');
 ///Shubham
 
 Route::get('/','LoginController@checklogin');
@@ -76,9 +82,7 @@ Route::get('quickleadassignmentshow','quickleadController@showlead');
 
 	Route::get('user_mapping','usermappingController@fbauser');
 
-Route::get('sales-code-update','salescodeController@updatesalescode');
-Route::get('sales-code-update-get-fbaid/{salsecode}','salescodeController@selfcodefbaid');
-Route::POST('sales-code-update-insert','salescodeController@insertsalescode');
+
 //User_mapping vikas End
 
 
@@ -109,15 +113,9 @@ Route::get('export','FbaController@exportexcel');
 Route::get('load-non-fba-list','nonfbaController@nonfbalist');
 Route::get('non-fba-list','nonfbaController@getnonfba');
 Route::get('export-excel','nonfbaController@nonfbaexportexcel');
+
 // non fba-list End
 
-// Sales code update start
-  
-
-// Sales code update End
-Route::get('sales-code-update','salescodeController@updatesalescode');
-Route::get('sales-code-update-get-fbaid/{salsecode}','salescodeController@selfcodefbaid');
-Route::POST('sales-code-update-insert','salescodeController@insertsalescode');
 
 
 
@@ -210,22 +208,13 @@ Route::post('search-loan-apicall','SearchLoanController@SearchLoancallapi');
 Route::get('quick-lead','quickleadController@quicklead_ql');
 Route::Post('quick-lead','quickleadController@insertquickleadstatus');
 Route::get('quick-lead/{leadid}','quickleadController@gethistory');
+Route::get('quick-lead-assigned-fba','quickleadController@getAssignedFBAToUserQuickLead');
 
-/*Route::get('quick-lead-assigned-fba','quickleadController@getAssignedFBAToUserQuickLead');
-
-Route::get('assigned-fba-lead','quickleadController@assignedfbalead');*/
-
-Route::get('assigned-fba-lead','quickleadController@assignedfbaleadnew');
-Route::post('assigned-fba-lead-new','quickleadController@insertstatus');
-Route::get('assigned-fba-lead-history/{fbaid}','quickleadController@gethistoryfba');
+Route::get('assigned-fba-lead','quickleadController@assignedfbalead');
 
 Route::get('Quick-lead-dashboard','quickleaddashboardController@getquicklead');
 Route::get('edit_lead/{Leadid}','quickleadController@editlead');
 Route::Post('quick-lead-edit','quickleadController@updatelead');
-
-route::get('offlinecs','offlinecsController@getofflinecs');
-route::get('get_state_offlinecs/{cityid}','offlinecsController@getstate');
-Route::Post('offlinecs','offlinecsController@insertofflinecs');
 ///shubham end ///
 // avinash
  Route::get('ticket-module','TicketController@getticketdetails') ;
@@ -403,29 +392,6 @@ Route::get('lead-assgin-list-get','LeadstatusController@lead_assgin_list_get');
 // END LEAD MANAGMENT
 ******************/ 
 
-
-
-  /************
-//  CRM
-******************/
-Route::group(['namespace'=>'crm'],function(){
-Route::get('user-role','CrmController@user_role');
-Route::get('crm-view-history','CrmController@crm_view_history'); 
-Route::get('crm-disposition/{id}','CrmController@crm_disposition_fn'); 
-Route::post('crm-disposition','CrmController@crm_disposition');
-Route::get('crm-disposition-id','CrmController@crm_disposition_id'); 
-Route::get('crm-followup','CrmController@crm_followup'); 
-Route::get('crm-followup-disposition','CrmController@followup_disposition_view'); 
-
-
-
-});
-
-  /************
-//  END CRM 
-******************/
-
-
  /************
 // Product Controller 
 ******************/
@@ -483,8 +449,6 @@ Route::get('marketing-leads','LeaduploadController@marketing_leads');
 // Route::get('state_dropdown/{cityid}','bankofferController@get_cities');
 // Route::get('state_sub_dropdown/{cityid}','bankofferController@get_sub_cities');
 
-
- 
 
 
 });

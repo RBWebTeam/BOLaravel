@@ -97,7 +97,7 @@ $(document).ready(function(){
              }
 
              function POSP_UPDATE(id){
-              // updatepospapi(id);
+              //updatepospapi(id);
                       $('#fbaid').val(id);
                       $('.updatePosp').modal('show');
                     

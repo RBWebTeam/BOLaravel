@@ -10,35 +10,34 @@
 </style>
 
 
-
-
-             <div class="container-fluid white-bg">
-             <div class="col-md-12"><h3 class="mrg-btm">FBA List</h3>
+           <div class="container-fluid white-bg">
+           <div class="col-md-12"><h3 class="mrg-btm">FBA List</h3>
            <hr>
            </div>
 
-      <div class="col-md-2">
-      <div class="form-group">
 
-         <p>From Date</p>
-         <div id="datepicker" class="input-group date" data-date-format="mm-dd-yyyy">
-               <input class="form-control date-range-filter" type="text" placeholder="From Date" name="fdate" id="min"/>
-              <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-            </div>
-            </div>
-           </div>
+     
+       <div class="col-md-2">
+       <div class="form-group">
+       <p>From Date</p>
+       <div id="datepicker" class="input-group date" data-date-format="mm-dd-yyyy">
+       <input class="form-control date-range-filter" type="text" placeholder="From Date" name="fdate" id="min"/ value="<?php echo date('m-d-Y',strtotime("-7 days")); ?>">
+       <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+       </div>
+       </div>
+       </div>
+
        <div class="col-md-2">
        <div class="form-group">
        <p>To Date</p>
        <div id="datepicker1" class="input-group date" data-date-format="mm-dd-yyyy">
-               <input class="form-control date-range-filter" type="text" placeholder="To Date"  name="todate"  id="max"/>
-              <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-              </div>
-              </div>
-            </div>
+       <input class="form-control date-range-filter" type="text" placeholder="To Date" name="todate"  id="max"/ value="<?php echo date('m-d-Y'); ?>">
+       <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+       </div>
+       </div>
+       </div>
            
        <div class="col-md-4">
-
        <div class="form-group"> <input type="submit" name="btndate" id="btndate"  class="mrg-top common-btn pull-left" value="SHOW">  
      &nbsp;&nbsp;
 
@@ -92,7 +91,6 @@
                                        <th>State</th>
                                        <th>Zone</th>
                                        <th>Pincode</th>
-                                  <!-- <th>Erpid</th> -->
                                        <th>POSP No(SSID)</th>
                                        <th>Loan ID</th> 
                                        <th>Posp Name</th> 
@@ -113,9 +111,6 @@
 
   <div id="myDIV" >
   <a href="{{url('export')}}" class="qry-btn" id="pospbtn">Export</a>
-
-
-    
 
 </div>
   </div>
@@ -603,7 +598,7 @@ $(document).ready(function() {
     var min = $('#min').val();
     var max = $('#max').val();
    // console.log(max);
-    var createdAt = data[21] || 21; // Our date column in the table
+    var createdAt = data[24] || 24; // Our date column in the table
    
     if (
       (min == "" || max == "") ||

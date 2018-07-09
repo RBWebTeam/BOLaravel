@@ -16,7 +16,7 @@ class FbaController extends CallApiController
 {
       
         public function fba_list(){
-         //$query=DB::select("call usp_load_fbalist_new(0)");
+ 
          $doctype = DB::select("call get_document_type()");   
          //print_r($doctype); exit();
 
@@ -29,8 +29,9 @@ class FbaController extends CallApiController
               $query=DB::select('call fbaList_export(0)');
               $data = json_decode( json_encode($query), true) ;
               return Excel::create('Fbalist', function($excel) use ($data) {
-              $excel->sheet('mySheet', function($sheet) use ($data)
-          {
+            $excel->sheet('FBADATA', function($sheet) use ($data)
+            {
+
               $sheet->fromArray($data);
           });
               })->download('xls');
@@ -64,7 +65,8 @@ class FbaController extends CallApiController
               $newsms = urlencode($req->sms); //htmlspecialchars();
 
               $post_data="";
-              $result=$this->call_json_data_api('http://vas.mobilogi.com/api.php?username=rupeeboss&password=pass1234&route=1&sender=FINMRT&mobile[]='.$req->mobile_no.'&message[]='.$newsms,$post_data);
+              // $result=$this->call_json_data_api('http://vas.mobilogi.com/api.php?username=rupeeboss&password=pass1234&route=1&sender=FINMRT&mobile[]='.$req->mobile_no.'&message[]='.$newsms,$post_data);
+          $result=$this->call_json_data_api('http://alrt.co.in/http-api.php?username=finmrt&password=pass1234&senderid=FINMRT&route=1&number='.$req->mobile_no.',&message='.$newsms,$post_data);
               $http_result=$result['http_result'];
               $error=$result['error'];
               $st=str_replace('"{', "{", $http_result);
@@ -258,7 +260,8 @@ class FbaController extends CallApiController
       $newsms = urlencode( $text.":".$req->divpartnertable_payment);//htmlspecialchars();
        //print_r($newsms); exit();
       $post_data="";
-      $result=$this->call_json_data_api('http://vas.mobilogi.com/api.php?username=rupeeboss&password=pass1234&route=1&sender=FINMRT&mobile[]='.$req->txtmono.'&message[]='.$newsms,$post_data);
+      // $result=$this->call_json_data_api('http://vas.mobilogi.com/api.php?username=rupeeboss&password=pass1234&route=1&sender=FINMRT&mobile[]='.$req->txtmono.'&message[]='.$newsms,$post_data);
+      $result=$this->call_json_data_api('http://alrt.co.in/http-api.php?username=finmrt&password=pass1234&senderid=FINMRT&route=1&number='.$req->txtmono.',&message='.$newsms,$post_data);
        $http_result=$result['http_result'];
        $error=$result['error'];
        $st=str_replace('"{', "{", $http_result);

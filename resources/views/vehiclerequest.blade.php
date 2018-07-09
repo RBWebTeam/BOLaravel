@@ -4,19 +4,14 @@
 
 
        <div class="container-fluid white-bg">
-       <div class="col-md-12"><h3 class="mrg-btm">Registration NO</h3></div>
-       
-     
- 
- 
+       <div class="col-md-12"><h3 class="mrg-btm">Registration NO</h3></div> 
        <div class="col-md-12">
        <div class="overflow-scroll">
        <div class="table-responsive" >
       <table class="datatable-responsive table table-striped table-bordered dt-responsive nowrap" id="example">
                     <thead>
                        <tr>
-                       <th>FBA ID</th>
-          
+                       <th>FBA ID</th>          
                         <th>registration no</th>
                       </tr>
                     </thead>
@@ -24,8 +19,7 @@
                       @foreach($query as $val)
                        <tr>
                       <td> <a href="#" onclick="vehicle_fn('{{$val->VehicleRequestID}}','MOI','{{$val->FBAID}}')">{{$val->FBAID}}</a></td>
-                      <td>{{$val->registration_no}}</td>
-                     
+                      <td>{{$val->registration_no}}</td>          
  
                       </tr>
                       @endforeach
@@ -36,11 +30,6 @@
       </div>
       </div>
       </div>
-
-
-
-
-
  <div class="modal fade" id="vehicle-fn-Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
