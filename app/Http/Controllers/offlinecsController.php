@@ -23,8 +23,10 @@ class offlinecsController extends CallApiController
        $Executive=DB::select("call Usp_get_Executive();");
        $Executive1=DB::select("call Usp_get_Executive1();");
        $reason=DB::select("call Usp_get_reason_offlinecs();");
+       $product=DB::select("call Usp_get_offlinecsproduct();");
        
-       return view('offlinecs',['Genins'=>$Genins,'lifeins'=>$lifeins,'health'=>$health,'city'=>$city,'fba'=>$fba,'productmgr'=>$productmgr,'productexe'=>$productexe,'Executive'=>$Executive,'Executive1'=>$Executive1,'reason'=>$reason]);
+       
+       return view('offlinecs',['Genins'=>$Genins,'lifeins'=>$lifeins,'health'=>$health,'city'=>$city,'fba'=>$fba,'productmgr'=>$productmgr,'productexe'=>$productexe,'Executive'=>$Executive,'Executive1'=>$Executive1,'reason'=>$reason,'product'=>$product]);
 	}
 	public function getstate($cityid)
   { 
@@ -48,7 +50,7 @@ class offlinecsController extends CallApiController
            $fileKYC=$this->fileupload_fn($req->file('fileKYC'));
            
             
-             $id= DB::select('call Usp_insert_motor_offlinecs(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',array(
+             $id= DB::select('call Usp_insert_motor_offlinecs(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',array(
               $req->ddproduct,
               $req->txtcstname,
               $req->txtadd,             
@@ -67,7 +69,7 @@ class offlinecsController extends CallApiController
               $req->txtvehicalno,
               $req->txtexpdate,
               $req->txtbreakin,
-              $req->ddlInsurer,
+              $req->ddlInsurermotor,
               $req->ddlpayment,
               $req->txtutrnomotor,
               $req->txtbankmotor,
@@ -90,7 +92,8 @@ class offlinecsController extends CallApiController
               $req->txtmedicalcase,
               $req->ddlInsurerhealth,
               $req->ddlInsurerlife,
-              $fbauser));              
+              $fbauser,
+              $req->ddlwhyoffline));              
             
             foreach ($id as $val) 
             {
@@ -246,7 +249,28 @@ if ($fileKYC!=0)
 
         return $e->getMessage();    
      }        
-}            
+}
+
+
+
+//print_r($offlinecsdata) ;exit();            
+               /* $email = 'shubhamkhandekar2@gmail.com';
+                $ccemail='shubhamkhandekar2@gmail.com';
+  if($ccemail!=''){
+                $offlinecsdata = DB::select("call Usp_get_motor_data($ID)");
+                $mail = Mail::send('mailViews.sendmailofflinecs',['offlinecsdata' => $offlinecsdata], function($message)use($email,$ccemail){
+                $message->from('wecare@rupeeboss.com', 'RupeeBoss');
+                $message->to($email)->cc($ccemail)->subject('OFFLINE CS');
+                });
+             
+                    if(Mail::failures()){
+                            $error=3;
+                            echo $error;
+                    }else{
+
+                    
+                    }
+                }        */ 
       
         
                  
@@ -261,9 +285,9 @@ if ($fileKYC!=0)
             $destinationPath = public_path('upload/offlinecs/'); //->save image folder 
             $image->move($destinationPath, $name);
             $declva=$name;
-           }else{
+           }else
+           {
               $declva='0';
-
            } 
              
              return $declva;

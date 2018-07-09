@@ -21,12 +21,14 @@
                 <div class="col-md-4">
          		      <label>Product:</label>
                   <select class="form-control" id="ddproduct" name="ddproduct">
-                 	<option value="1">Motor</option>
-                  <option value="1">Two Wheeler</option> 
+                  @foreach($product as $val)
+                 	<option value="{{$val->id}}">{{$val->product_name}}</option>
+                  @endforeach
+                  <!-- <option value="1">Two Wheeler</option> 
                   <option value="1">Commercial Vehicle</option>                 	
                  	<option value="2">Health</option>
                   <option value="2">Top UP</option>                 	
-                 	<option value="3">Life</option>
+                 	<option value="3">Life</option> -->
                  </select>  
                  </div>
               </div>           
@@ -323,6 +325,24 @@ $( document ).ready(function() {
       $(".life").hide();
      }
      else if($("#ddproduct").val()==2){
+      $(".Motor").show();
+      $("#life").hide();
+      $("#Health").hide();
+      $("#divlife").hide();
+      $("#divhealth").hide();
+      $(".health").hide();
+      $(".life").hide();
+     }
+     else if($("#ddproduct").val()==3){
+      $(".Motor").show();
+      $("#life").hide();
+      $("#Health").hide();
+      $("#divlife").hide();
+      $("#divhealth").hide();
+      $(".health").hide();
+      $(".life").hide();
+     }
+     else if($("#ddproduct").val()==4){
      	$("#life").hide();
      	$("#Health").show();
      	$("#divlife").hide();
@@ -332,7 +352,17 @@ $( document ).ready(function() {
       $(".health").show();
       $(".life").hide();
      }
-     else if($("#ddproduct").val()==3){   	
+     else if($("#ddproduct").val()==5){
+      $("#life").hide();
+      $("#Health").show();
+      $("#divlife").hide();
+      $("#divhealth").show();
+      $(".Proposal").show();
+      $(".Motor").hide();
+      $(".health").show();
+      $(".life").hide();
+     }
+     else if($("#ddproduct").val()==6){   	
       $("#life").show();
      	$("#Health").hide();
      	$("#divlife").show();
