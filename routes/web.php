@@ -392,6 +392,29 @@ Route::get('lead-assgin-list-get','LeadstatusController@lead_assgin_list_get');
 // END LEAD MANAGMENT
 ******************/ 
 
+
+
+  /************
+//  CRM
+******************/
+Route::group(['namespace'=>'crm'],function(){
+Route::get('user-role','CrmController@user_role');
+Route::get('crm-view-history','CrmController@crm_view_history'); 
+Route::get('crm-disposition/{id}','CrmController@crm_disposition_fn'); 
+Route::post('crm-disposition','CrmController@crm_disposition');
+Route::get('crm-disposition-id','CrmController@crm_disposition_id'); 
+Route::get('crm-followup','CrmController@crm_followup'); 
+Route::get('crm-followup-disposition','CrmController@followup_disposition_view'); 
+
+
+
+});
+
+  /************
+//  END CRM 
+******************/
+
+
  /************
 // Product Controller 
 ******************/
@@ -449,6 +472,8 @@ Route::get('marketing-leads','LeaduploadController@marketing_leads');
 // Route::get('state_dropdown/{cityid}','bankofferController@get_cities');
 // Route::get('state_sub_dropdown/{cityid}','bankofferController@get_sub_cities');
 
+
+ 
 
 
 });
