@@ -259,23 +259,25 @@ if ($fileKYC!=0)
 }
 
 
-
-//print_r($offlinecsdata) ;exit();            
-                $email = 'shubhamkhandekar2@gmail.com';
-                $ccemail='shubhamkhandekar2@gmail.com';
-  if($ccemail!=''){
+           
+                $email ='shubhamkhandekar2@gmail.com';
+                $ccemail='shaikhdani26@gmail.com';
                 $offlinecsdata = DB::select("call Usp_get_motor_data($ID)");
-                $mail = Mail::send('mailViews.sendmailofflinecs',['offlinecsdata' => $offlinecsdata], function($message)use($email,$ccemail){
+                $sub='SNo.'.$offlinecsdata[0]->ID.' '.$offlinecsdata[0]->product_name.'  Entry details for '.$offlinecsdata[0]->CustomerName.' - '.$offlinecsdata[0]->POSPName;
+                
+    if($ccemail!=''){                
+                $mail = Mail::send('mailViews.sendmailofflinecs',['offlinecsdata' => $offlinecsdata], function($message)use($email,$ccemail,$sub){
                 $message->from('wecare@rupeeboss.com', 'RupeeBoss');
-                $message->to($email)->cc($ccemail)->subject('OFFLINE CS');
+                $message->to($email)->cc($ccemail)->subject($sub);
                 });
              
                     if(Mail::failures()){
                             $error=3;
                             echo $error;
-                    }else{
+                    }
+                    else
+                    {
 
-                    
                     }
                 }         
       

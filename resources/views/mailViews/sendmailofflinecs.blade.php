@@ -12,8 +12,10 @@ th, td {
 }
 </style>
 </head>
-<table>
-		@foreach($offlinecsdata as $val)   
+<p>Dear Sir/Madam,</p>
+@foreach($offlinecsdata as $val) 
+<p>Please find enclosed details for CS for {{$val->product_name}} for {{$val->CustomerName}}. Details of the case are as under:</p>
+<table>		  
 		<tr>
 	    <th>ID</th>
 		<td>{{$val->ID}}</td>
@@ -74,22 +76,28 @@ th, td {
 		<th>QTNo</th>
 		<td>{{$val->QTNo}}</td>
 		</tr>
+		@if($val->VehicleNo!='')
 		<tr>
 		<th>Vehicle No</th>
 		<td>{{$val->VehicleNo}}</td>
 		</tr>
+		@endif		
 		<tr>
 		<th>Date of Expiry</th>
 		<td>{{$val->DateofExpiry}}</td>
 		</tr>
+		@if($val->BreakIn!='')
 		<tr>
 		<th>Break In</th>
 		<td>{{$val->BreakIn}}</td>
 		</tr>
+		@endif	
+		@if($val->motorInsurer!='')
 		<tr>
 		<th>Insurer motor</th>
 		<td>{{$val->motorInsurer}}</td>
 		</tr>
+		@endif
 		<tr>
 		<th>Payment Mode</th>
 		<td>{{$val->PaymentMode}}</td>
@@ -118,30 +126,90 @@ th, td {
 		<th>Product Manager</th>
 		<td>{{$val->ProductManager}}</td>
 		</tr>
+		@if($val->RCCopy!='')
 		<tr>
 		<th>RC Copy</th>
 		<td>{{$val->RCCopy}}</td>
 		</tr>
+		@endif
+		@if($val->Fitness!='')
 		<tr>
 		<th>Fitness</th>
 		<td>{{$val->Fitness}}</td>
 		</tr>
+		@endif
+		@if($val->PUC!='')
 		<tr>
 		<th>PUC</th>
 		<td>{{$val->PUC}}</td>
 		</tr>
+		@endif
+		@if($val->BreakinReport!='')
 		<tr>
 		<th>Breakin Report</th>
 		<td>{{$val->BreakinReport}}</td>
 		</tr>
+		@endif
+		@if($val->ChequeCopy!='')
 		<tr>
 		<th>Cheque Copy</th>
 		<td>{{$val->ChequeCopy}}</td>
 		</tr>
+		@endif
+		@if($val->Other!='')
 		<tr>
-		<th>Other</th>
-		<td>{{$val->Other}}</td>
+		   <th>Other</th>
+		   <td>{{$val->Other}}</td>
 		</tr>
+		@endif
+		@if($val->ProposalForm!='')
+		<tr>
+        	<th>Proposal Form</th>
+        	<td>{{$val->ProposalForm}}</td>
+        </tr>
+        @endif
+        @if($val->KYC!='')
+		<tr>
+			<th>KYC</th>
+			<td>{{$val->KYC}}</td>
+		</tr>
+		@endif
+        @if($val->Preexisting!='')
+		<tr>
+			<th>Preexisting</th>
+			<td>{{$val->Preexisting}}</td>
+		</tr>
+		@endif
+        @if($val->MedicalReport!='')
+		<tr>
+			<th>Medical Report</th>
+			<td>{{$val->MedicalReport}}</td>
+		</tr>
+		@endif
+        @if($val->PremiumYears!=0)
+		<tr>
+			<th>Premium Years</th>
+			<td>{{$val->PremiumYears}}</td>
+		</tr>
+		@endif
+        @if($val->TypeofPolicy!=0)
+		<tr>
+			<th>Type of Policy</th>
+			<td>{{$val->TypeofPolicy}}</td>
+		</tr>
+		@endif
+        @if($val->Insurerhealth!='')
+		<tr>
+			<th>Insurer Health</th>
+			<td>{{$val->Insurerhealth}}</td>
+		</tr>
+		@endif
+        @if($val->Insurerlife!='')
+		<tr>
+			<th>Insurer Life</th>
+			<td>{{$val->Insurerlife}}</td>
+		</tr>
+		@endif
 		<tr>
 		<th>Created date</th>
 		<td>{{$val->createddate}}</td>
@@ -149,3 +217,11 @@ th, td {
        @endforeach
 </table>
 </html>
+
+
+
+
+
+
+
+

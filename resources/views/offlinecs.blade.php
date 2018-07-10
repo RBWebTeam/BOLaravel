@@ -11,8 +11,8 @@
               <div class="row col-md-12" style="padding-left: 0px;">
                 <div class="col-md-4">
                    <label>Why Offline:</label>
-                  <select class="form-control" id="ddlwhyoffline" name="ddlwhyoffline" >
-                    <option >--select--</option>
+                  <select class="form-control" id="ddlwhyoffline" name="ddlwhyoffline" required>
+                    <option value="">--select--</option>
                     @foreach($reason as $val)
                      <option value="{{$val->id}}">{{$val->Reason}}</option>
                     @endforeach                 
@@ -35,15 +35,15 @@
               <br>
               <div class="row">
                  <div class="col-md-4">
-                 	<label>Name of Customer:</label><input id="txtcstname" name="txtcstname" type="text" class="form-control" placeholder="Name of Customer" >                    
+                 	<label>Name of Customer:</label><input id="txtcstname" name="txtcstname" type="text" class="form-control" placeholder="Name of Customer" required>                    
                  </div>
                  <div class="col-md-4">
-                 	<label>Address of Customer :</label><textarea id="txtadd" name="txtadd" class="form-control" placeholder="Address of Customer" ></textarea>            
+                 	<label>Address of Customer :</label><textarea id="txtadd" name="txtadd" class="form-control" placeholder="Address of Customer" required></textarea>            
                 </div>
                 <div class="col-md-4">
                 	<label>City:</label>
-                	<select class="form-control" id="ddlcity" name="ddlcity" >
-                		<option>--select--</option>
+                	<select class="form-control" id="ddlcity" name="ddlcity" required>
+                		<option value="">--select--</option>
                     @foreach($city as $val)
                     <option value="{{$val->city_id}}">{{$val->cityname}}</option>
                     @endforeach
@@ -77,7 +77,7 @@
                 </div>
                 <div class="col-md-4">
                   <label>Mobile no:</label>                   
-                   <input type="number" id="txtmobno" name="txtmobno" class="form-control" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type = "number" maxlength = "10"  />             
+                   <input type="number" id="txtmobno" name="txtmobno" class="form-control" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type = "number" maxlength = "10"  required>             
                 </div>
                 <div class="col-md-4">
                   <label>Telephone No:</label>
@@ -85,12 +85,12 @@
                 </div>             	
               	<div class="col-md-4">
               		<label>Email Id:</label>
-              		<input type="Email" class="form-control" name="txtemail" id="txtemail">           		
+              		<input type="Email" class="form-control" name="txtemail" id="txtemail" required>           		
               	</div>
                	<div class="col-md-4">
               		<label>Posp Name:</label>
-              		<select class="form-control" id="ddlfbaname" name="ddlfbaname" >
-                    <option>--Select--</option>
+              		<select class="form-control" id="ddlfbaname" name="ddlfbaname" required>
+                    <option value="0">--Select--</option>
                     @foreach($fba as $val)
               			<option value="{{$val->FBAID}}">{{$val->POSPName}} ({{$val->FBAID}})</option>
                     @endforeach
@@ -98,24 +98,24 @@
               	</div>
                 <div class="col-md-4">
                   <label>Premium Amount:</label>
-                <input type="number" class="form-control" name="txtpremiumamt" id="txtpremiumamt" >        
+                <input type="number" class="form-control" name="txtpremiumamt" id="txtpremiumamt" required>        
                 </div>
               	<div class="col-md-4">
               		<label>ERP ID:</label>
-              		<input type="text" class="form-control" name="txterpid" id="txterpid" readonly >           		
+              		<input type="text" class="form-control" name="txterpid" id="txterpid" readonly>           		
               	</div>
 
               	<div class="col-md-4">
               		<label>QT No:</label>
-              		<input type="text" class="form-control" name="txtqtno" id="txtqtno" >           		
+              		<input type="text" class="form-control" name="txtqtno" id="txtqtno" required>           		
               	</div>
                 <div class="col-md-4">
                   <label>Date of Expiry:</label>
-                  <input type="Date" class="form-control" name="txtexpdate" id="txtexpdate" >            
+                  <input type="Date" class="form-control" name="txtexpdate" id="txtexpdate" required>            
                 </div>
                 <div class="col-md-4">
                   <label>Payment Mode:</label>
-                  <select id="ddlpayment" name="ddlpayment" class="form-control">
+                  <select id="ddlpayment" name="ddlpayment" class="form-control" required>
                     <option>--select--</option>
                     <option value="Online">Online</option>
                     <option value="Offline">Offline</option>
@@ -123,11 +123,11 @@
                 </div>
                 <div class="col-md-4">
                   <label>UTR No / Cheque No:</label>
-                  <input type="text" name="txtutrnomotor" class="form-control" id="txtutrnomotor" >
+                  <input type="text" name="txtutrnomotor" class="form-control" id="txtutrnomotor" required>
                 </div> 
                 <div class="col-md-4">
                   <label>Bank:</label>
-                  <input type="text" name="txtbankmotor" id="txtbankmotor" class="form-control" >
+                  <input type="text" name="txtbankmotor" id="txtbankmotor" class="form-control" required>
                 </div>  
               </div>            
             <br>
@@ -145,7 +145,7 @@
               	<div class="col-md-4">
               		<label>Insurer:</label>
               		<select id="ddlInsurermotor" name="ddlInsurermotor" class="form-control" >
-              			<option>--select---</option>
+              			<option value="0">--select---</option>
               			@foreach ($Genins as $val)
               			<option value="{{$val->GeneralInsuranceCompanyMasterId}}">{{$val->CompanyName}}</option>
               			@endforeach
@@ -179,7 +179,7 @@
               	<div class="col-md-4">
               		<label>Premium Year/s:</label>
               		<select id="dllpremium" name="dllpremium" class="form-control" >
-              			<option>--select--</option>
+              			<option value="0">--select--</option>
               			<option value="1">1 year</option>
               			<option value="2">2 year</option>
               			<option value="3">3 year</option>
@@ -217,7 +217,7 @@
               	<div class="col-md-4">
               		<label>Executive Name:</label>             
                   <select id="txtexecutivename" name="txtexecutivename" class="form-control" >
-                    <option>--select--</option >
+                    <option value="0">--select--</option >
                     @foreach($Executive as $val)
                     <option value="{{$val->UId}}">{{$val->EmployeeName}}</option>
                    @endforeach
@@ -392,10 +392,11 @@ $("#ddlcity").change(function(){
               //alert(data);
               var state=  JSON.parse(data);
               $('#ddlstate').empty();  
-              $('#ddlzone').empty();                       
+              $('#ddlzone').empty();
+              $('#ddlregion').empty();                       
               $('#ddlstate').append('<option value="'+ state[0].state_id +'">'+ state[0].state_name +'</option>');
               $('#ddlzone').append('<option value="'+ state[0].state_id +'">'+ state[0].zone +'</option>');
-            
+              $('#ddlregion').append('<option value="'+ state[0].state_id +'">'+ state[0].region +'</option>');           
              }
          });
 });
