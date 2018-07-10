@@ -38,7 +38,7 @@ Route::get('dashboard','DashboardController@dashboard');
 
 //Fba details
 Route::get('fba-list','FbaController@fba_list');
-Route::get('get-fba-list','FbaController@get_fba_list');
+Route::get('get-fba-list/{fdate}/{todate}','FbaController@get_fba_list');
 Route::post('sales-update','FbaController@sales');
 Route::post('loan-update','FbaController@loan');
 Route::post('posp-update','FbaController@posp');
@@ -79,6 +79,8 @@ Route::get('quickleadassignmentshow','quickleadController@showlead');
 Route::get('sales-code-update','salescodeController@updatesalescode');
 Route::get('sales-code-update-get-fbaid/{salsecode}','salescodeController@selfcodefbaid');
 Route::POST('sales-code-update-insert','salescodeController@insertsalescode');
+
+
 //User_mapping vikas End
 
 
