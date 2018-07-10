@@ -23,8 +23,7 @@ class offlinecsController extends CallApiController
        $Executive=DB::select("call Usp_get_Executive();");
        $Executive1=DB::select("call Usp_get_Executive1();");
        $reason=DB::select("call Usp_get_reason_offlinecs();");
-       $product=DB::select("call Usp_get_offlinecsproduct();");
-       
+       $product=DB::select("call Usp_get_offlinecsproduct();");       
        
        return view('offlinecs',['Genins'=>$Genins,'lifeins'=>$lifeins,'health'=>$health,'city'=>$city,'fba'=>$fba,'productmgr'=>$productmgr,'productexe'=>$productexe,'Executive'=>$Executive,'Executive1'=>$Executive1,'reason'=>$reason,'product'=>$product]);
 	}
@@ -99,6 +98,7 @@ class offlinecsController extends CallApiController
             {
               $ID=$val->Id;             
             }
+            //print_r($ID);exit();
 
 if ($filerc!=0) 
 {
@@ -131,6 +131,7 @@ if ($fileFitness!=0)
 
     $Response= json_decode($result['http_result']);
     $shorturl=$Response->MasterData[0]->ShortURL;
+    //print_r($shorturl);exit();
     DB::select('call Usp_Insert_shortlink_offlinecs(?,?,?)',array($shorturl,'Fitness',$ID));
     
     
@@ -152,6 +153,7 @@ if ($filePUC!=0)
 
     $Response= json_decode($result['http_result']);
     $shorturl=$Response->MasterData[0]->ShortURL;
+    //print_r($shorturl);exit();
     DB::select('call Usp_Insert_shortlink_offlinecs(?,?,?)',array($shorturl,'PUC',$ID));
   }
   catch (Exception $e){
@@ -171,6 +173,7 @@ if ($filebreakrp!=0)
 
     $Response= json_decode($result['http_result']);
     $shorturl=$Response->MasterData[0]->ShortURL;
+    //print_r($shorturl);exit();
     DB::select('call Usp_Insert_shortlink_offlinecs(?,?,?)',array($shorturl,'break report',$ID));
   }
   catch (Exception $e){
@@ -189,6 +192,7 @@ if ($fileCheque!=0)
 
     $Response= json_decode($result['http_result']);
     $shorturl=$Response->MasterData[0]->ShortURL;
+    //print_r($shorturl);exit();    
     DB::select('call Usp_Insert_shortlink_offlinecs(?,?,?)',array($shorturl,'Cheque',$ID));
   }
   catch (Exception $e){
@@ -207,6 +211,7 @@ if ($fileother!=0)
 
     $Response= json_decode($result['http_result']);
     $shorturl=$Response->MasterData[0]->ShortURL;
+    //print_r($shorturl);exit();
     DB::select('call Usp_Insert_shortlink_offlinecs(?,?,?)',array($shorturl,'other',$ID));
   }
   catch (Exception $e){
@@ -225,6 +230,7 @@ if ($fileProposalForm!=0)
 
     $Response= json_decode($result['http_result']);
     $shorturl=$Response->MasterData[0]->ShortURL;
+    //print_r($shorturl);exit();
     DB::select('call Usp_Insert_shortlink_offlinecs(?,?,?)',array($shorturl,'Proposal Form',$ID));
   }
   catch (Exception $e){
@@ -243,6 +249,7 @@ if ($fileKYC!=0)
 
     $Response= json_decode($result['http_result']);
     $shorturl=$Response->MasterData[0]->ShortURL;
+    //print_r($shorturl);exit();
     DB::select('call Usp_Insert_shortlink_offlinecs(?,?,?)',array($shorturl,'KYC',$ID));
   }
   catch (Exception $e){
@@ -254,7 +261,7 @@ if ($fileKYC!=0)
 
 
 //print_r($offlinecsdata) ;exit();            
-               /* $email = 'shubhamkhandekar2@gmail.com';
+                $email = 'shubhamkhandekar2@gmail.com';
                 $ccemail='shubhamkhandekar2@gmail.com';
   if($ccemail!=''){
                 $offlinecsdata = DB::select("call Usp_get_motor_data($ID)");
@@ -270,7 +277,7 @@ if ($fileKYC!=0)
 
                     
                     }
-                }        */ 
+                }         
       
         
                  
