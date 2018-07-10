@@ -17,28 +17,29 @@
 
 
      
-       <div class="col-md-2">
-       <div class="form-group">
-       <p>From Date</p>
-       <div id="datepicker" class="input-group date" data-date-format="mm-dd-yyyy">
-       <input class="form-control date-range-filter" type="text" placeholder="From Date" name="fdate" id="min"/ value="<?php echo date('m-d-Y',strtotime("-7 days")); ?>">
-       <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-       </div>
-       </div>
-       </div>
+   <div class="col-md-2">
+      <div class="form-group">
 
+         <p>From Date</p>
+         <div id="datepicker" class="input-group date" data-date-format="yyyy-mm-dd">
+               <input class="form-control date-range-filter" type="text" placeholder="From Date" name="fdate" id="min"/ value="<?php echo date('Y-m-d',strtotime("-7 days")); ?>">
+              <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+            </div>
+            </div>
+           </div>
        <div class="col-md-2">
        <div class="form-group">
        <p>To Date</p>
-       <div id="datepicker1" class="input-group date" data-date-format="mm-dd-yyyy">
-       <input class="form-control date-range-filter" type="text" placeholder="To Date" name="todate"  id="max"/ value="<?php echo date('m-d-Y'); ?>">
-       <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-       </div>
-       </div>
-       </div>
+       <div id="datepicker1" class="input-group date" data-date-format="yyyy-mm-dd">
+               <input class="form-control date-range-filter" type="text" placeholder="To Date" name="todate"  id="max"/ value="<?php echo date('Y-m-d'); ?>">
+              <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+              </div>
+              </div>
+            </div>
            
        <div class="col-md-4">
-       <div class="form-group"> <input type="submit" name="btndate" id="btndate"  class="mrg-top common-btn pull-left" value="SHOW">  
+
+       <div class="form-group"> <input type="submit" name="btndate" id="btndate" onclick="getfbadata()"  class="mrg-top common-btn pull-left" value="SHOW">  
      &nbsp;&nbsp;
 
 <!--    <select  id="msds-select" class="pull-left mrg-top mrg-left">
@@ -463,121 +464,7 @@
 
   $(document).ready(function() {
 
-    $('#fba-list-table').DataTable({
-
-   "createdRow": function(row, data, dataIndex ) {
-    if ( data.PayStat=="S" ) {
-    $(row).css({backgroundColor: 'LightGreen'});
- }
-    },
-        "order": [[ 0, "desc" ]],
-        "ajax": "get-fba-list",
-        "columns": [
-
-            { "data": "fbaid"},
-            { "data": "FullName",
-              "render": function ( data, type, row, meta ) {
-              return (data)+' <a target="_blank" href="Fba-profile/'+row.fbaid+' "><span class="glyphicon glyphicon-user"  title="FBA Profile"></span></a>';
-              }
-          },
-
-            { "data": "createdate"},            
-            {"data":"MobiNumb1" ,
-
-             "render": function ( data, type, row, meta ) {
-              return '<span>'+data+'</span></a> <a href="#" data-toggle="modal" data-target="#sms_sent_id" onclick="SMS_FN(1,'+data+')"><span class="glyphicon glyphicon-envelope"></span></a>';
-              }
-            },
-            // { "data": "createdate" },
-            { "data": "EMaiID" },         
-            { "data": "Link",
-
-         "render": function ( data, type, row, meta ) {
-         return row.PayStat == "S"?'':'<a id="btnviewhistory" data-toggle="modal" data-target="#paylink_payment" onclick="getpaymentlink('+row.fbaid+','+row.MobiNumb1+')">Payment link</a>';
-              }
-
-             }, 
-
-               {"data":"pwd" ,
-              "render": function ( data, type, row, meta ) {
-              return '<a id="btnshowpassword" data-toggle="modal" data-target="#spassword" onclick="getpassword('+"'"+ data+"'"+')">*****</a>';
-              }
-
-       },   
-
-            {"data":"City"},
-            {"data":"statename"},
-            {"data":"Zone"},  
-            {"data":"Pincode"},
-             {"data":"POSPNo"  ,
-             "render": function ( data, type, row, meta ) {
-              return data==""?('<a id="posp_'+row.fbaid+'" class="checkPosp" data-toggle="modal" data-target="#updatePosp" onclick="updateposp('+row.fbaid+')">update</a>'):data;
-              }
- 
-
-            }, 
-
-             {"data":"LoanID"  ,
-             "render": function ( data, type, row, meta ) {
-                // return data==""?('<a id="loan_'+row.fbaid+'" class="checkloan" data-toggle="modal" data-target="#updateLoan" onclick="LoanID_UPDATE('+row.fbaid+')">update</a>'):data;
-                 return (data==""||data=="0")?('<a id="btnviewid" onclick="getloanid(this,'+row.fbaid+')">Update</a>'):data;
-              }
-         }, 
-
-
-             {"data":"pospname"},
-             {"data":"pospstatus"},  
-             {"data":"bankaccount"}, 
-             {"data":null ,
-             "render": function ( data, type, row, meta ) {
-                return '<a href="" data-toggle="modal" data-target="#partnerInfo" onclick="getpartnerinfo('+row.fbaid+')">partner info</a>';
-            } 
-
-            }, 
-
-
-     // {"data":"salescode" ,
-     //         "render": function ( data, type, row, meta ) {
-     //      return '<a href="#"id="update_'+row.fbaid+'" onclick="sales_update_fn('+row.fbaid+','+data+')" >'+data+'</a>';
-     //          }
-   
-     //       },
-
-
-              {"data":"erpid"},
-              {"data":"Refcode"},
-              {"data":"Refbycode"},    
-              {"data":"salescode",
-            "render": function ( data, type, row, meta ) {
-            return ("<a id=update_"+row.fbaid+" onclick=sales_update_fn("+row.fbaid+",'"+data+"')>"+data+"</a>");
-              }
-   
-           },
-
-             {"data":null  ,
-             "render": function ( data, type, row, meta ) {
-                return '<a href="#" style="" data-toggle="modal" data-target=".fsmdetails">Fsm details</a>';
-              }
-            },
-            
-             {"data":"fdid" ,
-             "render": function ( data, type, row, meta ) {
-            return data == 1?'<a href="" style="" data-toggle="modal"  data-target="#docviwer" onclick="docview('+row.fbaid+')" >uploaded</a>':'pending';
-           }
-        },
-          
-          {"data":"CustID" ,
-              "render": function ( data, type, row, meta ) {
-               return (data==""||data=="0")?('<a id="btnviewcid" onclick="getcustomerid(this,'+row.fbaid+')">Update</a>'):data;
-             }  
-         }, 
-
-
-         { "data": "createdate1","visible":false }
-
-        ],
-
-    });//.column('0:visible').order('desc').draw();
+//.column('0:visible').order('desc').draw();
 
 
 });  
@@ -586,41 +473,45 @@
 
 $(document).ready(function() {
   // Bootstrap datepicker
-  $('.input-daterange input').each(function() {
-    $(this).datepicker('clearDates');
-  });
 
-  // Extend dataTables search
+getfbadata();
 
- // alert('test');
-  $.fn.dataTable.ext.search.push(
-    function(settings, data, dataIndex) {
-    var min = $('#min').val();
-    var max = $('#max').val();
-   // console.log(max);
-    var createdAt = data[24] || 24; // Our date column in the table
+ // $('.input-daterange input').each(function() {
+ //    $(this).datepicker('clearDates');
+ //  });
+
+ //  // Extend dataTables search
+
+ // // alert('test');
+ //  $.fn.dataTable.ext.search.push(
+ //    function(settings, data, dataIndex) {
+ //    var min = $('#min').val();
+ //    var max = $('#max').val();
+ //   // console.log(max);
+ //    var createdAt = data[24] || 24; // Our date column in the table
    
-    if (
-      (min == "" || max == "") ||
-      (moment(createdAt).isSameOrAfter(min) && moment(createdAt).isSameOrBefore(max,'day'))
-    ) 
+ //    if (
+ //      (min == "" || max == "") ||
+ //      (moment(createdAt).isSameOrAfter(min) && moment(createdAt).isSameOrBefore(max,'day'))
+ //    ) 
 
-    {
+ //    {
 
- return true;
-    }
-    return false;
-    }
-  );
+ // return true;
+ //    }
+ //    return false;
+ //    }
+ //  );
 
- // Re-draw the table when the a date range filter changes
+ //Re-draw the table when the a date range filter changes
   $('#btndate').on("click", function(){
     var table = $('#fba-list-table').DataTable();
-    table.draw();
-  });
+ table.draw();
+
+});
 
 $('.date-range-filter').datepicker();
-});
+ });
 </script>
 <!-- from date to date end -->  
 
@@ -758,6 +649,132 @@ for (var i = 0; i < btns.length; i++) {
     this.className += " active";
   });
 }
+
+</script>
+
+
+ <script type="text/javascript">
+
+  function getfbadata(){
+
+var fdate=$("#min").val();
+  var todate=$("#max").val();
+    $('#fba-list-table').DataTable({
+"destroy": true,
+   "createdRow": function(row, data, dataIndex ) {
+    if ( data.PayStat=="S" ) {
+    $(row).css({backgroundColor: 'LightGreen'});
+ }
+    },
+        "order": [[ 0, "desc" ]],
+        "ajax": "get-fba-list/"+fdate+'/'+todate,
+        "columns": [
+
+            { "data": "fbaid"},
+            { "data": "FullName",
+              "render": function ( data, type, row, meta ) {
+              return (data)+' <a target="_blank" href="Fba-profile/'+row.fbaid+' "><span class="glyphicon glyphicon-user"  title="FBA Profile"></span></a>';
+              }
+          },
+
+            { "data": "createdate"},            
+            {"data":"MobiNumb1" ,
+
+             "render": function ( data, type, row, meta ) {
+              return '<span>'+data+'</span></a> <a href="#" data-toggle="modal" data-target="#sms_sent_id" onclick="SMS_FN(1,'+data+')"><span class="glyphicon glyphicon-envelope"></span></a>';
+              }
+            },
+            // { "data": "createdate" },
+            { "data": "EMaiID" },         
+            { "data": "Link",
+
+         "render": function ( data, type, row, meta ) {
+         return row.PayStat == "S"?'':'<a id="btnviewhistory" data-toggle="modal" data-target="#paylink_payment" onclick="getpaymentlink('+row.fbaid+','+row.MobiNumb1+')">Payment link</a>';
+              }
+
+             }, 
+
+               {"data":"pwd" ,
+              "render": function ( data, type, row, meta ) {
+              return '<a id="btnshowpassword" data-toggle="modal" data-target="#spassword" onclick="getpassword('+"'"+ data+"'"+')">*****</a>';
+              }
+
+       },   
+
+            {"data":"City"},
+            {"data":"statename"},
+            {"data":"Zone"},  
+            {"data":"Pincode"},
+             {"data":"POSPNo"  ,
+             "render": function ( data, type, row, meta ) {
+              return data==""?('<a id="posp_'+row.fbaid+'" class="checkPosp" data-toggle="modal" data-target="#updatePosp" onclick="updateposp('+row.fbaid+')">update</a>'):data;
+              }
+ 
+
+            }, 
+
+             {"data":"LoanID"  ,
+             "render": function ( data, type, row, meta ) {
+                // return data==""?('<a id="loan_'+row.fbaid+'" class="checkloan" data-toggle="modal" data-target="#updateLoan" onclick="LoanID_UPDATE('+row.fbaid+')">update</a>'):data;
+                 return (data==""||data=="0")?('<a id="btnviewid" onclick="getloanid(this,'+row.fbaid+')">Update</a>'):data;
+              }
+         }, 
+
+
+             {"data":"pospname"},
+             {"data":"pospstatus"},  
+             {"data":"bankaccount"}, 
+             {"data":null ,
+             "render": function ( data, type, row, meta ) {
+                return '<a href="" data-toggle="modal" data-target="#partnerInfo" onclick="getpartnerinfo('+row.fbaid+')">partner info</a>';
+            } 
+
+            }, 
+
+
+     // {"data":"salescode" ,
+     //         "render": function ( data, type, row, meta ) {
+     //      return '<a href="#"id="update_'+row.fbaid+'" onclick="sales_update_fn('+row.fbaid+','+data+')" >'+data+'</a>';
+     //          }
+   
+     //       },
+
+
+              {"data":"erpid"},
+              {"data":"Refcode"},
+              {"data":"Refbycode"},    
+              {"data":"salescode",
+            "render": function ( data, type, row, meta ) {
+            return ("<a id=update_"+row.fbaid+" onclick=sales_update_fn("+row.fbaid+",'"+data+"')>"+data+"</a>");
+              }
+   
+           },
+
+             {"data":null  ,
+             "render": function ( data, type, row, meta ) {
+                return '<a href="#" style="" data-toggle="modal" data-target=".fsmdetails">Fsm details</a>';
+              }
+            },
+            
+             {"data":"fdid" ,
+             "render": function ( data, type, row, meta ) {
+            return data == 1?'<a href="" style="" data-toggle="modal"  data-target="#docviwer" onclick="docview('+row.fbaid+')" >uploaded</a>':'pending';
+           }
+        },
+          
+          {"data":"CustID" ,
+              "render": function ( data, type, row, meta ) {
+               return (data==""||data=="0")?('<a id="btnviewcid" onclick="getcustomerid(this,'+row.fbaid+')">Update</a>'):data;
+             }  
+         }, 
+
+
+         { "data": "createdate1","visible":false }
+
+        ],
+
+    });
+  }
 
 </script>
 
