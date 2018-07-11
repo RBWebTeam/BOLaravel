@@ -22,7 +22,7 @@
 
          <p>From Date</p>
          <div id="datepicker" class="input-group date" data-date-format="yyyy-mm-dd">
-               <input class="form-control date-range-filter" type="text" placeholder="From Date" name="fdate" id="min"/ value="<?php echo date('Y-m-d',strtotime("-7 days")); ?>">
+               <input class="form-control date-range-filter" type="text" placeholder="From Date" name="fdate" id="min"/ value="<?php echo date('Y-m-d',strtotime("-30 days")); ?>">
               <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
             </div>
             </div>
@@ -465,10 +465,7 @@
   $(document).ready(function() {
 
 //.column('0:visible').order('desc').draw();
-
-
 });  
-
 // from date to date start
 
 $(document).ready(function() {
@@ -506,20 +503,16 @@ getfbadata();
  //Re-draw the table when the a date range filter changes
   $('#btndate').on("click", function(){
     var table = $('#fba-list-table').DataTable();
- table.draw();
-
+    table.draw();
 });
 
 $('.date-range-filter').datepicker();
  });
-</script>
+ </script>
+
 <!-- from date to date end -->  
-
-
 <!-- Search Pospno and Fbaid start,STATE,CITY etc -->
 <script>
-
-
 /// code for search
 function searchdata()
 {
@@ -559,13 +552,7 @@ function selectIndex(dd) {
   }  
 }
 
-
-     
-
-
 </script>
-
-
 <script type="text/javascript">
     function getpaylinknew(){
     
@@ -618,8 +605,7 @@ function selectIndex(dd) {
 });
 </script>
 
-
-  <script type="text/javascript">
+<script type="text/javascript">
    $(function(){
    $('#p_remark').keyup(function(){    
    var yourInput = $(this).val();
@@ -637,8 +623,6 @@ function selectIndex(dd) {
 
 
 <script type="text/javascript">
-  
-
 // Add active class to the current button (highlight it)
 var header = document.getElementById("myDIV");
 var btns = header.getElementsByClassName("qry-btn");
@@ -654,16 +638,15 @@ for (var i = 0; i < btns.length; i++) {
 
 
  <script type="text/javascript">
-
-  function getfbadata(){
-
-var fdate=$("#min").val();
+ function getfbadata(){
+  var fdate=$("#min").val();
   var todate=$("#max").val();
-    $('#fba-list-table').DataTable({
-"destroy": true,
-   "createdRow": function(row, data, dataIndex ) {
-    if ( data.PayStat=="S" ) {
-    $(row).css({backgroundColor: 'LightGreen'});
+  $('#fba-list-table').DataTable ({
+
+  "destroy": true,
+ "createdRow": function(row, data, dataIndex ) {
+   if ( data.PayStat=="S" ) {
+   $(row).css({backgroundColor: 'LightGreen'});
  }
     },
         "order": [[ 0, "desc" ]],
