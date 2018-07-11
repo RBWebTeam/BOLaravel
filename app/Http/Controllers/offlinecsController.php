@@ -46,8 +46,7 @@ class offlinecsController extends CallApiController
            $fileCheque=$this->fileupload_fn($req->file('fileCheque'));
            $fileother=$this->fileupload_fn($req->file('fileother'));
            $fileProposalForm=$this->fileupload_fn($req->file('fileProposalForm'));
-           $fileKYC=$this->fileupload_fn($req->file('fileKYC'));
-           
+           $fileKYC=$this->fileupload_fn($req->file('fileKYC'));      
             
              $id= DB::select('call Usp_insert_motor_offlinecs(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',array(
               $req->ddproduct,
@@ -265,24 +264,22 @@ if ($fileKYC!=0)
                 $offlinecsdata = DB::select("call Usp_get_motor_data($ID)");
                 $sub='SNo.'.$offlinecsdata[0]->ID.' '.$offlinecsdata[0]->product_name.'  Entry details for '.$offlinecsdata[0]->CustomerName.' - '.$offlinecsdata[0]->POSPName;
                 
-    if($ccemail!=''){                
-                $mail = Mail::send('mailViews.sendmailofflinecs',['offlinecsdata' => $offlinecsdata], function($message)use($email,$ccemail,$sub){
-                $message->from('wecare@rupeeboss.com', 'RupeeBoss');
-                $message->to($email)->cc($ccemail)->subject($sub);
-                });
-             
-                    if(Mail::failures()){
-                            $error=3;
-                            echo $error;
-                    }
-                    else
-                    {
+    if($ccemail!='')
+    {                
+        $mail = Mail::send('mailViews.sendmailofflinecs',['offlinecsdata' => $offlinecsdata], function($message)use($email,$ccemail,$sub){
+        $message->from('info@magicfinamrt.com', 'Fin-Mart');
+        $message->to($email)->cc($ccemail)->subject($sub);});
+         if(Mail::failures())
+         {
+            $error=3;
+            echo $error;
+         }
+         else
+             {
 
-                    }
-                }         
-      
-        
-                 
+             }
+    }      
+     Session::flash('message', 'Record has been saved successfully');           
       return Redirect('offlinecs');
     }
 
@@ -308,7 +305,229 @@ if ($fileKYC!=0)
        return json_encode($ERPID);
 
    }
+     public function saveofflinecsdata(Request $req)
+       {
+          $fbauser=Session::get('fbauserid');
+          //print_r($req->all());exit();
+           $filerc=$this->fileupload_fn($req->file('filerc'));
+           $fileFitness=$this->fileupload_fn($req->file('fileFitness'));
+           $filePUC=$this->fileupload_fn($req->file('filePUC'));
+           $filebreakrp=$this->fileupload_fn($req->file('filebreakrp'));
+           $fileCheque=$this->fileupload_fn($req->file('fileCheque'));
+           $fileother=$this->fileupload_fn($req->file('fileother'));
+           $fileProposalForm=$this->fileupload_fn($req->file('fileProposalForm'));
+           $fileKYC=$this->fileupload_fn($req->file('fileKYC'));      
+            
+             $id= DB::select('call Usp_save_offlinecs_data(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',array(
+              $req->ddproduct,
+              $req->txtcstname,
+              $req->txtadd,             
+              $req->ddlcity,
+              $req->ddlstate,
+              $req->ddlzone,
+              $req->ddlregion,
+              $req->txtmobno,
+              $req->txttelno,
+              $req->txtemail,
+              $req->ddlfbaname,
+              $req->txtposp,
+              $req->txtpremiumamt,
+              $req->txterpid,
+              $req->txtqtno,
+              $req->txtvehicalno,
+              $req->txtexpdate,
+              $req->txtbreakin,
+              $req->ddlInsurermotor,
+              $req->ddlpayment,
+              $req->txtutrnomotor,
+              $req->txtbankmotor,
+              $req->txtexecutivename,
+              $req->txtexecutivename1,
+              $req->txtexeProductname,
+              $req->txtmgrProductname,
+              $filerc,
+              $fileFitness,
+              $filePUC,
+              $filebreakrp,
+              $fileCheque,
+              $fileother,
+              $req->txtPreexisting,
+              $req->txtmedicalrp,
+              $req->dllpremium,
+              $fileProposalForm,
+              $fileKYC,
+              $req->ddlnoofpolicy,
+              $req->txtmedicalcase,
+              $req->ddlInsurerhealth,
+              $req->ddlInsurerlife,
+              $fbauser,
+              $req->ddlwhyoffline));
+             foreach ($id as $val) 
+            {
+              $ID=$val->Id;             
+            }
+            //print_r($ID);exit();
 
+if ($filerc!=0) 
+{
+  try{
+    $data= array("longurl"=>"http://bo.mgfm.in/upload/offlinecs/$filerc");
+    $token=array("cache-control: no-cache","content-type: application/json", "token: 1234567890");
+    $post_data=json_encode($data);
+    $type=$token;
+    $result=$this->call_other_data_api($this::$api_url.'/api/short-url-forall',$post_data,$type);
+    $Response= json_decode($result['http_result']); 
+    
+    $shorturl=$Response->MasterData[0]->ShortURL;   
+    //print_r($shorturl);exit();
+    DB::select('call Usp_Insert_shortlink_offlinecs(?,?,?)',array($shorturl,'RCCopy',$ID));
+  }
+  catch (Exception $e){
+
+        return $e->getMessage();    
+     }        
+      
+} 
+if ($fileFitness!=0) 
+{
+  try{
+    $data= array("longurl"=>"http://bo.mgfm.in/upload/offlinecs/$fileFitness");
+    $token=array("cache-control: no-cache","content-type: application/json", "token: 1234567890");
+    $post_data=json_encode($data);
+    $type=$token;
+    $result=$this->call_other_data_api($this::$api_url.'/api/short-url-forall',$post_data,$type);
+
+    $Response= json_decode($result['http_result']);
+    $shorturl=$Response->MasterData[0]->ShortURL;
+    //print_r($shorturl);exit();
+    DB::select('call Usp_Insert_shortlink_offlinecs(?,?,?)',array($shorturl,'Fitness',$ID));
+    
+    
+  }
+  catch (Exception $e){
+
+        return $e->getMessage();    
+     }        
+      
+}  
+if ($filePUC!=0) 
+{
+  try{
+    $data= array("longurl"=>"http://bo.mgfm.in/upload/offlinecs/$filePUC");
+    $token=array("cache-control: no-cache","content-type: application/json", "token: 1234567890");
+    $post_data=json_encode($data);
+    $type=$token;
+    $result=$this->call_other_data_api($this::$api_url.'/api/short-url-forall',$post_data,$type);
+
+    $Response= json_decode($result['http_result']);
+    $shorturl=$Response->MasterData[0]->ShortURL;
+    //print_r($shorturl);exit();
+    DB::select('call Usp_Insert_shortlink_offlinecs(?,?,?)',array($shorturl,'PUC',$ID));
+  }
+  catch (Exception $e){
+
+        return $e->getMessage();    
+     }        
+      
+} 
+if ($filebreakrp!=0) 
+{
+  try{
+    $data= array("longurl"=>"http://bo.mgfm.in/upload/offlinecs/$filebreakrp");
+    $token=array("cache-control: no-cache","content-type: application/json", "token: 1234567890");
+    $post_data=json_encode($data);
+    $type=$token;
+    $result=$this->call_other_data_api($this::$api_url.'/api/short-url-forall',$post_data,$type);
+
+    $Response= json_decode($result['http_result']);
+    $shorturl=$Response->MasterData[0]->ShortURL;
+    //print_r($shorturl);exit();
+    DB::select('call Usp_Insert_shortlink_offlinecs(?,?,?)',array($shorturl,'break report',$ID));
+  }
+  catch (Exception $e){
+
+        return $e->getMessage();    
+     }        
+} 
+if ($fileCheque!=0) 
+{
+  try{
+    $data= array("longurl"=>"http://bo.mgfm.in/upload/offlinecs/$fileCheque");
+    $token=array("cache-control: no-cache","content-type: application/json", "token: 1234567890");
+    $post_data=json_encode($data);
+    $type=$token;
+    $result=$this->call_other_data_api($this::$api_url.'/api/short-url-forall',$post_data,$type);
+
+    $Response= json_decode($result['http_result']);
+    $shorturl=$Response->MasterData[0]->ShortURL;
+    //print_r($shorturl);exit();    
+    DB::select('call Usp_Insert_shortlink_offlinecs(?,?,?)',array($shorturl,'Cheque',$ID));
+  }
+  catch (Exception $e){
+
+        return $e->getMessage();    
+     }        
+}
+if ($fileother!=0) 
+{
+  try{
+    $data= array("longurl"=>"http://bo.mgfm.in/upload/offlinecs/$fileother");
+    $token=array("cache-control: no-cache","content-type: application/json", "token: 1234567890");
+    $post_data=json_encode($data);
+    $type=$token;
+    $result=$this->call_other_data_api($this::$api_url.'/api/short-url-forall',$post_data,$type);
+
+    $Response= json_decode($result['http_result']);
+    $shorturl=$Response->MasterData[0]->ShortURL;
+    //print_r($shorturl);exit();
+    DB::select('call Usp_Insert_shortlink_offlinecs(?,?,?)',array($shorturl,'other',$ID));
+  }
+  catch (Exception $e){
+
+        return $e->getMessage();    
+     }        
+}
+if ($fileProposalForm!=0) 
+{
+  try{
+    $data= array("longurl"=>"http://bo.mgfm.in/upload/offlinecs/$fileProposalForm");
+    $token=array("cache-control: no-cache","content-type: application/json", "token: 1234567890");
+    $post_data=json_encode($data);
+    $type=$token;
+    $result=$this->call_other_data_api($this::$api_url.'/api/short-url-forall',$post_data,$type);
+
+    $Response= json_decode($result['http_result']);
+    $shorturl=$Response->MasterData[0]->ShortURL;
+    //print_r($shorturl);exit();
+    DB::select('call Usp_Insert_shortlink_offlinecs(?,?,?)',array($shorturl,'Proposal Form',$ID));
+  }
+  catch (Exception $e){
+
+        return $e->getMessage();    
+     }        
+}
+if ($fileKYC!=0) 
+{
+  try{
+    $data= array("longurl"=>"http://bo.mgfm.in/upload/offlinecs/$fileKYC");
+    $token=array("cache-control: no-cache","content-type: application/json", "token: 1234567890");
+    $post_data=json_encode($data);
+    $type=$token;
+    $result=$this->call_other_data_api($this::$api_url.'/api/short-url-forall',$post_data,$type);
+
+    $Response= json_decode($result['http_result']);
+    $shorturl=$Response->MasterData[0]->ShortURL;
+    //print_r($shorturl);exit();
+    DB::select('call Usp_Insert_shortlink_offlinecs(?,?,?)',array($shorturl,'KYC',$ID));
+  }
+  catch (Exception $e){
+
+        return $e->getMessage();    
+     }        
+}
+ Session::flash('message', 'Record has been saved successfully');
+return Redirect('offlinecs');
+}
 
 }
 

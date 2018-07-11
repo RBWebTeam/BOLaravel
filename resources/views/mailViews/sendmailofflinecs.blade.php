@@ -21,7 +21,7 @@ th, td {
 		<td>{{$val->ID}}</td>
 	    </tr>
 	    <tr>
-	    <th>Produc name</th>	
+	    <th>Product Name</th>	
 		<td>{{$val->product_name}}</td>
 		</tr>
 		<tr>
@@ -186,13 +186,13 @@ th, td {
 			<td>{{$val->MedicalReport}}</td>
 		</tr>
 		@endif
-        @if($val->PremiumYears!=0)
+        @if($val->PremiumYears!='')
 		<tr>
 			<th>Premium Years</th>
 			<td>{{$val->PremiumYears}}</td>
 		</tr>
 		@endif
-        @if($val->TypeofPolicy!=0)
+        @if($val->TypeofPolicy!='')
 		<tr>
 			<th>Type of Policy</th>
 			<td>{{$val->TypeofPolicy}}</td>
@@ -217,11 +217,3 @@ th, td {
        @endforeach
 </table>
 </html>
-
-
-
-
-
-
-
-

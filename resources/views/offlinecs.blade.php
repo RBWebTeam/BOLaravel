@@ -1,6 +1,11 @@
 @extends('include.master')
 @section('content')
-
+@if(Session::has('message'))
+<div class="alert alert-success alert-dismissible">
+<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+<p class="alert alert-success">{{ Session::get('message') }}</p>
+</div>
+@endif
 <div class="container-fluid white-bg">
   <div class="col-md-12"><h3 class="mrg-btm">Offline Cs</h3></div>
       <div class="col-md-12">
@@ -23,19 +28,14 @@
                   <select class="form-control" id="ddproduct" name="ddproduct">
                   @foreach($product as $val)
                  	<option value="{{$val->id}}">{{$val->product_name}}</option>
-                  @endforeach
-                  <!-- <option value="1">Two Wheeler</option> 
-                  <option value="1">Commercial Vehicle</option>                 	
-                 	<option value="2">Health</option>
-                  <option value="2">Top UP</option>                 	
-                 	<option value="3">Life</option> -->
+                  @endforeach                  
                  </select>  
                  </div>
               </div>           
               <br>
               <div class="row">
                  <div class="col-md-4">
-                 	<label>Name of Customer:</label><input id="txtcstname" name="txtcstname" type="text" class="form-control" placeholder="Name of Customer" required>                    
+                 	<label>Name of Customer:</label><input id="txtcstname" name="txtcstname" type="text" class="form-control txtonly" placeholder="Name of Customer" required>                    
                  </div>
                  <div class="col-md-4">
                  	<label>Address of Customer :</label><textarea id="txtadd" name="txtadd" class="form-control" placeholder="Address of Customer" required></textarea>            
@@ -77,11 +77,11 @@
                 </div>
                 <div class="col-md-4">
                   <label>Mobile no:</label>                   
-                   <input type="number" id="txtmobno" name="txtmobno" class="form-control" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type = "number" maxlength = "10"  required>             
+                   <input id="txtmobno" name="txtmobno" class="form-control numericOnly" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type = "number" maxlength = "10"  required>             
                 </div>
                 <div class="col-md-4">
                   <label>Telephone No:</label>
-                  <input type="number" class="form-control" name="txttelno" id="txttelno">              
+                  <input type="number" class="form-control numericOnly" name="txttelno" id="txttelno">              
                 </div>             	
               	<div class="col-md-4">
               		<label>Email Id:</label>
@@ -90,7 +90,7 @@
                	<div class="col-md-4">
               		<label>Posp Name:</label>
               		<select class="form-control" id="ddlfbaname" name="ddlfbaname" required>
-                    <option value="0">--Select--</option>
+                    <option value="">--Select--</option>
                     @foreach($fba as $val)
               			<option value="{{$val->FBAID}}">{{$val->POSPName}} ({{$val->FBAID}})</option>
                     @endforeach
@@ -98,7 +98,7 @@
               	</div>
                 <div class="col-md-4">
                   <label>Premium Amount:</label>
-                <input type="number" class="form-control" name="txtpremiumamt" id="txtpremiumamt" required>        
+                <input type="number" class="form-control numericOnly" name="txtpremiumamt" id="txtpremiumamt" required>        
                 </div>
               	<div class="col-md-4">
               		<label>ERP ID:</label>
@@ -116,7 +116,7 @@
                 <div class="col-md-4">
                   <label>Payment Mode:</label>
                   <select id="ddlpayment" name="ddlpayment" class="form-control" required>
-                    <option>--select--</option>
+                    <option value="">--select--</option>
                     <option value="Online">Online</option>
                     <option value="Offline">Offline</option>
                   </select>
@@ -134,13 +134,13 @@
             <div class="Motor" id="Motor">
             <div class="row">
               	<div class="col-md-4">
-              		<label>Vehicle No:</label>
-              		<input type="text" name="txtvehicalno" id="txtvehicalno" class="form-control">     		
+              		<label>Vehicle No:</label>  
+                  <input type="text" name="txtvehicalno" id="txtvehicalno" class="form-control Vehicleno" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength = "10">        		
               	</div>              	
               	<div class="col-md-4">
               		<label>Break In:</label>
-              		<label class="checkbox-inline">YES  <input type="radio" name="txtbreakin" id="txtbreakin" value="1"></label>
-              		<label class="checkbox-inline">No  <input type="radio" name="txtbreakin" id="txtbreakin" value="0"></label>              		           		
+              		<label class="checkbox-inline">YES  <input type="radio" name="txtbreakin" id="txtbreakin" value="YES"></label>
+              		<label class="checkbox-inline">No  <input type="radio" name="txtbreakin" id="txtbreakin" value="No"></label>              		           		
               	</div>              
               	<div class="col-md-4">
               		<label>Insurer:</label>
@@ -166,23 +166,23 @@
               	</div>         	
               	<div class="col-md-4">
               		<label>Preexisting:</label>
-              		<label class="checkbox-inline">YES  <input type="radio" name="txtPreexisting" id="txtPreexisting" value="1" ></label>
-              		<label class="checkbox-inline">No  <input type="radio" name="txtPreexisting" id="txtPreexisting" value="1"></label>             		           		
+              		<label class="checkbox-inline">YES  <input type="radio" name="txtPreexisting" id="txtPreexisting" value="YES"></label>
+              		<label class="checkbox-inline">No  <input type="radio" name="txtPreexisting" id="txtPreexisting" value="No"></label>             		           		
               	</div>   
               	<div class="col-md-4">
               		<label>Medical Report:</label>
-              		<label class="checkbox-inline">YES  <input type="radio" name="txtmedicalrp" id="txtmedicalrp" value="1"></label>
-              		<label class="checkbox-inline">No  <input type="radio" name="txtmedicalrp" id="txtmedicalrp" value="0"></label>             		           		
+              		<label class="checkbox-inline">YES  <input type="radio" name="txtmedicalrp" id="txtmedicalrp" value="YES"></label>
+              		<label class="checkbox-inline">No  <input type="radio" name="txtmedicalrp" id="txtmedicalrp" value="No"></label>             		           		
               	</div> 
               	</div> 
               	<div class="row">  
               	<div class="col-md-4">
               		<label>Premium Year/s:</label>
               		<select id="dllpremium" name="dllpremium" class="form-control" >
-              			<option value="0">--select--</option>
-              			<option value="1">1 year</option>
-              			<option value="2">2 year</option>
-              			<option value="3">3 year</option>
+              			<option value="">--select--</option>
+              			<option value="1 year">1 year</option>
+              			<option value="2 year">2 year</option>
+              			<option value="3 year">3 year</option>
               		</select>
               	</div>             	
                </div>
@@ -192,15 +192,15 @@
              	<div class="col-md-4">
              		<label>Type of Policy:</label>
              		<select id="ddlnoofpolicy" name="ddlnoofpolicy" class="form-control" >
-             			<option>--select--</option>
+             			<option value="">--select--</option>
              			<option value="Term">Term</option>
              			<option value="Other">Other</option>
              		</select>
              	</div>             
              	<div class="col-md-4">
               		<label>Medical case:</label>
-              		<label class="checkbox-inline">YES  <input type="radio" name="txtmedicalcase" id="txtmedicalcase" value="1"></label>
-              		<label class="checkbox-inline">No  <input type="radio" name="txtmedicalcase" id="txtmedicalcase" value="0"></label>              		           		
+              		<label class="checkbox-inline">YES  <input type="radio" name="txtmedicalcase" id="txtmedicalcase" value="YES"></label>
+              		<label class="checkbox-inline">No  <input type="radio" name="txtmedicalcase" id="txtmedicalcase" value="No"></label>              		           		
               	</div>             
               	<div class="col-md-4">
               		<label>Insurer:</label>
@@ -216,8 +216,8 @@
               <div class="row">
               	<div class="col-md-4">
               		<label>Executive Name:</label>             
-                  <select id="txtexecutivename" name="txtexecutivename" class="form-control" >
-                    <option value="0">--select--</option >
+                  <select id="txtexecutivename" name="txtexecutivename" class="form-control" required>
+                    <option value="">--select--</option >
                     @foreach($Executive as $val)
                     <option value="{{$val->UId}}">{{$val->EmployeeName}}</option>
                    @endforeach
@@ -225,8 +225,8 @@
               	</div>
               	<div class="col-md-4">
               		<label>Executive 1 Name:</label>              		
-                  <select id="txtexecutivename1" name="txtexecutivename1" class="form-control">
-                    <option>--select--</option>
+                  <select id="txtexecutivename1" name="txtexecutivename1" class="form-control" required>
+                    <option value="">--select--</option>
                     @foreach($Executive1 as $val)
                     <option value="{{$val->UId}}">{{$val->EmployeeName}}</option>
                    @endforeach
@@ -234,8 +234,8 @@
               	</div>
               	<div class="col-md-4">
               		<label>Product Executive:</label>              		
-                  <select id="txtexeProductname" name="txtexeProductname" class="form-control">
-                    <option>--select--</option>
+                  <select id="txtexeProductname" name="txtexeProductname" class="form-control" required>
+                    <option value="">--select--</option>
                     @foreach($productexe as $val)
                     <option value="{{$val->UId}}">{{$val->EmployeeName}}</option>
                    @endforeach
@@ -243,8 +243,8 @@
               	</div>
               	<div class="col-md-4">
               		<label>Product Manager:</label>              		
-                  <select id="txtmgrProductname" name="txtmgrProductname" class="form-control">
-                    <option>--select--</option>
+                  <select id="txtmgrProductname" name="txtmgrProductname" class="form-control" required>
+                    <option value="">--select--</option>
                     @foreach($productmgr as $val)
                     <option value="{{$val->UId}}">{{$val->EmployeeName}}</option>
                    @endforeach
@@ -273,7 +273,7 @@
                <div class="row"> 
              	<div class="col-md-4">
              		<label>Cheque Copy:</label>
-             		<input type="file" name="fileCheque" id="fileCheque" class="form-control" accept=".png, .jpg, .jpeg .pdf">            
+             		<input type="file" name="fileCheque" id="fileCheque" class="form-control" accept=".png, .jpg, .jpeg .pdf" required>            
              	</div>
              	<div class="col-md-4">
              		<label>Other:</label>
@@ -296,8 +296,9 @@
              <br>
              <br>
              <div class="col-md-12" style="text-align: center;">
-               <input type="submit" name="save" class="btn btn-primary">
-               <button class="btn btn-primary" >RESET</button>
+              <button id="saveofflinecs" class="btn btn-primary" >Save</button>
+               <input type="submit" name="save" class="btn btn-primary" value="Save & Send Email">
+               
              </div>            
             </form>            
         </div>
@@ -313,6 +314,15 @@ $( document ).ready(function() {
      	$("#divlife").hide();
      	$("#divhealth").hide();
      	$(".Motor").show();
+      $('#txtvehicalno').attr('required', true);
+      $('#txtbreakin').attr('required', true);
+      $('#ddlInsurermotor').attr('required', true);
+      $('#filerc').attr('required', true);
+      $('#fileFitness').attr('required', true);
+      $('#filePUC').attr('required', true);
+      $('#filebreakrp').attr('required', true);
+
+      
 });
  	$("#ddproduct").change(function(){
      if($("#ddproduct").val()==1){
@@ -323,6 +333,13 @@ $( document ).ready(function() {
      	$("#divhealth").hide();
       $(".health").hide();
       $(".life").hide();
+      $('#txtvehicalno').attr('required', true);
+      $('#txtbreakin').attr('required', true);
+      $('#ddlInsurermotor').attr('required', true);
+      $('#filerc').attr('required', true);
+      $('#fileFitness').attr('required', true);
+      $('#filePUC').attr('required', true);
+      $('#filebreakrp').attr('required', true);
      }
      else if($("#ddproduct").val()==2){
       $(".Motor").show();
@@ -332,6 +349,13 @@ $( document ).ready(function() {
       $("#divhealth").hide();
       $(".health").hide();
       $(".life").hide();
+      $('#txtvehicalno').attr('required', true);
+      $('#txtbreakin').attr('required', true);
+      $('#ddlInsurermotor').attr('required', true);
+      $('#filerc').attr('required', true);
+      $('#fileFitness').attr('required', true);
+      $('#filePUC').attr('required', true);
+      $('#filebreakrp').attr('required', true);
      }
      else if($("#ddproduct").val()==3){
       $(".Motor").show();
@@ -341,6 +365,13 @@ $( document ).ready(function() {
       $("#divhealth").hide();
       $(".health").hide();
       $(".life").hide();
+      $('#txtvehicalno').attr('required', true);
+      $('#txtbreakin').attr('required', true);
+      $('#ddlInsurermotor').attr('required', true);
+      $('#filerc').attr('required', true);
+      $('#fileFitness').attr('required', true);
+      $('#filePUC').attr('required', true);
+      $('#filebreakrp').attr('required', true);
      }
      else if($("#ddproduct").val()==4){
      	$("#life").hide();
@@ -351,6 +382,17 @@ $( document ).ready(function() {
      	$(".Motor").hide();
       $(".health").show();
       $(".life").hide();
+      $('#ddlInsurerhealth').attr('required', true);
+      $('#dllpremium').attr('required', true);
+      $('#fileProposalForm').attr('required', true);
+      $('#fileKYC').attr('required', true);
+      $('#txtvehicalno').removeAttr("required"); 
+      $('#txtbreakin').removeAttr("required");
+      $('#ddlInsurermotor').removeAttr("required");
+      $('#filerc').removeAttr("required");
+      $('#fileFitness').removeAttr("required");
+      $('#filePUC').removeAttr("required");
+      $('#filebreakrp').removeAttr("required");
      }
      else if($("#ddproduct").val()==5){
       $("#life").hide();
@@ -361,6 +403,17 @@ $( document ).ready(function() {
       $(".Motor").hide();
       $(".health").show();
       $(".life").hide();
+      $('#ddlInsurerhealth').attr('required', true);
+      $('#dllpremium').attr('required', true);
+      $('#fileProposalForm').attr('required', true);
+      $('#fileKYC').attr('required', true);
+      $('#txtvehicalno').removeAttr("required"); 
+      $('#txtbreakin').removeAttr("required");
+      $('#ddlInsurermotor').removeAttr("required");
+      $('#filerc').removeAttr("required");
+      $('#fileFitness').removeAttr("required");
+      $('#filePUC').removeAttr("required");
+      $('#filebreakrp').removeAttr("required");
      }
      else if($("#ddproduct").val()==6){   	
       $("#life").show();
@@ -371,7 +424,17 @@ $( document ).ready(function() {
      	$(".Motor").hide();
       $(".health").hide();
       $(".life").show();
-
+      $('#ddlnoofpolicy').attr('required', true);
+      $('#ddlInsurerlife').attr('required', true);
+      $('#fileProposalForm').attr('required', true);
+      $('#fileKYC').attr('required', true);
+      $('#txtvehicalno').removeAttr("required"); 
+      $('#txtbreakin').removeAttr("required");
+      $('#ddlInsurermotor').removeAttr("required");
+      $('#filerc').removeAttr("required");
+      $('#fileFitness').removeAttr("required");
+      $('#filePUC').removeAttr("required");
+      $('#filebreakrp').removeAttr("required");
      }
      else{
      	$("#life").hide();
@@ -379,6 +442,13 @@ $( document ).ready(function() {
      	$("#divlife").hide();
      	$("#divhealth").hide();
      	$(".Motor").show();
+      $('#txtvehicalno').attr('required', true);
+      $('#txtbreakin').attr('required', true);
+      $('#ddlInsurermotor').attr('required', true);
+      $('#filerc').attr('required', true);
+      $('#fileFitness').attr('required', true);
+      $('#filePUC').attr('required', true);
+      $('#filebreakrp').attr('required', true);
      }
      });
 
@@ -416,5 +486,17 @@ $("#ddlfbaname").change(function(){
              }
          });
 });
+$(".txtonly").keypress(function (e) {
+    if (String.fromCharCode(e.keyCode).match(/[^ a-zA-Z]/g)) return false;
+});
+
+$(".Vehicleno").keypress(function (e) {
+    if (String.fromCharCode(e.keyCode).match(/[^0-9a-zA-Z]/g)) return false;
+});
+
+$("#saveofflinecs" ).click(function() {
+  $("#frmofflinecs").attr('action', '{{url('saveofflinecs')}}');
+});
+
 </script>
 @endsection

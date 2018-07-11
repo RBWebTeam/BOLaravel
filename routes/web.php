@@ -222,6 +222,8 @@ route::get('offlinecs','offlinecsController@getofflinecs');
 route::get('get_state_offlinecs/{cityid}','offlinecsController@getstate');
 Route::Post('offlinecs','offlinecsController@insertofflinecs');
 Route::get('get_ERPID_offlinecs/{fbaid}','offlinecsController@geterpid');
+Route::post('saveofflinecs','offlinecsController@saveofflinecsdata');
+Route::get('offlinecs-dashboard','offlinecsDashboardController@getofflinecsdata');
 ///shubham end ///
 // avinash
  Route::get('ticket-module','TicketController@getticketdetails') ;
