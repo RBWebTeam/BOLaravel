@@ -38,7 +38,7 @@ Route::get('dashboard','DashboardController@dashboard');
 
 //Fba details
 Route::get('fba-list','FbaController@fba_list');
-Route::get('get-fba-list','FbaController@get_fba_list');
+Route::get('get-fba-list/{fdate}/{todate}','FbaController@get_fba_list');
 Route::post('sales-update','FbaController@sales');
 Route::post('loan-update','FbaController@loan');
 Route::post('posp-update','FbaController@posp');
@@ -79,6 +79,8 @@ Route::get('quickleadassignmentshow','quickleadController@showlead');
 Route::get('sales-code-update','salescodeController@updatesalescode');
 Route::get('sales-code-update-get-fbaid/{salsecode}','salescodeController@selfcodefbaid');
 Route::POST('sales-code-update-insert','salescodeController@insertsalescode');
+
+
 //User_mapping vikas End
 
 
@@ -104,14 +106,20 @@ Route::get('Fba-list-Update-posp/{id}','FbaController@UpdatePospno');
 Route::get('export','FbaController@exportexcel');
 
 
-// non fba start  
-Route::get('load-non-fba-list','nonfbaController@nonfbalist');
+// non fba-list start  
 
+Route::get('load-non-fba-list','nonfbaController@nonfbalist');
 Route::get('non-fba-list','nonfbaController@getnonfba');
 Route::get('export-excel','nonfbaController@nonfbaexportexcel');
+// non fba-list End
 
-// non fba End
+// Sales code update start
+  
 
+// Sales code update End
+Route::get('sales-code-update','salescodeController@updatesalescode');
+Route::get('sales-code-update-get-fbaid/{salsecode}','salescodeController@selfcodefbaid');
+Route::POST('sales-code-update-insert','salescodeController@insertsalescode');
 
 
 
@@ -137,7 +145,6 @@ Route::post('update_fbamaster','FbaController@update_fba_table');
 
 
 // Route::get('fba-list/{salescode}/{fbaid}',array('as'=>'fba-list.ajax','uses'=>'FbaController@salesupdate'));
-
 
 
 
@@ -401,6 +408,29 @@ Route::get('lead-assgin-list-get','LeadstatusController@lead_assgin_list_get');
 // END LEAD MANAGMENT
 ******************/ 
 
+
+
+  /************
+//  CRM
+******************/
+Route::group(['namespace'=>'crm'],function(){
+Route::get('user-role','CrmController@user_role');
+Route::get('crm-view-history','CrmController@crm_view_history'); 
+Route::get('crm-disposition/{id}','CrmController@crm_disposition_fn'); 
+Route::post('crm-disposition','CrmController@crm_disposition');
+Route::get('crm-disposition-id','CrmController@crm_disposition_id'); 
+Route::get('crm-followup','CrmController@crm_followup'); 
+Route::get('crm-followup-disposition','CrmController@followup_disposition_view'); 
+
+
+
+});
+
+  /************
+//  END CRM 
+******************/
+
+
  /************
 // Product Controller 
 ******************/
@@ -458,6 +488,8 @@ Route::get('marketing-leads','LeaduploadController@marketing_leads');
 // Route::get('state_dropdown/{cityid}','bankofferController@get_cities');
 // Route::get('state_sub_dropdown/{cityid}','bankofferController@get_sub_cities');
 
+
+ 
 
 
 });

@@ -52,11 +52,11 @@
        <div class="form-group">
        <p>To Date</p>
        <div id="datepicker1" class="input-group date" data-date-format="mm-dd-yyyy">
-               <input class="form-control date-range-filter " value="{{$todate}}" type="text"  placeholder="To Date"  name="todate"  id="max-date"   />
-              <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-              </div>
-            </div>
-           </div>
+        <input class="form-control date-range-filter" value="{{$todate}}" type="text"  placeholder="To Date"  name="todate" id="max-date"/>
+        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+        </div>
+       </div>
+        </div>
        <div class="col-md-4">
        <div class="form-group"> <input type="submit" name=""  class="mrg-top common-btn" value="SHOW"> <a href="{{url('payment-history')}}?export=1" class="qry-btn">export</a> </div>
        </div>

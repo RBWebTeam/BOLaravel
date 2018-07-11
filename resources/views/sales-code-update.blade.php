@@ -2,8 +2,9 @@
 @section('content') 
 
 <div class="container-fluid white-bg">
-<div class="col-md-12"><h3 class="mrg-btm">sales code update</h3></div>
-   <div class="col-md-12">
+
+<div class="col-md-12"><h3 class="mrg-btm">Salef sales code update</h3></div>
+ <div class="col-md-12">
       <div class="overflow-scroll">
 
 <form name="salesform" id="salesform" method="POST">
@@ -12,6 +13,7 @@
   <div class="col-md-3">
   <label>Sales Code:</label>
   </div>
+
   <div class="col-md-4">
   <input type="text" class="text-primary form-control" name="Scode" id="Scode" onkeyup="getfbaid()" required>
   </div>
@@ -35,9 +37,10 @@
 </div>
 </div>
 <script type="text/javascript">
-  function getfbaid()
-  {
-    $("#fbaid").text('');
+
+  function getfbaid(){
+  
+$("#fbaid").text('');
     var salsecode=$("#Scode").val();    
      $.ajax({  
          type: "GET",  
@@ -45,22 +48,22 @@
          success: function(fbadata)
          {  
 
-           var data = JSON.parse(fbadata);   
-            if(data.length>0)
+			var data = JSON.parse(fbadata);   
+  if(data.length>0)
             {          
              $("#fbaid").text(data[0].FBAID);
              $("#txtfbaid").val(data[0].FBAID);  
+ }        
+	}  
+});
+     }        
 
-            }        
-
-         }  
-      });
-  }
 
 $("#btnsave").click(function(){
-  alert ($("#txtfbaid").val());
+  //alert ($("#txtfbaid").val());
+
   if ($('#salesform').valid()){
-$.ajax({ 
+  $.ajax({ 
    url: "{{URL::to('sales-code-update-insert')}}",
    method:"POST",
    data: $('#salesform').serialize(),  
@@ -74,6 +77,7 @@ $.ajax({
  }); 
  }
 });
+
 </script>
 
 
