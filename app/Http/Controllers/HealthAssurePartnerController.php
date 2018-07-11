@@ -46,14 +46,16 @@ public function providerlist(Request $req)
 {
 
     try{
-    $data=array("apptrebook_input"=>null,"status_input"=>null,"apptdetail"=>null,"pack_details"=>null,"slot_inputdata"=>null,"provider_data"=>array("username"=>"Datacomp","password"=>"Health@1234","latitude"=>"19.1629437","longitude"=>"72.8353005","packcode"=>$req->txtPackcode,"visittype"=>$req->txthomevisit,"apptdatetime"=>"30-03-2018"),"pack_param"=>null);
+    $data=array("apptrebook_input"=>null,"status_input"=>null,"apptdetail"=>null,"pack_details"=>null,"slot_inputdata"=>null,"provider_data"=>array("username"=>"Datacomp","password"=>"Health@1234","latitude"=>$req->latitude,"longitude"=>$req->longitude,"packcode"=>$req->txtPackcode,"visittype"=>$req->txthomevisit,"apptdatetime"=>$req->txtdate),"pack_param"=>null);
               $m=$this->responsejson($data);
               $obj = json_decode($m);
+              //print_r(json_encode($data));exit();
               return $m;
                     }
     catch (Exception $e){
         return $e;    
      }
+
 }
 
 private function responsejson($data){
@@ -100,7 +102,7 @@ private function responsejson($data){
             $packdetails =  array('healthplan'=>$req->txtPackName,'mrp'=>$req->txtMRP,'offerprice'=>$req->txtOfferPrice,'lab'=>$req->txtprovidername,'LabAddress'=>$req->txtprovideraddress,'homevisit'=>$req->txthomevisit,'fasting'=>$req->txtfasting,'url'=>$obj->d->PayURL);
            //print_r($packdetails);exit();
             try{
-    $data=array("pack_param"=> array("username"=>"Datacomp","pass"=>"Health@1234","packcode"=>191));
+    $data=array("pack_param"=> array("username"=>"Datacomp","pass"=>"Health@1234","packcode"=>$req->txtPackcode));
  
      $post_data=json_encode($data);
     // print_r($post_data); exit();
