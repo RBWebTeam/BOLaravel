@@ -45,7 +45,7 @@
             </div>
 
               <div class="form-group row">
-                   <label for="inputPassword" class="col-sm-4 col-form-label">connect_result</label>
+                   <label for="inputPassword" class="col-sm-4 col-form-label">Connect Result</label>
                <div class="col-sm-8">
                  <input type="text"  class="form-control" readonly id="connect_result">
 
@@ -53,7 +53,7 @@
             </div>
 
               <div class="form-group row">
-                   <label for="inputPassword" class="col-sm-4 col-form-label">emp_category</label>
+                   <label for="inputPassword" class="col-sm-4 col-form-label">Emp Category</label>
                <div class="col-sm-8">
                 <input type="text"  class="form-control" readonly id="emp_category">
 
@@ -109,12 +109,19 @@
  
 
             <div class="form-group row" id="followup_internalteam_id" style="display: none">
-            <label for="inputPassword" class="col-sm-4 col-form-label">task assignment</label>
+            <label for="inputPassword" class="col-sm-4 col-form-label">task assignment internal </label>
             <div class="col-sm-8">
               <input type="text"  class="form-control"  readonly name="assignment_id"   id="followup_internalteam">
             </div>
           </div>
               
+
+          <div class="form-group row" id="followup_externalteam_id" style="display: none">
+            <label for="inputPassword" class="col-sm-4 col-form-label">task assignment external</label>
+            <div class="col-sm-8">
+              <input type="text"  class="form-control"  readonly name="assign_external_id"   id="followup_externalteam">
+            </div>
+          </div>
 
             
           </div>
@@ -124,7 +131,7 @@
 
 
          <center>
-            <button class="btn btn-default" type="button"  id=CRM_Disposition_btn >sumbit</button>
+            <button class="btn btn-default" type="button"  id=CRM_Disposition_btn >submit</button>
 
 
          </center>
@@ -199,22 +206,38 @@
            // $('#followup_internalteam').val(msg.res.followup_internalteam);
  
              if(msg.find_profile!="undefined" && msg.find_profile!=null && msg.find_profile!=""){  
-                   $('#followup_internalteam').val(msg.find_profile.UId);
+                   $('#followup_internalteam').val(msg.find_profile.UId); //msg.find_profile.Profile
                    $('#followup_internalteam_id').show();
 
              }else{
               $('#followup_internalteam_id').hide();
              }
+
+            
+             if(msg.find_profile1!="undefined" && msg.find_profile1!=null && msg.find_profile1!=""){  
+                   $('#followup_externalteam').val(msg.find_profile1.UId); //msg.find_profile.Profile
+                   $('#followup_externalteam_id').show();
+
+             }else{
+              $('#followup_externalteam_id').hide();
+             }
+
+
+
               $('#id_none').show();
+             
          }).fail(function(xml,Status,error){
                console.log(xml);
           });
 
+
+
   });
   $(document).on('click','#CRM_Disposition_btn',function(e){ e.preventDefault();
            data=$('#CRM_Disposition_from').serialize();
-           $.post("{{url('crm-disposition')}}",data).done(function(respo){
-               window.location="{{url('crm-disposition')}}/{{$fbamappin_id}}";
+           $.post("{{url('crm-disposition')}}",data).done(function(respo){ 
+              // window.location="{{url('crm-disposition')}}/{{$fbamappin_id}}";
+               location.reload();
            }).fail(function(xml,Status,error){
                console.log(xml);
            });
