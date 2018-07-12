@@ -416,7 +416,8 @@ Route::post('crm-disposition','CrmController@crm_disposition');
 Route::get('crm-disposition-id','CrmController@crm_disposition_id'); 
 Route::get('crm-followup','CrmController@crm_followup'); 
 Route::get('crm-followup-disposition','CrmController@followup_disposition_view'); 
-
+Route::get('crm-followup-history','CrmController@followup_history'); 
+Route::post('crm-followup-history','CrmController@followup_history_update'); 
 
 
 });
