@@ -38,10 +38,23 @@ class FbaController extends CallApiController
 
 }
 
-          public function get_fba_list(Request $req){
-          $id=Session::get('FBAUserId');
-        // print_r($id); exit();
-          $query=DB::select("call fbaList(0)");
+          public function get_fba_list($fdate,$todate){
+             $id=Session::get('FBAUserId');
+            $query=DB::select("call fbaList('0','$fdate','$todate')");
+
+
+//return $fdate.'|'.$todate;exit();
+         
+            //print_r( json_encode($query));exit();
+              //$query=DB::select("call fbaList(0)");
+          //$query=DB::select("call fbaList(0,'2018-05-21','2018-07-03')");
+             //print_r($query);
+            //return $query;
+          /*$id=Session::get('FBAUserId');
+         //print_r($todate); exit();
+            $query=DB::select("call fbaList(0,'07-02-2018','07-09-2018')");
+             print_r($query); exit();
+        //$query=DB::select("call fbaList(0)");*/
 
           return json_encode(["data"=>$query]);
         }

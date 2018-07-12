@@ -17,28 +17,29 @@
 
 
      
-       <div class="col-md-2">
-       <div class="form-group">
-       <p>From Date</p>
-       <div id="datepicker" class="input-group date" data-date-format="mm-dd-yyyy">
-       <input class="form-control date-range-filter" type="text" placeholder="From Date" name="fdate" id="min"/ value="<?php echo date('m-d-Y',strtotime("-7 days")); ?>">
-       <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-       </div>
-       </div>
-       </div>
+   <div class="col-md-2">
+      <div class="form-group">
 
+         <p>From Date</p>
+         <div id="datepicker" class="input-group date" data-date-format="yyyy-mm-dd">
+               <input class="form-control date-range-filter" type="text" placeholder="From Date" name="fdate" id="min"/ value="<?php echo date('Y-m-d',strtotime("-30 days")); ?>">
+              <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+            </div>
+            </div>
+           </div>
        <div class="col-md-2">
        <div class="form-group">
        <p>To Date</p>
-       <div id="datepicker1" class="input-group date" data-date-format="mm-dd-yyyy">
-       <input class="form-control date-range-filter" type="text" placeholder="To Date" name="todate"  id="max"/ value="<?php echo date('m-d-Y'); ?>">
-       <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-       </div>
-       </div>
-       </div>
+       <div id="datepicker1" class="input-group date" data-date-format="yyyy-mm-dd">
+               <input class="form-control date-range-filter" type="text" placeholder="To Date" name="todate"  id="max"/ value="<?php echo date('Y-m-d'); ?>">
+              <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+              </div>
+              </div>
+            </div>
            
        <div class="col-md-4">
-       <div class="form-group"> <input type="submit" name="btndate" id="btndate"  class="mrg-top common-btn pull-left" value="SHOW">  
+
+       <div class="form-group"> <input type="submit" name="btndate" id="btndate" onclick="getfbadata()"  class="mrg-top common-btn pull-left" value="SHOW">  
      &nbsp;&nbsp;
 
 <!--    <select  id="msds-select" class="pull-left mrg-top mrg-left">
@@ -463,15 +464,193 @@
 
   $(document).ready(function() {
 
-    $('#fba-list-table').DataTable({
+//.column('0:visible').order('desc').draw();
+});  
+// from date to date start
 
-   "createdRow": function(row, data, dataIndex ) {
-    if ( data.PayStat=="S" ) {
-    $(row).css({backgroundColor: 'LightGreen'});
+$(document).ready(function() {
+  // Bootstrap datepicker
+
+getfbadata();
+
+ // $('.input-daterange input').each(function() {
+ //    $(this).datepicker('clearDates');
+ //  });
+
+ //  // Extend dataTables search
+
+ // // alert('test');
+ //  $.fn.dataTable.ext.search.push(
+ //    function(settings, data, dataIndex) {
+ //    var min = $('#min').val();
+ //    var max = $('#max').val();
+ //   // console.log(max);
+ //    var createdAt = data[24] || 24; // Our date column in the table
+   
+ //    if (
+ //      (min == "" || max == "") ||
+ //      (moment(createdAt).isSameOrAfter(min) && moment(createdAt).isSameOrBefore(max,'day'))
+ //    ) 
+
+ //    {
+
+ // return true;
+ //    }
+ //    return false;
+ //    }
+ //  );
+
+ //Re-draw the table when the a date range filter changes
+  $('#btndate').on("click", function(){
+    var table = $('#fba-list-table').DataTable();
+    table.draw();
+});
+
+$('.date-range-filter').datepicker();
+ });
+ </script>
+
+<!-- from date to date end -->  
+<!-- Search Pospno and Fbaid start,STATE,CITY etc -->
+<script>
+/// code for search
+function searchdata()
+{
+  var index = $('#msds-select').val();
+  if(index=='fbacity')
+  {
+    colsearch(7);
+  }
+  else if(index == 'FBAID')
+  {
+    colsearch(0);
+  }
+  else if(index == 'POSPNO')
+  {
+    colsearch(11);
+  }else if(index=='state'){colsearch(8);}
+  else if(index == 'zone'){colsearch(9);}
+  else if(index == 'fbaname'){colsearch(1);}
+  else if(index == 'pospname'){colsearch(13);}
+}
+
+function colsearch(index)
+{
+  table1 = $('#fba-list-table').DataTable();
+    if ($('#txtfbasearch').val()!= '') {
+    table1.columns(index).search('^'+ $('#txtfbasearch').val() + '$', true, true).draw(); 
+ }
+    else
+    table1.columns(index).search($('#txtfbasearch').val(), true, true).draw(); 
+}
+
+function selectIndex(dd) {
+  if (dd.selectedIndex>=4){
+     dd.form['txtfbasearch'].style.display='block';
+  }else{
+    dd.form['txtfbasearch'].style.display='none';
+  }  
+}
+
+</script>
+<script type="text/javascript">
+    function getpaylinknew(){
+    
+  $.ajax({
+  url: 'getpaylinknew/'+$('#fba').val(),
+  type: "GET",                  
+  success:function(data) {
+  console.log(data);
+  var json = JSON.parse(data);
+  if(json.StatusNo==0){
+  $('#divpartnertable_payment').html(json.MasterData.PaymentURL);
+  $('#divpartnertable_payment').val(json.MasterData.PaymentURL);
+
+      }
+
+    }
+});
+     alert("Payment Link Genrate successfully..");
+}
+
+     function pmesgsend(){
+     alert("SMS Send successfully..");
+     $.ajax({ 
+     url: "{{URL::to('pmesgsend')}}",
+     method:"POST",
+     data: $('#modelpaylink').serialize(),
+     success: function(msg)  
+      {
+     console.log(msg);
+
+      }
+    });
+  }
+
+</script>
+
+  <script type="text/javascript">
+   $(function(){
+   $('#posp_remark').keyup(function(){    
+   var yourInput = $(this).val();
+   re = /[A-Za-z]?[A-Za-z `~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi;
+   var isSplChar = re.test(yourInput);
+    if(isSplChar)
+    {
+    var no_spl_char = yourInput.replace(/[A-Za-z]?[A-Za-z `~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi, '');
+    $(this).val(no_spl_char);
+    }
+  });
+ 
+});
+</script>
+
+<script type="text/javascript">
+   $(function(){
+   $('#p_remark').keyup(function(){    
+   var yourInput = $(this).val();
+   re = /[A-Za-z]?[A-Za-z `~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi;
+   var isSplChar = re.test(yourInput);
+    if(isSplChar)
+    {
+    var no_spl_char = yourInput.replace(/[A-Za-z]?[A-Za-z `~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi, '');
+    $(this).val(no_spl_char);
+    }
+  });
+ 
+});
+</script>
+
+
+<script type="text/javascript">
+// Add active class to the current button (highlight it)
+var header = document.getElementById("myDIV");
+var btns = header.getElementsByClassName("qry-btn");
+for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener("click", function() {
+    var current = document.getElementsByClassName("active");
+    current[0].className = current[0].className.replace(" active", "");
+    this.className += " active";
+  });
+}
+
+</script>
+
+
+ <script type="text/javascript">
+ function getfbadata(){
+  var fdate=$("#min").val();
+  var todate=$("#max").val();
+  $('#fba-list-table').DataTable ({
+
+  "destroy": true,
+ "createdRow": function(row, data, dataIndex ) {
+   if ( data.PayStat=="S" ) {
+   $(row).css({backgroundColor: 'LightGreen'});
  }
     },
         "order": [[ 0, "desc" ]],
-        "ajax": "get-fba-list",
+        "ajax": "get-fba-list/"+fdate+'/'+todate,
         "columns": [
 
             { "data": "fbaid"},
@@ -577,187 +756,8 @@
 
         ],
 
-    });//.column('0:visible').order('desc').draw();
-
-
-});  
-
-// from date to date start
-
-$(document).ready(function() {
-  // Bootstrap datepicker
-  $('.input-daterange input').each(function() {
-    $(this).datepicker('clearDates');
-  });
-
-  // Extend dataTables search
-
- // alert('test');
-  $.fn.dataTable.ext.search.push(
-    function(settings, data, dataIndex) {
-    var min = $('#min').val();
-    var max = $('#max').val();
-   // console.log(max);
-    var createdAt = data[24] || 24; // Our date column in the table
-   
-    if (
-      (min == "" || max == "") ||
-      (moment(createdAt).isSameOrAfter(min) && moment(createdAt).isSameOrBefore(max,'day'))
-    ) 
-
-    {
-
- return true;
-    }
-    return false;
-    }
-  );
-
- // Re-draw the table when the a date range filter changes
-  $('#btndate').on("click", function(){
-    var table = $('#fba-list-table').DataTable();
-    table.draw();
-  });
-
-$('.date-range-filter').datepicker();
-});
-</script>
-<!-- from date to date end -->  
-
-
-<!-- Search Pospno and Fbaid start,STATE,CITY etc -->
-<script>
-
-
-/// code for search
-function searchdata()
-{
-  var index = $('#msds-select').val();
-  if(index=='fbacity')
-  {
-    colsearch(7);
-  }
-  else if(index == 'FBAID')
-  {
-    colsearch(0);
-  }
-  else if(index == 'POSPNO')
-  {
-    colsearch(11);
-  }else if(index=='state'){colsearch(8);}
-  else if(index == 'zone'){colsearch(9);}
-  else if(index == 'fbaname'){colsearch(1);}
-  else if(index == 'pospname'){colsearch(13);}
-}
-
-function colsearch(index)
-{
-  table1 = $('#fba-list-table').DataTable();
-    if ($('#txtfbasearch').val()!= '') {
-    table1.columns(index).search('^'+ $('#txtfbasearch').val() + '$', true, true).draw(); 
- }
-    else
-    table1.columns(index).search($('#txtfbasearch').val(), true, true).draw(); 
-}
-
-function selectIndex(dd) {
-  if (dd.selectedIndex>=4){
-     dd.form['txtfbasearch'].style.display='block';
-  }else{
-    dd.form['txtfbasearch'].style.display='none';
-  }  
-}
-
-
-     
-
-
-</script>
-
-
-<script type="text/javascript">
-    function getpaylinknew(){
-    
-  $.ajax({
-  url: 'getpaylinknew/'+$('#fba').val(),
-  type: "GET",                  
-  success:function(data) {
-  console.log(data);
-  var json = JSON.parse(data);
-  if(json.StatusNo==0){
-  $('#divpartnertable_payment').html(json.MasterData.PaymentURL);
-  $('#divpartnertable_payment').val(json.MasterData.PaymentURL);
-
-      }
-
-    }
-});
-     alert("Payment Link Genrate successfully..");
-}
-
-     function pmesgsend(){
-     alert("SMS Send successfully..");
-     $.ajax({ 
-     url: "{{URL::to('pmesgsend')}}",
-     method:"POST",
-     data: $('#modelpaylink').serialize(),
-     success: function(msg)  
-      {
-     console.log(msg);
-
-      }
     });
   }
-
-</script>
-
-  <script type="text/javascript">
-   $(function(){
-   $('#posp_remark').keyup(function(){    
-   var yourInput = $(this).val();
-   re = /[A-Za-z]?[A-Za-z `~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi;
-   var isSplChar = re.test(yourInput);
-    if(isSplChar)
-    {
-    var no_spl_char = yourInput.replace(/[A-Za-z]?[A-Za-z `~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi, '');
-    $(this).val(no_spl_char);
-    }
-  });
- 
-});
-</script>
-
-
-  <script type="text/javascript">
-   $(function(){
-   $('#p_remark').keyup(function(){    
-   var yourInput = $(this).val();
-   re = /[A-Za-z]?[A-Za-z `~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi;
-   var isSplChar = re.test(yourInput);
-    if(isSplChar)
-    {
-    var no_spl_char = yourInput.replace(/[A-Za-z]?[A-Za-z `~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi, '');
-    $(this).val(no_spl_char);
-    }
-  });
- 
-});
-</script>
-
-
-<script type="text/javascript">
-  
-
-// Add active class to the current button (highlight it)
-var header = document.getElementById("myDIV");
-var btns = header.getElementsByClassName("qry-btn");
-for (var i = 0; i < btns.length; i++) {
-  btns[i].addEventListener("click", function() {
-    var current = document.getElementsByClassName("active");
-    current[0].className = current[0].className.replace(" active", "");
-    this.className += " active";
-  });
-}
 
 </script>
 

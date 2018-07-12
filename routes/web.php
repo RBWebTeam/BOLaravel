@@ -38,7 +38,7 @@ Route::get('dashboard','DashboardController@dashboard');
 
 //Fba details
 Route::get('fba-list','FbaController@fba_list');
-Route::get('get-fba-list','FbaController@get_fba_list');
+Route::get('get-fba-list/{fdate}/{todate}','FbaController@get_fba_list');
 Route::post('sales-update','FbaController@sales');
 Route::post('loan-update','FbaController@loan');
 Route::post('posp-update','FbaController@posp');
@@ -79,6 +79,8 @@ Route::get('quickleadassignmentshow','quickleadController@showlead');
 Route::get('sales-code-update','salescodeController@updatesalescode');
 Route::get('sales-code-update-get-fbaid/{salsecode}','salescodeController@selfcodefbaid');
 Route::POST('sales-code-update-insert','salescodeController@insertsalescode');
+
+
 //User_mapping vikas End
 
 
@@ -226,6 +228,9 @@ Route::Post('quick-lead-edit','quickleadController@updatelead');
 route::get('offlinecs','offlinecsController@getofflinecs');
 route::get('get_state_offlinecs/{cityid}','offlinecsController@getstate');
 Route::Post('offlinecs','offlinecsController@insertofflinecs');
+Route::get('get_ERPID_offlinecs/{fbaid}','offlinecsController@geterpid');
+Route::post('saveofflinecs','offlinecsController@saveofflinecsdata');
+Route::get('offlinecs-dashboard','offlinecsDashboardController@getofflinecsdata');
 ///shubham end ///
 // avinash
  Route::get('ticket-module','TicketController@getticketdetails') ;
