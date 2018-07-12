@@ -144,7 +144,8 @@
                   <tr>
                    <th>ID</th>
                    <th>Assigned by</th>
-                    <th>Assigne </th>
+                    <th>Assigne Internal </th>
+                     <th>Assigne external </th>
                     <th>Remark</th>
                     <th>Action </th>
                      <th>followup_date </th>
@@ -160,11 +161,15 @@
      <tr>
          <td> <a href="#" onclick="followup_disposition('{{$val->history_id}} ')" >{{$val->history_id}} </a>     </td>
          <td>{{$val->user_id}} </td>
-         <td>{{$val->assignment_id}} </td>
+         <td>@if($val->assignment_id){{$val->assignment_id."-".$val->Profile}}@endif </td>
+         <td>@if($val->assign_external_id){{$val->assign_external_id."-".$val->Profile}}@endif </td>
          <td>{{$val->remark}} </td>
          
-         <td>{{$val->action==="n"?"close":"open"}}</td>
-           <td>{{$val->followup_date}} </td>
+
+        <?php $class =($val->action=="n")? 'color: #00C851': ' color:#ff4444'; ?>
+          
+         <td  style="{{$class}}">{{$val->action==="n"?"close":"open"}}</td>
+         <td>{{$val->followup_date}} </td>
 
          <td>{{$val->create_at}} </td>
 
