@@ -528,6 +528,10 @@ if ($fileKYC!=0)
  Session::flash('message', 'Record has been saved successfully');
 return Redirect('offlinecs');
 }
-
+ public function getofflinecsdataedit($id)
+ {
+  $offlinecsdt=DB::select("call Usp_get_edit_data_offlinecs($id)");
+   return json_encode($offlinecsdt);
+ }
 }
 

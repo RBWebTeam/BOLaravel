@@ -24,11 +24,19 @@
     	<tr>
     		<td>{{$val->ID}}</td>
     		<td>{{$val->product_name}}</td>
+        <td>{{$val->CustomerName}}</td>
     		<td>{{$val->cityname}}</td>
     		<td>{{$val->POSPName}}</td>
     		<td>{{$val->MobileNo}}</td>
-    		<td></td>
-    		<td></td>    		
+        <td>          
+          @if($val->ismailsend!=1)
+          <a id="btnedit" class="btn btn-primary" href="{{url('offlinecs')}}?id={{$val->ID}}" >Edit</a>
+          <a id="btnedit" class="btn btn-primary" >Send Mail</a>
+          @endif
+          @if($val->ismailsend==1)
+          <a id="btnedit" class="btn btn-primary" >Send Mail</a>
+          @endif
+         </td>		
     	</tr>
     	@endforeach
       @endisset

@@ -42,7 +42,7 @@
                 </div>
                 <div class="col-md-4">
                 	<label>City:</label>
-                	<select class="form-control" id="ddlcity" name="ddlcity" required>
+                	<select onchange="getstate()" class="form-control" id="ddlcity" name="ddlcity" required>
                 		<option value="">--select--</option>
                     @foreach($city as $val)
                     <option value="{{$val->city_id}}">{{$val->cityname}}</option>
@@ -89,7 +89,7 @@
               	</div>
                	<div class="col-md-4">
               		<label>Posp Name:</label>
-              		<select class="form-control" id="ddlfbaname" name="ddlfbaname" required>
+              		<select onchange="getpospname();" class="form-control" id="ddlfbaname" name="ddlfbaname" required>
                     <option value="">--Select--</option>
                     @foreach($fba as $val)
               			<option value="{{$val->FBAID}}">{{$val->POSPName}} ({{$val->FBAID}})</option>
@@ -139,8 +139,8 @@
               	</div>              	
               	<div class="col-md-4">
               		<label>Break In:</label>
-              		<label class="checkbox-inline">YES  <input type="radio" name="txtbreakin" id="txtbreakin" value="YES"></label>
-              		<label class="checkbox-inline">No  <input type="radio" name="txtbreakin" id="txtbreakin" value="No"></label>              		           		
+              		<label class="checkbox-inline">YES  <input class="Breakinyes" type="radio" name="txtbreakin" id="txtbreakin" value="YES"></label>
+              		<label class="checkbox-inline">No  <input class="Breakinno" type="radio" name="txtbreakin" id="txtbreakin" value="No"></label>              		           		
               	</div>              
               	<div class="col-md-4">
               		<label>Insurer:</label>
@@ -322,7 +322,57 @@ $( document ).ready(function() {
       $('#filePUC').attr('required', true);
       $('#filebreakrp').attr('required', true);
 
-      
+if (window.location.href.indexOf('?id=') > 0) {
+        var id = window.location.href.split('?id=')[1];  
+        //alert(id);
+
+    $.ajax({  
+         type: "GET",  
+         url:'offlinecsedit/'+id,
+         success: function(offlinecsdt)
+         {
+           var data=  JSON.parse(offlinecsdt);
+           $("#ddlwhyoffline").val(data[0].reason);
+           $("#ddproduct").val(data[0].Product);
+           $("#txtcstname").val(data[0].CustomerName);
+           $("#txtadd").val(data[0].CustomerAddress);
+           $("#ddlcity").val(data[0].City);
+           getstate();
+           $("#txtmobno").val(data[0].MobileNo);
+           $("#txttelno").val(data[0].TelephoneNo);
+           $("#txtemail").val(data[0].EmailId);
+           $("#ddlfbaname").val(data[0].FBAID);
+           //getpospname();
+           $("#txtpremiumamt").val(data[0].PremiumAmount);
+           $("#txtqtno").val(data[0].QTNo);
+           $("#txtexpdate").val(data[0].DateofExpiry);
+           $("#ddlpayment").val(data[0].PaymentMode);
+           $("#txtutrnomotor").val(data[0].UTRNo);
+           $("#txtbankmotor").val(data[0].Bank);
+           $("#txtvehicalno").val(data[0].VehicleNo);
+           if(data[0].BreakIn=='YES')
+           {
+            $(".Breakinyes").attr('checked', 'checked');
+           }
+           else{
+            $(".Breakinno").attr('checked', 'checked');
+           }
+           $("#ddlInsurermotor").val(data[0].Insurermotor);
+           $("#txtexecutivename").val(data[0].ExecutiveName);
+           $("#txtexecutivename1").val(data[0].ExecutiveName1);
+           $("#txtexeProductname").val(data[0].ProductExecutive);
+           $("#txtmgrProductname").val(data[0].ProductManager);
+           
+           
+           
+           
+
+
+
+         }
+
+        });   
+      } 
 });
  	$("#ddproduct").change(function(){
      if($("#ddproduct").val()==1){
@@ -451,8 +501,34 @@ $( document ).ready(function() {
       $('#filebreakrp').attr('required', true);
      }
      });
+function getpospname()
+{
+  var fbaid=$("#ddlfbaname").val();  
+   $.ajax({
+             url: 'get_ERPID_offlinecs/'+fbaid,
+             type: "GET",             
+             success:function(data) 
+             {      
+              var erpid=  JSON.parse(data);              
+               $("#txterpid").val(erpid[0].ERPID);
+               $("#txtexecutivename").val(erpid[0].fieldmanageruid);
+               $("#txtexecutivename1").val(erpid[0].rrmuid);
+             }
+         });
+}
+$(".txtonly").keypress(function (e) {
+    if (String.fromCharCode(e.keyCode).match(/[^ a-zA-Z]/g)) return false;
+});
 
-$("#ddlcity").change(function(){
+$(".Vehicleno").keypress(function (e) {
+    if (String.fromCharCode(e.keyCode).match(/[^0-9a-zA-Z]/g)) return false;
+});
+
+$("#saveofflinecs" ).click(function() {
+  $("#frmofflinecs").attr('action', '{{url('saveofflinecs')}}');
+});
+function getstate()
+{
   var cityid=$("#ddlcity").val();
    $.ajax({
              url: 'get_state_offlinecs/'+cityid,
@@ -469,34 +545,7 @@ $("#ddlcity").change(function(){
               $('#ddlregion').append('<option value="'+ state[0].state_id +'">'+ state[0].region +'</option>');           
              }
          });
-});
-
-$("#ddlfbaname").change(function(){
-  var fbaid=$("#ddlfbaname").val();
-  //alert(fbaid)
-   $.ajax({
-             url: 'get_ERPID_offlinecs/'+fbaid,
-             type: "GET",             
-             success:function(data) 
-             {      
-              var erpid=  JSON.parse(data);              
-               $("#txterpid").val(erpid[0].ERPID);
-               $("#txtexecutivename").val(erpid[0].fieldmanageruid);
-               $("#txtexecutivename1").val(erpid[0].rrmuid);
-             }
-         });
-});
-$(".txtonly").keypress(function (e) {
-    if (String.fromCharCode(e.keyCode).match(/[^ a-zA-Z]/g)) return false;
-});
-
-$(".Vehicleno").keypress(function (e) {
-    if (String.fromCharCode(e.keyCode).match(/[^0-9a-zA-Z]/g)) return false;
-});
-
-$("#saveofflinecs" ).click(function() {
-  $("#frmofflinecs").attr('action', '{{url('saveofflinecs')}}');
-});
+}
 
 </script>
 @endsection
