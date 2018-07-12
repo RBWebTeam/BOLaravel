@@ -19,6 +19,7 @@
       </tr>
     </thead>
     <tbody>
+      @isset($data)
     	@foreach($data as $val)
     	<tr>
     		<td>{{$val->ID}}</td>
@@ -30,6 +31,7 @@
     		<td></td>    		
     	</tr>
     	@endforeach
+      @endisset
     </tbody>
 </table>
 </div>

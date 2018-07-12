@@ -9,13 +9,13 @@ use Redirect;
 use Session;
 use URL;
 use Mail;
-class offlinecsDashboardController extends CallApiController
+class OfflinecsDashboardController extends Controller
 {
 	public function getofflinecsdata()
 	{
-		 $data=DB::select("call Usp_get_offlinecs_data_view()");
-		 print_r($data);
-		 return view('offlinecsDashboard',['data'=>$data]);
+		//$data=DB::select("call Usp_get_offlinecs_data_view()");
+		 //echo "Ssss";
+		 return view('offlinecsDashboard');
 	}
  
 }
