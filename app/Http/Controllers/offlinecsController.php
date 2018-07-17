@@ -256,8 +256,8 @@ if ($fileKYC!=0)
         return $e->getMessage();    
      }        
 }
-                $email ='shubhamkhandekar2@gmail.com';
-                $ccemail='shaikhdani26@gmail.com';
+                $email ='rajendra.raval@rupeeboss.com';
+                $ccemail='hrs@rupeeboss.com';
                 $offlinecsdata = DB::select("call Usp_get_motor_data($ID)");
                 $sub='SNo.'.$offlinecsdata[0]->ID.' '.$offlinecsdata[0]->product_name.'  Entry details for '.$offlinecsdata[0]->CustomerName.' - '.$offlinecsdata[0]->POSPName;
                 
@@ -851,8 +851,8 @@ if ($fileKYC!=0)
         return $e->getMessage();    
      }        
 }            // print_r($offlinecsdata); exit();
-                $email ='shubhamkhandekar2@gmail.com';
-                $ccemail='shaikhdani26@gmail.com';
+                $email ='rajendra.raval@rupeeboss.com';
+                $ccemail='hrs@rupeeboss.com';
                 $offlinecsdata = DB::select("call Usp_get_motor_data($ID)");
                 //print_r($ID); exit();
                 $sub='SNo.'.$offlinecsdata[0]->ID.' '.$offlinecsdata[0]->product_name.'  Entry details for '.$offlinecsdata[0]->CustomerName.' - '.$offlinecsdata[0]->POSPName;

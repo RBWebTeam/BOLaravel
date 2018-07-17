@@ -414,12 +414,7 @@ if (window.location.href.indexOf('?id=') > 0) {
             }
             $("#dllpremium").val(data[0].PremiumYears); 
 
-           
-           
-
-
-
-         }
+            }
 
         });   
       } 

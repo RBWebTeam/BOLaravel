@@ -13,14 +13,15 @@ class OfflinecsDashboardController extends Controller
 {
 	public function getofflinecsdata()
 	{
-		$data=DB::select("call Usp_get_offlinecs_data_view()");
+		$fbauser=Session::get('fbauserid');
+		$data=DB::select("call Usp_get_offlinecs_data_view($fbauser)");
 		//print_r($data); exit();
 		 return view('offlinecsDashboard',['data'=>$data]);
 	}
 	public function sendemail($ID)
 	{
-                $email ='shubhamkhandekar2@gmail.com';
-                $ccemail='shaikhdani26@gmail.com';
+                $email ='rajendra.raval@rupeeboss.com';
+                $ccemail='hrs@rupeeboss.com';
                 $offlinecsdata = DB::select("call Usp_get_motor_data($ID)");    
 
                 $sub='SNo.'.$offlinecsdata[0]->ID.' '.$offlinecsdata[0]->product_name.'  Entry details for '.$offlinecsdata[0]->CustomerName.' - '.$offlinecsdata[0]->POSPName;
@@ -37,6 +38,7 @@ class OfflinecsDashboardController extends Controller
                 }
               DB::table('offlinecs')->where('ID','=',$ID)->update(['ismailsend'=>1]);
              }
+             return Redirect('offlinecs-dashboard');
     }
  
 }
