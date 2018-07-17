@@ -31,10 +31,10 @@
         <td>          
           @if($val->ismailsend!=1)
           <a id="btnedit" class="btn btn-primary" href="{{url('offlinecs')}}?id={{$val->ID}}" >Edit</a>
-          <a id="btnedit" class="btn btn-primary" >Send Mail</a>
+          <a id="btnedit" class="btn btn-primary" onclick="Sendemail({{$val->ID}},this)">Send Mail</a>
           @endif
           @if($val->ismailsend==1)
-          <a id="btnedit" class="btn btn-primary" >Send Mail</a>
+          <a id="btnedit" class="btn btn-primary" onclick="Sendemail({{$val->ID}},this)" >Send Mail</a>
           @endif
          </td>		
     	</tr>
@@ -46,4 +46,18 @@
 </div>
 </div>
 </div>
+<script type="text/javascript">
+  function Sendemail($ID)
+  {
+     alert($ID);    
+   $.ajax({
+             url: 'offlinecssendemail/'+$ID,
+             type: "GET",             
+             success:function(data) 
+             {      
+              alert("test");
+             }
+         });
+  }
+</script>
 @endsection

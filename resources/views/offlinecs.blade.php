@@ -11,9 +11,10 @@
       <div class="col-md-12">
          <div class="overflow-scroll">
          	<div class="container">
-         	<form  id="frmofflinecs" method="post" enctype="multipart/form-data" action="{{url('offlinecs')}}">
+         	<form  id="frmofflinecs" method="post" enctype="multipart/form-data" action="{{url('offlinecs')}}">            
               {{ csrf_field() }}
               <div class="row col-md-12" style="padding-left: 0px;">
+                <input type="hidden" name="txtofflinecsid" id="txtofflinecsid">
                 <div class="col-md-4">
                    <label>Why Offline:</label>
                   <select class="form-control" id="ddlwhyoffline" name="ddlwhyoffline" required>
@@ -25,7 +26,7 @@
                 </div>
                 <div class="col-md-4">
          		      <label>Product:</label>
-                  <select class="form-control" id="ddproduct" name="ddproduct">
+                  <select class="form-control" onchange="pageview()" id="ddproduct" name="ddproduct">
                   @foreach($product as $val)
                  	<option value="{{$val->id}}">{{$val->product_name}}</option>
                   @endforeach                  
@@ -166,13 +167,13 @@
               	</div>         	
               	<div class="col-md-4">
               		<label>Preexisting:</label>
-              		<label class="checkbox-inline">YES  <input type="radio" name="txtPreexisting" id="txtPreexisting" value="YES"></label>
-              		<label class="checkbox-inline">No  <input type="radio" name="txtPreexisting" id="txtPreexisting" value="No"></label>             		           		
+              		<label class="checkbox-inline">YES  <input class="Preexistingyes" type="radio" name="txtPreexisting" id="txtPreexisting" value="YES"></label>
+              		<label class="checkbox-inline">No  <input class="Preexistingno" type="radio" name="txtPreexisting" id="txtPreexisting" value="No"></label>             		           		
               	</div>   
               	<div class="col-md-4">
               		<label>Medical Report:</label>
-              		<label class="checkbox-inline">YES  <input type="radio" name="txtmedicalrp" id="txtmedicalrp" value="YES"></label>
-              		<label class="checkbox-inline">No  <input type="radio" name="txtmedicalrp" id="txtmedicalrp" value="No"></label>             		           		
+              		<label class="checkbox-inline">YES  <input type="radio" class="Medicalyes" name="txtmedicalrp" id="txtmedicalrp" value="YES"></label>
+              		<label class="checkbox-inline">No  <input type="radio" class="Medicalno" name="txtmedicalrp" id="txtmedicalrp" value="No"></label>             		           		
               	</div> 
               	</div> 
               	<div class="row">  
@@ -255,29 +256,35 @@
              <div class="row Motor" id="divMotor">              
              	<div class="col-md-4">
              		<label>RC Copy:</label>
-             		<input type="file" name="filerc" id="filerc" class="form-control" accept=".png, .jpg, .jpeg .pdf">                           		
+             		<input type="file" name="filerc" id="filerc" class="form-control" accept=".png, .jpg, .jpeg .pdf">  
+                <span><a id="spnrccopy" target="_blank"></a></span>                         		
              	</div>
              	<div class="col-md-4">
              		<label>Fitness:</label>
-             		<input type="file" name="fileFitness" id="fileFitness" class="form-control" accept=".png, .jpg, .jpeg .pdf">             		
+             		<input type="file" name="fileFitness" id="fileFitness" class="form-control" accept=".png, .jpg, .jpeg .pdf"> 
+                <span><a id="spnfitness" target="_blank"></a></span>             		
              	</div>
              	<div class="col-md-4">
              		<label>PUC:</label>
-             		<input type="file" name="filePUC" id="filePUC" class="form-control" accept=".png, .jpg, .jpeg .pdf">             		
+             		<input type="file" name="filePUC" id="filePUC" class="form-control" accept=".png, .jpg, .jpeg .pdf">    
+                 <span><a id="spnPUC" target="_blank"></a></span>         		
              	</div>
              	<div class="col-md-4">
              		<label>Break in Report:</label>
-             		<input type="file" name="filebreakrp" id="filebreakrp" class="form-control" accept=".png, .jpg, .jpeg .pdf">            
+             		<input type="file" name="filebreakrp" id="filebreakrp" class="form-control" accept=".png, .jpg, .jpeg .pdf"> 
+                 <span><a id="spnbreakrp" target="_blank"></a></span>           
              	</div>
               </div> 
                <div class="row"> 
              	<div class="col-md-4">
              		<label>Cheque Copy:</label>
-             		<input type="file" name="fileCheque" id="fileCheque" class="form-control" accept=".png, .jpg, .jpeg .pdf" required>            
+             		<input type="file" name="fileCheque" id="fileCheque" class="form-control" accept=".png, .jpg, .jpeg .pdf" required> 
+                <span><a id="spnCheque" target="_blank"></a></span>           
              	</div>
              	<div class="col-md-4">
              		<label>Other:</label>
              		<input type="file" name="fileother" id="fileother" class="form-control" accept=".png, .jpg, .jpeg .pdf"> 
+                <span ><a id="spnother" target="_blank"></a></span>
              	</div>  
               </div>                  
              <br>
@@ -285,10 +292,12 @@
              	<div class="col-md-4">
              		<label>Proposal Form:</label>
              		<input type="file" name="fileProposalForm" id="fileProposalForm" class="form-control" accept=".png, .jpg, .jpeg .pdf">
+                <span><a id="spnproposaform" target="_blank"></a></span>
              	</div>  
               <div class="col-md-4">
                 <label>KYC:</label>
-                <input type="file" name="fileKYC" id="fileKYC" class="form-control" accept=".png, .jpg, .jpeg .pdf">                
+                <input type="file" name="fileKYC" id="fileKYC" class="form-control" accept=".png, .jpg, .jpeg .pdf">   
+                <span><a id="spnKYC" target="_blank"></a></span>             
               </div>     	
              </div> 
              <br>                      
@@ -296,9 +305,14 @@
              <br>
              <br>
              <div class="col-md-12" style="text-align: center;">
-              <button id="saveofflinecs" class="btn btn-primary" >Save</button>
-               <input type="submit" name="save" class="btn btn-primary" value="Save & Send Email">
-               
+              <div id="btnsavediv">
+                <button id="saveofflinecs" class="btn btn-primary" >Save</button>
+                <input type="submit" name="save" class="btn btn-primary" value="Save & Send Email"> 
+               </div>
+               <div id="btnupdatediv">
+                 <button id="btnupdate" class="btn btn-primary" >Update</button>
+                 <input id="btnupdateandsendmail" type="submit" name="save" class="btn btn-primary" value="Update & Send Email">                 
+               </div>             
              </div>            
             </form>            
         </div>
@@ -324,8 +338,11 @@ $( document ).ready(function() {
 
 if (window.location.href.indexOf('?id=') > 0) {
         var id = window.location.href.split('?id=')[1];  
-        //alert(id);
+         $("#txtofflinecsid").val(id);
+         $("#btnsavediv").hide();
+         $("#btnupdatediv").show();
 
+        //alert(id)
     $.ajax({  
          type: "GET",  
          url:'offlinecsedit/'+id,
@@ -334,6 +351,7 @@ if (window.location.href.indexOf('?id=') > 0) {
            var data=  JSON.parse(offlinecsdt);
            $("#ddlwhyoffline").val(data[0].reason);
            $("#ddproduct").val(data[0].Product);
+           pageview();
            $("#txtcstname").val(data[0].CustomerName);
            $("#txtadd").val(data[0].CustomerAddress);
            $("#ddlcity").val(data[0].City);
@@ -342,6 +360,7 @@ if (window.location.href.indexOf('?id=') > 0) {
            $("#txttelno").val(data[0].TelephoneNo);
            $("#txtemail").val(data[0].EmailId);
            $("#ddlfbaname").val(data[0].FBAID);
+           $("#txterpid").val(data[0].ERPID);
            //getpospname();
            $("#txtpremiumamt").val(data[0].PremiumAmount);
            $("#txtqtno").val(data[0].QTNo);
@@ -362,8 +381,39 @@ if (window.location.href.indexOf('?id=') > 0) {
            $("#txtexecutivename1").val(data[0].ExecutiveName1);
            $("#txtexeProductname").val(data[0].ProductExecutive);
            $("#txtmgrProductname").val(data[0].ProductManager);
-           
-           
+           $("#spnrccopy").append(data[0].RCCopy);
+           $('#spnrccopy').attr('href',data[0].RCCopy);
+           $("#spnfitness").append(data[0].Fitness);
+           $('#spnfitness').attr('href',data[0].Fitness);
+           $("#spnPUC").append(data[0].PUC);
+           $('#spnPUC').attr('href',data[0].PUC);
+           $("#spnbreakrp").append(data[0].BreakinReport);
+           $('#spnbreakrp').attr('href',data[0].BreakinReport);
+           $("#spnCheque").append(data[0].ChequeCopy);
+           $('#spnCheque').attr('href',data[0].ChequeCopy);
+           $("#spnother").append(data[0].Other);
+           $('#spnother').attr('href',data[0].Other);
+           $("#spnproposaform").append(data[0].ProposalForm);
+           $('#spnproposaform').attr('href',data[0].ProposalForm);
+           $("#spnKYC").append(data[0].KYC);
+           $('#spnKYC').attr('href',data[0].KYC);
+           if (data[0].Insurerhealth!=0){
+           $("#ddlInsurerhealth").val(data[0].Insurerhealth);
+           } 
+           if (data[0].Preexisting=='YES') {
+             $(".Preexistingyes").attr('checked', 'checked');
+            }
+             if (data[0].Preexisting=='NO'){
+              $(".Preexistingno").attr('checked', 'checked');
+            }
+            if (data[0].MedicalReport=='YES'){
+              $(".Medicalyes").attr('checked', 'checked');
+            }
+             if (data[0].MedicalReport=='NO') {
+               $(".Medicalno").attr('checked', 'checked');
+            }
+            $("#dllpremium").val(data[0].PremiumYears); 
+
            
            
 
@@ -373,8 +423,11 @@ if (window.location.href.indexOf('?id=') > 0) {
 
         });   
       } 
+      else{
+        $("#btnupdatediv").hide();
+      }
 });
- 	$("#ddproduct").change(function(){
+ 	function pageview(){
      if($("#ddproduct").val()==1){
      	$(".Motor").show();
      	$("#life").hide();
@@ -500,7 +553,7 @@ if (window.location.href.indexOf('?id=') > 0) {
       $('#filePUC').attr('required', true);
       $('#filebreakrp').attr('required', true);
      }
-     });
+     }
 function getpospname()
 {
   var fbaid=$("#ddlfbaname").val();  
@@ -527,6 +580,13 @@ $(".Vehicleno").keypress(function (e) {
 $("#saveofflinecs" ).click(function() {
   $("#frmofflinecs").attr('action', '{{url('saveofflinecs')}}');
 });
+$("#btnupdate" ).click(function() {
+  $("#frmofflinecs").attr('action', '{{url('offlinecsupdate')}}');
+});
+$("#btnupdateandsendmail" ).click(function() {
+  $("#frmofflinecs").attr('action', '{{url('offlinecsupdateandsendmail')}}');
+});
+
 function getstate()
 {
   var cityid=$("#ddlcity").val();
@@ -546,6 +606,8 @@ function getstate()
              }
          });
 }
+
+
 
 </script>
 @endsection

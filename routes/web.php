@@ -234,6 +234,10 @@ route::get('offlinecsedit/{id}','offlinecsController@getofflinecsdataedit');
 
 Route::post('saveofflinecs','offlinecsController@saveofflinecsdata');
 Route::get('offlinecs-dashboard','OfflinecsDashboardController@getofflinecsdata');
+
+Route::post('offlinecsupdate','offlinecsController@Updateofflinecs');
+Route::post('offlinecsupdateandsendmail','offlinecsController@Updateofflinecsandsendmail');
+Route::get('offlinecssendemail/{ID}','OfflinecsDashboardController@sendemail');
 ///shubham end ///
 // avinash
  Route::get('ticket-module','TicketController@getticketdetails') ;

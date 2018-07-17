@@ -14,7 +14,7 @@ th, td {
 </head>
 <p>Dear Sir/Madam,</p>
 @foreach($offlinecsdata as $val) 
-<p>Please find enclosed details for CS for {{$val->product_name}} for {{$val->CustomerName}}. Details of the case are as under:</p>
+<p>Please find enclosed details for CS  {{$val->product_name}} for {{$val->CustomerName}}. Details of the case are as under:</p>
 <table>		  
 		<tr>
 	    <th>ID</th>
