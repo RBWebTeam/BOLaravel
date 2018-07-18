@@ -2,6 +2,7 @@
 @section('content')
 <div class="container-fluid white-bg">
 <div class="col-md-12"><h3 class="mrg-btm">OFFLINE CS</h3></div>
+
 <div class="col-md-12">
  <div class="overflow-scroll">
  <div class="table-responsive" >
@@ -49,13 +50,14 @@
 <script type="text/javascript">
   function Sendemail($ID)
   {
-     alert($ID);    
+     //alert($ID);    
    $.ajax({
              url: 'offlinecssendemail/'+$ID,
              type: "GET",             
              success:function(data) 
              {      
-              alert("test");
+              alert("Mail Has Been Send Successfully");
+              window.location.href = '{{url('offlinecs-dashboard')}}';
              }
          });
   }

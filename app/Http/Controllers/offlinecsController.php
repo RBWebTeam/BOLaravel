@@ -256,15 +256,15 @@ if ($fileKYC!=0)
         return $e->getMessage();    
      }        
 }
-                $email ='rajendra.raval@rupeeboss.com';
-                $ccemail='hrs@rupeeboss.com';
+                $email ='shubhamkhandekar2@gmail.com';
+                $ccemail='shaikhdani26@gmail.com';
                 $offlinecsdata = DB::select("call Usp_get_motor_data($ID)");
                 $sub='SNo.'.$offlinecsdata[0]->ID.' '.$offlinecsdata[0]->product_name.'  Entry details for '.$offlinecsdata[0]->CustomerName.' - '.$offlinecsdata[0]->POSPName;
                 
     if($ccemail!='')
     {                
         $mail = Mail::send('mailViews.sendmailofflinecs',['offlinecsdata' => $offlinecsdata], function($message)use($email,$ccemail,$sub){
-        $message->from('info@magicfinamrt.com', 'Fin-Mart');
+        $message->from('OfflineCS@magicfinmart.com', 'Fin-Mart');
         $message->to($email)->cc($ccemail)->subject($sub);});
          if(Mail::failures())
          {
@@ -851,8 +851,8 @@ if ($fileKYC!=0)
         return $e->getMessage();    
      }        
 }            // print_r($offlinecsdata); exit();
-                $email ='rajendra.raval@rupeeboss.com';
-                $ccemail='hrs@rupeeboss.com';
+                $email ='shubhamkhandekar2@gmail.com';
+                $ccemail='shaikhdani26@gmail.com';
                 $offlinecsdata = DB::select("call Usp_get_motor_data($ID)");
                 //print_r($ID); exit();
                 $sub='SNo.'.$offlinecsdata[0]->ID.' '.$offlinecsdata[0]->product_name.'  Entry details for '.$offlinecsdata[0]->CustomerName.' - '.$offlinecsdata[0]->POSPName;
@@ -860,7 +860,7 @@ if ($fileKYC!=0)
     if($ccemail!='')
     {                
         $mail = Mail::send('mailViews.sendmailofflinecs',['offlinecsdata' => $offlinecsdata], function($message)use($email,$ccemail,$sub){
-        $message->from('info@magicfinamrt.com', 'Fin-Mart');
+        $message->from('OfflineCS@magicfinmart.com', 'Fin-Mart');
         $message->to($email)->cc($ccemail)->subject($sub);});
          if(Mail::failures())
          {

@@ -7,7 +7,8 @@
 </div>
 @endif
 <div class="container-fluid white-bg">
-  <div class="col-md-12"><h3 class="mrg-btm">Offline Cs</h3></div>
+  <div class="col-md-12"><h3>Offline Cs</h3></div>
+  <div><a href="{{url('offlinecs-dashboard')}}" class="btn btn-primary pull-right">Show my Entries</a></div>
       <div class="col-md-12">
          <div class="overflow-scroll">
          	<div class="container">
@@ -200,13 +201,13 @@
              	</div>             
              	<div class="col-md-4">
               		<label>Medical case:</label>
-              		<label class="checkbox-inline">YES  <input type="radio" name="txtmedicalcase" id="txtmedicalcase" value="YES"></label>
-              		<label class="checkbox-inline">No  <input type="radio" name="txtmedicalcase" id="txtmedicalcase" value="No"></label>              		           		
+              		<label class="checkbox-inline">YES <input type="radio" class="Medicalcaseyes" name="txtmedicalcase" id="txtmedicalcase" value="YES"></label>
+              		<label class="checkbox-inline">No  <input type="radio" class="Medicalcaseno" name="txtmedicalcase" id="txtmedicalcase" value="No"></label>              		           		
               	</div>             
               	<div class="col-md-4">
               		<label>Insurer:</label>
               		<select id="ddlInsurerlife" name="ddlInsurerlife" class="form-control" >
-                    <option value="0">--select---</option>
+                    <option value="">--select---</option>
                     @foreach($lifeins as $val)
               			<option value="{{$val->LifeInsurerCompanyMasterId}}">{{$val->CompanyName}}</option>
                     @endforeach
@@ -381,6 +382,8 @@ if (window.location.href.indexOf('?id=') > 0) {
            $("#txtexecutivename1").val(data[0].ExecutiveName1);
            $("#txtexeProductname").val(data[0].ProductExecutive);
            $("#txtmgrProductname").val(data[0].ProductManager);
+           $("#ddlInsurerlife").val(data[0].Insurerlife);
+           $("#ddlnoofpolicy").val(data[0].TypeofPolicy);
            $("#spnrccopy").append(data[0].RCCopy);
            $('#spnrccopy').attr('href',data[0].RCCopy);
            $("#spnfitness").append(data[0].Fitness);
@@ -412,6 +415,12 @@ if (window.location.href.indexOf('?id=') > 0) {
              if (data[0].MedicalReport=='NO') {
                $(".Medicalno").attr('checked', 'checked');
             }
+             if (data[0].Medicalcase=='NO') {
+               $(".Medicalcaseno").attr('checked', 'checked');
+            } 
+            if (data[0].Medicalcase=='YES') {
+               $(".Medicalcaseyes").attr('checked', 'checked');
+            } 
             $("#dllpremium").val(data[0].PremiumYears); 
 
             }
@@ -531,8 +540,10 @@ if (window.location.href.indexOf('?id=') > 0) {
       $('#ddlInsurermotor').removeAttr("required");
       $('#filerc').removeAttr("required");
       $('#fileFitness').removeAttr("required");
-      $('#filePUC').removeAttr("required");
+      $('#filePUC').removeAttr("required"); 
       $('#filebreakrp').removeAttr("required");
+      $('#dllpremium').removeAttr("required");
+      
      }
      else{
      	$("#life").hide();
@@ -573,7 +584,7 @@ $(".Vehicleno").keypress(function (e) {
 });
 
 $("#saveofflinecs" ).click(function() {
-  $("#frmofflinecs").attr('action', '{{url('saveofflinecs')}}');
+  $("#frmofflinecs").attr('action', '{{url('saveofflinecs')}}'); 
 });
 $("#btnupdate" ).click(function() {
   $("#frmofflinecs").attr('action', '{{url('offlinecsupdate')}}');

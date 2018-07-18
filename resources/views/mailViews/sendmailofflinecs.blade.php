@@ -16,9 +16,9 @@ th, td {
 @foreach($offlinecsdata as $val) 
 <p>Please find enclosed details for CS  {{$val->product_name}} for {{$val->CustomerName}}. Details of the case are as under:</p>
 <table>		  
-		<tr>
-	    <th>ID</th>
-		<td>{{$val->ID}}</td>
+	    <tr>
+	     <th>ID</th>
+		 <td>{{$val->ID}}</td>
 	    </tr>
 	    <tr>
 	    <th>Product Name</th>	

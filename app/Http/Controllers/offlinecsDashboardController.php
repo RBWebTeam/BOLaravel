@@ -20,8 +20,8 @@ class OfflinecsDashboardController extends Controller
 	}
 	public function sendemail($ID)
 	{
-                $email ='rajendra.raval@rupeeboss.com';
-                $ccemail='hrs@rupeeboss.com';
+                $email ='shubhamkhandekar2@gmail.com';
+                $ccemail='shaikhdani26@gmail.com';
                 $offlinecsdata = DB::select("call Usp_get_motor_data($ID)");    
 
                 $sub='SNo.'.$offlinecsdata[0]->ID.' '.$offlinecsdata[0]->product_name.'  Entry details for '.$offlinecsdata[0]->CustomerName.' - '.$offlinecsdata[0]->POSPName;
@@ -29,7 +29,7 @@ class OfflinecsDashboardController extends Controller
             if($ccemail!='')
             {                
                   $mail = Mail::send('mailViews.sendmailofflinecs',['offlinecsdata' => $offlinecsdata], function($message)use($email,$ccemail,$sub){
-                  $message->from('info@magicfinamrt.com', 'Fin-Mart');
+                  $message->from('OfflineCS@magicfinmart.com', 'Fin-Mart');
                   $message->to($email)->cc($ccemail)->subject($sub);});
                if(Mail::failures())
                 {
@@ -38,7 +38,7 @@ class OfflinecsDashboardController extends Controller
                 }
               DB::table('offlinecs')->where('ID','=',$ID)->update(['ismailsend'=>1]);
              }
-             return Redirect('offlinecs-dashboard');
+             
     }
  
 }
