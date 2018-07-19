@@ -20,8 +20,11 @@ class OfflinecsDashboardController extends Controller
 	}
 	public function sendemail($ID)
 	{
+              // $email ='rajendra.raval@rupeeboss.com';
+              // $ccemail='vishakha.kadam@policyboss.com';
+              // $ccemail1='OfflineCS@magicfinmart.com';
                 $email ='shubhamkhandekar2@gmail.com';
-                $ccemail='shaikhdani26@gmail.com';
+                $ccemail='shubhamkhandekar2@gmail.com';
                 $offlinecsdata = DB::select("call Usp_get_motor_data($ID)");    
 
                 $sub='SNo.'.$offlinecsdata[0]->ID.' '.$offlinecsdata[0]->product_name.'  Entry details for '.$offlinecsdata[0]->CustomerName.' - '.$offlinecsdata[0]->POSPName;

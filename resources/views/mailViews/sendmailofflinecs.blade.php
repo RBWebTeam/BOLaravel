@@ -126,52 +126,52 @@ th, td {
 		<th>Product Manager</th>
 		<td>{{$val->ProductManager}}</td>
 		</tr>
-		@if($val->RCCopy!='')
+		@if($val->RCCopy!=0)
 		<tr>
 		<th>RC Copy</th>
-		<td>{{$val->RCCopy}}</td>
+		<td>{{url('/upload/offlinecs')}}/{{$val->RCCopy}}</td>
 		</tr>
 		@endif
-		@if($val->Fitness!='')
+		@if($val->Fitness!=0)
 		<tr>
 		<th>Fitness</th>
-		<td>{{$val->Fitness}}</td>
+		<td>{{url('/upload/offlinecs')}}/{{$val->Fitness}}</td>
 		</tr>
 		@endif
-		@if($val->PUC!='')
+		@if($val->PUC!=0)
 		<tr>
 		<th>PUC</th>
-		<td>{{$val->PUC}}</td>
+		<td>{{url('/upload/offlinecs')}}/{{$val->PUC}}</td>
 		</tr>
 		@endif
-		@if($val->BreakinReport!='')
+		@if($val->BreakinReport!=0)
 		<tr>
 		<th>Breakin Report</th>
-		<td>{{$val->BreakinReport}}</td>
+		<td>{{url('/upload/offlinecs')}}/{{$val->BreakinReport}}</td>
 		</tr>
 		@endif
-		@if($val->ChequeCopy!='')
+		@if($val->ChequeCopy!=0)
 		<tr>
 		<th>Cheque Copy</th>
-		<td>{{$val->ChequeCopy}}</td>
+		<td>{{url('/upload/offlinecs')}}/{{$val->ChequeCopy}}</td>
 		</tr>
 		@endif
-		@if($val->Other!='')
+		@if($val->Other!=0)
 		<tr>
 		   <th>Other</th>
-		   <td>{{$val->Other}}</td>
+		   <td>{{url('/upload/offlinecs')}}/{{$val->Other}}</td>
 		</tr>
 		@endif
-		@if($val->ProposalForm!='')
+		@if($val->ProposalForm!=0)
 		<tr>
         	<th>Proposal Form</th>
-        	<td>{{$val->ProposalForm}}</td>
+        	<td>{{url('/upload/offlinecs')}}/{{$val->ProposalForm}}</td>
         </tr>
         @endif
-        @if($val->KYC!='')
+        @if($val->KYC!=0)
 		<tr>
 			<th>KYC</th>
-			<td>{{$val->KYC}}</td>
+			<td>{{url('/upload/offlinecs')}}/{{$val->KYC}}</td>
 		</tr>
 		@endif
         @if($val->Preexisting!='')
