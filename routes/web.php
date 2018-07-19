@@ -426,11 +426,12 @@ Route::get('crm-view-history','CrmController@crm_view_history');
 Route::get('crm-disposition/{id}','CrmController@crm_disposition_fn'); 
 Route::post('crm-disposition','CrmController@crm_disposition');
 Route::get('crm-disposition-id','CrmController@crm_disposition_id'); 
-Route::get('crm-followup','CrmController@crm_followup'); 
+Route::get('crm-followup/{fbamappinid}/{crmid}/{history_id}','CrmController@crm_followup'); 
 Route::get('crm-followup-disposition','CrmController@followup_disposition_view'); 
 Route::get('crm-followup-history','CrmController@followup_history'); 
 Route::post('crm-followup-history','CrmController@followup_history_update'); 
 
+Route::get('crm-new/{fbamappin_id}','CrmController@crm_new'); 
 
 });
 

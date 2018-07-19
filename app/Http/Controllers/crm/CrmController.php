@@ -13,6 +13,7 @@ class CrmController extends Controller
 
 
           public function user_role(Request $req){   // find column UID
+ 
                $profile_id=Session::get('UId');
                $query=DB::table('finmartemployeemaster')->select('UId','Profile','role_id')->where('UId','=',$profile_id)->first();
                $query=DB::table('fbacrmmapping')->where($query->role_id,'=',$profile_id)->get(); 
@@ -47,8 +48,23 @@ class CrmController extends Controller
                 $find_profile1=$this->fbamappin_fn($query->followup_externalteam,$req->fbamappin_id); //followup_internalteam search
                 }
 
+                // check if dispostion id is already exist.
+              $check=DB::select('call sp_check_history(?,?)',[$req->fbamappin_id,$req->id]);
+              if(count($check)>0){
+                  $ischeck=1;
+                  $fbamappin_id=$check['0']->fbamappin_id;
+                  $crm_id=$check['0']->crm_id;
+                  $history_id=$check['0']->history_id;
+                   $aa=array('fbamappin_id'=>$fbamappin_id,'crm_id'=>$crm_id,'history_id'=>$history_id);
+
+              }else{
+                     $ischeck=0;
+                     $aa=array('fbamappin_id'=>0,'crm_id'=>0,'history_id'=>0);
+              }
+
+              
                 
-                  return Response::json(array("res"=>$query,'find_profile'=>$find_profile,'find_profile1'=>$find_profile1));       
+                  return Response::json(array("res"=>$query,'find_profile'=>$find_profile,'find_profile1'=>$find_profile1,'ischeck'=>$aa));       
             }
 
 
@@ -131,12 +147,17 @@ class CrmController extends Controller
 
                
             public function crm_followup(Request $req){
-                    $query=DB::select('call sp_crm_followup_details(?)',[Session::get('UId')]);
-                    return  view('crm.crm_followup_view',['query'=>$query]);
+
+
+
+                    $query=DB::select('call sp_crm_followup_details(?,?,?)',[$req->fbamappinid,$req->crmid,Session::get('UId')]);
+                    return  view('crm.crm_followup_view',['query'=>$query,'history_id'=>$req->history_id]);
             }
 
 
-            public function  followup_disposition_view(Request $req){     
+            public function  followup_disposition_view(Request $req){   
+
+
                     $query=DB::select('call sp_crm_followup_disposition_view(?)',[$req->historyid]);
                     return Response::json(array("res"=>$query[0]));         
             }
@@ -152,10 +173,6 @@ class CrmController extends Controller
 
             public function followup_history_update(Request $req){
 
-                if($req->action=="y"){
-  
-                       DB::table('crm_history')->where('history_id','=',$req->historyid)->update(['action'=>'n']);
-
  
                        $history_id=DB::table('crm_history')->insertGetId([
                                   'disposition_id'=>$req->disposition_id,
@@ -163,16 +180,65 @@ class CrmController extends Controller
                                   'crm_id'=>$req->crm_id,
                                   'fbamappin_id'=>$req->fbamappin_id,
                                   'create_at'=> date('Y-m-d H:i:s'),
-                                  'followup_date'=>$req->followup_date,
+                                  'followup_date'=>$req->followup_date?$req->followup_date:null,
                                   'remark'=>$req->remark,
-                                  'action'=>$req->action
+                                  'action'=>$req->action,
+                                  'ch_id'=>$req->history_id,
                 ]);
 
+                if($req->action=="y"){
+  
+
+ 
+                
+
+                if(isset($req->assignment_id)){
+                   $assignment_id=$req->assignment_id;
                 }else{
-                     echo "close";
+                   $assignment_id=null;
                 }
+
+                 if(isset($req->assign_external_id)){
+                   $assign_external_id=$req->assign_external_id;
+                }else{
+                   $assign_external_id=null;
+                }
+
+                         DB::table('crm_followup')->insert([
+                                  'user_id'=>Session::get('UId'),
+                                  'assignment_id'=>$assignment_id,
+                                  'assign_external_id'=>$assign_external_id,
+                                  'create_at'=> date('Y-m-d H:i:s'),
+                                  'fbamappin_id'=>$req->fbamappin_id,
+                                  'history_id'=>$history_id,
+                                  ]);
+
+
+                }else{
+
+                       DB::table('crm_history')->where('history_id','=',$req->historyid)->update(['action'=>'n']);
+                }
+
+
+                  return  redirect("crm-disposition/".$req->fbamappin_id);
             }
 
 
 
+ 
+
+
+            public function crm_new(Request $req){
+                    $history_db=DB::select('call sp_crm_view_history(?)',[$req->fbamappin_id]);
+                    $query=DB::table('crm_disposition')->where('emp_category','=','Recruiter')->get();
+                    return  view('crm.crm_disposition_add',['query'=>$query,'fbamappin_id'=>$req->fbamappin_id,'history_db'=>$history_db]);  
+            }
+
+
 }
+
+
+// $servername = "35.154.72.18";
+// $username = "finmart_user";
+// $password = "finmart@0909";
+// $dbname = "BackOffice";

@@ -1,7 +1,7 @@
 @extends('include.master')
 @section('content')   
 <div class="container-fluid white-bg">
-       <div class="col-md-12"><h3 class="mrg-btm">CRM Followup</h3></div>
+       <div class="col-md-12"><h3 class="mrg-btm">CRM Followup</h3></div> 
        <div class="col-md-12">
        <div class="overflow-scroll">
        <div class="table-responsive" >
@@ -10,7 +10,7 @@
 
        <form  method="post" action="{{url('crm-followup-history')}}"  >{{ csrf_field() }}
            
-            <input type="hidden" name="historyid" id="historyid"  >
+            <input type="hidden" name="history_id" id="history_id"  value="{{$history_id}}" >
 
 
           <div id="id_none" style="display:none">
@@ -61,11 +61,11 @@
             </div>
  
 
-      <div class="form-group row">
+      <div class="form-group row" id="followup_date_id">
              <label for="inputPassword" class="col-sm-4 col-form-label">Followup Date</label>
                 <div class="col-sm-8">
                  <div id="datepicker" class="input-group date" data-date-format="mm-dd-yyyy">
-              <input type="text"  class="form-control date-range-filter "  name="followup_date" id="followup_date" required="">
+              <input type="text"  class="form-control date-range-filter " required name="followup_date" id="followup_date" >
               <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
               </div>
               </div>
@@ -76,7 +76,7 @@
                    <label for="inputPassword" class="col-sm-4 col-form-label">Remark</label>
                <div class="col-sm-8">
               
-                 <textarea name="remark"  class="form-control"   id="remark"></textarea>
+                 <textarea name="remark"  required class="form-control"   id="remark"></textarea>
 
               </div>
             </div>
@@ -96,20 +96,22 @@
               </div>
             </div>
 
+              <input type="hidden"   name="fbamappin_id" id="fbamappin_id">
+              <input type="hidden"   name="disposition_id" id="disposition_id">
+                  
 
 
+<!-- 
              <div class="form-group row">
                    <label for="inputPassword" class="col-sm-4 col-form-label">View History</label>
                <div class="col-sm-8">
             
                   <label class="radio-inline"  > <a href="#" onclick="View_History()">View History</a></label>
                   
-                   <input type="hidden"   name="fbamappin_id" id="fbamappin_id">
-                  <input type="hidden"   name="disposition_id" id="disposition_id">
-                  
+                 
 
               </div>
-            </div>
+            </div> -->
 
  
 <!-- 
@@ -142,15 +144,16 @@
   <table   class="table table-bordered table-striped  " id="crm_followup_tb" >
    <thead>
                   <tr>
-                   <th>ID</th>
+                  <!--  <th>ID</th>
                    <th>Assigned by</th>
                     <th>Assigne Internal </th>
-                     <th>Assigne external </th>
+                     <th>Assigne external </th> -->
+                       <th>create_at</th>
                     <th>Remark</th>
                     <th>Action </th>
                      <th>followup_date </th>
                       
-                     <th>create_at</th>
+                   
                      
                                 
                   </tr>
@@ -159,10 +162,13 @@
      
      @foreach($query as $val)
      <tr>
-         <td> <a href="#" onclick="followup_disposition('{{$val->history_id}} ')" >{{$val->history_id}} </a>     </td>
+ <!--         <td>  {{$val->history_id}}      </td>
          <td>{{$val->user_id}} </td>
          <td>@if($val->assignment_id){{$val->assignment_id."-".$val->Profile}}@endif </td>
          <td>@if($val->assign_external_id){{$val->assign_external_id."-".$val->Profile}}@endif </td>
+ -->
+
+           <td>{{$val->create_at}} </td>
          <td>{{$val->remark}} </td>
          
 
@@ -171,7 +177,7 @@
          <td  style="{{$class}}">{{$val->action==="n"?"close":"open"}}</td>
          <td>{{$val->followup_date}} </td>
 
-         <td>{{$val->create_at}} </td>
+       
 
          
          
@@ -236,10 +242,9 @@
 
 
 <script type="text/javascript">
-function followup_disposition(historyid){
-             $('#historyid').val(historyid);
+ 
 
-        $.get("{{url('crm-followup-disposition')}}",{historyid:historyid}).done(function(msg){ 
+        $.get("{{url('crm-followup-disposition')}}",{historyid:"{{$history_id}}"}).done(function(msg){ 
 
  
           if(msg.res.action=="n"){
@@ -248,7 +253,6 @@ function followup_disposition(historyid){
           if(msg.res.action=="y"){
                 $('#check2').attr('checked', true);
           }
-
 
             $('#disposition_id').val(msg.res.id);  
             $('#fbamappin_id').val(msg.res.fbamappin_id);
@@ -265,7 +269,7 @@ function followup_disposition(historyid){
 }).fail(function(xml,Status,error){
                console.log(xml);
 });
-} 
+ 
 
 
  
@@ -300,8 +304,18 @@ function followup_disposition(historyid){
 
 
 $(document).ready(function () {
-            $('#crm_followup_tb').DataTable();
-        });
+$('#crm_followup_tb').DataTable();
+$('#crm_disposition_tb').DataTable();
+$('input:radio[name=action]').change(function() {  
+if (this.value == 'y') {
+$('#followup_date_id').show();
+}else if (this.value == 'n') {
+$('#followup_date').val('');
+$('#followup_date_id').hide();
+$("#followup_date").prop('required',false);
+}
+});
+});
 </script>
 
  
