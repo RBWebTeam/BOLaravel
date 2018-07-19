@@ -256,9 +256,6 @@ if ($fileKYC!=0)
         return $e->getMessage();    
      }        
 }
-
-
-           
                 $email ='shubhamkhandekar2@gmail.com';
                 $ccemail='shaikhdani26@gmail.com';
                 $offlinecsdata = DB::select("call Usp_get_motor_data($ID)");
@@ -528,6 +525,356 @@ if ($fileKYC!=0)
  Session::flash('message', 'Record has been saved successfully');
 return Redirect('offlinecs');
 }
+ public function getofflinecsdataedit($id)
+ {
+  $offlinecsdt=DB::select("call Usp_get_edit_data_offlinecs($id)");
+   return json_encode($offlinecsdt);
+ }
+  public function Updateofflinecs(Request $req)
+       {
+          $fbauser=Session::get('fbauserid');
+          //print_r($req->all());exit();
+           $filerc=$this->fileupload_fn($req->file('filerc'));
+           $fileFitness=$this->fileupload_fn($req->file('fileFitness'));
+           $filePUC=$this->fileupload_fn($req->file('filePUC'));
+           $filebreakrp=$this->fileupload_fn($req->file('filebreakrp'));
+           $fileCheque=$this->fileupload_fn($req->file('fileCheque'));
+           $fileother=$this->fileupload_fn($req->file('fileother'));
+           $fileProposalForm=$this->fileupload_fn($req->file('fileProposalForm'));
+           $fileKYC=$this->fileupload_fn($req->file('fileKYC'));  
 
+              DB::select('call Usp_update_offlinecs(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',array(
+              $req->txtofflinecsid,
+              $req->ddproduct,
+              $req->txtcstname,
+              $req->txtadd,             
+              $req->ddlcity,
+              $req->ddlstate,
+              $req->ddlzone,
+              $req->ddlregion,
+              $req->txtmobno,
+              $req->txttelno,
+              $req->txtemail,
+              $req->ddlfbaname,
+              $req->txtpremiumamt,
+              $req->txterpid,
+              $req->txtqtno,
+              $req->txtvehicalno,
+              $req->txtexpdate,
+              $req->txtbreakin,
+              $req->ddlInsurermotor,
+              $req->ddlpayment,
+              $req->txtutrnomotor,
+              $req->txtbankmotor,
+              $req->txtexecutivename,
+              $req->txtexecutivename1,
+              $req->txtexeProductname,
+              $req->txtmgrProductname,
+              $filerc,
+              $fileFitness,
+              $filePUC,
+              $filebreakrp,
+              $fileCheque,
+              $fileother,
+              $req->txtPreexisting,
+              $req->txtmedicalrp,
+              $req->dllpremium,
+              $fileProposalForm,
+              $fileKYC,
+              $req->ddlnoofpolicy,
+              $req->txtmedicalcase,
+              $req->ddlInsurerhealth,
+              $req->ddlInsurerlife,
+              $fbauser,
+              $req->ddlwhyoffline));
+          
+              $ID=$req->txtofflinecsid;             
+            
+            //print_r($ID);exit();
+
+if ($filerc!=0) 
+{
+  try{
+   $this->getshorturl($filerc,$ID,'RCCopy');
+  }
+  catch (Exception $e){
+
+        return $e->getMessage();    
+     }        
+      
+} 
+if ($fileFitness!=0) 
+{
+  try{
+    $this->getshorturl($fileFitness,$ID,'Fitness');
+    
+    
+  }
+  catch (Exception $e){
+
+        return $e->getMessage();    
+     }        
+      
+}  
+if ($filePUC!=0) 
+{
+  try{
+    $this->getshorturl($filePUC,$ID,'PUC');
+  }
+  catch (Exception $e){
+
+        return $e->getMessage();    
+     }        
+      
+} 
+if ($filebreakrp!=0) 
+{
+  try{
+  $this->getshorturl($filebreakrp,$ID,'break report');
+  }
+  catch (Exception $e){
+
+        return $e->getMessage();    
+     }        
+} 
+if ($fileCheque!=0) 
+{
+  try{
+   $this->getshorturl($fileCheque,$ID,'Cheque');
+  }
+  catch (Exception $e){
+
+        return $e->getMessage();    
+     }        
+}
+if ($fileother!=0) 
+{
+  try{
+    $this->getshorturl($fileother,$ID,'other');    
+  }
+  catch (Exception $e){
+
+        return $e->getMessage();    
+     }        
+}
+if ($fileProposalForm!=0) 
+{
+  try{
+
+    $this->getshorturl($fileProposalForm,$ID,'Proposal Form');
+    
+  }
+  catch (Exception $e){
+
+        return $e->getMessage();    
+     }        
+}
+if ($fileKYC!=0) 
+{
+  try{
+    
+    $this->getshorturl($fileKYC,$ID,'KYC');
+  }
+  catch (Exception $e){
+
+        return $e->getMessage();    
+     }        
+}
+ Session::flash('message', 'Record has been Updated successfully');
+ return Redirect('offlinecs');
+}
+
+public function getshorturl($filename,$ID,$doctype)
+{  try{
+    $data= array("longurl"=>"http://bo.mgfm.in/upload/offlinecs/$filename");
+    $token=array("cache-control: no-cache","content-type: application/json", "token: 1234567890");
+    $post_data=json_encode($data);
+    $type=$token;
+    $result=$this->call_other_data_api($this::$api_url.'/api/short-url-forall',$post_data,$type);
+
+    $Response= json_decode($result['http_result']);
+    $shorturl=$Response->MasterData[0]->ShortURL;
+    DB::select('call Usp_Update_shortlink_offlinecs(?,?,?)',array($shorturl,$ID,$doctype));
+    }
+    catch (Exception $e)
+    {
+        return $e->getMessage();    
+     } 
+}
+
+public function Updateofflinecsandsendmail(Request $req)
+       {
+          $fbauser=Session::get('fbauserid');
+          //print_r($req->all());exit();
+           $filerc=$this->fileupload_fn($req->file('filerc'));
+           $fileFitness=$this->fileupload_fn($req->file('fileFitness'));
+           $filePUC=$this->fileupload_fn($req->file('filePUC'));
+           $filebreakrp=$this->fileupload_fn($req->file('filebreakrp'));
+           $fileCheque=$this->fileupload_fn($req->file('fileCheque'));
+           $fileother=$this->fileupload_fn($req->file('fileother'));
+           $fileProposalForm=$this->fileupload_fn($req->file('fileProposalForm'));
+           $fileKYC=$this->fileupload_fn($req->file('fileKYC'));      
+            
+             $id= DB::select('call Usp_update_offlinecsandsendmail(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',array(
+              $req->txtofflinecsid,
+              $req->ddproduct,
+              $req->txtcstname,
+              $req->txtadd,             
+              $req->ddlcity,
+              $req->ddlstate,
+              $req->ddlzone,
+              $req->ddlregion,
+              $req->txtmobno,
+              $req->txttelno,
+              $req->txtemail,
+              $req->ddlfbaname,
+              $req->txtpremiumamt,
+              $req->txterpid,
+              $req->txtqtno,
+              $req->txtvehicalno,
+              $req->txtexpdate,
+              $req->txtbreakin,
+              $req->ddlInsurermotor,
+              $req->ddlpayment,
+              $req->txtutrnomotor,
+              $req->txtbankmotor,
+              $req->txtexecutivename,
+              $req->txtexecutivename1,
+              $req->txtexeProductname,
+              $req->txtmgrProductname,
+              $filerc,
+              $fileFitness,
+              $filePUC,
+              $filebreakrp,
+              $fileCheque,
+              $fileother,
+              $req->txtPreexisting,
+              $req->txtmedicalrp,
+              $req->dllpremium,
+              $fileProposalForm,
+              $fileKYC,
+              $req->ddlnoofpolicy,
+              $req->txtmedicalcase,
+              $req->ddlInsurerhealth,
+              $req->ddlInsurerlife,
+              $fbauser,
+              $req->ddlwhyoffline));
+             
+              $ID=$req->txtofflinecsid;             
+            
+            //print_r($ID);exit();
+
+if ($filerc!=0) 
+{
+  try{
+   $this->getshorturl($filerc,$ID,'RCCopy');
+  }
+  catch (Exception $e){
+
+        return $e->getMessage();    
+     }        
+      
+} 
+if ($fileFitness!=0) 
+{
+  try{
+    $this->getshorturl($fileFitness,$ID,'Fitness');    
+    
+  }
+  catch (Exception $e){
+
+        return $e->getMessage();    
+     }        
+      
+}  
+if ($filePUC!=0) 
+{
+  try{
+    $this->getshorturl($filePUC,$ID,'PUC');
+  }
+  catch (Exception $e){
+
+        return $e->getMessage();    
+     }        
+      
+} 
+if ($filebreakrp!=0) 
+{
+  try{
+  $this->getshorturl($filebreakrp,$ID,'break report');
+  }
+  catch (Exception $e){
+
+        return $e->getMessage();    
+     }        
+} 
+if ($fileCheque!=0) 
+{
+  try{
+   $this->getshorturl($fileCheque,$ID,'Cheque');
+  }
+  catch (Exception $e){
+
+        return $e->getMessage();    
+     }        
+}
+if ($fileother!=0) 
+{
+  try{
+    $this->getshorturl($fileother,$ID,'other');    
+  }
+  catch (Exception $e){
+
+        return $e->getMessage();    
+     }        
+}
+if ($fileProposalForm!=0) 
+{
+  try{
+
+    $this->getshorturl($fileProposalForm,$ID,'Proposal Form');
+    
+  }
+  catch (Exception $e){
+
+        return $e->getMessage();    
+     }        
+}
+if ($fileKYC!=0) 
+{
+  try{
+    
+    $this->getshorturl($fileKYC,$ID,'KYC');
+  }
+  catch (Exception $e){
+
+        return $e->getMessage();    
+     }        
+}            // print_r($offlinecsdata); exit();
+                $email ='shubhamkhandekar2@gmail.com';
+                $ccemail='shaikhdani26@gmail.com';
+                $offlinecsdata = DB::select("call Usp_get_motor_data($ID)");
+                //print_r($ID); exit();
+                $sub='SNo.'.$offlinecsdata[0]->ID.' '.$offlinecsdata[0]->product_name.'  Entry details for '.$offlinecsdata[0]->CustomerName.' - '.$offlinecsdata[0]->POSPName;
+                
+    if($ccemail!='')
+    {                
+        $mail = Mail::send('mailViews.sendmailofflinecs',['offlinecsdata' => $offlinecsdata], function($message)use($email,$ccemail,$sub){
+        $message->from('info@magicfinamrt.com', 'Fin-Mart');
+        $message->to($email)->cc($ccemail)->subject($sub);});
+         if(Mail::failures())
+         {
+            $error=3;
+            echo $error;
+         }
+         else
+             {
+
+             }
+    }
+ Session::flash('message', 'Record has been Updated successfully');
+return Redirect('offlinecs');
+}
+ 
 }
 

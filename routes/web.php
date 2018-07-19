@@ -224,13 +224,20 @@ Route::get('assigned-fba-lead-history/{fbaid}','quickleadController@gethistoryfb
 Route::get('Quick-lead-dashboard','quickleaddashboardController@getquicklead');
 Route::get('edit_lead/{Leadid}','quickleadController@editlead');
 Route::Post('quick-lead-edit','quickleadController@updatelead');
-
 route::get('offlinecs','offlinecsController@getofflinecs');
+
 route::get('get_state_offlinecs/{cityid}','offlinecsController@getstate');
 Route::Post('offlinecs','offlinecsController@insertofflinecs');
 Route::get('get_ERPID_offlinecs/{fbaid}','offlinecsController@geterpid');
+
+route::get('offlinecsedit/{id}','offlinecsController@getofflinecsdataedit');
+
 Route::post('saveofflinecs','offlinecsController@saveofflinecsdata');
-Route::get('offlinecs-dashboard','offlinecsDashboardController@getofflinecsdata');
+Route::get('offlinecs-dashboard','OfflinecsDashboardController@getofflinecsdata');
+
+Route::post('offlinecsupdate','offlinecsController@Updateofflinecs');
+Route::post('offlinecsupdateandsendmail','offlinecsController@Updateofflinecsandsendmail');
+Route::get('offlinecssendemail/{ID}','OfflinecsDashboardController@sendemail');
 ///shubham end ///
 // avinash
  Route::get('ticket-module','TicketController@getticketdetails') ;

@@ -9,14 +9,35 @@ use Redirect;
 use Session;
 use URL;
 use Mail;
-class offlinecsDashboardController extends CallApiController
+class OfflinecsDashboardController extends Controller
 {
 	public function getofflinecsdata()
 	{
-		 $data=DB::select("call Usp_get_offlinecs_data_view()");
-		 print_r($data);
+		$data=DB::select("call Usp_get_offlinecs_data_view()");
+		//print_r($data); exit();
 		 return view('offlinecsDashboard',['data'=>$data]);
 	}
+	public function sendemail($ID)
+	{
+                $email ='shubhamkhandekar2@gmail.com';
+                $ccemail='shaikhdani26@gmail.com';
+                $offlinecsdata = DB::select("call Usp_get_motor_data($ID)");    
+
+                $sub='SNo.'.$offlinecsdata[0]->ID.' '.$offlinecsdata[0]->product_name.'  Entry details for '.$offlinecsdata[0]->CustomerName.' - '.$offlinecsdata[0]->POSPName;
+                
+            if($ccemail!='')
+            {                
+                  $mail = Mail::send('mailViews.sendmailofflinecs',['offlinecsdata' => $offlinecsdata], function($message)use($email,$ccemail,$sub){
+                  $message->from('info@magicfinamrt.com', 'Fin-Mart');
+                  $message->to($email)->cc($ccemail)->subject($sub);});
+               if(Mail::failures())
+                {
+                   $error=3;
+                   echo $error;
+                }
+              DB::table('offlinecs')->where('ID','=',$ID)->update(['ismailsend'=>1]);
+             }
+    }
  
 }
 
