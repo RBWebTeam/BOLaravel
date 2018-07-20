@@ -16,7 +16,7 @@
           <tr>
             <th>ID</th>
             <th>followup Internal ID</th>
-            <th>followup - external ID</th>
+   
             <th>Fbamappin ID</th>
             <th>History_id</th>
             <th>followup_date</th>
@@ -26,21 +26,22 @@
           </thead>
           <tbody   >
      
+     <?php //print_r($query);exit; ?>
 
      @foreach($query as $key=>$val)
         <tr> 
         <td>{{$val->user_id}}</td>
         <td>{{$val->assignment_id}}</td>
-        <td>{{$val->assign_external_id}}</td>
+   
         <td>{{$val->fbamappin_id}}</td>
         <td>{{$val->history_id}}</td>
         <td>{{$val->followup_date}}</td>
         <td>{{$val->disposition}}</td>
-         <?php $class =($val->action=="n")? 'color: #00C851': ' color:#ff4444'; ?>
-        @if($val->action=="n")
-              <td >  <a style="{{$class }}" href="#" id="close_action">{{$val->action==="n"?"close":"open"}} </a> </td>
+         
+        @if($val->followup_assign_id!=null || $val->followup_assign_id!=0)
+              <td >  <a   href="#" id="close_action">close </a> </td>
            @else
- <td >  <a style="{{$class }}" href="{{url('crm-new')}}/{{$val->fbamappin_id}}?assign_id={{$val->assignment_id}}">new </a> </td>
+ <td >  <a   href="{{url('crm-new')}}/{{$val->fbamappin_id}}?assign_id={{$val->assignment_id}}&?history_id={{$val->history_id}}">new </a> </td>
            @endif
         </tr>  
      @endforeach

@@ -93,7 +93,7 @@ class CrmController extends Controller
 
 
 
-          public function crm_disposition(Request $req){
+          public function crm_disposition(Request $req){  
             if(isset($req->disposition_id)){
                if(isset($req->followup_date)){
                    $followup_date=$req->followup_date;
@@ -101,11 +101,15 @@ class CrmController extends Controller
                   $followup_date="";
                 }
 
-                 if(isset($req->assign_id)){
+                 if(isset($req->assign_id) && isset($req->historyid)){
                    $assign_id=$req->assign_id;
-                }else{
-                  $assign_id=0;
-                }
+
+                    DB::table('crm_followup')
+                    ->where('history_id', $req->historyid)
+                  //->where('destination', 'San Diego')
+                  ->update(['followup_assign_id' =>  $assign_id]);
+
+                } 
          
 
 
@@ -118,7 +122,7 @@ class CrmController extends Controller
                	                  'followup_date'=>$followup_date,
                	                  'remark'=>$req->remark,
                	                  'action'=>$req->action,
-                                  'followup_assign_id'=>$req->assign_id,
+                                  
                	 ]);
 
                 if(isset($req->assignment_id)){
@@ -148,7 +152,7 @@ class CrmController extends Controller
                                   'create_at'=> date('Y-m-d H:i:s'),
                                   'fbamappin_id'=>$req->fbamappin_id,
                                   'history_id'=>$history_id,
-                                  'followup_assign_id'=>$req->assign_id,
+                                   
                                   ]);
                                   
                            }
@@ -184,7 +188,7 @@ class CrmController extends Controller
 
 
             public function followup_history_update(Request $req){
-
+   
  
                        $history_id=DB::table('crm_history')->insertGetId([
                                   'disposition_id'=>$req->disposition_id,
@@ -240,17 +244,20 @@ class CrmController extends Controller
 
             public function crm_new(Request $req){
 
-                       if(isset($_GET['assign_id'])){
+                       if(isset($_GET['assign_id']) && isset( $_GET['history_id'])){
                             $assign_id=$_GET['assign_id'];
+                            $historyid=$_GET['history_id'];
+                            
                        }else{
                             $assign_id=null;
+                            $historyid=null;
                        }
-
-                        
+ 
+                         
 
                     $history_db=DB::select('call sp_crm_view_history(?,?)',[$req->fbamappin_id,Session::get('UId')]);
                     $query=DB::table('crm_disposition')->where('emp_category','=','Recruiter')->get();
-                    return  view('crm.crm_disposition_add',['query'=>$query,'fbamappin_id'=>$req->fbamappin_id,'history_db'=>$history_db,'assign_id'=>$assign_id]);  
+                    return  view('crm.crm_disposition_add',['query'=>$query,'fbamappin_id'=>$req->fbamappin_id,'history_db'=>$history_db,'assign_id'=>$assign_id,'historyid'=>$historyid]);  
             }
 
 
