@@ -433,6 +433,9 @@ Route::post('crm-followup-history','CrmController@followup_history_update');
 
 Route::get('crm-new/{fbamappin_id}','CrmController@crm_new'); 
 
+Route::get('my-followup','MyfollowupController@my_followup'); 
+Route::get('assign-followup','MyfollowupController@assign_followup'); 
+
 });
 
   /************

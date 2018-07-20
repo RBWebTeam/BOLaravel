@@ -25,7 +25,8 @@ class CrmController extends Controller
 
 
             public function crm_disposition_fn(Request $req){
-            				$history_db=DB::select('call sp_crm_view_history(?)',[$req->id]);
+
+            				$history_db=DB::select('call sp_crm_view_history(?,?)',[$req->id,Session::get('UId')]);
             				$query=DB::table('crm_disposition')->where('emp_category','=','Recruiter')->get();
             				return  view('crm.crm_disposition_view',['query'=>$query,'fbamappin_id'=>$req->id,'history_db'=>$history_db]);  
             }
@@ -49,7 +50,7 @@ class CrmController extends Controller
                 }
 
                 // check if dispostion id is already exist.
-              $check=DB::select('call sp_check_history(?,?)',[$req->fbamappin_id,$req->id]);
+              $check=DB::select('call sp_check_history(?,?,?)',[$req->fbamappin_id,$req->id,Session::get('UId')]);
               if(count($check)>0){
                   $ischeck=1;
                   $fbamappin_id=$check['0']->fbamappin_id;
@@ -99,6 +100,15 @@ class CrmController extends Controller
                 }else{
                   $followup_date="";
                 }
+
+                 if(isset($req->assign_id)){
+                   $assign_id=$req->assign_id;
+                }else{
+                  $assign_id=0;
+                }
+         
+
+
                   $history_id=DB::table('crm_history')->insertGetId([
                                   'disposition_id'=>$req->disposition_id,
                	                  'user_id'=>Session::get('UId'),
@@ -107,7 +117,8 @@ class CrmController extends Controller
                	                  'create_at'=> date('Y-m-d H:i:s'),
                	                  'followup_date'=>$followup_date,
                	                  'remark'=>$req->remark,
-               	                  'action'=>$req->action
+               	                  'action'=>$req->action,
+                                  'followup_assign_id'=>$req->assign_id,
                	 ]);
 
                 if(isset($req->assignment_id)){
@@ -137,6 +148,7 @@ class CrmController extends Controller
                                   'create_at'=> date('Y-m-d H:i:s'),
                                   'fbamappin_id'=>$req->fbamappin_id,
                                   'history_id'=>$history_id,
+                                  'followup_assign_id'=>$req->assign_id,
                                   ]);
                                   
                            }
@@ -187,11 +199,6 @@ class CrmController extends Controller
                 ]);
 
                 if($req->action=="y"){
-  
-
- 
-                
-
                 if(isset($req->assignment_id)){
                    $assignment_id=$req->assignment_id;
                 }else{
@@ -204,7 +211,9 @@ class CrmController extends Controller
                    $assign_external_id=null;
                 }
 
-                         DB::table('crm_followup')->insert([
+
+
+                      DB::table('crm_followup')->insert([
                                   'user_id'=>Session::get('UId'),
                                   'assignment_id'=>$assignment_id,
                                   'assign_external_id'=>$assign_external_id,
@@ -216,11 +225,12 @@ class CrmController extends Controller
 
                 }else{
 
-                       DB::table('crm_history')->where('history_id','=',$req->historyid)->update(['action'=>'n']);
+                       DB::table('crm_history')->where('history_id','=',$req->history_id)->update(['action'=>'n']);
                 }
 
+ 
 
-                  return  redirect("crm-disposition/".$req->fbamappin_id);
+                 return  redirect("crm-disposition/".$req->fbamappin_id);
             }
 
 
@@ -229,9 +239,18 @@ class CrmController extends Controller
 
 
             public function crm_new(Request $req){
-                    $history_db=DB::select('call sp_crm_view_history(?)',[$req->fbamappin_id]);
+
+                       if(isset($_GET['assign_id'])){
+                            $assign_id=$_GET['assign_id'];
+                       }else{
+                            $assign_id=null;
+                       }
+
+                        
+
+                    $history_db=DB::select('call sp_crm_view_history(?,?)',[$req->fbamappin_id,Session::get('UId')]);
                     $query=DB::table('crm_disposition')->where('emp_category','=','Recruiter')->get();
-                    return  view('crm.crm_disposition_add',['query'=>$query,'fbamappin_id'=>$req->fbamappin_id,'history_db'=>$history_db]);  
+                    return  view('crm.crm_disposition_add',['query'=>$query,'fbamappin_id'=>$req->fbamappin_id,'history_db'=>$history_db,'assign_id'=>$assign_id]);  
             }
 
 

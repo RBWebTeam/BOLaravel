@@ -10,7 +10,8 @@
 
        <form  method="post" action="{{url('crm-disposition')}}" id="CRM_Disposition_from">{{ csrf_field() }}
            <input type="hidden" name="fbamappin_id" id="fbamappin_id" value="{{$fbamappin_id}}">
-            <input type="hidden" name="disposition_id" id="disposition_id"  >
+           <input type="hidden" name="disposition_id" id="disposition_id"  >
+           <input type="hidden" name="assign_id" id="assign_id"  value="{{$assign_id}}" >
 
             <div class="form-group row">
             <label for="inputPassword" class="col-sm-4 col-form-label">Disposition</label>
