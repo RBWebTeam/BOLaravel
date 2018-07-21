@@ -144,10 +144,10 @@
   <table   class="table table-bordered table-striped  " id="crm_followup_tb" >
    <thead>
                   <tr>
-                  <!--  <th>ID</th>
+                   <th>ID</th>
                    <th>Assigned by</th>
                     <th>Assigne Internal </th>
-                     <th>Assigne external </th> -->
+                     <th>Assigne external </th>
                        <th>create_at</th>
                     <th>Remark</th>
                     <th>Action </th>
@@ -162,11 +162,11 @@
      
      @foreach($query as $val)
      <tr>
- <!--         <td>  {{$val->history_id}}      </td>
+         <td>  {{$val->history_id}}      </td>
          <td>{{$val->user_id}} </td>
          <td>@if($val->assignment_id){{$val->assignment_id."-".$val->Profile}}@endif </td>
          <td>@if($val->assign_external_id){{$val->assign_external_id."-".$val->Profile}}@endif </td>
- -->
+
 
            <td>{{$val->create_at}} </td>
          <td>{{$val->remark}} </td>
