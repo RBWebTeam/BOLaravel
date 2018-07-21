@@ -48,7 +48,7 @@ class offlinecsController extends CallApiController
            $fileProposalForm=$this->fileupload_fn($req->file('fileProposalForm'));
            $fileKYC=$this->fileupload_fn($req->file('fileKYC'));      
             
-             $id= DB::select('call Usp_insert_motor_offlinecs(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',array(
+             $id= DB::select('call Usp_insert_motor_offlinecs(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',array(
               $req->ddproduct,
               $req->txtcstname,
               $req->txtadd,             
@@ -91,7 +91,9 @@ class offlinecsController extends CallApiController
               $req->ddlInsurerhealth,
               $req->ddlInsurerlife,
               $fbauser,
-              $req->ddlwhyoffline));              
+              $req->ddlwhyoffline,
+              $req->txtReason,
+              $req->ddlmapcity));              
             
             foreach ($id as $val) 
             {
@@ -256,20 +258,21 @@ if ($fileKYC!=0)
         return $e->getMessage();    
      }        
 }
-               // $email ='rajendra.raval@rupeeboss.com';
-               // $ccemail='vishakha.kadam@policyboss.com';
-                //$ccemail1='OfflineCS@magicfinmart.com';
-                $email ='shubhamkhandekar2@gmail.com';
-                $ccemail='shubhamkhandekar2@gmail.com';
+               $email ='rajendra.raval@rupeeboss.com';
+               $ccemail='vishakha.kadam@policyboss.com';
+               $ccemail1='OfflineCS@magicfinmart.com';  
+               $ccemail2='rajendra.raval@policyboss.com';
+                //$email ='shubhamkhandekar2@gmail.com';
+               // $ccemail='rajendra.raval@policyboss.com';
                 $offlinecsdata = DB::select("call Usp_get_motor_data($ID)");    
 
                 $sub='SNo.'.$offlinecsdata[0]->ID.' '.$offlinecsdata[0]->product_name.'  Entry details for '.$offlinecsdata[0]->CustomerName.' - '.$offlinecsdata[0]->POSPName;
                 
             if($ccemail!='')
             {                
-                  $mail = Mail::send('mailViews.sendmailofflinecs',['offlinecsdata' => $offlinecsdata], function($message)use($email,$ccemail,$sub){
+                  $mail = Mail::send('mailViews.sendmailofflinecs',['offlinecsdata' => $offlinecsdata], function($message)use($email,$ccemail,$ccemail1,$ccemail2,$sub){
                   $message->from('OfflineCS@magicfinmart.com', 'Fin-Mart');
-                  $message->to($email)->cc($ccemail)->subject($sub);});
+                  $message->to($email)->cc($ccemail)->cc($ccemail1)->cc($ccemail2)->subject($sub);});
                if(Mail::failures())
                 {
                    $error=3;
@@ -315,7 +318,7 @@ if ($fileKYC!=0)
            $fileProposalForm=$this->fileupload_fn($req->file('fileProposalForm'));
            $fileKYC=$this->fileupload_fn($req->file('fileKYC'));      
             
-             $id= DB::select('call Usp_save_offlinecs_data(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',array(
+             $id= DB::select('call Usp_save_offlinecs_data(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',array(
               $req->ddproduct,
               $req->txtcstname,
               $req->txtadd,             
@@ -358,7 +361,9 @@ if ($fileKYC!=0)
               $req->ddlInsurerhealth,
               $req->ddlInsurerlife,
               $fbauser,
-              $req->ddlwhyoffline));
+              $req->ddlwhyoffline,
+              $req->txtReason,
+              $req->ddlmapcity));
              foreach ($id as $val) 
             {
               $ID=$val->Id;             
@@ -543,7 +548,7 @@ return Redirect('offlinecs');
            $fileProposalForm=$this->fileupload_fn($req->file('fileProposalForm'));
            $fileKYC=$this->fileupload_fn($req->file('fileKYC'));  
 
-              DB::select('call Usp_update_offlinecs(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',array(
+              DB::select('call Usp_update_offlinecs(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',array(
               $req->txtofflinecsid,
               $req->ddproduct,
               $req->txtcstname,
@@ -586,7 +591,9 @@ return Redirect('offlinecs');
               $req->ddlInsurerhealth,
               $req->ddlInsurerlife,
               $fbauser,
-              $req->ddlwhyoffline));
+              $req->ddlwhyoffline,
+              $req->txtReason,
+              $req->ddlmapcity));
           
               $ID=$req->txtofflinecsid;             
             
@@ -715,7 +722,7 @@ public function Updateofflinecsandsendmail(Request $req)
            $fileProposalForm=$this->fileupload_fn($req->file('fileProposalForm'));
            $fileKYC=$this->fileupload_fn($req->file('fileKYC'));      
             
-             $id= DB::select('call Usp_update_offlinecsandsendmail(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',array(
+             $id= DB::select('call Usp_update_offlinecsandsendmail(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',array(
               $req->txtofflinecsid,
               $req->ddproduct,
               $req->txtcstname,
@@ -758,7 +765,9 @@ public function Updateofflinecsandsendmail(Request $req)
               $req->ddlInsurerhealth,
               $req->ddlInsurerlife,
               $fbauser,
-              $req->ddlwhyoffline));
+              $req->ddlwhyoffline,
+              $req->txtReason,
+              $req->ddlmapcity));
              
               $ID=$req->txtofflinecsid;             
             
@@ -850,21 +859,21 @@ if ($fileKYC!=0)
 
         return $e->getMessage();    
      }        
-}            // print_r($offlinecsdata); exit();
-                //$email ='rajendra.raval@rupeeboss.com';
-               // $ccemail='vishakha.kadam@policyboss.com';
-                //$ccemail1='OfflineCS@magicfinmart.com';
-                $email ='shubhamkhandekar2@gmail.com';
-                $ccemail='shubhamkhandekar2@gmail.com';
+}              $email ='rajendra.raval@rupeeboss.com';
+               $ccemail='vishakha.kadam@policyboss.com';
+               $ccemail1='OfflineCS@magicfinmart.com';  
+               $ccemail2='rajendra.raval@policyboss.com';
+                //$email ='shubhamkhandekar2@gmail.com';
+               // $ccemail='rajendra.raval@policyboss.com';
                 $offlinecsdata = DB::select("call Usp_get_motor_data($ID)");    
 
                 $sub='SNo.'.$offlinecsdata[0]->ID.' '.$offlinecsdata[0]->product_name.'  Entry details for '.$offlinecsdata[0]->CustomerName.' - '.$offlinecsdata[0]->POSPName;
                 
             if($ccemail!='')
             {                
-                  $mail = Mail::send('mailViews.sendmailofflinecs',['offlinecsdata' => $offlinecsdata], function($message)use($email,$ccemail,$sub){
+                  $mail = Mail::send('mailViews.sendmailofflinecs',['offlinecsdata' => $offlinecsdata], function($message)use($email,$ccemail,$ccemail1,$ccemail2,$sub){
                   $message->from('OfflineCS@magicfinmart.com', 'Fin-Mart');
-                  $message->to($email)->cc($ccemail)->subject($sub);});
+                  $message->to($email)->cc($ccemail)->cc($ccemail1)->cc($ccemail2)->subject($sub);});
                if(Mail::failures())
                 {
                    $error=3;

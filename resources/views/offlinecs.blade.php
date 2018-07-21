@@ -18,13 +18,17 @@
                 <input type="hidden" name="txtofflinecsid" id="txtofflinecsid">
                 <div class="col-md-4">
                    <label>Why Offline:</label>
-                  <select class="form-control" id="ddlwhyoffline" name="ddlwhyoffline" required>
+                  <select class="form-control" id="ddlwhyoffline" onchange="showotherdiv()" name="ddlwhyoffline" required>
                     <option value="">--select--</option>
                     @foreach($reason as $val)
                      <option value="{{$val->id}}">{{$val->Reason}}</option>
                     @endforeach                 
                  </select>  
                 </div>
+                 <div class="col-md-4" id="divother" style="display: none;">
+                  <label>Other Reason for Offline-cs:</label>  
+                  <textarea id="txtReason" name="txtReason"  class="form-control txtonly" placeholder="Specify Other Reason"></textarea>                  
+                 </div>
                 <div class="col-md-4">
          		      <label>Product:</label>
                   <select class="form-control" onchange="pageview()" id="ddproduct" name="ddproduct">
@@ -32,7 +36,7 @@
                  	<option value="{{$val->id}}">{{$val->product_name}}</option>
                   @endforeach                  
                  </select>  
-                 </div>
+                 </div>                 
               </div>           
               <br>
               <div class="row">
@@ -348,6 +352,7 @@ if (window.location.href.indexOf('?id=') > 0) {
          {
            var data=  JSON.parse(offlinecsdt);
            $("#ddlwhyoffline").val(data[0].reason);
+           $("#txtReason").val(data[0].otherreason);
            $("#ddproduct").val(data[0].Product);
            pageview();
            $("#txtcstname").val(data[0].CustomerName);
@@ -598,15 +603,28 @@ function getstate()
               var state=  JSON.parse(data);
               $('#ddlstate').empty();  
               $('#ddlzone').empty();
-              $('#ddlregion').empty();                       
+              $('#ddlregion').empty();  
+              $('#ddlmapcity').empty();                     
               $('#ddlstate').append('<option value="'+ state[0].state_id +'">'+ state[0].state_name +'</option>');
               $('#ddlzone').append('<option value="'+ state[0].state_id +'">'+ state[0].zone +'</option>');
-              $('#ddlregion').append('<option value="'+ state[0].state_id +'">'+ state[0].region +'</option>');           
+              $('#ddlregion').append('<option value="'+ state[0].state_id +'">'+ state[0].region +'</option>'); 
+              $('#ddlmapcity').append('<option value="'+ state[0].mapcity +'">'+ state[0].mapcity +'</option>');          
              }
          });
 }
 
-
+function showotherdiv(){
+ if($("#ddlwhyoffline").val()==9)
+ {
+   $("#divother").show();
+   $('#txtReason').attr('required', true);
+ }
+ else
+ {
+   $("#divother").hide();
+   $('#txtReason').removeAttr("required");
+ }
+}
 
 </script>
 @endsection

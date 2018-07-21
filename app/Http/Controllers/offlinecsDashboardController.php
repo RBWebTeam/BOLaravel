@@ -20,20 +20,21 @@ class OfflinecsDashboardController extends Controller
 	}
 	public function sendemail($ID)
 	{
-              // $email ='rajendra.raval@rupeeboss.com';
-              // $ccemail='vishakha.kadam@policyboss.com';
-              // $ccemail1='OfflineCS@magicfinmart.com';
-                $email ='shubhamkhandekar2@gmail.com';
-                $ccemail='shubhamkhandekar2@gmail.com';
+               $email ='rajendra.raval@rupeeboss.com';
+               $ccemail='vishakha.kadam@policyboss.com';
+               $ccemail1='OfflineCS@magicfinmart.com';  
+               $ccemail2='rajendra.raval@policyboss.com';
+                //$email ='shubhamkhandekar2@gmail.com';
+               // $ccemail='rajendra.raval@policyboss.com';
                 $offlinecsdata = DB::select("call Usp_get_motor_data($ID)");    
 
                 $sub='SNo.'.$offlinecsdata[0]->ID.' '.$offlinecsdata[0]->product_name.'  Entry details for '.$offlinecsdata[0]->CustomerName.' - '.$offlinecsdata[0]->POSPName;
                 
             if($ccemail!='')
             {                
-                  $mail = Mail::send('mailViews.sendmailofflinecs',['offlinecsdata' => $offlinecsdata], function($message)use($email,$ccemail,$sub){
+                  $mail = Mail::send('mailViews.sendmailofflinecs',['offlinecsdata' => $offlinecsdata], function($message)use($email,$ccemail,$ccemail1,$ccemail2,$sub){
                   $message->from('OfflineCS@magicfinmart.com', 'Fin-Mart');
-                  $message->to($email)->cc($ccemail)->subject($sub);});
+                  $message->to($email)->cc($ccemail)->cc($ccemail1)->cc($ccemail2)->subject($sub);});
                if(Mail::failures())
                 {
                    $error=3;
@@ -42,6 +43,11 @@ class OfflinecsDashboardController extends Controller
               DB::table('offlinecs')->where('ID','=',$ID)->update(['ismailsend'=>1]);
              }
              
+    }
+    public function showdetails($ID)
+    {
+       $offlinecsdata = DB::select("call Usp_get_motor_data($ID)");
+       return json_encode($offlinecsdata);
     }
  
 }

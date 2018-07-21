@@ -49,7 +49,7 @@ th, td {
 		<td>{{$val->Region}}</td>
 		</tr>
 		<tr>
-		<th>MobileNo</th>
+		<th>Mobile No</th>
 		<td>{{$val->MobileNo}}</td>
 		</tr>
 		<tr>
@@ -60,27 +60,12 @@ th, td {
 		<th>Email Id</th>	
 		<td>{{$val->EmailId}}</td>
 		</tr>
-		<tr>
-		<th>POSP Name</th>
-		<td>{{$val->POSPName}}</td>	
-		</tr>
-		<tr>
-		<th>Premium Amount</th>
-		<td>{{$val->PremiumAmount}}</td>
-		</tr>
-		<tr>
-		<th>ERPID</th>
-		<td>{{$val->ERPID}}</td>
-		</tr>
-		<tr>
-		<th>QTNo</th>
-		<td>{{$val->QTNo}}</td>
-		</tr>
+		<tr><th>POSP Name</th><td>{{$val->POSPName}}</td></tr>
+		<tr><th>Premium Amount</th><td>{{$val->PremiumAmount}}</td></tr>
+		<tr><th>ERPID</th><td>{{$val->ERPID}}</td></tr>
+		<tr><th>QTNo</th><td>{{$val->QTNo}}</td></tr>
 		@if($val->VehicleNo!='')
-		<tr>
-		<th>Vehicle No</th>
-		<td>{{$val->VehicleNo}}</td>
-		</tr>
+		<tr><th>Vehicle No</th><td>{{$val->VehicleNo}}</td></tr>
 		@endif		
 		<tr>
 		<th>Date of Expiry</th>
