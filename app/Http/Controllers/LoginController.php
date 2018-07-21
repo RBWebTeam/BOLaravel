@@ -50,8 +50,15 @@ $query=DB::select('call sp_user_login(?,?,?)',array($request->email,$request->pa
                     $request->session()->put('companyid',$val->companyid);
                     $request->session()->put('last_login',$val->last_login);
                         
-                    $request->session()->put('UId',110318);
-                    // 110318 109996
+
+                        if($val->email=="finmartlive@gmail.com"){
+                           $request->session()->put('UId',109996);
+                        }else{
+                           $request->session()->put('UId',110318);
+                        }
+                       
+                    
+                    // 110318 
 
                     // $request->session()->put('LastLogiDate',$val->LastLogiDate);                              
                return redirect()->intended('dashboard');
