@@ -49,6 +49,15 @@ class OfflinecsDashboardController extends Controller
        $offlinecsdata = DB::select("call Usp_get_motor_data($ID)");
        return json_encode($offlinecsdata);
     }
+    public function updatecsid(Request $req)
+    {
+       $fbauser=Session::get('fbauserid');
+       DB::select('call Usp_update_csid_offlinecs(?,?,?)',array(
+        $req->txtcsid,
+        $fbauser,
+        $req->txtID));
+       
+    }
  
 }
 

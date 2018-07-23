@@ -72,10 +72,7 @@ th, td {
 		<td>{{$val->DateofExpiry}}</td>
 		</tr>
 		@if($val->BreakIn!='')
-		<tr>
-		<th>Break In</th>
-		<td>{{$val->BreakIn}}</td>
-		</tr>
+		<tr><th>Break In</th><td>{{$val->BreakIn}}</td></tr>
 		@endif	
 		@if($val->motorInsurer!='')
 		<tr>
