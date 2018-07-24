@@ -6,7 +6,7 @@
        <div class="overflow-scroll">
        <div class="table-responsive" >
        
-
+ 
 
        <form  method="post" action="{{url('crm-disposition')}}" id="CRM_Disposition_from">{{ csrf_field() }}
            <input type="hidden" name="fbamappin_id" id="fbamappin_id" value="{{$fbamappin_id}}">

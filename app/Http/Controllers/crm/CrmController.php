@@ -14,7 +14,7 @@ class CrmController extends Controller
 
           public function user_role(Request $req){   // find column UID
  
-               $profile_id=Session::get('UId');
+               $profile_id=Session::get('UId'); 
                $query=DB::table('finmartemployeemaster')->select('UId','Profile','role_id')->where('UId','=',$profile_id)->first();
                $query=DB::table('fbacrmmapping')->where($query->role_id,'=',$profile_id)->get(); 
           	   return view('crm.user_role',['query'=>$query]);
@@ -101,7 +101,7 @@ class CrmController extends Controller
                   $followup_date="";
                 }
 
-                 if(isset($req->assign_id) && isset($req->historyid)){
+                 if(isset($req->assign_id) && isset($req->historyid)){ 
                    $assign_id=$req->assign_id;
 
                     DB::table('crm_followup')
@@ -115,15 +115,15 @@ class CrmController extends Controller
 
                   $history_id=DB::table('crm_history')->insertGetId([
                                   'disposition_id'=>$req->disposition_id,
-               	                  'user_id'=>Session::get('UId'),
-               	                  'crm_id'=>$req->crm_id,
-               	                  'fbamappin_id'=>$req->fbamappin_id,
-               	                  'create_at'=> date('Y-m-d H:i:s'),
-               	                  'followup_date'=>$followup_date,
-               	                  'remark'=>$req->remark,
-               	                  'action'=>$req->action,
+                                  'user_id'=>Session::get('UId'),
+                                  'crm_id'=>$req->crm_id,
+                                  'fbamappin_id'=>$req->fbamappin_id,
+                                  'create_at'=> date('Y-m-d H:i:s'),
+                                  'followup_date'=>$followup_date,
+                                  'remark'=>$req->remark,
+                                  'action'=>$req->action,
                                   
-               	 ]);
+                 ]);
 
                 if(isset($req->assignment_id)){
                    $assignment_id=$req->assignment_id;
@@ -159,7 +159,6 @@ class CrmController extends Controller
 
                       }
            }
- 
 
                
             public function crm_followup(Request $req){
@@ -188,7 +187,7 @@ class CrmController extends Controller
 
 
             public function followup_history_update(Request $req){
-   
+
  
                        $history_id=DB::table('crm_history')->insertGetId([
                                   'disposition_id'=>$req->disposition_id,
@@ -244,22 +243,33 @@ class CrmController extends Controller
 
             public function crm_new(Request $req){
 
+            //            if(isset($_GET['assign_id'])){
+            //                 $assign_id=$_GET['assign_id'];
+            //            }else{
+            //                 $assign_id=null;
+            //            }
+
+                        
+
+            //         $history_db=DB::select('call sp_crm_view_history(?,?)',[$req->fbamappin_id,Session::get('UId')]);
+            //         $query=DB::table('crm_disposition')->where('emp_category','=','Recruiter')->get();
+            //         return  view('crm.crm_disposition_add',['query'=>$query,'fbamappin_id'=>$req->fbamappin_id,'history_db'=>$history_db,'assign_id'=>$assign_id]);  
+            // 
+       
                        if(isset($_GET['assign_id']) && isset( $_GET['history_id'])){
                             $assign_id=$_GET['assign_id'];
-                            $historyid=$_GET['history_id'];
+                            $historyid=$_GET['history_id']; 
                             
                        }else{
                             $assign_id=null;
                             $historyid=null;
                        }
  
-                         
 
                     $history_db=DB::select('call sp_crm_view_history(?,?)',[$req->fbamappin_id,Session::get('UId')]);
                     $query=DB::table('crm_disposition')->where('emp_category','=','Recruiter')->get();
                     return  view('crm.crm_disposition_add',['query'=>$query,'fbamappin_id'=>$req->fbamappin_id,'history_db'=>$history_db,'assign_id'=>$assign_id,'historyid'=>$historyid]);  
-            }
-
+}
 
 }
 
