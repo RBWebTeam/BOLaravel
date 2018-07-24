@@ -11,10 +11,29 @@ class CrmController extends Controller
 {
 
 
+        
+         public function __construct(){
+        $this->middleware(function ($request, $next) {
+            
+            if(!$request->session()->exists('UId')){
+           
+                     return redirect('/');
+            }else{
+
+
+
+            return $next($request);
+
+          }
+
+        });
+    }
+
+ 
 
           public function user_role(Request $req){   // find column UID
  
-               $profile_id=Session::get('UId'); 
+               echo $profile_id=Session::get('UId');  
                $query=DB::table('finmartemployeemaster')->select('UId','Profile','role_id')->where('UId','=',$profile_id)->first();
                $query=DB::table('fbacrmmapping')->where($query->role_id,'=',$profile_id)->get(); 
           	   return view('crm.user_role',['query'=>$query]);

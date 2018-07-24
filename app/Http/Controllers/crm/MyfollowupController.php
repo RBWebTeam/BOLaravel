@@ -9,6 +9,24 @@ use Session;
 use Response;
 class MyfollowupController extends Controller
 {
+
+   public function __construct(){
+        $this->middleware(function ($request, $next) {
+            
+            if(!$request->session()->exists('UId')){
+           
+                     return redirect('/');
+            }else{
+
+
+
+            return $next($request);
+
+          }
+
+        });
+    }
+
      public function my_followup(Request $req){
                
 

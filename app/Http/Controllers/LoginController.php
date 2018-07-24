@@ -49,10 +49,18 @@ $query=DB::select('call sp_user_login(?,?,?)',array($request->email,$request->pa
                     $request->session()->put('usergroup',$val->usergroup);
                     $request->session()->put('companyid',$val->companyid);
                     $request->session()->put('last_login',$val->last_login);
-                    $request->session()->put('UId',110318);
-                    
-                       
-                    
+  
+
+       $qu=DB::table('finmartemployeemaster')->select('fba_id','UId')
+       ->where('fba_id','=',$val->fbaid)->first();
+
+ 
+       if($qu){
+           $request->session()->put('UId',$qu->UId);
+       } 
+
+
+                
                     // 110318  109996
 
                     // $request->session()->put('LastLogiDate',$val->LastLogiDate);                              
