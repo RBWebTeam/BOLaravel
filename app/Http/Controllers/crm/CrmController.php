@@ -33,9 +33,18 @@ class CrmController extends Controller
 
           public function user_role(Request $req){   // find column UID
  
-               echo $profile_id=Session::get('UId');  
-               $query=DB::table('finmartemployeemaster')->select('UId','Profile','role_id')->where('UId','=',$profile_id)->first();
-               $query=DB::table('fbacrmmapping')->where($query->role_id,'=',$profile_id)->get(); 
+                $profile_id=Session::get('UId');  
+                $queryu=DB::table('finmartemployeemaster')->select('UId','Profile','role_id','Profile')->where('UId','=',$profile_id)->first();
+                     
+                     if($queryu->role_id){
+
+                $query=DB::table('fbacrmmapping')->where($queryu->role_id,'=',$profile_id)->get(); 
+              }else{
+
+                    return redirect('dashboard');
+              }
+
+          
           	   return view('crm.user_role',['query'=>$query]);
           }
 
@@ -44,9 +53,10 @@ class CrmController extends Controller
 
 
             public function crm_disposition_fn(Request $req){
-
+ 
             				$history_db=DB::select('call sp_crm_view_history(?,?)',[$req->id,Session::get('UId')]);
-            				$query=DB::table('crm_disposition')->where('emp_category','=','Recruiter')->get();
+            				$query=DB::table('crm_disposition')
+                     ->where('emp_category','=',Session::get('Profile'))->get();
             				return  view('crm.crm_disposition_view',['query'=>$query,'fbamappin_id'=>$req->id,'history_db'=>$history_db]);  
             }
 
