@@ -192,6 +192,12 @@ th, td {
 			<td>{{$val->Insurerlife}}</td>
 		</tr>
 		@endif
+		 @if($val->CSID!='')
+		<tr>
+			<th>CSID</th>
+			<td>{{$val->CSID}}</td>
+		</tr>
+		@endif
 		<tr>
 		<th>Created date</th>
 		<td>{{$val->createddate}}</td>

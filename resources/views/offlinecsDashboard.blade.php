@@ -155,6 +155,7 @@
                   str += data[i].TypeofPolicy==null?"":"<tr><th>Type of Policy</th><td>"+data[i].TypeofPolicy+"</td></tr>";
                   str += data[i].Insurerhealth==null?"":"<tr><th>Insurer Health</th><td>"+data[i].Insurerhealth+"</td></tr>";
                   str += data[i].Insurerlife==null?"":"<tr><th>Insurer Life</th><td>"+data[i].Insurerlife+"</td></tr>";
+                  str += data[i].CSID==null?"":"<tr><th>CSID</th><td>"+data[i].CSID+"</td></tr>";
                   str += data[i].createddate==null?"":"<tr><th>Created date</th><td>"+data[i].createddate+"</td></tr>";
                   str += data[i].RCCopy==0?"":"<tr><th>RC Copy</th><td><a target='_blank' href='{{url('/upload/offlinecs')}}/"+data[i].RCCopy+"'>"+data[i].RCCopy+"</a></td></tr>";
                   str += data[i].Fitness==0?"":"<tr><th>Fitness</th><td><a target='_blank' href='{{url('/upload/offlinecs')}}/"+data[i].Fitness+"'>"+data[i].Fitness+"</a></td></tr>";
