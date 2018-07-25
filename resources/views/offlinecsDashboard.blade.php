@@ -137,7 +137,8 @@
                var str = "<table Id='tblcsdata' class='table-bordered'>";
          for (var i = 0; i < data.length; i++) 
            {
-               str = str + "<tr><th>ID</th><td>"+data[i].ID+"</td></tr><tr><th>Product Name</th><td>"+data[i].product_name+"</td></tr><tr><th>Customer Name</th><td>"+data[i].CustomerName+"</td></tr><tr><th>Customer Address</th><td>"+data[i].CustomerAddress+"</td></tr><tr><th>City</th><td>"+data[i].cityname+"</td></tr><tr><th>State</th><td>"+data[i].state_name+"</td></tr><tr><th>Zone</th><td>"+data[i].Zone+"</td></tr><tr><th>Region</th><td>"+data[i].Region+"</td></tr><tr><th>Mobile No</th><td>"+data[i].MobileNo+"</td></tr><tr><th>Telephone No</th><td>"+data[i].TelephoneNo+"</td></tr><tr><th>Email Id</th><td>"+data[i].EmailId+"</td></tr><tr><th>POSP Name</th><td>"+data[i].POSPName+"</td></tr><tr><th>Premium Amount</th><td>"+data[i].PremiumAmount+"</td></tr><tr><th>ERPID</th><td>"+data[i].ERPID+"</td></tr><tr><th>QTNo</th><td>"+data[i].QTNo+"</td></tr>";
+               str = str + "<tr><th>ID</th><td>"+data[i].ID+"</td></tr><tr><th>Reason</th><td>"+data[i].Reason+"</td></tr><tr><th>Product Name</th><td>"+data[i].product_name+"</td></tr><tr><th>Customer Name</th><td>"+data[i].CustomerName+"</td></tr><tr><th>Customer Address</th><td>"+data[i].CustomerAddress+"</td></tr><tr><th>City</th><td>"+data[i].cityname+"</td></tr><tr><th>State</th><td>"+data[i].state_name+"</td></tr><tr><th>Zone</th><td>"+data[i].Zone+"</td></tr><tr><th>Region</th><td>"+data[i].Region+"</td></tr><tr><th>Mobile No</th><td>"+data[i].MobileNo+"</td></tr><tr><th>Telephone No</th><td>"+data[i].TelephoneNo+"</td></tr><tr><th>Email Id</th><td>"+data[i].EmailId+"</td></tr><tr><th>POSP Name</th><td>"+data[i].POSPName+"</td></tr><tr><th>Premium Amount</th><td>"+data[i].PremiumAmount+"</td></tr><tr><th>ERPID</th><td>"+data[i].ERPID+"</td></tr><tr><th>QTNo</th><td>"+data[i].QTNo+"</td></tr>";                 
+                  str += data[i].otherreason==null?"":"<tr><th>Other Reason</th><td>"+data[i].otherreason+"</td></tr>";
                   str += data[i].VehicleNo==null?"":"<tr><th>Vehicle No</th><td>"+data[i].VehicleNo+"</td></tr>";
                   str += data[i].DateofExpiry==null?"":"<tr><th>Date of Expiry</th><td>"+data[i].DateofExpiry+"</td></tr>";
                   str += data[i].BreakIn==null?"":"<tr><th>Break In</th><td>"+data[i].BreakIn+"</td></tr>";
@@ -165,6 +166,7 @@
                   str += data[i].Other==0?"":"<tr><th>Other</th><td><a target='_blank' href='{{url('/upload/offlinecs')}}/"+data[i].Other+"'>"+data[i].Other+"</a></td></tr>";
                   str += data[i].ProposalForm==0?"":"<tr><th>Proposal Form</th><td><a target='_blank' href='{{url('/upload/offlinecs')}}/"+data[i].ProposalForm+"'>"+data[i].ProposalForm+"</a></td></tr>";
                    str += data[i].KYC==0?"":"<tr><th>KYC</th><td><a target='_blank' href='{{url('/upload/offlinecs')}}/"+data[i].KYC+"'>"+data[i].KYC+"</a></td></tr>";
+
 
            } 
              

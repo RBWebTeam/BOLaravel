@@ -34,7 +34,7 @@ class CrmController extends Controller
           public function user_role(Request $req){   // find column UID
  
                echo $profile_id=Session::get('UId');  
-               $query=DB::table('finmartemployeemaster')->select('UId','Profile','role_id')->where('UId','=',$profile_id)->first();
+               $query=DB::table('finmartemployeemaster')->select('UId','Profile','role_id')->where('fba_id','=',$profile_id)->first();
                $query=DB::table('fbacrmmapping')->where($query->role_id,'=',$profile_id)->get(); 
           	   return view('crm.user_role',['query'=>$query]);
           }

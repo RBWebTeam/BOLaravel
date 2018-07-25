@@ -353,6 +353,7 @@ if (window.location.href.indexOf('?id=') > 0) {
            var data=  JSON.parse(offlinecsdt);
            $("#ddlwhyoffline").val(data[0].reason);
            $("#txtReason").val(data[0].otherreason);
+           showotherdiv();
            $("#ddproduct").val(data[0].Product);
            pageview();
            $("#txtcstname").val(data[0].CustomerName);

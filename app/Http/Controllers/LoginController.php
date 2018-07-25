@@ -38,9 +38,9 @@ $query=DB::select('call sp_user_login(?,?,?)',array($request->email,$request->pa
   $val=$query[0];
   $request->session()->flush();
   $request->session()->put('emailid',$val->email);
- $request->session()->put('emailid',$val->email);
- $request->session()->put('fbauserid',$val->fbauserid);
- $request->session()->put('fbaid',$val->fbaid);
+  $request->session()->put('emailid',$val->email);
+  $request->session()->put('fbauserid',$val->fbauserid);
+  $request->session()->put('fbaid',$val->fbaid);
                     $request->session()->put('username',$val->username);
                     $request->session()->put('loginame',$val->loginame);
                     $request->session()->put('uid',$val->uid);
