@@ -296,7 +296,7 @@ class CrmController extends Controller
  
 
                     $history_db=DB::select('call sp_crm_view_history(?,?)',[$req->fbamappin_id,Session::get('UId')]);
-                    $query=DB::table('crm_disposition')->where('emp_category','=','Recruiter')->get();
+                    $query=DB::table('crm_disposition')->where('emp_category','=',Session::get('Profile'))->get();
                     return  view('crm.crm_disposition_add',['query'=>$query,'fbamappin_id'=>$req->fbamappin_id,'history_db'=>$history_db,'assign_id'=>$assign_id,'historyid'=>$historyid]);  
 }
 
