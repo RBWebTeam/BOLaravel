@@ -22,7 +22,7 @@
 
          <p>From Date</p>
          <div id="datepicker" class="input-group date" data-date-format="yyyy-mm-dd">
-               <input class="form-control date-range-filter" type="text" placeholder="From Date" name="fdate" id="min"/ value="<?php echo date('Y-m-d',strtotime("-30 days")); ?>">
+               <input class="form-control date-range-filter" type="text" placeholder="From Date" name="fdate" id="min" value="<?php echo date('Y-m-d',strtotime("-30 days")); ?>">
               <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
             </div>
             </div>
@@ -31,7 +31,7 @@
        <div class="form-group">
        <p>To Date</p>
        <div id="datepicker1" class="input-group date" data-date-format="yyyy-mm-dd">
-               <input class="form-control date-range-filter" type="text" placeholder="To Date" name="todate"  id="max"/ value="<?php echo date('Y-m-d'); ?>">
+               <input class="form-control date-range-filter" type="text" placeholder="To Date" name="todate"  id="max" value="<?php echo date('Y-m-d'); ?>">
               <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
               </div>
               </div>

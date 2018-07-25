@@ -224,23 +224,25 @@ Route::get('assigned-fba-lead-history/{fbaid}','quickleadController@gethistoryfb
 Route::get('Quick-lead-dashboard','quickleaddashboardController@getquicklead');
 Route::get('edit_lead/{Leadid}','quickleadController@editlead');
 Route::Post('quick-lead-edit','quickleadController@updatelead');
-route::get('offlinecs','offlinecsController@getofflinecs');
+route::get('offlinecs','OfflinecsController@getofflinecs');
 
-route::get('get_state_offlinecs/{cityid}','offlinecsController@getstate');
-Route::Post('offlinecs','offlinecsController@insertofflinecs');
-Route::get('get_ERPID_offlinecs/{fbaid}','offlinecsController@geterpid');
+route::get('get_state_offlinecs/{cityid}','OfflinecsController@getstate');
+Route::Post('offlinecs','OfflinecsController@insertofflinecs');
+Route::get('get_ERPID_offlinecs/{fbaid}','OfflinecsController@geterpid');
 
-route::get('offlinecsedit/{id}','offlinecsController@getofflinecsdataedit');
+route::get('offlinecsedit/{id}','OfflinecsController@getofflinecsdataedit');
 
-Route::post('saveofflinecs','offlinecsController@saveofflinecsdata');
+Route::post('saveofflinecs','OfflinecsController@saveofflinecsdata');
 Route::get('offlinecs-dashboard','OfflinecsDashboardController@getofflinecsdata');
 
-Route::post('offlinecsupdate','offlinecsController@Updateofflinecs');
-Route::post('offlinecsupdateandsendmail','offlinecsController@Updateofflinecsandsendmail');
+Route::post('offlinecsupdate','OfflinecsController@Updateofflinecs');
+Route::post('offlinecsupdateandsendmail','OfflinecsController@Updateofflinecsandsendmail');
 Route::get('offlinecssendemail/{ID}','OfflinecsDashboardController@sendemail');
+Route::get('offlinecs-details/{ID}','OfflinecsDashboardController@showdetails');
+Route::Post('offlinecs-csidupdate','OfflinecsDashboardController@updatecsid');
 ///shubham end ///
 // avinash
- Route::get('ticket-module','TicketController@getticketdetails') ;
+ Route::get('ticket-module','TicketController@getticketdetails');
    // avinash
 
 

@@ -7,7 +7,8 @@
 </div>
 @endif
 <div class="container-fluid white-bg">
-  <div class="col-md-12"><h3 class="mrg-btm">Offline Cs</h3></div>
+  <div class="col-md-12"><h3>Offline Cs</h3></div>
+  <div><a href="{{url('offlinecs-dashboard')}}" class="btn btn-primary pull-right">Show my Entries</a></div>
       <div class="col-md-12">
          <div class="overflow-scroll">
          	<div class="container">
@@ -17,13 +18,17 @@
                 <input type="hidden" name="txtofflinecsid" id="txtofflinecsid">
                 <div class="col-md-4">
                    <label>Why Offline:</label>
-                  <select class="form-control" id="ddlwhyoffline" name="ddlwhyoffline" required>
+                  <select class="form-control" id="ddlwhyoffline" onchange="showotherdiv()" name="ddlwhyoffline" required>
                     <option value="">--select--</option>
                     @foreach($reason as $val)
                      <option value="{{$val->id}}">{{$val->Reason}}</option>
                     @endforeach                 
                  </select>  
                 </div>
+                 <div class="col-md-4" id="divother" style="display: none;">
+                  <label>Other Reason for Offline-cs:</label>  
+                  <textarea id="txtReason" name="txtReason"  class="form-control txtonly" placeholder="Specify Other Reason"></textarea>                  
+                 </div>
                 <div class="col-md-4">
          		      <label>Product:</label>
                   <select class="form-control" onchange="pageview()" id="ddproduct" name="ddproduct">
@@ -31,7 +36,7 @@
                  	<option value="{{$val->id}}">{{$val->product_name}}</option>
                   @endforeach                  
                  </select>  
-                 </div>
+                 </div>                 
               </div>           
               <br>
               <div class="row">
@@ -108,7 +113,7 @@
 
               	<div class="col-md-4">
               		<label>QT No:</label>
-              		<input type="text" class="form-control" name="txtqtno" id="txtqtno" required>           		
+              		<input type="text" class="form-control" name="txtqtno" id="txtqtno">           		
               	</div>
                 <div class="col-md-4">
                   <label>Date of Expiry:</label>
@@ -146,7 +151,7 @@
               	<div class="col-md-4">
               		<label>Insurer:</label>
               		<select id="ddlInsurermotor" name="ddlInsurermotor" class="form-control" >
-              			<option value="0">--select---</option>
+              			<option value="">--select---</option>
               			@foreach ($Genins as $val)
               			<option value="{{$val->GeneralInsuranceCompanyMasterId}}">{{$val->CompanyName}}</option>
               			@endforeach
@@ -159,7 +164,7 @@
              	<div class="col-md-4">
               		<label>Insurer:</label>
               		<select id="ddlInsurerhealth" name="ddlInsurerhealth" class="form-control" >
-                    <option value="0">--select---</option>
+                    <option value="">--select---</option>
                     @foreach($health as $val)
               			<option value="{{$val->id}}">{{$val->companyname}}</option>
                     @endforeach
@@ -200,13 +205,13 @@
              	</div>             
              	<div class="col-md-4">
               		<label>Medical case:</label>
-              		<label class="checkbox-inline">YES  <input type="radio" name="txtmedicalcase" id="txtmedicalcase" value="YES"></label>
-              		<label class="checkbox-inline">No  <input type="radio" name="txtmedicalcase" id="txtmedicalcase" value="No"></label>              		           		
+              		<label class="checkbox-inline">YES <input type="radio" class="Medicalcaseyes" name="txtmedicalcase" id="txtmedicalcase" value="YES"></label>
+              		<label class="checkbox-inline">No  <input type="radio" class="Medicalcaseno" name="txtmedicalcase" id="txtmedicalcase" value="No"></label>              		           		
               	</div>             
               	<div class="col-md-4">
               		<label>Insurer:</label>
               		<select id="ddlInsurerlife" name="ddlInsurerlife" class="form-control" >
-                    <option value="0">--select---</option>
+                    <option value="">--select---</option>
                     @foreach($lifeins as $val)
               			<option value="{{$val->LifeInsurerCompanyMasterId}}">{{$val->CompanyName}}</option>
                     @endforeach
@@ -277,8 +282,8 @@
               </div> 
                <div class="row"> 
              	<div class="col-md-4">
-             		<label>Cheque Copy:</label>
-             		<input type="file" name="fileCheque" id="fileCheque" class="form-control" accept=".png, .jpg, .jpeg .pdf" required> 
+             		<label>Cheque / Online Payment Receipt Copy:</label>
+             		<input type="file" name="fileCheque" id="fileCheque" class="form-control" accept=".png, .jpg, .jpeg .pdf"> 
                 <span><a id="spnCheque" target="_blank"></a></span>           
              	</div>
              	<div class="col-md-4">
@@ -331,10 +336,7 @@ $( document ).ready(function() {
       $('#txtvehicalno').attr('required', true);
       $('#txtbreakin').attr('required', true);
       $('#ddlInsurermotor').attr('required', true);
-      $('#filerc').attr('required', true);
-      $('#fileFitness').attr('required', true);
-      $('#filePUC').attr('required', true);
-      $('#filebreakrp').attr('required', true);
+      
 
 if (window.location.href.indexOf('?id=') > 0) {
         var id = window.location.href.split('?id=')[1];  
@@ -350,6 +352,7 @@ if (window.location.href.indexOf('?id=') > 0) {
          {
            var data=  JSON.parse(offlinecsdt);
            $("#ddlwhyoffline").val(data[0].reason);
+           $("#txtReason").val(data[0].otherreason);
            $("#ddproduct").val(data[0].Product);
            pageview();
            $("#txtcstname").val(data[0].CustomerName);
@@ -381,22 +384,40 @@ if (window.location.href.indexOf('?id=') > 0) {
            $("#txtexecutivename1").val(data[0].ExecutiveName1);
            $("#txtexeProductname").val(data[0].ProductExecutive);
            $("#txtmgrProductname").val(data[0].ProductManager);
+           $("#ddlInsurerlife").val(data[0].Insurerlife);
+           $("#ddlnoofpolicy").val(data[0].TypeofPolicy);
+           if(data[0].RCCopy!=0){
            $("#spnrccopy").append(data[0].RCCopy);
-           $('#spnrccopy').attr('href',data[0].RCCopy);
+           $('#spnrccopy').attr('href','{{url('/upload/offlinecs')}}/'+data[0].RCCopy);
+           }
+           if(data[0].Fitness!=0){
            $("#spnfitness").append(data[0].Fitness);
-           $('#spnfitness').attr('href',data[0].Fitness);
+           $('#spnfitness').attr('href','{{url('/upload/offlinecs')}}/'+data[0].Fitness);
+           }
+           if(data[0].PUC!=0){
            $("#spnPUC").append(data[0].PUC);
-           $('#spnPUC').attr('href',data[0].PUC);
+           $('#spnPUC').attr('href','{{url('/upload/offlinecs')}}/'+data[0].PUC);
+           }
+           if(data[0].BreakinReport!=0){
            $("#spnbreakrp").append(data[0].BreakinReport);
-           $('#spnbreakrp').attr('href',data[0].BreakinReport);
+           $('#spnbreakrp').attr('href','{{url('/upload/offlinecs')}}/'+data[0].BreakinReport);
+           }
+           if(data[0].ChequeCopy!=0){
            $("#spnCheque").append(data[0].ChequeCopy);
-           $('#spnCheque').attr('href',data[0].ChequeCopy);
+           $('#spnCheque').attr('href','{{url('/upload/offlinecs')}}/'+data[0].ChequeCopy);
+           }
+           if(data[0].Other!=0){
            $("#spnother").append(data[0].Other);
-           $('#spnother').attr('href',data[0].Other);
-           $("#spnproposaform").append(data[0].ProposalForm);
-           $('#spnproposaform').attr('href',data[0].ProposalForm);
+           $('#spnother').attr('href','{{url('/upload/offlinecs')}}/'+data[0].Other);
+           }
+           if(data[0].ProposalForm!=0){
+           $("#spnproposaform").append(data[0].ProposalForm);           
+           $('#spnproposaform').attr('href','{{url('/upload/offlinecs')}}/'+data[0].ProposalForm);
+           }
+           if(data[0].KYC!=0){
            $("#spnKYC").append(data[0].KYC);
-           $('#spnKYC').attr('href',data[0].KYC);
+           $('#spnKYC').attr('href','{{url('/upload/offlinecs')}}/'+data[0].KYC);
+           }
            if (data[0].Insurerhealth!=0){
            $("#ddlInsurerhealth").val(data[0].Insurerhealth);
            } 
@@ -412,14 +433,15 @@ if (window.location.href.indexOf('?id=') > 0) {
              if (data[0].MedicalReport=='NO') {
                $(".Medicalno").attr('checked', 'checked');
             }
+             if (data[0].Medicalcase=='NO') {
+               $(".Medicalcaseno").attr('checked', 'checked');
+            } 
+            if (data[0].Medicalcase=='YES') {
+               $(".Medicalcaseyes").attr('checked', 'checked');
+            } 
             $("#dllpremium").val(data[0].PremiumYears); 
 
-           
-           
-
-
-
-         }
+            }
 
         });   
       } 
@@ -438,11 +460,7 @@ if (window.location.href.indexOf('?id=') > 0) {
       $(".life").hide();
       $('#txtvehicalno').attr('required', true);
       $('#txtbreakin').attr('required', true);
-      $('#ddlInsurermotor').attr('required', true);
-      $('#filerc').attr('required', true);
-      $('#fileFitness').attr('required', true);
-      $('#filePUC').attr('required', true);
-      $('#filebreakrp').attr('required', true);
+      $('#ddlInsurermotor').attr('required', true);      
      }
      else if($("#ddproduct").val()==2){
       $(".Motor").show();
@@ -454,11 +472,7 @@ if (window.location.href.indexOf('?id=') > 0) {
       $(".life").hide();
       $('#txtvehicalno').attr('required', true);
       $('#txtbreakin').attr('required', true);
-      $('#ddlInsurermotor').attr('required', true);
-      $('#filerc').attr('required', true);
-      $('#fileFitness').attr('required', true);
-      $('#filePUC').attr('required', true);
-      $('#filebreakrp').attr('required', true);
+      $('#ddlInsurermotor').attr('required', true);      
      }
      else if($("#ddproduct").val()==3){
       $(".Motor").show();
@@ -471,10 +485,7 @@ if (window.location.href.indexOf('?id=') > 0) {
       $('#txtvehicalno').attr('required', true);
       $('#txtbreakin').attr('required', true);
       $('#ddlInsurermotor').attr('required', true);
-      $('#filerc').attr('required', true);
-      $('#fileFitness').attr('required', true);
-      $('#filePUC').attr('required', true);
-      $('#filebreakrp').attr('required', true);
+      
      }
      else if($("#ddproduct").val()==4){
      	$("#life").hide();
@@ -486,9 +497,7 @@ if (window.location.href.indexOf('?id=') > 0) {
       $(".health").show();
       $(".life").hide();
       $('#ddlInsurerhealth').attr('required', true);
-      $('#dllpremium').attr('required', true);
-      $('#fileProposalForm').attr('required', true);
-      $('#fileKYC').attr('required', true);
+      $('#dllpremium').attr('required', true);      
       $('#txtvehicalno').removeAttr("required"); 
       $('#txtbreakin').removeAttr("required");
       $('#ddlInsurermotor').removeAttr("required");
@@ -507,9 +516,7 @@ if (window.location.href.indexOf('?id=') > 0) {
       $(".health").show();
       $(".life").hide();
       $('#ddlInsurerhealth').attr('required', true);
-      $('#dllpremium').attr('required', true);
-      $('#fileProposalForm').attr('required', true);
-      $('#fileKYC').attr('required', true);
+      $('#dllpremium').attr('required', true);      
       $('#txtvehicalno').removeAttr("required"); 
       $('#txtbreakin').removeAttr("required");
       $('#ddlInsurermotor').removeAttr("required");
@@ -528,16 +535,16 @@ if (window.location.href.indexOf('?id=') > 0) {
       $(".health").hide();
       $(".life").show();
       $('#ddlnoofpolicy').attr('required', true);
-      $('#ddlInsurerlife').attr('required', true);
-      $('#fileProposalForm').attr('required', true);
-      $('#fileKYC').attr('required', true);
+      $('#ddlInsurerlife').attr('required', true);      
       $('#txtvehicalno').removeAttr("required"); 
       $('#txtbreakin').removeAttr("required");
       $('#ddlInsurermotor').removeAttr("required");
       $('#filerc').removeAttr("required");
       $('#fileFitness').removeAttr("required");
-      $('#filePUC').removeAttr("required");
+      $('#filePUC').removeAttr("required"); 
       $('#filebreakrp').removeAttr("required");
+      $('#dllpremium').removeAttr("required");
+      
      }
      else{
      	$("#life").hide();
@@ -548,10 +555,7 @@ if (window.location.href.indexOf('?id=') > 0) {
       $('#txtvehicalno').attr('required', true);
       $('#txtbreakin').attr('required', true);
       $('#ddlInsurermotor').attr('required', true);
-      $('#filerc').attr('required', true);
-      $('#fileFitness').attr('required', true);
-      $('#filePUC').attr('required', true);
-      $('#filebreakrp').attr('required', true);
+      
      }
      }
 function getpospname()
@@ -578,7 +582,7 @@ $(".Vehicleno").keypress(function (e) {
 });
 
 $("#saveofflinecs" ).click(function() {
-  $("#frmofflinecs").attr('action', '{{url('saveofflinecs')}}');
+  $("#frmofflinecs").attr('action', '{{url('saveofflinecs')}}'); 
 });
 $("#btnupdate" ).click(function() {
   $("#frmofflinecs").attr('action', '{{url('offlinecsupdate')}}');
@@ -599,15 +603,28 @@ function getstate()
               var state=  JSON.parse(data);
               $('#ddlstate').empty();  
               $('#ddlzone').empty();
-              $('#ddlregion').empty();                       
+              $('#ddlregion').empty();  
+              $('#ddlmapcity').empty();                     
               $('#ddlstate').append('<option value="'+ state[0].state_id +'">'+ state[0].state_name +'</option>');
               $('#ddlzone').append('<option value="'+ state[0].state_id +'">'+ state[0].zone +'</option>');
-              $('#ddlregion').append('<option value="'+ state[0].state_id +'">'+ state[0].region +'</option>');           
+              $('#ddlregion').append('<option value="'+ state[0].state_id +'">'+ state[0].region +'</option>'); 
+              $('#ddlmapcity').append('<option value="'+ state[0].mapcity +'">'+ state[0].mapcity +'</option>');          
              }
          });
 }
 
-
+function showotherdiv(){
+ if($("#ddlwhyoffline").val()==9)
+ {
+   $("#divother").show();
+   $('#txtReason').attr('required', true);
+ }
+ else
+ {
+   $("#divother").hide();
+   $('#txtReason').removeAttr("required");
+ }
+}
 
 </script>
 @endsection
