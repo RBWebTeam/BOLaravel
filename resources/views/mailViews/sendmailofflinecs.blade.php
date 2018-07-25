@@ -16,9 +16,9 @@ th, td {
 @foreach($offlinecsdata as $val) 
 <p>Please find enclosed details for CS  {{$val->product_name}} for {{$val->CustomerName}}. Details of the case are as under:</p>
 <table>		  
-		<tr>
-	    <th>ID</th>
-		<td>{{$val->ID}}</td>
+	    <tr>
+	     <th>ID</th>
+		 <td>{{$val->ID}}</td>
 	    </tr>
 	    <tr>
 	    <th>Product Name</th>	
@@ -49,7 +49,7 @@ th, td {
 		<td>{{$val->Region}}</td>
 		</tr>
 		<tr>
-		<th>MobileNo</th>
+		<th>Mobile No</th>
 		<td>{{$val->MobileNo}}</td>
 		</tr>
 		<tr>
@@ -60,37 +60,19 @@ th, td {
 		<th>Email Id</th>	
 		<td>{{$val->EmailId}}</td>
 		</tr>
-		<tr>
-		<th>POSP Name</th>
-		<td>{{$val->POSPName}}</td>	
-		</tr>
-		<tr>
-		<th>Premium Amount</th>
-		<td>{{$val->PremiumAmount}}</td>
-		</tr>
-		<tr>
-		<th>ERPID</th>
-		<td>{{$val->ERPID}}</td>
-		</tr>
-		<tr>
-		<th>QTNo</th>
-		<td>{{$val->QTNo}}</td>
-		</tr>
+		<tr><th>POSP Name</th><td>{{$val->POSPName}}</td></tr>
+		<tr><th>Premium Amount</th><td>{{$val->PremiumAmount}}</td></tr>
+		<tr><th>ERPID</th><td>{{$val->ERPID}}</td></tr>
+		<tr><th>QTNo</th><td>{{$val->QTNo}}</td></tr>
 		@if($val->VehicleNo!='')
-		<tr>
-		<th>Vehicle No</th>
-		<td>{{$val->VehicleNo}}</td>
-		</tr>
+		<tr><th>Vehicle No</th><td>{{$val->VehicleNo}}</td></tr>
 		@endif		
 		<tr>
 		<th>Date of Expiry</th>
 		<td>{{$val->DateofExpiry}}</td>
 		</tr>
 		@if($val->BreakIn!='')
-		<tr>
-		<th>Break In</th>
-		<td>{{$val->BreakIn}}</td>
-		</tr>
+		<tr><th>Break In</th><td>{{$val->BreakIn}}</td></tr>
 		@endif	
 		@if($val->motorInsurer!='')
 		<tr>
@@ -126,52 +108,52 @@ th, td {
 		<th>Product Manager</th>
 		<td>{{$val->ProductManager}}</td>
 		</tr>
-		@if($val->RCCopy!='')
+		@if($val->RCCopy!=0)
 		<tr>
 		<th>RC Copy</th>
-		<td>{{$val->RCCopy}}</td>
+		<td>{{url('/upload/offlinecs')}}/{{$val->RCCopy}}</td>
 		</tr>
 		@endif
-		@if($val->Fitness!='')
+		@if($val->Fitness!=0)
 		<tr>
 		<th>Fitness</th>
-		<td>{{$val->Fitness}}</td>
+		<td>{{url('/upload/offlinecs')}}/{{$val->Fitness}}</td>
 		</tr>
 		@endif
-		@if($val->PUC!='')
+		@if($val->PUC!=0)
 		<tr>
 		<th>PUC</th>
-		<td>{{$val->PUC}}</td>
+		<td>{{url('/upload/offlinecs')}}/{{$val->PUC}}</td>
 		</tr>
 		@endif
-		@if($val->BreakinReport!='')
+		@if($val->BreakinReport!=0)
 		<tr>
 		<th>Breakin Report</th>
-		<td>{{$val->BreakinReport}}</td>
+		<td>{{url('/upload/offlinecs')}}/{{$val->BreakinReport}}</td>
 		</tr>
 		@endif
-		@if($val->ChequeCopy!='')
+		@if($val->ChequeCopy!=0)
 		<tr>
 		<th>Cheque Copy</th>
-		<td>{{$val->ChequeCopy}}</td>
+		<td>{{url('/upload/offlinecs')}}/{{$val->ChequeCopy}}</td>
 		</tr>
 		@endif
-		@if($val->Other!='')
+		@if($val->Other!=0)
 		<tr>
 		   <th>Other</th>
-		   <td>{{$val->Other}}</td>
+		   <td>{{url('/upload/offlinecs')}}/{{$val->Other}}</td>
 		</tr>
 		@endif
-		@if($val->ProposalForm!='')
+		@if($val->ProposalForm!=0)
 		<tr>
         	<th>Proposal Form</th>
-        	<td>{{$val->ProposalForm}}</td>
+        	<td>{{url('/upload/offlinecs')}}/{{$val->ProposalForm}}</td>
         </tr>
         @endif
-        @if($val->KYC!='')
+        @if($val->KYC!=0)
 		<tr>
 			<th>KYC</th>
-			<td>{{$val->KYC}}</td>
+			<td>{{url('/upload/offlinecs')}}/{{$val->KYC}}</td>
 		</tr>
 		@endif
         @if($val->Preexisting!='')
@@ -208,6 +190,12 @@ th, td {
 		<tr>
 			<th>Insurer Life</th>
 			<td>{{$val->Insurerlife}}</td>
+		</tr>
+		@endif
+		 @if($val->CSID!='')
+		<tr>
+			<th>CSID</th>
+			<td>{{$val->CSID}}</td>
 		</tr>
 		@endif
 		<tr>
