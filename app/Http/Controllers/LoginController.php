@@ -50,13 +50,15 @@ $query=DB::select('call sp_user_login(?,?,?)',array($request->email,$request->pa
                     $request->session()->put('companyid',$val->companyid);
                     $request->session()->put('last_login',$val->last_login);
   
-
-       $qu=DB::table('finmartemployeemaster')->select('fba_id','UId')
+ 
+       $qu=DB::table('finmartemployeemaster')->select('fba_id','UId','Profile')
        ->where('fba_id','=',$val->fbaid)->first();
 
  
+ 
        if($qu){
            $request->session()->put('UId',$qu->UId);
+           $request->session()->put('Profile',$qu->Profile);
        } 
 
 
