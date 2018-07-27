@@ -225,7 +225,7 @@
                   <select id="txtexecutivename" name="txtexecutivename" class="form-control" required>
                     <option value="">--select--</option >
                     @foreach($Executive as $val)
-                    <option value="{{$val->UId}}">{{$val->EmployeeName}}</option>
+                    <option value="{{$val->UId}}">{{$val->EmployeeName}}-{{$val->UId}}</option>
                    @endforeach
                   </select>
               	</div>
@@ -234,7 +234,7 @@
                   <select id="txtexecutivename1" name="txtexecutivename1" class="form-control" required>
                     <option value="">--select--</option>
                     @foreach($Executive1 as $val)
-                    <option value="{{$val->UId}}">{{$val->EmployeeName}}</option>
+                    <option value="{{$val->UId}}">{{$val->EmployeeName}}-{{$val->UId}}</option>
                    @endforeach
                   </select>
               	</div>
@@ -243,7 +243,7 @@
                   <select id="txtexeProductname" name="txtexeProductname" class="form-control" required>
                     <option value="">--select--</option>
                     @foreach($productexe as $val)
-                    <option value="{{$val->UId}}">{{$val->EmployeeName}}</option>
+                    <option value="{{$val->UId}}">{{$val->EmployeeName}}-{{$val->UId}}</option>
                    @endforeach
                   </select>
               	</div>
@@ -252,7 +252,7 @@
                   <select id="txtmgrProductname" name="txtmgrProductname" class="form-control" required>
                     <option value="">--select--</option>
                     @foreach($productmgr as $val)
-                    <option value="{{$val->UId}}">{{$val->EmployeeName}}</option>
+                    <option value="{{$val->UId}}">{{$val->EmployeeName}}-{{$val->UId}}</option>
                    @endforeach
                   </select>
               	</div>              	

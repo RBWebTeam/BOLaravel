@@ -24,10 +24,12 @@ class FbaController extends CallApiController
           return view('dashboard.fba-list',['doctype'=>$doctype]);         
         }
 
-              public function exportexcel(){
+              public function exportexcel($fdate,$todate){
+                //print_r($fdate);exit();
               $query=[];
-              $query=DB::select('call fbaList_export(0)');
+              $query=DB::select("call fbaList_export(0,'$fdate','$todate')");
               $data = json_decode( json_encode($query), true) ;
+
               return Excel::create('Fbalist', function($excel) use ($data) {
             $excel->sheet('FBADATA', function($sheet) use ($data)
             {
@@ -38,7 +40,8 @@ class FbaController extends CallApiController
 
 }
 
-          public function get_fba_list($fdate,$todate){
+          public function get_fba_list($fdate,$todate){        
+
              $id=Session::get('FBAUserId');
             $query=DB::select("call fbaList('0','$fdate','$todate')");
 

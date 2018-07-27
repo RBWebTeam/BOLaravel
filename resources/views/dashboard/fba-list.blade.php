@@ -22,7 +22,7 @@
 
          <p>From Date</p>
          <div id="datepicker" class="input-group date" data-date-format="yyyy-mm-dd">
-               <input class="form-control date-range-filter" type="text" placeholder="From Date" name="fdate" id="min" value="<?php echo date('Y-m-d',strtotime("-30 days")); ?>">
+               <input   class="form-control date-range-filter" type="text" placeholder="From Date" name="fdate" id="min" value="<?php echo date('Y-m-d',strtotime("-30 days")); ?>">
               <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
             </div>
             </div>
@@ -31,7 +31,7 @@
        <div class="form-group">
        <p>To Date</p>
        <div id="datepicker1" class="input-group date" data-date-format="yyyy-mm-dd">
-               <input class="form-control date-range-filter" type="text" placeholder="To Date" name="todate"  id="max" value="<?php echo date('Y-m-d'); ?>">
+               <input  class="form-control date-range-filter" type="text" placeholder="To Date" name="todate"  id="max" value="<?php echo date('Y-m-d'); ?>">
               <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
               </div>
               </div>
@@ -111,8 +111,7 @@
                                        </table>
 
   <div id="myDIV" >
-  <a href="{{url('export')}}" class="qry-btn" id="pospbtn">Export</a>
-
+  <a  class="qry-btn" id="pospbtn" onclick="getfdate()">Export</a>
 </div>
   </div>
      </div>
@@ -508,6 +507,17 @@ getfbadata();
 
 $('.date-range-filter').datepicker();
  });
+
+function getfdate()
+{
+
+  var fdate=$("#min").val();
+  var todate=$("#max").val();
+ 
+  $("#pospbtn").attr('href', '{{url('export')}}/'+fdate+'/'+todate);  
+
+
+}
  </script>
 
 <!-- from date to date end -->  

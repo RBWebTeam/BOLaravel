@@ -9,9 +9,29 @@
     border: 1px solid #eee !important; 
     margin-left: 45px;
   }
-  #tblcsdata tr:hover{
+/*#tblcsdata tr:hover{
    background-color: #8cc9e2;
-  }
+  }*/
+   /*#txtarea textarea:hover{
+  background-color: #8cc9e2;
+  border-style: none;
+ }*/
+ textarea {
+    -webkit-appearance: textarea;
+    background-color: none;
+    -webkit-rtl-ordering: logical;
+    flex-direction: column;
+    resize: auto;
+    cursor: default;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    border-width: none;
+    border-style: none;
+    border-color: none;
+    border-image: none;
+    padding: 2px;
+}
+  
 </style>
 <div class="container-fluid white-bg">
 <div class="col-md-12"><h3 class="mrg-btm">OFFLINE CS</h3></div>
@@ -23,7 +43,7 @@
 	<thead>
       <tr>
       	<th>ID</th>
-      	<th>Produc Name</th>
+      	<th>Product Name</th>
       	<th>Customer Name</th>
       	<th>City</th>
       	<th>POSP Name</th>
@@ -107,6 +127,7 @@
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>        
       </div>
     </div>
+
   </div>
 </div>
 <script type="text/javascript">
@@ -119,7 +140,7 @@
              success:function(data) 
              {      
               alert("Mail Has Been Send Successfully");
-              window.location.href = '{{url('offlinecs-dashboard')}}';
+              //window.location.href = '{{url('offlinecs-dashboard')}}';
              }
          });
   }
@@ -137,7 +158,7 @@
                var str = "<table Id='tblcsdata' class='table-bordered'>";
          for (var i = 0; i < data.length; i++) 
            {
-               str = str + "<tr><th>ID</th><td>"+data[i].ID+"</td></tr><tr><th>Reason</th><td>"+data[i].Reason+"</td></tr><tr><th>Product Name</th><td>"+data[i].product_name+"</td></tr><tr><th>Customer Name</th><td>"+data[i].CustomerName+"</td></tr><tr><th>Customer Address</th><td>"+data[i].CustomerAddress+"</td></tr><tr><th>City</th><td>"+data[i].cityname+"</td></tr><tr><th>State</th><td>"+data[i].state_name+"</td></tr><tr><th>Zone</th><td>"+data[i].Zone+"</td></tr><tr><th>Region</th><td>"+data[i].Region+"</td></tr><tr><th>Mobile No</th><td>"+data[i].MobileNo+"</td></tr><tr><th>Telephone No</th><td>"+data[i].TelephoneNo+"</td></tr><tr><th>Email Id</th><td>"+data[i].EmailId+"</td></tr><tr><th>POSP Name</th><td>"+data[i].POSPName+"</td></tr><tr><th>Premium Amount</th><td>"+data[i].PremiumAmount+"</td></tr><tr><th>ERPID</th><td>"+data[i].ERPID+"</td></tr><tr><th>QTNo</th><td>"+data[i].QTNo+"</td></tr>";                 
+               str = str + "<tr><th>ID</th><td>"+data[i].ID+"</td></tr><tr><th>Reason</th><td>"+data[i].Reason+"</td></tr><tr><th>Product Name</th><td>"+data[i].product_name+"</td></tr><tr><th>Customer Name</th><td>"+data[i].CustomerName+"</td></tr><tr id='txtarea'><th>Customer Address</th><td><textarea readonly>"+data[i].CustomerAddress+"</textarea></td></tr><tr><th>City</th><td>"+data[i].cityname+"</td></tr><tr><th>State</th><td>"+data[i].state_name+"</td></tr><tr><th>Zone</th><td>"+data[i].Zone+"</td></tr><tr><th>Region</th><td>"+data[i].Region+"</td></tr><tr><th>Mobile No</th><td>"+data[i].MobileNo+"</td></tr><tr><th>Telephone No</th><td>"+data[i].TelephoneNo+"</td></tr><tr><th>Email Id</th><td>"+data[i].EmailId+"</td></tr><tr><th>POSP Name</th><td>"+data[i].POSPName+"</td></tr><tr><th>Premium Amount</th><td>"+data[i].PremiumAmount+"</td></tr><tr><th>ERPID</th><td>"+data[i].ERPID+"</td></tr><tr><th>QTNo</th><td>"+data[i].QTNo+"</td></tr>";                 
                   str += data[i].otherreason==null?"":"<tr><th>Other Reason</th><td>"+data[i].otherreason+"</td></tr>";
                   str += data[i].VehicleNo==null?"":"<tr><th>Vehicle No</th><td>"+data[i].VehicleNo+"</td></tr>";
                   str += data[i].DateofExpiry==null?"":"<tr><th>Date of Expiry</th><td>"+data[i].DateofExpiry+"</td></tr>";
@@ -158,14 +179,14 @@
                   str += data[i].Insurerlife==null?"":"<tr><th>Insurer Life</th><td>"+data[i].Insurerlife+"</td></tr>";
                   str += data[i].CSID==null?"":"<tr><th>CSID</th><td>"+data[i].CSID+"</td></tr>";
                   str += data[i].createddate==null?"":"<tr><th>Created date</th><td>"+data[i].createddate+"</td></tr>";
-                  str += data[i].RCCopy==0?"":"<tr><th>RC Copy</th><td><a target='_blank' href='{{url('/upload/offlinecs')}}/"+data[i].RCCopy+"'>"+data[i].RCCopy+"</a></td></tr>";
-                  str += data[i].Fitness==0?"":"<tr><th>Fitness</th><td><a target='_blank' href='{{url('/upload/offlinecs')}}/"+data[i].Fitness+"'>"+data[i].Fitness+"</a></td></tr>";
-                  str += data[i].PUC==0?"":"<tr><th>PUC</th><td><a target='_blank' href='{{url('/upload/offlinecs')}}/"+data[i].PUC+"'>"+data[i].PUC+"</a></td></tr>";
-                   str += data[i].BreakinReport==0?"":"<tr><th>Breakin Report</th><td><a target='_blank' href='{{url('/upload/offlinecs')}}/"+data[i].BreakinReport+"'>"+data[i].BreakinReport+"</a></td></tr>";
-                  str += data[i].ChequeCopy==0?"":"<tr><th>Cheque Copy</th><td><a target='_blank' href='{{url('/upload/offlinecs')}}/"+data[i].ChequeCopy+"'>"+data[i].ChequeCopy+"</a></td></tr>";
-                  str += data[i].Other==0?"":"<tr><th>Other</th><td><a target='_blank' href='{{url('/upload/offlinecs')}}/"+data[i].Other+"'>"+data[i].Other+"</a></td></tr>";
-                  str += data[i].ProposalForm==0?"":"<tr><th>Proposal Form</th><td><a target='_blank' href='{{url('/upload/offlinecs')}}/"+data[i].ProposalForm+"'>"+data[i].ProposalForm+"</a></td></tr>";
-                   str += data[i].KYC==0?"":"<tr><th>KYC</th><td><a target='_blank' href='{{url('/upload/offlinecs')}}/"+data[i].KYC+"'>"+data[i].KYC+"</a></td></tr>";
+                  str += data[i].RCCopy==0?"":"<tr><th>RC Copy</th><td><a target='_blank' href='http://"+data[i].RCCopy+"'>"+data[i].RCCopy+"</a></td></tr>";
+                  str += data[i].Fitness==0?"":"<tr><th>Fitness</th><td><a target='_blank' href='http://"+data[i].Fitness+"'>"+data[i].Fitness+"</a></td></tr>";
+                  str += data[i].PUC==0?"":"<tr><th>PUC</th><td><a target='_blank' href='http://"+data[i].PUC+"'>"+data[i].PUC+"</a></td></tr>";
+                   str += data[i].BreakinReport==0?"":"<tr><th>Breakin Report</th><td><a target='_blank' href='http://"+data[i].BreakinReport+"'>"+data[i].BreakinReport+"</a></td></tr>";
+                  str += data[i].ChequeCopy==0?"":"<tr><th>Cheque Copy</th><td><a target='_blank' href='http://"+data[i].ChequeCopy+"'>"+data[i].ChequeCopy+"</a></td></tr>";
+                  str += data[i].Other==0?"":"<tr><th>Other</th><td><a target='_blank' href='http://"+data[i].Other+"'>"+data[i].Other+"</a></td></tr>";
+                  str += data[i].ProposalForm==0?"":"<tr><th>Proposal Form</th><td><a target='_blank' href='http://"+data[i].ProposalForm+"'>"+data[i].ProposalForm+"</a></td></tr>";
+                   str += data[i].KYC==0?"":"<tr><th>KYC</th><td><a target='_blank' href='http://"+data[i].KYC+"'>"+data[i].KYC+"</a></td></tr>";
 
 
            } 

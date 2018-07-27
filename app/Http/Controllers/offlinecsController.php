@@ -9,7 +9,7 @@ use Redirect;
 use Session;
 use URL;
 use Mail;
-class offlinecsController extends CallApiController
+class OfflinecsController extends CallApiController
 {
 	public function getofflinecs()
 	{
@@ -104,7 +104,7 @@ class offlinecsController extends CallApiController
 if ($filerc!=0) 
 {
   try{
-    $data= array("longurl"=>"http://bo.mgfm.in/upload/offlinecs/$filerc");
+    $data= array("longurl"=>"http://bo.magicfinmart.com/upload/offlinecs/$filerc");
     $token=array("cache-control: no-cache","content-type: application/json", "token: 1234567890");
     $post_data=json_encode($data);
     $type=$token;
@@ -124,7 +124,7 @@ if ($filerc!=0)
 if ($fileFitness!=0) 
 {
   try{
-    $data= array("longurl"=>"http://bo.mgfm.in/upload/offlinecs/$fileFitness");
+    $data= array("longurl"=>"http://bo.magicfinmart.com/upload/offlinecs/$fileFitness");
     $token=array("cache-control: no-cache","content-type: application/json", "token: 1234567890");
     $post_data=json_encode($data);
     $type=$token;
@@ -146,7 +146,7 @@ if ($fileFitness!=0)
 if ($filePUC!=0) 
 {
   try{
-    $data= array("longurl"=>"http://bo.mgfm.in/upload/offlinecs/$filePUC");
+    $data= array("longurl"=>"http://bo.magicfinmart.com/upload/offlinecs/$filePUC");
     $token=array("cache-control: no-cache","content-type: application/json", "token: 1234567890");
     $post_data=json_encode($data);
     $type=$token;
@@ -166,7 +166,7 @@ if ($filePUC!=0)
 if ($filebreakrp!=0) 
 {
   try{
-    $data= array("longurl"=>"http://bo.mgfm.in/upload/offlinecs/$filebreakrp");
+    $data= array("longurl"=>"http://bo.magicfinmart.com/upload/offlinecs/$filebreakrp");
     $token=array("cache-control: no-cache","content-type: application/json", "token: 1234567890");
     $post_data=json_encode($data);
     $type=$token;
@@ -185,7 +185,7 @@ if ($filebreakrp!=0)
 if ($fileCheque!=0) 
 {
   try{
-    $data= array("longurl"=>"http://bo.mgfm.in/upload/offlinecs/$fileCheque");
+    $data= array("longurl"=>"http://bo.magicfinmart.com/upload/offlinecs/$fileCheque");
     $token=array("cache-control: no-cache","content-type: application/json", "token: 1234567890");
     $post_data=json_encode($data);
     $type=$token;
@@ -204,7 +204,7 @@ if ($fileCheque!=0)
 if ($fileother!=0) 
 {
   try{
-    $data= array("longurl"=>"http://bo.mgfm.in/upload/offlinecs/$fileother");
+    $data= array("longurl"=>"http://bo.magicfinmart.com/upload/offlinecs/$fileother");
     $token=array("cache-control: no-cache","content-type: application/json", "token: 1234567890");
     $post_data=json_encode($data);
     $type=$token;
@@ -223,7 +223,7 @@ if ($fileother!=0)
 if ($fileProposalForm!=0) 
 {
   try{
-    $data= array("longurl"=>"http://bo.mgfm.in/upload/offlinecs/$fileProposalForm");
+    $data= array("longurl"=>"http://bo.magicfinmart.com/upload/offlinecs/$fileProposalForm");
     $token=array("cache-control: no-cache","content-type: application/json", "token: 1234567890");
     $post_data=json_encode($data);
     $type=$token;
@@ -242,7 +242,7 @@ if ($fileProposalForm!=0)
 if ($fileKYC!=0) 
 {
   try{
-    $data= array("longurl"=>"http://bo.mgfm.in/upload/offlinecs/$fileKYC");
+    $data= array("longurl"=>"http://bo.magicfinmart.com/upload/offlinecs/$fileKYC");
     $token=array("cache-control: no-cache","content-type: application/json", "token: 1234567890");
     $post_data=json_encode($data);
     $type=$token;
@@ -258,30 +258,110 @@ if ($fileKYC!=0)
         return $e->getMessage();    
      }        
 }
-               $email ='rajendra.raval@rupeeboss.com';
-               $ccemail='vishakha.kadam@policyboss.com';
-               $ccemail1='OfflineCS@magicfinmart.com';  
-               $ccemail2='rajendra.raval@policyboss.com';
-                //$email ='shubhamkhandekar2@gmail.com';
-               // $ccemail='rajendra.raval@policyboss.com';
-                $offlinecsdata = DB::select("call Usp_get_motor_data($ID)");    
 
+      $offlinecsdata = DB::select("call Usp_get_motor_data($ID)"); 
+
+      if ($offlinecsdata[0]->Product==1||$offlinecsdata[0]->Product==2||$offlinecsdata[0]->Product==3) 
+              {             
+               $FBAID=Session::get('fbaid');
+               $emailids=DB::select("call getTOCCEmailIdForOfflineCS($FBAID,1)"); 
+              foreach ($emailids as $val){                
+               $tomail= $val->To_mail_id;
+               $ccemail = explode(',',$val->CC_mail_id);               
+              }
+            
+                
                 $sub='SNo.'.$offlinecsdata[0]->ID.' '.$offlinecsdata[0]->product_name.'  Entry details for '.$offlinecsdata[0]->CustomerName.' - '.$offlinecsdata[0]->POSPName;
                 
-            if($ccemail!='')
+            if($emailids!='')
             {                
-                  $mail = Mail::send('mailViews.sendmailofflinecs',['offlinecsdata' => $offlinecsdata], function($message)use($email,$ccemail,$ccemail1,$ccemail2,$sub){
+                  $mail = Mail::send('mailViews.sendmailofflinecs',['offlinecsdata' => $offlinecsdata], function($message)use($tomail,$ccemail,$sub){
                   $message->from('OfflineCS@magicfinmart.com', 'Fin-Mart');
-                  $message->to($email)->cc($ccemail)->cc($ccemail1)->cc($ccemail2)->subject($sub);});
+                  $message->to($tomail);
+                   foreach ($ccemail as $key => $cc) 
+                   {
+                     $message->cc($cc);
+                    }
+                  $message->subject($sub);
+
+                  });
                if(Mail::failures())
                 {
                    $error=3;
                    echo $error;
                 }
-    }      
+            
+             }
+           }
+
+      if ($offlinecsdata[0]->Product==4||$offlinecsdata[0]->Product==5) 
+              {             
+               $FBAID=Session::get('fbaid');
+               $emailids=DB::select("call getTOCCEmailIdForOfflineCS($FBAID,4)"); 
+              foreach ($emailids as $val){                
+               $tomail= $val->To_mail_id;
+               $ccemail = explode(',',$val->CC_mail_id);               
+              }
+            
+                
+                $sub='SNo.'.$offlinecsdata[0]->ID.' '.$offlinecsdata[0]->product_name.'  Entry details for '.$offlinecsdata[0]->CustomerName.' - '.$offlinecsdata[0]->POSPName;
+                
+            if($emailids!='')
+            {                
+                  $mail = Mail::send('mailViews.sendmailofflinecs',['offlinecsdata' => $offlinecsdata], function($message)use($tomail,$ccemail,$sub){
+                  $message->from('OfflineCS@magicfinmart.com', 'Fin-Mart');
+                  $message->to($tomail);
+                   foreach ($ccemail as $key => $cc) 
+                   {
+                     $message->cc($cc);
+                    }
+                  $message->subject($sub);
+
+                  });
+               if(Mail::failures())
+                {
+                   $error=3;
+                   echo $error;
+                }
+              
+             }
+           }
+
+     if ($offlinecsdata[0]->Product==6) 
+              {             
+               $FBAID=Session::get('fbaid');
+               $emailids=DB::select("call getTOCCEmailIdForOfflineCS($FBAID,6)"); 
+              foreach ($emailids as $val){                
+               $tomail= $val->To_mail_id;
+               $ccemail = explode(',',$val->CC_mail_id);               
+              }
+            
+                
+                $sub='SNo.'.$offlinecsdata[0]->ID.' '.$offlinecsdata[0]->product_name.'  Entry details for '.$offlinecsdata[0]->CustomerName.' - '.$offlinecsdata[0]->POSPName;
+                
+            if($emailids!='')
+            {                
+                  $mail = Mail::send('mailViews.sendmailofflinecs',['offlinecsdata' => $offlinecsdata], function($message)use($tomail,$ccemail,$sub){
+                  $message->from('OfflineCS@magicfinmart.com', 'Fin-Mart');
+                  $message->to($tomail);
+                   foreach ($ccemail as $key => $cc) 
+                   {
+                     $message->cc($cc);
+                    }
+                  $message->subject($sub);
+
+                  });
+               if(Mail::failures())
+                {
+                   $error=3;
+                   echo $error;
+                }
+             
+             }
+           }
      Session::flash('message', 'Record has been saved successfully');           
       return Redirect('offlinecs');
-    }
+}
 
   public  function fileupload_fn($image)
   {
@@ -368,12 +448,12 @@ if ($fileKYC!=0)
             {
               $ID=$val->Id;             
             }
-            //print_r($ID);exit();
+            
 
 if ($filerc!=0) 
 {
   try{
-    $data= array("longurl"=>"http://bo.mgfm.in/upload/offlinecs/$filerc");
+    $data= array("longurl"=>"http://bo.magicfinmart.com/upload/offlinecs/$filerc");
     $token=array("cache-control: no-cache","content-type: application/json", "token: 1234567890");
     $post_data=json_encode($data);
     $type=$token;
@@ -393,7 +473,7 @@ if ($filerc!=0)
 if ($fileFitness!=0) 
 {
   try{
-    $data= array("longurl"=>"http://bo.mgfm.in/upload/offlinecs/$fileFitness");
+    $data= array("longurl"=>"http://bo.magicfinmart.com/upload/offlinecs/$fileFitness");
     $token=array("cache-control: no-cache","content-type: application/json", "token: 1234567890");
     $post_data=json_encode($data);
     $type=$token;
@@ -415,7 +495,7 @@ if ($fileFitness!=0)
 if ($filePUC!=0) 
 {
   try{
-    $data= array("longurl"=>"http://bo.mgfm.in/upload/offlinecs/$filePUC");
+    $data= array("longurl"=>"http://bo.magicfinmart.com/upload/offlinecs/$filePUC");
     $token=array("cache-control: no-cache","content-type: application/json", "token: 1234567890");
     $post_data=json_encode($data);
     $type=$token;
@@ -435,7 +515,7 @@ if ($filePUC!=0)
 if ($filebreakrp!=0) 
 {
   try{
-    $data= array("longurl"=>"http://bo.mgfm.in/upload/offlinecs/$filebreakrp");
+    $data= array("longurl"=>"http://bo.magicfinmart.com/upload/offlinecs/$filebreakrp");
     $token=array("cache-control: no-cache","content-type: application/json", "token: 1234567890");
     $post_data=json_encode($data);
     $type=$token;
@@ -454,7 +534,7 @@ if ($filebreakrp!=0)
 if ($fileCheque!=0) 
 {
   try{
-    $data= array("longurl"=>"http://bo.mgfm.in/upload/offlinecs/$fileCheque");
+    $data= array("longurl"=>"http://bo.magicfinmart.com/upload/offlinecs/$fileCheque");
     $token=array("cache-control: no-cache","content-type: application/json", "token: 1234567890");
     $post_data=json_encode($data);
     $type=$token;
@@ -473,7 +553,7 @@ if ($fileCheque!=0)
 if ($fileother!=0) 
 {
   try{
-    $data= array("longurl"=>"http://bo.mgfm.in/upload/offlinecs/$fileother");
+    $data= array("longurl"=>"http://bo.magicfinmart.com/upload/offlinecs/$fileother");
     $token=array("cache-control: no-cache","content-type: application/json", "token: 1234567890");
     $post_data=json_encode($data);
     $type=$token;
@@ -492,7 +572,7 @@ if ($fileother!=0)
 if ($fileProposalForm!=0) 
 {
   try{
-    $data= array("longurl"=>"http://bo.mgfm.in/upload/offlinecs/$fileProposalForm");
+    $data= array("longurl"=>"http://bo.magicfinmart.com/upload/offlinecs/$fileProposalForm");
     $token=array("cache-control: no-cache","content-type: application/json", "token: 1234567890");
     $post_data=json_encode($data);
     $type=$token;
@@ -511,7 +591,7 @@ if ($fileProposalForm!=0)
 if ($fileKYC!=0) 
 {
   try{
-    $data= array("longurl"=>"http://bo.mgfm.in/upload/offlinecs/$fileKYC");
+    $data= array("longurl"=>"http://bo.magicfinmart.com/upload/offlinecs/$fileKYC");
     $token=array("cache-control: no-cache","content-type: application/json", "token: 1234567890");
     $post_data=json_encode($data);
     $type=$token;
@@ -693,7 +773,7 @@ if ($fileKYC!=0)
 
 public function getshorturl($filename,$ID,$doctype)
 {  try{
-    $data= array("longurl"=>"http://bo.mgfm.in/upload/offlinecs/$filename");
+    $data= array("longurl"=>"http://bo.magicfinmart.com/upload/offlinecs/$filename");
     $token=array("cache-control: no-cache","content-type: application/json", "token: 1234567890");
     $post_data=json_encode($data);
     $type=$token;
@@ -711,6 +791,7 @@ public function getshorturl($filename,$ID,$doctype)
 
 public function Updateofflinecsandsendmail(Request $req)
        {
+
           $fbauser=Session::get('fbauserid');
           //print_r($req->all());exit();
            $filerc=$this->fileupload_fn($req->file('filerc'));
@@ -859,28 +940,107 @@ if ($fileKYC!=0)
 
         return $e->getMessage();    
      }        
-}              $email ='rajendra.raval@rupeeboss.com';
-               $ccemail='vishakha.kadam@policyboss.com';
-               $ccemail1='OfflineCS@magicfinmart.com';  
-               $ccemail2='rajendra.raval@policyboss.com';
-                //$email ='shubhamkhandekar2@gmail.com';
-               // $ccemail='rajendra.raval@policyboss.com';
-                $offlinecsdata = DB::select("call Usp_get_motor_data($ID)");    
+}              
+ $offlinecsdata = DB::select("call Usp_get_motor_data($ID)"); 
 
+      if ($offlinecsdata[0]->Product==1||$offlinecsdata[0]->Product==2||$offlinecsdata[0]->Product==3) 
+              {             
+               $FBAID=Session::get('fbaid');
+               $emailids=DB::select("call getTOCCEmailIdForOfflineCS($FBAID,1)"); 
+              foreach ($emailids as $val){                
+               $tomail= $val->To_mail_id;
+               $ccemail = explode(',',$val->CC_mail_id);               
+              }
+            
+                
                 $sub='SNo.'.$offlinecsdata[0]->ID.' '.$offlinecsdata[0]->product_name.'  Entry details for '.$offlinecsdata[0]->CustomerName.' - '.$offlinecsdata[0]->POSPName;
                 
-            if($ccemail!='')
+            if($emailids!='')
             {                
-                  $mail = Mail::send('mailViews.sendmailofflinecs',['offlinecsdata' => $offlinecsdata], function($message)use($email,$ccemail,$ccemail1,$ccemail2,$sub){
+                  $mail = Mail::send('mailViews.sendmailofflinecs',['offlinecsdata' => $offlinecsdata], function($message)use($tomail,$ccemail,$sub){
                   $message->from('OfflineCS@magicfinmart.com', 'Fin-Mart');
-                  $message->to($email)->cc($ccemail)->cc($ccemail1)->cc($ccemail2)->subject($sub);});
+                  $message->to($tomail);
+                   foreach ($ccemail as $key => $cc) 
+                   {
+                     $message->cc($cc);
+                    }
+                  $message->subject($sub);
+
+                  });
                if(Mail::failures())
                 {
                    $error=3;
                    echo $error;
                 }
-       
-    }
+            
+             }
+           }
+
+      if ($offlinecsdata[0]->Product==4||$offlinecsdata[0]->Product==5) 
+              {             
+               $FBAID=Session::get('fbaid');
+               $emailids=DB::select("call getTOCCEmailIdForOfflineCS($FBAID,4)"); 
+              foreach ($emailids as $val){                
+               $tomail= $val->To_mail_id;
+               $ccemail = explode(',',$val->CC_mail_id);               
+              }
+            
+                
+                $sub='SNo.'.$offlinecsdata[0]->ID.' '.$offlinecsdata[0]->product_name.'  Entry details for '.$offlinecsdata[0]->CustomerName.' - '.$offlinecsdata[0]->POSPName;
+                
+            if($emailids!='')
+            {                
+                  $mail = Mail::send('mailViews.sendmailofflinecs',['offlinecsdata' => $offlinecsdata], function($message)use($tomail,$ccemail,$sub){
+                  $message->from('OfflineCS@magicfinmart.com', 'Fin-Mart');
+                  $message->to($tomail);
+                   foreach ($ccemail as $key => $cc) 
+                   {
+                     $message->cc($cc);
+                    }
+                  $message->subject($sub);
+
+                  });
+               if(Mail::failures())
+                {
+                   $error=3;
+                   echo $error;
+                }
+              
+             }
+           }
+
+     if ($offlinecsdata[0]->Product==6) 
+              {             
+               $FBAID=Session::get('fbaid');
+               $emailids=DB::select("call getTOCCEmailIdForOfflineCS($FBAID,6)"); 
+              foreach ($emailids as $val){                
+               $tomail= $val->To_mail_id;
+               $ccemail = explode(',',$val->CC_mail_id);               
+              }
+            
+                
+                $sub='SNo.'.$offlinecsdata[0]->ID.' '.$offlinecsdata[0]->product_name.'  Entry details for '.$offlinecsdata[0]->CustomerName.' - '.$offlinecsdata[0]->POSPName;
+                
+            if($emailids!='')
+            {                
+                  $mail = Mail::send('mailViews.sendmailofflinecs',['offlinecsdata' => $offlinecsdata], function($message)use($tomail,$ccemail,$sub){
+                  $message->from('OfflineCS@magicfinmart.com', 'Fin-Mart');
+                  $message->to($tomail);
+                   foreach ($ccemail as $key => $cc) 
+                   {
+                     $message->cc($cc);
+                    }
+                  $message->subject($sub);
+
+                  });
+               if(Mail::failures())
+                {
+                   $error=3;
+                   echo $error;
+                }
+             
+             }
+           }
  Session::flash('message', 'Record has been Updated successfully');
 return Redirect('offlinecs');
 }

@@ -103,7 +103,7 @@ Route::get('Fba-list-Update-posp/{id}','FbaController@UpdatePospno');
 
 
 // export excel  
-Route::get('export','FbaController@exportexcel');
+Route::get('export/{fdate}/{todate}','FbaController@exportexcel');
 
 
 // non fba-list start  

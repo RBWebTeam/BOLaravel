@@ -20,21 +20,33 @@ class OfflinecsDashboardController extends Controller
 	}
 	public function sendemail($ID)
 	{
-               $email ='rajendra.raval@rupeeboss.com';
-               $ccemail='vishakha.kadam@policyboss.com';
-               $ccemail1='OfflineCS@magicfinmart.com';  
-               $ccemail2='rajendra.raval@policyboss.com';
-                //$email ='shubhamkhandekar2@gmail.com';
-               // $ccemail='rajendra.raval@policyboss.com';
-                $offlinecsdata = DB::select("call Usp_get_motor_data($ID)");    
+               
+       $offlinecsdata = DB::select("call Usp_get_motor_data($ID)"); 
 
+      if ($offlinecsdata[0]->Product==1||$offlinecsdata[0]->Product==2||$offlinecsdata[0]->Product==3) 
+              {             
+               $FBAID=Session::get('fbaid');
+               $emailids=DB::select("call getTOCCEmailIdForOfflineCS($FBAID,1)"); 
+              foreach ($emailids as $val){                
+               $tomail= $val->To_mail_id;
+               $ccemail = explode(',',$val->CC_mail_id);               
+              }
+            
+                
                 $sub='SNo.'.$offlinecsdata[0]->ID.' '.$offlinecsdata[0]->product_name.'  Entry details for '.$offlinecsdata[0]->CustomerName.' - '.$offlinecsdata[0]->POSPName;
                 
-            if($ccemail!='')
+            if($emailids!='')
             {                
-                  $mail = Mail::send('mailViews.sendmailofflinecs',['offlinecsdata' => $offlinecsdata], function($message)use($email,$ccemail,$ccemail1,$ccemail2,$sub){
+                  $mail = Mail::send('mailViews.sendmailofflinecs',['offlinecsdata' => $offlinecsdata], function($message)use($tomail,$ccemail,$sub){
                   $message->from('OfflineCS@magicfinmart.com', 'Fin-Mart');
-                  $message->to($email)->cc($ccemail)->cc($ccemail1)->cc($ccemail2)->subject($sub);});
+                  $message->to($tomail);
+                   foreach ($ccemail as $key => $cc) 
+                   {
+                     $message->cc($cc);
+                    }
+                  $message->subject($sub);
+
+                  });
                if(Mail::failures())
                 {
                    $error=3;
@@ -42,6 +54,73 @@ class OfflinecsDashboardController extends Controller
                 }
               DB::table('offlinecs')->where('ID','=',$ID)->update(['ismailsend'=>1]);
              }
+           }
+
+      if ($offlinecsdata[0]->Product==4||$offlinecsdata[0]->Product==5) 
+              {             
+               $FBAID=Session::get('fbaid');
+               $emailids=DB::select("call getTOCCEmailIdForOfflineCS($FBAID,4)"); 
+              foreach ($emailids as $val){                
+               $tomail= $val->To_mail_id;
+               $ccemail = explode(',',$val->CC_mail_id);               
+              }
+            
+                
+                $sub='SNo.'.$offlinecsdata[0]->ID.' '.$offlinecsdata[0]->product_name.'  Entry details for '.$offlinecsdata[0]->CustomerName.' - '.$offlinecsdata[0]->POSPName;
+                
+            if($emailids!='')
+            {                
+                  $mail = Mail::send('mailViews.sendmailofflinecs',['offlinecsdata' => $offlinecsdata], function($message)use($tomail,$ccemail,$sub){
+                  $message->from('OfflineCS@magicfinmart.com', 'Fin-Mart');
+                  $message->to($tomail);
+                   foreach ($ccemail as $key => $cc) 
+                   {
+                     $message->cc($cc);
+                    }
+                  $message->subject($sub);
+
+                  });
+               if(Mail::failures())
+                {
+                   $error=3;
+                   echo $error;
+                }
+              DB::table('offlinecs')->where('ID','=',$ID)->update(['ismailsend'=>1]);
+             }
+           }
+
+     if ($offlinecsdata[0]->Product==6) 
+              {             
+               $FBAID=Session::get('fbaid');
+               $emailids=DB::select("call getTOCCEmailIdForOfflineCS($FBAID,6)"); 
+              foreach ($emailids as $val){                
+               $tomail= $val->To_mail_id;
+               $ccemail = explode(',',$val->CC_mail_id);               
+              }
+            
+                
+                $sub='SNo.'.$offlinecsdata[0]->ID.' '.$offlinecsdata[0]->product_name.'  Entry details for '.$offlinecsdata[0]->CustomerName.' - '.$offlinecsdata[0]->POSPName;
+                
+            if($emailids!='')
+            {                
+                  $mail = Mail::send('mailViews.sendmailofflinecs',['offlinecsdata' => $offlinecsdata], function($message)use($tomail,$ccemail,$sub){
+                  $message->from('OfflineCS@magicfinmart.com', 'Fin-Mart');
+                  $message->to($tomail);
+                   foreach ($ccemail as $key => $cc) 
+                   {
+                     $message->cc($cc);
+                    }
+                  $message->subject($sub);
+
+                  });
+               if(Mail::failures())
+                {
+                   $error=3;
+                   echo $error;
+                }
+              DB::table('offlinecs')->where('ID','=',$ID)->update(['ismailsend'=>1]);
+             }
+           }
              
     }
     public function showdetails($ID)
