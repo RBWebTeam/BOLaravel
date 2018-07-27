@@ -271,6 +271,8 @@ foreach ($val->ParamDetails as $key => $value) {
 <input type="hidden" name="txtOfferPrice" id="txtOfferPrice" value="{{$_GET["OfferPrice"]}}">
 <input type="hidden" name="txthomevisit" id="txthomevisit" value="{{$_GET["homevisit"]}}">
 <input type="hidden" name="txtfasting" id="txtfasting" value="{{$_GET["fasting"]}}">
+<input type="hidden" name="latitude" id="latitude" value="{{$_GET["latitude"]}}">
+<input type="hidden" name="longitude" id="longitude" value="{{$_GET["longitude"]}}">
 
 
 <input type="hidden" name="txtprovider" id="txtprovider">

@@ -233,13 +233,25 @@ Route::get('assigned-fba-lead-history/{fbaid}','quickleadController@gethistoryfb
 Route::get('Quick-lead-dashboard','quickleaddashboardController@getquicklead');
 Route::get('edit_lead/{Leadid}','quickleadController@editlead');
 Route::Post('quick-lead-edit','quickleadController@updatelead');
+route::get('offlinecs','OfflinecsController@getofflinecs');
 
-route::get('offlinecs','offlinecsController@getofflinecs');
-route::get('get_state_offlinecs/{cityid}','offlinecsController@getstate');
-Route::Post('offlinecs','offlinecsController@insertofflinecs');
+route::get('get_state_offlinecs/{cityid}','OfflinecsController@getstate');
+Route::Post('offlinecs','OfflinecsController@insertofflinecs');
+Route::get('get_ERPID_offlinecs/{fbaid}','OfflinecsController@geterpid');
+
+route::get('offlinecsedit/{id}','OfflinecsController@getofflinecsdataedit');
+
+Route::post('saveofflinecs','OfflinecsController@saveofflinecsdata');
+Route::get('offlinecs-dashboard','OfflinecsDashboardController@getofflinecsdata');
+
+Route::post('offlinecsupdate','OfflinecsController@Updateofflinecs');
+Route::post('offlinecsupdateandsendmail','OfflinecsController@Updateofflinecsandsendmail');
+Route::get('offlinecssendemail/{ID}','OfflinecsDashboardController@sendemail');
+Route::get('offlinecs-details/{ID}','OfflinecsDashboardController@showdetails');
+Route::Post('offlinecs-csidupdate','OfflinecsDashboardController@updatecsid');
 ///shubham end ///
 // avinash
- Route::get('ticket-module','TicketController@getticketdetails') ;
+ Route::get('ticket-module','TicketController@getticketdetails');
    // avinash
 
 
@@ -425,10 +437,15 @@ Route::get('crm-view-history','CrmController@crm_view_history');
 Route::get('crm-disposition/{id}','CrmController@crm_disposition_fn'); 
 Route::post('crm-disposition','CrmController@crm_disposition');
 Route::get('crm-disposition-id','CrmController@crm_disposition_id'); 
-Route::get('crm-followup','CrmController@crm_followup'); 
+Route::get('crm-followup/{fbamappinid}/{crmid}/{history_id}','CrmController@crm_followup'); 
 Route::get('crm-followup-disposition','CrmController@followup_disposition_view'); 
+Route::get('crm-followup-history','CrmController@followup_history'); 
+Route::post('crm-followup-history','CrmController@followup_history_update'); 
 
+Route::get('crm-new/{fbamappin_id}','CrmController@crm_new'); 
 
+Route::get('my-followup','MyfollowupController@my_followup'); 
+Route::get('assign-followup','MyfollowupController@assign_followup'); 
 
 });
 

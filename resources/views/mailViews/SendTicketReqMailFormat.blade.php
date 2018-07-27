@@ -11,9 +11,4 @@
     <img src="http://bo.mgfm.in/images/logo1.png">
 	<p>Warm Regards,</p>
 	<p>Magic Finmart Team</p>
-
-
-
-
-
 </html>

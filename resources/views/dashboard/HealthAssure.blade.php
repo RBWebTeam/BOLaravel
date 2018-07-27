@@ -233,7 +233,8 @@ if($('#healthchekup').valid())
 
     $("#healthchekup").trigger('reset');
 
-    window.location.href ="{{URL::to('Health-Assure-Partner')}}?PackName="+$('#txtpackname').val()+"&Packcode="+$('#txtpackcode').val()+"&OfferPrice="+$('#txtoffer').val()+"&MRP="+$('#txtmrp').val()+"&tcount="+$('#txttcount').val()+"&fasting="+$('#txtfasting').val()+"&homevisit="+$('#txthomevisit').val()+"&fbaid="+$('#txtfbaid').val()+"&fbaname="+$('#txtfbaname').val()+"&ID="+msg[0].ID;
+    window.location.href ="{{URL::to('Health-Assure-Partner')}}?PackName="+$('#txtpackname').val()+"&Packcode="+$('#txtpackcode').val()+"&OfferPrice="+$('#txtoffer').val()+"&MRP="+$('#txtmrp').val()+"&tcount="+$('#txttcount').val()+"&fasting="+$('#txtfasting').val()+"&latitude="+$('#latitude').val()+"&longitude="+$('#longitude').val()
+    +"&homevisit="+$('#txthomevisit').val()+"&fbaid="+$('#txtfbaid').val()+"&fbaname="+$('#txtfbaname').val()+"&ID="+msg[0].ID;
 
    }
 });
@@ -292,13 +293,14 @@ function checkDate() {
    }
  }
  function GetLocation(address) {
-  alert(address);
+
 $.ajax({ 
             type: "GET",
             url:"https://maps.googleapis.com/maps/api/geocode/xml?address=" + address + "&sensor=true_or_false&key=AIzaSyA3t6Az0YB8lyTGCguYHwrscSzGjohnAx4",
             success: function(response) 
             {
-              console.log(response);   
+              $('#latitude').val($(response).find('GeocodeResponse').find('location').find('lat').text());
+              $('#longitude').val($(response).find('GeocodeResponse').find('location').find('lng').text());
             }
         });
         };
@@ -386,7 +388,8 @@ foreach ($val->ParamDetails as $key => $value) {
     value="{{$_GET["fbaname"]}}">
 <input type="hidden" name="txttcount" id="txttcount" 
     value="{{$_GET["tcount"]}}">
-
+<input type="hidden" name="latitude" id="latitude">
+<input type="hidden" name="longitude" id="longitude">
 
  
 </div>
@@ -397,8 +400,7 @@ foreach ($val->ParamDetails as $key => $value) {
 </div>
 <div class="col-md-4 col-sx-6 styled-input">
 
- <input type="number" id="txtmono" name="txtmono" class="input-1" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-    type = "number" maxlength = "10" required />
+ <input type="number" id="txtmono" name="txtmono" class="input-1" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type = "number" maxlength = "10" required />
  <label>Mobile No</label>
 </div>
 
