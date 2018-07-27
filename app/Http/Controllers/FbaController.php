@@ -260,21 +260,19 @@ class FbaController extends CallApiController
            public function fbamaster(){
            return view('fbamaster_data');
         }
-
-           public function getfbaid(Request $req){ 
-          $data = DB::select("call get_fbamast_data(?)",array($req->id));
-          return response()->json($data);
+        public function getfbaid(Request $req){ 
+        $data = DB::select("call get_fbamast_data(?)",array($req->id));
+      return response()->json($data);
    }
 
-          public function update_fba_table(Request $req)
-       {
+    public function update_fba_table(Request $req)
+    {
           $arra= array('FirsName'=>$req->f_name,'LastName'=>$req->l_name,'emailID'=>$req->work_email,'MobiNumb1'=>$req->mobile);
           $que=DB::table('FBAMast')->where('FBAID','=',$req->fba_id)->update($arra);
            return redirect('fbamaster-edit');
-       }
+     }
 
-
-private function getPaymentLinkFromFinmart($fbaid){
+       private function getPaymentLinkFromFinmart($fbaid){
        $data='{"FBAID": "'.$fbaid.'"}';
        $type= array("cache-control: no-cache","content-type: application/json", "token:1234567890");
        $result=$this->call_other_data_api($this::$api_url.'/api/get-posp-payment-link',$data,$type);

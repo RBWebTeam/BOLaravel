@@ -11,8 +11,7 @@ Category:{{$data->CateName}}
 <br>
 SubCategory:{{$data->QuerType}}
 <br>
-Ticket Summary
+Ticketcccccc Summary
 <br>
-{{$data->Message}}
 <br>
 Attachment:If any';

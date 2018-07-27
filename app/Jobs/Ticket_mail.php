@@ -60,9 +60,7 @@ class Ticket_mail implements ShouldQueue
                  $message->subject('Ticket Request');           
                 });
                      
-          
-
-                    if(Mail::failures()){
+          if(Mail::failures()){
                             return "false";
                     }else{
                             return "true";

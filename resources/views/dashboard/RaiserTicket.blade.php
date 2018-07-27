@@ -10,6 +10,7 @@
 <div class="col-md-12"><h3 class="mrg-btm">Raise A Ticket</h3></div>
 <div class="col-md-12">
 
+
 <form method="post" id="fromraiserticket"  name="fromraiserticket" enctype="multipart/form-data" >
 {{ csrf_field() }}
 
@@ -51,7 +52,14 @@
 <div class="col-md-4  col-xs-12">
 <div class="form-group">
 <label class="control-label" for="message-text">Image: </label>
-<input type="file" class="form-control" id="pathimgraiser" name="pathimgraiser" required="yes">
+<input type="file" class="form-control" id="pathimgraiser" name="pathimgraiser">
+</div>
+</div>
+
+<div class="col-md-4  col-xs-12">
+<div class="form-group">
+<label class="control-label" for="message-text">TO Email Id: </label>
+<input type="Email"  class="form-control" id="txttoemailid" name="txttoemailid">
 </div>
 </div>
 
@@ -64,10 +72,7 @@
 </div>
 </div>
 
-<!-- <div class="form-group">
-<label class="control-label" for="message-text">CC Email Id: </label>
- <input type="Email"  class="form-control" id="txtccemailid" name="txtccemailid">
-</div> -->
+
 <br>
 <br>
 

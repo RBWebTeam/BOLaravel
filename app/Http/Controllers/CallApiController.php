@@ -6,7 +6,7 @@ use Response;
 class CallApiController extends InitialController
 {
 	public function call_json_data_api($url,$data){
-		$ch = curl_init();
+        $ch = curl_init();
         curl_setopt($ch, CURLOPT_VERBOSE, 1);
         curl_setopt( $ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
         curl_setopt($ch, CURLOPT_URL, $url);

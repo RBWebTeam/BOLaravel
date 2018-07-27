@@ -47,9 +47,9 @@
 
 
 
- <div class="col-md-4 col-sm-4 col-xs-12">
-   <h4 style="text-align: center;">City</h4>
- <div class="form-group">
+<div class="col-md-4 col-sm-4 col-xs-12">
+<h4 style="text-align: center;">City</h4>
+<div class="form-group">
 <select  multiple="multiple" class="form-control select-sty" name="city[]" id="city">
 </select>
 
