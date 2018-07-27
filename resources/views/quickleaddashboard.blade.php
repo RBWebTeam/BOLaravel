@@ -38,9 +38,33 @@
          	</tr>
          	@endforeach
          </tbody>
-    </table>
+<!-- 
+  <div id="myDIV" >
+  <a href="{{url('export')}}" class="qry-btn" id="pospbtn">Export</a>
+
+</div> -->
+
+ </table>
+ <!--   <div id="myDIV" >
+   <a href="{{url('exportlead')}}" class="qry-btn" id="pospbtn">Export</a>
+   </div> -->
        </div>
    </div>
  </div>
 </div>
 @endsection
+
+<!-- Export to Excel Code -->
+
+<script type="text/javascript">
+// Add active class to the current button (highlight it)
+var header = document.getElementById("myDIV");
+var btns = header.getElementsByClassName("qry-btn");
+for (var i = 0; i < btns.length; i++) {
+btns[i].addEventListener("click", function() {
+var current = document.getElementsByClassName("active");
+current[0].className = current[0].className.replace(" active", "");
+this.className += " active";
+  });
+}
+</script>

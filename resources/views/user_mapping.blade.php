@@ -12,9 +12,9 @@
    <div class="col-md-12">
       <div class="overflow-scroll">
          <div class="table-responsive" >
-	      <table class="datatable-responsive table table-striped table-bordered dt-responsive nowrap" id="example">
-	        	<thead>
-	        		<tr>
+	     <table class="datatable-responsive table table-striped table-bordered dt-responsive nowrap" id="example">
+	        	                   <thead>
+	        		                 <tr>
              
 	        						                 <th>FBA ID</th> 
                                        <th>Full Name</th> 
@@ -35,11 +35,10 @@
                                        <th>Sales code</th>
                                        <th>Documents</th> 
                                        <th>Customer ID</th> 
-                                      
-                                       <!-- <th>Created Date1</th -->
-						</tr>
-	        	   	   </thead>
-	             	   <tbody>
+                                      <!-- <th>Created Date1</th -->
+					        	    </tr>
+	        	   	        </thead>
+	             	        <tbody>
 
 	              @isset ($usermaping)
 				  @foreach($usermaping as $val)   
@@ -49,7 +48,7 @@
        				<td><?php echo $val->MobiNumb1; ?></td> 
        				<td><?php echo $val->EMaiID; ?></td>
        				<td><?php echo $val->PayStat; ?></td>
-       			<!-- 	<td><?php echo $val->pwd; ?></td>  -->
+       			<!-- 	<td><?php echo $val->pwd; ?></td> -->
        				<td><?php echo $val->City; ?></td>
        				<td><?php echo $val->statename; ?></td>
        				<td><?php echo $val->zone; ?></td> 
@@ -59,7 +58,7 @@
        				<td><?php echo $val->pospname; ?></td>
        				<td><?php echo $val->pospstatus; ?></td>
        				<td><?php echo $val->bankaccount; ?></td> 
-              @if($val->salescode =='Update')
+              @if($val->salescode =='Update') 
               <td></td>
               @else
               <td><?php echo $val->salescode; ?></td>
@@ -70,6 +69,7 @@
        			</tr>
                @endforeach
 @endisset
+
 
 	@endsection
 

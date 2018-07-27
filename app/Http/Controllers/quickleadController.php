@@ -32,14 +32,17 @@ class quickleadController extends CallApiController
  }  
 
           public function statecityfba (Request $req){
+    
+                
+                // print_r($req->all());
 
-         $fbascity = DB::select('call getquick_city_state(?,?)',[implode(',',$req->state),implode(',',$req->city)]);
+        $fbascity = DB::select('call getquick_city_state(?,?)',[implode(',',$req->state),implode(',',$req->city)]);
 
-       // $userfb=DB::select("call get_fba_fbauser()"); 
+       $userfb=DB::select("call get_fba_fbauser()"); 
  
-    return json_encode($fbascity);
+       return json_encode($fbascity);
  
-        //  return view ('quick_lead_assignment',['fbascity'=>$fbascity,'userfb'=>$userfb]);
+         return view ('quick_lead_assignment',['fbascity'=>$fbascity,'userfb'=>$userfb]);
  }
 
       public function Insertquicklead(Request $req){
@@ -164,9 +167,11 @@ public function assignedfbalead()
 
   public function gethistoryfba($fbaid)
   {
+    //$id=Session::get('fbauserid');
      $fbahistory = DB::select("call get_fba_assignment_history($fbaid)");
     // print_r($fbahistory);exit(); 
      return json_encode($fbahistory);
   }
+
 
  }

@@ -7,40 +7,36 @@
   .hide {
   display:  none;
 }
-</style>
-
+   </style>
 
            <div class="container-fluid white-bg">
            <div class="col-md-12"><h3 class="mrg-btm">FBA List</h3>
            <hr>
            </div>
 
-
-     
-   <div class="col-md-2">
+      <div class="col-md-2">
       <div class="form-group">
+      <p>From Date</p>
+      <div id="datepicker" class="input-group date" data-date-format="yyyy-mm-dd">
+      <input class="form-control date-range-filter" type="text" placeholder="From Date" name="fdate" id="min"/ value="<?php echo date('Y-m-d',strtotime("-30 days")); ?>">
+      <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+      </div>
+      </div>
+      </div>
 
-         <p>From Date</p>
-         <div id="datepicker" class="input-group date" data-date-format="yyyy-mm-dd">
-               <input class="form-control date-range-filter" type="text" placeholder="From Date" name="fdate" id="min"/ value="<?php echo date('Y-m-d',strtotime("-30 days")); ?>">
-              <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-            </div>
-            </div>
-           </div>
-       <div class="col-md-2">
-       <div class="form-group">
-       <p>To Date</p>
-       <div id="datepicker1" class="input-group date" data-date-format="yyyy-mm-dd">
-               <input class="form-control date-range-filter" type="text" placeholder="To Date" name="todate"  id="max"/ value="<?php echo date('Y-m-d'); ?>">
-              <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-              </div>
-              </div>
-            </div>
+      <div class="col-md-2">
+      <div class="form-group">
+      <p>To Date</p>
+      <div id="datepicker1" class="input-group date" data-date-format="yyyy-mm-dd ">
+      <input class="form-control date-range-filter" type="text" placeholder="To Date" name="todate"  id="max"/ value="<?php echo date('Y-m-d');?>">
+      <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+      </div>
+      </div>
+      </div>
            
        <div class="col-md-4">
-
        <div class="form-group"> <input type="submit" name="btndate" id="btndate" onclick="getfbadata()"  class="mrg-top common-btn pull-left" value="SHOW">  
-     &nbsp;&nbsp;
+       &nbsp;&nbsp;
 
 <!--    <select  id="msds-select" class="pull-left mrg-top mrg-left">
    <option value="0">Posp Type</option>
@@ -75,9 +71,9 @@
 
   <!-- Date End -->
 
-             <div class="col-md-12">
-             <div class="overflow-scroll">
-             <div id="divtable" class="table-responsive" >
+          <div class="col-md-12">
+          <div class="overflow-scroll">
+          <div id="divtable" class="table-responsive" >
           <table class="datatable-responsive table table-striped table-bordered nowrap" id="fba-list-table">
                                        <thead>
                                        <tr>
@@ -100,7 +96,7 @@
                                        <th>Partner Info</th> 
                                        <th>Erp id</th>
                                        <th>Referer Code</th> 
-                                       <th>Referedby_Code</th>   
+                                       <th>Referedby Code</th>   
                                        <th>Sales code</th>
                                        <th>FSM Details</th>  
                                        <th>Documents</th> 
@@ -110,13 +106,18 @@
                                        </thead>
                                        </table>
 
-  <div id="myDIV" >
-  <a href="{{url('export')}}" class="qry-btn" id="pospbtn">Export</a>
 
+  
+  
+  <div id="myDIV" >
+    <a  class="qry-btn" id="pospbtn" onclick="getfdate()">Export</a>
+
+
+ <!--  <a href="{{url('export')}}" class="qry-btn" id="pospbtn">Export</a> -->
+</div> 
 </div>
-  </div>
-     </div>
-          </div>
+    </div>
+        </div>
             </div>
               </div>
                  </div>
@@ -216,25 +217,25 @@
 
 <!-- sales update -->
 
-<div class="salesupdate modal fade" role="dialog" id="salesupdate_modal_fade">   
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
+      <div class="salesupdate modal fade" role="dialog" id="salesupdate_modal_fade">   
+      <div class="modal-dialog" role="document">
+      <div class="modal-content">
       <div class="modal-header"  >
-        <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-        <h4 class="modal-title">Sales Code</h4>
+      <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+      <h4 class="modal-title">Sales Code</h4>
       </div>
       <div class="modal-body">
-        <form name="update_remark" id="update_remark">
+      <form name="update_remark" id="update_remark">
          {{ csrf_field() }}
-         <div class="form-group">
-            <input type="hidden" name="p_fbaid" id="p_fbaid" value="">
-            <label class="control-label" for="message-text">Enter Sales Code : </label>
-            <input type="text" class="recipient-name form-control" id="p_remark" name="p_remark" required="" />
-          </div>
-        </form>
-        <div class="modal-footer"> 
-          <button class="btn btn-default" type="button" data-dismiss="modal">Close</button>
-          <a id="sales_update" class="btn btn-primary" type="button">Update</a><b class="alert-success primary" id=""></b>
+      <div class="form-group">
+      <input type="hidden" name="p_fbaid" id="p_fbaid" value="">
+      <label class="control-label" for="message-text">Enter Sales Code : </label>
+      <input type="text" class="recipient-name form-control" id="p_remark" name="p_remark" required="" />
+      </div>
+      </form>
+      <div class="modal-footer"> 
+      <button class="btn btn-default" type="button" data-dismiss="modal">Close</button>
+         <a id="sales_update" class="btn btn-primary" type="button">Update</a><b class="alert-success primary" id=""></b>
           
         </div>
       </div>
@@ -244,24 +245,24 @@
 
 
 <!-- update posp -->
-<div class="updatePosp modal fade" role="dialog">   
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-        <h4 class="modal-title">UPDATE POSP</h4>
-      </div>
-       <div class="modal-body">
-        <form name="update_posp" id="update_posp">
+     <div class="updatePosp modal fade" role="dialog">   
+     <div class="modal-dialog" role="document">
+     <div class="modal-content">
+     <div class="modal-header">
+     <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+     <h4 class="modal-title">UPDATE POSP</h4>
+     </div>
+     <div class="modal-body">
+     <form name="update_posp" id="update_posp">
          {{ csrf_field() }}
-         <div class="form-group">
-          <input type="hidden" name="fbaid" id="fbaid" value=" ">
-          <label class="control-label" for="message-text">Enter POSP : </label>
-          <input type="text" class="recipient-name form-control" id="posp_remark" name="posp_remark"  maxlength="4" required="" />
-          </div>
-        </form>
-        <div class="modal-footer"> 
-          <button class="btn btn-default" type="button" data-dismiss="modal">Close</button>
+      <div class="form-group">
+      <input type="hidden" name="fbaid" id="fbaid" value=" ">
+      <label class="control-label" for="message-text">Enter POSP : </label>
+      <input type="text" class="recipient-name form-control" id="posp_remark" name="posp_remark"  maxlength="4" required="" />
+      </div>
+      </form>
+      <div class="modal-footer"> 
+      <button class="btn btn-default" type="button" data-dismiss="modal">Close</button>
           <a id="posp_update" class="btn btn-primary" type="button">Update</a><b class="alert-success primary" id=""></b>
           
         </div>
@@ -301,23 +302,20 @@
 </div>
 
 <!-- Partner Info Start -->
-<div id="partnerInfo" class="modal fade" role="dialog">
-  <div class="modal-dialog">
+    <div id="partnerInfo" class="modal fade" role="dialog">
+    <div class="modal-dialog">
    <!-- Modal content-->
     <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Partner Info</h4>
-      </div>
-      <div class="modal-body">
-
-      <div class="table-responsive">
-        <div id="divpartnertable" name="divpartnertable">
-
-        </div>
-        </div>
-
-      </div>
+    <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal">&times;</button>
+    <h4 class="modal-title">Partner Info</h4>
+    </div>
+    <div class="modal-body">
+    <div class="table-responsive">
+    <div id="divpartnertable" name="divpartnertable">
+    </div>
+    </div>
+    </div>
     </div>
   </div>
 </div>
@@ -450,10 +448,10 @@
     <div class="modal-body">
     <div style="color: blue;" id="show_password" class="show_password">
     </div>
-        </div>
-     </div>
-  </div>
-</div>
+    </div>
+    </div>
+    </div>
+    </div>
 
 
 @endsection
@@ -473,6 +471,8 @@ $(document).ready(function() {
 
 getfbadata();
 
+
+
  // $('.input-daterange input').each(function() {
  //    $(this).datepicker('clearDates');
  //  });
@@ -485,7 +485,7 @@ getfbadata();
  //    var min = $('#min').val();
  //    var max = $('#max').val();
  //   // console.log(max);
- //    var createdAt = data[24] || 24; // Our date column in the table
+ //    var createdAt = data[24] || 24; // Our date column in the table 
    
  //    if (
  //      (min == "" || max == "") ||
@@ -504,6 +504,8 @@ getfbadata();
   $('#btndate').on("click", function(){
     var table = $('#fba-list-table').DataTable();
     table.draw();
+
+
 });
 
 $('.date-range-filter').datepicker();
@@ -635,18 +637,30 @@ for (var i = 0; i < btns.length; i++) {
 }
 
 </script>
-
+<!-- all DATA EXPORT DATE TO DATE START -->
+<script type="text/javascript">
+function getfdate(){
+  var fdate=$("#min").val();
+  var todate=$("#max").val();
+  $("#pospbtn").attr('href', '{{url('export')}}/'+fdate+'/'+todate);  
+}
+</script>
+<!-- all DATA EXPORT DATE TO DATE END
+ -->
 
  <script type="text/javascript">
  function getfbadata(){
   var fdate=$("#min").val();
   var todate=$("#max").val();
-  $('#fba-list-table').DataTable ({
+
+
+$('#fba-list-table').DataTable ({
 
   "destroy": true,
  "createdRow": function(row, data, dataIndex ) {
    if ( data.PayStat=="S" ) {
    $(row).css({backgroundColor: 'LightGreen'});
+
  }
     },
         "order": [[ 0, "desc" ]],
@@ -757,6 +771,8 @@ for (var i = 0; i < btns.length; i++) {
         ],
 
     });
+
+
   }
 
 </script>
