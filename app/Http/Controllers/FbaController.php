@@ -16,18 +16,18 @@ class FbaController extends CallApiController
 {
       
         public function fba_list(){
- 
-         $doctype = DB::select("call get_document_type()");   
+        $doctype = DB::select("call get_document_type()");   
          //print_r($doctype); exit();
 
           
           return view('dashboard.fba-list',['doctype'=>$doctype]);         
         }
 
-              public function exportexcel(){
+              public function exportexcel($fdate,$todate){
               $query=[];
-              $query=DB::select('call fbaList_export(0)');
-              $data = json_decode( json_encode($query), true) ;
+                $query=DB::select("call fbaList_export('0','$fdate','$todate')");
+              //$query=DB::select('call fbaList_export(0)');
+              $data = json_decode( json_encode($query), true);
               return Excel::create('Fbalist', function($excel) use ($data) {
             $excel->sheet('FBADATA', function($sheet) use ($data)
             {
@@ -38,22 +38,15 @@ class FbaController extends CallApiController
 
 }
 
-          public function get_fba_list($fdate,$todate){
+             public function get_fba_list($fdate,$todate){
              $id=Session::get('FBAUserId');
             $query=DB::select("call fbaList('0','$fdate','$todate')");
 
-
-//return $fdate.'|'.$todate;exit();
-         
-            //print_r( json_encode($query));exit();
-              //$query=DB::select("call fbaList(0)");
-          //$query=DB::select("call fbaList(0,'2018-05-21','2018-07-03')");
-             //print_r($query);
-            //return $query;
+           //print_r( json_encode($query));exit();
+           //$query=DB::select("call fbaList(0)");
+      
           /*$id=Session::get('FBAUserId');
          //print_r($todate); exit();
-            $query=DB::select("call fbaList(0,'07-02-2018','07-09-2018')");
-             print_r($query); exit();
         //$query=DB::select("call fbaList(0)");*/
 
           return json_encode(["data"=>$query]);
@@ -164,23 +157,17 @@ class FbaController extends CallApiController
 
         }
 
-        public function getfbapartner(Request $req)
-        {          
+          public function getfbapartner(Request $req){ 
           $fsmfbaquery = DB::select("call usp_load_partner_info(?)",[$req->partnerid]);
-
           return json_encode($fsmfbaquery);    
         }
 
-        public function getdoclistview($fbaid)
-       {
-         $doctype = DB::select("call get_fba_doc($fbaid)");
-          $url=$this::$api_url;
-          $data = array('data' => $doctype, 'url'=>$url);
-          return json_encode($data);
+        public function getdoclistview($fbaid){
+        $doctype = DB::select("call get_fba_doc($fbaid)");
+        $url=$this::$api_url;
+        $data = array('data' => $doctype, 'url'=>$url);
+        return json_encode($data);
         }
-
-
-
 
         public function getpaymentlink($fbaid){
         $paymentlink=DB::select("call Usp_paymentlink($fbaid)");
@@ -189,7 +176,7 @@ class FbaController extends CallApiController
 
 
 
-         public function getcustomerid1 ($fbaid){
+       public function getcustomerid1 ($fbaid){
  try{
     $data= array("FBAId"=>"$fbaid");
     $token=array("cache-control: no-cache","content-type: application/json", "token: 1234567890");
@@ -234,8 +221,6 @@ class FbaController extends CallApiController
    else{
      return array("loanid"=>0,"message"=>$datax->Message);
    } 
-    
-             
     
 }
   catch (Exception $e){
@@ -284,24 +269,49 @@ class FbaController extends CallApiController
        return $obj;
     }
 
- // vivek start
- //fba master*******
 
-        
+ //fba master edit *******
            public function fbamaster(){
            return view('fbamaster_data');
         }
 
-           public function getfbaid(Request $req){ 
+          public function getfbaid(Request $req){ 
+            
           $data = DB::select("call get_fbamast_data(?)",array($req->id));
           return response()->json($data);
-   }
+   }  
 
-          public function update_fba_table(Request $req)
-       {
-          $arra= array('FirsName'=>$req->f_name,'LastName'=>$req->l_name,'emailID'=>$req->work_email,'MobiNumb1'=>$req->mobile);
-          $que=DB::table('FBAMast')->where('FBAID','=',$req->fba_id)->update($arra);
+          public function update_fba_table(Request $req){
+         //echo $dbirth = str_replace('-','',$req->dbirth);
+    $id=Session::get('fbauserid');
+ DB::select('call usp_update_fba_details(?,?,?,?,?,?,?)',array(
+    $req->fba_id,      
+    $req->f_name, 
+    $req->l_name,  
+    $req->work_email,
+    $req->mobile,
+    $req->dbirth,
+    $req->midname, 
+    $id 
+));
+
+  // print_r($Result);exit();
+
+   Session::flash('message', 'Record has been Updated successfully'); 
            return redirect('fbamaster-edit');
+
+
+// if($Result != 1){
+//            Session::flash('message', 'Record has been Updated successfully'); 
+//            return redirect('fbamaster-edit');
+//          }else{
+//               ('mesage); 
+//            return redirect('fbamaster-edit');
+//          }
+ 
+   // $arra= array('FirsName'=>$req->f_name,'LastName'=>$req->l_name,'emailID'=>$req->work_email,'MobiNumb1'=>$req->mobile,'DOB'=>$req->dbirth,'MiddName'=>$req->midname,);
+          // $que=DB::table('FBAMast')->where('FBAID','=',$req->fba_id)->update($arra);
+           
        }
 
 

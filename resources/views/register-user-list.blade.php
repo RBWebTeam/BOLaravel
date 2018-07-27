@@ -73,7 +73,7 @@
                                                  <td>{{$vl->uid}}</td>
                                                  <td>{{$vl->password}}</td>
 
-                                                 <td><a href="{{url('register-update')}}/{{$vl->FBAUserId}}">Edit</a>    </td>
+                                                 <td><a href="{{url('register-update')}}/{{$vl->FBAUserId}}">Edit</a> </td>
                                        
                                       </tr>
                                     @endforeach

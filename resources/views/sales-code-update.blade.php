@@ -49,10 +49,10 @@ $("#fbaid").text('');
          {  
 
 			var data = JSON.parse(fbadata);   
-  if(data.length>0)
-            {          
-             $("#fbaid").text(data[0].FBAID);
-             $("#txtfbaid").val(data[0].FBAID);  
+      if(data.length>0)
+   {          
+      $("#fbaid").text(data[0].FBAID);
+      $("#txtfbaid").val(data[0].FBAID);  
  }        
 	}  
 });

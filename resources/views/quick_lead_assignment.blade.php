@@ -31,7 +31,7 @@
      </div>
      </div>
 
-      <div class="form-group"> <input type="Submit" name="qlead" id="qlead"  class="mrg-top common-btn pull-left" value="SHOW"> 
+      <div class="form-group"> <input type="Submit" name="qlead" id="qlead" class="mrg-top common-btn pull-left" value="SHOW"> 
       </div>
   </form>
   <br>
@@ -141,7 +141,7 @@ function getLoanData(){
 
     var json = JSON.parse(data);
     $("#fbacount").text(json.length);
-    alert(json.length);
+   // alert(json.length);
    // console.log(json);
     if(json.length>0){
 
@@ -178,37 +178,48 @@ function getLoanData(){
     $('#tablediv').addClass('hidden');
      alert("Please select state and city");
   }
+
 });     
 }
 })
 
- $.ajax({ 
- url: "{{URL::to('quickleadassignment')}}",
- method:"GET",
- success: function(datas)  
+   $.ajax({ 
+   url: "{{URL::to('quickleadassignment')}}",
+   method:"GET",
+  success: function(datas)  
  {
 
- var data=$.parseJSON(datas);
- // console.log(data);
- if(data)
- { $.each(data, function( index, value ) {
- $('#state').append('<option value="'+value.state_id+'">'+value.state_name+'</option>');
+  var data=$.parseJSON(datas);
+  // console.log(data);
+    if(data)
+    { $.each(data, function( index, value ) {
+
+      
+    $('#state').append('<option value="'+value.state_id+'">'+value.state_name+'</option>');
  }); 
- }else{
-  $('#state').empty().append('No Result Found');
+    }else{
+    $('#state').empty().append('No Result Found');
   }
   },
   });
 
-    $('#state').on('change', function() {
-  $("#city").empty().append('');
-   // alert('okae');
-  var state=$('#state').find(":selected").val();
-  var array = "";
-  var i=0;
-   $('#state  option:selected').each(function() {
-    array+= $(this).val()+",";
-    });
+
+     $('#state').on('change', function() {
+     $("#city").empty().append(''); 
+     //alert('okae');
+     var state=$('#state').find(":selected").val();
+     var array = "";
+     var i=0
+     $('#state  option:selected').each(function() {
+     array+= $(this).val()+",";
+
+//     if ($("select option:selected").length > 3) {
+//     }
+// alert('You can select only 3 State at time');
+   
+});
+
+
    console.log(array);
     var v_token ="{{csrf_token()}}";
    $.ajax({  
@@ -242,11 +253,7 @@ $(document).ready(function (){
    });
 
 
-
-
-
-
-  $('#example tbody').on('change', 'input[type="checkbox"]', function(){
+    $('#example tbody').on('change', 'input[type="checkbox"]', function(){
       // If checkbox is not checked
            if(!this.checked){
            var el = $('#example-select-all').get(0);
@@ -261,8 +268,8 @@ $(document).ready(function (){
       var rows = table.rows({ 'search': 'applied' }).nodes();
       var counter = 0;
       for (var i = 0; i < rows.count(); i++) {
-        if($('input[type="checkbox"]', rows[i])[0].checked){
-            counter++;
+      if($('input[type="checkbox"]', rows[i])[0].checked){
+        counter++;
         }
       }
        $("#checkboxcount").text(counter + "/");
@@ -273,8 +280,7 @@ $(document).ready(function (){
 
   $('#fbdatail').click(function(){
 
-
-    if($('#ddlstatus').val()==""){
+ if($('#ddlstatus').val()==""){
       alert('Please Select User');
       return false;
     }
@@ -306,7 +312,7 @@ if(chkval==""){
    data: $('#fbdatail-table-from').serialize(),
    success: function(msg)  
    {
-    console.log(msg);
+    //console.log(msg);
     alert('FBA Assigned Successfully');
     window.location.reload();
     //$('#leadquick').trigger("reset");
@@ -318,23 +324,20 @@ if(chkval==""){
 });
 
 
-function checkboxcount(){
-
+    function checkboxcount(){
     var $checkboxes = $('.countceckbox');
     // alert($checkboxes)    
     $checkboxes.change(function(){
     var countCheckedCheckboxes = $checkboxes.filter(':checked').length;
-    $("#checkboxcount").text(countCheckedCheckboxes);
-        
-    });
+    $("#checkboxcount").rows().select(); 
+    //text(countCheckedCheckboxes);
+
+ });
 }
 
 
 
- 
+
 </script>
-
-
-
 
 @endsection

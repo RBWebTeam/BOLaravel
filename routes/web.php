@@ -84,6 +84,13 @@ Route::POST('sales-code-update-insert','salescodeController@insertsalescode');
 //User_mapping vikas End
 
 
+//Test state_wise city start
+Route::get('city_wise_state','statewisecityController@get_city'); 
+Route::post('citywisestate','statewisecityController@statewisecity'); 
+Route::get('city_wise_state2','statewisecityController@showlead2');
+//Test state_wise city End
+
+
 
 
 
@@ -103,8 +110,11 @@ Route::get('Fba-list-Update-posp/{id}','FbaController@UpdatePospno');
 
 
 // export excel  
-Route::get('export','FbaController@exportexcel');
+//Route::get('export','FbaController@exportexcel');
+Route::get('export/{fdate}/{todate}','FbaController@exportexcel');
 
+
+//Route::get('exportlead','quickleaddashboardController@exportleadexcel');
 
 // non fba-list start  
 
@@ -195,7 +205,6 @@ Route::get('View-Raised-Ticket/{ticketid}','ViewRaisedTicketController@deletetic
 Route::get('send-sms-rights','SendSmsRightsController@sendsmsview');
 Route::get('send-sms-directsend/{userid}','SendSmsRightsController@isdirectsend');
 Route::get('send-sms-needaproval/{userid}','SendSmsRightsController@isneedapproval');
-
 Route::get('Approve-send-sms','SendSmsapprovalController@sendsmsview');
 
 Route::get('Fba-profile/{fbaid}','FbaprofileController@fbaprofileview');
