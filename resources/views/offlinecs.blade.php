@@ -310,9 +310,11 @@
              <br>
              <br>
              <div class="col-md-12" style="text-align: center;">
+               <span id="spnerpid" style="color:red"></span>
               <div id="btnsavediv">
+
                 <button id="saveofflinecs" class="btn btn-primary" >Save</button>
-                <input type="submit" name="save" class="btn btn-primary" value="Save & Send Email"> 
+                <input type="submit" id="btnsaveandsendmail" name="save" class="btn btn-primary" value="Save & Send Email"> 
                </div>
                <div id="btnupdatediv">
                  <button id="btnupdate" class="btn btn-primary" >Update</button>
@@ -365,6 +367,16 @@ if (window.location.href.indexOf('?id=') > 0) {
            $("#txtemail").val(data[0].EmailId);
            $("#ddlfbaname").val(data[0].FBAID);
            $("#txterpid").val(data[0].ERPID);
+           var ERPID=data[0].ERPID;   
+           //alert(ERPID) ;          
+                if (ERPID=='') {                  
+                  $("#btnupdateandsendmail").hide();
+                  $("#spnerpid").text("You cannot send email as ERPID is not available. Please contact your floor cordinator.");
+                 } 
+                 else{                   
+                   $("#btnupdateandsendmail").show();
+                   $("#spnerpid").text("");
+                 }
            //getpospname();
            $("#txtpremiumamt").val(data[0].PremiumAmount);
            $("#txtqtno").val(data[0].QTNo);
@@ -561,18 +573,39 @@ if (window.location.href.indexOf('?id=') > 0) {
      }
 function getpospname()
 {
+
   var fbaid=$("#ddlfbaname").val();  
+  if (fbaid!='') {
    $.ajax({
              url: 'get_ERPID_offlinecs/'+fbaid,
              type: "GET",             
              success:function(data) 
              {      
-              var erpid=  JSON.parse(data);              
+              var erpid=  JSON.parse(data);                  
+               var ERPID=erpid[0].ERPID;              
+                if (ERPID=='') {
+                  $("#btnsaveandsendmail").hide();
+                  $("#btnupdateandsendmail").hide();
+                  $("#spnerpid").text("You cannot send email as ERPID is not available. Please contact your floor cordinator.");
+                 } 
+                 else{
+                   $("#btnsaveandsendmail").show();
+                   $("#btnupdateandsendmail").show();
+                   $("#spnerpid").text("");
+                 }     
                $("#txterpid").val(erpid[0].ERPID);
                $("#txtexecutivename").val(erpid[0].fieldmanageruid);
                $("#txtexecutivename1").val(erpid[0].rrmuid);
+                 
+                     
              }
-         });
+         });   
+ }
+ else{
+
+ }
+
+
 }
 $(".txtonly").keypress(function (e) {
     if (String.fromCharCode(e.keyCode).match(/[^ a-zA-Z]/g)) return false;
@@ -582,8 +615,8 @@ $(".Vehicleno").keypress(function (e) {
     if (String.fromCharCode(e.keyCode).match(/[^0-9a-zA-Z]/g)) return false;
 });
 
-$("#saveofflinecs" ).click(function() {
-  $("#frmofflinecs").attr('action', '{{url('saveofflinecs')}}'); 
+$("#saveofflinecs" ).click(function() {  
+  $("#frmofflinecs").attr('action', '{{url('saveofflinecs')}}');    
 });
 $("#btnupdate" ).click(function() {
   $("#frmofflinecs").attr('action', '{{url('offlinecsupdate')}}');
@@ -626,6 +659,7 @@ function showotherdiv(){
    $('#txtReason').removeAttr("required");
  }
 }
+
 
 </script>
 @endsection

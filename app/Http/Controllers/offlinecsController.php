@@ -780,7 +780,9 @@ public function getshorturl($filename,$ID,$doctype)
     $result=$this->call_other_data_api($this::$api_url.'/api/short-url-forall',$post_data,$type);
 
     $Response= json_decode($result['http_result']);
+    //print_r($Response);exit();
     $shorturl=$Response->MasterData[0]->ShortURL;
+
     DB::select('call Usp_Update_shortlink_offlinecs(?,?,?)',array($shorturl,$ID,$doctype));
     }
     catch (Exception $e)

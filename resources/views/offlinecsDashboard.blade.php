@@ -48,6 +48,7 @@
       	<th>City</th>
       	<th>POSP Name</th>
       	<th>Mobile No</th>
+        <th>CSID</th>
       	<th>Action</th>      	
       </tr>
     </thead>
@@ -63,15 +64,25 @@
     		<td>{{$val->cityname}}</td>
     		<td>{{$val->POSPName}}</td>
     		<td>{{$val->MobileNo}}</td>
+        <td>{{$val->CSID}}</td>
         <td>  
-         <a class="btn btn-primary" data-toggle="modal" data-target="#csidupdate" onclick="updatecsid({{$val->ID}},this)">Update CSID</a>        
-          @if($val->ismailsend!=1)
-          <a id="btnedit" class="btn btn-primary" href="{{url('offlinecs')}}?id={{$val->ID}}" >Edit</a>
+          @if($val->CSID=='')
+         <a class="btn btn-primary" data-toggle="modal" data-target="#csidupdate" onclick="updatecsid({{$val->ID}},this)">Update CSID</a>     
+         @endif
+
+          <!-- @if($val->ismailsend!=1)
+          <a id="btnedit" class="btn btn-primary" href="{{url('offlinecs')}}?id={{$val->ID}}">Edit</a>
           <a id="btnedit" class="btn btn-primary" onclick="Sendemail({{$val->ID}},this)"><span class="glyphicon glyphicon-envelope" style="font-size: 20px;"></span></a>
-          @endif
-          @if($val->ismailsend==1)
-          <a id="btnedit" class="btn btn-primary" onclick="Sendemail({{$val->ID}},this)" ><span class="glyphicon glyphicon-envelope" style="font-size: 20px;"></span></a>
-          @endif         
+          @endif -->
+          @if($val->ERPID=='')
+          <a id="btnedit" class="btn btn-primary" href="{{url('offlinecs')}}?id={{$val->ID}}">Edit</a>
+          @elseif($val->ismailsend!=1)
+            <a id="btnedit" class="btn btn-primary" href="{{url('offlinecs')}}?id={{$val->ID}}">Edit</a>
+            <a id="btnedit" class="btn btn-primary" onclick="Sendemail({{$val->ID}},this)" ><span class="glyphicon glyphicon-envelope" style="font-size: 20px;"></span></a> 
+            @else
+            <a id="btnedit" class="btn btn-primary" onclick="Sendemail({{$val->ID}},this)" ><span class="glyphicon glyphicon-envelope" style="font-size: 20px;"></span></a> 
+          @endif   
+             
          </td>		
     	</tr>
     	@endforeach
@@ -139,7 +150,7 @@
              type: "GET",             
              success:function(data) 
              {      
-              alert("Mail Has Been Send Successfully");
+              alert("Mail has Been Send Successfully");              
               //window.location.href = '{{url('offlinecs-dashboard')}}';
              }
          });

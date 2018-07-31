@@ -240,6 +240,8 @@ Route::post('offlinecsupdateandsendmail','OfflinecsController@Updateofflinecsand
 Route::get('offlinecssendemail/{ID}','OfflinecsDashboardController@sendemail');
 Route::get('offlinecs-details/{ID}','OfflinecsDashboardController@showdetails');
 Route::Post('offlinecs-csidupdate','OfflinecsDashboardController@updatecsid');
+
+Route::get('fba-location','FindfbalocationController@getfbadata');
 ///shubham end ///
 // avinash
  Route::get('ticket-module','TicketController@getticketdetails');
