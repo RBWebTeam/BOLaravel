@@ -10,8 +10,15 @@
    </style>
 
            <div class="container-fluid white-bg">
-           <div class="col-md-12"><h3 class="mrg-btm">FBA List</h3>
+           <div class="col-md-12">
+        <div class="col-md-12">
+           <h3>FBA List</h3>
+    <h5 class="col-md-6" style="margin-top: -20px; margin-left:69px;" ><div class="col-md-12" id="divdate"></div></h5> 
+           </div>                                
            <hr>
+
+
+          <label><span id="fbaid"></span></label>
            </div>
 
       <div class="col-md-2">
@@ -34,13 +41,23 @@
       </div>
       </div>
       </div>
-
+<div>
         
+
+</div>
+
+  
 
            
        <div class="col-md-4">
-       <div class="form-group"> <input type="submit" name="btndate" id="btndate" onclick="getfbadata()"  class="mrg-top common-btn pull-left" value="SHOW">  
+       <div class="form-group"> <input type="submit" name="btndate" id="btndate" onclick="getloadfbadata()"  class="mrg-top common-btn pull-left" value="SHOW">  
        &nbsp;&nbsp;
+
+
+
+
+
+
 
 <!--    <select  id="msds-select" class="pull-left mrg-top mrg-left">
    <option value="0">Posp Type</option>
@@ -64,6 +81,7 @@
    <option value="fbacity">FBA City</option>
    <option value="pospname">POSP Name</option>
    </select>
+  <td><a  id="btnall" class="qry-btn" name="btnall" style="margin-left:-33px"; onclick="getfbaalldata()" class="btn btn-default">Show all Data</a></td>
 
    <input type="text" id="txtfbasearch" name="txtfbasearch" placeholder="Search" onkeyup="searchdata()"  style="display: none; margin-left: 96px;"/>
  
@@ -116,8 +134,11 @@
   <div id="myDIV" >
     <a  class="qry-btn" id="pospbtn" onclick="getfdate()">Export</a>
 
+    <!-- <a href="{{url('fba-list')}}" class="qry-btn" id="pospbtn">All Data</a> -->
 
- <!--  <a href="{{url('export')}}" class="qry-btn" id="pospbtn">Export</a> -->
+ 
+
+ 
 </div> 
 </div>
     </div>
@@ -125,6 +146,7 @@
             </div>
               </div>
                  </div>
+ 
 
 <!-- send sms -->
 <div class="sms_sent_id id modal fade" role="dialog">   
@@ -465,6 +487,13 @@
 <script type="text/javascript">
 
   $(document).ready(function() {
+    var fdate=$("#min").val();
+    var todate=$("#max").val();
+
+$('#divdate').html(' - Showing data from ' +fdate+ ' to ' +todate+'.');   
+
+// $('#divdate').html(' - Showing data from ' +fdate+ ' to ' +todate+'.');     
+ 
 
 //.column('0:visible').order('desc').draw();
 });  
@@ -472,8 +501,9 @@
 
 $(document).ready(function() {
   // Bootstrap datepicker
-
-getfbadata();
+ var fdate=$("#min").val();
+  var todate=$("#max").val();
+getfbadata(fdate,todate);
 
 
 
@@ -506,9 +536,11 @@ getfbadata();
 
  //Re-draw the table when the a date range filter changes
   $('#btndate').on("click", function(){
-    var table = $('#fba-list-table').DataTable();
+    var fdate=$("#min").val();
+    var todate=$("#max").val();
+   var table = $('#fba-list-table').DataTable();
     table.draw();
-
+$('#divdate').html(' - Showing data from ' +fdate+ ' to ' +todate+'.');   
 
 });
 
@@ -520,6 +552,14 @@ $('.date-range-filter').datepicker();
 <!-- Search Pospno and Fbaid start,STATE,CITY etc -->
 <script>
 /// code for search
+
+function getloadfbadata()
+{
+  var fdate=$("#min").val();
+  var todate=$("#max").val();
+  getfbadata(fdate,todate);
+}
+
 function searchdata()
 {
   var index = $('#msds-select').val();
@@ -649,15 +689,27 @@ function getfdate(){
   $("#pospbtn").attr('href', '{{url('export')}}/'+fdate+'/'+todate);  
 }
 </script>
-<!-- all DATA EXPORT DATE TO DATE END
- -->
 
- <script type="text/javascript">
- function getfbadata(){
+
+<script type="text/javascript">
+function getfbaalldata(){
+  var today = new Date();
+  var date = today.getFullYear()+'-'+((today.getMonth()+1)>9?(today.getMonth()+1):'0'+(today.getMonth()+1))+'-'+
+((today.getDate())>9?(today.getDate()):'0'+(today.getDate()));
+  
+  // alert(date);
   var fdate=$("#min").val();
   var todate=$("#max").val();
+  getfbadata('2016-05-31',date);
+   
+}
+</script>
 
-
+<!-- all DATA EXPORT DATE TO DATE END
+ -->
+ <script type="text/javascript">
+ function getfbadata(fdate,todate){
+ 
 $('#fba-list-table').DataTable ({
 
   "destroy": true,
@@ -780,6 +832,9 @@ $('#fba-list-table').DataTable ({
   }
 
 </script>
+
+
+
 
 
 
