@@ -41,18 +41,18 @@ class FbaController extends CallApiController
              public function get_fba_list($fdate,$todate){
              $id=Session::get('FBAUserId');
             $query=DB::select("call fbaList('0','$fdate','$todate')");
-
-           //print_r( json_encode($query));exit();
-           //$query=DB::select("call fbaList(0)");
-      
-          /*$id=Session::get('FBAUserId');
-         //print_r($todate); exit();
-        //$query=DB::select("call fbaList(0)");*/
-
-          return json_encode(["data"=>$query]);
+            return json_encode(["data"=>$query]);
         }
 
-        public function updateposp($fbaid,$value,$flag) {
+             public function get_all_fba_list_data($fdate,$todate){
+             $alldata=DB::select("call get_fbaList_all_data(0,'2017-05-31','$todate')");
+             return json_encode(["data"=>$alldata]);
+         }
+
+
+
+
+          public function updateposp($fbaid,$value,$flag) {
           DB::select("call usp_update_posploanid('$fbaid','$value','$flag')");
           return redirect('fba-list');
         }
@@ -284,7 +284,7 @@ class FbaController extends CallApiController
           public function update_fba_table(Request $req){
          //echo $dbirth = str_replace('-','',$req->dbirth);
     $id=Session::get('fbauserid');
- DB::select('call usp_update_fba_details(?,?,?,?,?,?,?)',array(
+$msg=DB::select('call usp_update_fba_details(?,?,?,?,?,?,?)',array(
     $req->fba_id,      
     $req->f_name, 
     $req->l_name,  
@@ -295,7 +295,7 @@ class FbaController extends CallApiController
     $id 
 ));
 
-  // print_r($Result);exit();
+  //print_r($msg);exit();
 
    Session::flash('message', 'Record has been Updated successfully'); 
            return redirect('fbamaster-edit');

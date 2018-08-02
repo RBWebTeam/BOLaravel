@@ -71,7 +71,7 @@ Route::get('quickleadassignmentshow','quickleadController@showlead');
 
   // Route::get('fba-list-posp-update/{fbaid}','FbaController@updatepospthroapi');
 
-//User_mapping vikas Start   fbauserview
+//User_mapping vikas Start  
   	//Route::get('user_mapping','usermappingController@fbauserview');
 
 	Route::get('user_mapping','usermappingController@fbauser');
@@ -117,7 +117,6 @@ Route::get('export/{fdate}/{todate}','FbaController@exportexcel');
 //Route::get('exportlead','quickleaddashboardController@exportleadexcel');
 
 // non fba-list start  
-
 Route::get('load-non-fba-list','nonfbaController@nonfbalist');
 Route::get('non-fba-list','nonfbaController@getnonfba');
 Route::get('export-excel','nonfbaController@nonfbaexportexcel');
@@ -131,6 +130,25 @@ Route::get('sales-code-update','salescodeController@updatesalescode');
 Route::get('sales-code-update-get-fbaid/{salsecode}','salescodeController@selfcodefbaid');
 Route::POST('sales-code-update-insert','salescodeController@insertsalescode');
 
+
+
+// Manage Emploee Start
+//Route::get('manage-employee','manageemploeeController@viewmaageemployy'); 
+Route::get('finmartemployee-details','manageemploeeController@finemployeeview'); 
+Route::get('emp-details','manageemploeeController@allemployeedata');  
+Route::get('manage-employee/{uid}','manageemploeeController@viewmaageemployy');
+
+Route::post('update_detailsemp','manageemploeeController@update_emp_details'); 
+
+// add employee start  
+Route::get('add-employee','manageemploeeController@addfbaemp');
+Route::post('add-new-emp','manageemploeeController@new_emp_add'); 
+// Manage Emploee End
+// prodouct-lead-details Start
+Route::get('prodouct-lead-details','prodouctleaddetailsController@viewlead_details');
+// prodouct-lead-details End
+// get-all-fbalist-data start   
+Route::get('all-fba-data/{fdate}/{todate}','FbaController@get_all_fba_list_data');
 
 
 //city_droupdown

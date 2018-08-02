@@ -315,7 +315,7 @@ if(chkval==""){
     //console.log(msg);
     alert('FBA Assigned Successfully');
     window.location.reload();
-    //$('#leadquick').trigger("reset");
+    $('#leadquick').trigger("reset");
    
    }
 
