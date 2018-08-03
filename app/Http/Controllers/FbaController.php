@@ -45,7 +45,7 @@ class FbaController extends CallApiController
         }
 
              public function get_all_fba_list_data($fdate,$todate){
-             $alldata=DB::select("call get_fbaList_all_data(0,'2017-05-31','$todate')");
+             $alldata=DB::select("call get_fbaList_all_data(0,'2015-05-31','$todate')");
              return json_encode(["data"=>$alldata]);
          }
 

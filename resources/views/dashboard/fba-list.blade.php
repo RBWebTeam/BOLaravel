@@ -36,40 +36,28 @@
       <div class="form-group">
       <p>To Date</p>
       <div id="datepicker1" class="input-group date" data-date-format="yyyy-mm-dd ">
-      <input class="form-control date-range-filter" type="text" placeholder="To Date" name="todate"  id="max"/ value="<?php echo date('Y-m-d');?>">
+      <input class="form-control date-range-filter" type="text" placeholder="To Date" name="todate" id="max"/ value="<?php echo date('Y-m-d');?>">
       <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
       </div>
       </div>
       </div>
 <div>
-        
-
 </div>
 
-  
+    <div class="col-md-6">
+    <div class="form-group"> <input type="submit" name="btndate" id="btndate" onclick="getloadfbadata()" class="mrg-top common-btn pull-left" value="SHOW"> 
+     &nbsp;&nbsp;
+    <div>
+    <td><a id="btnall" class="qry-btn" name="btnall" style="margin-left:9px;margin-top:4px;"; onclick="getfbaalldata()" class="btn btn-default">Show all</a></td>
+    </div> 
 
-           
-       <div class="col-md-4">
-       <div class="form-group"> <input type="submit" name="btndate" id="btndate" onclick="getloadfbadata()"  class="mrg-top common-btn pull-left" value="SHOW">  
-       &nbsp;&nbsp;
-
-
-
-
-
-
-
-<!--    <select  id="msds-select" class="pull-left mrg-top mrg-left">
-   <option value="0">Posp Type</option>
-  <option value="1">POSP Yes</option>
-  <option value="2">POSP No</option>  fnamesearch
-
-  </select> -->
+   </select> 
    &nbsp;&nbsp;&nbsp;
   <form name="myform">
-  <select id="msds-select" class="form-control" style="width:55%;margin:10px;margin-top:4px;display: -webkit-inline-box;"  name="one" onchange="selectIndex(this)">
+   <select id="msds-select" class="form-control" style="width:30%;margin:10px;margin-top:4px;margin-right:-33px; margin-left: 200px;margin-top: -54px;display: -webkit-inline-box;" name="one" onchange="selectIndex(this)">
 
-   <option value="-1" selected="selected">Search By</option>
+
+  <option value="-1" selected="selected">Search By</option>
    <option value="0">All</option>
    <option value="1">POSP Yes</option>
    <option value="2">POSP No</option>
@@ -81,10 +69,8 @@
    <option value="fbacity">FBA City</option>
    <option value="pospname">POSP Name</option>
    </select>
-  <td><a  id="btnall" class="qry-btn" name="btnall" style="margin-left:-33px"; onclick="getfbaalldata()" class="btn btn-default">Show all Data</a></td>
 
-   <input type="text" id="txtfbasearch" name="txtfbasearch" placeholder="Search" onkeyup="searchdata()"  style="display: none; margin-left: 96px;"/>
- 
+<input type="text" id="txtfbasearch" name="txtfbasearch" placeholder="Search" onkeyup="searchdata()" style="display: none; margin-left:199px;margin-top:-12px;width:30%;"/>
 
   </form>
   </div> 
@@ -128,10 +114,7 @@
                                        </thead>
                                        </table>
 
-
-  
-  
-  <div id="myDIV" >
+    <div id="myDIV" >
     <a  class="qry-btn" id="pospbtn" onclick="getfdate()">Export</a>
 
     <!-- <a href="{{url('fba-list')}}" class="qry-btn" id="pospbtn">All Data</a> -->
@@ -490,9 +473,9 @@
     var fdate=$("#min").val();
     var todate=$("#max").val();
 
-$('#divdate').html(' - Showing data from ' +fdate+ ' to ' +todate+'.');   
 
-// $('#divdate').html(' - Showing data from ' +fdate+ ' to ' +todate+'.');     
+$('#divdate').html('<b><font color="red"> - Showing data from ' +fdate+ ' to ' +todate+'.</font></b>'); 
+    
  
 
 //.column('0:visible').order('desc').draw();
@@ -500,47 +483,20 @@ $('#divdate').html(' - Showing data from ' +fdate+ ' to ' +todate+'.');
 // from date to date start
 
 $(document).ready(function() {
+
   // Bootstrap datepicker
  var fdate=$("#min").val();
   var todate=$("#max").val();
 getfbadata(fdate,todate);
 
 
-
- // $('.input-daterange input').each(function() {
- //    $(this).datepicker('clearDates');
- //  });
-
- //  // Extend dataTables search
-
- // // alert('test');
- //  $.fn.dataTable.ext.search.push(
- //    function(settings, data, dataIndex) {
- //    var min = $('#min').val();
- //    var max = $('#max').val();
- //   // console.log(max);
- //    var createdAt = data[24] || 24; // Our date column in the table 
-   
- //    if (
- //      (min == "" || max == "") ||
- //      (moment(createdAt).isSameOrAfter(min) && moment(createdAt).isSameOrBefore(max,'day'))
- //    ) 
-
- //    {
-
- // return true;
- //    }
- //    return false;
- //    }
- //  );
-
- //Re-draw the table when the a date range filter changes
+//Re-draw the table when the a date range filter changes
   $('#btndate').on("click", function(){
     var fdate=$("#min").val();
     var todate=$("#max").val();
    var table = $('#fba-list-table').DataTable();
     table.draw();
-$('#divdate').html(' - Showing data from ' +fdate+ ' to ' +todate+'.');   
+$('#divdate').html('<b><font color="red">- Showing data from ' +fdate+ ' to ' +todate+'</font></b>');  
 
 });
 
@@ -553,10 +509,11 @@ $('.date-range-filter').datepicker();
 <script>
 /// code for search
 
-function getloadfbadata()
+function getloadfbadata()      
 {
   var fdate=$("#min").val();
   var todate=$("#max").val();
+
   getfbadata(fdate,todate);
 }
 
@@ -682,26 +639,25 @@ for (var i = 0; i < btns.length; i++) {
 
 </script>
 <!-- all DATA EXPORT DATE TO DATE START -->
-<script type="text/javascript">
-function getfdate(){
+  <script type="text/javascript">
+  function getfdate(){
   var fdate=$("#min").val();
   var todate=$("#max").val();
-  $("#pospbtn").attr('href', '{{url('export')}}/'+fdate+'/'+todate);  
+  $("#pospbtn").attr('href', '{{url('export')}}/'+fdate+'/'+todate);
 }
 </script>
 
 
 <script type="text/javascript">
-function getfbaalldata(){
+  function getfbaalldata(){
   var today = new Date();
   var date = today.getFullYear()+'-'+((today.getMonth()+1)>9?(today.getMonth()+1):'0'+(today.getMonth()+1))+'-'+
 ((today.getDate())>9?(today.getDate()):'0'+(today.getDate()));
   
-  // alert(date);
-  var fdate=$("#min").val();
-  var todate=$("#max").val();
-  getfbadata('2016-05-31',date);
-   
+  $("#max").val(date);
+  $("#min").val('2015-05-31');
+  getfbadata('2015-05-31',date);
+
 }
 </script>
 
