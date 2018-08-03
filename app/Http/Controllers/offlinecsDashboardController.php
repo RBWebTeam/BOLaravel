@@ -121,6 +121,38 @@ class OfflinecsDashboardController extends Controller
               DB::table('offlinecs')->where('ID','=',$ID)->update(['ismailsend'=>1]);
              }
            }
+ if ($offlinecsdata[0]->Product==7) 
+              {             
+               $FBAID=Session::get('fbaid');
+               $emailids=DB::select("call getTOCCEmailIdForOfflineCS($FBAID,7)"); 
+              foreach ($emailids as $val){                
+               $tomail= $val->To_mail_id;
+               $ccemail = explode(',',$val->CC_mail_id);               
+              }
+            
+                
+                $sub='SNo.'.$offlinecsdata[0]->ID.' '.$offlinecsdata[0]->product_name.'  Entry details for '.$offlinecsdata[0]->CustomerName.' - '.$offlinecsdata[0]->POSPName;
+                
+            if($emailids!='')
+            {                
+                  $mail = Mail::send('mailViews.sendmailofflinecs',['offlinecsdata' => $offlinecsdata], function($message)use($tomail,$ccemail,$sub){
+                  $message->from('OfflineCS@magicfinmart.com', 'Fin-Mart');
+                  $message->to($tomail);
+                   foreach ($ccemail as $key => $cc) 
+                   {
+                     $message->cc($cc);
+                    }
+                  $message->subject($sub);
+
+                  });
+               if(Mail::failures())
+                {
+                   $error=3;
+                   echo $error;
+                }
+              DB::table('offlinecs')->where('ID','=',$ID)->update(['ismailsend'=>1]);
+             }
+           }    
              
     }
     public function showdetails($ID)

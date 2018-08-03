@@ -1,11 +1,13 @@
 @extends('include.master')
 @section('content')
 @if(Session::has('message'))
+
 <div class="alert alert-success alert-dismissible">
 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
 <p class="alert alert-success">{{ Session::get('message') }}</p>
 </div>
 @endif
+
 <div class="container-fluid white-bg">
   <div class="col-md-12"><h3>Offline Cs</h3></div>
   <div><a href="{{url('offlinecs-dashboard')}}" class="btn btn-primary pull-right">Show my Entries</a></div>
@@ -27,7 +29,7 @@
                 </div>
                  <div class="col-md-4" id="divother" style="display: none;">
                   <label>Other Reason for Offline-cs:</label>  
-                  <textarea id="txtReason" name="txtReason"  class="form-control txtonly" placeholder="Specify Other Reason"></textarea>                  
+                  <textarea id="txtReason" name="txtReason"  class="form-control" placeholder="Specify Other Reason"></textarea>                  
                  </div>
                 <div class="col-md-4">
          		      <label>Product:</label>
@@ -36,7 +38,11 @@
                  	<option value="{{$val->id}}">{{$val->product_name}}</option>
                   @endforeach                  
                  </select>  
-                 </div>                 
+                 </div> 
+                 <div class="col-md-4 otherproduct" style="display: none;">
+                  <label> Other Product</label>
+                    <input type="text" name="txtotherproduct" id="txtotherproduct" class="form-control" placeholder="Other Product">
+                 </div>                
               </div>           
               <br>
               <div class="row">
@@ -83,11 +89,11 @@
                 </div>
                 <div class="col-md-4">
                   <label>Mobile no:</label>                   
-                   <input id="txtmobno" name="txtmobno" class="form-control numericOnly" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type = "number" maxlength = "10"  required>             
+                   <input id="txtmobno" name="txtmobno" class="form-control numericonly" oninput="javascript: if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type = "number" maxlength = "10"  required>             
                 </div>
                 <div class="col-md-4">
                   <label>Telephone No:</label>
-                  <input type="number" class="form-control numericOnly" name="txttelno" id="txttelno">              
+                <input type="number" class="form-control numericonly" name="txttelno" id="txttelno" oninput="javascript: if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength = "10">              
                 </div>             	
               	<div class="col-md-4">
               		<label>Email Id:</label>
@@ -104,7 +110,7 @@
               	</div>
                 <div class="col-md-4">
                   <label>Premium Amount:</label>
-                <input type="number" class="form-control numericOnly" name="txtpremiumamt" id="txtpremiumamt" required>        
+                <input type="number" class="form-control numericonly" name="txtpremiumamt" id="txtpremiumamt" required oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength = "8">        
                 </div>
               	<div class="col-md-4">
               		<label>ERP ID:</label>
@@ -169,7 +175,8 @@
               			<option value="{{$val->id}}">{{$val->companyname}}</option>
                     @endforeach
               		</select>              		
-              	</div>         	
+              	</div>  
+                <div class="productother">      	
               	<div class="col-md-4">
               		<label>Preexisting:</label>
               		<label class="checkbox-inline">YES  <input class="Preexistingyes" type="radio" name="txtPreexisting" id="txtPreexisting" value="YES"></label>
@@ -179,19 +186,20 @@
               		<label>Medical Report:</label>
               		<label class="checkbox-inline">YES  <input type="radio" class="Medicalyes" name="txtmedicalrp" id="txtmedicalrp" value="YES"></label>
               		<label class="checkbox-inline">No  <input type="radio" class="Medicalno" name="txtmedicalrp" id="txtmedicalrp" value="No"></label>             		           		
-              	</div> 
-              	</div> 
-              	<div class="row">  
-              	<div class="col-md-4">
-              		<label>Premium Year/s:</label>
-              		<select id="dllpremium" name="dllpremium" class="form-control" >
-              			<option value="">--select--</option>
-              			<option value="1 year">1 year</option>
-              			<option value="2 year">2 year</option>
-              			<option value="3 year">3 year</option>
-              		</select>
-              	</div>             	
+              	</div>                 
+              	</div>             	                           	
                </div>
+               <div class="row productother">
+               <div class="col-md-4">
+                  <label>Premium Year/s:</label>
+                  <select id="dllpremium" name="dllpremium" class="form-control" >
+                    <option value="">--select--</option>
+                    <option value="1 year">1 year</option>
+                    <option value="2 year">2 year</option>
+                    <option value="3 year">3 year</option>
+                  </select>
+                </div>
+                </div>
                </div>          
              <div id="divlife">
              <div class="row">
@@ -280,6 +288,7 @@
                  <span><a id="spnbreakrp" target="_blank"></a></span>           
              	</div>
               </div> 
+              <div class="otherproductdoc">
                <div class="row"> 
              	<div class="col-md-4">
              		<label>Cheque / Online Payment Receipt Copy:</label>
@@ -305,7 +314,36 @@
                 <span><a id="spnKYC" target="_blank"></a></span>             
               </div>     	
              </div> 
-             <br>                      
+             <br>
+             </div> 
+             <div class="divotherproductdoc row" style="display: none;">
+              <div class="col-md-4">
+                <label>Document 1</label>
+                <input type="file" name="doc1" id="doc1" class="form-control" accept=".png,.jpeg,.jpg,.pdf"> 
+                <span><a id="spndoc1" target="_blank"></a></span>               
+              </div>
+              <div class="col-md-4">
+                <label>Document 2</label>
+                <input type="file" name="doc2" id="doc2" class="form-control" accept=".png,.jpeg,.jpg,.pdf">
+                <span><a id="spndoc2" target="_blank"></a></span>                
+              </div>
+              <div class="col-md-4">
+                <label>Document 3</label>
+                <input type="file" name="doc3" id="doc3" class="form-control" accept=".png,.jpeg,.jpg,.pdf">  
+                <span><a id="spndoc3" target="_blank"></a></span>              
+              </div>
+               <div class="col-md-4">
+                <label>Document 4</label>
+                <input type="file" name="doc4" id="doc4" class="form-control" accept=".png,.jpeg,.jpg,.pdf">
+                <span><a id="spndoc4" target="_blank"></a></span>                
+              </div>
+              <div class="col-md-4">
+                <label>Document 5</label>
+                <input type="file" name="doc5" id="doc5" class="form-control" accept=".png,.jpeg,.jpg,.pdf">  
+                <span><a id="spndoc5" target="_blank"></a></span>              
+              </div>
+               
+             </div>                     
              </div>
              <br>
              <br>
@@ -399,6 +437,7 @@ if (window.location.href.indexOf('?id=') > 0) {
            $("#txtmgrProductname").val(data[0].ProductManager);
            $("#ddlInsurerlife").val(data[0].Insurerlife);
            $("#ddlnoofpolicy").val(data[0].TypeofPolicy);
+           $("#txtotherproduct").val(data[0].otherproductname); 
            if(data[0].RCCopy!=0){
            $("#spnrccopy").append(data[0].RCCopy);
            $('#spnrccopy').attr('href','{{url('/upload/offlinecs')}}/'+data[0].RCCopy);
@@ -430,6 +469,26 @@ if (window.location.href.indexOf('?id=') > 0) {
            if(data[0].KYC!=0){
            $("#spnKYC").append(data[0].KYC);
            $('#spnKYC').attr('href','{{url('/upload/offlinecs')}}/'+data[0].KYC);
+           }
+           if(data[0].otherproductdoc1!=0){
+           $("#spndoc1").append(data[0].otherproductdoc1);
+           $('#spndoc1').attr('href','{{url('/upload/offlinecs')}}/'+data[0].otherproductdoc1);
+           }
+           if(data[0].otherproductdoc2!=0){
+           $("#spndoc2").append(data[0].otherproductdoc2);
+           $('#spndoc2').attr('href','{{url('/upload/offlinecs')}}/'+data[0].otherproductdoc2);
+           }
+           if(data[0].otherproductdoc3!=0){
+           $("#spndoc3").append(data[0].otherproductdoc3);
+           $('#spndoc3').attr('href','{{url('/upload/offlinecs')}}/'+data[0].otherproductdoc3);
+           }
+           if(data[0].otherproductdoc4!=0){
+           $("#spndoc4").append(data[0].otherproductdoc4);
+           $('#spndoc4').attr('href','{{url('/upload/offlinecs')}}/'+data[0].otherproductdoc4);
+           }
+           if(data[0].otherproductdoc5!=0){
+           $("#spndoc5").append(data[0].otherproductdoc5);
+           $('#spndoc5').attr('href','{{url('/upload/offlinecs')}}/'+data[0].otherproductdoc5);
            }
            if (data[0].Insurerhealth!=0){
            $("#ddlInsurerhealth").val(data[0].Insurerhealth);
@@ -471,6 +530,8 @@ if (window.location.href.indexOf('?id=') > 0) {
      	$("#divhealth").hide();
       $(".health").hide();
       $(".life").hide();
+      $(".otherproduct").hide();
+      $(".divotherproductdoc").hide();
       $('#txtvehicalno').attr('required', true);
       $('#txtbreakin').attr('required', true);
       $('#ddlInsurermotor').attr('required', true);      
@@ -483,6 +544,8 @@ if (window.location.href.indexOf('?id=') > 0) {
       $("#divhealth").hide();
       $(".health").hide();
       $(".life").hide();
+      $(".otherproduct").hide();
+      $(".divotherproductdoc").hide();
       $('#txtvehicalno').attr('required', true);
       $('#txtbreakin').attr('required', true);
       $('#ddlInsurermotor').attr('required', true);      
@@ -495,6 +558,8 @@ if (window.location.href.indexOf('?id=') > 0) {
       $("#divhealth").hide();
       $(".health").hide();
       $(".life").hide();
+      $(".otherproduct").hide();
+      $(".divotherproductdoc").hide();
       $('#txtvehicalno').attr('required', true);
       $('#txtbreakin').attr('required', true);
       $('#ddlInsurermotor').attr('required', true);
@@ -509,6 +574,9 @@ if (window.location.href.indexOf('?id=') > 0) {
      	$(".Motor").hide();
       $(".health").show();
       $(".life").hide();
+      $(".productother").show();
+      $(".otherproduct").hide();
+      $(".divotherproductdoc").hide();
       $('#ddlInsurerhealth').attr('required', true);
       $('#dllpremium').attr('required', true);      
       $('#txtvehicalno').removeAttr("required"); 
@@ -528,6 +596,9 @@ if (window.location.href.indexOf('?id=') > 0) {
       $(".Motor").hide();
       $(".health").show();
       $(".life").hide();
+      $(".productother").show();
+      $(".otherproduct").hide();
+      $(".divotherproductdoc").hide();
       $('#ddlInsurerhealth').attr('required', true);
       $('#dllpremium').attr('required', true);      
       $('#txtvehicalno').removeAttr("required"); 
@@ -547,6 +618,8 @@ if (window.location.href.indexOf('?id=') > 0) {
      	$(".Motor").hide();
       $(".health").hide();
       $(".life").show();
+      $(".otherproduct").hide();
+      $(".divotherproductdoc").hide();
       $('#ddlnoofpolicy').attr('required', true);
       $('#ddlInsurerlife').attr('required', true);      
       $('#txtvehicalno').removeAttr("required"); 
@@ -556,8 +629,33 @@ if (window.location.href.indexOf('?id=') > 0) {
       $('#fileFitness').removeAttr("required");
       $('#filePUC').removeAttr("required"); 
       $('#filebreakrp').removeAttr("required");
-      $('#dllpremium').removeAttr("required");
-      
+      $('#dllpremium').removeAttr("required");      
+     }
+    else if($("#ddproduct").val()==7){
+      $("#life").hide();
+      $("#Health").show();
+      $("#divlife").hide();
+      $("#divhealth").show();
+      $(".Proposal").show();
+      $(".Motor").hide();
+      $(".health").show();
+      $(".life").hide();
+      $(".productother").hide();
+      $(".otherproduct").show();
+      $(".otherproductdoc").hide();
+      $(".divotherproductdoc").show();
+
+      $('#ddlInsurerhealth').attr('required', true);
+      $('#txtotherproduct').attr('required', true);      
+      $('#txtvehicalno').removeAttr("required"); 
+      $('#txtbreakin').removeAttr("required");
+      $('#ddlInsurermotor').removeAttr("required");
+      $('#filerc').removeAttr("required");
+      $('#fileFitness').removeAttr("required");
+      $('#filePUC').removeAttr("required");
+      $('#filebreakrp').removeAttr("required");
+      $('#ddlnoofpolicy').removeAttr("required");
+      $('#ddlInsurerlife').removeAttr("required");
      }
      else{
      	$("#life").hide();
@@ -568,6 +666,8 @@ if (window.location.href.indexOf('?id=') > 0) {
       $('#txtvehicalno').attr('required', true);
       $('#txtbreakin').attr('required', true);
       $('#ddlInsurermotor').attr('required', true);
+      $(".otherproduct").hide();
+      $(".divotherproductdoc").hide();
       
      }
      }
@@ -607,13 +707,21 @@ function getpospname()
 
 
 }
-$(".txtonly").keypress(function (e) {
+
+   
+  $(".txtonly").keypress(function (e) {
     if (String.fromCharCode(e.keyCode).match(/[^ a-zA-Z]/g)) return false;
+    });
+  $(".Vehicleno").keypress(function (e) {
+    if (String.fromCharCode(e.keyCode).match(/[^0-9a-zA-Z]/g)) return false;
+  });
+  $(".numericonly").keypress(function (e) {
+    if (String.fromCharCode(e.keyCode).match(/[^0-9]/g)) return false;
 });
 
-$(".Vehicleno").keypress(function (e) {
-    if (String.fromCharCode(e.keyCode).match(/[^0-9a-zA-Z]/g)) return false;
-});
+
+
+
 
 $("#saveofflinecs" ).click(function() {  
   $("#frmofflinecs").attr('action', '{{url('saveofflinecs')}}');    

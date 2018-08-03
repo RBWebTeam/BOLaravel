@@ -24,6 +24,12 @@ th, td {
 	    <th>Product Name</th>	
 		<td>{{$val->product_name}}</td>
 		</tr>
+		@if($val->otherproductname!='')
+		<tr>
+	    <th>Other Product Name</th>	
+		<td>{{$val->otherproductname}}</td>
+		</tr>
+		@endif
 		<tr>
 		<th>Customer Name</th>
 		<td>{{$val->CustomerName}}</td>	
@@ -107,7 +113,49 @@ th, td {
 		<tr>
 		<th>Product Manager</th>
 		<td>{{$val->ProductManager}}</td>
+		</tr>		
+        @if($val->Preexisting!='')
+		<tr>
+			<th>Preexisting</th>
+			<td>{{$val->Preexisting}}</td>
 		</tr>
+		@endif
+        @if($val->MedicalReport!='')
+		<tr>
+			<th>Medical Report</th>
+			<td>{{$val->MedicalReport}}</td>
+		</tr>
+		@endif
+        @if($val->PremiumYears!='')
+		<tr>
+			<th>Premium Years</th>
+			<td>{{$val->PremiumYears}}</td>
+		</tr>
+		@endif
+        @if($val->TypeofPolicy!='')
+		<tr>
+			<th>Type of Policy</th>
+			<td>{{$val->TypeofPolicy}}</td>
+		</tr>
+		@endif
+        @if($val->Insurerhealth!='')
+		<tr>
+			<th>Insurer Health</th>
+			<td>{{$val->Insurerhealth}}</td>
+		</tr>
+		@endif
+        @if($val->Insurerlife!='')
+		<tr>
+			<th>Insurer Life</th>
+			<td>{{$val->Insurerlife}}</td>
+		</tr>
+		@endif
+		 @if($val->CSID!='')
+		<tr>
+			<th>CSID</th>
+			<td>{{$val->CSID}}</td>
+		</tr>
+		@endif
 		@if($val->RCCopy!='')
 		<tr>
 		<th>RC Copy</th>
@@ -156,46 +204,34 @@ th, td {
 			<td>{{$val->KYC}}</td>
 		</tr>
 		@endif
-        @if($val->Preexisting!='')
+		@if($val->Document1!='')
 		<tr>
-			<th>Preexisting</th>
-			<td>{{$val->Preexisting}}</td>
+			<th>Document 1</th>
+			<td>{{$val->Document1}}</td>
 		</tr>
 		@endif
-        @if($val->MedicalReport!='')
+		@if($val->Document2!='')
 		<tr>
-			<th>Medical Report</th>
-			<td>{{$val->MedicalReport}}</td>
+			<th>Document 2</th>
+			<td>{{$val->Document2}}</td>
 		</tr>
 		@endif
-        @if($val->PremiumYears!='')
+		@if($val->Document3!='')
 		<tr>
-			<th>Premium Years</th>
-			<td>{{$val->PremiumYears}}</td>
+			<th>Document 3</th>
+			<td>{{$val->Document3}}</td>
 		</tr>
 		@endif
-        @if($val->TypeofPolicy!='')
+		@if($val->Document4!='')
 		<tr>
-			<th>Type of Policy</th>
-			<td>{{$val->TypeofPolicy}}</td>
+			<th>Document 4</th>
+			<td>{{$val->Document4}}</td>
 		</tr>
 		@endif
-        @if($val->Insurerhealth!='')
+		@if($val->Document5!='')
 		<tr>
-			<th>Insurer Health</th>
-			<td>{{$val->Insurerhealth}}</td>
-		</tr>
-		@endif
-        @if($val->Insurerlife!='')
-		<tr>
-			<th>Insurer Life</th>
-			<td>{{$val->Insurerlife}}</td>
-		</tr>
-		@endif
-		 @if($val->CSID!='')
-		<tr>
-			<th>CSID</th>
-			<td>{{$val->CSID}}</td>
+			<th>Document 5</th>
+			<td>{{$val->Document5}}</td>
 		</tr>
 		@endif
 		<tr>

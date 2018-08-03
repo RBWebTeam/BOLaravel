@@ -11,7 +11,7 @@
   	<form method="Post" id="frmlocationfba" name="frmlocationfba">
   		<div class="form-group col-md-6">
   			<label>Address:</label>  			
-  			<textarea name="txtadd" id="txtadd" class="form-control"></textarea>			
+  			<textarea name="txtadd" id="txtadd" class="form-control" required></textarea>			
        </div>        
    	</form>   	
   </div>
@@ -48,11 +48,9 @@
     </div>
     <script type="text/javascript">
 
-  function GetLocation() {
-        
-          var address =$("#txtadd").val();
-          alert(address);
-
+  function GetLocation() {        
+          var address =$("#txtadd").val();          
+          if (address!='') {
        $.ajax({ 
             type: "GET",
             url:"https://maps.googleapis.com/maps/api/geocode/xml?address=" + address + "&sensor=true_or_false&key=AIzaSyA3t6Az0YB8lyTGCguYHwrscSzGjohnAx4",
@@ -63,6 +61,11 @@
               alert($(response).find('GeocodeResponse').find('location').find('lng').text());
             }
         });
+        }
+        else
+        {
+        	alert("Address is Required");
+        }
         }
     </script>
  @endsection

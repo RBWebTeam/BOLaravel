@@ -46,9 +46,14 @@ class OfflinecsController extends CallApiController
            $fileCheque=$this->fileupload_fn($req->file('fileCheque'));
            $fileother=$this->fileupload_fn($req->file('fileother'));
            $fileProposalForm=$this->fileupload_fn($req->file('fileProposalForm'));
-           $fileKYC=$this->fileupload_fn($req->file('fileKYC'));      
+           $fileKYC=$this->fileupload_fn($req->file('fileKYC'));   
+           $doc1=$this->fileupload_fn($req->file('doc1')); 
+           $doc2=$this->fileupload_fn($req->file('doc2'));       
+           $doc3=$this->fileupload_fn($req->file('doc3')); 
+           $doc4=$this->fileupload_fn($req->file('doc4'));
+           $doc5=$this->fileupload_fn($req->file('doc5'));    
             
-             $id= DB::select('call Usp_insert_motor_offlinecs(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',array(
+             $id= DB::select('call Usp_insert_motor_offlinecs(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',array(
               $req->ddproduct,
               $req->txtcstname,
               $req->txtadd,             
@@ -93,7 +98,13 @@ class OfflinecsController extends CallApiController
               $fbauser,
               $req->ddlwhyoffline,
               $req->txtReason,
-              $req->ddlmapcity));              
+              $req->ddlmapcity,
+              $req->txtotherproduct,
+              $doc1,
+              $doc2,
+              $doc3,
+              $doc4,
+              $doc5));              
             
             foreach ($id as $val) 
             {
@@ -110,7 +121,7 @@ if ($filerc!=0)
     $type=$token;
     $result=$this->call_other_data_api($this::$api_url.'/api/short-url-forall',$post_data,$type);
     $Response= json_decode($result['http_result']); 
-    
+     
     $shorturl=$Response->MasterData[0]->ShortURL;   
     //print_r($shorturl);exit();
     DB::select('call Usp_Insert_shortlink_offlinecs(?,?,?)',array($shorturl,'RCCopy',$ID));
@@ -258,6 +269,102 @@ if ($fileKYC!=0)
         return $e->getMessage();    
      }        
 }
+if ($doc1!=0) 
+{
+  try{
+    $data= array("longurl"=>"http://bo.magicfinmart.com/upload/offlinecs/$doc1");
+    $token=array("cache-control: no-cache","content-type: application/json", "token: 1234567890");
+    $post_data=json_encode($data);
+    $type=$token;
+    $result=$this->call_other_data_api($this::$api_url.'/api/short-url-forall',$post_data,$type);
+
+    $Response= json_decode($result['http_result']);
+    //print_r($Response);exit();
+    $shorturl=$Response->MasterData[0]->ShortURL;
+    //print_r($shorturl);exit();
+    DB::select('call Usp_Insert_shortlink_offlinecs(?,?,?)',array($shorturl,'Document1',$ID));
+  }
+  catch (Exception $e){
+
+        return $e->getMessage();    
+     }        
+}
+if ($doc2!=0) 
+{
+  try{
+    $data= array("longurl"=>"http://bo.magicfinmart.com/upload/offlinecs/$doc2");
+    $token=array("cache-control: no-cache","content-type: application/json", "token: 1234567890");
+    $post_data=json_encode($data);
+    $type=$token;
+    $result=$this->call_other_data_api($this::$api_url.'/api/short-url-forall',$post_data,$type);
+
+    $Response= json_decode($result['http_result']);
+    $shorturl=$Response->MasterData[0]->ShortURL;
+    //print_r($shorturl);exit();
+    DB::select('call Usp_Insert_shortlink_offlinecs(?,?,?)',array($shorturl,'Document2',$ID));
+  }
+  catch (Exception $e){
+
+        return $e->getMessage();    
+     }        
+}
+if ($doc3!=0) 
+{
+  try{
+    $data= array("longurl"=>"http://bo.magicfinmart.com/upload/offlinecs/$doc3");
+    $token=array("cache-control: no-cache","content-type: application/json", "token: 1234567890");
+    $post_data=json_encode($data);
+    $type=$token;
+    $result=$this->call_other_data_api($this::$api_url.'/api/short-url-forall',$post_data,$type);
+
+    $Response= json_decode($result['http_result']);
+    $shorturl=$Response->MasterData[0]->ShortURL;
+    //print_r($shorturl);exit();
+    DB::select('call Usp_Insert_shortlink_offlinecs(?,?,?)',array($shorturl,'Document3',$ID));
+  }
+  catch (Exception $e){
+
+        return $e->getMessage();    
+     }        
+}
+if ($doc4!=0) 
+{
+  try{
+    $data= array("longurl"=>"http://bo.magicfinmart.com/upload/offlinecs/$doc4");
+    $token=array("cache-control: no-cache","content-type: application/json", "token: 1234567890");
+    $post_data=json_encode($data);
+    $type=$token;
+    $result=$this->call_other_data_api($this::$api_url.'/api/short-url-forall',$post_data,$type);
+
+    $Response= json_decode($result['http_result']);
+    $shorturl=$Response->MasterData[0]->ShortURL;
+    //print_r($shorturl);exit();
+    DB::select('call Usp_Insert_shortlink_offlinecs(?,?,?)',array($shorturl,'Document4',$ID));
+  }
+  catch (Exception $e){
+
+        return $e->getMessage();    
+     }        
+}
+if ($doc5!=0) 
+{
+  try{
+    $data= array("longurl"=>"http://bo.magicfinmart.com/upload/offlinecs/$doc5");
+    $token=array("cache-control: no-cache","content-type: application/json", "token: 1234567890");
+    $post_data=json_encode($data);
+    $type=$token;
+    $result=$this->call_other_data_api($this::$api_url.'/api/short-url-forall',$post_data,$type);
+
+    $Response= json_decode($result['http_result']);
+    $shorturl=$Response->MasterData[0]->ShortURL;
+    //print_r($shorturl);exit();
+    DB::select('call Usp_Insert_shortlink_offlinecs(?,?,?)',array($shorturl,'Document5',$ID));
+  }
+  catch (Exception $e){
+
+        return $e->getMessage();    
+     }        
+}
 
       $offlinecsdata = DB::select("call Usp_get_motor_data($ID)"); 
 
@@ -396,9 +503,15 @@ if ($fileKYC!=0)
            $fileCheque=$this->fileupload_fn($req->file('fileCheque'));
            $fileother=$this->fileupload_fn($req->file('fileother'));
            $fileProposalForm=$this->fileupload_fn($req->file('fileProposalForm'));
-           $fileKYC=$this->fileupload_fn($req->file('fileKYC'));      
+           $fileKYC=$this->fileupload_fn($req->file('fileKYC'));
+           $doc1=$this->fileupload_fn($req->file('doc1')); 
+           $doc2=$this->fileupload_fn($req->file('doc2'));       
+           $doc3=$this->fileupload_fn($req->file('doc3')); 
+           $doc4=$this->fileupload_fn($req->file('doc4'));
+           $doc5=$this->fileupload_fn($req->file('doc5'));  
+
             
-             $id= DB::select('call Usp_save_offlinecs_data(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',array(
+             $id= DB::select('call Usp_save_offlinecs_data(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',array(
               $req->ddproduct,
               $req->txtcstname,
               $req->txtadd,             
@@ -443,7 +556,13 @@ if ($fileKYC!=0)
               $fbauser,
               $req->ddlwhyoffline,
               $req->txtReason,
-              $req->ddlmapcity));
+              $req->ddlmapcity,
+              $req->txtotherproduct,
+              $doc1,
+              $doc2,
+              $doc3,
+              $doc4,
+              $doc5));
              foreach ($id as $val) 
             {
               $ID=$val->Id;             
@@ -607,6 +726,102 @@ if ($fileKYC!=0)
         return $e->getMessage();    
      }        
 }
+if ($doc1!=0) 
+{
+  try{
+    $data= array("longurl"=>"http://bo.magicfinmart.com/upload/offlinecs/$doc1");
+    $token=array("cache-control: no-cache","content-type: application/json", "token: 1234567890");
+    $post_data=json_encode($data);
+    $type=$token;
+    $result=$this->call_other_data_api($this::$api_url.'/api/short-url-forall',$post_data,$type);
+
+    $Response= json_decode($result['http_result']);
+    $shorturl=$Response->MasterData[0]->ShortURL;
+    //print_r($shorturl);exit();
+    DB::select('call Usp_Insert_shortlink_offlinecs(?,?,?)',array($shorturl,'Document1',$ID));
+  }
+  catch (Exception $e){
+
+        return $e->getMessage();    
+     }        
+}
+if ($doc2!=0) 
+{
+  try{
+    $data= array("longurl"=>"http://bo.magicfinmart.com/upload/offlinecs/$doc2");
+    $token=array("cache-control: no-cache","content-type: application/json", "token: 1234567890");
+    $post_data=json_encode($data);
+    $type=$token;
+    $result=$this->call_other_data_api($this::$api_url.'/api/short-url-forall',$post_data,$type);
+
+    $Response= json_decode($result['http_result']);
+    //print_r($Response);exit();
+    $shorturl=$Response->MasterData[0]->ShortURL;
+    //print_r($shorturl);exit();
+    DB::select('call Usp_Insert_shortlink_offlinecs(?,?,?)',array($shorturl,'Document2',$ID));
+  }
+  catch (Exception $e){
+
+        return $e->getMessage();    
+     }        
+}
+if ($doc3!=0) 
+{
+  try{
+    $data= array("longurl"=>"http://bo.magicfinmart.com/upload/offlinecs/$doc3");
+    $token=array("cache-control: no-cache","content-type: application/json", "token: 1234567890");
+    $post_data=json_encode($data);
+    $type=$token;
+    $result=$this->call_other_data_api($this::$api_url.'/api/short-url-forall',$post_data,$type);
+
+    $Response= json_decode($result['http_result']);
+    $shorturl=$Response->MasterData[0]->ShortURL;
+    //print_r($shorturl);exit();
+    DB::select('call Usp_Insert_shortlink_offlinecs(?,?,?)',array($shorturl,'Document3',$ID));
+  }
+  catch (Exception $e){
+
+        return $e->getMessage();    
+     }        
+}
+if ($doc4!=0) 
+{
+  try{
+    $data= array("longurl"=>"http://bo.magicfinmart.com/upload/offlinecs/$doc4");
+    $token=array("cache-control: no-cache","content-type: application/json", "token: 1234567890");
+    $post_data=json_encode($data);
+    $type=$token;
+    $result=$this->call_other_data_api($this::$api_url.'/api/short-url-forall',$post_data,$type);
+
+    $Response= json_decode($result['http_result']);
+    $shorturl=$Response->MasterData[0]->ShortURL;
+    //print_r($shorturl);exit();
+    DB::select('call Usp_Insert_shortlink_offlinecs(?,?,?)',array($shorturl,'Document4',$ID));
+  }
+  catch (Exception $e){
+
+        return $e->getMessage();    
+     }        
+}
+if ($doc5!=0) 
+{
+  try{
+    $data= array("longurl"=>"http://bo.magicfinmart.com/upload/offlinecs/$doc5");
+    $token=array("cache-control: no-cache","content-type: application/json", "token: 1234567890");
+    $post_data=json_encode($data);
+    $type=$token;
+    $result=$this->call_other_data_api($this::$api_url.'/api/short-url-forall',$post_data,$type);
+
+    $Response= json_decode($result['http_result']);
+    $shorturl=$Response->MasterData[0]->ShortURL;
+    //print_r($shorturl);exit();
+    DB::select('call Usp_Insert_shortlink_offlinecs(?,?,?)',array($shorturl,'Document5',$ID));
+  }
+  catch (Exception $e){
+
+        return $e->getMessage();    
+     }        
+}
  Session::flash('message', 'Record has been saved successfully');
 return Redirect('offlinecs');
 }
@@ -626,9 +841,14 @@ return Redirect('offlinecs');
            $fileCheque=$this->fileupload_fn($req->file('fileCheque'));
            $fileother=$this->fileupload_fn($req->file('fileother'));
            $fileProposalForm=$this->fileupload_fn($req->file('fileProposalForm'));
-           $fileKYC=$this->fileupload_fn($req->file('fileKYC'));  
+           $fileKYC=$this->fileupload_fn($req->file('fileKYC'));
+           $doc1=$this->fileupload_fn($req->file('doc1')); 
+           $doc2=$this->fileupload_fn($req->file('doc2'));       
+           $doc3=$this->fileupload_fn($req->file('doc3')); 
+           $doc4=$this->fileupload_fn($req->file('doc4'));
+           $doc5=$this->fileupload_fn($req->file('doc5'));  
 
-              DB::select('call Usp_update_offlinecs(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',array(
+              DB::select('call Usp_update_offlinecs(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',array(
               $req->txtofflinecsid,
               $req->ddproduct,
               $req->txtcstname,
@@ -673,7 +893,13 @@ return Redirect('offlinecs');
               $fbauser,
               $req->ddlwhyoffline,
               $req->txtReason,
-              $req->ddlmapcity));
+              $req->ddlmapcity,
+              $req->txtotherproduct,
+              $doc1,
+              $doc2,
+              $doc3,
+              $doc4,
+              $doc5));
           
               $ID=$req->txtofflinecsid;             
             
@@ -767,6 +993,61 @@ if ($fileKYC!=0)
         return $e->getMessage();    
      }        
 }
+if ($doc1!=0) 
+{
+  try{
+    
+    $this->getshorturl($doc1,$ID,'Document1');
+  }
+  catch (Exception $e){
+
+        return $e->getMessage();    
+     }        
+}
+if ($doc2!=0) 
+{
+  try{
+    
+    $this->getshorturl($doc2,$ID,'Document2');
+  }
+  catch (Exception $e){
+
+        return $e->getMessage();    
+     }        
+}
+if ($doc3!=0) 
+{
+  try{
+    
+    $this->getshorturl($doc3,$ID,'Document3');
+  }
+  catch (Exception $e){
+
+        return $e->getMessage();    
+     }        
+}
+if ($doc4!=0) 
+{
+  try{
+    
+    $this->getshorturl($doc4,$ID,'Document4');
+  }
+  catch (Exception $e){
+
+        return $e->getMessage();    
+     }        
+}
+if ($doc5!=0) 
+{
+  try{
+    
+    $this->getshorturl($doc5,$ID,'Document5');
+  }
+  catch (Exception $e){
+
+        return $e->getMessage();    
+     }        
+}
  Session::flash('message', 'Record has been Updated successfully');
  return Redirect('offlinecs');
 }
@@ -778,10 +1059,11 @@ public function getshorturl($filename,$ID,$doctype)
     $post_data=json_encode($data);
     $type=$token;
     $result=$this->call_other_data_api($this::$api_url.'/api/short-url-forall',$post_data,$type);
-
+    //print_r($result); exit();
     $Response= json_decode($result['http_result']);
-    //print_r($Response);exit();
+   
     $shorturl=$Response->MasterData[0]->ShortURL;
+
 
     DB::select('call Usp_Update_shortlink_offlinecs(?,?,?)',array($shorturl,$ID,$doctype));
     }
@@ -803,9 +1085,14 @@ public function Updateofflinecsandsendmail(Request $req)
            $fileCheque=$this->fileupload_fn($req->file('fileCheque'));
            $fileother=$this->fileupload_fn($req->file('fileother'));
            $fileProposalForm=$this->fileupload_fn($req->file('fileProposalForm'));
-           $fileKYC=$this->fileupload_fn($req->file('fileKYC'));      
+           $fileKYC=$this->fileupload_fn($req->file('fileKYC'));
+           $doc1=$this->fileupload_fn($req->file('doc1')); 
+           $doc2=$this->fileupload_fn($req->file('doc2'));       
+           $doc3=$this->fileupload_fn($req->file('doc3')); 
+           $doc4=$this->fileupload_fn($req->file('doc4'));
+           $doc5=$this->fileupload_fn($req->file('doc5'));       
             
-             $id= DB::select('call Usp_update_offlinecsandsendmail(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',array(
+             $id= DB::select('call Usp_update_offlinecsandsendmail(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',array(
               $req->txtofflinecsid,
               $req->ddproduct,
               $req->txtcstname,
@@ -850,7 +1137,13 @@ public function Updateofflinecsandsendmail(Request $req)
               $fbauser,
               $req->ddlwhyoffline,
               $req->txtReason,
-              $req->ddlmapcity));
+              $req->ddlmapcity,
+              $req->txtotherproduct,
+              $doc1,
+              $doc2,
+              $doc3,
+              $doc4,
+              $doc5));
              
               $ID=$req->txtofflinecsid;             
             
@@ -942,7 +1235,63 @@ if ($fileKYC!=0)
 
         return $e->getMessage();    
      }        
-}              
+} 
+if ($doc1!=0) 
+{
+  try{
+    
+    $this->getshorturl($doc1,$ID,'Document1');
+  }
+  catch (Exception $e){
+
+        return $e->getMessage();    
+     }        
+}
+if ($doc2!=0) 
+{
+  try{
+    
+    $this->getshorturl($doc2,$ID,'Document2');
+  }
+  catch (Exception $e){
+
+        return $e->getMessage();    
+     }        
+}
+if ($doc3!=0) 
+{
+  try{
+    
+    $this->getshorturl($doc3,$ID,'Document3');
+  }
+  catch (Exception $e){
+
+        return $e->getMessage();    
+     }        
+}
+if ($doc4!=0) 
+{
+  try{
+    
+    $this->getshorturl($doc4,$ID,'Document4');
+  }
+  catch (Exception $e){
+
+        return $e->getMessage();    
+     }        
+}
+if ($doc5!=0) 
+{
+  try{
+    
+    $this->getshorturl($doc5,$ID,'Document5');
+  }
+  catch (Exception $e){
+
+        return $e->getMessage();    
+     }        
+}
+
  $offlinecsdata = DB::select("call Usp_get_motor_data($ID)"); 
 
       if ($offlinecsdata[0]->Product==1||$offlinecsdata[0]->Product==2||$offlinecsdata[0]->Product==3) 

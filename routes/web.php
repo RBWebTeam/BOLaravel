@@ -242,6 +242,11 @@ Route::get('offlinecs-details/{ID}','OfflinecsDashboardController@showdetails');
 Route::Post('offlinecs-csidupdate','OfflinecsDashboardController@updatecsid');
 
 Route::get('fba-location','FindfbalocationController@getfbadata');
+
+Route::get('prodouct-lead-details','prodouctleaddetailsController@viewlead_details');
+
+Route::get('get-fba-location/{lat}/{long}','prodouctleaddetailsController@fbalocation');
+
 ///shubham end ///
 // avinash
  Route::get('ticket-module','TicketController@getticketdetails');
