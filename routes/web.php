@@ -234,6 +234,7 @@ route::get('offlinecsedit/{id}','OfflinecsController@getofflinecsdataedit');
 
 Route::post('saveofflinecs','OfflinecsController@saveofflinecsdata');
 Route::get('offlinecs-dashboard','OfflinecsDashboardController@getofflinecsdata');
+Route::get('offlinecs-All-Entry','OfflinecsDashboardController@getofflinecsalldata');
 
 Route::post('offlinecsupdate','OfflinecsController@Updateofflinecs');
 Route::post('offlinecsupdateandsendmail','OfflinecsController@Updateofflinecsandsendmail');

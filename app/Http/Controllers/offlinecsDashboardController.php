@@ -18,6 +18,14 @@ class OfflinecsDashboardController extends Controller
 		//print_r($data); exit();
 		 return view('offlinecsDashboard',['data'=>$data]);
 	}
+  public function getofflinecsalldata()
+  {
+   // $fbauser=Session::get('fbauserid');
+    $data=DB::select("call Usp_get_offlinecs_all_data()");
+    //print_r($data); exit();
+     return view('OfflinecsallEntry',['data'=>$data]);
+  }
+
 	public function sendemail($ID)
 	{
                

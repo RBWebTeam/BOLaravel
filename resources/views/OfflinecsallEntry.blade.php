@@ -49,7 +49,7 @@
       	<th>POSP Name</th>
       	<th>Mobile No</th>
         <th>CSID</th>
-      	<th>Action</th>      	
+      	      	
       </tr>
     </thead>
     <tbody>
@@ -68,18 +68,7 @@
           @if($val->CSID=='')
          <a id="btncsid" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#csidupdate" onclick="updatecsid({{$val->ID}},this)">Update CSID</a>
          @endif
-         {{$val->CSID}}</td>
-        <td> 
-          @if($val->ERPID=='')
-          <a id="btnedit" class="btn btn-primary btn-sm" href="{{url('offlinecs')}}?id={{$val->ID}}"><span style="font-size: 15px;">Edit</span></a>
-          @elseif($val->ismailsend!=1)
-            <a id="btnedit" class="btn btn-primary btn-sm" href="{{url('offlinecs')}}?id={{$val->ID}}"><span style="font-size: 15px;">Edit</span></a>
-            <a id="btnedit" class="btn btn-primary btn-sm" onclick="Sendemail({{$val->ID}},this)" ><span class="glyphicon glyphicon-envelope" style="font-size: 15px;"></span></a> 
-            @else
-            <a id="btnedit" class="btn btn-primary btn-sm" onclick="Sendemail({{$val->ID}},this)" ><span class="glyphicon glyphicon-envelope" style="font-size: 15px;"></span></a> 
-          @endif   
-             
-         </td>		
+         {{$val->CSID}}</td>       
     	</tr>
     	@endforeach
       @endisset
@@ -138,19 +127,7 @@
   </div>
 </div>
 <script type="text/javascript">
-  function Sendemail($ID)
-  {
-     //alert($ID);    
-   $.ajax({
-             url: 'offlinecssendemail/'+$ID,
-             type: "GET",             
-             success:function(data) 
-             {      
-              alert("Mail has Been Send Successfully");              
-              //window.location.href = '{{url('offlinecs-dashboard')}}';
-             }
-         });
-  }
+
   function showdetails($ID)
   {
      //alert($ID);    
