@@ -28,6 +28,11 @@ Route::get('getcitybypincode/{pincode}','HealthAssureController@getcity');
 
 Route::get('/','LoginController@checklogin');
 Route::post('admin-login','LoginController@login');
+
+Route::post('forgot-password','LoginController@forgot_password');
+
+
+
 Route::group(['middleware' => ['CheckMidd']], function (){
  // city  state
 Route::get('search-state','LoginController@search_state');
@@ -38,7 +43,8 @@ Route::get('dashboard','DashboardController@dashboard');
 
 //Fba details
 Route::get('fba-list','FbaController@fba_list');
-Route::get('get-fba-list/{fdate}/{todate}','FbaController@get_fba_list');
+// Route::get('get-fba-list/{fdate}/{todate}','FbaController@get_fba_list');
+Route::get('get-fba-list','FbaController@get_fba_list');
 Route::post('sales-update','FbaController@sales');
 Route::post('loan-update','FbaController@loan');
 Route::post('posp-update','FbaController@posp');
@@ -74,8 +80,7 @@ Route::get('quickleadassignmentshow','quickleadController@showlead');
 //User_mapping vikas Start  
   	//Route::get('user_mapping','usermappingController@fbauserview');
 
-	Route::get('user_mapping','usermappingController@fbauser');
-
+Route::get('user_mapping','usermappingController@fbauser');
 Route::get('sales-code-update','salescodeController@updatesalescode');
 Route::get('sales-code-update-get-fbaid/{salsecode}','salescodeController@selfcodefbaid');
 Route::POST('sales-code-update-insert','salescodeController@insertsalescode');
@@ -108,13 +113,16 @@ Route::get('state_sub_dropdown/{cityid}','bankofferController@get_sub_cities');
 /////////////shubham podp
 Route::get('Fba-list-Update-posp/{id}','FbaController@UpdatePospno');
 
-
 // export excel  
-//Route::get('export','FbaController@exportexcel');
-Route::get('export/{fdate}/{todate}','FbaController@exportexcel');
-
-
+Route::get('export','FbaController@exportexcel');
+// Route::get('export/{fdate}/{todate}','FbaController@exportexcel');
 //Route::get('exportlead','quickleaddashboardController@exportleadexcel');
+
+// Route::get('forgot-password','LoginController@forgotpassword');
+// Route::post('forgot-password','LoginController@forgot_password');
+
+
+
 
 // non fba-list start  
 Route::get('load-non-fba-list','nonfbaController@nonfbalist');
@@ -129,6 +137,9 @@ Route::get('export-excel','nonfbaController@nonfbaexportexcel');
 Route::get('sales-code-update','salescodeController@updatesalescode');
 Route::get('sales-code-update-get-fbaid/{salsecode}','salescodeController@selfcodefbaid');
 Route::POST('sales-code-update-insert','salescodeController@insertsalescode');
+// Refresh get data functiolity start
+Route::get('refresh-data/{fbaid}','FbaController@get_refresh_data');
+// Refresh get data functiolity End
 
 
 
@@ -137,7 +148,6 @@ Route::POST('sales-code-update-insert','salescodeController@insertsalescode');
 Route::get('finmartemployee-details','manageemploeeController@finemployeeview'); 
 Route::get('emp-details','manageemploeeController@allemployeedata');  
 Route::get('manage-employee/{uid}','manageemploeeController@viewmaageemployy');
-
 Route::post('update_detailsemp','manageemploeeController@update_emp_details'); 
 
 // add employee start  

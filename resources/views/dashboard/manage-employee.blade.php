@@ -2,7 +2,7 @@
 @section('content')
 
 
-<form id="updateempdtl" name="updateempdtl" method="POST" action="{{url('update_detailsemp')}}" >
+<form id="updateempdtl" name="updateempdtl" method="POST" action="{{url('update_detailsemp')}}" onsubmit="alertSuccess()" >
     {{csrf_field()}}
 <div id="content" style="overflow:scroll; height: 5px;">
              <div class="container-fluid white-bg">
@@ -270,7 +270,17 @@ $("#statussub").click(function(){
 });
 
       });
+
+
+
+
   </script>
+
+<script>
+function alertSuccess() {
+alert('Update Successfully');
+}
+</script>
      
 
 

@@ -1,62 +1,50 @@
 @extends('include.master')
 @section('content')
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
 <style type="text/css">
   
   .hide {
   display:  none;
 }
-   </style>
+</style>
 
-           <div class="container-fluid white-bg">
-           <div class="col-md-12">
-        <div class="col-md-12">
-           <h3>FBA List</h3>
-    <h5 class="col-md-6" style="margin-top: -20px; margin-left:69px;" ><div class="col-md-12" id="divdate"></div></h5> 
-           </div>                                
+
+             <div class="container-fluid white-bg">
+             <div class="col-md-12"><h3 class="mrg-btm">FBA List</h3>
            <hr>
-
-
-          <label><span id="fbaid"></span></label>
            </div>
 
       <div class="col-md-2">
       <div class="form-group">
-      <p>From Date</p>
-      <div id="datepicker" class="input-group date" data-date-format="yyyy-mm-dd">
-      <input class="form-control date-range-filter" type="text" placeholder="From Date" name="fdate" id="min"/ value="<?php echo date('Y-m-d',strtotime("-30 days")); ?>">
-      <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-      </div>
-      </div>
-      </div>
 
+    <p>From Date</p>
+         <div id="datepicker" class="input-group date" data-date-format="mm-dd-yyyy">
+               <input class="form-control date-range-filter" type="text" placeholder="From Date" name="fdate" id="min"/>
+              <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+            </div>
+            </div>
+           </div>
+       <div class="col-md-2">
+       <div class="form-group">
+       <p>To Date</p>
+       <div id="datepicker1" class="input-group date" data-date-format="mm-dd-yyyy">
+               <input class="form-control date-range-filter" type="text" placeholder="To Date"  name="todate"  id="max"/>
+              <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+              </div>
+              </div>
+            </div>
+           
+       <div class="col-md-4">
 
-      <div class="col-md-2">
-      <div class="form-group">
-      <p>To Date</p>
-      <div id="datepicker1" class="input-group date" data-date-format="yyyy-mm-dd ">
-      <input class="form-control date-range-filter" type="text" placeholder="To Date" name="todate" id="max"/ value="<?php echo date('Y-m-d');?>">
-      <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-      </div>
-      </div>
-      </div>
-<div>
-</div>
+       <div class="form-group"> <input type="submit" name="btndate" id="btndate"  class="mrg-top common-btn pull-left" value="SHOW">  
 
-    <div class="col-md-6">
-    <div class="form-group"> <input type="submit" name="btndate" id="btndate" onclick="getloadfbadata()" class="mrg-top common-btn pull-left" value="SHOW"> 
+      <button class="qry-btn" style="margin-top: 24px" name="btnrfsh" id="btnrfsh" onclick="refreshdata()">Refresh</button>
      &nbsp;&nbsp;
-    <div>
-    <td><a id="btnall" class="qry-btn" name="btnall" style="margin-left:9px;margin-top:4px;"; onclick="getfbaalldata()" class="btn btn-default">Show all</a></td>
-    </div> 
+  &nbsp;&nbsp;&nbsp;
 
-   </select> 
-   &nbsp;&nbsp;&nbsp;
+
   <form name="myform">
-   <select id="msds-select" class="form-control" style="width:30%;margin:10px;margin-top:4px;margin-right:-33px; margin-left: 200px;margin-top: -54px;display: -webkit-inline-box;" name="one" onchange="selectIndex(this)">
-
-
+   <select id="msds-select" class="form-control" style="width:45%;margin:10px;margin-right:-33px; margin-left: 186px;margin-top: -39px;display: -webkit-inline-box;" name="one" onchange="selectIndex(this)">
   <option value="-1" selected="selected">Search By</option>
    <option value="0">All</option>
    <option value="1">POSP Yes</option>
@@ -70,7 +58,8 @@
    <option value="pospname">POSP Name</option>
    </select>
 
-<input type="text" id="txtfbasearch" name="txtfbasearch" placeholder="Search" onkeyup="searchdata()" style="display: none; margin-left:199px;margin-top:-12px;width:30%;"/>
+   <input type="text" id="txtfbasearch" name="txtfbasearch" placeholder="Search" onkeyup="searchdata()" style="display: none; margin-left:104px;margin-top:2px;width:45%;"/>
+
 
   </form>
   </div> 
@@ -79,10 +68,10 @@
 
   <!-- Date End -->
 
-          <div class="col-md-12">
-          <div class="overflow-scroll">
-          <div id="divtable" class="table-responsive" >
-          <table class="datatable-responsive table table-striped table-bordered nowrap" id="fba-list-table">
+             <div class="col-md-12">
+             <div class="overflow-scroll">
+             <div class="table-responsive" >
+             <table class="datatable-responsive table table-striped table-bordered nowrap" id="fba-list-table">
                                        <thead>
                                        <tr>
                                        <th>FBA ID</th> 
@@ -110,26 +99,20 @@
                                        <th>Documents</th> 
                                        <th>Customer ID</th>   
                                        <th>Created Date1</th>
-                                       </tr>
-                                       </thead>
-                                       </table>
+                                     </tr>
+                                    </thead>
+                                   </table>
 
-    <div id="myDIV" >
-    <a  class="qry-btn" id="pospbtn" onclick="getfdate()">Export</a>
+ <div id="myDIV" >
+<!--     <a class="qry-btn" id="pospbtn" onclick="getfdate()">Export</a>
+ -->    <a href="{{url('export')}}" class="qry-btn" id="pospbtn">Export</a>
+   <!--   <button class="qry-btn" name="btnrfsh" id="btnrfsh" onclick="refreshdata()">Refresh</button> -->
 
-    <!-- <a href="{{url('fba-list')}}" class="qry-btn" id="pospbtn">All Data</a> -->
-
- 
-
- 
-</div> 
-</div>
-    </div>
+             </div>
+           </div>
         </div>
-            </div>
-              </div>
-                 </div>
- 
+     </div>
+ </div>
 
 <!-- send sms -->
 <div class="sms_sent_id id modal fade" role="dialog">   
@@ -210,41 +193,43 @@
  -->
 
 
-        <div class="pageloader modal fade" role="dialog" id="pageloader">   
-        <div class="modal-dialog" role="document">
-        <div class="modal-content">
-        <div class="modal-body">
+ <div class="pageloader modal fade" role="dialog" id="pageloader">   
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+     
+      <div class="modal-body">
         <form id="posp_from_id">
+         
         </form>
-             </div>
-            </div>
-          </div>
-        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 
 
 <!-- sales update -->
 
-      <div class="salesupdate modal fade" role="dialog" id="salesupdate_modal_fade">   
-      <div class="modal-dialog" role="document">
-      <div class="modal-content">
+<div class="salesupdate modal fade" role="dialog" id="salesupdate_modal_fade">   
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
       <div class="modal-header"  >
-      <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-      <h4 class="modal-title">Sales Code</h4>
+        <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+        <h4 class="modal-title">Sales Code</h4>
       </div>
       <div class="modal-body">
-      <form name="update_remark" id="update_remark">
+        <form name="update_remark" id="update_remark">
          {{ csrf_field() }}
-      <div class="form-group">
-      <input type="hidden" name="p_fbaid" id="p_fbaid" value="">
-      <label class="control-label" for="message-text">Enter Sales Code : </label>
-      <input type="text" class="recipient-name form-control" id="p_remark" name="p_remark" required="" />
-      </div>
-      </form>
-      <div class="modal-footer"> 
-      <button class="btn btn-default" type="button" data-dismiss="modal">Close</button>
-         <a id="sales_update" class="btn btn-primary" type="button">Update</a><b class="alert-success primary" id=""></b>
+         <div class="form-group">
+            <input type="hidden" name="p_fbaid" id="p_fbaid" value="">
+            <label class="control-label" for="message-text">Enter Sales Code : </label>
+            <input type="text" class="recipient-name form-control" id="p_remark" name="p_remark" required="" />
+          </div>
+        </form>
+        <div class="modal-footer"> 
+          <button class="btn btn-default" type="button" data-dismiss="modal">Close</button>
+          <a id="sales_update" class="btn btn-primary" type="button">Update</a><b class="alert-success primary" id=""></b>
           
         </div>
       </div>
@@ -253,25 +238,27 @@
 </div>
 
 
+
+
 <!-- update posp -->
-     <div class="updatePosp modal fade" role="dialog">   
-     <div class="modal-dialog" role="document">
-     <div class="modal-content">
-     <div class="modal-header">
-     <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-     <h4 class="modal-title">UPDATE POSP</h4>
-     </div>
-     <div class="modal-body">
-     <form name="update_posp" id="update_posp">
-         {{ csrf_field() }}
-      <div class="form-group">
-      <input type="hidden" name="fbaid" id="fbaid" value=" ">
-      <label class="control-label" for="message-text">Enter POSP : </label>
-      <input type="text" class="recipient-name form-control" id="posp_remark" name="posp_remark"  maxlength="4" required="" />
+<div class="updatePosp modal fade" role="dialog">   
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+        <h4 class="modal-title">UPDATE POSP</h4>
       </div>
-      </form>
-      <div class="modal-footer"> 
-      <button class="btn btn-default" type="button" data-dismiss="modal">Close</button>
+       <div class="modal-body">
+        <form name="update_posp" id="update_posp">
+         {{ csrf_field() }}
+         <div class="form-group">
+            <input type="hidden" name="fbaid" id="fbaid" value=" ">
+            <label class="control-label" for="message-text">Enter POSP : </label>
+            <input type="text" class="recipient-name form-control" id="posp_remark" name="posp_remark" required="" />
+          </div>
+        </form>
+        <div class="modal-footer"> 
+          <button class="btn btn-default" type="button" data-dismiss="modal">Close</button>
           <a id="posp_update" class="btn btn-primary" type="button">Update</a><b class="alert-success primary" id=""></b>
           
         </div>
@@ -311,71 +298,78 @@
 </div>
 
 <!-- Partner Info Start -->
-    <div id="partnerInfo" class="modal fade" role="dialog">
-    <div class="modal-dialog">
+<div id="partnerInfo" class="modal fade" role="dialog">
+  <div class="modal-dialog">
    <!-- Modal content-->
     <div class="modal-content">
-    <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal">&times;</button>
-    <h4 class="modal-title">Partner Info</h4>
-    </div>
-    <div class="modal-body">
-    <div class="table-responsive">
-    <div id="divpartnertable" name="divpartnertable">
-    </div>
-    </div>
-    </div>
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Partner Info</h4>
+      </div>
+      <div class="modal-body">
+
+      <div class="table-responsive">
+        <div id="divpartnertable" name="divpartnertable">
+
+        </div>
+        </div>
+
+      </div>
     </div>
   </div>
 </div>
 <!-- Partner Info End -->
 
-   <div id="docviwer" class="modal fade" role="dialog">
-   <div class="modal-dialog">
+<div id="docviwer" class="modal fade" role="dialog">
+  <div class="modal-dialog">
    <!-- Modal content-->
     <div class="modal-content">
-    <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal">&times;</button>
-    <h4 class="modal-title" style="text-align:center;">Attachment</h4>
-    </div>
-    <div class="modal-body">
-    <div class="table-responsive">
-    <div id="divdocviewer" name="divdocviewer">
-    </div>
-    <div>
-    <img id="imgdoc" style="height:100%; width:100%;">
-            </div>
-          </div>
-         </div>
-        </div>
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title" style="text-align:center;">Attachment</h4>
       </div>
+      <div class="modal-body">
+
+      <div class="table-responsive">
+        <div id="divdocviewer" name="divdocviewer">
+        </div>
+        <div>
+         <img id="imgdoc" style="height:100%; width:100%;">
+         
+
+         </div>
+       </div>
+     </div>
     </div>
+  </div>
+</div>
 
 
 <!--Filter -->
-    <div class="Filter modal fade" id="Filter" role="dialog">   
-    <div class="modal-dialog" role="document">
+<div class="Filter modal fade" id="Filter" role="dialog">   
+  <div class="modal-dialog" role="document">
     <div class="modal-content">
-    <div class="modal-header">
-    <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-    <h4 class="modal-title">Filter</h4>
-    </div>
-    <div class="modal-body">
-    <form id="posp_from_id">
-    <div class="form-group">
-    </div>
-    <div class="form-group">
-    <select class="recipient-name form-control" > 
-    <option>FBA</option>
-    <option>POSP</option>
-    <option>FBA</option>
-    </select>
-    <input type="text" class="recipient-name form-control" id="" name="" required="yes" />
-    </div>
-    </form>
-    <div class="modal-footer"> 
-    <button class="btn btn-default" type="button" data-dismiss="modal">Close</button>
-    <button id="" class="btn btn-primary" type="button">search</button>
+      <div class="modal-header">
+        <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+        <h4 class="modal-title">Filter</h4>
+      </div>
+      <div class="modal-body">
+        <form id="posp_from_id">
+          <div class="form-group">
+          </div>
+          <div class="form-group">
+            <select class="recipient-name form-control" > 
+              <option>FBA</option>
+              <option>POSP</option>
+              <option>FBA</option>
+            </select>
+            <input type="text" class="recipient-name form-control" id="" name="" required="yes" />
+             
+          </div>
+        </form>
+        <div class="modal-footer"> 
+          <button class="btn btn-default" type="button" data-dismiss="modal">Close</button>
+          <button id="" class="btn btn-primary" type="button">search</button>
           
         </div>
       </div>
@@ -385,45 +379,47 @@
 <!-- paymentlink -->
  
 
-    <div id="paylink_payment" class="modal fade paylink_payment" role="dialog">
-    <div class="modal-dialog">
+<div id="paylink_payment" class="modal fade paylink_payment" role="dialog">
+  <div class="modal-dialog">
    <!-- Modal content-->
     <div class="modal-content">
-    <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal">&times;</button>
-    <h4 class="modal-title">Payment link</h4>
-    </div>
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Payment link</h4>
+      </div>
 
-    <div class="col-md-12"> <br>
-    <form method="POST" id="modelpaylink">
-    {{ csrf_field() }}
-
-   <textarea type="text" style="resize:none" name="divpartnertable_payment" cols="num" rows="num" id="divpartnertable_payment" class="divpartnertable_payment form-control" readonly> </textarea> 
-    <br>
-    </div> 
+<div class="col-md-12"> <br>
+<textarea type="text" rows="6"  id="divpartnertable_payment" class="divpartnertable_payment form-control">
+  </textarea>      
+   <br>
+  </div> 
        
-    <div class="col-md-12"> 
+      <div class="col-md-12"> 
     <button type="button" style="margin-left:20px;" class="btn btn-info" name="paysub" id="paysub" onclick="getpaylinknew()" >Genrate Payment link</button> &nbsp;&nbsp;
-    <button type="button" name="smspayment" id="smspayment" class="btn btn-success" data-dismiss="modal" style="padding-left:5px; " onclick="pmesgsend()">Send SMS</button>
+     <button type="button" name="smspayment" id="smspayment" class="btn btn-success" data-dismiss="modal" style="padding-left:5px; " onclick="pmesgsend()">Send SMS</button>
     </div>
 
     
       
-      <!-- <form id="modelpaylink" name="modelpaylink"> -->
-    <!--  <form method="POST" id="modelpaylink">
-        {{ csrf_field() }} -->
-     <div id="divlink" class="modal-body"> </div>
-     <div class="modal-footer">
-     <input type="hidden" name="fba" id="fba">
-     <input type="hidden" name="txtmono" id="txtmono">
-     <input type="hidden" name="txtlink" id="txtlink">
-     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-     </div>
-     <div class="modal-body"></div>
+<!-- <form id="modelpaylink" name="modelpaylink"> -->
+  <form method="POST" id="modelpaylink">
+  {{ csrf_field() }}
+         <div id="divlink" class="modal-body">
 
-        </form>
+        </div>
+        <div class="modal-footer">
+         <input type="hidden" name="fba" id="fba">
+         <input type="hidden" name="txtmono" id="txtmono">
+         <input type="hidden" name="txtlink" id="txtlink">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      <div class="modal-body">
+
+
       </div>
+      </form>
     </div>
+  </div>
 </div>
 
 <!-- Customer id start -->
@@ -447,20 +443,21 @@
 
 <!-- password -->
 
-    <div id="spassword" class="modal fade spassword" role="dialog">
-    <div class="modal-dialog">
+<div id="spassword" class="modal fade spassword" role="dialog">
+  <div class="modal-dialog">
+   
     <div class="modal-content">
-    <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal">&times;</button>
-    <h4 class="modal-title">Password</h4>
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Password</h4>
+      </div>
+      <div class="modal-body">
+      <div style="color: blue;" id="show_password" class="show_password">
+      </div>
+      </div>
     </div>
-    <div class="modal-body">
-    <div style="color: blue;" id="show_password" class="show_password">
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
+  </div>
+</div>
 
 
 @endsection
@@ -470,213 +467,28 @@
 <script type="text/javascript">
 
   $(document).ready(function() {
-    var fdate=$("#min").val();
-    var todate=$("#max").val();
 
 
-$('#divdate').html('<b><font color="red"> - Showing data from ' +fdate+ ' to ' +todate+'.</font></b>'); 
-    
- 
-
-//.column('0:visible').order('desc').draw();
-});  
-// from date to date start
-
-$(document).ready(function() {
-
-  // Bootstrap datepicker
- var fdate=$("#min").val();
-  var todate=$("#max").val();
-getfbadata(fdate,todate);
+// setInterval(function(){
 
 
-//Re-draw the table when the a date range filter changes
-  $('#btndate').on("click", function(){
-    var fdate=$("#min").val();
-    var todate=$("#max").val();
-   var table = $('#fba-list-table').DataTable();
-    table.draw();
-$('#divdate').html('<b><font color="red">- Showing data from ' +fdate+ ' to ' +todate+'</font></b>');  
 
-});
+// }, 60000);
 
-$('.date-range-filter').datepicker();
- });
- </script>
 
-<!-- from date to date end -->  
-<!-- Search Pospno and Fbaid start,STATE,CITY etc -->
-<script>
-/// code for search
+    $('#fba-list-table').DataTable({
 
-function getloadfbadata()      
-{
-  var fdate=$("#min").val();
-  var todate=$("#max").val();
+ //     language: {
+  //   processing: "<img src='img/loading.gif'> Loading...",
+  // },
 
-  getfbadata(fdate,todate);
-}
-
-function searchdata()
-{
-  var index = $('#msds-select').val();
-  if(index=='fbacity')
-  {
-    colsearch(7);
-  }
-  else if(index == 'FBAID')
-  {
-    colsearch(0);
-  }
-  else if(index == 'POSPNO')
-  {
-    colsearch(11);
-  }else if(index=='state'){colsearch(8);}
-  else if(index == 'zone'){colsearch(9);}
-  else if(index == 'fbaname'){colsearch(1);}
-  else if(index == 'pospname'){colsearch(13);}
-}
-
-function colsearch(index)
-{
-  table1 = $('#fba-list-table').DataTable();
-    if ($('#txtfbasearch').val()!= '') {
-    table1.columns(index).search('^'+ $('#txtfbasearch').val() + '$', true, true).draw(); 
- }
-    else
-    table1.columns(index).search($('#txtfbasearch').val(), true, true).draw(); 
-}
-
-function selectIndex(dd) {
-  if (dd.selectedIndex>=4){
-     dd.form['txtfbasearch'].style.display='block';
-  }else{
-    dd.form['txtfbasearch'].style.display='none';
-  }  
-}
-
-</script>
-<script type="text/javascript">
-    function getpaylinknew(){
-    
-  $.ajax({
-  url: 'getpaylinknew/'+$('#fba').val(),
-  type: "GET",                  
-  success:function(data) {
-  console.log(data);
-  var json = JSON.parse(data);
-  if(json.StatusNo==0){
-  $('#divpartnertable_payment').html(json.MasterData.PaymentURL);
-  $('#divpartnertable_payment').val(json.MasterData.PaymentURL);
-
+      "createdRow": function(row, data, dataIndex ) {
+      if ( data.PayStat=="S" ) {
+        $(row).css({backgroundColor: 'LightGreen'});
       }
-
-    }
-});
-     alert("Payment Link Genrate successfully..");
-}
-
-     function pmesgsend(){
-     alert("SMS Send successfully..");
-     $.ajax({ 
-     url: "{{URL::to('pmesgsend')}}",
-     method:"POST",
-     data: $('#modelpaylink').serialize(),
-     success: function(msg)  
-      {
-     console.log(msg);
-
-      }
-    });
-  }
-
-</script>
-
-  <script type="text/javascript">
-   $(function(){
-   $('#posp_remark').keyup(function(){    
-   var yourInput = $(this).val();
-   re = /[A-Za-z]?[A-Za-z `~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi;
-   var isSplChar = re.test(yourInput);
-    if(isSplChar)
-    {
-    var no_spl_char = yourInput.replace(/[A-Za-z]?[A-Za-z `~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi, '');
-    $(this).val(no_spl_char);
-    }
-  });
- 
-});
-</script>
-
-<script type="text/javascript">
-   $(function(){
-   $('#p_remark').keyup(function(){    
-   var yourInput = $(this).val();
-   re = /[A-Za-z]?[A-Za-z `~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi;
-   var isSplChar = re.test(yourInput);
-    if(isSplChar)
-    {
-    var no_spl_char = yourInput.replace(/[A-Za-z]?[A-Za-z `~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi, '');
-    $(this).val(no_spl_char);
-    }
-  });
- 
-});
-</script>
-
-
-<script type="text/javascript">
-// Add active class to the current button (highlight it)
-var header = document.getElementById("myDIV");
-var btns = header.getElementsByClassName("qry-btn");
-for (var i = 0; i < btns.length; i++) {
-  btns[i].addEventListener("click", function() {
-    var current = document.getElementsByClassName("active");
-    current[0].className = current[0].className.replace(" active", "");
-    this.className += " active";
-  });
-}
-
-</script>
-<!-- all DATA EXPORT DATE TO DATE START -->
-  <script type="text/javascript">
-  function getfdate(){
-  var fdate=$("#min").val();
-  var todate=$("#max").val();
-  $("#pospbtn").attr('href', '{{url('export')}}/'+fdate+'/'+todate);
-}
-</script>
-
-
-<script type="text/javascript">
-  function getfbaalldata(){
-  var today = new Date();
-  var date = today.getFullYear()+'-'+((today.getMonth()+1)>9?(today.getMonth()+1):'0'+(today.getMonth()+1))+'-'+
-((today.getDate())>9?(today.getDate()):'0'+(today.getDate()));
-  
-  $("#max").val(date);
-  $("#min").val('2015-05-31');
-  getfbadata('2015-05-31',date);
-
-}
-</script>
-
-<!-- all DATA EXPORT DATE TO DATE END
- -->
- <script type="text/javascript">
- function getfbadata(fdate,todate){
- 
-$('#fba-list-table').DataTable ({
-
-  "destroy": true,
- "createdRow": function(row, data, dataIndex ) {
-   if ( data.PayStat=="S" ) {
-   $(row).css({backgroundColor: 'LightGreen'});
-
- }
     },
         "order": [[ 0, "desc" ]],
-        "ajax": "get-fba-list/"+fdate+'/'+todate,
+        "ajax": "get-fba-list",
         "columns": [
 
             { "data": "fbaid"},
@@ -741,14 +553,6 @@ $('#fba-list-table').DataTable ({
             }, 
 
 
-     // {"data":"salescode" ,
-     //         "render": function ( data, type, row, meta ) {
-     //      return '<a href="#"id="update_'+row.fbaid+'" onclick="sales_update_fn('+row.fbaid+','+data+')" >'+data+'</a>';
-     //          }
-   
-     //       },
-
-
               {"data":"erpid"},
               {"data":"Refcode"},
               {"data":"Refbycode"},    
@@ -785,9 +589,225 @@ $('#fba-list-table').DataTable ({
     });
 
 
-  }
+ 
+// from date to date start
+
+$(document).ready(function() {
+  // Bootstrap datepicker
+  $('.input-daterange input').each(function() {
+    $(this).datepicker('clearDates');
+  });
+
+  // Extend dataTables search
+
+ // alert('test');
+  $.fn.dataTable.ext.search.push(
+    function(settings, data, dataIndex) {
+    var min = $('#min').val();
+    var max = $('#max').val();
+   // console.log(max);
+    var createdAt = data[24] || 24; // Our date column in the table
+   
+    if (
+      (min == "" || max == "") ||
+      (moment(createdAt).isSameOrAfter(min) && moment(createdAt).isSameOrBefore(max,'day'))
+    ) 
+
+    {
+
+ return true;
+    }
+    return false;
+    }
+  );
+
+ // Re-draw the table when the a date range filter changes
+  $('#btndate').on("click", function(){
+    var table = $('#fba-list-table').DataTable();
+    table.draw();
+  });
+
+$('.date-range-filter').datepicker();
+});
+ });
+ </script>
+
+
+
+
+<!-- from date to date end -->  
+
+
+<!-- Search Pospno and Fbaid start -->
+<script>
+$(document).ready(function(){
+
+    $(".psearch").keyup (function(){ 
+       table1 = $('#fba-list-table').DataTable();
+      
+           if ($(this).val()!= '') {
+        table1.columns(10).search('^'+$(this).val() + '$', true, true).draw(); 
+      }
+      else
+        table1.columns(10).search($(this).val(), true, true).draw(); 
+    });
+});
+
+ $(document).ready(function(){
+    $(".fbsearch").on("keyup change",function(){ 
+         table1 = $('#fba-list-table').DataTable();
+         //table1.columns(0).search( this.value).draw();
+         if ($(this).val()!= '') {
+        table1.columns(0).search('^'+$(this).val() + '$', true, true).draw(); 
+      }
+      else
+        table1.columns(0).search($(this).val(), true, true).draw(); 
+    });
+});
+
+
+     
+$(document).ready(function() {
+  $('#paysub').on("onclick", function(){
+    alert("test");
+  });
+
+
+});
+
+
+
+function refreshdata(){  
+
+  //alert('succeed');
+  var table =$('#fba-list-table').DataTable();
+  var rows = table.rows({ 'search': 'applied' }).nodes();
+  var fbaid=table.rows(rows.count()-1).data()[0].fbaid; 
+
+   $.ajax({
+  url: 'refresh-data/'+fbaid,
+  type: "GET",                  
+  success:function(data) {
+            var tdata = JSON.parse(data);
+            table.rows.add(tdata).draw();
+          }
+        });
+}
+
 
 </script>
+
+
+<script type="text/javascript">
+    function getpaylinknew(){
+  $.ajax({
+  url: 'getpaylinknew/'+$('#fba').val(),
+  type: "GET",                  
+  success:function(data) {
+  var json = JSON.parse(data);
+  if(json.StatusNo==0){
+        $('#divpartnertable_payment').html(json.MasterData.PaymentURL);
+        $('#txtlink').val(json.MasterData.PaymentURL);
+      }
+          }
+
+        });
+}
+
+ function pmesgsend(){
+alert("Offer Created successfully..");
+        $.ajax({ 
+        url: "{{URL::to('pmesgsend')}}",
+        method:"POST",
+        data: $('#modelpaylink').serialize(),
+        success: function(msg)  
+         {
+          console.log(msg);
+
+         }
+});
+      }
+
+
+</script>
+
+   <script type="text/javascript">
+    var header = document.getElementById("myDIV");
+    var btns = header.getElementsByClassName("qry-btn");
+    for (var i = 0; i < btns.length; i++) {
+    btns[i].addEventListener("click", function() {
+    var current = document.getElementsByClassName("active");
+    current[0].className = current[0].className.replace(" active", "");
+    this.className += " active";
+  });
+}
+
+function searchdata()
+{
+  var index = $('#msds-select').val();
+  if(index=='fbacity')
+  {
+    colsearch(7);
+  }
+  else if(index == 'FBAID')
+  {
+    colsearch(0);
+  }
+  else if(index == 'POSPNO')
+  {
+    colsearch(11);
+  }else if(index=='state'){colsearch(8);}
+  else if(index == 'zone'){colsearch(9);}
+  else if(index == 'fbaname'){colsearch(1);}
+  else if(index == 'pospname'){colsearch(13);}
+}
+function colsearch(index)
+{
+  table1 = $('#fba-list-table').DataTable();
+    if ($('#txtfbasearch').val()!= '') {
+    table1.columns(index).search('^'+ $('#txtfbasearch').val() + '$', true, true).draw(); 
+ }
+    else
+    table1.columns(index).search($('#txtfbasearch').val(), true, true).draw(); 
+}
+
+function selectIndex(dd) {
+  if (dd.selectedIndex>=4){
+     dd.form['txtfbasearch'].style.display='block';
+  }else{
+    dd.form['txtfbasearch'].style.display='none';
+  }  
+}
+
+
+  </script>
+
+
+
+<script type="text/javascript">
+
+
+  $('#btnrfsh').on("click", function(){
+    alert('test');
+
+   
+  });
+
+
+</script>
+
+
+
+
+
+
+
+
+  
+
+
+
+
 
 
 
@@ -801,3 +821,10 @@ $('#fba-list-table').DataTable ({
 
 
  
+
+
+
+
+
+
+

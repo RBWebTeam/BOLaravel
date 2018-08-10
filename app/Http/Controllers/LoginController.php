@@ -15,32 +15,40 @@ use Illuminate\Support\Facades\Hash;
 
 class LoginController extends InitialController
 {
-public function checklogin(Request $request){
-if(!$request->session()->exists('emailid')){
-return view('index');
-}else{
-return redirect('/dashboard');
+public function checklogin(Request $request)
+{
+   if(!$request->session()->exists('emailid'))
+   {
+     return view('index');
+   }
+   else
+   {
+     return redirect('/dashboard');
+   }
 }
-}
-public function login(Request $request){
-$validator = Validator::make($request->all(), [
-'email' => 'required|max:100',
-'password' => 'required|max:100',
- ]);
- if ($validator->fails()) {
-  return redirect('/')
-  ->withErrors($validator)
- ->withInput();
-   }else{
-          
+public function login(Request $request)
+{
+    $validator = Validator::make($request->all(), [
+    'email' => 'required|max:100',
+    'password' => 'required|max:100',
+     ]);
+ if ($validator->fails()) 
+ {
+   return redirect('/')
+   ->withErrors($validator)
+   ->withInput();
+ }
+ else
+ {          
 $query=DB::select('call sp_user_login(?,?,?)',array($request->email,$request->password,$request->ip()));
-  if($query){
-  $val=$query[0];
-  $request->session()->flush();
-  $request->session()->put('emailid',$val->email);
- $request->session()->put('emailid',$val->email);
- $request->session()->put('fbauserid',$val->fbauserid);
- $request->session()->put('fbaid',$val->fbaid);
+if($query)
+  {
+       $val=$query[0];
+       $request->session()->flush();
+       $request->session()->put('emailid',$val->email);
+       $request->session()->put('emailid',$val->email);
+       $request->session()->put('fbauserid',$val->fbauserid);
+       $request->session()->put('fbaid',$val->fbaid);
                     $request->session()->put('username',$val->username);
                     $request->session()->put('loginame',$val->loginame);
                     $request->session()->put('uid',$val->uid);
@@ -48,36 +56,38 @@ $query=DB::select('call sp_user_login(?,?,?)',array($request->email,$request->pa
                     $request->session()->put('empid',$val->empid);
                     $request->session()->put('usergroup',$val->usergroup);
                     $request->session()->put('companyid',$val->companyid);
-                    $request->session()->put('last_login',$val->last_login);
-  
+                    $request->session()->put('last_login',$val->last_login); 
  
        $qu=DB::table('finmartemployeemaster')->select('fba_id','UId','Profile')
        ->where('fba_id','=',$val->fbaid)->first();
-
  
- 
-       if($qu){
+       if($qu)
+       {
            $request->session()->put('UId',$qu->UId);
            $request->session()->put('Profile',$qu->Profile);
        } 
-
-
-                
+             
                     // 110318  109996
 
                     // $request->session()->put('LastLogiDate',$val->LastLogiDate);                              
                return redirect()->intended('dashboard');
-          }else{
-                      Session::flash('msg', "Invalid email or password. Please Try again! ");
-
-                    
-              return redirect()->intended('dashboard');
-       }
-        {
- Session::flash('msg', "Invalid esmail or password. Please Try again! ");
+    }
+else 
+  {
+     Session::flash('msg', "Invalid email or password. Please Try again! ");                    
+     return redirect()->intended('dashboard');
+   }
+        
+  Session::flash('msg', "Invalid esmail or password. Please Try again! ");
   return Redirect::back();              
+ 
  }
  }
+
+
+
+ public function forgotpassword(){
+  return view('forgot-password');
  }
  // start insert
         public function registerinsert (Request $req){ 
@@ -273,5 +283,90 @@ public function went_wrong(Request $req){
 
             return view('500');
 }
+
+
+
+
+
+// forgot password start
+
+
+  
+  public function forgot_password(Request $request){
+   // print_r($request->all()); exit();
+
+    $user=DB::select("call forgot_password(?)",array($request->email));
+  //  print_r($user); exit();
+       //$contactName = $user[0]->LogiName;
+
+       $contactEmail = $user[0]->UserName;
+       $contactMessage = $user[0]->Password;
+
+
+
+        $mail = Mail::send('mailViews.mail',['user'=>$user],function($message)use($contactEmail){
+                  $message->from('OfflineCS@magicfinmart.com', 'Magicfinmart');
+                  $message->to($contactEmail)->subject('finmart password');
+     });
+
+       
+
+
+    // $data = array('email'=>$contactEmail, 'name'=> $contactName, 'password'=>$contactMessage);
+    // Mail::send('mail', $data, function($data) use ($contactEmail, $contactName)
+    // {   
+    //     $data->from('noreply@magicfinmart.com', 'Magicfinmart');
+    //     $data->to($contactEmail,$contactName)->subject('finmart password');
+    // });
+    //return redirect('login-elite');
+
+
+    if($user)
+
+      {
+        $val=$user[0];
+        // if($val->status=="OK")
+        if($user)
+        {
+          ?>
+          <script type="text/javascript">
+            alert('Sending Mail from Finmart. successfully.');
+            window.location.href = "<?php echo URL::to('/'); ?>";
+          </script>
+          <?php
+        }
+        else
+        {
+           ?>
+          <script type="text/javascript">
+            alert('The Send Password Operation Failed');
+            window.location.href = "<?php echo URL::to('/'); ?>";
+          </script>
+          <?php
+        }
+      }
+    
+    }
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 }

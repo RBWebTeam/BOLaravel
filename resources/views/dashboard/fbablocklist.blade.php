@@ -9,6 +9,10 @@
 			 <div class="table-responsive" >
 
 				<table id="example" class="table table-bordered table-striped tbl" >
+
+
+
+        
                  <thead>
                   <tr>
                    <th>Full Name</th>
