@@ -2,7 +2,7 @@
 @section('content')
 
 
-<form id="addnewemp" name="addnewemp" method="POST" action="{{url('add-new-emp')}}">>
+<form id="addnewemp" name="addnewemp" method="POST" action="{{url('add-new-emp')}}" onsubmit="alertSuccess()">
     {{csrf_field()}}
 <div id="content" style="overflow:scroll; height: 5px;">
              <div class="container-fluid white-bg">
@@ -22,7 +22,7 @@
         <label>UID :</label>
         </div>
         <div class="col-md-7">
-       <input type="text" class="text-primary form-control" name="euid" id="euid">
+       <input type="text" class="text-primary form-control" name="euid" id="euid" required="">
        </div>
         </div>
       <div class="form-group col-md-6">
@@ -30,7 +30,7 @@
           <label>FBA ID:</label>
           </div>
           <div class="col-md-7">
-       <input type="text" class="text-primary form-control" name="efbid" id="efbid">
+       <input type="text" class="text-primary form-control" name="efbid" id="efbid" required="">
           </div>
           </div>
 
@@ -39,7 +39,7 @@
         <label>Role ID:</label>
         </div>
          <div class="col-md-7">
-        <select name="eroleid" id="eroleid" class="text-primary form-control">
+        <select name="eroleid" id="eroleid" class="text-primary form-control" required="">
         <option value="">--Role ID--</option>
          @foreach($roleadd as $val)
          <option value="{{$val->role_id}}">{{$val->role_id}}</option>
@@ -58,7 +58,7 @@
         <label>Employee Name :</label>
         </div>
         <div class="col-md-7">
-         <input type="text" class="text-primary form-control" name="ename" id="ename">
+         <input type="text" class="text-primary form-control" name="ename" id="ename" required="">
         </div>
         </div>
 
@@ -70,11 +70,8 @@
         <label>Mobile No:</label>
         </div>
         <div class="col-md-7">
-     
-        <input type="number" class="text-primary form-control" name="emobile" id="emobile" maxlength="10">
-
-
-        </div>
+      <input type="number" class="text-primary form-control" name="emobile" id="emobile" maxlength="10" required="">
+       </div>
         </div>
 
         	 <div class="form-group col-md-6">
@@ -82,7 +79,7 @@
         <label>Email:</label>
         </div>
         <div class="col-md-7">
-        <input type="email" class="text-primary form-control" name="eemail" id="eemail">
+        <input type="email" class="text-primary form-control" name="eemail" id="eemail" required="">
         </div>
         </div>
 
@@ -91,7 +88,7 @@
         <label>Offical Mobile:</label>
         </div>
         <div class="col-md-7">
-        <input type="text" class="text-primary form-control" name="offclmob" id="offclmob" maxlength="10">
+        <input type="text" class="text-primary form-control" name="offclmob" id="offclmob" maxlength="10" required="">
         </div>
         </div>
 
@@ -103,7 +100,7 @@
         <label>Offical Email:</label>
         </div>
         <div class="col-md-7">
-        <input type="email" class="text-primary form-control" name="offclemail" id="offclemail">
+        <input type="email" class="text-primary form-control" name="offclemail" id="offclemail" required="">
         </div>
         </div>
 
@@ -115,7 +112,7 @@
         <label>Profile:</label>
         </div>
          <div class="col-md-7">
-        <select name="eprofile" id="eprofile" class="text-primary form-control">
+        <select name="eprofile" id="eprofile" class="text-primary form-control" required="">
         <option value="">--Select Employee Profile--</option>
          @foreach($profileadd as $val)
          <option value="{{$val->Profile}}">{{$val->Profile}}</option>
@@ -131,7 +128,7 @@
         <label>Employee category:</label>
         </div>
          <div class="col-md-7">
-        <select name="ecatgory" id="ecatgory" class="text-primary form-control">
+        <select name="ecatgory" id="ecatgory" class="text-primary form-control" required="">
         <option value="">--Select Employee category--</option>
          @foreach($catgoryadd as $val)
          <option value="{{$val->EmployeeCategory}}">{{$val->EmployeeCategory}}</option>
@@ -147,7 +144,7 @@
         <label>Designation:</label>
         </div>
          <div class="col-md-7">
-        <select name="edesignation" id="edesignation" class="text-primary form-control">
+        <select name="edesignation" id="edesignation" class="text-primary form-control" required="">
           <option value="">--Select Designation--</option>
            @foreach($digngtionadd as $val)
             <option value="{{$val->Designation}}">{{$val->Designation}}</option>
@@ -161,7 +158,7 @@
         <label>Emp-Status:</label>
         </div>
          <div class="col-md-7">
-        <select name="estatus" id="estatus" class="text-primary form-control">
+        <select name="estatus" id="estatus" class="text-primary form-control" required="">
           <option value="">--Select-Emp-Status--</option>
            @foreach($statusadd as $val)
             <option value="{{$val->EmployeeStatus}}">{{$val->EmployeeStatus}}</option>
@@ -170,19 +167,13 @@
           </div>
          </div>
 
-
-
-
-
-
-
-   <div class="form-group col-md-6">
+        <div class="form-group col-md-6">
         <div class="col-md-5">
         <label>Location Acess :</label>
         </div>
         <div class="col-md-7">
         <input type="radio" name="emolocation" id="mapcity" value="Mapped_Area" checked> Mapped_City
-      <input type="radio" name="emolocation" id="allindia"  value="All_India"> All India<br>
+        <input type="radio" name="emolocation" id="allindia"  value="All_India"> All India<br>
         </div>
         </div>
 
@@ -195,11 +186,10 @@
         <input type="submit" name="statussub" id="statussub" value="submit" class="btn btn-success">
         </div>
         </div>
-                 </thead>
-                    <tbody>
+                </thead>
+         <tbody>
                
-			<tbody>
-                </tbody>
+			
               </tbody>
             </table>
            </div>
@@ -225,9 +215,7 @@
    success: function(msg)  
    {
    	
-    
-    
-   }
+     }
 
 });
  }
@@ -236,6 +224,12 @@
 
       });
   </script>
+
+  <script>
+function alertSuccess() {
+alert('New Employee Added Successfully');
+}
+</script>
      
 
 

@@ -15,18 +15,16 @@ use Excel;
 class FbaController extends CallApiController
 {
       
-        public function fba_list(){
-        $doctype = DB::select("call get_document_type()");   
+           public function fba_list(){
+           $doctype = DB::select("call get_document_type()");   
          //print_r($doctype); exit();
-
-          
-          return view('dashboard.fba-list',['doctype'=>$doctype]);         
+            return view('dashboard.fba-list',['doctype'=>$doctype]);         
         }
 
-              public function exportexcel($fdate,$todate){
+              public function exportexcel(){
               $query=[];
-                $query=DB::select("call fbaList_export('0','$fdate','$todate')");
-              //$query=DB::select('call fbaList_export(0)');
+                $query=DB::select("call fbaList_export(0)");
+              //$query=DB::select('call fbaList_export()');
               $data = json_decode( json_encode($query), true);
               return Excel::create('Fbalist', function($excel) use ($data) {
             $excel->sheet('FBADATA', function($sheet) use ($data)
@@ -38,16 +36,25 @@ class FbaController extends CallApiController
 
 }
 
-             public function get_fba_list($fdate,$todate){
+             // public function get_fba_list($fdate,$todate){
+              public function get_fba_list(){
              $id=Session::get('FBAUserId');
-            $query=DB::select("call fbaList('0','$fdate','$todate')");
+            $query=DB::select("call fbaList(0)");
+               // $query=DB::select("call fbaList('0','$fdate','$todate')");
             return json_encode(["data"=>$query]);
         }
 
-             public function get_all_fba_list_data($fdate,$todate){
-             $alldata=DB::select("call get_fbaList_all_data(0,'2015-05-31','$todate')");
-             return json_encode(["data"=>$alldata]);
+        public function get_refresh_data($fbaid){
+        $refresh=DB::select("call getnewaddedfba(0,$fbaid)");
+             return json_encode($refresh);
          }
+
+
+
+         //     public function get_all_fba_list_data($fdate,$todate){
+         //     $alldata=DB::select("call get_fbaList_all_data(0,'2015-05-31','$todate')");
+         //     return json_encode(["data"=>$alldata]);
+         // }
 
 
 
