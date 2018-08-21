@@ -39,7 +39,7 @@
 <div class="col-md-12">
  <div class="overflow-scroll">
  <div class="table-responsive" >
-<table class="datatable-responsive table table-striped table-bordered dt-responsive nowrap" id="example">
+<table class="datatable-responsive table table-striped table-bordered dt-responsive nowrap" id="tblofflinecs">
 	<thead>
       <tr>
       	<th>ID</th>
@@ -138,6 +138,9 @@
   </div>
 </div>
 <script type="text/javascript">
+    $(document).ready(function(){
+  $('#tblofflinecs').DataTable();
+}); 
   function Sendemail($ID)
   {
      //alert($ID);    

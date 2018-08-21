@@ -39,17 +39,17 @@
 <div class="col-md-12">
  <div class="overflow-scroll">
  <div class="table-responsive" >
-<table class="datatable-responsive table table-striped table-bordered dt-responsive nowrap" id="example">
+<table class="datatable-responsive table table-striped table-bordered nowrap" id="tblofflinecs">
 	<thead>
       <tr>
       	<th>ID</th>
       	<th>Product Name</th>
       	<th>Customer Name</th>
       	<th>City</th>
-      	<th>POSP Name</th>
-      	<th>Mobile No</th>
-        <th>CSID</th>
-      	      	
+      	<th>POSP Name</th>      	      
+        <th>Created By</th>
+        <th>Created Date</th>
+        <th>CSID</th>      	      	
       </tr>
     </thead>
     <tbody>
@@ -62,8 +62,9 @@
     		<td>{{$val->product_name}}</td>
         <td>{{$val->CustomerName}}</td>
     		<td>{{$val->cityname}}</td>
-    		<td>{{$val->POSPName}}</td>
-    		<td>{{$val->MobileNo}}</td>
+    		<td>{{$val->POSPName}}</td>    		       
+        <td>{{$val->CreatedBy}}</td>
+        <td>{{$val->createddate}}</td>
         <td>
           @if($val->CSID=='')
          <a id="btncsid" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#csidupdate" onclick="updatecsid({{$val->ID}},this)">Update CSID</a>
@@ -74,6 +75,9 @@
       @endisset
     </tbody>
 </table>
+<div class="col-md-12">
+  <a class="btn btn-sm btn-primary" href="{{URL::to('export-to-excle-offlinecs')}}">Export To Excle</a>
+</div>
 </div>
 </div>
 </div>
@@ -127,11 +131,11 @@
   </div>
 </div>
 <script type="text/javascript">
-
+$(document).ready(function(){
+  $('#tblofflinecs').DataTable();
+});  
   function showdetails($ID)
-  {
-     //alert($ID);    
-     
+  {     
    $.ajax({
              url: 'offlinecs-details/'+$ID,
              type: "GET",             

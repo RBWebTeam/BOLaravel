@@ -30,7 +30,7 @@ class prodouctleaddetailsController extends CallApiController
 
               
                 try{
-                  $data= array( "to"=>"$Token", array("notifyFlag"=> "OPT","img_url"=>"http://i.stack.imgur.com/CE5lz.png", "body"=>"this is Different Data Daniyal this is Different Data Rahul this is Different Data Umesh this is Different Data Vinit this is Different Data Nilesh this is Different Data DaRajeevniyal ", "title"=>"PushNotification from Data120 Daniyal...", "web_url"=>"http://www.rupeeboss.com", "web_title"=> "Demo","message_id" =>"1"));
+                  $data= array( "to"=>"e-SmWp9-uKI:APA91bHkO2TylugrsIn90WBhUeiAi48L2qa1jY3iI0ieyHEM8ZsscqdVND7PO7a4BVLTW-WfSm0-ORfWTL7sHu9pUQFjmZpea0yANiSSkv2Hm88MLv1zyMf2X3vHc4KmwA6ggrMhwRSCfzDWbi7ZWalKzsELJLDGUw", array("notifyFlag"=>"OPT","img_url"=>"http://i.stack.imgur.com/CE5lz.png", "body"=>"this is Different Data Daniyal this is Different Data Rahul this is Different Data Umesh this is Different Data Vinit this is Different Data Nilesh this is Different Data DaRajeevniyal ", "title"=>"PushNotification from Data120 Daniyal...", "web_url"=>"http://www.rupeeboss.com", "web_title"=> "Demo","message_id" =>"1"));
                  //print_r($data);exit();
                   $token=array("cache-control: no-cache","content-type: application/json",
                     "Authorization:key=AAAAS_NxFJ0:APA91bHaDvrs7g_ezcnzlMX-oM21lcR9quuKll2ISo6QwcL1gESfavPUA7sRcnBanttfJjDHaaiWdPQ_ykEyjLKySdKk8Zyll-SN6PnvY--UXWqq8IfFuEYSvkDKoZPsrIEOX-h9D0sD",

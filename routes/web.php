@@ -28,7 +28,21 @@ Route::get('getcitybypincode/{pincode}','HealthAssureController@getcity');
 
 Route::get('/','LoginController@checklogin');
 Route::post('admin-login','LoginController@login');
+Route::post('forgot-password','LoginController@forgot_password');
 Route::group(['middleware' => ['CheckMidd']], function (){
+
+  //Route::get('forgot-password','LoginController@forgotpassword');
+
+
+
+
+
+
+
+
+
+
+
  // city  state
 Route::get('search-state','LoginController@search_state');
 Route::get('search-city','LoginController@search_city');
@@ -241,6 +255,7 @@ Route::post('offlinecsupdateandsendmail','OfflinecsController@Updateofflinecsand
 Route::get('offlinecssendemail/{ID}','OfflinecsDashboardController@sendemail');
 Route::get('offlinecs-details/{ID}','OfflinecsDashboardController@showdetails');
 Route::Post('offlinecs-csidupdate','OfflinecsDashboardController@updatecsid');
+route::get('export-to-excle-offlinecs','OfflinecsDashboardController@exportexcel');
 
 Route::get('fba-location','FindfbalocationController@getfbadata');
 

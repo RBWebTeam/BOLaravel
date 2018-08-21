@@ -503,6 +503,7 @@ getfbadata();
   $('#btndate').on("click", function(){
     var table = $('#fba-list-table').DataTable();
     table.draw();
+    
 });
 
 $('.date-range-filter').datepicker();

@@ -10,7 +10,7 @@
 <div class="col-md-12">
 			 <div class="overflow-scroll">
 			 <div class="table-responsive" >
-				<table id="example" class="table table-bordered table-striped tbl"  >
+				<table id="tbllead" class="table table-bordered table-striped tbl">
                  <thead>
                   <tr>
                    <th>Lead_Id</th>
@@ -19,6 +19,7 @@
                    <th>Product_Name</th>
                    <th>Address</th>
                    <th>Assigned_To</th>
+                   <th>status</th>
                    <th>Send</th> 
                    </tr>                
                 </thead>
@@ -32,6 +33,7 @@
                 <td>{{ $val->Product_Name}}</td> 
                 <td>{{ $val->address}}</td> 
                 <td>{{ $val->assigned_to}}</td>
+                <td>{{$val->status}}</td>
                 <td><a onclick="GetLocation('{{$val->address}}',this)" id="btnsend" class="qry-btn"  value="" name="btnsend" class="btn btn-default">Send</a></td>   
                 </tr>
               @endforeach
@@ -43,6 +45,9 @@
 	</div>
 </div>    
 <script type="text/javascript">
+  $(document).ready(function(){
+  $('#tbllead').DataTable();
+});  
  function GetLocation(address) {            
           alert(address);        
           if (address!='') {

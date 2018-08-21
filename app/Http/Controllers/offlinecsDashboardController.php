@@ -9,6 +9,7 @@ use Redirect;
 use Session;
 use URL;
 use Mail;
+use Excel;
 class OfflinecsDashboardController extends Controller
 {
 	public function getofflinecsdata()
@@ -177,6 +178,23 @@ class OfflinecsDashboardController extends Controller
         $req->txtID));
        
     }
+
+    public function exportexcel()
+    {
+               
+              $query=[];
+              $query=DB::select("call Usp_Export_to_excle_offlinecs()");
+              $data = json_decode( json_encode($query), true) ;
+
+              return Excel::create('Offlinecsdata', function($excel) use ($data) {
+            $excel->sheet('Offlinecsdata', function($sheet) use ($data)
+            {
+
+              $sheet->fromArray($data);
+          });
+              })->download('xls');
+
+  }
  
 }
 

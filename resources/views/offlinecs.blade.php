@@ -1,7 +1,6 @@
 @extends('include.master')
 @section('content')
 @if(Session::has('message'))
-
 <div class="alert alert-success alert-dismissible">
 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
 <p class="alert alert-success">{{ Session::get('message') }}</p>
@@ -28,8 +27,8 @@
                  </select>  
                 </div>
                  <div class="col-md-4" id="divother" style="display: none;">
-                  <label>Other Reason for Offline-cs:</label>  
-                  <textarea id="txtReason" name="txtReason"  class="form-control" placeholder="Specify Other Reason"></textarea>                  
+                       <label>Other Reason for Offline-cs:</label>  
+                       <textarea id="txtReason" name="txtReason"  class="form-control" placeholder="Specify Other Reason"></textarea>                  
                  </div>
                 <div class="col-md-4">
          		      <label>Product:</label>
@@ -55,10 +54,10 @@
                 <div class="col-md-4">
                 	<label>City:</label>
                 	<select onchange="getstate()" class="form-control" id="ddlcity" name="ddlcity" required>
-                		<option value="">--select--</option>
-                    @foreach($city as $val)
-                    <option value="{{$val->city_id}}">{{$val->cityname}}</option>
-                    @endforeach
+                		   <option value="">--select--</option>
+                       @foreach($city as $val)
+                       <option value="{{$val->city_id}}">{{$val->cityname}}</option>
+                       @endforeach
                 	</select>
                 </div>              
               </div>
@@ -288,7 +287,7 @@
                  <span><a id="spnbreakrp" target="_blank"></a></span>           
              	</div>
               </div> 
-              <div class="otherproductdoc">
+              <div class="otherproductdoc health">
                <div class="row"> 
              	<div class="col-md-4">
              		<label>Cheque / Online Payment Receipt Copy:</label>
@@ -616,7 +615,7 @@ if (window.location.href.indexOf('?id=') > 0) {
       $(".Proposal").show();
      	$("#divhealth").hide();
      	$(".Motor").hide();
-      $(".health").hide();
+      $(".health").show();
       $(".life").show();
       $(".otherproduct").hide();
       $(".divotherproductdoc").hide();
@@ -644,7 +643,6 @@ if (window.location.href.indexOf('?id=') > 0) {
       $(".otherproduct").show();
       $(".otherproductdoc").hide();
       $(".divotherproductdoc").show();
-
       $('#ddlInsurerhealth').attr('required', true);
       $('#txtotherproduct').attr('required', true);      
       $('#txtvehicalno').removeAttr("required"); 
@@ -656,21 +654,8 @@ if (window.location.href.indexOf('?id=') > 0) {
       $('#filebreakrp').removeAttr("required");
       $('#ddlnoofpolicy').removeAttr("required");
       $('#ddlInsurerlife').removeAttr("required");
-     }
-     else{
-     	$("#life").hide();
-     	$("#Health").hide();
-     	$("#divlife").hide();
-     	$("#divhealth").hide();
-     	$(".Motor").show();
-      $('#txtvehicalno').attr('required', true);
-      $('#txtbreakin').attr('required', true);
-      $('#ddlInsurermotor').attr('required', true);
-      $(".otherproduct").hide();
-      $(".divotherproductdoc").hide();
-      
-     }
-     }
+     } 
+    }
 function getpospname()
 {
 

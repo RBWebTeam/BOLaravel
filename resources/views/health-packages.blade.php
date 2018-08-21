@@ -103,8 +103,8 @@ img {margin:0 auto; display:block;}
  <br>
  <img src="images/health-assure-logo.jpg" class="logo-center" />
 <h5 class="text-center">ADVISOR</h5>
-<h4 class="text-center">LIVE FBA</h4>
-<p class="text-center"><img src="images/phone-icon.png" style="display:-webkit-inline-box;"/> (+91-9292929292)</p>
+<h4 class="text-center">{{$_GET["FBAName"]}}</h4>
+<p class="text-center"><img src="images/phone-icon.png" style="display:-webkit-inline-box;"/> (+91 {{$_GET["FBAMobile"]}})</p>
 <p class="text-center bl-txt">HEALTH CHECK-UP PLANS AVAILABLE FOR YOU</p>
  </div>
  <input type="hidden" value="{{$_GET["FBAID"]}}" id="txtfbaid" name="txtfbaid"/> 
@@ -263,7 +263,12 @@ $('#testHead').append(name.replace(/_/g,' ')+" Test");
 <script type="text/javascript">
   function offer_price(PackName,PackCode,OfferPrice,MRP,cnt,Fasting,VisitType)
   {
-      window.location.href ="{{URL::to('HealthAssure')}}?PackName="+PackName+"&Packcode="+PackCode+"&OfferPrice="+OfferPrice+"&MRP="+MRP+"&tcount="+cnt+"&fasting="+Fasting+"&homevisit="+VisitType+"&fbaid=1976&fbaname=LIVE%20FBA&mob=9292929292#";
+
+    var valuefbaid=$("#txtfbaid").val();
+    var valuefbaname=$("#txtfbaname").val();
+    var valuefbano=$("#txtfbamobile").val();
+    
+      window.location.href ="{{URL::to('HealthAssure')}}?PackName="+PackName+"&Packcode="+PackCode+"&OfferPrice="+OfferPrice+"&MRP="+MRP+"&tcount="+cnt+"&fasting="+Fasting+"&homevisit="+VisitType+"&fbaid="+valuefbaid+"&fbaname="+valuefbaname+"&mob="+valuefbano+"#";
   };
 </script>    
   
