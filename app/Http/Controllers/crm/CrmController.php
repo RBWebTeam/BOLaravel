@@ -199,6 +199,7 @@ class CrmController extends Controller
             {
 
                     $query=DB::select('call sp_crm_followup_details(?,?,?)',[$req->fbamappinid,$req->crmid,Session::get('UId')]);
+                   // print_r($query);exit();
                     return  view('crm.crm_followup_view',['query'=>$query,'history_id'=>$req->history_id]);
             }
 

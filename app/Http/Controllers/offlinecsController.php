@@ -51,9 +51,16 @@ class OfflinecsController extends CallApiController
            $doc2=$this->fileupload_fn($req->file('doc2'));       
            $doc3=$this->fileupload_fn($req->file('doc3')); 
            $doc4=$this->fileupload_fn($req->file('doc4'));
-           $doc5=$this->fileupload_fn($req->file('doc5'));    
+           $doc5=$this->fileupload_fn($req->file('doc5'));  
+
+           $filequotation=$this->fileupload_fn($req->file('filequotation'));
+           $filepyp=$this->fileupload_fn($req->file('filepyp')); 
+           $filepy=$this->fileupload_fn($req->file('filepy'));       
+           $filepyp2=$this->fileupload_fn($req->file('filepyp2')); 
+           $filepyp3=$this->fileupload_fn($req->file('filepyp3'));
+           $filepyp4=$this->fileupload_fn($req->file('filepyp4'));  
             
-             $id= DB::select('call Usp_insert_motor_offlinecs(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',array(
+             $id= DB::select('call Usp_insert_motor_offlinecs(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',array(
               $req->ddproduct,
               $req->txtcstname,
               $req->txtadd,             
@@ -104,7 +111,13 @@ class OfflinecsController extends CallApiController
               $doc2,
               $doc3,
               $doc4,
-              $doc5));              
+              $doc5,
+              $filequotation,
+              $filepyp,
+              $filepy,
+              $filepyp2,
+              $filepyp3,
+              $filepyp4));              
             
             foreach ($id as $val) 
             {
@@ -365,6 +378,121 @@ if ($doc5!=0)
         return $e->getMessage();    
      }        
 }
+///new docs
+if ($filequotation!=0) 
+{
+  try{
+    $data= array("longurl"=>"http://bo.magicfinmart.com/upload/offlinecs/$filequotation");
+    $token=array("cache-control: no-cache","content-type: application/json", "token: 1234567890");
+    $post_data=json_encode($data);
+    $type=$token;
+    $result=$this->call_other_data_api($this::$api_url.'/api/short-url-forall',$post_data,$type);
+
+    $Response= json_decode($result['http_result']);
+    $shorturl=$Response->MasterData[0]->ShortURL;
+    //print_r($shorturl);exit();
+    DB::select('call Usp_Insert_shortlink_offlinecs(?,?,?)',array($shorturl,'Quotation',$ID));
+  }
+  catch (Exception $e){
+
+        return $e->getMessage();    
+     }        
+}
+if ($filepyp!=0) 
+{
+  try{
+    $data= array("longurl"=>"http://bo.magicfinmart.com/upload/offlinecs/$filepyp");
+    $token=array("cache-control: no-cache","content-type: application/json", "token: 1234567890");
+    $post_data=json_encode($data);
+    $type=$token;
+    $result=$this->call_other_data_api($this::$api_url.'/api/short-url-forall',$post_data,$type);
+
+    $Response= json_decode($result['http_result']);
+    $shorturl=$Response->MasterData[0]->ShortURL;
+    //print_r($shorturl);exit();
+    DB::select('call Usp_Insert_shortlink_offlinecs(?,?,?)',array($shorturl,'pyp',$ID));
+  }
+  catch (Exception $e){
+
+        return $e->getMessage();    
+     }        
+}
+if ($filepy!=0) 
+{
+  try{
+    $data= array("longurl"=>"http://bo.magicfinmart.com/upload/offlinecs/$filepy");
+    $token=array("cache-control: no-cache","content-type: application/json", "token: 1234567890");
+    $post_data=json_encode($data);
+    $type=$token;
+    $result=$this->call_other_data_api($this::$api_url.'/api/short-url-forall',$post_data,$type);
+
+    $Response= json_decode($result['http_result']);
+    $shorturl=$Response->MasterData[0]->ShortURL;
+    //print_r($shorturl);exit();
+    DB::select('call Usp_Insert_shortlink_offlinecs(?,?,?)',array($shorturl,'py',$ID));
+  }
+  catch (Exception $e){
+
+        return $e->getMessage();    
+     }        
+}
+if ($filepyp2!=0) 
+{
+  try{
+    $data= array("longurl"=>"http://bo.magicfinmart.com/upload/offlinecs/$filepyp2");
+    $token=array("cache-control: no-cache","content-type: application/json", "token: 1234567890");
+    $post_data=json_encode($data);
+    $type=$token;
+    $result=$this->call_other_data_api($this::$api_url.'/api/short-url-forall',$post_data,$type);
+
+    $Response= json_decode($result['http_result']);
+    $shorturl=$Response->MasterData[0]->ShortURL;
+    //print_r($shorturl);exit();
+    DB::select('call Usp_Insert_shortlink_offlinecs(?,?,?)',array($shorturl,'pyp2',$ID));
+  }
+  catch (Exception $e){
+
+        return $e->getMessage();    
+     }        
+}
+if ($filepyp3!=0) 
+{
+  try{
+    $data= array("longurl"=>"http://bo.magicfinmart.com/upload/offlinecs/$filepyp3");
+    $token=array("cache-control: no-cache","content-type: application/json", "token: 1234567890");
+    $post_data=json_encode($data);
+    $type=$token;
+    $result=$this->call_other_data_api($this::$api_url.'/api/short-url-forall',$post_data,$type);
+
+    $Response= json_decode($result['http_result']);
+    $shorturl=$Response->MasterData[0]->ShortURL;
+    //print_r($shorturl);exit();
+    DB::select('call Usp_Insert_shortlink_offlinecs(?,?,?)',array($shorturl,'pyp3',$ID));
+  }
+  catch (Exception $e){
+
+        return $e->getMessage();    
+     }        
+}
+if ($filepyp4!=0) 
+{
+  try{
+    $data= array("longurl"=>"http://bo.magicfinmart.com/upload/offlinecs/$filepyp4");
+    $token=array("cache-control: no-cache","content-type: application/json", "token: 1234567890");
+    $post_data=json_encode($data);
+    $type=$token;
+    $result=$this->call_other_data_api($this::$api_url.'/api/short-url-forall',$post_data,$type);
+
+    $Response= json_decode($result['http_result']);
+    $shorturl=$Response->MasterData[0]->ShortURL;
+    //print_r($shorturl);exit();
+    DB::select('call Usp_Insert_shortlink_offlinecs(?,?,?)',array($shorturl,'pyp4',$ID));
+  }
+  catch (Exception $e){
+
+        return $e->getMessage();    
+     }        
+}
 
       $offlinecsdata = DB::select("call Usp_get_motor_data($ID)"); 
 
@@ -508,10 +636,17 @@ if ($doc5!=0)
            $doc2=$this->fileupload_fn($req->file('doc2'));       
            $doc3=$this->fileupload_fn($req->file('doc3')); 
            $doc4=$this->fileupload_fn($req->file('doc4'));
-           $doc5=$this->fileupload_fn($req->file('doc5'));  
+           $doc5=$this->fileupload_fn($req->file('doc5'));
+
+           $filequotation=$this->fileupload_fn($req->file('filequotation'));
+           $filepyp=$this->fileupload_fn($req->file('filepyp')); 
+           $filepy=$this->fileupload_fn($req->file('filepy'));       
+           $filepyp2=$this->fileupload_fn($req->file('filepyp2')); 
+           $filepyp3=$this->fileupload_fn($req->file('filepyp3'));
+           $filepyp4=$this->fileupload_fn($req->file('filepyp4'));   
 
             
-             $id= DB::select('call Usp_save_offlinecs_data(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',array(
+             $id= DB::select('call Usp_save_offlinecs_data(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',array(
               $req->ddproduct,
               $req->txtcstname,
               $req->txtadd,             
@@ -562,7 +697,13 @@ if ($doc5!=0)
               $doc2,
               $doc3,
               $doc4,
-              $doc5));
+              $doc5,
+              $filequotation,
+              $filepyp,
+              $filepy,
+              $filepyp2,
+              $filepyp3,
+              $filepyp4));
              foreach ($id as $val) 
             {
               $ID=$val->Id;             
@@ -816,6 +957,122 @@ if ($doc5!=0)
     $shorturl=$Response->MasterData[0]->ShortURL;
     //print_r($shorturl);exit();
     DB::select('call Usp_Insert_shortlink_offlinecs(?,?,?)',array($shorturl,'Document5',$ID));
+  }
+  catch (Exception $e){
+
+        return $e->getMessage();    
+     }        
+}
+//////new docs
+ 
+if ($filequotation!=0) 
+{
+  try{
+    $data= array("longurl"=>"http://bo.magicfinmart.com/upload/offlinecs/$filequotation");
+    $token=array("cache-control: no-cache","content-type: application/json", "token: 1234567890");
+    $post_data=json_encode($data);
+    $type=$token;
+    $result=$this->call_other_data_api($this::$api_url.'/api/short-url-forall',$post_data,$type);
+
+    $Response= json_decode($result['http_result']);
+    $shorturl=$Response->MasterData[0]->ShortURL;
+    //print_r($shorturl);exit();
+    DB::select('call Usp_Insert_shortlink_offlinecs(?,?,?)',array($shorturl,'Quotation',$ID));
+  }
+  catch (Exception $e){
+
+        return $e->getMessage();    
+     }        
+}
+if ($filepyp!=0) 
+{
+  try{
+    $data= array("longurl"=>"http://bo.magicfinmart.com/upload/offlinecs/$filepyp");
+    $token=array("cache-control: no-cache","content-type: application/json", "token: 1234567890");
+    $post_data=json_encode($data);
+    $type=$token;
+    $result=$this->call_other_data_api($this::$api_url.'/api/short-url-forall',$post_data,$type);
+
+    $Response= json_decode($result['http_result']);
+    $shorturl=$Response->MasterData[0]->ShortURL;
+    //print_r($shorturl);exit();
+    DB::select('call Usp_Insert_shortlink_offlinecs(?,?,?)',array($shorturl,'pyp',$ID));
+  }
+  catch (Exception $e){
+
+        return $e->getMessage();    
+     }        
+}
+if ($filepy!=0) 
+{
+  try{
+    $data= array("longurl"=>"http://bo.magicfinmart.com/upload/offlinecs/$filepy");
+    $token=array("cache-control: no-cache","content-type: application/json", "token: 1234567890");
+    $post_data=json_encode($data);
+    $type=$token;
+    $result=$this->call_other_data_api($this::$api_url.'/api/short-url-forall',$post_data,$type);
+
+    $Response= json_decode($result['http_result']);
+    $shorturl=$Response->MasterData[0]->ShortURL;
+    //print_r($shorturl);exit();
+    DB::select('call Usp_Insert_shortlink_offlinecs(?,?,?)',array($shorturl,'py',$ID));
+  }
+  catch (Exception $e){
+
+        return $e->getMessage();    
+     }        
+}
+if ($filepyp2!=0) 
+{
+  try{
+    $data= array("longurl"=>"http://bo.magicfinmart.com/upload/offlinecs/$filepyp2");
+    $token=array("cache-control: no-cache","content-type: application/json", "token: 1234567890");
+    $post_data=json_encode($data);
+    $type=$token;
+    $result=$this->call_other_data_api($this::$api_url.'/api/short-url-forall',$post_data,$type);
+
+    $Response= json_decode($result['http_result']);
+    $shorturl=$Response->MasterData[0]->ShortURL;
+    //print_r($shorturl);exit();
+    DB::select('call Usp_Insert_shortlink_offlinecs(?,?,?)',array($shorturl,'pyp2',$ID));
+  }
+  catch (Exception $e){
+
+        return $e->getMessage();    
+     }        
+}
+if ($filepyp3!=0) 
+{
+  try{
+    $data= array("longurl"=>"http://bo.magicfinmart.com/upload/offlinecs/$filepyp3");
+    $token=array("cache-control: no-cache","content-type: application/json", "token: 1234567890");
+    $post_data=json_encode($data);
+    $type=$token;
+    $result=$this->call_other_data_api($this::$api_url.'/api/short-url-forall',$post_data,$type);
+
+    $Response= json_decode($result['http_result']);
+    $shorturl=$Response->MasterData[0]->ShortURL;
+    //print_r($shorturl);exit();
+    DB::select('call Usp_Insert_shortlink_offlinecs(?,?,?)',array($shorturl,'pyp3',$ID));
+  }
+  catch (Exception $e){
+
+        return $e->getMessage();    
+     }        
+}
+if ($filepyp4!=0) 
+{
+  try{
+    $data= array("longurl"=>"http://bo.magicfinmart.com/upload/offlinecs/$filepyp4");
+    $token=array("cache-control: no-cache","content-type: application/json", "token: 1234567890");
+    $post_data=json_encode($data);
+    $type=$token;
+    $result=$this->call_other_data_api($this::$api_url.'/api/short-url-forall',$post_data,$type);
+
+    $Response= json_decode($result['http_result']);
+    $shorturl=$Response->MasterData[0]->ShortURL;
+    //print_r($shorturl);exit();
+    DB::select('call Usp_Insert_shortlink_offlinecs(?,?,?)',array($shorturl,'pyp4',$ID));
   }
   catch (Exception $e){
 

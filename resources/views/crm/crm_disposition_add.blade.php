@@ -175,6 +175,7 @@ function get_desposition_data(fbamappin_id,id){
           }
           }else{
             
+                    
               if(msg.find_profile!="undefined" && msg.find_profile!=null && msg.find_profile!=""){  
               $('#followup_internalteam').val(msg.find_profile.UId); //msg.find_profile.Profile
               $('#followup_internalteam_id').show();

@@ -264,7 +264,32 @@
                   </select>
               	</div>              	
               </div>
-              <br>                       
+              <br>  
+              <div class="divnewdocs row">
+               <div class="col-md-4">
+                <label>Quotation</label>
+               <input type="file" name="filequotation" id="filequotation" class="form-control" accept=".png,.jpeg,.jpg,.pdf">
+                <span><a id="spnquotation" target="_blank"></a></span>              
+              </div>
+              <div class="col-md-4">
+                <label>Previous Year Policy Copy</label>
+               <input type="file" name="filepyp" id="filepyp" class="form-control" accept=".png,.jpeg,.jpg,.pdf">
+                <span><a id="spnpyp" target="_blank"></a></span>              
+              </div>  
+               <div class="col-md-4">
+                <label>New Policy Copy</label>
+               <input type="file" name="filepy" id="filepy" class="form-control" accept=".png,.jpeg,.jpg,.pdf">
+                <span><a id="spnpy" target="_blank"></a></span>              
+              </div> 
+              <div class="col-md-4">
+                <label>Other:</label>
+                <input type="file" name="fileother" id="fileother" class="form-control" accept=".png, .jpg, .jpeg .pdf"> 
+                <span ><a id="spnother" target="_blank"></a></span>
+              </div>          
+               
+             </div>   
+
+
              <div class="row Motor" id="divMotor">              
              	<div class="col-md-4">
              		<label>RC Copy:</label>
@@ -293,12 +318,7 @@
              		<label>Cheque / Online Payment Receipt Copy:</label>
              		<input type="file" name="fileCheque" id="fileCheque" class="form-control" accept=".png, .jpg, .jpeg .pdf"> 
                 <span><a id="spnCheque" target="_blank"></a></span>           
-             	</div>
-             	<div class="col-md-4">
-             		<label>Other:</label>
-             		<input type="file" name="fileother" id="fileother" class="form-control" accept=".png, .jpg, .jpeg .pdf"> 
-                <span ><a id="spnother" target="_blank"></a></span>
-             	</div>  
+             	</div>             	 
               </div>                  
              <br>
              <div class="Proposal row" id="Health">                               
@@ -311,7 +331,27 @@
                 <label>KYC:</label>
                 <input type="file" name="fileKYC" id="fileKYC" class="form-control" accept=".png, .jpg, .jpeg .pdf">   
                 <span><a id="spnKYC" target="_blank"></a></span>             
-              </div>     	
+              </div>               
+              <!-- <div class="col-md-4">
+                <label>Previous Year Policy Copy 1:</label>
+                <input type="file" name="filepyp1" id="filepyp1" class="form-control" accept=".png, .jpg, .jpeg .pdf">   
+                <span><a id="spnpyp1" target="_blank"></a></span>             
+              </div>   -->
+              <div class="col-md-4">
+                <label>Previous Year Policy Copy 2:</label>
+                <input type="file" name="filepyp2" id="filepyp2" class="form-control" accept=".png, .jpg, .jpeg .pdf">   
+                <span><a id="spnpyp2" target="_blank"></a></span>             
+              </div> 
+              <div class="col-md-4">
+                <label>Previous Year Policy Copy 3:</label>
+                <input type="file" name="filepyp3" id="filepyp3" class="form-control" accept=".png, .jpg, .jpeg .pdf">   
+                <span><a id="spnpyp3" target="_blank"></a></span>             
+              </div> 
+              <div class="col-md-4">
+                <label>Previous Year Policy Copy 4:</label>
+                <input type="file" name="filepyp4" id="filepyp4" class="form-control" accept=".png, .jpg, .jpeg .pdf">   
+                <span><a id="spnpyp4" target="_blank"></a></span>             
+              </div>   	
              </div> 
              <br>
              </div> 
@@ -342,7 +382,7 @@
                 <span><a id="spndoc5" target="_blank"></a></span>              
               </div>
                
-             </div>                     
+             </div>                              
              </div>
              <br>
              <br>
