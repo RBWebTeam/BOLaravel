@@ -10,11 +10,18 @@
 label{
   display: block;
 }
+label.error{top:34px !important; color:#ff0000 !important;font-size:15px !important;}
+
+
+
+
 </style>
 <div class="container-fluid white-bg">
 <div class="col-md-12"><h3 class="mrg-btm">FBA Profile</h3></div>
    <div class="col-md-12">
       <div class="overflow-scroll">
+        <div class="register-in">
+           <div class="register-form">
         <form id="fbaprofile" method="post">
           {{ csrf_field() }}
        <div class="fbadiv form-group">
@@ -48,7 +55,7 @@ label{
 
        @endforeach
        	</table>
-             <hr>
+         <hr>
 
 
        </div>
@@ -262,6 +269,8 @@ label{
           <input type="hidden" name="generatlinsucomp" id="generatlinsucomp">
            <input type="hidden" name="healthinuscomp" id="healthinuscomp">
      </form>
+   </div>
+ </div>
      </div>
     </div>
 </div>
@@ -397,6 +406,9 @@ if($("input[name='isWorksGeneralins']:checked").val()==2){
                }
              });  
     } 
+    else{
+      alert("Please fill in all required fields");
+    }
 });
 
 

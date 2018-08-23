@@ -12,12 +12,14 @@
 <a  href="{{url('assign-followup')}}" class="btn btn-warning">Assign-Followup</a>
 
 
-  <table id="example" class="table table-bordered table-striped tbl" >
+  <table id="tbluserrole" class="table table-bordered table-striped tbl" >
    <thead>
                   <tr>
                    <th>ID</th>
                    <th>FBA ID</th>
-                    
+                   <th>Name</th>
+                   <th>Mobile Numbmer</th>
+                   <th>Email ID</th>         
                                 
                   </tr>
    </thead>
@@ -25,8 +27,11 @@
 
      @foreach($query as $val)
       <tr>
-          <td  ><a href="{{url('crm-disposition')}}/{{$val->id}}"   >{{$val->id}}</a></td> 
-          <td  >{{$val->fba_id}} </td> 
+          <td><a href="{{url('crm-disposition')}}/{{$val->ID}}">{{$val->ID}}</a></td> 
+          <td>{{$val->fba_id}} </td> 
+          <td>{{$val->FullName}}</td>
+          <td>{{$val->MobiNumb1}}</td>
+          <td>{{$val->EmailID}}</td>
            
   
        
@@ -239,6 +244,9 @@
 </div>
    
    <script type="text/javascript">      
+  $( document ).ready(function() {
+    $("#tbluserrole").DataTable();
+});
      var data=0;
 //       function CRM_Disposition(id){
 //             $('#fbamappin_id').val(id);

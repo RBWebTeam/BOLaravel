@@ -171,7 +171,7 @@
      @if($val->ch_id==0)
        
       <tr class="clickable" data-toggle="collapse" id="row1" data-target=".{{$val->history_id}}">
-        <td>{{$val->history_id}} <i class="glyphicon glyphicon-plus"></i></td>
+        <td>{{$val->history_id}} <i class="glyphicon glyphicon-plus" style="font-size: 20px; cursor: pointer;"></i></td>
          <td>{{$val->emp_category}}</td>
          <td>{{$val->calltype}}</td>
          <td>{{$val->connect_result}}</td>
@@ -180,14 +180,17 @@
          <td>{{$val->sub_disposition}}</td>
           <td>{{$val->followup_date}}</td>
           <td>{{$val->remark}}</td>
+
          <?php $class =($val->action=="n")? 'color: #00C851': ' color:#ff4444'; ?>
 
           
           
            @if($val->action=="n")
-              <td >  <a style="{{$class }}" href="#" id="close_action">{{$val->action==="n"?"close":"open"}} </a> </td>
+              <!-- <td ><a style="{{$class}}" href="#" id="close_action">{{$val->action==="n"?"close":"open"}} </a> </td> -->
+              <td>closed</td>
            @else
- <td >  <a style="{{$class }}" href="{{url('crm-followup')}}/{{$val->fbamappin_id}}/{{$val->crm_id}}/{{$val->history_id}}">{{$val->action==="n"?"close":"open"}} </a> </td>
+          <td>
+            <a style="{{$class}}" href="{{url('crm-followup')}}/{{$val->fbamappin_id}}/{{$val->crm_id}}/{{$val->history_id}}">{{$val->action==="n"?"close":"open"}}</a></td>
            @endif
 
 

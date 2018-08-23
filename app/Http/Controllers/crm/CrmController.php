@@ -33,14 +33,15 @@ class CrmController extends Controller
 
           public function user_role(Request $req){   // find column UID
  
- 
 
                 $profile_id=Session::get('UId');  
                 $queryu=DB::table('finmartemployeemaster')->select('UId','Profile','role_id','Profile')->where('UId','=',$profile_id)->first();
-                     
+                    // print_r($queryu->role_id);exit();
                      if($queryu->role_id){
 
-                $query=DB::table('fbacrmmapping')->where($queryu->role_id,'=',$profile_id)->get(); 
+                $query=DB::table('fbacrmmapping')->join('FBAMast', 'fbacrmmapping.fba_id', '=', 'FBAMast.FBAID')->where($queryu->role_id,'=',$profile_id)->select('fbacrmmapping.ID','fbacrmmapping.fba_id','FBAMast.FullName','FBAMast.MobiNumb1','FBAMast.EmailID')->get(); 
+                
+                //print_r($query);exit();
               }else{
 
                     return redirect('dashboard');
@@ -58,6 +59,7 @@ class CrmController extends Controller
             public function crm_disposition_fn(Request $req){
  
             				$history_db=DB::select('call sp_crm_view_history(?,?)',[$req->id,Session::get('UId')]);
+                    //print_r($history_db);exit();
             				$query=DB::table('crm_disposition')
                      ->where('emp_category','=',Session::get('Profile'))->get();
             				return  view('crm.crm_disposition_view',['query'=>$query,'fbamappin_id'=>$req->id,'history_db'=>$history_db]);  
@@ -193,9 +195,8 @@ class CrmController extends Controller
            }
 
                
-            public function crm_followup(Request $req){
-
-
+            public function crm_followup(Request $req)
+            {
 
                     $query=DB::select('call sp_crm_followup_details(?,?,?)',[$req->fbamappinid,$req->crmid,Session::get('UId')]);
                     return  view('crm.crm_followup_view',['query'=>$query,'history_id'=>$req->history_id]);

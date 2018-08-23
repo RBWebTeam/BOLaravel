@@ -31,11 +31,22 @@ class OfflinecsDashboardController extends Controller
 	{
                
        $offlinecsdata = DB::select("call Usp_get_motor_data($ID)"); 
+       foreach ($offlinecsdata as $val) {
+         $fba_id=$val->Createdby_FBAID;
+        // print_r($fba_id);exit();
+       }
 
       if ($offlinecsdata[0]->Product==1||$offlinecsdata[0]->Product==2||$offlinecsdata[0]->Product==3) 
               {             
                $FBAID=Session::get('fbaid');
-               $emailids=DB::select("call getTOCCEmailIdForOfflineCS($FBAID,1)"); 
+               if ($FBAID!=$fba_id) {
+                  $emailids=DB::select("call getTOCCEmailIdForOfflineCS($fba_id,1)"); 
+               }
+               else{
+                $emailids=DB::select("call getTOCCEmailIdForOfflineCS($FBAID,1)"); 
+               }
+               
+              
               foreach ($emailids as $val){                
                $tomail= $val->To_mail_id;
                $ccemail = explode(',',$val->CC_mail_id);               
@@ -68,7 +79,13 @@ class OfflinecsDashboardController extends Controller
       if ($offlinecsdata[0]->Product==4||$offlinecsdata[0]->Product==5) 
               {             
                $FBAID=Session::get('fbaid');
-               $emailids=DB::select("call getTOCCEmailIdForOfflineCS($FBAID,4)"); 
+               if ($FBAID!=$fba_id) {
+                  $emailids=DB::select("call getTOCCEmailIdForOfflineCS($fba_id,4)"); 
+               }
+               else{
+                $emailids=DB::select("call getTOCCEmailIdForOfflineCS($FBAID,4)"); 
+               }
+                
               foreach ($emailids as $val){                
                $tomail= $val->To_mail_id;
                $ccemail = explode(',',$val->CC_mail_id);               
@@ -101,7 +118,12 @@ class OfflinecsDashboardController extends Controller
      if ($offlinecsdata[0]->Product==6) 
               {             
                $FBAID=Session::get('fbaid');
-               $emailids=DB::select("call getTOCCEmailIdForOfflineCS($FBAID,6)"); 
+               if ($FBAID!=$fba_id) {
+                  $emailids=DB::select("call getTOCCEmailIdForOfflineCS($fba_id,6)"); 
+               }
+               else{
+                $emailids=DB::select("call getTOCCEmailIdForOfflineCS($FBAID,6)"); 
+               }
               foreach ($emailids as $val){                
                $tomail= $val->To_mail_id;
                $ccemail = explode(',',$val->CC_mail_id);               

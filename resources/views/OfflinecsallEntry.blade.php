@@ -49,7 +49,8 @@
       	<th>POSP Name</th>      	      
         <th>Created By</th>
         <th>Created Date</th>
-        <th>CSID</th>      	      	
+        <th>CSID</th> 
+        <th>action</th>     	      	
       </tr>
     </thead>
     <tbody>
@@ -63,13 +64,18 @@
         <td>{{$val->CustomerName}}</td>
     		<td>{{$val->cityname}}</td>
     		<td>{{$val->POSPName}}</td>    		       
-        <td>{{$val->CreatedBy}}</td>
-        <td>{{$val->createddate}}</td>
+        <td></td>
+        <td></td>
         <td>
           @if($val->CSID=='')
          <a id="btncsid" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#csidupdate" onclick="updatecsid({{$val->ID}},this)">Update CSID</a>
          @endif
-         {{$val->CSID}}</td>       
+         {{$val->CSID}}</td>
+          <td> 
+         
+            <a id="btnedit" class="btn btn-primary btn-sm" onclick="Sendemail({{$val->ID}},this)" ><span class="glyphicon glyphicon-envelope" style="font-size: 15px;"></span></a>           
+             
+         </td>       
     	</tr>
     	@endforeach
       @endisset
@@ -217,6 +223,18 @@ $("#btncsidupdate" ).click(function(){
 });
 }
 });
+ function Sendemail($ID)
+  {
+     //alert($ID);    
+   $.ajax({
+             url: 'offlinecssendemail/'+$ID,
+             type: "GET",             
+             success:function(data) 
+             {      
+              alert("Mail has Been Send Successfully");      
+             }
+         });
+  }
 
 
  

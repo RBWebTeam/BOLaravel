@@ -31,6 +31,8 @@ class MyfollowupController extends Controller
                
 
                $query=DB::select('call sp_crm_myfollowup(?)',[Session::get('UId')]);
+               //print_r(Session::get('UId'));exit();
+             //  print_r($query);exit();
 
                
               

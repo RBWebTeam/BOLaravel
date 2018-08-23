@@ -43,7 +43,7 @@ class FbaController extends CallApiController
           public function get_fba_list($fdate,$todate){        
 
              $id=Session::get('FBAUserId');
-            $query=DB::select("call fbaList('0','$fdate','$todate')");
+             $query=DB::select("call fbaList('0','$fdate','$todate')");
 
 
 //return $fdate.'|'.$todate;exit();

@@ -28,10 +28,11 @@
 			<div class="login-bdy">
 			 <h2 class="text-center">SIGN IN</h2>
 			 <br>
+			 <h4 class="text-center" style="color: #fff;">To Login use your Registered Email-id and Password of Magic Finmart App.</h4>
 			<form action="{{url('admin-login')}}" method="post" >
 				{{ csrf_field() }}
 			   <div class="form-group">
-			  <input type="text" name="email" value="vivekkhandekar758@gmail.com" class="form-control input-cs" placeholder="email"  />
+			  <input type="text" name="email"  class="form-control input-cs" placeholder="Email"  />
 			  @if ($errors->has('email'))<label class="control-label" for="inputError"> {{ $errors->first('email') }}</label>  @endif
 			  </div>
 			  <div class="form-group">
@@ -43,9 +44,7 @@
                </div>
 
 			  <input type="Submit" class="btn btn-default submit-btn" value="Submit"/>
-			   <button type="button" class="btn btn-default submit-btn"  data-target="#pwdModal" data-toggle="modal" value=""/>Forget Password</button>
- 			 <!--  <a href="forgot-password.php" class="forgot-pass pull-right">Forgot Password</a> -->
-			</form>
+			  <a href= class="btn btn-default submit-btn" style="color: white;margin-left:180px"  data-target="#pwdModal" data-toggle="modal" value=""/>Forgot Password</a>			</form>
 			</div>
 			@if(Session::has('msg'))
              <div class="alert alert-success alert-dismissible">
