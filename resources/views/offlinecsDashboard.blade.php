@@ -208,6 +208,18 @@
 
                    str += data[i].Document5==0?"":"<tr><th>Document 5</th><td><a target='_blank' href='http://"+data[i].Document5+"'><textarea readonly>"+data[i].Document5+"</textarea></a></td></tr>";
 
+                   str += data[i].Quotation==0?"":"<tr><th>Quotation</th><td><a target='_blank' href='http://"+data[i].Quotation+"'><textarea readonly>"+data[i].Quotation+"</textarea></a></td></tr>";
+
+                    str += data[i].pyp==0?"":"<tr><th>pyp</th><td><a target='_blank' href='http://"+data[i].pyp+"'><textarea readonly>"+data[i].pyp+"</textarea></a></td></tr>";
+
+                    str += data[i].newpolicycopy==0?"":"<tr><th>newpolicycopy</th><td><a target='_blank' href='http://"+data[i].newpolicycopy+"'><textarea readonly>"+data[i].newpolicycopy+"</textarea></a></td></tr>";
+
+                    str += data[i].pyp2==0?"":"<tr><th>pyp2</th><td><a target='_blank' href='http://"+data[i].pyp2+"'><textarea readonly>"+data[i].pyp2+"</textarea></a></td></tr>";
+
+                    str += data[i].pyp3==0?"":"<tr><th>pyp3</th><td><a target='_blank' href='http://"+data[i].pyp3+"'><textarea readonly>"+data[i].pyp3+"</textarea></a></td></tr>";
+
+                    str += data[i].pyp4==0?"":"<tr><th>pyp4</th><td><a target='_blank' href='http://"+data[i].pyp4+"'><textarea readonly>"+data[i].pyp4+"</textarea></a></td></tr>";
+
 
            } 
              

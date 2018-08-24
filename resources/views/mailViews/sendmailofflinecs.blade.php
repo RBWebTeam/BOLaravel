@@ -234,6 +234,42 @@ th, td {
 			<td>{{$val->Document5}}</td>
 		</tr>
 		@endif
+		@if($val->Quotation!='')
+		<tr>
+			<th>Quotation</th>
+			<td>{{$val->Quotation}}</td>
+		</tr>
+		@endif
+		@if($val->pyp!='')
+		<tr>
+			<th>pyp</th>
+			<td>{{$val->pyp}}</td>
+		</tr>
+		@endif
+		@if($val->newpolicycopy!='')
+		<tr>
+			<th>newpolicycopy</th>
+			<td>{{$val->newpolicycopy}}</td>
+		</tr>
+		@endif
+		@if($val->pyp2!='')
+		<tr>
+			<th>pyp2</th>
+			<td>{{$val->pyp2}}</td>
+		</tr>
+		@endif
+		@if($val->pyp3!='')
+		<tr>
+			<th>pyp3</th>
+			<td>{{$val->pyp3}}</td>
+		</tr>
+		@endif
+		@if($val->pyp4!='')
+		<tr>
+			<th>pyp4</th>
+			<td>{{$val->pyp4}}</td>
+		</tr>
+		@endif
 		<tr>
 		<th>Created date</th>
 		<td>{{$val->createddate}}</td>

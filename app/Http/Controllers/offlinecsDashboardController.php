@@ -64,7 +64,7 @@ class OfflinecsDashboardController extends Controller
                    {
                      $message->cc($cc);
                     }
-                  $message->subject($sub);
+                  $message->subject($sub);                 
 
                   });
                if(Mail::failures())

@@ -19,7 +19,9 @@
                    <th>FBA ID</th>
                    <th>Name</th>
                    <th>Mobile Numbmer</th>
-                   <th>Email ID</th>         
+                   <th>Email ID</th>
+                   <th>City</th> 
+                   <th>Creation Date</th>        
                                 
                   </tr>
    </thead>
@@ -32,6 +34,8 @@
           <td>{{$val->FullName}}</td>
           <td>{{$val->MobiNumb1}}</td>
           <td>{{$val->EmailID}}</td>
+          <td>{{$val->City}}</td>
+          <td>{{$val->CreaOn}}</td>
            
   
        

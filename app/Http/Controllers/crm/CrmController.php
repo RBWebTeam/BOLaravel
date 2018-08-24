@@ -39,7 +39,7 @@ class CrmController extends Controller
                     // print_r($queryu->role_id);exit();
                      if($queryu->role_id){
 
-                $query=DB::table('fbacrmmapping')->join('FBAMast', 'fbacrmmapping.fba_id', '=', 'FBAMast.FBAID')->where($queryu->role_id,'=',$profile_id)->select('fbacrmmapping.ID','fbacrmmapping.fba_id','FBAMast.FullName','FBAMast.MobiNumb1','FBAMast.EmailID')->get(); 
+                $query=DB::table('fbacrmmapping')->join('FBAMast', 'fbacrmmapping.fba_id', '=', 'FBAMast.FBAID')->where($queryu->role_id,'=',$profile_id)->select('fbacrmmapping.ID','fbacrmmapping.fba_id','FBAMast.FullName','FBAMast.MobiNumb1','FBAMast.EmailID','FBAMast.CreaOn','FBAMast.City')->get(); 
                 
                 //print_r($query);exit();
               }else{

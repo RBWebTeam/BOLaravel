@@ -294,7 +294,7 @@
              	<div class="col-md-4">
              		<label>RC Copy:</label>
              		<input type="file" name="filerc" id="filerc" class="form-control" accept=".png, .jpg, .jpeg .pdf">  
-                <span><a id="spnrccopy" target="_blank"></a></span>                         		
+                <span><a id="spnrccopy" target="_blank" download></a></span>                         		
              	</div>
              	<div class="col-md-4">
              		<label>Fitness:</label>
@@ -528,6 +528,30 @@ if (window.location.href.indexOf('?id=') > 0) {
            if(data[0].otherproductdoc5!=0){
            $("#spndoc5").append(data[0].otherproductdoc5);
            $('#spndoc5').attr('href','{{url('/upload/offlinecs')}}/'+data[0].otherproductdoc5);
+           }
+           if(data[0].Quotation!=0){
+           $("#spnquotation").append(data[0].Quotation);
+           $('#spnquotation').attr('href','{{url('/upload/offlinecs')}}/'+data[0].Quotation);
+           }
+           if(data[0].pyp!=0){
+           $("#spnpyp").append(data[0].pyp);
+           $('#spnpyp').attr('href','{{url('/upload/offlinecs')}}/'+data[0].pyp);
+           }
+           if(data[0].newpolicycopy!=0){
+           $("#spnpy").append(data[0].newpolicycopy);
+           $('#spnpy').attr('href','{{url('/upload/offlinecs')}}/'+data[0].newpolicycopy);
+           }
+           if(data[0].pyp2!=0){
+           $("#spnpyp2").append(data[0].pyp2);
+           $('#spnpyp2').attr('href','{{url('/upload/offlinecs')}}/'+data[0].pyp2);
+           }
+           if(data[0].pyp3!=0){
+           $("#spnpyp3").append(data[0].pyp3);
+           $('#spnpyp3').attr('href','{{url('/upload/offlinecs')}}/'+data[0].pyp3);
+           }
+           if(data[0].pyp4!=0){
+           $("#spnpyp4").append(data[0].pyp4);
+           $('#spnpyp4').attr('href','{{url('/upload/offlinecs')}}/'+data[0].pyp4);
            }
            if (data[0].Insurerhealth!=0){
            $("#ddlInsurerhealth").val(data[0].Insurerhealth);

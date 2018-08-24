@@ -1105,7 +1105,14 @@ return Redirect('offlinecs');
            $doc4=$this->fileupload_fn($req->file('doc4'));
            $doc5=$this->fileupload_fn($req->file('doc5'));  
 
-              DB::select('call Usp_update_offlinecs(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',array(
+           $filequotation=$this->fileupload_fn($req->file('filequotation'));
+           $filepyp=$this->fileupload_fn($req->file('filepyp')); 
+           $filepy=$this->fileupload_fn($req->file('filepy'));       
+           $filepyp2=$this->fileupload_fn($req->file('filepyp2')); 
+           $filepyp3=$this->fileupload_fn($req->file('filepyp3'));
+           $filepyp4=$this->fileupload_fn($req->file('filepyp4'));
+
+              DB::select('call Usp_update_offlinecs(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',array(
               $req->txtofflinecsid,
               $req->ddproduct,
               $req->txtcstname,
@@ -1156,7 +1163,13 @@ return Redirect('offlinecs');
               $doc2,
               $doc3,
               $doc4,
-              $doc5));
+              $doc5,
+              $filequotation,
+              $filepyp,
+              $filepy,
+              $filepyp2,
+              $filepyp3,
+              $filepyp4));
           
               $ID=$req->txtofflinecsid;             
             
@@ -1305,6 +1318,63 @@ if ($doc5!=0)
         return $e->getMessage();    
      }        
 }
+///new docs
+
+if ($filequotation!=0) 
+{
+  try{
+    
+    $this->getshorturl($filequotation,$ID,'Quotation');
+  }
+  catch (Exception $e){
+
+        return $e->getMessage();    
+     }        
+}
+if ($filepy!=0) 
+{
+  try{
+    
+    $this->getshorturl($filepy,$ID,'py');
+  }
+  catch (Exception $e){
+
+        return $e->getMessage();    
+     }        
+}
+if ($filepyp2!=0) 
+{
+  try{
+    
+    $this->getshorturl($filepyp2,$ID,'pyp2');
+  }
+  catch (Exception $e){
+
+        return $e->getMessage();    
+     }        
+}
+if ($filepyp3!=0) 
+{
+  try{
+    
+    $this->getshorturl($filepyp3,$ID,'pyp3');
+  }
+  catch (Exception $e){
+
+        return $e->getMessage();    
+     }        
+}
+if ($filepyp4!=0) 
+{
+  try{
+    
+    $this->getshorturl($filepyp4,$ID,'pyp4');
+  }
+  catch (Exception $e){
+
+        return $e->getMessage();    
+     }        
+}
  Session::flash('message', 'Record has been Updated successfully');
  return Redirect('offlinecs');
 }
@@ -1347,9 +1417,16 @@ public function Updateofflinecsandsendmail(Request $req)
            $doc2=$this->fileupload_fn($req->file('doc2'));       
            $doc3=$this->fileupload_fn($req->file('doc3')); 
            $doc4=$this->fileupload_fn($req->file('doc4'));
-           $doc5=$this->fileupload_fn($req->file('doc5'));       
+           $doc5=$this->fileupload_fn($req->file('doc5'));   
+
+           $filequotation=$this->fileupload_fn($req->file('filequotation'));
+           $filepyp=$this->fileupload_fn($req->file('filepyp')); 
+           $filepy=$this->fileupload_fn($req->file('filepy'));       
+           $filepyp2=$this->fileupload_fn($req->file('filepyp2')); 
+           $filepyp3=$this->fileupload_fn($req->file('filepyp3'));
+           $filepyp4=$this->fileupload_fn($req->file('filepyp4'));    
             
-             $id= DB::select('call Usp_update_offlinecsandsendmail(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',array(
+             $id= DB::select('call Usp_update_offlinecsandsendmail(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',array(
               $req->txtofflinecsid,
               $req->ddproduct,
               $req->txtcstname,
@@ -1400,7 +1477,13 @@ public function Updateofflinecsandsendmail(Request $req)
               $doc2,
               $doc3,
               $doc4,
-              $doc5));
+              $doc5,
+              $filequotation,
+              $filepyp,
+              $filepy,
+              $filepyp2,
+              $filepyp3,
+              $filepyp4));
              
               $ID=$req->txtofflinecsid;             
             
@@ -1542,6 +1625,63 @@ if ($doc5!=0)
   try{
     
     $this->getshorturl($doc5,$ID,'Document5');
+  }
+  catch (Exception $e){
+
+        return $e->getMessage();    
+     }        
+}
+// new docs
+
+if ($filequotation!=0) 
+{
+  try{
+    
+    $this->getshorturl($filequotation,$ID,'Quotation');
+  }
+  catch (Exception $e){
+
+        return $e->getMessage();    
+     }        
+}
+if ($filepy!=0) 
+{
+  try{
+    
+    $this->getshorturl($filepy,$ID,'py');
+  }
+  catch (Exception $e){
+
+        return $e->getMessage();    
+     }        
+}
+if ($filepyp2!=0) 
+{
+  try{
+    
+    $this->getshorturl($filepyp2,$ID,'pyp2');
+  }
+  catch (Exception $e){
+
+        return $e->getMessage();    
+     }        
+}
+if ($filepyp3!=0) 
+{
+  try{
+    
+    $this->getshorturl($filepyp3,$ID,'pyp3');
+  }
+  catch (Exception $e){
+
+        return $e->getMessage();    
+     }        
+}
+if ($filepyp4!=0) 
+{
+  try{
+    
+    $this->getshorturl($filepyp4,$ID,'pyp4');
   }
   catch (Exception $e){
 
