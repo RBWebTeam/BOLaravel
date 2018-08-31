@@ -33,16 +33,6 @@ Route::group(['middleware' => ['CheckMidd']], function (){
 
   //Route::get('forgot-password','LoginController@forgotpassword');
 
-
-
-
-
-
-
-
-
-
-
  // city  state
 Route::get('search-state','LoginController@search_state');
 Route::get('search-city','LoginController@search_city');
@@ -242,6 +232,7 @@ route::get('offlinecs','OfflinecsController@getofflinecs');
 
 route::get('get_state_offlinecs/{cityid}','OfflinecsController@getstate');
 Route::Post('offlinecs','OfflinecsController@insertofflinecs');
+route::get('proposalfrom','OfflinecsController@getproposalfrom');
 Route::get('get_ERPID_offlinecs/{fbaid}','OfflinecsController@geterpid');
 
 route::get('offlinecsedit/{id}','OfflinecsController@getofflinecsdataedit');
@@ -262,6 +253,10 @@ Route::get('fba-location','FindfbalocationController@getfbadata');
 Route::get('prodouct-lead-details','prodouctleaddetailsController@viewlead_details');
 
 Route::get('get-fba-location/{lat}/{long}','prodouctleaddetailsController@fbalocation');
+
+Route::get('import-sales-data','ImportsalesdataController@getsalesview');
+
+Route::POST('getfiledsata','ImportsalesdataController@importExcel');
 
 ///shubham end ///
 // avinash

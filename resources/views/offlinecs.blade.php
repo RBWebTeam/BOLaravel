@@ -268,22 +268,22 @@
               <div class="divnewdocs row">
                <div class="col-md-4">
                 <label>Quotation</label>
-               <input type="file" name="filequotation" id="filequotation" class="form-control" accept=".png,.jpeg,.jpg,.pdf">
+               <input type="file" name="filequotation" id="filequotation" class="form-control files" accept=".png,.jpeg,.jpg,.pdf">
                 <span><a id="spnquotation" target="_blank"></a></span>              
               </div>
               <div class="col-md-4">
                 <label>Previous Year Policy Copy</label>
-               <input type="file" name="filepyp" id="filepyp" class="form-control" accept=".png,.jpeg,.jpg,.pdf">
+               <input type="file" name="filepyp" id="filepyp" class="form-control files" accept=".png,.jpeg,.jpg,.pdf">
                 <span><a id="spnpyp" target="_blank"></a></span>              
               </div>  
                <div class="col-md-4">
                 <label>New Policy Copy</label>
-               <input type="file" name="filepy" id="filepy" class="form-control" accept=".png,.jpeg,.jpg,.pdf">
+               <input type="file" name="filepy" id="filepy" class="form-control files" accept=".png,.jpeg,.jpg,.pdf">
                 <span><a id="spnpy" target="_blank"></a></span>              
               </div> 
               <div class="col-md-4">
                 <label>Other:</label>
-                <input type="file" name="fileother" id="fileother" class="form-control" accept=".png, .jpg, .jpeg .pdf"> 
+                <input type="file" name="fileother" id="fileother" class="form-control files" accept=".png, .jpg, .jpeg .pdf"> 
                 <span ><a id="spnother" target="_blank"></a></span>
               </div>          
                
@@ -293,22 +293,22 @@
              <div class="row Motor" id="divMotor">              
              	<div class="col-md-4">
              		<label>RC Copy:</label>
-             		<input type="file" name="filerc" id="filerc" class="form-control" accept=".png, .jpg, .jpeg .pdf">  
-                <span><a id="spnrccopy" target="_blank" download></a></span>                         		
+             		<input type="file" name="filerc" id="filerc" class="form-control files" accept=".png, .jpg, .jpeg .pdf">  
+                <span><a id="spnrccopy" target="_blank"></a></span>                         		
              	</div>
              	<div class="col-md-4">
              		<label>Fitness:</label>
-             		<input type="file" name="fileFitness" id="fileFitness" class="form-control" accept=".png, .jpg, .jpeg .pdf"> 
+             		<input type="file" name="fileFitness" id="fileFitness" class="form-control files" accept=".png, .jpg, .jpeg .pdf"> 
                 <span><a id="spnfitness" target="_blank"></a></span>             		
              	</div>
              	<div class="col-md-4">
              		<label>PUC:</label>
-             		<input type="file" name="filePUC" id="filePUC" class="form-control" accept=".png, .jpg, .jpeg .pdf">    
+             		<input type="file" name="filePUC" id="filePUC" class="form-control files" accept=".png, .jpg, .jpeg .pdf">    
                  <span><a id="spnPUC" target="_blank"></a></span>         		
              	</div>
              	<div class="col-md-4">
              		<label>Break in Report:</label>
-             		<input type="file" name="filebreakrp" id="filebreakrp" class="form-control" accept=".png, .jpg, .jpeg .pdf"> 
+             		<input type="file" name="filebreakrp" id="filebreakrp" class="form-control files" accept=".png, .jpg, .jpeg .pdf"> 
                  <span><a id="spnbreakrp" target="_blank"></a></span>           
              	</div>
               </div> 
@@ -316,7 +316,7 @@
                <div class="row"> 
              	<div class="col-md-4">
              		<label>Cheque / Online Payment Receipt Copy:</label>
-             		<input type="file" name="fileCheque" id="fileCheque" class="form-control" accept=".png, .jpg, .jpeg .pdf"> 
+             		<input type="file" name="fileCheque" id="fileCheque" class="form-control files" accept=".png, .jpg, .jpeg .pdf"> 
                 <span><a id="spnCheque" target="_blank"></a></span>           
              	</div>             	 
               </div>                  
@@ -324,12 +324,12 @@
              <div class="Proposal row" id="Health">                               
              	<div class="col-md-4">
              		<label>Proposal Form:</label>
-             		<input type="file" name="fileProposalForm" id="fileProposalForm" class="form-control" accept=".png, .jpg, .jpeg .pdf">
+             		<input type="file" name="fileProposalForm" id="fileProposalForm" class="form-control files" accept=".png, .jpg, .jpeg .pdf">
                 <span><a id="spnproposaform" target="_blank"></a></span>
              	</div>  
               <div class="col-md-4">
                 <label>KYC:</label>
-                <input type="file" name="fileKYC" id="fileKYC" class="form-control" accept=".png, .jpg, .jpeg .pdf">   
+                <input type="file" name="fileKYC" id="fileKYC" class="form-control files" accept=".png, .jpg, .jpeg .pdf">   
                 <span><a id="spnKYC" target="_blank"></a></span>             
               </div>               
               <!-- <div class="col-md-4">
@@ -339,17 +339,17 @@
               </div>   -->
               <div class="col-md-4">
                 <label>Previous Year Policy Copy 2:</label>
-                <input type="file" name="filepyp2" id="filepyp2" class="form-control" accept=".png, .jpg, .jpeg .pdf">   
+                <input type="file" name="filepyp2" id="filepyp2" class="form-control files" accept=".png, .jpg, .jpeg .pdf">   
                 <span><a id="spnpyp2" target="_blank"></a></span>             
               </div> 
               <div class="col-md-4">
                 <label>Previous Year Policy Copy 3:</label>
-                <input type="file" name="filepyp3" id="filepyp3" class="form-control" accept=".png, .jpg, .jpeg .pdf">   
+                <input type="file" name="filepyp3" id="filepyp3" class="form-control files" accept=".png, .jpg, .jpeg .pdf">   
                 <span><a id="spnpyp3" target="_blank"></a></span>             
               </div> 
               <div class="col-md-4">
                 <label>Previous Year Policy Copy 4:</label>
-                <input type="file" name="filepyp4" id="filepyp4" class="form-control" accept=".png, .jpg, .jpeg .pdf">   
+                <input type="file" name="filepyp4" id="filepyp4" class="form-control files" accept=".png, .jpg, .jpeg .pdf">   
                 <span><a id="spnpyp4" target="_blank"></a></span>             
               </div>   	
              </div> 
@@ -358,27 +358,27 @@
              <div class="divotherproductdoc row" style="display: none;">
               <div class="col-md-4">
                 <label>Document 1</label>
-                <input type="file" name="doc1" id="doc1" class="form-control" accept=".png,.jpeg,.jpg,.pdf"> 
+                <input type="file" name="doc1" id="doc1" class="form-control files" accept=".png,.jpeg,.jpg,.pdf"> 
                 <span><a id="spndoc1" target="_blank"></a></span>               
               </div>
               <div class="col-md-4">
                 <label>Document 2</label>
-                <input type="file" name="doc2" id="doc2" class="form-control" accept=".png,.jpeg,.jpg,.pdf">
+                <input type="file" name="doc2" id="doc2" class="form-control files" accept=".png,.jpeg,.jpg,.pdf">
                 <span><a id="spndoc2" target="_blank"></a></span>                
               </div>
               <div class="col-md-4">
                 <label>Document 3</label>
-                <input type="file" name="doc3" id="doc3" class="form-control" accept=".png,.jpeg,.jpg,.pdf">  
+                <input type="file" name="doc3" id="doc3" class="form-control files" accept=".png,.jpeg,.jpg,.pdf">  
                 <span><a id="spndoc3" target="_blank"></a></span>              
               </div>
                <div class="col-md-4">
                 <label>Document 4</label>
-                <input type="file" name="doc4" id="doc4" class="form-control" accept=".png,.jpeg,.jpg,.pdf">
+                <input type="file" name="doc4" id="doc4" class="form-control files" accept=".png,.jpeg,.jpg,.pdf">
                 <span><a id="spndoc4" target="_blank"></a></span>                
               </div>
               <div class="col-md-4">
                 <label>Document 5</label>
-                <input type="file" name="doc5" id="doc5" class="form-control" accept=".png,.jpeg,.jpg,.pdf">  
+                <input type="file" name="doc5" id="doc5" class="form-control files" accept=".png,.jpeg,.jpg,.pdf">  
                 <span><a id="spndoc5" target="_blank"></a></span>              
               </div>
                
@@ -597,7 +597,14 @@ if (window.location.href.indexOf('?id=') > 0) {
       $(".divotherproductdoc").hide();
       $('#txtvehicalno').attr('required', true);
       $('#txtbreakin').attr('required', true);
-      $('#ddlInsurermotor').attr('required', true);      
+      $('#ddlInsurermotor').attr('required', true); 
+      $('#txtotherproduct').removeAttr("required"); 
+      $('#ddlInsurerhealth').removeAttr("required");
+      $('#dllpremium').removeAttr("required");
+      $('#txtotherproduct').removeAttr("required");
+      $('#ddlnoofpolicy').removeAttr("required");
+      $('#ddlInsurerlife').removeAttr("required");
+
      }
      else if($("#ddproduct").val()==2){
       $(".Motor").show();
@@ -611,7 +618,13 @@ if (window.location.href.indexOf('?id=') > 0) {
       $(".divotherproductdoc").hide();
       $('#txtvehicalno').attr('required', true);
       $('#txtbreakin').attr('required', true);
-      $('#ddlInsurermotor').attr('required', true);      
+      $('#ddlInsurermotor').attr('required', true);  
+      $('#txtotherproduct').removeAttr("required");  
+      $('#ddlInsurerhealth').removeAttr("required");
+      $('#dllpremium').removeAttr("required");
+      $('#txtotherproduct').removeAttr("required");  
+      $('#ddlnoofpolicy').removeAttr("required");
+      $('#ddlInsurerlife').removeAttr("required");
      }
      else if($("#ddproduct").val()==3){
       $(".Motor").show();
@@ -626,6 +639,12 @@ if (window.location.href.indexOf('?id=') > 0) {
       $('#txtvehicalno').attr('required', true);
       $('#txtbreakin').attr('required', true);
       $('#ddlInsurermotor').attr('required', true);
+      $('#txtotherproduct').removeAttr("required");
+      $('#ddlInsurerhealth').removeAttr("required");
+      $('#dllpremium').removeAttr("required");
+      $('#txtotherproduct').removeAttr("required");
+      $('#ddlnoofpolicy').removeAttr("required");
+      $('#ddlInsurerlife').removeAttr("required");
       
      }
      else if($("#ddproduct").val()==4){
@@ -649,6 +668,7 @@ if (window.location.href.indexOf('?id=') > 0) {
       $('#fileFitness').removeAttr("required");
       $('#filePUC').removeAttr("required");
       $('#filebreakrp').removeAttr("required");
+      $('#txtotherproduct').removeAttr("required");
      }
      else if($("#ddproduct").val()==5){
       $("#life").hide();
@@ -671,6 +691,7 @@ if (window.location.href.indexOf('?id=') > 0) {
       $('#fileFitness').removeAttr("required");
       $('#filePUC').removeAttr("required");
       $('#filebreakrp').removeAttr("required");
+      $('#txtotherproduct').removeAttr("required");
      }
      else if($("#ddproduct").val()==6){   	
       $("#life").show();
@@ -692,7 +713,8 @@ if (window.location.href.indexOf('?id=') > 0) {
       $('#fileFitness').removeAttr("required");
       $('#filePUC').removeAttr("required"); 
       $('#filebreakrp').removeAttr("required");
-      $('#dllpremium').removeAttr("required");      
+      $('#dllpremium').removeAttr("required");     
+      $('#txtotherproduct').removeAttr("required"); 
      }
     else if($("#ddproduct").val()==7){
       $("#life").hide();
@@ -718,7 +740,28 @@ if (window.location.href.indexOf('?id=') > 0) {
       $('#filebreakrp').removeAttr("required");
       $('#ddlnoofpolicy').removeAttr("required");
       $('#ddlInsurerlife').removeAttr("required");
-     } 
+     } else{
+      $(".Motor").show();
+      $("#life").hide();
+      $("#Health").hide();
+      $("#divlife").hide();
+      $("#divhealth").hide();
+      $(".health").hide();
+      $(".life").hide();
+      $(".otherproduct").hide();
+      $(".divotherproductdoc").hide();
+      $('#txtvehicalno').attr('required', true);
+      $('#txtbreakin').attr('required', true);
+      $('#ddlInsurermotor').attr('required', true);
+      $('#ddlInsurerhealth').removeAttr("required");
+      $('#dllpremium').removeAttr("required");
+      $('#txtotherproduct').removeAttr("required");
+      $('#ddlnoofpolicy').removeAttr("required");
+      $('#ddlInsurerlife').removeAttr("required");
+      
+      
+      
+     }
     }
 function getpospname()
 {
@@ -772,8 +815,113 @@ function getpospname()
 
 
 
-$("#saveofflinecs" ).click(function() {  
-  $("#frmofflinecs").attr('action', '{{url('saveofflinecs')}}');    
+$("#saveofflinecs" ).click(function() { 
+  
+  /*//filequtition
+  if (window.File && window.FileReader && window.FileList && window.Blob)
+    {
+        //get the file size and file type from file input field
+        var fsize = $('#filequotation')[0].files[0].size;
+        
+        if(fsize>15000000) //do something if file size more than 1 mb (1048576)
+        {
+            alert(fsize +" bites\nToo big!");
+        }else{
+            alert(fsize +" bites\nYou are good to go!");
+        }
+    }
+    ///2
+     if (window.File && window.FileReader && window.FileList && window.Blob)
+    {
+        //get the file size and file type from file input field
+        var fsize = $('#filepyp')[0].files[0].size;
+        
+        if(fsize>15000000) //do something if file size more than 1 mb (1048576)
+        {
+            alert(fsize +" bites\nToo big!");
+        }else{
+            alert(fsize +" bites\nYou are good to go!");
+        }
+    }
+    //3
+     if (window.File && window.FileReader && window.FileList && window.Blob)
+    {
+        //get the file size and file type from file input field
+        var fsize = $('#filepy')[0].files[0].size;
+        
+        if(fsize>15000000) //do something if file size more than 1 mb (1048576)
+        {
+            alert(fsize +" bites\nToo big!");
+        }else{
+            alert(fsize +" bites\nYou are good to go!");
+        }
+    }
+     //4
+     if (window.File && window.FileReader && window.FileList && window.Blob)
+    {
+        //get the file size and file type from file input field
+        var fsize = $('#fileother')[0].files[0].size;
+        
+        if(fsize>15000000) //do something if file size more than 1 mb (1048576)
+        {
+            alert(fsize +" bites\nToo big!");
+        }else{
+            alert(fsize +" bites\nYou are good to go!");
+        }
+    }
+    //5
+    if (window.File && window.FileReader && window.FileList && window.Blob)
+    {
+        //get the file size and file type from file input field
+        var fsize = $('#filerc')[0].files[0].size;
+        
+        if(fsize>15000000) //do something if file size more than 1 mb (1048576)
+        {
+            alert(fsize +" bites\nToo big!");
+        }else{
+            alert(fsize +" bites\nYou are good to go!");
+        }
+    }
+    //6
+     if (window.File && window.FileReader && window.FileList && window.Blob)
+    {
+        //get the file size and file type from file input field
+        var fsize = $('#fileFitness')[0].files[0].size;
+        
+        if(fsize>15000000) //do something if file size more than 1 mb (1048576)
+        {
+            alert(fsize +" bites\nToo big!");
+        }else{
+            alert(fsize +" bites\nYou are good to go!");
+        }
+    }
+    //7
+     if (window.File && window.FileReader && window.FileList && window.Blob)
+    {
+        //get the file size and file type from file input field
+        var fsize = $('#filePUC')[0].files[0].size;
+        
+        if(fsize>15000000) //do something if file size more than 1 mb (1048576)
+        {
+            alert(fsize +" bites\nToo big!");
+        }else{
+            alert(fsize +" bites\nYou are good to go!");
+        }
+    }
+    //8
+    if (window.File && window.FileReader && window.FileList && window.Blob)
+    {
+        //get the file size and file type from file input field
+        var fsize = $('#filebreakrp')[0].files[0].size;
+        
+        if(fsize>15000000) //do something if file size more than 1 mb (1048576)
+        {
+            alert(fsize +" bites\nToo big!");
+        }else{
+            alert(fsize +" bites\nYou are good to go!");
+        }
+    }*/
+    $("#frmofflinecs").attr('action', '{{url('saveofflinecs')}}');
 });
 $("#btnupdate" ).click(function() {
   $("#frmofflinecs").attr('action', '{{url('offlinecsupdate')}}');
@@ -816,6 +964,7 @@ function showotherdiv(){
    $('#txtReason').removeAttr("required");
  }
 }
+
 
 
 </script>

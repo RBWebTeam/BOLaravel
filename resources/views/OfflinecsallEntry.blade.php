@@ -63,9 +63,9 @@
     		<td>{{$val->product_name}}</td>
         <td>{{$val->CustomerName}}</td>
     		<td>{{$val->cityname}}</td>
-    		<td>{{$val->POSPName}}</td>    		       
-        <td></td>
-        <td></td>
+    		<td>{{$val->POSPName}}</td>     
+        <td>{{$val->CreatedBy}}</td>
+        <td>{{$val->createddate}}</td>
         <td>
           @if($val->CSID=='')
          <a id="btncsid" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#csidupdate" onclick="updatecsid({{$val->ID}},this)">Update CSID</a>

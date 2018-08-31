@@ -125,7 +125,7 @@ class OfflinecsController extends CallApiController
             }
             //print_r($ID);exit();
 
-if ($filerc!=0) 
+/*if ($filerc!=0) 
 {
   try{
     $data= array("longurl"=>"http://bo.magicfinmart.com/upload/offlinecs/$filerc");
@@ -492,7 +492,7 @@ if ($filepyp4!=0)
 
         return $e->getMessage();    
      }        
-}
+}*/
 
       $offlinecsdata = DB::select("call Usp_get_motor_data($ID)"); 
 
@@ -710,7 +710,7 @@ if ($filepyp4!=0)
             }
             
 
-if ($filerc!=0) 
+/*if ($filerc!=0) 
 {
   try{
     $data= array("longurl"=>"http://bo.magicfinmart.com/upload/offlinecs/$filerc");
@@ -1078,7 +1078,7 @@ if ($filepyp4!=0)
 
         return $e->getMessage();    
      }        
-}
+}*/
  Session::flash('message', 'Record has been saved successfully');
 return Redirect('offlinecs');
 }
@@ -1175,7 +1175,7 @@ return Redirect('offlinecs');
             
             //print_r($ID);exit();
 
-if ($filerc!=0) 
+/*if ($filerc!=0) 
 {
   try{
    $this->getshorturl($filerc,$ID,'RCCopy');
@@ -1374,12 +1374,12 @@ if ($filepyp4!=0)
 
         return $e->getMessage();    
      }        
-}
+}*/
  Session::flash('message', 'Record has been Updated successfully');
  return Redirect('offlinecs');
 }
 
-public function getshorturl($filename,$ID,$doctype)
+/*public function getshorturl($filename,$ID,$doctype)
 {  try{
     $data= array("longurl"=>"http://bo.magicfinmart.com/upload/offlinecs/$filename");
     $token=array("cache-control: no-cache","content-type: application/json", "token: 1234567890");
@@ -1398,7 +1398,7 @@ public function getshorturl($filename,$ID,$doctype)
     {
         return $e->getMessage();    
      } 
-}
+}*/
 
 public function Updateofflinecsandsendmail(Request $req)
        {
@@ -1489,7 +1489,7 @@ public function Updateofflinecsandsendmail(Request $req)
             
             //print_r($ID);exit();
 
-if ($filerc!=0) 
+/*if ($filerc!=0) 
 {
   try{
    $this->getshorturl($filerc,$ID,'RCCopy');
@@ -1687,7 +1687,7 @@ if ($filepyp4!=0)
 
         return $e->getMessage();    
      }        
-}
+}*/
 
  $offlinecsdata = DB::select("call Usp_get_motor_data($ID)"); 
 
@@ -1791,6 +1791,11 @@ if ($filepyp4!=0)
            }
  Session::flash('message', 'Record has been Updated successfully');
 return Redirect('offlinecs');
+}
+
+public function getproposalfrom()
+{
+  return view('Proposal_form');
 }
  
 }

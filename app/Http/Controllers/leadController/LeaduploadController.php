@@ -50,20 +50,23 @@ class LeaduploadController extends Controller{
     }
 
 
- public function import($value){
- $val =Validator::make($value,[  
- 	'mobile' =>  'required|regex:/^[0-9]{10}+$/|unique:raw_lead_master',
+ public function import($value)
+ {
+  $val =Validator::make($value,[  
+ 	  'mobile' =>  'required|regex:/^[0-9]{10}+$/|unique:raw_lead_master',
     'email' =>  'required|email|unique:raw_lead_master',
     'panno' =>  'required',
     'pincode' =>  'required',
-     'city' =>  'required',
+    'city' =>  'required',
 
       ]);
 
 
-if ($val->passes()){ 
-$city= DB::table('city_master')->where('cityname', 'LIKE', "%{$value['city']}%")->first();
-if(isset($city->city_id)){
+if ($val->passes())
+{ 
+  $city= DB::table('city_master')->where('cityname', 'LIKE', "%{$value['city']}%")->first();
+  if(isset($city->city_id))
+  {
         $arra=array(
          'name'=>$value['name'],
          'mobile'=>$value['mobile'],
@@ -72,14 +75,16 @@ if(isset($city->city_id)){
          'profession'=>$value['profession'],
          'monthly_income'=>$value['monthlyincome'],
          'pan'=>$value['panno'],
-          'city_id'=>$city->city_id,
-           'address'=>$value['address'],
-            'pincode'=>$value['pincode'],
-            'campaign_id'=>$value['campaign'],
-            'user_id'=>Session::get('fbauserid'),
-            'ip_address'=>\Request::ip(),
-            'created_on'=>date('Y-m-d H:i:s'),); 
-      	DB::table('raw_lead_master')->insert($arra);    } } 
+         'city_id'=>$city->city_id,
+         'address'=>$value['address'],
+         'pincode'=>$value['pincode'],
+         'campaign_id'=>$value['campaign'],
+         'user_id'=>Session::get('fbauserid'),
+         'ip_address'=>\Request::ip(),
+         'created_on'=>date('Y-m-d H:i:s'),); 
+      	DB::table('raw_lead_master')->insert($arra);    
+      } 
+    } 
   }
 
         
