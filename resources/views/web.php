@@ -28,11 +28,12 @@ Route::get('getcitybypincode/{pincode}','HealthAssureController@getcity');
 
 Route::get('/','LoginController@checklogin');
 Route::post('admin-login','LoginController@login');
+
 Route::post('forgot-password','LoginController@forgot_password');
+
+
+
 Route::group(['middleware' => ['CheckMidd']], function (){
-
-  //Route::get('forgot-password','LoginController@forgotpassword');
-
  // city  state
 Route::get('search-state','LoginController@search_state');
 Route::get('search-city','LoginController@search_city');
@@ -64,8 +65,6 @@ Route::get('getloanid/{fbaid}','FbaController@getupdateloanid');
  Route::get('crmfbalist/{FBAID}','crmfbalistController@test');
 //Route::get('crmstatus/{FBAID}','crmfbalistController@showcrmstatus');
 
-//Route::get('crmstatus/{FBAID}','crmfbalistController@showcrmstatus');
-
 
 //QuicK Lead start  
 Route::get('quickleadassignmentshow','quickleadController@showlead');
@@ -78,17 +77,23 @@ Route::get('quickleadassignmentshow','quickleadController@showlead');
 
   // Route::get('fba-list-posp-update/{fbaid}','FbaController@updatepospthroapi');
 
-//User_mapping vikas Start   fbauserview
+//User_mapping vikas Start  
   	//Route::get('user_mapping','usermappingController@fbauserview');
 
-	Route::get('user_mapping','usermappingController@fbauser');
-
+Route::get('user_mapping','usermappingController@fbauser');
 Route::get('sales-code-update','salescodeController@updatesalescode');
 Route::get('sales-code-update-get-fbaid/{salsecode}','salescodeController@selfcodefbaid');
 Route::POST('sales-code-update-insert','salescodeController@insertsalescode');
 
 
 //User_mapping vikas End
+
+
+//Test state_wise city start
+Route::get('city_wise_state','statewisecityController@get_city'); 
+Route::post('citywisestate','statewisecityController@statewisecity'); 
+Route::get('city_wise_state2','statewisecityController@showlead2');
+//Test state_wise city End
 
 
 
@@ -108,13 +113,18 @@ Route::get('state_sub_dropdown/{cityid}','bankofferController@get_sub_cities');
 /////////////shubham podp
 Route::get('Fba-list-Update-posp/{id}','FbaController@UpdatePospno');
 
-
 // export excel  
-Route::get('export/{fdate}/{todate}','FbaController@exportexcel');
+Route::get('export','FbaController@exportexcel');
+// Route::get('export/{fdate}/{todate}','FbaController@exportexcel');
+//Route::get('exportlead','quickleaddashboardController@exportleadexcel');
+
+// Route::get('forgot-password','LoginController@forgotpassword');
+// Route::post('forgot-password','LoginController@forgot_password');
+
+
 
 
 // non fba-list start  
-
 Route::get('load-non-fba-list','nonfbaController@nonfbalist');
 Route::get('non-fba-list','nonfbaController@getnonfba');
 Route::get('export-excel','nonfbaController@nonfbaexportexcel');
@@ -127,7 +137,30 @@ Route::get('export-excel','nonfbaController@nonfbaexportexcel');
 Route::get('sales-code-update','salescodeController@updatesalescode');
 Route::get('sales-code-update-get-fbaid/{salsecode}','salescodeController@selfcodefbaid');
 Route::POST('sales-code-update-insert','salescodeController@insertsalescode');
+// Refresh get data functiolity start
+Route::get('refresh-data/{fbaid}','FbaController@get_refresh_data');
+Route::get('fba-count/{fbaid}','FbaController@get_fba_count');
 
+// Refresh get dataget_refresh_data functiolity End
+
+
+
+// Manage Emploee Start
+//Route::get('manage-employee','manageemploeeController@viewmaageemployy'); 
+Route::get('finmartemployee-details','manageemploeeController@finemployeeview'); 
+Route::get('emp-details','manageemploeeController@allemployeedata');  
+Route::get('manage-employee/{uid}','manageemploeeController@viewmaageemployy');
+Route::post('update_detailsemp','manageemploeeController@update_emp_details'); 
+
+// add employee start  
+Route::get('add-employee','manageemploeeController@addfbaemp');
+Route::post('add-new-emp','manageemploeeController@new_emp_add'); 
+// Manage Emploee End
+// prodouct-lead-details Start
+Route::get('prodouct-lead-details','prodouctleaddetailsController@viewlead_details');
+// prodouct-lead-details End
+// get-all-fbalist-data start   
+Route::get('all-fba-data/{fdate}/{todate}','FbaController@get_all_fba_list_data');
 
 
 //city_droupdown
@@ -148,6 +181,18 @@ Route::post('rm_city_view_edit','rmcitymappingController@table_view');
 Route::get('fbamaster-edit','FbaController@fbamaster');
 Route::get('fbaid-view','FbaController@getfbaid');
 Route::post('update_fbamaster','FbaController@update_fba_table');
+
+Route::get('Registartion-report','RegistartionreportController@Regireport');
+Route::get('Regi-report/{fdate}/{ldate}','RegistartionreportController@Regireportfdateldate');
+
+Route::get('Registartion-report-details','RegistartionreportController@Regideatil');
+Route::get('Registartion-report-details/{fdate}/{ldate}','RegistartionreportController@Regireportdetails');
+
+Route::get('posp-certification','RegistartionreportController@pocertification');
+Route::get('posp-certification/{fdate}/{ldate}','RegistartionreportController@pocration');
+ 
+Route::get('posp-certification-date','RegistartionreportController@pocertificationdate'); 
+Route::get('posp-certification-date/{fdate}/{ldate}','RegistartionreportController@pocredate'); 
 
 
 
@@ -202,7 +247,6 @@ Route::get('View-Raised-Ticket/{ticketid}','ViewRaisedTicketController@deletetic
 Route::get('send-sms-rights','SendSmsRightsController@sendsmsview');
 Route::get('send-sms-directsend/{userid}','SendSmsRightsController@isdirectsend');
 Route::get('send-sms-needaproval/{userid}','SendSmsRightsController@isneedapproval');
-
 Route::get('Approve-send-sms','SendSmsapprovalController@sendsmsview');
 
 Route::get('Fba-profile/{fbaid}','FbaprofileController@fbaprofileview');
@@ -232,38 +276,25 @@ Route::get('Quick-lead-dashboard','quickleaddashboardController@getquicklead');
 Route::get('edit_lead/{Leadid}','quickleadController@editlead');
 Route::Post('quick-lead-edit','quickleadController@updatelead');
 route::get('offlinecs','OfflinecsController@getofflinecs');
+Route::get('offlinecs-All-Entry','OfflinecsDashboardController@getofflinecsalldata');
+Route::get('offlinecs-dashboard','OfflinecsDashboardController@getofflinecsdata');
+route::get('export-to-excle-offlinecs','OfflinecsDashboardController@exportexcel');
+
 
 route::get('get_state_offlinecs/{cityid}','OfflinecsController@getstate');
 Route::Post('offlinecs','OfflinecsController@insertofflinecs');
-route::get('proposalfrom','OfflinecsController@getproposalfrom');
 Route::get('get_ERPID_offlinecs/{fbaid}','OfflinecsController@geterpid');
 
 route::get('offlinecsedit/{id}','OfflinecsController@getofflinecsdataedit');
 
 Route::post('saveofflinecs','OfflinecsController@saveofflinecsdata');
 Route::get('offlinecs-dashboard','OfflinecsDashboardController@getofflinecsdata');
-Route::get('offlinecs-All-Entry','OfflinecsDashboardController@getofflinecsalldata');
 
 Route::post('offlinecsupdate','OfflinecsController@Updateofflinecs');
 Route::post('offlinecsupdateandsendmail','OfflinecsController@Updateofflinecsandsendmail');
 Route::get('offlinecssendemail/{ID}','OfflinecsDashboardController@sendemail');
 Route::get('offlinecs-details/{ID}','OfflinecsDashboardController@showdetails');
 Route::Post('offlinecs-csidupdate','OfflinecsDashboardController@updatecsid');
-route::get('export-to-excle-offlinecs','OfflinecsDashboardController@exportexcel');
-
-Route::get('fba-location','FindfbalocationController@getfbadata');
-
-Route::get('prodouct-lead-details','prodouctleaddetailsController@viewlead_details');
-
-Route::get('get-fba-location/{lat}/{long}','prodouctleaddetailsController@fbalocation');
-
-Route::get('import-sales-data','ImportsalesdataController@getsalesview');
-
-Route::POST('gethealthdata','ImportsalesdataController@importExcelhealth');
-Route::POST('getmotordata','ImportsalesdataController@importExcelmotor');
-
-Route::get('getcrmid/{fbaid}','getcrmidController@getcrm_id');
-
 ///shubham end ///
 // avinash
  Route::get('ticket-module','TicketController@getticketdetails');

@@ -133,10 +133,13 @@ function getproviderlist()
    data: $('#formprovidelist').serialize(),
    success: function(msg)  
     {
-      var obj = JSON.parse(msg);
 
+      var obj = JSON.parse(msg);
+     //alert(obj);
 var arr = obj.d.service_provider_listdata;
 var text = "";
+
+if (obj.d.service_provider_listdata!=null){
 for(var i = 0; i< arr.length;i++){
 
 text+="<div class='col-md-12 divpartnerselect'   onclick=showDivw('"+arr[i].provider_id+"',this,'"+ arr[i].provider_name.replace(/ /g,'_')+"','"+arr[i].address.replace(/ /g,'_')+"','"+arr[i].visittype+"','"+arr[i].DCCode+"')>";
@@ -151,15 +154,19 @@ text+="<div class='col-md-12 divpartnerselect'   onclick=showDivw('"+arr[i].prov
 text +="<div class='col-md-8 col-xs-8 height4 height5'><h4>"+ arr[i].provider_name+"</h4><p>"+
   arr[i].address+"</p></div></div>";
 }
-
 $('#tblproviderlist').append(text);
- 
+ }else{
+ // alert('list not found');
+ $("#btndiv").hide();
+  $("#errormsg").html('Sorry! There no lab found at your Location.');
+ }
 
     }
   });
 }
 function showDivw(id,row,name,address,visittype,dccode)
-{
+{ 
+
   $('.divpartnerselect').css("background-color","");
   $(row).css("background-color", "#f5f5f5");
   $('#txtprovider').val(id);
@@ -258,7 +265,7 @@ foreach ($val->ParamDetails as $key => $value) {
   </tbody>
 </table>
 </div>
-<div class="col-md-12"><p class="text-center head1">Select your preferred lab from the list below</p></div>
+<div class="col-md-12"><p id="errormsg" class="text-center head1">Select your preferred lab from the list below</p></div>
 <div class="col-md-12">
 <div id="tblproviderlist" style="border: 1px #ccc; margin-bottom: 5px;">                     
 <input type="hidden" name="txtPackName" id="txtPackName" value="{{$_GET["PackName"]}}">
@@ -286,10 +293,9 @@ foreach ($val->ParamDetails as $key => $value) {
 <div class="col-md-12"></div>
 </div>
 </div>
-
-<div id="btndiv" class="text-center col-md-12">
+<div id="btndiv" class="text-center col-md-12" style="display: none;">
  <input type="submit" name="btnbook" value="BOOK THIS TEST" onclick="" id="btnbook" class="button1">
-
+</div>
 </form>
 </div>
 </body>

@@ -34,7 +34,7 @@
   
 </style>
 <div class="container-fluid white-bg">
-<div class="col-md-12"><h3 class="mrg-btm">OFFLINE CS</h3></div>
+<div class="col-md-12"><h3 class="mrg-btm">Offline Sales Record Entries</h3></div>
 
 <div class="col-md-12">
  <div class="overflow-scroll">

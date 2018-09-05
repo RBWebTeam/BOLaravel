@@ -8,8 +8,11 @@
 @endif
 
 <div class="container-fluid white-bg">
-  <div class="col-md-12"><h3>Offline Cs</h3></div>
-  <div><a href="{{url('offlinecs-dashboard')}}" class="btn btn-primary pull-right">Show my Entries</a></div>
+  <div class="col-md-12"><h3>Offline Sales Record</h3></div>
+<br/>
+<br/>
+  <p> All <b style="color: red; font-size: 15px;">*</b> Marked field are Compulsory</p>
+    <div><a href="{{url('offlinecs-dashboard')}}" class="btn btn-primary pull-right">Show my Entries</a></div>
       <div class="col-md-12">
          <div class="overflow-scroll">
          	<div class="container">
@@ -18,7 +21,7 @@
               <div class="row col-md-12" style="padding-left: 0px;">
                 <input type="hidden" name="txtofflinecsid" id="txtofflinecsid">
                 <div class="col-md-4">
-                   <label>Why Offline:</label>
+                   <label> Why Offline: <b style="color: red; font-size: 15px;">*</b></label>
                   <select class="form-control" id="ddlwhyoffline" onchange="showotherdiv()" name="ddlwhyoffline" required>
                     <option value="">--select--</option>
                     @foreach($reason as $val)
@@ -27,11 +30,11 @@
                  </select>  
                 </div>
                  <div class="col-md-4" id="divother" style="display: none;">
-                       <label>Other Reason for Offline-cs:</label>  
+                       <label>Other Reason for Offline-cs: <b style="color: red; font-size: 15px;">*</b></label>  
                        <textarea id="txtReason" name="txtReason"  class="form-control" placeholder="Specify Other Reason"></textarea>                  
                  </div>
                 <div class="col-md-4">
-         		      <label>Product:</label>
+         		      <label>Product: <b style="color: red; font-size: 15px;">*</b></label>
                   <select class="form-control" onchange="pageview()" id="ddproduct" name="ddproduct">
                   @foreach($product as $val)
                  	<option value="{{$val->id}}">{{$val->product_name}}</option>
@@ -39,20 +42,20 @@
                  </select>  
                  </div> 
                  <div class="col-md-4 otherproduct" style="display: none;">
-                  <label> Other Product</label>
+                  <label>Other Product <b style="color: red; font-size: 15px;">*</b>  </label>
                     <input type="text" name="txtotherproduct" id="txtotherproduct" class="form-control" placeholder="Other Product">
                  </div>                
               </div>           
               <br>
               <div class="row">
                  <div class="col-md-4">
-                 	<label>Name of Customer:</label><input id="txtcstname" name="txtcstname" type="text" class="form-control txtonly" placeholder="Name of Customer" required>                    
+                 	<label>Name of Customer: <b style="color: red; font-size: 15px;">*</b></label><input id="txtcstname" name="txtcstname" type="text" class="form-control txtonly" placeholder="Name of Customer" required>                    
                  </div>
                  <div class="col-md-4">
-                 	<label>Address of Customer :</label><textarea id="txtadd" name="txtadd" class="form-control" placeholder="Address of Customer" required></textarea>            
+                 	<label>Address of Customer : <b style="color: red; font-size: 15px;">*</b></label><textarea id="txtadd" name="txtadd" class="form-control" placeholder="Address of Customer" required></textarea>            
                 </div>
                 <div class="col-md-4">
-                	<label>City:</label>
+                	<label>City: <b style="color: red; font-size: 15px;">*</b></label>
                 	<select onchange="getstate()" class="form-control" id="ddlcity" name="ddlcity" required>
                 		   <option value="">--select--</option>
                        @foreach($city as $val)
@@ -87,7 +90,7 @@
                 	</select>
                 </div>
                 <div class="col-md-4">
-                  <label>Mobile no:</label>                   
+                  <label>Mobile no: <b style="color: red; font-size: 15px;">*</b></label>                   
                    <input id="txtmobno" name="txtmobno" class="form-control numericonly" oninput="javascript: if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type = "number" maxlength = "10"  required>             
                 </div>
                 <div class="col-md-4">
@@ -95,11 +98,11 @@
                 <input type="number" class="form-control numericonly" name="txttelno" id="txttelno" oninput="javascript: if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength = "10">              
                 </div>             	
               	<div class="col-md-4">
-              		<label>Email Id:</label>
+              		<label> Email Id: <b style="color: red; font-size: 15px;">*</b></label>
               		<input type="Email" class="form-control" name="txtemail" id="txtemail" required>           		
               	</div>
                	<div class="col-md-4">
-              		<label>Posp Name:</label>
+              		<label> Posp Name: <b style="color: red; font-size: 15px;">*</b></label>
               		<select onchange="getpospname();" class="form-control" id="ddlfbaname" name="ddlfbaname" required>
                     <option value="">--Select--</option>
                     @foreach($fba as $val)
@@ -108,7 +111,7 @@
               		</select>           		
               	</div>
                 <div class="col-md-4">
-                  <label>Premium Amount:</label>
+                  <label>Premium Amount: <b style="color: red; font-size: 15px;">*</b></label>
                 <input type="number" class="form-control numericonly" name="txtpremiumamt" id="txtpremiumamt" required oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength = "8">        
                 </div>
               	<div class="col-md-4">
@@ -121,11 +124,11 @@
               		<input type="text" class="form-control" name="txtqtno" id="txtqtno">           		
               	</div>
                 <div class="col-md-4">
-                  <label>Date of Expiry:</label>
+                  <label>Date of Expiry: <b style="color: red; font-size: 15px;">*</b></label>
                   <input type="Date" class="form-control" name="txtexpdate" id="txtexpdate" required>            
                 </div>
                 <div class="col-md-4">
-                  <label>Payment Mode:</label>
+                  <label>Payment Mode: <b style="color: red; font-size: 15px;">*</b></label>
                   <select id="ddlpayment" name="ddlpayment" class="form-control" required>
                     <option value="">--select--</option>
                     <option value="Online">Online</option>
@@ -133,11 +136,11 @@
                   </select>
                 </div>
                 <div class="col-md-4">
-                  <label>UTR No / Cheque No:</label>
+                  <label>UTR No / Cheque No: <b style="color: red; font-size: 15px;">*</b></label>
                   <input type="text" name="txtutrnomotor" class="form-control" id="txtutrnomotor" required>
                 </div> 
                 <div class="col-md-4">
-                  <label>Bank:</label>
+                  <label>Bank: <b style="color: red; font-size: 15px;">*</b></label>
                   <input type="text" name="txtbankmotor" id="txtbankmotor" class="form-control" required>
                 </div>  
               </div>            
@@ -145,16 +148,16 @@
             <div class="Motor" id="Motor">
             <div class="row">
               	<div class="col-md-4">
-              		<label>Vehicle No:</label>  
+              		<label>Vehicle No: <b style="color: red; font-size: 15px;">*</b></label>  
                   <input type="text" name="txtvehicalno" id="txtvehicalno" class="form-control Vehicleno" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength = "10">        		
               	</div>              	
               	<div class="col-md-4">
-              		<label>Break In:</label>
+              		<label> Break In: <b style="color: red; font-size: 15px;">*</b></label>
               		<label class="checkbox-inline">YES  <input class="Breakinyes" type="radio" name="txtbreakin" id="txtbreakin" value="YES"></label>
               		<label class="checkbox-inline">No  <input class="Breakinno" type="radio" name="txtbreakin" id="txtbreakin" value="No"></label>              		           		
               	</div>              
               	<div class="col-md-4">
-              		<label>Insurer:</label>
+              		<label> Insurer: <b style="color: red; font-size: 15px;">*</b></label>
               		<select id="ddlInsurermotor" name="ddlInsurermotor" class="form-control" >
               			<option value="">--select---</option>
               			@foreach ($Genins as $val)
@@ -167,7 +170,7 @@
              <div id="divhealth">           
              <div class="row">
              	<div class="col-md-4">
-              		<label>Insurer:</label>
+              		<label> Insurer: <b style="color: red; font-size: 15px;">*</b></label>
               		<select id="ddlInsurerhealth" name="ddlInsurerhealth" class="form-control" >
                     <option value="">--select---</option>
                     @foreach($health as $val)
@@ -177,12 +180,12 @@
               	</div>  
                 <div class="productother">      	
               	<div class="col-md-4">
-              		<label>Preexisting:</label>
+              		<label> Preexisting: <b style="color: red; font-size: 15px;">*</b></label>
               		<label class="checkbox-inline">YES  <input class="Preexistingyes" type="radio" name="txtPreexisting" id="txtPreexisting" value="YES"></label>
               		<label class="checkbox-inline">No  <input class="Preexistingno" type="radio" name="txtPreexisting" id="txtPreexisting" value="No"></label>             		           		
               	</div>   
               	<div class="col-md-4">
-              		<label>Medical Report:</label>
+              		<label> Medical Report: <b style="color: red; font-size: 15px;">*</b></label>
               		<label class="checkbox-inline">YES  <input type="radio" class="Medicalyes" name="txtmedicalrp" id="txtmedicalrp" value="YES"></label>
               		<label class="checkbox-inline">No  <input type="radio" class="Medicalno" name="txtmedicalrp" id="txtmedicalrp" value="No"></label>             		           		
               	</div>                 
@@ -190,7 +193,7 @@
                </div>
                <div class="row productother">
                <div class="col-md-4">
-                  <label>Premium Year/s:</label>
+                  <label> Premium Year/s: <b style="color: red; font-size: 15px;">*</b></label>
                   <select id="dllpremium" name="dllpremium" class="form-control" >
                     <option value="">--select--</option>
                     <option value="1 year">1 year</option>
@@ -203,7 +206,7 @@
              <div id="divlife">
              <div class="row">
              	<div class="col-md-4">
-             		<label>Type of Policy:</label>
+             		<label> Type of Policy: <b style="color: red; font-size: 15px;">*</b></label>
              		<select id="ddlnoofpolicy" name="ddlnoofpolicy" class="form-control" >
              			<option value="">--select--</option>
              			<option value="Term">Term</option>
@@ -211,12 +214,12 @@
              		</select>
              	</div>             
              	<div class="col-md-4">
-              		<label>Medical case:</label>
+              		<label> Medical case: <b style="color: red; font-size: 15px;">*</b></label>
               		<label class="checkbox-inline">YES <input type="radio" class="Medicalcaseyes" name="txtmedicalcase" id="txtmedicalcase" value="YES"></label>
               		<label class="checkbox-inline">No  <input type="radio" class="Medicalcaseno" name="txtmedicalcase" id="txtmedicalcase" value="No"></label>              		           		
               	</div>             
               	<div class="col-md-4">
-              		<label>Insurer:</label>
+              		<label> Insurer: <b style="color: red; font-size: 15px;">*</b></label>
               		<select id="ddlInsurerlife" name="ddlInsurerlife" class="form-control" >
                     <option value="">--select---</option>
                     @foreach($lifeins as $val)
@@ -228,7 +231,7 @@
               </div>
               <div class="row">
               	<div class="col-md-4">
-              		<label>Executive Name:</label>             
+              		<label> Executive Name: <b style="color: red; font-size: 15px;">*</b></label>             
                   <select id="txtexecutivename" name="txtexecutivename" class="form-control" required>
                     <option value="">--select--</option >
                     @foreach($Executive as $val)
@@ -237,7 +240,7 @@
                   </select>
               	</div>
               	<div class="col-md-4">
-              		<label>Executive 1 Name:</label>              		
+              		<label> Executive 1 Name: <b style="color: red; font-size: 15px;">*</b></label>              		
                   <select id="txtexecutivename1" name="txtexecutivename1" class="form-control" required>
                     <option value="">--select--</option>
                     @foreach($Executive1 as $val)
@@ -246,7 +249,7 @@
                   </select>
               	</div>
               	<div class="col-md-4">
-              		<label>Product Executive:</label>              		
+              		<label> Product Executive: <b style="color: red; font-size: 15px;">*</b></label>              		
                   <select id="txtexeProductname" name="txtexeProductname" class="form-control" required>
                     <option value="">--select--</option>
                     @foreach($productexe as $val)
@@ -255,7 +258,7 @@
                   </select>
               	</div>
               	<div class="col-md-4">
-              		<label>Product Manager:</label>              		
+              		<label> Product Manager: <b style="color: red; font-size: 15px;">*</b></label>              		
                   <select id="txtmgrProductname" name="txtmgrProductname" class="form-control" required>
                     <option value="">--select--</option>
                     @foreach($productmgr as $val)
@@ -422,7 +425,7 @@ if (window.location.href.indexOf('?id=') > 0) {
          $("#txtofflinecsid").val(id);
          $("#btnsavediv").hide();
          $("#btnupdatediv").show();
-
+         $('#ddproduct').attr('disabled', true);
         //alert(id)
     $.ajax({  
          type: "GET",  

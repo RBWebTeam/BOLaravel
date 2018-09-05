@@ -229,10 +229,7 @@ if($('#healthchekup').valid())
    data: $('#healthchekup').serialize(),
 
   success: function(msg)  
-   {
-
-    $("#healthchekup").trigger('reset');
-
+   {   
     window.location.href ="{{URL::to('Health-Assure-Partner')}}?PackName="+$('#txtpackname').val()+"&Packcode="+$('#txtpackcode').val()+"&OfferPrice="+$('#txtoffer').val()+"&MRP="+$('#txtmrp').val()+"&tcount="+$('#txttcount').val()+"&fasting="+$('#txtfasting').val()+"&latitude="+$('#latitude').val()+"&longitude="+$('#longitude').val()
     +"&homevisit="+$('#txthomevisit').val()+"&fbaid="+$('#txtfbaid').val()+"&fbaname="+$('#txtfbaname').val()+"&ID="+msg[0].ID;
 

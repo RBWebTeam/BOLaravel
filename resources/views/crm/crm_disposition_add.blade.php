@@ -4,7 +4,7 @@
        <div class="col-md-12"><h3 class="mrg-btm">CRM FBA</h3></div>
        <div class="col-md-12">
        <div class="overflow-scroll">
-       <div class="table-responsive" >
+       <div class="col-md-12 col-md-offset-2">
        
  
 
@@ -12,31 +12,25 @@
            <input type="hidden" name="fbamappin_id" id="fbamappin_id" value="{{$fbamappin_id}}">
            <input type="hidden" name="disposition_id" id="disposition_id"  >
            <input type="hidden" name="assign_id" id="assign_id"  value="{{$assign_id}}" >
-           <input type="hidden" name="historyid" id="historyid"  value="{{$historyid}}" >
-
-           
+           <input type="hidden" name="historyid" id="historyid"  value="{{$historyid}}" >         
 
             <div class="form-group row">
-            <label for="inputPassword" class="col-sm-4 col-form-label">Disposition</label>
-            <div class="col-sm-8">
+            <label for="inputPassword" class="col-md-2 col-form-label">Disposition <b style="color: red; font-size: 15px;">*</b></label>
+            <div class="col-md-6">
               <select class="form-control  " data-style="btn-success" name="crm_id" id="disposition">
-                <option selected value=""  >Select Disposition</option>
-                @foreach($query as $val)
-             
-                 
+                <option selected value="">Select Disposition</option>
+                @foreach($query as $val)      
 
                 <option value="{{ $val->id}}"  >{{$val->disposition."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".$val->sub_disposition}}</option>
                 @endforeach
               </select>
             </div>
-          </div> 
-
-             
+          </div>              
             <!--  <div id="id_none" style="display:none"> -->
 
              <div class="form-group row">
-                   <label for="inputPassword" class="col-sm-4 col-form-label">calltype</label>
-               <div class="col-sm-8">
+                   <label for="inputPassword" class="col-md-2 col-form-label">Call Type <b style="color: red; font-size: 15px;">*</b></label>
+               <div class="col-md-6">
                  <input type="text" class="form-control"  id="calltype" readonly>
 
               </div>
@@ -44,48 +38,48 @@
 
 
              <div class="form-group row">
-                   <label for="inputPassword" class="col-sm-4 col-form-label">Outcome</label>
-               <div class="col-sm-8">
+                   <label for="inputPassword" class="col-md-2 col-form-label">Outcome <b style="color: red; font-size: 15px;">*</b></label>
+               <div class="col-md-6">
                  <input type="text"  class="form-control" readonly id="Outcome">
 
               </div>
             </div>
 
               <div class="form-group row">
-                   <label for="inputPassword" class="col-sm-4 col-form-label">Connect Result</label>
-               <div class="col-sm-8">
+                   <label for="inputPassword" class="col-md-2 col-form-label">Connect Result <b style="color: red; font-size: 15px;">*</b></label>
+               <div class="col-md-6">
                  <input type="text"  class="form-control" readonly id="connect_result">
 
               </div>
             </div>
 
               <div class="form-group row">
-                   <label for="inputPassword" class="col-sm-4 col-form-label">Emp Category</label>
-               <div class="col-sm-8">
+                   <label for="inputPassword" class="col-md-2 col-form-label">Emp Category <b style="color: red; font-size: 15px;">*</b></label>
+               <div class="col-md-6">
                 <input type="text"  class="form-control" readonly id="emp_category">
 
               </div>
             </div>
 <!-- 
              <div class="form-group row">
-                   <label for="inputPassword" class="col-sm-4 col-form-label">followup_externalteam</label>
-               <div class="col-sm-8">
+                   <label for="inputPassword" class="col-md-2 col-form-label">followup_externalteam</label>
+               <div class="col-md-6">
                 <input type="text"  class="form-control" readonly id="followup_externalteam">
 
               </div>
             </div>
 
              <div class="form-group row">
-                   <label for="inputPassword" class="col-sm-4 col-form-label">followup_internalteam</label>
-               <div class="col-sm-8">
+                   <label for="inputPassword" class="col-md-2 col-form-label">followup_internalteam</label>
+               <div class="col-md-6">
                   <input type="text"  class="form-control" readonly id="followup_internalteam">
 
               </div>
             </div> -->
 
             <div class="form-group row" id="followup_date_id">
-             <label for="inputPassword" class="col-sm-4 col-form-label">Followup Date</label>
-                <div class="col-sm-8">
+             <label for="inputPassword" class="col-md-2 col-form-label">Followup Date <b style="color: red; font-size: 15px;">*</b></label>
+                <div class="col-md-6">
                  <div id="datepicker" class="input-group date" data-date-format="mm-dd-yyyy">
               <input type="text"  class="form-control date-range-filter "  name="followup_date" id="followup_date" required >
               <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
@@ -95,8 +89,8 @@
 
                
            <div class="form-group row">
-                   <label for="inputPassword" class="col-sm-4 col-form-label">Remark</label>
-               <div class="col-sm-8">
+                   <label for="inputPassword" class="col-md-2 col-form-label">Remark <b style="color: red; font-size: 15px;">*</b></label>
+               <div class="col-md-6">
                  <!--  <input type="text"  class="form-control"  > -->
                  <textarea required name="remark"  class="form-control"   id="remark"></textarea>
 
@@ -105,8 +99,8 @@
 
 
              <div class="form-group row">
-                   <label for="inputPassword" class="col-sm-4 col-form-label">Action</label>
-               <div class="col-sm-8">
+                   <label for="inputPassword" class="col-md-2 col-form-label">Action <b style="color: red; font-size: 15px;">*</b></label>
+               <div class="col-md-6">
                   <label class="radio-inline"><input type="radio" value="y" checked="checked" name="action">Open</label>
                   <label class="radio-inline"><input type="radio" value="n" name="action">Close</label>
 
@@ -116,39 +110,25 @@
  
 
             <div class="form-group row" id="followup_internalteam_id" style="display: none">
-            <label for="inputPassword" class="col-sm-4 col-form-label">task assignment internal </label>
-            <div class="col-sm-8">
+            <label for="inputPassword" class="col-md-2 col-form-label">Task Assignment Internal</label>
+            <div class="col-md-6">
               <input type="text"  class="form-control"  readonly name="assignment_id"   id="followup_internalteam">
             </div>
           </div>
               
 
           <div class="form-group row" id="followup_externalteam_id" style="display: none">
-            <label for="inputPassword" class="col-sm-4 col-form-label">task assignment external</label>
-            <div class="col-sm-8">
+            <label for="inputPassword" class="col-md-2 col-form-label">Task Assignment External</label>
+            <div class="col-md-6">
               <input type="text"  class="form-control"  readonly name="assign_external_id"   id="followup_externalteam">
             </div>
+          </div>            
+  <!-- </div> -->
+           <div class="col-md-12 col-md-offset-3">
+            <button class="btn btn-primary" type="button"  id=CRM_Disposition_btn >submit</button>
           </div>
-
-            
-  <!--         </div> -->
-            
-
-
-
-
-         <center>
-            <button class="btn btn-default" type="button"  id=CRM_Disposition_btn >submit</button>
-
-
-         </center>
          </form>
-
- 
- 
- 
-
-  </div>
+</div>
 </div>
 </div>
 </div>
@@ -173,20 +153,21 @@ function get_desposition_data(fbamappin_id,id){
           }else{
              location.reload();
           }
-          }else{
-            
-                    
+          }else{   
+              alert(msg.find_profile) ;      
               if(msg.find_profile!="undefined" && msg.find_profile!=null && msg.find_profile!=""){  
               $('#followup_internalteam').val(msg.find_profile.UId); //msg.find_profile.Profile
               $('#followup_internalteam_id').show();
               }else{
               $('#followup_internalteam_id').hide();
+              getcrmexception();
               }
               if(msg.find_profile1!="undefined" && msg.find_profile1!=null && msg.find_profile1!=""){  
               $('#followup_externalteam').val(msg.find_profile1.UId); //msg.find_profile.Profile
               $('#followup_externalteam_id').show();
               }else{
               $('#followup_externalteam_id').hide();
+               getcrmexception();
               } $('#id_none').show();
           }
              
@@ -207,7 +188,7 @@ function get_desposition_data(fbamappin_id,id){
   $(document).on('change','#disposition',function(){
           id=$(this).val();  
           fbamappin_id=$('#fbamappin_id').val();
-       get_desposition_data(fbamappin_id,id);
+          get_desposition_data(fbamappin_id,id);
 
   });
 
@@ -226,18 +207,27 @@ function get_desposition_data(fbamappin_id,id){
          }
 });
 
-$(document).ready(function () {  
-$('#crm_disposition_tb').DataTable();
-$('input:radio[name=action]').change(function() {  
-if (this.value == 'y') {
-$('#followup_date_id').show();
-}else if (this.value == 'n') {
-$('#followup_date').val('');
-$('#followup_date_id').hide();
-$("#followup_date").prop('required',false);
+$(document).ready(function (){  
+   $('#crm_disposition_tb').DataTable();
+   $('input:radio[name=action]').change(function()
+    {  
+   if (this.value == 'y') 
+   {
+     $('#followup_date_id').show();
+   }else if (this.value == 'n') 
+   {
+     $('#followup_date').val('');
+     $('#followup_date_id').hide();
+     $("#followup_date").prop('required',false);
+   }
+});
+});
+function getcrmexception()
+{
+ var disposition=$("#disposition").val();
+ alert(disposition);
+ 
 }
-});
-});
  </script>
 @endsection
 

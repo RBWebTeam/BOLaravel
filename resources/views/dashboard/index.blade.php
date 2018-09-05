@@ -12,7 +12,7 @@ th,td {
 }
 </style>          
 <div class="container-fluid white-bg">
-   <div class="col-md-12"><h3 class="mrg-btm">Your Information</h3></div>
+   <div class="col-md-12"><h3 class="mrg-btm text-center"><span class="glyphicon glyphicon-user"></span> My Information</h3></div>
      <div class="col-md-12">
        <div class="overflow-scroll">
            <div class="table-responsive" >
@@ -47,16 +47,20 @@ th,td {
 						<a href="{{'fba-list'}}"><button class="common-btn center-obj">View More</button></a>
 						</div> -->
 
-                        <table class="table-bordered col-md-6">
+                        <table class="table-bordered col-md-6 col-md-offset-3">
                         	 @foreach($basicinfo as $val)
-                        	<tr>
+                        <!-- 	<tr>
                         		<th>FBAUserId</th>
                         		<td>{{$val->FBAUserId}}</td>
-                        	</tr>
+                        	</tr> -->
                         	<tr>
                         		<th>FBAID</th>
                         		<td>{{$val->FBAID}}</td>
                         	</tr>
+                            <tr>
+                                <th>UID</th>
+                                <td>{{$val->UID}}</td>
+                            </tr>
                         	<tr>
                         		<th>Profile</th>
                         		<td><p style="color: #39FF14"><b>{{$val->profile}}</b></p></td>
@@ -80,15 +84,11 @@ th,td {
                         	<tr>
                         		<th>DOB</th>
                         		<td>{{$val->DOB}}</td>
-                        	</tr>
-                        	<tr>
-                        		<th>Last Login Date</th>
-                        		<td>{{$val->LastLogiDate}}</td>
-                        	</tr>
+                        	</tr>                        	
                         	@endforeach
-                        </table>
-						
-				        </div>
+                        </table>              
+						</div>
+                         <br/>                       
 				</div>
 		</div>
 </div>

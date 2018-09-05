@@ -17,22 +17,22 @@ class ImportsalesdataController  extends Controller
         return view('Importsalesdata');
   }
 
-  public function importExcel(Request $request)
+  public function importExcelhealth(Request $request)
   {
   	
         $data=array();
  try{
-        if($request->hasFile('import_file'))
+        if($request->hasFile('import_file_health'))
         {
-        	//print_r($request->file('import_file'));exit();
-            Excel::load($request->file('import_file')->getRealPath(), function ($reader)use($data){
-            //	print_r($reader);exit();
+        
+            Excel::load($request->file('import_file_health')->getRealPath(), function ($reader)use($data){            
 
                 foreach ($reader->toArray() as $key => $row) 
-                {
+                { 
+                //  print_r($row);exit();
                     if(!empty($row))
                          {                          	
-                           $this->import($row); 
+                           $this->importhealth($row); 
                          }
                     
                 }
@@ -44,34 +44,86 @@ class ImportsalesdataController  extends Controller
         {
            return $e;               
         }
-    Session::flash('message', 'Your File Successfully Imported');           
-    return Redirect('import-sales-data'); 
+     Session::flash('message', 'Your File Uploaded Successfully');           
+    return Redirect('import-sales-data');  
   }
 
-  public function import($value)
+  public function importhealth($health)
  {
- 	
- 	if(!empty($value['source']))
+
+ 	if(!empty($health['source']))
  	{
  	 $fbaid=Session::get('fbaid');
-    DB::select('call insert_all_sales_data(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',array(
-  	  $value['source'],
- 	    $value['product'],
- 	    $value['lm_status'],
- 	    $value['platform'],
- 	    $value['agent'],
- 	    $value['reporting'],
- 	    $value['insurer'],
- 	    $value['pb_crn'],
- 	    $value['erp_cs'],
- 	    $value['reg_no'],
- 	    $value['premium'],
- 	    $value['od_addon'],
- 	    $value['disc'],
- 	    $value['transact_on'],
+    DB::select('call inset_health_sales_data(?,?,?,?,?,?,?,?,?,?,?,?,?,?)',array(
+  	  $health['source'],
+ 	    $health['product'],
+ 	    $health['customer_name'],
+ 	    $health['agent_ss_id'],
+ 	    $health['agent'],
+ 	    $health['reporting'],
+ 	    $health['insurer'],
+ 	    $health['pb_crn'],
+ 	    $health['erp_cs'],
+ 	    $health['premium'],
+ 	    $health['description'],
+ 	    $health['date'],
+ 	    $health['status'],
  	    $fbaid ));
     }
+  }
+  public function importExcelmotor(Request $request)
+  {
+    
+        $data=array();
+ try{
+        if($request->hasFile('import_file_Motor'))
+        {
+        
+            Excel::load($request->file('import_file_Motor')->getRealPath(), function ($reader)use($data){            
 
- 
+                foreach ($reader->toArray() as $key => $row) 
+                {
+                   //print_r($row);exit();
+                    if(!empty($row))
+                         {                            
+                           $this->importmotor($row); 
+                         }
+                    
+                }
+            });
+              
+        }
+    }
+    catch (Exception $e)
+        {
+           return $e;               
+        }
+     Session::flash('message', 'Your File Uploaded Successfully');           
+    return Redirect('import-sales-data');  
+  }
+
+  public function importmotor($motor)
+ {
+
+  if(!empty($motor['source']))
+  {
+   $fbaid=Session::get('fbaid');
+    DB::select('call insert_motor_sales_data(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',array(
+      $motor['source'],
+      $motor['product'],
+      $motor['agent'],
+      $motor['reporting'],
+      $motor['insurer'],
+      $motor['pb_crn'],
+      $motor['erp_cs'],
+      $motor['reg_no'],
+      $motor['premium'],
+      $motor['od_addon'],
+      $motor['disc'],
+      $motor['transact_on'],
+      $motor['fbaid'],
+      $motor['erp_id'],
+      $fbaid ));
+    }
   }
 }
