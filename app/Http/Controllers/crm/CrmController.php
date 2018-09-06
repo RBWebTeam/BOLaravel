@@ -71,6 +71,7 @@ class CrmController extends Controller
 
 
             public function crm_disposition_id(Request $req){
+              print_r($req->all());exit();
                 $find_profile="";
                 $find_profile1="";
                 $query=DB::table('crm_disposition')->where('id','=',$req->id)->first();

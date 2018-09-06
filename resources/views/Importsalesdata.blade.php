@@ -6,6 +6,12 @@
 <p class="alert alert-success">{{ Session::get('message') }}</p>
 </div>
 @endif
+@if(Session::has('error'))
+<div class="alert alert-danger alert-dismissible">
+<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+<p class="alert alert-danger">{{ Session::get('error') }}</p>
+</div>
+@endif
 <div class="container-fluid white-bg">
   <div class="col-md-12"><h3>Import Sales Data</h3></div>
   <br>
