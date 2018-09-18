@@ -1,26 +1,48 @@
 @extends('include.master')
-@section('content')   
+@section('content')
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<style type="text/css">
+  .fbadetails h2 {
+   float: left;
+   padding:5px; 
+  }
+  .fbadetails{
+    margin-bottom: 20px;
+    font-size: 20px;
+  }
+</style>   
 <div class="container-fluid white-bg">
-       <div class="col-md-12"><h3 class="mrg-btm">CRM FBA</h3></div>
+       <div class="col-md-12 fbadetails"><h3 class="mrg-btm">CRM FBA</h3></div>
+       <div class="fbadetails col-md-12 col-md-offset-2">
+         @foreach($fbadetails as $val)
+        <tr>
+         <th>FBAID:</th>
+         <td>{{$val->FBAID}}</td> |
+         <th>FBA NAME:</th>
+         <td>{{$val->FullName}}</td> |
+         <th>FBA MOBILE NO:</th>
+         <td>{{$val->MobiNumb1}}</td>
+        </tr>
+         @endforeach
+       </div>
+       
        <div class="col-md-12">
        <div class="overflow-scroll">
        <div class="col-md-12 col-md-offset-2">
-       
- 
-
        <form  method="post" action="{{url('crm-disposition')}}" id="CRM_Disposition_from">{{ csrf_field() }}
            <input type="hidden" name="fbamappin_id" id="fbamappin_id" value="{{$fbamappin_id}}">
-           <input type="hidden" name="disposition_id" id="disposition_id"  >
+           <input type="hidden" name="disposition_id" id="disposition_id">
            <input type="hidden" name="assign_id" id="assign_id"  value="{{$assign_id}}" >
            <input type="hidden" name="historyid" id="historyid"  value="{{$historyid}}" >         
 
             <div class="form-group row">
             <label for="inputPassword" class="col-md-2 col-form-label">Disposition <b style="color: red; font-size: 15px;">*</b></label>
             <div class="col-md-6">
-              <select class="form-control  " data-style="btn-success" name="crm_id" id="disposition">
+              <select class="form-control"data-style="btn-success" name="crm_id" id="disposition">
                 <option selected value="">Select Disposition</option>
-                @foreach($query as $val)      
-
+                @foreach($query as $val)
                 <option value="{{ $val->id}}"  >{{$val->disposition."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".$val->sub_disposition}}</option>
                 @endforeach
               </select>
@@ -60,40 +82,18 @@
 
               </div>
             </div>
-<!-- 
-             <div class="form-group row">
-                   <label for="inputPassword" class="col-md-2 col-form-label">followup_externalteam</label>
-               <div class="col-md-6">
-                <input type="text"  class="form-control" readonly id="followup_externalteam">
-
-              </div>
-            </div>
-
-             <div class="form-group row">
-                   <label for="inputPassword" class="col-md-2 col-form-label">followup_internalteam</label>
-               <div class="col-md-6">
-                  <input type="text"  class="form-control" readonly id="followup_internalteam">
-
-              </div>
-            </div> -->
-
             <div class="form-group row" id="followup_date_id">
              <label for="inputPassword" class="col-md-2 col-form-label">Followup Date <b style="color: red; font-size: 15px;">*</b></label>
-                <div class="col-md-6">
-                 <div id="datepicker" class="input-group date" data-date-format="mm-dd-yyyy">
-              <input type="text"  class="form-control date-range-filter "  name="followup_date" id="followup_date" required >
-              <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-              </div>
+                <div class="col-md-6">             
+                  <input type="datetime-local"  class="form-control"  name="followup_date" id="followup_date" required >
               </div>
             </div>
 
                
            <div class="form-group row">
                    <label for="inputPassword" class="col-md-2 col-form-label">Remark <b style="color: red; font-size: 15px;">*</b></label>
-               <div class="col-md-6">
-                 <!--  <input type="text"  class="form-control"  > -->
+               <div class="col-md-6">                
                  <textarea required name="remark"  class="form-control"   id="remark"></textarea>
-
               </div>
             </div>
 
@@ -111,8 +111,11 @@
 
             <div class="form-group row" id="followup_internalteam_id" style="display: none">
             <label for="inputPassword" class="col-md-2 col-form-label">Task Assignment Internal</label>
-            <div class="col-md-6">
-              <input type="text"  class="form-control"  readonly name="assignment_id"   id="followup_internalteam">
+            <div class="col-md-1">
+              <input type="text" class="form-control" readonly name="assignment_id" id="followup_internalteam">
+            </div>
+               <div class="col-md-3">
+              <span id="txtusername" style="font-size: 20px;"></span>
             </div>
           </div>
               
@@ -154,20 +157,19 @@ function get_desposition_data(fbamappin_id,id){
              location.reload();
           }
           }else{   
-              alert(msg.find_profile) ;      
+               
               if(msg.find_profile!="undefined" && msg.find_profile!=null && msg.find_profile!=""){  
-              $('#followup_internalteam').val(msg.find_profile.UId); //msg.find_profile.Profile
+              $('#followup_internalteam').val(msg.find_profile.UId);
+              $('#txtusername').text(msg.find_profile.EmployeeName);                
               $('#followup_internalteam_id').show();
               }else{
-              $('#followup_internalteam_id').hide();
-              getcrmexception();
+                getcrmexception();                           
               }
               if(msg.find_profile1!="undefined" && msg.find_profile1!=null && msg.find_profile1!=""){  
-              $('#followup_externalteam').val(msg.find_profile1.UId); //msg.find_profile.Profile
+              $('#followup_externalteam').val(msg.find_profile1.UId+'-'+msg.find_profile.EmployeeName); //msg.find_profile.Profile
               $('#followup_externalteam_id').show();
               }else{
-              $('#followup_externalteam_id').hide();
-               getcrmexception();
+              $('#followup_externalteam_id').hide();              
               } $('#id_none').show();
           }
              
@@ -177,12 +179,6 @@ function get_desposition_data(fbamappin_id,id){
 
 
 }
-
-
-// window.onload = function() {
-//   get_desposition_data("{{$fbamappin_id}}",$('#disposition').val() );
-// };
- 
  
  
   $(document).on('change','#disposition',function(){
@@ -225,10 +221,28 @@ $(document).ready(function (){
 function getcrmexception()
 {
  var disposition=$("#disposition").val();
- alert(disposition);
- 
+ $.ajax({
+             url: 'get_crm_exception/'+disposition,
+             type: "GET",             
+             success:function(data) 
+             {
+              //alert(data);
+                        
+             if (data!='') {            
+               var obj = JSON.parse(data);
+              $('#followup_internalteam').val(obj.UId);
+              $('#txtusername').text(obj.EmployeeName);
+              $('#followup_internalteam_id').show();
+            }else{
+              $('#followup_internalteam').val('');
+              $('#followup_internalteam_id').hide();
+              $('#txtusername').text('');
+             }
+            }
+         });
 }
  </script>
+
 @endsection
 
 

@@ -79,14 +79,11 @@
               </div>
             </div> -->
 
-            <div class="form-group row" >
-             <label for="inputPassword" class="col-sm-4 col-form-label">Followup Date</label>
-                <div class="col-sm-8">
-                 <div id="datepicker" class="input-group date" data-date-format="mm-dd-yyyy">
-              <input type="text"  class="form-control date-range-filter "  name="followup_date" id="followup_date" required="">
-              <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-              </div>
-              </div>
+            <div class="form-group row">
+             <label for="inputPassword" class="col-sm-4 col-form-label">Followup Date</label>  
+             <div class="col-md-6">              
+                <input type="datetime-local"  class="form-control"  name="followup_date" id="followup_date" required>    
+                </div>       
             </div>
 
                
@@ -127,8 +124,7 @@
           </div>
 
             
-          </div>
-            
+          </div>      
 
 
 
@@ -147,18 +143,17 @@
   <table   class="table table-responsive table-hover"  id="crm_disposition_tb">
    <thead>
                   <tr>
-                   <th>ID</th>
-                   <th>Employee_Category</th>
-                    <th>Type of Call </th>
+                     <th>ID</th>
+                     <th>Employee_Category</th>
+                     <th>Type of Call </th>
                      <th>Connect Result</th>
                      <th>Outcome</th>
                      <th>Disposition</th>
                      <th>Sub Disposition</th>
-                      <th>followup_date</th>
-                       <th>remark</th>
-                      <th>action</th>
-                     <th>Follow up Required</th>
-                                
+                     <th>followup_date</th>
+                     <th>remark</th>
+                     <th>action</th>
+                     <th>Follow up Required</th>                                
                   </tr>
    </thead>
    <tbody   >
@@ -180,11 +175,7 @@
          <td>{{$val->sub_disposition}}</td>
           <td>{{$val->followup_date}}</td>
           <td>{{$val->remark}}</td>
-
-         <?php $class =($val->action=="n")? 'color: #00C851': ' color:#ff4444'; ?>
-
-          
-          
+         <?php $class =($val->action=="n")? 'color: #00C851': ' color:#ff4444'; ?>          
            @if($val->action=="n")
               <!-- <td ><a style="{{$class}}" href="#" id="close_action">{{$val->action==="n"?"close":"open"}} </a> </td> -->
               <td>closed</td>
@@ -192,11 +183,8 @@
           <td>
             <a style="{{$class}}" href="{{url('crm-followup')}}/{{$val->fbamappin_id}}/{{$val->crm_id}}/{{$val->history_id}}">{{$val->action==="n"?"close":"open"}}</a></td>
            @endif
-
-
           <td>{{$val->followup_required}}</td>
-         </tr>  
-           
+         </tr>           
           
          <?php   calltr($history_db,$val->history_id);?>
           
@@ -234,8 +222,7 @@
                 }
                 echo "<td >".$action."</td>";
                 echo "<td>".$val->followup_required."</td>";
-                echo "</tr>";
-              
+                echo "</tr>";             
                
            }
           

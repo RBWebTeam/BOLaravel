@@ -152,9 +152,12 @@
                   <input type="text" name="txtvehicalno" id="txtvehicalno" class="form-control Vehicleno" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength = "10">        		
               	</div>              	
               	<div class="col-md-4">
-              		<label> Break In: <b style="color: red; font-size: 15px;">*</b></label>
+                  <label> Break In: <b style="color: red; font-size: 15px;">*</b>
+                  <div class="form-control">
+              		
               		<label class="checkbox-inline">YES  <input class="Breakinyes" type="radio" name="txtbreakin" id="txtbreakin" value="YES"></label>
-              		<label class="checkbox-inline">No  <input class="Breakinno" type="radio" name="txtbreakin" id="txtbreakin" value="No"></label>              		           		
+              		<label class="checkbox-inline">No  <input class="Breakinno" type="radio" name="txtbreakin" id="txtbreakin" value="No"></label>  
+                  </div>            		           		
               	</div>              
               	<div class="col-md-4">
               		<label> Insurer: <b style="color: red; font-size: 15px;">*</b></label>

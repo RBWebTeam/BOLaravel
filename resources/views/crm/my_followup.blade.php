@@ -5,58 +5,50 @@
        <div class="col-md-12">
        <div class="overflow-scroll">
        <div class="table-responsive" >
-       
-
-
- 
-
-
    <table id="classTable" class="table table-bordered">
           <thead>
           <tr>
-            <th>ID</th>
-            <th>followup Internal ID</th>
-            <th>followup - external ID</th>
-            <th>Fbamappin ID</th>
-            <th>History_id</th>
-            <th>followup_date</th>
+            <th>Follow up Id</th>
+            <th>FBAID</th>
+            <th>FBA Name</th>
+            <th>FBA Mobile No</th>           
+            <th>Follow up Date</th>
+            <th>Remark</th>            
             <th>Disposition</th>
-             <th>Action</th>
+            <th>Created Date</th>
+            <th>Action</th>
           </tr>
           </thead>
-          <tbody   >
-     
-
+          <tbody>
      @foreach($query as $key=>$val)
-        <tr> 
-        <td>{{$val->user_id}}</td>
-        <td>{{$val->assignment_id}}</td>
-        <td>{{$val->assign_external_id}}</td>
-        <td>{{$val->fbamappin_id}}</td>
-        <td>{{$val->history_id}}</td>
+        <tr>
+        <td>{{$val->history_id}}</td> 
+        <td>{{$val->FBAID}}</td>
+        <td>{{$val->FullName}}</td>
+        <td>{{$val->MobiNumb1}}</td>        
         <td>{{$val->followup_date}}</td>
+        <td><textarea readonly style="width: 100%;height: 30px;border: none; cursor: default;">{{$val->remark}}</textarea></td>
         <td>{{$val->disposition}}</td>
+        <td>{{$val->create_at}}</td>
          <?php $class =($val->action=="n")? 'color: #00C851': ' color:#ff4444'; ?>
         @if($val->action=="n")
-              <td >  <a style="{{$class }}" href="#" id="close_action">{{$val->action==="n"?"close":"open"}} </a> </td>
+        <td ><a style="{{$class}}" href="#" id="close_action">{{$val->action==="n"?"close":"open"}}</a></td>
            @else
- <td >  <a style="{{$class }}" href="{{url('crm-followup')}}/{{$val->fbamappin_id}}/{{$val->crm_id}}/{{$val->history_id}}">{{$val->action==="n"?"close":"open"}} </a> </td>
+        <td ><a style="{{$class }}" href="{{url('crm-followup')}}/{{$val->fbamappin_id}}/{{$val->crm_id}}/{{$val->history_id}}">{{$val->action==="n"?"close":"open"}}</a></td>
            @endif
         </tr>  
      @endforeach
      </tbody>
-        </table>
-
+   </table>
   </div>
 </div>
 </div>
 </div>
-
-
- 
- 
-
- 
+<script type="text/javascript">
+   $( document ).ready(function() {
+        $("#classTable").DataTable();
+    });
+</script> 
 @endsection
  
 

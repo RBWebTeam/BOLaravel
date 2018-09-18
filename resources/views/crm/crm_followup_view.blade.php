@@ -1,205 +1,130 @@
 @extends('include.master')
-@section('content')   
+@section('content')  
+<style type="text/css">
+  .fbadetails h2 {
+   float: left;
+   padding:5px; 
+  }
+  .fbadetails{
+    margin-bottom: 20px;
+    font-size: 20px;
+  }
+</style>   
 <div class="container-fluid white-bg">
-       <div class="col-md-12"><h3 class="mrg-btm">CRM Followup</h3></div> 
+       <div class="col-md-12"><h3 class="mrg-btm">CRM Followup</h3></div>
+        <div class="fbadetails col-md-12 col-md-offset-2">
+         @foreach($fbadetails as $val)
+        <tr>
+         <th>FBAID:</th>
+         <td>{{$val->FBAID}}</td> |
+         <th>FBA NAME:</th>
+         <td>{{$val->FullName}}</td> |
+         <th>FBA MOBILE NO:</th>
+         <td>{{$val->MobiNumb1}}</td>
+        </tr>
+         @endforeach
+       </div> 
        <div class="col-md-12">
        <div class="overflow-scroll">
-       <div class="table-responsive" >
-       
-
-
-       <form  method="post" action="{{url('crm-followup-history')}}"  >{{ csrf_field() }}
-           
+       <div class="col-md-12 col-md-offset-2">
+       <form  method="post" action="{{url('crm-followup-history')}}">{{csrf_field()}}           
             <input type="hidden" name="history_id" id="history_id"  value="{{$history_id}}" >
-
-
           <div id="id_none" style="display:none">
             <div class="form-group row">
-            <label for="inputPassword" class="col-sm-4 col-form-label">Disposition</label>
-            <div class="col-sm-8">
-                 
+            <label for="inputPassword" class="col-md-2 col-form-label">Disposition</label>
+            <div class="col-md-6">                 
             <input type="text" class="form-control"  name="crm_name" id="disposition_" readonly>
-             <input type="hidden" class="form-control"  name="crm_id" id="disposition_ID" readonly>
-               
+             <input type="hidden" class="form-control"  name="crm_id" id="disposition_ID" readonly>               
             </div>
-          </div> 
-
-             
-            
-
+          </div>
              <div class="form-group row">
-                   <label for="inputPassword" class="col-sm-4 col-form-label">Calltype</label>
-               <div class="col-sm-8">
+                   <label for="inputPassword" class="col-md-2 col-form-label">Calltype</label>
+               <div class="col-md-6">
                  <input type="text" class="form-control"  id="calltype" readonly>
-
               </div>
             </div>
-
-
              <div class="form-group row">
-                   <label for="inputPassword" class="col-sm-4 col-form-label">Outcome</label>
-               <div class="col-sm-8">
+                   <label for="inputPassword" class="col-md-2 col-form-label">Outcome</label>
+               <div class="col-md-6">
                  <input type="text"  class="form-control" readonly id="Outcome">
-
               </div>
             </div>
-
               <div class="form-group row">
-                   <label for="inputPassword" class="col-sm-4 col-form-label">Connect Result</label>
-               <div class="col-sm-8">
+                   <label for="inputPassword" class="col-md-2 col-form-label">Connect Result</label>
+               <div class="col-md-6">
                  <input type="text"  class="form-control" readonly id="connect_result">
-
               </div>
             </div>
-
               <div class="form-group row">
-                   <label for="inputPassword" class="col-sm-4 col-form-label">Emp Category</label>
-               <div class="col-sm-8">
+                   <label for="inputPassword" class="col-md-2 col-form-label">Emp Category</label>
+               <div class="col-md-6">
                 <input type="text"  class="form-control" readonly id="emp_category">
-
               </div>
             </div>
- 
-
-      <div class="form-group row" id="followup_date_id">
-             <label for="inputPassword" class="col-sm-4 col-form-label">Followup Date</label>
-                <div class="col-sm-8">
-                 <div id="datepicker" class="input-group date" data-date-format="mm-dd-yyyy">
-              <input type="text"  class="form-control date-range-filter " required name="followup_date" id="followup_date" >
-              <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+            <div class="form-group row" id="followup_date_id">
+             <label for="inputPassword" class="col-md-2 col-form-label">Followup Date <b style="color: red; font-size: 15px;">*</b></label>
+                <div class="col-md-6">                
+              <input type="datetime-local"  class="form-control date-range-filter " required name="followup_date" id="followup_date" >             
               </div>
               </div>
-            </div>
-
-               
+            </div>              
            <div class="form-group row">
-                   <label for="inputPassword" class="col-sm-4 col-form-label">Remark</label>
-               <div class="col-sm-8">
-              
+                   <label for="inputPassword" class="col-md-2 col-form-label">Remark <b style="color: red; font-size: 15px;">*</b></label>
+               <div class="col-md-6">              
                  <textarea name="remark"  required class="form-control"   id="remark"></textarea>
-
               </div>
             </div>
-
-
              <div class="form-group row">
-                   <label for="inputPassword" class="col-sm-4 col-form-label">Action</label>
-               <div class="col-sm-8" id="check_id">
-
+                   <label for="inputPassword" class="col-md-2 col-form-label">Action</label>
+               <div class="col-md-6" id="check_id">
                   <label class="radio-inline"><input type="radio" id="check2" value="y" 
                    name="action">Open</label>
                    <label class="radio-inline"><input type="radio" id="check1" value="n" name="action">Close</label>
-
-
-
-
               </div>
             </div>
-
               <input type="hidden"   name="fbamappin_id" id="fbamappin_id">
               <input type="hidden"   name="disposition_id" id="disposition_id">
-                  
-
-
-<!-- 
-             <div class="form-group row">
-                   <label for="inputPassword" class="col-sm-4 col-form-label">View History</label>
-               <div class="col-sm-8">
-            
-                  <label class="radio-inline"  > <a href="#" onclick="View_History()">View History</a></label>
-                  
-                 
-
-              </div>
-            </div> -->
-
- 
-<!-- 
-            <div class="form-group row" id="followup_internalteam_id" style="display: none">
-            <label for="inputPassword" class="col-sm-4 col-form-label">task assignment</label>
-            <div class="col-sm-8">
-              <input type="text"  class="form-control"  readonly name="assignment_id"   id="followup_internalteam">
-            </div>
-          </div>  -->
-              
-
-            
-         
-            
-
-
-
-
-         <center>
-            
-           
-           <input type="submit" name="submit"  class="btn btn-default" value="submit">
-
+         <center>          
+           <input type="submit" name="submit"  class="btn btn-primary" value="submit">
          </center>
          </form>
-
           </div>
-
-
-  <table   class="table table-bordered table-striped  " id="crm_followup_tb" >
-   <thead>
-                  <tr>
-                   <th>ID</th>
-                   <th>Assigned by</th>
-                    <th>Assigne Internal </th>
-                     <th>Assigne external </th>
-                       <th>create_at</th>
-                    <th>Remark</th>
-                    <th>Action </th>
-                     <th>followup_date </th>
-                      
-                   
-                     
-                                
-                  </tr>
+  
+  </div>
+</div>
+<div class="table-responsive col-md-12">
+  <table  class="table table-bordered table-striped" id="crm_followup_tb" >
+     <thead>
+            <tr>
+                <th>ID</th>
+                <th>Assigned by</th>
+                <th>Assigne Internal</th>
+                <th>Assigne external</th>
+                <th>create at</th>
+                <th>Remark</th>
+                <th>Action</th>
+                <th>followup date</th>                               
+          </tr>
    </thead>
-   <tbody   >
-     
+   <tbody>     
      @foreach($query as $val)
      <tr>
-         <td>  {{$val->history_id}}      </td>
+         <td>{{$val->history_id}}</td>
          <td>{{$val->user_id}} </td>
          <td>@if($val->assignment_id){{$val->assignment_id."-".$val->Profile}}@endif </td>
-         <td>@if($val->assign_external_id){{$val->assign_external_id."-".$val->Profile}}@endif </td>
-
-
-           <td>{{$val->create_at}} </td>
+         <td>@if($val->assign_external_id){{$val->assign_external_id."-".$val->Profile}}@endif</td>
+         <td>{{$val->create_at}} </td>
          <td>{{$val->remark}} </td>
-         
-
-        <?php $class =($val->action=="n")? 'color: #00C851': ' color:#ff4444'; ?>
-          
+        <?php $class =($val->action=="n")? 'color: #00C851': ' color:#ff4444'; ?>          
          <td  style="{{$class}}">{{$val->action==="n"?"close":"open"}}</td>
-         <td>{{$val->followup_date}} </td>
-
-       
-
-         
-         
+         <td>{{$val->followup_date}} </td>         
      </tr>
-
      @endforeach
-
    </tbody>
   </table>
-
   </div>
 </div>
 </div>
-</div>
-
-
- 
- 
-
-
-
-
  <div id="classModal_followup" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="classInfo" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
@@ -207,7 +132,7 @@
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
           ×
         </button>
-        <h4 class="modal-title" id="classModalLabel">   CRM History  </h4>
+        <h4 class="modal-title" id="classModalLabel">CRM History</h4>
       </div>
       <div class="modal-body">
         <table id="classTable" class="table table-bordered">

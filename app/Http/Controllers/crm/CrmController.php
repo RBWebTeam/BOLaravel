@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use DB;
 use Session;
 use Response;
+use Mail;
 class CrmController extends Controller
 {
 
@@ -71,14 +72,15 @@ class CrmController extends Controller
 
 
             public function crm_disposition_id(Request $req){
-              print_r($req->all());exit();
+             // print_r($req->all());exit();
+             //echo json_encode($req->all());
                 $find_profile="";
                 $find_profile1="";
-                $query=DB::table('crm_disposition')->where('id','=',$req->id)->first();
+                $query=DB::table('crm_disposition')->where('id','=',$req->id)->first();               
 
                if($query->followup_internalteam!=null && $query->followup_internalteam!=''){
                 $find_profile=$this->fbamappin_fn($query->followup_internalteam,$req->fbamappin_id); //followup_internalteam search
-                }
+                                }
 
                 if($query->followup_externalteam!=null && $query->followup_externalteam!=''){
                 $find_profile1=$this->fbamappin_fn($query->followup_externalteam,$req->fbamappin_id); //followup_internalteam search
@@ -94,17 +96,23 @@ class CrmController extends Controller
                    $aa=array('fbamappin_id'=>$fbamappin_id,'crm_id'=>$crm_id,'history_id'=>$history_id);
 
               }else{
+
+
                      $ischeck=0;
                      $aa=array('fbamappin_id'=>0,'crm_id'=>0,'history_id'=>0);
               }
 
-              
+          //    print_r($find_profile1."Zzzzz");exit;
+
                 
+                 
                   return Response::json(array("res"=>$query,'find_profile'=>$find_profile,'find_profile1'=>$find_profile1,'ischeck'=>$aa));       
             }
 
 
             public function fbamappin_fn($emp_profile_id,$fbamappin_id){  // find  Profile UID and fbacrmmapping UID
+             // echo $fbamappin_id;
+
                       $findquery=DB::table('fbacrmmapping')->where('id','=',$fbamappin_id)->first();   
                       $array = json_decode(json_encode($findquery),true);
                       $finduid=0;
@@ -113,13 +121,15 @@ class CrmController extends Controller
                                    $finduid=$value;
                                   break;
                                }
+
                         }
-           
+
+
+          // echo "tetststststtsts".$finduid;
             if(isset($finduid)){
-              $query=DB::table('finmartemployeemaster')->select('UId','Profile')->where('UId','=',$finduid)->first();
+              $query=DB::table('finmartemployeemaster')->select('UId','Profile','EmployeeName')->where('UId','=',$finduid)->first();            
                 return $query;
-            }else{
-              return 0;
+
             }
                          
                 
@@ -129,6 +139,7 @@ class CrmController extends Controller
 
 
           public function crm_disposition(Request $req){  
+           
             if(isset($req->disposition_id)){
                if(isset($req->followup_date)){
                    $followup_date=$req->followup_date;
@@ -159,7 +170,7 @@ class CrmController extends Controller
                                   'action'=>$req->action,
                                   
                  ]);
-
+            
                 if(isset($req->assignment_id)){
                    $assignment_id=$req->assignment_id;
                 }else{
@@ -191,8 +202,42 @@ class CrmController extends Controller
                                   ]);
                                   
                            }
+                       
+                      }   
+/*if (isset($assignment_id)){
 
-                      }
+             $maildata=DB::select('call crm_get_followup_mail_data(?)',[$history_id]);
+             $tomailid=DB::select('call crm_get_exception_mail_id(?)',[Session::get('UId')]);                 
+             $ccmailid=DB::select('call crm_get_exception_mail_id(?)',[$req->assignment_id]);
+                 //print_r($ccmail);exit();
+             foreach ($tomailid as $key => $value) {
+              $tomail=$value->EmailId;
+             }
+             foreach ($ccmailid as $key => $value) {
+               $ccemail=$value->EmailId;
+             }
+              //$tomail='shubhamkhandekar2@gmail.com';
+             // $ccemail='shubhamkhandekar2@gmail.com';
+             $ccemail1='ashutosh.sharma@magicfinmart.com';
+             $ccemail2='srinivas@policyboss.com';
+              $sub='Sr no. #'.$maildata[0]->history_id.' You have assigned followup from '.$maildata[0]->EmployeeName.'-'.$maildata[0]->MobileNo;
+                      
+                  $mail = Mail::send('mailViews.Crm_followup_mail',['maildata' => $maildata], function($message)use($tomail,$ccemail,$sub,$ccemail1,$ccemail2){
+                  $message->from('OfflineCS@magicfinmart.com', 'Fin-Mart');
+                  $message->to($tomail);                 
+                  $message->subject($sub);
+                  $message->cc($ccemail);
+                  $message->cc($ccemail1);
+                  $message->cc($ccemail2);                 
+
+                  });
+               if(Mail::failures())
+                {
+                   $error=3;
+                   echo $error;
+                }
+          
+           }*/
            }
 
                
@@ -201,7 +246,8 @@ class CrmController extends Controller
 
                     $query=DB::select('call sp_crm_followup_details(?,?,?)',[$req->fbamappinid,$req->crmid,Session::get('UId')]);
                    // print_r($query);exit();
-                    return  view('crm.crm_followup_view',['query'=>$query,'history_id'=>$req->history_id]);
+                      $fbadetails=DB::select('call crm_fba_followup_details(?)',[$req->fbamappinid]);
+                    return  view('crm.crm_followup_view',['query'=>$query,'history_id'=>$req->history_id,'fbadetails'=>$fbadetails]);
             }
 
 
@@ -302,14 +348,31 @@ class CrmController extends Controller
  
 
                     $history_db=DB::select('call sp_crm_view_history(?,?)',[$req->fbamappin_id,Session::get('UId')]);
+                    $fbadetails=DB::select('call crm_fba_followup_details(?)',[$req->fbamappin_id]);
+                    
                     $query=DB::table('crm_disposition')->where('emp_category','=',Session::get('Profile'))->get();
-                    return  view('crm.crm_disposition_add',['query'=>$query,'fbamappin_id'=>$req->fbamappin_id,'history_db'=>$history_db,'assign_id'=>$assign_id,'historyid'=>$historyid]);  
+                    return  view('crm.crm_disposition_add',['query'=>$query,'fbamappin_id'=>$req->fbamappin_id,'history_db'=>$history_db,'assign_id'=>$assign_id,'historyid'=>$historyid,'fbadetails'=>$fbadetails]);  
+}
+public function getcrmexception($discompostion)
+{
+   //print_r($discompostion);exit();
+   $exception=DB::select('call crm_get_exception(?)',[$discompostion]);
+  // print_r($exception);exit();
+   foreach ($exception as $key => $value) {
+    $role_id=$value->followup_internalteam;
+   }
+   if ($role_id!='') {
+    $exceptiondata=DB::table('crmexception')->select($role_id)->first();
+    foreach ($exceptiondata as $key => $value) {
+      $uid=$value;
+    }
+   //print_r($uid);exit();
+    $query=DB::table('finmartemployeemaster')->select('UId','Profile','EmployeeName')->where('UId','=',$uid)->first(); 
+    //print_r($query);exit();
+   return json_encode($query);
+   }
+   
 }
 
 }
 
-
-// $servername = "35.154.72.18";
-// $username = "finmart_user";
-// $password = "finmart@0909";
-// $dbname = "BackOffice";
