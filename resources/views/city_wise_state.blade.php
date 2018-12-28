@@ -46,7 +46,7 @@
            </tr>
            </thead>
            <tbody>
-
+@isset($fbascity) 
     @foreach($fbascity as $val)   
                <tr>
                <td><input value="<?php echo $val->FBAID; ?>" type="checkbox" name="chekfba" id="chekfba" class="select-checkall"></td>
@@ -58,6 +58,7 @@
 				<!--   <td>{{$val->FBAID}}</td> -->
               </tr>
                 @endforeach
+                @endisset
 
              </tbody>
 			 </table>
@@ -163,10 +164,5 @@ $('#fbdatail').click(function(){
 });
 
 </script>
-
-
-
-
-
 
 @endsection

@@ -24,6 +24,10 @@ Route::Post('Health-Assure-Partner','HealthAssurePartnerController@getproviderin
 Route::get('Success','HealthAssureController@Success');
 Route::get('Failure','HealthAssureController@failure');
 Route::get('getcitybypincode/{pincode}','HealthAssureController@getcity');
+
+
+Route::get('get_service/{fbaid}','getserviceController@getviewservice');
+Route::get('send_mail_commission','getserviceController@sendcommissionmail');
 ///Shubham
 
 Route::get('/','LoginController@checklogin');
@@ -43,8 +47,9 @@ Route::get('dashboard','DashboardController@dashboard');
 
 //Fba details
 Route::get('fba-list','FbaController@fba_list');
-// Route::get('get-fba-list/{fdate}/{todate}','FbaController@get_fba_list');
-Route::get('get-fba-list','FbaController@get_fba_list');
+
+//Route::get('get-fba-list','FbaController@get_fba_list'); 
+Route::get('get-fba-list','FbaController@get_fba_list');  
 Route::post('sales-update','FbaController@sales');
 Route::post('loan-update','FbaController@loan');
 Route::post('posp-update','FbaController@posp');
@@ -84,9 +89,12 @@ Route::get('user_mapping','usermappingController@fbauser');
 Route::get('sales-code-update','salescodeController@updatesalescode');
 Route::get('sales-code-update-get-fbaid/{salsecode}','salescodeController@selfcodefbaid');
 Route::POST('sales-code-update-insert','salescodeController@insertsalescode');
-
+//viks moter lead start
+Route::get('motor-lead-details/{FBAID}','motorleaddetailsController@view_motor_leads');
+Route::get('motor-lead-alldetails/{FBAID}/{month_no}','motorleaddetailsController@getleadata');
 
 //User_mapping vikas End
+
 
 
 //Test state_wise city start
@@ -95,6 +103,19 @@ Route::post('citywisestate','statewisecityController@statewisecity');
 Route::get('city_wise_state2','statewisecityController@showlead2');
 //Test state_wise city End
 
+//Vivek PinCode Mapping start
+Route::post('update_view_templete','Sms_tamplateController@update_sms_table');
+Route::get('upload-pincode-mapping','UploadFBACmMappingController@uploadpincode'); 
+Route::POST('pincode-update-excel','UploadFBACmMappingController@pincodeimportExcel');
+Route::post('update-pincode-excel-sheet','UploadFBACmMappingController@updateexcelsheet');
+Route::get('pincode-update-table','UploadFBACmMappingController@updatepintable');
+
+//avinash fbamapping start
+Route::get('upload-fba-mapping','UploadFBACmMappingController@uploadfbacmpaingdfn'); 
+Route::POST('pincode-fba-excel','UploadFBACmMappingController@fbaimportExcel');
+Route::post('update-fba-excel-sheet','UploadFBACmMappingController@updatefbaexcelsheet');
+
+Route::get('upload-fbacm','UploadFBACmMappingController@uploadfbacm');
 
 
 
@@ -125,10 +146,20 @@ Route::get('export','FbaController@exportexcel');
 
 
 // non fba-list start  
-Route::get('load-non-fba-list','nonfbaController@nonfbalist');
-Route::get('non-fba-list','nonfbaController@getnonfba');
-Route::get('export-excel','nonfbaController@nonfbaexportexcel');
-// non fba-list End
+Route::get('load-non-fba-list','newfbaController@nonfbalist');
+Route::get('new-fba-list','newfbaController@getnonfba');
+Route::get('export-excel','newfbaController@nonfbaexportexcel');
+
+ // Route::post('pmesgsend','newfbaController@sendpaysms');
+
+Route::get('load-update-fba-list/{fbaid}','newfbaController@update_fba_list'); 
+Route::get('load-update-pospnew/{id}','newfbaController@UpdatePospnonew');
+Route::post('get-type','newfbaController@update_type'); 
+// Route::get('load-update-fba-list/{partnerid}','newfbaController@getfbapartnernew');
+ 
+
+// non fba-list End 
+
 
 // Sales code update start
   
@@ -139,11 +170,20 @@ Route::get('sales-code-update-get-fbaid/{salsecode}','salescodeController@selfco
 Route::POST('sales-code-update-insert','salescodeController@insertsalescode');
 // Refresh get data functiolity start
 Route::get('refresh-data/{fbaid}','FbaController@get_refresh_data');
-// Refresh get data functiolity End
+Route::get('fba-count/{fbaid}','FbaController@get_fba_count');
+
+// Refresh get dataget_refresh_data functiolity End
+Route::get('birthday-mail','finmartempBirthdayController@viewsmstemplate');
+//Route::get('birthday-mail','finmartempBirthdayController@SendBirthdaySMS');
 
 
 
-// Manage Emploee Start
+
+
+
+
+
+// Manage Emploee Start Vikas
 //Route::get('manage-employee','manageemploeeController@viewmaageemployy'); 
 Route::get('finmartemployee-details','manageemploeeController@finemployeeview'); 
 Route::get('emp-details','manageemploeeController@allemployeedata');  
@@ -153,12 +193,53 @@ Route::post('update_detailsemp','manageemploeeController@update_emp_details');
 // add employee start  
 Route::get('add-employee','manageemploeeController@addfbaemp');
 Route::post('add-new-emp','manageemploeeController@new_emp_add'); 
+Route::get('get-role-id/{id}','manageemploeeController@getroleid');
+
+Route::get('get-ugroup-id/{id}','manageemploeeController@getugroupid');
+
+Route::get('fba-data','manageemploeeController@getfbadata');
+Route::get('uid-data','manageemploeeController@getuiddata'); 
+Route:: get('validuid','manageemploeeController@validuid'); 
+
+Route::post('get-type','FbaController@update_type');  
+// Finmart offline request start
+Route::get('offline-request','finmart_offline_requestController@display_offline_request');
+Route::get('update-status','finmart_offline_requestController@insert_offline_status');
+Route::get('update-amount-date','finmart_offline_requestController@updte_offline_amt_date');
+Route::post('upload-doc','finmart_offline_requestController@insertoflinedoc');
+Route::get('view-upload-doc/{id}','finmart_offline_requestController@getdocoffline');
+Route::get('view-upload-doc-one/{id}','finmart_offline_requestController@getdocofflineone');   
+Route::get('quotestatus/{id}','finmart_offline_requestController@getcurrentstatus');
+Route::get('getquotediscription/{id}','finmart_offline_requestController@getquotediscription');
+Route::get('update-remark','finmart_offline_requestController@insert_offline_remark');
+Route::get('get-remark/{quote_request_id}','finmart_offline_requestController@getofflineremark');
+// Finmart offline request End
+
+// NCD Campaign START
+Route::get('ncd-campaign','ncdcampaignController@ncdcampaignview');  
+Route::post('upload-nca-doc','ncdcampaignController@insertncafbadoc'); 
+Route::get('view-nca-doc/{id}','ncdcampaignController@viewncadoc');   
+Route::get('ncd-update-status','ncdcampaignController@insert_ncd_status');
+Route::get('ncdstatuscurrent/{id}','ncdcampaignController@getncdstatus');
+
+// NCD Campaign END
+// NCD FBA START
+//Route::get('ncd-fba-details','ncdfbadetailsController@ncdfbadetails');
+Route::get('ncd-fba-details/{fbaid}','ncdfbadetailsController@ncdfbadetails');
+
+
+
+
 // Manage Emploee End
 // prodouct-lead-details Start
 Route::get('prodouct-lead-details','prodouctleaddetailsController@viewlead_details');
 // prodouct-lead-details End
 // get-all-fbalist-data start   
 Route::get('all-fba-data/{fdate}/{todate}','FbaController@get_all_fba_list_data');
+
+// Commission start
+// Route::get('commission','CommissionController@Commissionshow');
+// Route::get('commission','CommissionController@getproduct'); 
 
 
 //city_droupdown
@@ -181,6 +262,43 @@ Route::get('fbaid-view','FbaController@getfbaid');
 Route::post('update_fbamaster','FbaController@update_fba_table');
 
 
+Route::get('Registartion-report','RegistartionreportController@Regireport');
+Route::get('Regi-report/{fdate}/{ldate}','RegistartionreportController@Regireportfdateldate');
+
+Route::get('notregi-report/{fdate}/{ldate}','RegistartionreportController@notregireport');
+Route::get('Registartion-report','RegistartionreportController@nottregireport');
+
+Route::get('fba-creation/{fdate}/{ldate}','RegistartionreportController@creationfba');
+Route::get('Registartion-report','RegistartionreportController@fbatocreation');
+
+Route::get('fba-certification/{fdate}/{ldate}','RegistartionreportController@fbatocertification');
+Route::get('Registartion-report','RegistartionreportController@fbatocertificationdate');
+
+Route::get('Registartion-report-details','RegistartionreportController@Regideatil');
+Route::get('Registartion-report-details/{fdate}/{ldate}','RegistartionreportController@Regireportdetails');
+
+Route::get('posp-certification','RegistartionreportController@pocertification');
+Route::get('posp-certification/{fdate}/{ldate}','RegistartionreportController@pocration');
+ 
+Route::get('posp-certification-date','RegistartionreportController@pocertificationdate'); 
+Route::get('posp-certification-date/{fdate}/{ldate}','RegistartionreportController@pocredate'); 
+
+Route::get('all-sales-report','allsalesreportController@allreport');
+Route::get('sales-report/{startdate}/{enddate}','allsalesreportController@salesreportfdateldate');
+
+Route::get('sales-loan-report/{startdate}/{enddate}','allsalesreportController@salesreportlone');
+
+Route::get('all-mis-report','allsalesreportController@allMISreport');
+Route::get('mis-report/{startdate}/{enddate}','allsalesreportController@misreportfdateldate');
+Route::get('cc-report/{startdate}/{enddate}','allsalesreportController@creditcardreport');
+
+Route::get('fba-mis-report','MISReportForFBAController@allfbamisreport');
+Route::get('all-fba-mis-report/{startdate}/{enddate}','MISReportForFBAController@fbamisreportfdateldate');
+
+
+// avinash
+Route::get('product-health-assure','ProductHealthAssureController@product_health_assure');
+Route::get('product-health/{ProductName}/{formdate}/{enddate}','ProductHealthAssureController@producthealthreportfdateldate');
 
 // Route::get('fba-list/{salescode}/{fbaid}',array('as'=>'fba-list.ajax','uses'=>'FbaController@salesupdate'));
 
@@ -271,6 +389,8 @@ route::get('offlinecsedit/{id}','OfflinecsController@getofflinecsdataedit');
 
 Route::post('saveofflinecs','OfflinecsController@saveofflinecsdata');
 Route::get('offlinecs-dashboard','OfflinecsDashboardController@getofflinecsdata');
+Route::get('offlinecs-All-Entry','OfflinecsDashboardController@getofflinecsalldata');
+route::get('export-to-excle-offlinecs','OfflinecsDashboardController@exportexcel');
 
 Route::post('offlinecsupdate','OfflinecsController@Updateofflinecs');
 Route::post('offlinecsupdateandsendmail','OfflinecsController@Updateofflinecsandsendmail');

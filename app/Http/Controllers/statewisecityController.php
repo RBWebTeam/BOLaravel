@@ -18,23 +18,21 @@ class statewisecityController extends CallApiController
  			public function get_city(){
 			$state = DB::select("call usp_load_state_list()");
    			 return view('city_wise_state');
+   			 	
  }
 
 
      public function statewisecity (Request $req){
-
-     $fbascity = DB::select('call getquick_city_state(?,?)',[implode(',',$req->state),implode(',',$req->city)]);
- 		return json_encode($fbascity);
+	$fbascity = DB::select('call getquick_city_state(?,?)',[implode(',',$req->state),implode(',',$req->city)]);
+    return json_encode($fbascity);
  
  }
 
 
-         public function showlead2 (){
-
-          	$fbascity2 = DB::select('call getquick_city_state(0,0)'); 
+         	public function showlead2 (){
+			$fbascity2 = DB::select('call getquick_city_state(0,0)'); 
           	//$userfb=DB::select("call get_fba_fbauser()"); 
-
-          return view('city_wise_state',['fbascity2'=>$fbascity2,'userfb'=>$userfb]);
+			return view('city_wise_state',['fbascity2'=>$fbascity2]);
  }
 
 

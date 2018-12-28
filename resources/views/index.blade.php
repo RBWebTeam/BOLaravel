@@ -53,6 +53,7 @@
 			<div class="login-bdy">
 			 <h2 class="text-center">SIGN IN</h2>
 			 <br>
+        <h4 class="text-center" style="color: #fff;">To Login use your Registered Email-id and Password of Magic Finmart App.</h4>
 			<form action="{{url('admin-login')}}" method="post" >
 				{{ csrf_field() }}
 			   <div class="form-group">
@@ -64,11 +65,12 @@
 			   @if ($errors->has('password')) <label class="control-label" for="inputError">{{ $errors->first('password') }} </label> @endif
 			  </div>
 			  <div class="form-group has-error">
-                                @if (Session::has('msg')) <label class="control-label" for="inputError">{{ Session::get('msg') }} </label>@endif
-               </div>
+           @if (Session::has('msg')) <label class="control-label" for="inputError">{{ Session::get('msg') }} </label>@endif
+         </div>
 
 			  <input type="Submit" class="btn btn-default submit-btn" value="Submit"/>
-			   <button type="button" class="btn btn-default submit-btn"  data-target="#pwdModal" data-toggle="modal" value=""/>Forgot Password</button>
+			 <!--   <button type="button" class="btn btn-default submit-btn"  data-target="#pwdModal" data-toggle="modal" value=""/>Forgot Password</button> -->
+          <a href= class="btn btn-default submit-btn" style="color: white;margin-left:180px"  data-target="#pwdModal" data-toggle="modal"/>Forgot Password</a>
  			 <!--  <a href="forgot-password.php" class="forgot-pass pull-right">Forgot Password</a> -->
 
 
@@ -103,14 +105,15 @@
                     <div class="panel-body">
                         <div class="text-center">
                           
-                          <p>If you have forgotten your password you can reset it here.</p>
+                          <p>Please enter your registered email here to know your password.</p>
 
                           <form method="post" action="{{url('forgot-password')}}">
                           {{ csrf_field() }}
                             <div class="panel-body">
                                 <fieldset>
                                     <div class="form-group">
-                                        <input class="form-control input-mg" placeholder="E-mail Address"  value="" name="email" type="email">
+                                        <input class="form-control input-mg" placeholder="E-mail Address"  value="" name="email" type="email" required>
+                                      
                                     </div>
                                     <input type="submit" class="btn btn-primary btn-mg"  value="Send My Password">
                                 </fieldset>

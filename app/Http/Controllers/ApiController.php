@@ -26,4 +26,22 @@ class ApiController extends CallApiController
          return response()->json(array('status' =>0,'message'=>"success",'result'=>$result));
             }
     }
+
+
+         public function send_success_response($message,$status,$data){ 
+         //print_r($message);
+         $res = array('Message' =>$message ,'Status'=>$status,'StatusNo'=>0,'MasterData'=>$data );
+         //print_r($res);exit();
+         return Response::json($res);
+       }
+
+         public function send_failure_response($message,$status,$data){
+         $res = array('Message' =>$message ,'Status'=>$status,'StatusNo'=>1,'MasterData'=>[] );
+         return Response::json($res);
+       }
+
+         public function send_success_json_encode($data){
+         return Response::json($data);
+       }
+
 }

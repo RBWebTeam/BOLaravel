@@ -1,10 +1,11 @@
+
 @extends('include.master')
 @section('content')
 
 <style type="text/css">
   
   .hide {
-  display:  none;
+  display:  none;}
 }
 </style>
 
@@ -13,38 +14,38 @@
              <div class="col-md-12"><h3 class="mrg-btm">FBA List</h3>
            <hr>
            </div>
-
-      <div class="col-md-2">
-      <div class="form-group">
+        <div class="col-md-2">
+        <div class="form-group">
 
     <p>From Date</p>
          <div id="datepicker" class="input-group date" data-date-format="mm-dd-yyyy">
                <input class="form-control date-range-filter" type="text" placeholder="From Date" name="fdate" id="min"/>
-              <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-            </div>
-            </div>
-           </div>
-       <div class="col-md-2">
-       <div class="form-group">
-       <p>To Date</p>
-       <div id="datepicker1" class="input-group date" data-date-format="mm-dd-yyyy">
-               <input class="form-control date-range-filter" type="text" placeholder="To Date"  name="todate"  id="max"/>
-              <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-              </div>
+          <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+               </div>
               </div>
             </div>
+           <div class="col-md-2">
+        <div class="form-group">
+        <p>To Date</p>
+        <div id="datepicker1" class="input-group date" data-date-format="mm-dd-yyyy">
+  <input class="form-control date-range-filter" type="text" placeholder="To Date"  name="todate"  id="max"/>
+          <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+         </div>
+      </div>
+  </div>
            
-       <div class="col-md-4">
+  <div class="col-md-6">
+    <div class="form-group"> <input type="submit" name="btndate" id="btndate"  class="mrg-top common-btn pull-left" value="SHOW">  
 
-       <div class="form-group"> <input type="submit" name="btndate" id="btndate"  class="mrg-top common-btn pull-left" value="SHOW">  
-
-      <button class="qry-btn" style="margin-top: 24px" name="btnrfsh" id="btnrfsh" onclick="refreshdata()">Refresh</button>
-     &nbsp;&nbsp;
+  &nbsp;&nbsp;
   &nbsp;&nbsp;&nbsp;
 
 
   <form name="myform">
-   <select id="msds-select" class="form-control" style="width:45%;margin:10px;margin-right:-33px; margin-left: 186px;margin-top: -39px;display: -webkit-inline-box;" name="one" onchange="selectIndex(this)">
+  <button class="qry-btn" type="button" style="margin-top:-2px;margin-left:10px;" name="btnrfsh" id="btnrfsh" onclick="refreshdata()">Refresh</button> <span id="spancnt"></span>
+
+   <select id="msds-select" class="form-control" style="width:22%;margin: 10px;
+    margin-left: 10px;margin-top: 0px;display: -webkit-inline-box;" name="one" onchange="selectIndex(this)">
   <option value="-1" selected="selected">Search By</option>
    <option value="0">All</option>
    <option value="1">POSP Yes</option>
@@ -58,22 +59,22 @@
    <option value="pospname">POSP Name</option>
    </select>
 
-   <input type="text" id="txtfbasearch" name="txtfbasearch" placeholder="Search" onkeyup="searchdata()" style="display: none; margin-left:104px;margin-top:2px;width:45%;"/>
-
-
+<input type="text" class="form-control" id="txtfbasearch"  name="txtfbasearch" placeholder="Search" onkeyup="searchdata()" style="display:none; display:margin-top:2px; width:26%;margin-right: 70px;float:right;"/>
   </form>
-  </div> 
+   </div> 
+ 
   </div>
 
-
+  
   <!-- Date End -->
 
-             <div class="col-md-12">
-             <div class="overflow-scroll">
-             <div class="table-responsive" >
-             <table class="datatable-responsive table table-striped table-bordered nowrap" id="fba-list-table">
+          <div class="col-md-12">
+          <div class="overflow-scroll">
+          <div class="table-responsive" >
+          <table class="datatable-responsive table table-striped table-bordered nowrap" id="fba-list-table">
                                        <thead>
                                        <tr>
+                                        <th>Action</th> 
                                        <th>FBA ID</th> 
                                        <th>Full Name</th> 
                                        <th>Created Date</th>
@@ -97,16 +98,19 @@
                                        <th>Sales code</th>
                                        <th>FSM Details</th>  
                                        <th>Documents</th> 
-                                       <th>Customer ID</th>   
+                                       <th>App Source</th>  
+                                       <th>Customer ID</th> 
+                                       <th>Type</th> 
                                        <th>Created Date1</th>
                                      </tr>
                                     </thead>
                                    </table>
 
- <div id="myDIV" >
+
+      <div id="myDIV" >
 <!--     <a class="qry-btn" id="pospbtn" onclick="getfdate()">Export</a>
- -->    <a href="{{url('export')}}" class="qry-btn" id="pospbtn">Export</a>
-   <!--   <button class="qry-btn" name="btnrfsh" id="btnrfsh" onclick="refreshdata()">Refresh</button> -->
+ --> 
+  <a href="{{url('export')}}" class="qry-btn" id="pospbtn">Export</a>
 
              </div>
            </div>
@@ -236,6 +240,46 @@
     </div>
   </div>
 </div>
+
+
+
+
+<!-- update TYPE -->
+ <div class="modal" id="myModal">
+    <div class="modal-dialog">
+      <div class="modal-content">      
+        <!-- Modal Header -->
+         <div class="modal-header">
+            <h4 class="modal-title">Update Type</h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+         </div>        
+        <!-- Modal body -->
+             <div class="modal-body">
+             <form id="frmtype" name="frmtype" method="post">
+              {{ csrf_field() }}
+                  <label>Select Type:</label>
+                  <select class="form-control" required id="ddltype" name="ddltype">
+                   <option value="">---Select---</option>
+                     <option value="1">FBA</option>
+                     <option value="2">POSP</option> 
+                   </select>
+                   <input type="hidden" name="txtfbaid" id="txtfbaid">
+             
+              </div>        
+        <!-- Modal footer -->
+        <div class="modal-footer">
+        
+         <input type="button" name="btn_submit" id="btn_submit" class="btn btn-primary" value="submit" onclick="update_fba_type(this.id)"> 
+         </form>
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+  
+</div>
+
 
 
 
@@ -389,9 +433,11 @@
       </div>
 
 <div class="col-md-12"> <br>
-<textarea type="text" rows="6"  id="divpartnertable_payment" class="divpartnertable_payment form-control">
+<form method="POST" id="modelpaylink">
+{{ csrf_field() }}
+<textarea type="text" rows="3" name="divpartnertable_payment" id="divpartnertable_payment" class="divpartnertable_payment form-control">
   </textarea>      
-   <br>
+  <br>
   </div> 
        
       <div class="col-md-12"> 
@@ -402,8 +448,8 @@
     
       
 <!-- <form id="modelpaylink" name="modelpaylink"> -->
-  <form method="POST" id="modelpaylink">
-  {{ csrf_field() }}
+<!--   <form method="POST" id="pmesgsend">
+  {{ csrf_field() }} -->
          <div id="divlink" class="modal-body">
 
         </div>
@@ -471,32 +517,50 @@
 
 // setInterval(function(){
 
-
-
 // }, 60000);
 
 
     $('#fba-list-table').DataTable({
+
+
+
+      
+  
 
  //     language: {
   //   processing: "<img src='img/loading.gif'> Loading...",
   // },
 
       "createdRow": function(row, data, dataIndex ) {
-      if ( data.PayStat=="S" ) {
+      if ( data.PayStat=="S" ) 
+      {
         $(row).css({backgroundColor: 'LightGreen'});
       }
+      if( data.AppSource=="Campaign sm")
+      {
+        $(row).css({backgroundColor: '#EE8891'});
+      }
     },
-        "order": [[ 0, "desc" ]],
+
+     
+
+        "order": [[ 1, "desc" ]],
         "ajax": "get-fba-list",
         "columns": [
 
-            { "data": "fbaid"},
-            { "data": "FullName",
-              "render": function ( data, type, row, meta ) {
-              return (data)+' <a target="_blank" href="Fba-profile/'+row.fbaid+' "><span class="glyphicon glyphicon-user"  title="FBA Profile"></span></a>';
+            //{ "data": "fbaid"},
+            { "data": "MobiNumb1",
+             "render": function ( data, type, row, meta ) {
+           return '<a target="_blank" href="getcrmid/'+row.fbaid+' "><span class="glyphicon glyphicon-earphone" title="CRM ID " ></span><a target="_blank" href="Fba-profile/'+row.fbaid+' "><span class="glyphicon glyphicon-user" title="FBA Profile"></span> <a href="#" data-toggle="modal" data-target="#sms_sent_id" onclick="SMS_FN(1,'+data+')"><span class="glyphicon glyphicon-envelope"></span></a></a></a>';
               }
-          },
+               },
+
+           { "data": "fbaid"},
+            { "data": "FullName"},
+          //     "render": function ( data, type, row, meta ) {
+          //     return (data)+' <a target="_blank" href="Fba-profile/'+row.fbaid+' "><span class="glyphicon glyphicon-user"  title="FBA Profile"></span></a>';
+          //     }
+          // },
 
             { "data": "createdate"},            
             {"data":"MobiNumb1" ,
@@ -574,7 +638,8 @@
             return data == 1?'<a href="" style="" data-toggle="modal"  data-target="#docviwer" onclick="docview('+row.fbaid+')" >uploaded</a>':'pending';
            }
         },
-          
+           {"data":"AppSource"}, 
+
           {"data":"CustID" ,
               "render": function ( data, type, row, meta ) {
                return (data==""||data=="0")?('<a id="btnviewcid" onclick="getcustomerid(this,'+row.fbaid+')">Update</a>'):data;
@@ -582,7 +647,16 @@
          }, 
 
 
-         { "data": "createdate1","visible":false }
+     {"data":"Type",
+            "render": function ( data, type, row, meta ) {
+              // return (data=="NA")?('<a class="btn btn-primary" data-toggle="modal" data-target="#myModal"(this,'+row.fbaid+')">Update</a>'):data;
+
+              return (data=="NA")?('<span id="bind_updated_type_'+row.fbaid+'"><a id="type" data-toggle="modal" onclick="Gettype('+row.fbaid+',this)" data-target="#myModal">Update</a></span>'):'<span id="bind_updated_type_'+row.fbaid+'">'+data+'</span>';
+              }
+
+
+       },
+             { "data": "createdate1","visible":false }
 
         ],
 
@@ -598,6 +672,12 @@ $(document).ready(function() {
     $(this).datepicker('clearDates');
   });
 
+setInterval(function(){ 
+getcount();
+  
+}, 60000); 
+
+
   // Extend dataTables search
 
  // alert('test');
@@ -606,7 +686,7 @@ $(document).ready(function() {
     var min = $('#min').val();
     var max = $('#max').val();
    // console.log(max);
-    var createdAt = data[24] || 24; // Our date column in the table
+    var createdAt = data[27] || 27; // Our date column in the table
    
     if (
       (min == "" || max == "") ||
@@ -679,20 +759,63 @@ $(document).ready(function() {
 
 function refreshdata(){  
 
-  //alert('succeed');
   var table =$('#fba-list-table').DataTable();
   var rows = table.rows({ 'search': 'applied' }).nodes();
-  var fbaid=table.rows(rows.count()-1).data()[0].fbaid; 
-
-   $.ajax({
-  url: 'refresh-data/'+fbaid,
-  type: "GET",                  
-  success:function(data) {
-            var tdata = JSON.parse(data);
-            table.rows.add(tdata).draw();
-          }
-        });
+   //var fbaid=table.rows(rows.count()-1)[0][0];
+        var fbaid=0;
+        table.rows().every( function () {
+        if(fbaid==0){
+        var d = this.data();
+        fbaid=this.data().fbaid;
 }
+        } );
+  //var fbaid=table.rows(rows.count()-1).data()[0].fbaid; 
+
+        $.ajax({
+        url: 'refresh-data/'+fbaid,
+        type: "GET",                  
+        success:function(data) {
+        var tdata = JSON.parse(data);
+        table.rows.add(tdata).draw();
+        $('#btnrfsh').text('Refresh(0)');
+    }
+  });
+}
+
+// get-count start
+ function getcount(){
+  
+      var table =$('#fba-list-table').DataTable();
+      var rows = table.rows({ 'search': 'applied' }).nodes();
+       //var fbaid=table.rows(rows.count()-1)[0][0];
+
+        var fbaid=0;
+         table.rows().every( function () {
+          if(fbaid==0){
+          var d = this.data();
+          fbaid=this.data().fbaid;
+}
+        } );
+
+     // var fbaid=table.rows(rows.count()-1).data()[0].fbaid; 
+        $.ajax({ 
+        url: 'fba-count/'+fbaid,
+        method:"GET",
+        success: function(data){
+          //console.log(data[0].count);
+        var json = JSON.parse(data);
+       if (json.count > "1")
+       {
+            //console.log(json);
+            //$('#btnrfsh').text('New Record-- '+json[0].count);
+
+            $('#btnrfsh').text('Refresh('+json[0].count+')');
+          
+    // $('#divdate').html('Showing data from ' +fdate+ ' to ' +todate+'');  
+          }  
+        }
+        });
+    }
 
 
 </script>
@@ -701,13 +824,13 @@ function refreshdata(){
 <script type="text/javascript">
     function getpaylinknew(){
   $.ajax({
-  url: 'getpaylinknew/'+$('#fba').val(),
+  url: '../getpaylinknew/'+$('#fba').val(),
   type: "GET",                  
   success:function(data) {
   var json = JSON.parse(data);
   if(json.StatusNo==0){
-        $('#divpartnertable_payment').html(json.MasterData.PaymentURL);
-        $('#txtlink').val(json.MasterData.PaymentURL);
+        $('#divpartnertable_payment').val(json.MasterData.PaymentURL);
+       // $('#txtlink').val(json.MasterData.PaymentURL);
       }
           }
 
@@ -715,9 +838,9 @@ function refreshdata(){
 }
 
  function pmesgsend(){
-alert("Offer Created successfully..");
+alert("Send SMS successfully..");
         $.ajax({ 
-        url: "{{URL::to('pmesgsend')}}",
+        url: "{{URL::to('../pmesgsend')}}",
         method:"POST",
         data: $('#modelpaylink').serialize(),
         success: function(msg)  
@@ -736,6 +859,7 @@ alert("Offer Created successfully..");
     var btns = header.getElementsByClassName("qry-btn");
     for (var i = 0; i < btns.length; i++) {
     btns[i].addEventListener("click", function() {
+               
     var current = document.getElementsByClassName("active");
     current[0].className = current[0].className.replace(" active", "");
     this.className += " active";
@@ -772,59 +896,85 @@ function colsearch(index)
 }
 
 function selectIndex(dd) {
+
+  
   if (dd.selectedIndex>=4){
      dd.form['txtfbasearch'].style.display='block';
   }else{
     dd.form['txtfbasearch'].style.display='none';
   }  
+var table = $('#fba-list-table').DataTable(); 
+  table.draw();
 }
 
 
   </script>
 
 
-
+  <script type="text/javascript">
+   $(function(){
+   $('#posp_remark').keyup(function(){    
+   var yourInput = $(this).val();
+   re = /[A-Za-z]?[A-Za-z `~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi;
+   var isSplChar = re.test(yourInput);
+    if(isSplChar)
+    {
+    var no_spl_char = yourInput.replace(/[A-Za-z]?[A-Za-z `~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi, '');
+    $(this).val(no_spl_char);
+    }
+  });
+ 
+});
+</script>
 <script type="text/javascript">
+function update_fba_type(this_id){
 
+  if($("#ddltype").val() == ""){
+    alert("Please Select Type");
+  }else{
 
-  $('#btnrfsh').on("click", function(){
-    alert('test');
+  var formdata = new FormData($("#frmtype")[0]);
 
-   
+  $.ajax({ 
+    url: "{{URL::to('get-type')}}",
+    method:"POST",
+    data: formdata,
+    contentType:false,
+    processData:false,
+    success: function(response)  {
+      var resp = JSON.parse(response);
+      alert(resp.alert_msg);
+      $("#" + resp.field).html(resp.show_field_data);
+      $('.close').click(); 
+    }
   });
 
+  }
+  
+} 
+</script> 
+
+
+
+<script>
+function Gettype(fbaid){
+    //alert(fbaid);
+    $("#txtfbaid").val(fbaid);
+    
+  }
 
 </script>
-
-
-
-
-
-
-
 
   
 
 
 
+<!-- <script type="text/javascript">
+
+$('#btnrfsh').on("click", function(){
+    alert('test');
+
+});
 
 
-
-
-
-
-
-
-
-
-
-
-
- 
-
-
-
-
-
-
-
+</script> -->

@@ -5,7 +5,6 @@
 <h3>{{ $val->UserName }} </h3>
 <p>Your Magicfinmart Password is:: {{$val->Password}}</p>
 
-
 @endforeach
 
  <img src="http://bo.mgfm.in/images/logo1.png" style="">

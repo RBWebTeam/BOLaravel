@@ -34,6 +34,15 @@
 						<a href="{{'fba-list'}}"><button class="common-btn center-obj">View More</button></a>
 						</div>
 						</div>
+  					   <div class="col-md-3 col-xs-12">
+						<div class="brdr text-center white-bg">
+						<img src="images/register-fba-img.png" class="img-responsive center-img img-circle-cs" />
+						<h4>Registartion Report</h4>
+						<br/>
+						<a href="{{'Registartion-report'}}"><button class="common-btn center-obj">View More</button></a>
+						</div>
+						</div>
+
 						</div>
 @endsection		
             

@@ -49,6 +49,7 @@ if($query)
        $request->session()->put('emailid',$val->email);
        $request->session()->put('fbauserid',$val->fbauserid);
        $request->session()->put('fbaid',$val->fbaid);
+         //$request->session()->put('fullname',$val->FullName);
                     $request->session()->put('username',$val->username);
                     $request->session()->put('loginame',$val->loginame);
                     $request->session()->put('uid',$val->uid);
@@ -299,29 +300,16 @@ public function went_wrong(Request $req){
   //  print_r($user); exit();
        //$contactName = $user[0]->LogiName;
 
-       $contactEmail = $user[0]->UserName;
-       $contactMessage = $user[0]->Password;
+    if(!empty($user[0])){
+      $contactEmail = $user[0]->UserName;
+      $contactMessage = $user[0]->Password;
 
-
-
-        $mail = Mail::send('mailViews.mail',['user'=>$user],function($message)use($contactEmail){
+      $mail = Mail::send('mailViews.mail',['user'=>$user],function($message)use($contactEmail){
                   $message->from('OfflineCS@magicfinmart.com', 'Magicfinmart');
                   $message->to($contactEmail)->subject('finmart password');
-     });
+                  });
 
-       
-
-
-    // $data = array('email'=>$contactEmail, 'name'=> $contactName, 'password'=>$contactMessage);
-    // Mail::send('mail', $data, function($data) use ($contactEmail, $contactName)
-    // {   
-    //     $data->from('noreply@magicfinmart.com', 'Magicfinmart');
-    //     $data->to($contactEmail,$contactName)->subject('finmart password');
-    // });
-    //return redirect('login-elite');
-
-
-    if($user)
+      if($user)
 
       {
         $val=$user[0];
@@ -330,7 +318,7 @@ public function went_wrong(Request $req){
         {
           ?>
           <script type="text/javascript">
-            alert('Sending Mail from Finmart. successfully.');
+            alert('Password has successfully sent to entered e-mail id.');
             window.location.href = "<?php echo URL::to('/'); ?>";
           </script>
           <?php
@@ -345,28 +333,17 @@ public function went_wrong(Request $req){
           <?php
         }
       }
+
+    }else{
+        ?>
+          <script type="text/javascript">
+            alert('Email Id/Account Does Not Exits...');
+            window.location.href = "<?php echo URL::to('/'); ?>";
+          </script>
+          <?php
     
-    }
-      
+        }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  }
 
 }

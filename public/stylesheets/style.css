@@ -1,3 +1,21 @@
+.month1 {height:100px; border:1px solid #f1efef;background:#f5f5f5; text-align:center;font-size:16px; padding:10px;}
+  .month1:hover {background:#fff;}
+  .title11 {text-transform:uppercase;background: #337bb7;padding: 10px;margin: 0px;color: #fff;}
+  .box-shadow {box-shadow:1px 1px 3px 1px #ccc; padding-left:0px; padding-right:0px;}
+  .month1 h3 {font-size:18px; margin-top:20px;}
+  .count {font-size:13px; color:#888;}
+  .efefef {background: #efefef;}
+  .box-shadow a {text-align:center;}
+  
+  @media only screen and (max-width: 768px) {
+  .efefef {background: #f5f5f5;}
+  .box-shadow {float:left;}
+  }
+
+
+
+
+
 th {color: #417084 !important;}
 .table {margin-top:10px;}
 #msds-select {padding:8px;}

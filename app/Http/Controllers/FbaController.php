@@ -21,9 +21,12 @@ class FbaController extends CallApiController
             return view('dashboard.fba-list',['doctype'=>$doctype]);         
         }
 
-              public function exportexcel(){
+              public function exportexcel(Request $req){
               $query=[];
-                $query=DB::select("call fbaList_export(0)");
+               // $fbaid=Session::get('fbaid');
+                //$query=DB::select("call fbaList_export(0)");
+              $query=DB::select("call fbaList_export(?,?,?)",array('0','2018-08-20','2018-08-22'));
+   //print_r($query); exit();
               //$query=DB::select('call fbaList_export()');
               $data = json_decode( json_encode($query), true);
               return Excel::create('Fbalist', function($excel) use ($data) {
@@ -38,20 +41,31 @@ class FbaController extends CallApiController
 
              // public function get_fba_list($fdate,$todate){
               public function get_fba_list(){
-             $id=Session::get('FBAUserId');
-            $query=DB::select("call fbaList(0)");
+             //$id=Session::get('FBAUserId');
+            $fbaid=Session::get('fbaid');
+            $query=DB::select("call fbaList($fbaid)");
                // $query=DB::select("call fbaList('0','$fdate','$todate')");
             return json_encode(["data"=>$query]);
         }
 
-        public function get_refresh_data($fbaid){
-        $refresh=DB::select("call getnewaddedfba(0,$fbaid)");
-             return json_encode($refresh);
+              public function get_refresh_data($fbaid){
+              $id=Session::get('fbaid');
+              $refresh=DB::select("call getnewaddedfba('$id',$fbaid)");
+              return json_encode($refresh);
          }
 
 
 
-         //     public function get_all_fba_list_data($fdate,$todate){
+            public function get_fba_count($fbaid){
+            $loggedinfba=Session::get('fbaid');
+            $count=DB::select("call getfba_count('$loggedinfba','$fbaid')"); 
+            //print_r($count); exit();
+             return json_encode($count);
+         }
+
+
+
+          //     public function get_all_fba_list_data($fdate,$todate){
          //     $alldata=DB::select("call get_fbaList_all_data(0,'2015-05-31','$todate')");
          //     return json_encode(["data"=>$alldata]);
          // }
@@ -89,6 +103,11 @@ class FbaController extends CallApiController
               $obj = json_decode($m);
               return $obj;
         }
+
+
+
+
+
 
 
          public function uploaddoc(Request $req) {
@@ -260,13 +279,21 @@ class FbaController extends CallApiController
  } 
 
       public function sendpaysms(Request $req){
-   
+          //print_r($req->all()); exit();
+
       $text="Your payment link is genrated";
+
       $newsms = urlencode( $text.":".$req->divpartnertable_payment);//htmlspecialchars();
-       //print_r($newsms); exit();
+      //$newsms = urlencode( $text.":".$req->txtlink);
+        // $newsms = urlencode( $text.":".$req->fba);
+        //print_r($newsms); exit();
       $post_data="";
       // $result=$this->call_json_data_api('http://vas.mobilogi.com/api.php?username=rupeeboss&password=pass1234&route=1&sender=FINMRT&mobile[]='.$req->txtmono.'&message[]='.$newsms,$post_data);
-      $result=$this->call_json_data_api('http://alrt.co.in/http-api.php?username=finmrt&password=pass1234&senderid=FINMRT&route=1&number='.$req->txtmono.',&message='.$newsms,$post_data);
+  // $result=$this->call_json_data_api('http://sms.cell24x7.com:1111/mspProducerM/sendSMS?user=rupee&pwd=apirupee&sender=FINMRT&mobile=1&number='.$req->txtmono.',&message='.$newsms,$post_data);
+
+         $result=$this->call_json_data_api('http://sms.cell24x7.com:1111/mspProducerM/sendSMS?user=rupee&pwd=apirupee&sender=FINMRT&mobile='.$req->txtmono.'&msg='.$newsms.'&mt=0',$post_data);
+
+  // $result=$this->call_json_data_api('http://sms.cell24x7.com:1111/mspProducerM/sendSMS?user=rupee&pwd=apirupee&sender=FINMRT&mobile=1&number='.$req->txtmono.'&msg='.$newsms,$post_data);
        $http_result=$result['http_result'];
        $error=$result['error'];
        $st=str_replace('"{', "{", $http_result);
@@ -274,7 +301,9 @@ class FbaController extends CallApiController
        $m=$s=str_replace('\\', "", $s);
        $obj = json_decode($m);
        return $obj;
-    }
+}
+
+
 
 
  //fba master edit *******
@@ -291,7 +320,7 @@ class FbaController extends CallApiController
           public function update_fba_table(Request $req){
          //echo $dbirth = str_replace('-','',$req->dbirth);
     $id=Session::get('fbauserid');
-$msg=DB::select('call usp_update_fba_details(?,?,?,?,?,?,?)',array(
+    $msg=DB::select('call usp_update_fba_details(?,?,?,?,?,?,?)',array(
     $req->fba_id,      
     $req->f_name, 
     $req->l_name,  
@@ -369,10 +398,20 @@ public function UpdatePospno($id)
        
    }        
          
+}
 
+    public function update_type(Request $req){ 
+
+    $FBAID = $req->txtfbaid; 
+    $fba_type = $req->ddltype;
+    $types = array("1"=>"FBA","2"=>"POSP");
+   DB::select('call usp_update_type(?,?)',array($req->txtfbaid,
+  $req->ddltype));
+ $arr = array("field"=>"bind_updated_type_$FBAID","show_field_data"=>$types[$fba_type],"alert_msg"=>"FBA Type Updated Successfully");
+
+      echo json_encode($arr);
+}
 
 }
 
 
-
-}

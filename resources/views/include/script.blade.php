@@ -552,7 +552,7 @@ $(document).on('change', '#search_state', function() {
     {
       $.ajax({  
          type: "POST",  
-         url: "{{URL::to('sales-update')}}",
+         url: "{{URL::to('../sales-update')}}",
          data : $('#update_remark').serialize(),
          success: function(msg){
          if (msg.status==0) 
@@ -715,8 +715,6 @@ function getfsmfbalist(smid)
 
 $('#fsmid').val(smid);
 
-
-
 $.ajax({  
          type: "GET",  
          url:'Fsm-Details/'+smid,//"{{URL::to('Fsm-Details')}}",
@@ -745,7 +743,7 @@ function getpartnerinfo(fbaid)
 
 $.ajax({  
          type: "GET",  
-         url:'fba-list/'+fbaid,//"{{URL::to('Fsm-Details')}}",
+         url:'../fba-list/'+fbaid,//"{{URL::to('Fsm-Details')}}",
          success: function(fsmmsg){
 
         var data = JSON.parse(fsmmsg);
@@ -1134,7 +1132,8 @@ function getpaymentlink(fbaid,mobile){
  $('#txtmono').val(mobile);
  $('#fba').val(fbaid);
 $.ajax({
-                    url: 'getpaymentlink/'+fbaid,
+                    //url: 'getpaymentlink/'+fbaid,
+                    url: "../getpaymentlink/" +fbaid,
                     type: "GET",
                     dataType: "json",
                     success:function(data) {
@@ -1144,6 +1143,7 @@ $.ajax({
                         var str = ""+data[0].Link+"";
                         // alert(str)
                           $('.divpartnertable_payment').html(str);
+              $('#txtlink').val(str);
                           $('.paylink_payment').modal('show');
                           //$('#paylink').html(data[0].Link);
                        }     
@@ -1152,6 +1152,7 @@ $.ajax({
                         var str = "No Payment Link Available...";
                         // alert(str)
                         $('.divpartnertable_payment').html(str);
+              $('#txtlink').val(str);
                          $('.paylink_payment').modal('show');
                        } 
                        for (var i = 0; i < data.length; i++) 
@@ -1160,8 +1161,8 @@ $.ajax({
          // $('#paylink').html(str);
        }
                        
-                     }
-                });
+       }
+   });
 
 }
 
@@ -1339,8 +1340,8 @@ $("#imgdoc").css("display","none");
 $.ajax({  
 
          type: "GET",  
-        
-         url:'fbalist-document/'+fbaid,//"{{URL::to('Fsm-Details')}}",
+         
+         url:'../fbalist-document/'+fbaid,//"{{URL::to('Fsm-Details')}}",
          success: function(fsmmsg){
      
         var data = JSON.parse(fsmmsg);
@@ -1381,22 +1382,26 @@ $.ajax({
 <script> 
 
 $('#msds-select').change(function () {
-    // var $loading = $('#loading').hide();    
- var table = $('#fba-list-table').DataTable(); 
 
- // $loading.show();
-    $.fn.dataTable.ext.search.push(
+if($('#txtfbasearch').val()==''){
+      var table = $('#fba-list-table').DataTable(); 
+   $.fn.dataTable.ext.search.push(
     function( settings, data, dataIndex ) {
         var msdsSearch = $( "#msds-select option:selected" ).val();
         var msdsValue = data[11]|| 0;
        //console.log(data);
         var numbers = /^[0-9]+$/;
         return fncalc(msdsSearch,msdsValue);
-
-    }); 
+}); 
       
     table.draw();
-     
+  }
+  else{
+    var table1 = $('#fba-list-table').DataTable(); 
+    $('#txtfbasearch').val('');
+    table1.columns(1).search($('#txtfbasearch').val(), true, true).draw(); 
+  }
+
 });
 
 function fncalc(msdsSearch,msdsValue)
@@ -1439,6 +1444,7 @@ function fncalc(msdsSearch,msdsValue)
 }
 
 
+
   </script>
 <!-- POSP YES OR NO Dropdown end -->
 
@@ -1448,7 +1454,7 @@ function getcustomerid(text,fbaid){
   //alert(fbaid);
   // alert(data);
   $.ajax({
-               url: 'getcustomerid/'+fbaid,
+               url: '../getcustomerid/'+fbaid,
                type: "GET",                  
                success:function(data) {
                 var json = JSON.parse(data);
@@ -1456,9 +1462,8 @@ function getcustomerid(text,fbaid){
                       if(json.StatusNo==0){
    
                       $(text).closest('td').text(json.MasterData.CreateCustomerResult.CustID);
-                       alert("Customer id updated successfully"); 
-
-                    }
+                       alert("Customer id updated Successfully"); 
+                   }
                     else{
                       alert("Customer id does not exists"); 
 
@@ -1473,7 +1478,7 @@ function getcustomerid(text,fbaid){
     function getloanid(text,fbaid){
   //alert(fbaid);
  $.ajax({
-             url: 'getloanid/'+fbaid,
+             url: '../getloanid/'+fbaid,
              type: "GET",                  
              success:function(data) {
               if(data.loanid==0){
@@ -1498,12 +1503,6 @@ function getcustomerid(text,fbaid){
              }); 
 
 }
-
-
-
-
-
-
 
 
 </script>
@@ -1581,19 +1580,19 @@ function updateposp(id)
   
   $.ajax({  
          type: "GET",  
-         url:'Fba-list-Update-posp/'+id,
+         url:'../Fba-list-Update-posp/'+id,
          success: function(posp){        
-             var text = JSON.parse(posp);
-console.log(text);
-
-              if(text.StatusNo==1){
-                POSP_UPDATE(id);
-              }
+         var text = JSON.parse(posp);
+         console.log(text);
+           if(text.StatusNo==1){
+              POSP_UPDATE(id);
+            }
              else{
                   alert('Updated Successfully');
                   $('#posp_'+id).closest('td').html(text.MasterData.PospNo);
                   $('#posp_remark').val('');
                   $('.close').click(); 
+                  //$('.posp_C').TEXT(text.MasterData.PospNo);
              }        
         }  
       });
@@ -1601,6 +1600,23 @@ console.log(text);
 }
 
 
+</script>
+
+<script type="text/javascript">
+   function pmesgsend(){
+alert("Send SMS successfully..");
+        $.ajax({ 
+        url: "{{URL::to('../pmesgsend')}}",
+        method:"POST",
+        data: $('#modelpaylink').serialize(),
+        success: function(msg)  
+         {
+          console.log(msg);
+
+         }
+});
+      }
+  
 </script>
 
 

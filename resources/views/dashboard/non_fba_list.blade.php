@@ -13,7 +13,7 @@
 
 
              <div class="container-fluid white-bg">
-             <div class="col-md-12"><h3 class="mrg-btm">Non FBA List</h3>
+             <div class="col-md-12"><h3 class="mrg-btm">NEW FBA List</h3>
            <hr>
            </div>
 
@@ -50,25 +50,26 @@
   </select> -->
    &nbsp;&nbsp;&nbsp;
   <form name="myform">
-  <select id="msds-select" class="form-control" style="width:55%;margin:10px;margin-top:4px;display: -webkit-inline-box;"  name="one" onchange="selectIndex(this)">
+<button class="qry-btn" type="button" style="margin-top:-2px;margin-left:10px;" name="btnrfsh" id="btnrfsh" onclick="refreshdata()">Refresh</button> <span id="spancnt"></span>
 
-   <option value="-1" selected="selected">Search By</option>
-   <option value="0">All</option>
-   <option value="1">POSP Yes</option>
-   <option value="2">POSP No</option>
+  <select id="msds-select" class="form-control" style="width:32%;margin: 10px;
+    margin-left: 10px;margin-top: 0px;display: -webkit-inline-box;" name="one" onchange="selectIndex(this)">
+  <option value="-1" selected="selected">Search By</option>
+   <option value="0" class="hidden">All</option>
+   <option value="1" class="hidden">  POSP Yes</option>
+   <option value="2" class="hidden">POSP No</option>
    <option value="FBAID">FBA ID</option>
-   <option value="POSPNO">POSP Number</option>
-   <option value="state">FBA STATE</option>
+   <option value="POSPNO" class="hidden">POSP Number</option>
+   <option value="state" class="hidden">FBA STATE</option>
    <option value="zone">FBA ZONE</option>
    <option value="fbaname">FBA NAME</option>
    <option value="fbacity">FBA City</option>
    <option value="pospname">POSP Name</option>
    </select>
 
-   <input type="text" id="txtfbasearch" name="txtfbasearch" placeholder="Search" onkeyup="searchdata()"  style="display: none; margin-left: 96px;"/>
+<input type="text" class="form-control" id="txtfbasearch"  name="txtfbasearch" placeholder="Search" onkeyup="searchdata()" style="display:none; display:margin-top:2px; width:32%;margin-right: 70px;float:right;"/>
  
-
-  </form>
+ </form>
   </div> 
   </div>
 
@@ -81,42 +82,70 @@
           <table class="datatable-responsive table table-striped table-bordered nowrap" id="fba-list-table">
                                        <thead>
                                        <tr>
+                                       <th>Action</th> 
                                        <th>FBA ID</th> 
                                        <th>Full Name</th> 
                                        <th>Created Date</th>
                                        <th>Mobile No</th>                                   
                                        <th>Email ID</th>
-                                       <th>Payment Link</th>
-                                       <th>Password</th>
                                        <th>City</th>
-                                       <th>State</th>
                                        <th>Zone</th>
-                                       <th>Pincode</th>
-                                       <th>POSP No(SSID)</th>
-                                       <th>Loan ID</th> 
                                        <th>Posp Name</th> 
-                                       <th>Posp Status</th> 
-                                       <th>Bank Account</th>
-                                       <th>Partner Info</th> 
-                                       <th>Sales code</th>
-                                       <th>FSM Details</th>  
-                                       <th>Documents</th> 
-                                       <th>Customer ID</th> 
+                                       <th>ERP ID</th>
                                        <th>Created Date1</th>
-                                       </tr>
-                                       </thead>
-                                       </table>
+                          
+                                </thead>
+                           </table>
 
   <div id="myDIV" >
+<!--   <a href="{{url('export-excel')}}" class="qry-btn" id="pospbtn">Export</a> -->
+@if(Session::get('usergroup')==50)
   <a href="{{url('export-excel')}}" class="qry-btn" id="pospbtn">Export</a>
+@endif
   
 </div>
-</div>
+    </div>
      </div>
           </div>
             </div>
               </div>
                  </div>
+
+
+<!-- Type model start -->
+
+<div class="Filter modal fade" id="Filter" role="dialog">   
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+        <h4 class="modal-title">Filter</h4>
+      </div>
+      <div class="modal-body">
+        <form id="posp_from_id">
+          <div class="form-group">
+          </div>
+          <div class="form-group">
+            <select class="recipient-name form-control" > 
+              <option>FBA</option>
+              <option>POSP</option>
+              <option>FBA</option>
+            </select>
+            <input type="text" class="recipient-name form-control" id="" name="" required="yes" />
+             
+          </div>
+        </form>
+        <div class="modal-footer"> 
+          <button class="btn btn-default" type="button" data-dismiss="modal">Close</button>
+          <button id="" class="btn btn-primary" type="button">search</button>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 
 <!-- send sms -->
 <div class="sms_sent_id id modal fade" role="dialog">   
@@ -375,41 +404,41 @@
 <!-- paymentlink -->
  
 
-    <div id="paylink_payment" class="modal fade paylink_payment" role="dialog">
-    <div class="modal-dialog">
+   <!--  <div id="paylink_payment" class="modal fade paylink_payment" role="dialog">
+    <div class="modal-dialog"> -->
    <!-- Modal content-->
-    <div class="modal-content">
-    <div class="modal-header">
+   <!--  <div class="modal-content"> -->
+  <!--   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal">&times;</button>
     <h4 class="modal-title">Payment link</h4>
-    </div>
+    </div> -->
 
-    <div class="col-md-12"> <br>
+<!--     <div class="col-md-12"> <br>
     <form method="POST" id="modelpaylink">
         {{ csrf_field() }}
 
-   <textarea type="text" style="resize:none" name="divpartnertable_payment" cols="num" rows="num" id="divpartnertable_payment" class="divpartnertable_payment form-control" readonly> </textarea> 
+   <textarea type="text" style="resize:none" name="divpartnertable_payment" cols="num" rows="num" id="divpartnertable_payment" class="divpartnertable_payment form-control" readonly></textarea> 
     <br>
-    </div> 
+    </div>  -->
        
-    <div class="col-md-12"> 
+<!--     <div class="col-md-12"> 
     <button type="button" style="margin-left:20px;" class="btn btn-info" name="paysub" id="paysub" onclick="getpaylinknew()" >Genrate Payment link</button> &nbsp;&nbsp;
     <button type="button" name="smspayment" id="smspayment" class="btn btn-success" data-dismiss="modal" style="padding-left:5px; " onclick="pmesgsend()">Send SMS</button>
     </div>
-
+ -->
     
       
       <!-- <form id="modelpaylink" name="modelpaylink"> -->
     <!--  <form method="POST" id="modelpaylink">
         {{ csrf_field() }} -->
-     <div id="divlink" class="modal-body"> </div>
+<!--      <div id="divlink" class="modal-body"> </div>
      <div class="modal-footer">
      <input type="hidden" name="fba" id="fba">
      <input type="hidden" name="txtmono" id="txtmono">
      <input type="hidden" name="txtlink" id="txtlink">
      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
      </div>
-     <div class="modal-body"></div>
+     <div class="modal-body"></div> -->
 
         </form>
       </div>
@@ -463,73 +492,98 @@
 
     $('#fba-list-table').DataTable({
 
-   "createdRow": function(row, data, dataIndex ) {
-    if ( data.PayStat=="S" ) {
-    $(row).css({backgroundColor: 'LightGreen'});
- }
+      "createdRow": function(row, data, dataIndex ) {
+      if ( data.PayStat=="S" ) 
+      {
+        $(row).css({backgroundColor: 'LightGreen'});
+      }
+      if( data.AppSource=="Campaign sm")
+      {
+        $(row).css({backgroundColor: '#EE8891'});
+      }
+      if( data.AppSource=="Campaign Nochiket")
+      {
+        $(row).css({backgroundColor: '#FFA617'});
+      }
     },
-        "order": [[ 0, "desc" ]],
-        "ajax": "load-non-fba-list",
+        "order": [[ 1, "desc" ]],
+         "ajax": "{{ URL::to('load-non-fba-list')}}",
         "columns": [
 
-            { "data": "fbaid"},
-            { "data": "FullName",
-              "render": function ( data, type, row, meta ) {
-              return (data)+' <a target="_blank" href="Fba-profile/'+row.fbaid+' "><span class="glyphicon glyphicon-user"  title="FBA Profile"></span></a>';
+            {"data":"MobiNumb1" ,
+             "render": function ( data, type, row, meta ) {
+              return'<a target="_blank" href="load-update-fba-list/'+row.fbaid+'"><span class="glyphicon glyphicon-edit" title="FBA Details Update"></span></a><a target="_blank" href="getcrmid/'+row.fbaid+'"><span class="glyphicon glyphicon-earphone" title="CRM ID " ></span></a><a target="_blank" href="Fba-profile/'+row.fbaid+' "><span class="glyphicon glyphicon-user"  title="FBA Profile"></span></a></span></a> <a href="#" data-toggle="modal" data-target="#sms_sent_id" onclick="SMS_FN(1,'+data+')"><span class="glyphicon glyphicon-envelope"title="Send SMS"></span></a>';
               }
+            },
+
+
+
+               { "data": "fbaid",
+             // "render": function ( data, type, row, meta ) {
+             //  return (data)+' <a target="_blank" href="getcrmid/'+row.fbaid+'"><span class="glyphicon glyphicon-earphone" ></span></a>';
+             //  }
+            },
+
+            { "data": "FullName",
+              // "render": function ( data, type, row, meta ) {
+              // return (data)+' <a target="_blank" href="Fba-profile/'+row.fbaid+' "><span class="glyphicon glyphicon-user"  title="FBA Profile"></span></a>';
+              // }
           },
 
             { "data": "createdate" },            
-            {"data":"MobiNumb1" ,
+            {"data":"MobiNumb1" },
+            { "data": "EMaiID"   
 
-             "render": function ( data, type, row, meta ) {
-              return '<span>'+data+'</span></a> <a href="#" data-toggle="modal" data-target="#sms_sent_id" onclick="SMS_FN(1,'+data+')"><span class="glyphicon glyphicon-envelope"></span></a>';
-              }
+             // "render": function ( data, type, row, meta ) {
+             //  return '<span>'+data+'</span></a> <a href="#" data-toggle="modal" data-target="#sms_sent_id" onclick="SMS_FN(1,'+data+')"><span class="glyphicon glyphicon-envelope"></span></a>';
+             //  }
             },
             // { "data": "createdate" },
-            { "data": "EMaiID" },         
-            { "data": "Link",
+            // { "data": "EMaiID" },         
+         //  { "data": "Link",
 
-         "render": function ( data, type, row, meta ) {
-         return row.PayStat == "S"?'':'<a id="btnviewhistory" data-toggle="modal" data-target="#paylink_payment" onclick="getpaymentlink('+row.fbaid+','+row.MobiNumb1+')">Payment link</a>';
-              }
+         // "render": function ( data, type, row, meta ) {
+         // return row.PayStat == "S"?'':'<a id="btnviewhistory" data-toggle="modal" data-target="#paylink_payment" onclick="getpaymentlink('+row.fbaid+','+row.MobiNumb1+')">Payment link</a>';
+         //      }
 
-             }, 
+         //   }, 
 
-               {"data":"pwd" ,
-              "render": function ( data, type, row, meta ) {
-              return '<a id="btnshowpassword" data-toggle="modal" data-target="#spassword" onclick="getpassword('+"'"+ data+"'"+')">*****</a>';
-              }
+       //         {"data":"pwd" ,
+       //        "render": function ( data, type, row, meta ) {
+       //        return '<a id="btnshowpassword" data-toggle="modal" data-target="#spassword" onclick="getpassword('+"'"+ data+"'"+')">*****</a>';
+       //        }
 
-       },   
+       // },   
 
             {"data":"City"},
-            {"data":"statename"},
+            // {"data":"statename"},
             {"data":"Zone"},  
-            {"data":"Pincode"},
-            {"data":"POSPNo"  ,
-             "render": function ( data, type, row, meta ) {
-              return data==""?('<a id="posp_'+row.fbaid+'" class="checkPosp" data-toggle="modal" data-target="#updatePosp" onclick="updateposp('+row.fbaid+')">update</a>'):data;
-              }
-            }, 
+            // {"data":"Pincode"},
+            // {"data":"POSPNo"  ,
+            //  "render": function ( data, type, row, meta ) {
+            //   return data==""?('<a id="posp_'+row.fbaid+'" class="checkPosp" data-toggle="modal" data-target="#updatePosp" onclick="updateposp('+row.fbaid+')">update</a>'):data;
+            //   }
+            // }, 
 
-             {"data":"LoanID"  ,
-             "render": function ( data, type, row, meta ) {
-                // return data==""?('<a id="loan_'+row.fbaid+'" class="checkloan" data-toggle="modal" data-target="#updateLoan" onclick="LoanID_UPDATE('+row.fbaid+')">update</a>'):data;
-                 return (data==""||data=="0")?('<a id="btnviewid" onclick="getloanid(this,'+row.fbaid+')">Update</a>'):data;
-              }
-         }, 
+         //     {"data":"LoanID"  ,
+         //     "render": function ( data, type, row, meta ) {
+         //        // return data==""?('<a id="loan_'+row.fbaid+'" class="checkloan" data-toggle="modal" data-target="#updateLoan" onclick="LoanID_UPDATE('+row.fbaid+')">update</a>'):data;
+         //         return (data==""||data=="0")?('<a id="btnviewid" onclick="getloanid(this,'+row.fbaid+')">Update</a>'):data;
+         //      }
+         // }, 
 
-
+            
              {"data":"pospname"},
-             {"data":"pospstatus"},  
-             {"data":"bankaccount"}, 
-             {"data":null ,
-             "render": function ( data, type, row, meta ) {
-                return '<a href="" data-toggle="modal" data-target="#partnerInfo" onclick="getpartnerinfo('+row.fbaid+')">partner info</a>';
-              } 
+              {"data":"erpid"},
+               // {"data":"AppSource"}, 
+             // {"data":"pospstatus"},  
+             // {"data":"bankaccount"}, 
+            //  {"data":null ,
+            //  "render": function ( data, type, row, meta ) {
+            //     return '<a href="" data-toggle="modal" data-target="#partnerInfo" onclick="getpartnerinfo('+row.fbaid+')">partner info</a>';
+            //   } 
 
-            }, 
+            // }, 
 
 
      // {"data":"salescode" ,
@@ -541,33 +595,36 @@
 
 
 
-              {"data":"salescode" ,
-             "render": function ( data, type, row, meta ) {
-            return ("<a id=update_"+row.fbaid+" onclick=sales_update_fn("+row.fbaid+",'"+data+"')>"+data+"</a>");
-              }
+           //    {"data":"salescode" ,
+           //   "render": function ( data, type, row, meta ) {
+           //  return ("<a id=update_"+row.fbaid+" onclick=sales_update_fn("+row.fbaid+",'"+data+"')>"+data+"</a>");
+           //    }
    
-           },
+           // },
 
-             {"data":null  ,
-             "render": function ( data, type, row, meta ) {
-                return '<a href="#" style="" data-toggle="modal" data-target=".fsmdetails">Fsm details</a>';
-              }
-            },
+            //  {"data":null  ,
+            //  "render": function ( data, type, row, meta ) {
+            //     return '<a href="#" style="" data-toggle="modal" data-target=".fsmdetails">Fsm details</a>';
+            //   }
+            // },
             
-             {"data":"fdid" ,
-             "render": function ( data, type, row, meta ) {
-            return data == 1?'<a href="" style="" data-toggle="modal"  data-target="#docviwer" onclick="docview('+row.fbaid+')" >uploaded</a>':'pending';
-           }
-        },
+        //      {"data":"fdid" ,
+        //      "render": function ( data, type, row, meta ) {
+        //     return data == 1?'<a href="" style="" data-toggle="modal"  data-target="#docviwer" onclick="docview('+row.fbaid+')" >uploaded</a>':'pending';
+        //    }
+        // },
 
-          {"data":"CustID" ,
-              "render": function ( data, type, row, meta ) {
-               return (data==""||data=="0")?('<a id="btnviewcid" onclick="getcustomerid(this,'+row.fbaid+')">Update</a>'):data;
-             }  
-         }, 
+         //  {"data":"CustID" ,
+         //      "render": function ( data, type, row, meta ) {
+         //       return (data==""||data=="0")?('<a id="btnviewcid" onclick="getcustomerid(this,'+row.fbaid+')">Update</a>'):data;
+         //     }  
+         // }, 
 
 
-         { "data": "createdate1","visible":false }
+         { "data": "createdate1","visible":false } 
+
+
+
 
         ],
 
@@ -579,10 +636,16 @@
 // from date to date start
 
 $(document).ready(function() {
+
   // Bootstrap datepicker
   $('.input-daterange input').each(function() {
     $(this).datepicker('clearDates');
   });
+
+  setInterval(function(){ 
+getcount();
+  
+}, 60000); 
 
   // Extend dataTables search
 
@@ -592,7 +655,7 @@ $(document).ready(function() {
     var min = $('#min').val();
     var max = $('#max').val();
    // console.log(max);
-    var createdAt = data[21] || 21; // Our date column in the table
+    var createdAt = data[9] || 9; // Our date column in the table
    
     if (
       (min == "" || max == "") ||
@@ -619,57 +682,10 @@ $('.date-range-filter').datepicker();
 <!-- from date to date end -->  
 
 
-<!-- Search Pospno and Fbaid start,STATE,CITY etc -->
-<script>
-
-
-/// code for search
-function searchdata()
-{
-  var index = $('#msds-select').val();
-  if(index=='fbacity')
-  {
-    colsearch(7);
-  }
-  else if(index == 'FBAID')
-  {
-    colsearch(0);
-  }
-  else if(index == 'POSPNO')
-  {
-    colsearch(11);
-  }else if(index=='state'){colsearch(8);}
-  else if(index == 'zone'){colsearch(9);}
-  else if(index == 'fbaname'){colsearch(1);}
-  else if(index == 'pospname'){colsearch(13);}
-}
-
-function colsearch(index)
-{
-  table1 = $('#fba-list-table').DataTable();
-    if ($('#txtfbasearch').val()!= '') {
-    table1.columns(index).search('^'+ $('#txtfbasearch').val() + '$', true, true).draw(); 
- }
-    else
-    table1.columns(index).search($('#txtfbasearch').val(), true, true).draw(); 
-}
-
-function selectIndex(dd) {
-  if (dd.selectedIndex>=4){
-     dd.form['txtfbasearch'].style.display='block';
-  }else{
-    dd.form['txtfbasearch'].style.display='none';
-  }  
-}
-
-
-     
-
-
 </script>
 
 
-<script type="text/javascript">
+<!-- <script type="text/javascript">
     function getpaylinknew(){
     
   $.ajax({
@@ -703,7 +719,7 @@ function selectIndex(dd) {
     });
   }
 
-</script>
+</script> -->
 
   <script type="text/javascript">
    $(function(){
@@ -740,20 +756,139 @@ function selectIndex(dd) {
 
 
 <script type="text/javascript">
-  
-
-// Add active class to the current button (highlight it)
-var header = document.getElementById("myDIV");
-var btns = header.getElementsByClassName("qry-btn");
-for (var i = 0; i < btns.length; i++) {
-  btns[i].addEventListener("click", function() {
+  var header = document.getElementById("myDIV");
+    var btns = header.getElementsByClassName("qry-btn");
+    for (var i = 0; i < btns.length; i++) {
+    btns[i].addEventListener("click", function() {
     var current = document.getElementsByClassName("active");
     current[0].className = current[0].className.replace(" active", "");
     this.className += " active";
   });
 }
+</script>
+
+<script type="text/javascript">
+  
+function refreshdata(){  
+
+  var table =$('#fba-list-table').DataTable();
+  var rows = table.rows({ 'search': 'applied' }).nodes();
+   //var fbaid=table.rows(rows.count()-1)[0][0];
+        var fbaid=0;
+        table.rows().every( function () {
+        if(fbaid==0){
+        var d = this.data();
+        fbaid=this.data().fbaid;
+}
+        } );
+  //var fbaid=table.rows(rows.count()-1).data()[0].fbaid; 
+
+        $.ajax({
+        url: 'refresh-data/'+fbaid,
+        type: "GET",                  
+        success:function(data) {
+        var tdata = JSON.parse(data);
+        //table.rows.add('').draw();
+        table.rows.add(tdata).draw();
+        $('#btnrfsh').text('Refresh(0)');
+    }
+  });
+}
+
+// get-count start
+function getcount(){
+  
+      var table =$('#fba-list-table').DataTable();
+      var rows = table.rows({ 'search': 'applied' }).nodes();
+       //var fbaid=table.rows(rows.count()-1)[0][0];
+
+         var fbaid=0;
+         table.rows().every( function () {
+          if(fbaid==0){
+          var d = this.data();
+          fbaid=this.data().fbaid;
+}
+        } );
+
+     // var fbaid=table.rows(rows.count()-1).data()[0].fbaid; 
+    $.ajax({ 
+        url: 'fba-count/'+fbaid,
+        method:"GET",
+        success: function(data){
+          //console.log(data[0].count);
+        var json = JSON.parse(data);
+       if (json.count > "1")
+       { 
+       //console.log(json);
+            //$('#btnrfsh').text('New Record-- '+json[0].count);
+
+         $('#btnrfsh').text('Refresh('+json[0].count+')');
+          
+    // $('#divdate').html('Showing data from ' +fdate+ ' to ' +todate+'');  
+          }  
+        }
+        });
+    }
+
+
 
 </script>
+<script type="text/javascript">
+  function searchdata()
+{
+  var index = $('#msds-select').val();
+  if(index=='fbacity')
+  {
+    colsearch(6);
+  }
+  else if(index == 'FBAID')
+  {
+    colsearch(1);
+  }
+  else if(index == 'POSPNO')
+  {
+    colsearch(11);
+  } //else if(index=='state'){colsearch(8);}
+  else if(index == 'zone'){colsearch(7);}
+  else if(index == 'fbaname'){colsearch(2);}
+  else if(index == 'pospname'){colsearch(8);}
+}
+function colsearch(index)
+{
+  table1 = $('#fba-list-table').DataTable();
+    if ($('#txtfbasearch').val()!= '') {
+    table1.columns(index).search('^'+ $('#txtfbasearch').val() + '$', true, true).draw(); 
+ }
+    else
+    table1.columns(index).search($('#txtfbasearch').val(), true, true).draw(); 
+}
+
+function selectIndex(dd) {
+
+  
+  if (dd.selectedIndex>=4){
+     dd.form['txtfbasearch'].style.display='block';
+  }else{
+    dd.form['txtfbasearch'].style.display='none';
+  }  
+var table = $('#fba-list-table').DataTable(); 
+  table.draw();
+}
+
+
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

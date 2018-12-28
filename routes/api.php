@@ -18,3 +18,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 Route::post('test','UserController@data');
 Route::post('sales-material','ApiController@sales_material');
+Route::post('updat-fba-data','update_fba_dataController@update_fba_data');
+Route::post('get-crm-role','getcrmroleController@crm_role');
+Route::post('crm_disposition','getcrmroleController@get_crm_disposition');
+
+
+
+
+
